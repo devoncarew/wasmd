@@ -1,20 +1,14 @@
 // Generated from samples/fac.wasm.
 
-// ignore_for_file: camel_case_types
-// ignore_for_file: dead_code
-// ignore_for_file: non_constant_identifier_names
-// ignore_for_file: unused_label
-// ignore_for_file: unused_local_variable
+// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
+// ignore_for_file: unused_label, unused_local_variable
 
 import 'package:dasm/runtime.dart';
 
 class Module {
-  Module() {
-    dataSegments.init(memory);
-  }
+  Module();
 
   final Memory memory = Memory(0);
-  final DataSegments dataSegments = DataSegments();
 
   i32 fac(i32 arg0) {
     final frame = Frame(memory);
@@ -34,8 +28,4 @@ class Module {
     }
     return frame.pop();
   }
-}
-
-class DataSegments {
-  void init(Memory memory) {}
 }

@@ -93,7 +93,7 @@ class Compiler {
       } else if (sectionKind == SectionKind.data_count) {
         _parseDataCountSection(r, module, length);
       } else {
-        throw 'unhandled section';
+        throw 'unhandled section ${sectionKind?.name}';
       }
     }
 
@@ -738,6 +738,8 @@ class ResultType {
     switch (kind) {
       case 0x7C:
         return "f64";
+      case 0x7D:
+        return "f32";
       case 0x7E:
         return "i64";
       case 0x7F:
@@ -1107,7 +1109,7 @@ class DataSegment {
       builder.fields.add(Field(
         (b) => b
           ..name = 'data$i'
-          ..type = Reference('Uint8List')
+          ..type = Reference('Uint8List', 'dart:typed_data')
           ..assignment = Code('hexDecode(_hex0)'),
       ));
     }

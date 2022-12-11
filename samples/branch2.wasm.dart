@@ -1,23 +1,18 @@
 // Generated from samples/branch2.wasm.
 
-// ignore_for_file: camel_case_types
-// ignore_for_file: dead_code
-// ignore_for_file: non_constant_identifier_names
-// ignore_for_file: unused_label
-// ignore_for_file: unused_local_variable
+// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
+// ignore_for_file: unused_label, unused_local_variable
 
 import 'package:dasm/runtime.dart';
 
 class Module {
   Module({required this.consoleImports}) {
-    dataSegments.init(memory);
     _func0();
   }
 
   final ConsoleImports consoleImports;
   final Memory memory = Memory(0);
   final Globals globals = Globals();
-  final DataSegments dataSegments = DataSegments();
 
   void _func0() {
     final frame = Frame(memory);
@@ -51,12 +46,8 @@ class Globals {
   }
 }
 
-/// An abstract class representing the symbols imported from the 'console' module.
+/// A class representing the symbols imported from the 'console' module.
 abstract class ConsoleImports {
   /// The imported 'log' symbol.
   void log(i32 arg0);
-}
-
-class DataSegments {
-  void init(Memory memory) {}
 }

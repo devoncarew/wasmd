@@ -1,10 +1,7 @@
 // Generated from samples/rot13.wasm.
 
-// ignore_for_file: camel_case_types
-// ignore_for_file: dead_code
-// ignore_for_file: non_constant_identifier_names
-// ignore_for_file: unused_label
-// ignore_for_file: unused_local_variable
+// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
+// ignore_for_file: unused_label, unused_local_variable
 
 import 'package:dasm/runtime.dart';
 
@@ -12,15 +9,12 @@ class Module {
   Module({
     required this.hostImports,
     required this.memory,
-  }) {
-    dataSegments.init(memory);
-  }
+  });
 
   final HostImports hostImports;
 
   /// min pages: 1
   final Memory memory;
-  final DataSegments dataSegments = DataSegments();
 
   i32 _func0(i32 arg0) {
     i32 local0 = 0;
@@ -110,15 +104,11 @@ class Module {
   }
 }
 
-/// An abstract class representing the symbols imported from the 'host' module.
+/// A class representing the symbols imported from the 'host' module.
 abstract class HostImports {
   /// The imported 'fill_buf' symbol.
   i32 fill_buf(i32 arg0, i32 arg1);
 
   /// The imported 'buf_done' symbol.
   void buf_done(i32 arg0, i32 arg1);
-}
-
-class DataSegments {
-  void init(Memory memory) {}
 }

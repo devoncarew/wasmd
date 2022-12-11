@@ -1,5 +1,8 @@
 // Generated from samples/print.wasm.
 
+// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
+// ignore_for_file: unused_label, unused_local_variable
+
 import 'dart:typed_data';
 
 import 'package:dasm/runtime.dart';
@@ -31,7 +34,7 @@ class Module {
   }
 }
 
-/// An abstract class representing the symbols imported from the 'console' module.
+/// A class representing the symbols imported from the 'console' module.
 abstract class ConsoleImports {
   /// The imported 'log' symbol.
   void log(i32 arg0, i32 arg1);

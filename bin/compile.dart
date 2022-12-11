@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -59,9 +60,10 @@ void main(List<String> args) async {
   var library = compiler.compile();
 
   var formatter = DartFormatter();
-  var emitter = DartEmitter.scoped(
+  var emitter = DartEmitter(
     orderDirectives: true,
     useNullSafetySyntax: true,
+    allocator: NoPrefixAllocator(),
   );
 
   var code = library.accept(emitter).toString();
@@ -82,4 +84,22 @@ void main(List<String> args) async {
   //   logger.info('');
   //   print(code);
   // }
+}
+
+class NoPrefixAllocator implements Allocator {
+  final Set<String> _imports = SplayTreeSet();
+
+  NoPrefixAllocator();
+
+  @override
+  String allocate(Reference reference) {
+    if (reference.url != null) {
+      _imports.add(reference.url!);
+    }
+    return reference.symbol!;
+  }
+
+  @override
+  Iterable<Directive> get imports =>
+      _imports.map((url) => Directive.import(url));
 }

@@ -1,21 +1,15 @@
 // Generated from samples/sha3.wasm.
 
-// ignore_for_file: camel_case_types
-// ignore_for_file: dead_code
-// ignore_for_file: non_constant_identifier_names
-// ignore_for_file: unused_label
-// ignore_for_file: unused_local_variable
+// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
+// ignore_for_file: unused_label, unused_local_variable
 
 import 'package:dasm/runtime.dart';
 
 class Module {
-  Module() {
-    dataSegments.init(memory);
-  }
+  Module();
 
   final Memory memory = Memory(10, 65536);
   final Globals globals = Globals();
-  final DataSegments dataSegments = DataSegments();
 
   void init(i32 arg0, i32 arg1, i32 arg2) {
     final frame = Frame(memory);
@@ -1817,8 +1811,4 @@ class Globals {
     frame.i64_const(0);
     return frame.pop();
   }
-}
-
-class DataSegments {
-  void init(Memory memory) {}
 }
