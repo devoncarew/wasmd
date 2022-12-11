@@ -1,0 +1,20 @@
+name: dasm
+description: An exploration of compiling Wasm to Dart. 
+version: 0.1.0
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  args: ^2.3.0  
+  code_builder: ^4.3.0
+  collection: ^1.17.0
+  dart_style: ^2.2.0
+  logging: ^1.1.0
+
+dev_dependencies:
+  lints: ^2.0.0
+
+dependency_overrides:
+  code_builder:
+    path: ../../dart-lang/code_builder
