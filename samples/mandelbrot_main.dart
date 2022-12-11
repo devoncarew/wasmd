@@ -8,10 +8,10 @@ import 'package:dasm/runtime.dart';
 import 'mandelbrot.wasm.dart';
 
 void main(List<String> args) {
-  var memBytes = 1200 * 800 * 4;
-  final memory = Memory(memBytes ~/ Memory.pageSize + 1);
+  // var memBytes = 1200 * 800 * 4;
+  // final memory = Memory(memBytes ~/ Memory.pageSize + 1);
 
-  var mandelbrot = Module(memory: memory);
+  var mandelbrot = Module(envImports: _EnvImports());
 
   mandelbrot.width = stdout.hasTerminal ? stdout.terminalColumns : 80;
   mandelbrot.height = stdout.hasTerminal ? stdout.terminalLines - 2 : 40;
@@ -19,11 +19,13 @@ void main(List<String> args) {
   print('');
 
   // iterations, cx, cy, diameter
+  // mandelbrot.mandelbrot(1000, 1.5, 0.75, 4.0);
   mandelbrot.mandelbrot(1000, -0.7436447860, 0.1318252536, 0.00029336);
-  // mandelbrot.mandelbrot(100, -0.043644786, 0.1318252536, 2.00029336);
+  // mandelbrot.mandelbrot(1000, -0.7436447860, 0.1318252536, 0.00059336);
 
-  var range = 256.0 / 6;
+  final range = 256.0 / 6;
   final offset = mandelbrot.getDataBuffer();
+  final memory = mandelbrot.memory;
 
   for (int y = 0; y < mandelbrot.height; y++) {
     for (int x = 0; x < mandelbrot.width; x++) {
@@ -47,4 +49,11 @@ void main(List<String> args) {
   }
 
   stdout.writeln();
+}
+
+class _EnvImports implements EnvImports {
+  @override
+  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
+    // TODO:
+  }
 }

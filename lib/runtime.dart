@@ -56,6 +56,12 @@ class Memory {
       data.setUint8(i + offset, bytes[i]);
     }
   }
+
+  void fill(i32 value, i32 offset, i32 count) {
+    for (int i = 0; i < count; i++) {
+      data.setUint8(i + offset, value);
+    }
+  }
 }
 
 class Frame {
@@ -454,6 +460,13 @@ class Frame {
     f64 arg0 = stack.removeLast() as f64;
     i32 result = arg0.toInt() & 0xFFFFFFFF;
     stack.add(result);
+  }
+
+  void memory_fill(u32 memoryIndex) {
+    i32 count = stack.removeLast() as i32;
+    i32 value = stack.removeLast() as i32;
+    i32 offset = stack.removeLast() as i32;
+    memory.fill(value, offset, count);
   }
 }
 

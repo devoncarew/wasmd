@@ -8,75 +8,123 @@ import 'dart:typed_data';
 import 'package:dasm/runtime.dart';
 
 class Module {
-  Module({required this.memory}) {
+  Module({required this.envImports}) {
     dataSegments.init(memory);
-    _func6();
+    _func10();
   }
 
-  /// min pages: 1
-  final Memory memory;
+  final EnvImports envImports;
+  final Memory memory = Memory(60);
   final Globals globals = Globals();
   final DataSegments dataSegments = DataSegments();
 
-  i32 get width => globals.global2;
-  set width(i32 value) => globals.global2 = value;
-  i32 get height => globals.global3;
-  set height(i32 value) => globals.global3 = value;
-
-  i32 _func0() {
+  i32 get width => globals.global0;
+  set width(i32 value) => globals.global0 = value;
+  i32 get height => globals.global1;
+  set height(i32 value) => globals.global1 = value;
+  void _func0(i32 arg0, i32 arg1) {
     final frame = Frame(memory);
-    frame.i32_const(4);
-    frame.push(globals.global3);
-    frame.push(globals.global2);
-    frame.i32_mul();
-    frame.i32_mul();
-    return frame.pop();
+    frame.push(arg0);
+    frame.push(arg1);
+    frame.i32_store(2, 4);
   }
 
-  i32 _func1(i32 arg0, i32 arg1) {
+  void _func1(i32 arg0, i32 arg1) {
+    final frame = Frame(memory);
+    frame.push(arg0);
+    frame.push(arg1);
+    frame.i32_store(2, 8);
+  }
+
+  i32 _func2(i32 arg0, i32 arg1) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
     i32 local3 = 0;
     i32 local4 = 0;
+    i32 local5 = 0;
 
     final frame = Frame(memory);
     frame.push(arg0);
-    frame.i32_const(1073741808);
+    frame.i32_const(1073741804);
     frame.i32_gt_u();
     if_label_0:
     if (frame.pop() != 0) {
+      frame.i32_const(1168);
+      frame.i32_const(1232);
+      frame.i32_const(86);
+      frame.i32_const(30);
+      {
+        var t3 = frame.pop();
+        var t2 = frame.pop();
+        var t1 = frame.pop();
+        var t0 = frame.pop();
+        envImports.abort(
+          t0,
+          t1,
+          t2,
+          t3,
+        );
+      }
       throw 'unreachable';
     }
-    frame.push(globals.global0);
+    frame.push(arg0);
     frame.i32_const(16);
     frame.i32_add();
     local2 = frame.peek();
-    frame.push(arg0);
+    frame.i32_const(1073741820);
+    frame.i32_gt_u();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(1168);
+      frame.i32_const(1232);
+      frame.i32_const(33);
+      frame.i32_const(29);
+      {
+        var t3 = frame.pop();
+        var t2 = frame.pop();
+        var t1 = frame.pop();
+        var t0 = frame.pop();
+        envImports.abort(
+          t0,
+          t1,
+          t2,
+          t3,
+        );
+      }
+      throw 'unreachable';
+    }
+    frame.push(globals.global2);
+    local1 = frame.pop();
+    frame.push(globals.global2);
+    frame.i32_const(4);
+    frame.i32_add();
+    local0 = frame.peek();
+    frame.push(local2);
+    frame.i32_const(19);
+    frame.i32_add();
+    frame.i32_const(112);
+    frame.i32_and();
+    frame.i32_const(4);
+    frame.i32_sub();
+    local2 = frame.peek();
+    frame.i32_add();
+    local3 = frame.peek();
+    frame.memory_size(0);
+    local4 = frame.peek();
+    frame.i32_const(16);
+    frame.i32_shl();
     frame.i32_const(15);
     frame.i32_add();
     frame.i32_const(112);
     frame.i32_and();
-    local0 = frame.peek();
-    frame.i32_const(16);
-    frame.push(local0);
-    frame.i32_const(16);
-    frame.i32_gt_u();
-    frame.select();
-    local4 = frame.peek();
-    frame.i32_add();
-    local0 = frame.peek();
-    frame.memory_size(0);
-    local3 = frame.peek();
-    frame.i32_const(16);
-    frame.i32_shl();
-    local1 = frame.peek();
+    local5 = frame.peek();
     frame.i32_gt_u();
     if_label_0:
     if (frame.pop() != 0) {
+      frame.push(local4);
       frame.push(local3);
-      frame.push(local0);
-      frame.push(local1);
+      frame.push(local5);
       frame.i32_sub();
       frame.i32_const(65535);
       frame.i32_add();
@@ -84,9 +132,9 @@ class Module {
       frame.i32_and();
       frame.i32_const(16);
       frame.i32_shr_u();
-      local1 = frame.peek();
-      frame.push(local3);
-      frame.push(local1);
+      local5 = frame.peek();
+      frame.push(local4);
+      frame.push(local5);
       frame.i32_gt_s();
       frame.select();
       frame.memory_grow(0);
@@ -94,7 +142,7 @@ class Module {
       frame.i32_lt_s();
       if_label_1:
       if (frame.pop() != 0) {
-        frame.push(local1);
+        frame.push(local5);
         frame.memory_grow(0);
         frame.i32_const(0);
         frame.i32_lt_s();
@@ -104,460 +152,338 @@ class Module {
         }
       }
     }
-    frame.push(local0);
-    globals.global0 = frame.pop();
+    frame.push(local3);
+    globals.global2 = frame.pop();
+    frame.push(local1);
     frame.push(local2);
-    frame.i32_const(16);
-    frame.i32_sub();
-    local0 = frame.peek();
-    frame.push(local4);
     frame.i32_store(2, 0);
     frame.push(local0);
-    frame.i32_const(1);
-    frame.i32_store(2, 4);
-    frame.push(local0);
+    frame.i32_const(4);
+    frame.i32_sub();
+    local1 = frame.peek();
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func0(t0, t1);
+    }
+    frame.push(local1);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func1(t0, t1);
+    }
+    frame.push(local1);
     frame.push(arg1);
-    frame.i32_store(2, 8);
-    frame.push(local0);
-    frame.push(arg0);
     frame.i32_store(2, 12);
-    frame.push(local2);
+    frame.push(local1);
+    frame.push(arg0);
+    frame.i32_store(2, 16);
+    frame.push(local0);
+    frame.i32_const(16);
+    frame.i32_add();
     return frame.pop();
   }
 
-  void _func2(i32 arg0) {
-    i32 local0 = 0;
-    i32 local1 = 0;
-
+  void _func3(i32 arg0, i32 arg1) {
     final frame = Frame(memory);
-    block_label_0:
-    {
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store8(0, 0);
-      frame.push(arg0);
-      frame.push(_func0());
-      frame.i32_const(4);
-      frame.i32_sub();
-      frame.i32_add();
-      local0 = frame.peek();
-      frame.i32_const(0);
-      frame.i32_store8(0, 3);
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store8(0, 1);
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store8(0, 2);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store8(0, 2);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store8(0, 1);
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store8(0, 3);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store8(0, 0);
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.push(arg0);
-      frame.i32_sub();
-      frame.i32_const(3);
-      frame.i32_and();
-      local0 = frame.peek();
-      frame.i32_add();
-      arg0 = frame.peek();
-      frame.i32_const(0);
-      frame.i32_store(2, 0);
-      frame.push(arg0);
-      frame.push(_func0());
-      frame.push(local0);
-      frame.i32_sub();
-      frame.i32_const(124);
-      frame.i32_and();
-      local1 = frame.peek();
-      frame.i32_add();
-      frame.i32_const(28);
-      frame.i32_sub();
-      local0 = frame.peek();
-      frame.i32_const(0);
-      frame.i32_store(2, 24);
-      frame.push(local1);
-      frame.i32_const(8);
-      frame.i32_le_u();
-      if (frame.pop() != 0) break block_label_0;
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store(2, 4);
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store(2, 8);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store(2, 16);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store(2, 20);
-      frame.push(local1);
-      frame.i32_const(24);
-      frame.i32_le_u();
-      if (frame.pop() != 0) break block_label_0;
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store(2, 12);
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store(2, 16);
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store(2, 20);
-      frame.push(arg0);
-      frame.i32_const(0);
-      frame.i32_store(2, 24);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store(2, 0);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store(2, 4);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store(2, 8);
-      frame.push(local0);
-      frame.i32_const(0);
-      frame.i32_store(2, 12);
-      frame.push(arg0);
-      frame.push(arg0);
-      frame.i32_const(4);
-      frame.i32_and();
-      frame.i32_const(24);
-      frame.i32_add();
-      local0 = frame.peek();
-      frame.i32_add();
-      arg0 = frame.pop();
-      frame.push(local1);
-      frame.push(local0);
-      frame.i32_sub();
-      local0 = frame.pop();
+    frame.push(arg0);
+    frame.push(arg1);
+    frame.i32_store(2, 0);
+  }
 
-      loop_label_1:
-      for (;;) {
-        frame.push(local0);
-        frame.i32_const(32);
-        frame.i32_ge_u();
-        if_label_2:
-        if (frame.pop() != 0) {
-          frame.push(arg0);
-          frame.i64_const(0);
-          frame.i64_store(3, 0);
-          frame.push(arg0);
-          frame.i64_const(0);
-          frame.i64_store(3, 8);
-          frame.push(arg0);
-          frame.i64_const(0);
-          frame.i64_store(3, 16);
-          frame.push(arg0);
-          frame.i64_const(0);
-          frame.i64_store(3, 24);
-          frame.push(local0);
-          frame.i32_const(32);
-          frame.i32_sub();
-          local0 = frame.pop();
-          frame.push(arg0);
-          frame.i32_const(32);
-          frame.i32_add();
-          arg0 = frame.pop();
-          continue loop_label_1;
-        }
-        break;
+  f64 _func4(f64 arg0, f64 arg1, f64 arg2, f64 arg3) {
+    final frame = Frame(memory);
+    frame.push(arg0);
+    frame.push(arg1);
+    frame.push(arg3);
+    frame.f64_const(1.0);
+    frame.push(arg2);
+    frame.f64_div();
+    frame.f64_mul();
+    frame.f64_const(-1.0);
+    frame.f64_add();
+    frame.f64_mul();
+    frame.f64_add();
+    return frame.pop();
+  }
+
+  i32 _func5(i32 arg0, i32 arg1) {
+    final frame = Frame(memory);
+    frame.push(arg0);
+    frame.i32_const(2);
+    frame.i32_shl();
+    frame.push(arg1);
+    frame.i32_add();
+    frame.i32_const(1023);
+    frame.i32_and();
+    arg0 = frame.peek();
+    frame.i32_const(256);
+    frame.i32_lt_u();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.push(arg0);
+      return frame.pop();
+    } else {
+      frame.push(arg0);
+      frame.i32_const(512);
+      frame.i32_lt_u();
+      if_label_1:
+      if (frame.pop() != 0) {
+        frame.i32_const(510);
+        frame.push(arg0);
+        frame.i32_sub();
+        return frame.pop();
       }
     }
+    frame.i32_const(0);
+    return frame.pop();
+  }
+
+  void _func6(i32 arg0, i32 arg1, i32 arg2) {
+    final frame = Frame(memory);
+    frame.push(arg0);
+    frame.i32_load(2, 4);
+    frame.push(arg1);
+    frame.i32_add();
+    frame.push(arg2);
+    frame.i32_store8(0, 0);
   }
 
   void mandelbrot(i32 arg0, f64 arg1, f64 arg2, f64 arg3) {
-    i32 local0 = 0;
-    i32 local1 = 0;
+    f64 local0 = 0;
+    f64 local1 = 0;
     f64 local2 = 0;
-    i32 local3 = 0;
-    i32 local4 = 0;
-    f64 local5 = 0;
-    f64 local6 = 0;
-    f64 local7 = 0;
+    f64 local3 = 0;
+    f64 local4 = 0;
+    i32 local5 = 0;
+    i32 local6 = 0;
+    i32 local7 = 0;
     i32 local8 = 0;
-    i32 local9 = 0;
-    f64 local10 = 0;
-    f64 local11 = 0;
-    f64 local12 = 0;
+    f64 local9 = 0;
+    i32 local10 = 0;
 
     final frame = Frame(memory);
     frame.push(arg3);
-    frame.push(globals.global3);
+    frame.push(globals.global1);
     frame.f64_convert_i32_s();
     frame.f64_mul();
-    frame.push(globals.global2);
+    frame.push(globals.global0);
     frame.f64_convert_i32_s();
     frame.f64_div();
-    local10 = frame.pop();
+    local4 = frame.pop();
 
     loop_label_0:
     for (;;) {
-      frame.push(local4);
-      frame.push(globals.global3);
+      frame.push(local7);
+      frame.push(globals.global1);
       frame.i32_lt_s();
       if_label_1:
       if (frame.pop() != 0) {
         frame.i32_const(0);
-        local3 = frame.pop();
+        local8 = frame.pop();
 
         loop_label_2:
         for (;;) {
-          frame.push(local3);
-          frame.push(globals.global2);
+          frame.push(local8);
+          frame.push(globals.global0);
           frame.i32_lt_s();
           if_label_3:
           if (frame.pop() != 0) {
             frame.push(arg1);
             frame.push(arg3);
-            frame.push(local3);
+            frame.push(globals.global0);
             frame.f64_convert_i32_s();
-            frame.f64_const(0.0008333333333333334);
-            frame.f64_mul();
-            frame.f64_const(1.0);
-            frame.f64_sub();
-            frame.f64_mul();
-            frame.f64_add();
-            local11 = frame.pop();
+            frame.push(local8);
+            frame.f64_convert_i32_s();
+            {
+              var t3 = frame.pop();
+              var t2 = frame.pop();
+              var t1 = frame.pop();
+              var t0 = frame.pop();
+              frame.push(_func4(
+                t0,
+                t1,
+                t2,
+                t3,
+              ));
+            }
+            local3 = frame.pop();
             frame.push(arg2);
-            frame.push(local10);
             frame.push(local4);
+            frame.push(globals.global1);
             frame.f64_convert_i32_s();
-            frame.f64_const(0.00125);
-            frame.f64_mul();
-            frame.f64_const(1.0);
-            frame.f64_sub();
-            frame.f64_mul();
-            frame.f64_add();
-            local12 = frame.pop();
-            frame.f64_const(0.0);
+            frame.push(local7);
+            frame.f64_convert_i32_s();
+            {
+              var t3 = frame.pop();
+              var t2 = frame.pop();
+              var t1 = frame.pop();
+              var t0 = frame.pop();
+              frame.push(_func4(
+                t0,
+                t1,
+                t2,
+                t3,
+              ));
+            }
             local2 = frame.pop();
-            frame.i32_const(0);
+            frame.f64_const(0.0);
+            local0 = frame.pop();
+            frame.f64_const(0.0);
+            local9 = frame.pop();
+            frame.f64_const(0.0);
             local1 = frame.pop();
-            frame.f64_const(0.0);
-            local5 = frame.pop();
-            frame.f64_const(0.0);
-            local6 = frame.pop();
-            frame.f64_const(0.0);
-            local7 = frame.pop();
+            frame.i32_const(0);
+            local10 = frame.pop();
 
             loop_label_4:
             for (;;) {
-              frame.push(local1);
               frame.push(arg0);
-              frame.i32_lt_u();
+              frame.push(local10);
+              frame.i32_gt_u();
+              frame.push(local9);
+              frame.push(local9);
+              frame.f64_mul();
+              frame.push(local1);
+              frame.push(local1);
+              frame.f64_mul();
+              frame.f64_add();
+              frame.f64_const(4.0);
+              frame.f64_le();
+              frame.i32_and();
               if_label_5:
               if (frame.pop() != 0) {
-                frame.push(local7);
-                frame.push(local7);
+                frame.push(local9);
+                frame.push(local0);
                 frame.f64_mul();
-                frame.push(local2);
-                frame.push(local2);
-                frame.f64_mul();
+                local1 = frame.peek();
+                frame.push(local1);
                 frame.f64_add();
-                frame.f64_const(4.0);
-                frame.f64_le();
-              } else {
-                frame.i32_const(0);
-              }
-              if_label_5:
-              if (frame.pop() != 0) {
-                frame.push(local5);
-                frame.push(local6);
+                frame.push(local2);
+                frame.f64_add();
+                local1 = frame.pop();
+                frame.push(local9);
+                frame.push(local9);
                 frame.f64_mul();
-                local2 = frame.pop();
-                frame.push(local5);
-                frame.push(local5);
-                frame.f64_mul();
-                frame.push(local6);
-                frame.push(local6);
+                frame.push(local0);
+                frame.push(local0);
                 frame.f64_mul();
                 frame.f64_sub();
-                frame.push(local11);
+                frame.push(local3);
                 frame.f64_add();
-                local7 = frame.peek();
-                local5 = frame.pop();
-                frame.push(local2);
-                frame.push(local2);
-                frame.f64_add();
-                frame.push(local12);
-                frame.f64_add();
-                local2 = frame.peek();
-                local6 = frame.pop();
+                local9 = frame.pop();
                 frame.push(local1);
+                local0 = frame.pop();
+                frame.push(local10);
                 frame.i32_const(1);
                 frame.i32_add();
-                local1 = frame.pop();
+                local10 = frame.pop();
                 continue loop_label_4;
               }
               break;
             }
-            frame.push(local3);
-            frame.push(local4);
-            frame.push(globals.global2);
+            frame.push(globals.global3);
+            frame.push(local8);
+            frame.push(local7);
+            frame.push(globals.global0);
             frame.i32_mul();
             frame.i32_add();
             frame.i32_const(2);
             frame.i32_shl();
-            local8 = frame.peek();
-            frame.push(globals.global1);
-            frame.i32_load(2, 4);
-            frame.i32_add();
+            local6 = frame.peek();
             frame.push(arg0);
-            frame.push(local1);
+            frame.push(local10);
             frame.i32_eq();
-            local9 = frame.peek();
+            local5 = frame.peek();
             if_label_4:
             if (frame.pop() != 0) {
               frame.i32_const(0);
             } else {
-              block_label_5:
+              frame.push(local10);
+              frame.i32_const(0);
               {
-                frame.push(local1);
-                frame.i32_const(2);
-                frame.i32_shl();
-                frame.i32_const(1023);
-                frame.i32_and();
-                local0 = frame.peek();
-                frame.i32_const(256);
-                frame.i32_lt_u();
-                if (frame.pop() != 0) break block_label_5;
-                frame.push(local0);
-                frame.i32_const(512);
-                frame.i32_lt_u();
-                if_label_6:
-                if (frame.pop() != 0) {
-                  frame.i32_const(510);
-                  frame.push(local0);
-                  frame.i32_sub();
-                  local0 = frame.pop();
-                  break block_label_5;
-                }
-                frame.i32_const(0);
-                local0 = frame.pop();
+                var t1 = frame.pop();
+                var t0 = frame.pop();
+                frame.push(_func5(t0, t1));
               }
-              frame.push(local0);
-              frame.i32_const(255);
-              frame.i32_and();
             }
-            frame.i32_store8(0, 0);
-            frame.push(globals.global1);
-            frame.i32_load(2, 4);
-            frame.push(local8);
+            {
+              var t2 = frame.pop();
+              var t1 = frame.pop();
+              var t0 = frame.pop();
+              _func6(t0, t1, t2);
+            }
+            frame.push(globals.global3);
+            frame.push(local6);
             frame.i32_const(1);
             frame.i32_add();
-            frame.i32_add();
-            frame.push(local9);
+            frame.push(local5);
             if_label_4:
             if (frame.pop() != 0) {
               frame.i32_const(0);
             } else {
-              block_label_5:
+              frame.push(local10);
+              frame.i32_const(128);
               {
-                frame.push(local1);
-                frame.i32_const(2);
-                frame.i32_shl();
-                frame.i32_const(128);
-                frame.i32_add();
-                frame.i32_const(1023);
-                frame.i32_and();
-                local0 = frame.peek();
-                frame.i32_const(256);
-                frame.i32_lt_u();
-                if (frame.pop() != 0) break block_label_5;
-                frame.push(local0);
-                frame.i32_const(512);
-                frame.i32_lt_u();
-                if_label_6:
-                if (frame.pop() != 0) {
-                  frame.i32_const(510);
-                  frame.push(local0);
-                  frame.i32_sub();
-                  local0 = frame.pop();
-                  break block_label_5;
-                }
-                frame.i32_const(0);
-                local0 = frame.pop();
+                var t1 = frame.pop();
+                var t0 = frame.pop();
+                frame.push(_func5(t0, t1));
               }
-              frame.push(local0);
-              frame.i32_const(255);
-              frame.i32_and();
             }
-            frame.i32_store8(0, 0);
-            frame.push(globals.global1);
-            frame.i32_load(2, 4);
-            frame.push(local8);
+            {
+              var t2 = frame.pop();
+              var t1 = frame.pop();
+              var t0 = frame.pop();
+              _func6(t0, t1, t2);
+            }
+            frame.push(globals.global3);
+            frame.push(local6);
             frame.i32_const(2);
             frame.i32_add();
-            frame.i32_add();
-            frame.push(local9);
+            frame.push(local5);
             if_label_4:
             if (frame.pop() != 0) {
               frame.i32_const(0);
             } else {
-              block_label_5:
+              frame.push(local10);
+              frame.i32_const(356);
               {
-                frame.push(local1);
-                frame.i32_const(2);
-                frame.i32_shl();
-                frame.i32_const(356);
-                frame.i32_add();
-                frame.i32_const(1023);
-                frame.i32_and();
-                local0 = frame.peek();
-                frame.i32_const(256);
-                frame.i32_lt_u();
-                if (frame.pop() != 0) break block_label_5;
-                frame.push(local0);
-                frame.i32_const(512);
-                frame.i32_lt_u();
-                if_label_6:
-                if (frame.pop() != 0) {
-                  frame.i32_const(510);
-                  frame.push(local0);
-                  frame.i32_sub();
-                  local0 = frame.pop();
-                  break block_label_5;
-                }
-                frame.i32_const(0);
-                local0 = frame.pop();
+                var t1 = frame.pop();
+                var t0 = frame.pop();
+                frame.push(_func5(t0, t1));
               }
-              frame.push(local0);
-              frame.i32_const(255);
-              frame.i32_and();
             }
-            frame.i32_store8(0, 0);
-            frame.push(globals.global1);
-            frame.i32_load(2, 4);
-            frame.push(local8);
+            {
+              var t2 = frame.pop();
+              var t1 = frame.pop();
+              var t0 = frame.pop();
+              _func6(t0, t1, t2);
+            }
+            frame.push(globals.global3);
+            frame.push(local6);
             frame.i32_const(3);
             frame.i32_add();
-            frame.i32_add();
             frame.i32_const(255);
-            frame.i32_store8(0, 0);
-            frame.push(local3);
+            {
+              var t2 = frame.pop();
+              var t1 = frame.pop();
+              var t0 = frame.pop();
+              _func6(t0, t1, t2);
+            }
+            frame.push(local8);
             frame.i32_const(1);
             frame.i32_add();
-            local3 = frame.pop();
+            local8 = frame.pop();
             continue loop_label_2;
           }
           break;
         }
-        frame.push(local4);
+        frame.push(local7);
         frame.i32_const(1);
         frame.i32_add();
-        local4 = frame.pop();
+        local7 = frame.pop();
         continue loop_label_0;
       }
       break;
@@ -566,76 +492,129 @@ class Module {
 
   i32 getData() {
     final frame = Frame(memory);
-    frame.push(globals.global1);
+    frame.push(globals.global3);
     return frame.pop();
   }
 
   i32 getDataBuffer() {
     final frame = Frame(memory);
-    frame.push(globals.global1);
+    frame.push(globals.global3);
     frame.i32_load(2, 0);
     return frame.pop();
   }
 
-  void _func6() {
+  void _func10() {
     i32 local0 = 0;
     i32 local1 = 0;
+    i32 local2 = 0;
 
     final frame = Frame(memory);
-    frame.i32_const(1136);
-    globals.global0 = frame.pop();
+    frame.i32_const(1276);
+    globals.global2 = frame.pop();
+    frame.push(globals.global0);
+    frame.push(globals.global1);
+    frame.i32_mul();
+    frame.i32_const(2);
+    frame.i32_shl();
+    local1 = frame.pop();
     frame.i32_const(12);
-    frame.i32_const(3);
+    frame.i32_const(4);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(_func1(t0, t1));
+      frame.push(_func2(t0, t1));
     }
     local0 = frame.peek();
     frame.i32_eqz();
     if_label_0:
     if (frame.pop() != 0) {
       frame.i32_const(12);
-      frame.i32_const(2);
+      frame.i32_const(3);
       {
         var t1 = frame.pop();
         var t0 = frame.pop();
-        frame.push(_func1(t0, t1));
+        frame.push(_func2(t0, t1));
       }
       local0 = frame.pop();
     }
     frame.push(local0);
     frame.i32_const(0);
-    frame.i32_store(2, 0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func3(t0, t1);
+    }
     frame.push(local0);
-    frame.i32_const(0);
-    frame.i32_store(2, 4);
-    frame.push(local0);
-    frame.i32_const(0);
-    frame.i32_store(2, 8);
-    frame.push(_func0());
     frame.i32_const(0);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(_func1(t0, t1));
+      _func0(t0, t1);
     }
-    local1 = frame.peek();
-    _func2(frame.pop());
     frame.push(local0);
-    frame.i32_load(2, 0);
-    frame.drop();
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func1(t0, t1);
+    }
+    frame.push(local1);
+    frame.i32_const(1073741820);
+    frame.i32_gt_u();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(1056);
+      frame.i32_const(1104);
+      frame.i32_const(19);
+      frame.i32_const(57);
+      {
+        var t3 = frame.pop();
+        var t2 = frame.pop();
+        var t1 = frame.pop();
+        var t0 = frame.pop();
+        envImports.abort(
+          t0,
+          t1,
+          t2,
+          t3,
+        );
+      }
+      throw 'unreachable';
+    }
+    frame.push(local1);
+    frame.i32_const(1);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(_func2(t0, t1));
+    }
+    local2 = frame.peek();
+    frame.i32_const(0);
+    frame.push(local1);
+    frame.memory_fill(0);
+    frame.push(local0);
+    frame.push(local2);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func3(t0, t1);
+    }
+    frame.push(local0);
+    frame.push(local2);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func0(t0, t1);
+    }
     frame.push(local0);
     frame.push(local1);
-    frame.i32_store(2, 0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func1(t0, t1);
+    }
     frame.push(local0);
-    frame.push(local1);
-    frame.i32_store(2, 4);
-    frame.push(local0);
-    frame.push(_func0());
-    frame.i32_store(2, 8);
-    frame.push(local0);
-    globals.global1 = frame.pop();
+    globals.global3 = frame.pop();
   }
 }
 
@@ -649,56 +628,121 @@ class Globals {
 
   static i32 _initGlobal0() {
     final frame = Frame(memory);
-    frame.i32_const(0);
+    frame.i32_const(1200);
     return frame.pop();
   }
 
   static i32 _initGlobal1() {
     final frame = Frame(memory);
-    frame.i32_const(0);
+    frame.i32_const(800);
     return frame.pop();
   }
 
   static i32 _initGlobal2() {
     final frame = Frame(memory);
-    frame.i32_const(1200);
+    frame.i32_const(0);
     return frame.pop();
   }
 
   static i32 _initGlobal3() {
     final frame = Frame(memory);
-    frame.i32_const(800);
+    frame.i32_const(0);
     return frame.pop();
   }
+}
+
+/// A class representing the symbols imported from the 'env' module.
+abstract class EnvImports {
+  /// The imported 'abort' symbol.
+  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3);
 }
 
 class DataSegments {
   Uint8List data0 = decodeDataLiteral(_hex0);
   Uint8List data1 = decodeDataLiteral(_hex1);
+  Uint8List data2 = decodeDataLiteral(_hex2);
+  Uint8List data3 = decodeDataLiteral(_hex3);
+  Uint8List data4 = decodeDataLiteral(_hex4);
+  Uint8List data5 = decodeDataLiteral(_hex5);
+  Uint8List data6 = decodeDataLiteral(_hex6);
+  Uint8List data7 = decodeDataLiteral(_hex7);
 
-  static const String _hex0 =
-      '\x1C\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x1C\x00\x00\x00\x49\x00'
-      '\x6E\x00\x76\x00\x61\x00\x6C\x00\x69\x00\x64\x00\x20\x00\x6C\x00\x65\x00'
-      '\x6E\x00\x67\x00\x74\x00\x68';
+  static const String _hex0 = '\x2C';
   static const String _hex1 =
-      '\x26\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x26\x00\x00\x00\x7E\x00'
-      '\x6C\x00\x69\x00\x62\x00\x2F\x00\x61\x00\x72\x00\x72\x00\x61\x00\x79\x00'
-      '\x62\x00\x75\x00\x66\x00\x66\x00\x65\x00\x72\x00\x2E\x00\x74\x00\x73';
+      '\x02\x00\x00\x00\x1C\x00\x00\x00\x49\x00\x6E\x00\x76\x00\x61\x00\x6C\x00'
+      '\x69\x00\x64\x00\x20\x00\x6C\x00\x65\x00\x6E\x00\x67\x00\x74\x00\x68';
+  static const String _hex2 = '\x3C';
+  static const String _hex3 =
+      '\x02\x00\x00\x00\x26\x00\x00\x00\x7E\x00\x6C\x00\x69\x00\x62\x00\x2F\x00'
+      '\x61\x00\x72\x00\x72\x00\x61\x00\x79\x00\x62\x00\x75\x00\x66\x00\x66\x00'
+      '\x65\x00\x72\x00\x2E\x00\x74\x00\x73';
+  static const String _hex4 = '\x3C';
+  static const String _hex5 =
+      '\x02\x00\x00\x00\x28\x00\x00\x00\x41\x00\x6C\x00\x6C\x00\x6F\x00\x63\x00'
+      '\x61\x00\x74\x00\x69\x00\x6F\x00\x6E\x00\x20\x00\x74\x00\x6F\x00\x6F\x00'
+      '\x20\x00\x6C\x00\x61\x00\x72\x00\x67\x00\x65';
+  static const String _hex6 = '\x3C';
+  static const String _hex7 =
+      '\x02\x00\x00\x00\x1E\x00\x00\x00\x7E\x00\x6C\x00\x69\x00\x62\x00\x2F\x00'
+      '\x72\x00\x74\x00\x2F\x00\x73\x00\x74\x00\x75\x00\x62\x00\x2E\x00\x74\x00'
+      '\x73';
 
   void init(Memory memory) {
     memory.copyTo(data0, _dataOffset0(memory));
     memory.copyTo(data1, _dataOffset1(memory));
+    memory.copyTo(data2, _dataOffset2(memory));
+    memory.copyTo(data3, _dataOffset3(memory));
+    memory.copyTo(data4, _dataOffset4(memory));
+    memory.copyTo(data5, _dataOffset5(memory));
+    memory.copyTo(data6, _dataOffset6(memory));
+    memory.copyTo(data7, _dataOffset7(memory));
   }
 
   static u32 _dataOffset0(Memory memory) {
     final frame = Frame(memory);
-    frame.i32_const(1024);
+    frame.i32_const(1036);
     return frame.pop();
   }
 
   static u32 _dataOffset1(Memory memory) {
     final frame = Frame(memory);
-    frame.i32_const(1072);
+    frame.i32_const(1048);
+    return frame.pop();
+  }
+
+  static u32 _dataOffset2(Memory memory) {
+    final frame = Frame(memory);
+    frame.i32_const(1084);
+    return frame.pop();
+  }
+
+  static u32 _dataOffset3(Memory memory) {
+    final frame = Frame(memory);
+    frame.i32_const(1096);
+    return frame.pop();
+  }
+
+  static u32 _dataOffset4(Memory memory) {
+    final frame = Frame(memory);
+    frame.i32_const(1148);
+    return frame.pop();
+  }
+
+  static u32 _dataOffset5(Memory memory) {
+    final frame = Frame(memory);
+    frame.i32_const(1160);
+    return frame.pop();
+  }
+
+  static u32 _dataOffset6(Memory memory) {
+    final frame = Frame(memory);
+    frame.i32_const(1212);
+    return frame.pop();
+  }
+
+  static u32 _dataOffset7(Memory memory) {
+    final frame = Frame(memory);
+    frame.i32_const(1224);
     return frame.pop();
   }
 }

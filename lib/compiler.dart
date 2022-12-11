@@ -185,7 +185,7 @@ class Compiler {
 
       while (reader.bytesRemaining() > 0) {
         int opcode = reader.readUint8();
-        Instr? i = Instruction.parse(opcode, reader);
+        Instr? i = Instruction.parse(opcode, reader, logger: logger);
         if (i != null) {
           if (opcode == Instruction_Block.blockOpcode) {
             depth++;
@@ -1576,11 +1576,14 @@ class Instruction {
     return map;
   }
 
-  static Instr? parse(int opcode, Reader r) {
+  static Instr? parse(int opcode, Reader r, {Logger? logger}) {
     Instruction? instruction;
     if (opcode == overflowOpcode) {
       opcode = r.readUint8();
       instruction = overflowOpcodeMap[opcode];
+      if (instruction == null) {
+        logger?.info('    overflow: ${hex(opcode)}');
+      }
     } else {
       instruction = opcodeMap[opcode];
     }
@@ -1687,6 +1690,7 @@ class Instruction {
   static List<Instruction> _initOverflow() {
     return [
       Instruction('i32.trunc_sat_f64_u', 0x03),
+      Instruction('memory.fill', 0x0B, immediates: _one),
     ];
   }
 }
