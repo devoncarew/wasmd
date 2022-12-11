@@ -67,23 +67,15 @@ void main(List<String> args) async {
   );
 
   var code = library.accept(emitter).toString();
-  // var runtimeSupport = await readRuntimeLibrary();
-  // todo: move this into the compiler
-  // var code = '$generatedCode\n\n$runtimeSupport';
   try {
     code = formatter.format(code);
   } catch (e) {
     print(e);
   }
 
-  // if (output != null) {
   logger.info('\nEmitting $output.');
   var outFile = File(output);
   outFile.writeAsStringSync(code);
-  // } else {
-  //   logger.info('');
-  //   print(code);
-  // }
 }
 
 class NoPrefixAllocator implements Allocator {

@@ -59,7 +59,7 @@ class Compiler {
 
     while (r.bytesRemaining() > 0) {
       var kind = r.readUint8();
-      var length = r.readU32();
+      var length = r.leb128();
 
       var sectionKind = SectionKind.from(kind);
       _log('[section ${sectionKind?.name}] (bytes: $length)');
@@ -119,7 +119,7 @@ class Compiler {
     //
     //   functype ::= 0x60 rt1: resulttype rt2: resulttype ⇒ rt1 → rt2"
 
-    int vecCount = r.readU32();
+    int vecCount = r.leb128();
     for (int i = 0; i < vecCount; i++) {
       r.verifyMarker(r.readUint8(), 0x60);
       var parameterType = r.readResultTypeVector();
@@ -135,10 +135,10 @@ class Compiler {
   void _parseFunctionSection(Reader r, Module module) {
     // "It decodes into a vector of type indices that represent the type
     // fields of the functions in the funcs component of a module."
-    int vecCount = r.readU32();
+    int vecCount = r.leb128();
 
     for (int i = 0; i < vecCount; i++) {
-      int typeIndex = r.readU32();
+      int typeIndex = r.leb128();
       module.addDefinedFunction(DefinedFunction(module, typeIndex, i));
     }
 
@@ -153,21 +153,21 @@ class Compiler {
     // functions in the funcs component of a module. The type fields of the
     // respective functions are encoded separately in the function section."
 
-    int vecCount = r.readU32();
+    int vecCount = r.leb128();
     _log('  numFunctions: $vecCount');
 
     for (int i = 0; i < vecCount; i++) {
       var function = module.definedFunctions[i];
 
-      int funcLength = r.readU32();
+      int funcLength = r.leb128();
       int startPos = r.pos;
 
       _log('  func $i [len=$funcLength]');
 
       var locals = <ResultType>[];
-      var declsCount = r.readU32();
+      var declsCount = r.leb128();
       for (int i = 0; i < declsCount; i++) {
-        var count = r.readU32();
+        var count = r.leb128();
         var kind = ResultType(r.readUint8());
         locals.addAll(List.filled(count, kind));
       }
@@ -198,6 +198,7 @@ class Compiler {
           }
           instructions.add(i);
         } else {
+          _log('    unknown opcode: ${hex(opcode)}');
           print('unknown opcode: ${hex(opcode)}');
           instructions.add(Instr(Instruction_Unreachable(), [hex(opcode)]));
           while (depth > 0) {
@@ -213,20 +214,20 @@ class Compiler {
   }
 
   void _parseMemorySection(Reader r, Module module) {
-    int count = r.readU32();
+    int count = r.leb128();
     if (count > 1) {
       throw StateError('Only 1 memory item supported (found $count)');
     }
     var limitKind = r.readUint8();
     switch (limitKind) {
       case 0x00:
-        var min = r.readU32();
+        var min = r.leb128();
         _log('  min: $min pages');
         module.setMemoryInfo(min: min);
         break;
       case 0x01:
-        var min = r.readU32();
-        var max = r.readU32();
+        var min = r.leb128();
+        var max = r.leb128();
         _log('  min: $min pages');
         _log('  max: $max pages');
         module.setMemoryInfo(min: min, max: max);
@@ -237,9 +238,9 @@ class Compiler {
   }
 
   void _parseExportSection(Reader r, Module module) {
-    // "It decodes into a vector of exports that represent the component of
-    // a module."
-    var exportCount = r.readU32();
+    // "It decodes into a vector of exports that represent the component of a
+    // module."
+    var exportCount = r.leb128();
 
     for (int i = 0; i < exportCount; i++) {
       var name = r.readName();
@@ -248,15 +249,21 @@ class Compiler {
       switch (type) {
         case 0x00:
           // funcidx
-          var functionIndex = r.readU32();
+          var functionIndex = r.leb128();
           _log("  export func '$name' (#$functionIndex)");
           module.exportFunction(name, functionIndex);
           break;
         case 0x02:
           // memidx
-          var memoryIndex = r.readU32();
+          var memoryIndex = r.leb128();
           _log("  export memory (#$memoryIndex)");
           module.exportMemory(name, memoryIndex);
+          break;
+        case 0x03:
+          // globalidx
+          var globalIndex = r.leb128();
+          _log("  export global (#$globalIndex)");
+          module.exportGlobal(name, globalIndex);
           break;
         default:
           throw 'unhandled type: ${type.toRadixString(16)}';
@@ -265,12 +272,12 @@ class Compiler {
   }
 
   void _parseStartSection(Reader r, Module module) {
-    int funcIndex = r.readU32();
+    int funcIndex = r.leb128();
     module.startFunctionIndex = funcIndex;
   }
 
   void _parseImportSection(Reader r, Module module) {
-    var numImports = r.readU32();
+    var numImports = r.leb128();
     for (int i = 0; i < numImports; i++) {
       var moduleName = r.readUtf8();
       var itemName = r.readUtf8();
@@ -297,13 +304,13 @@ class Compiler {
           var limitKind = r.readUint8();
           switch (limitKind) {
             case 0x00:
-              var min = r.readU32();
+              var min = r.leb128();
               _log('  min: $min pages');
               module.setMemoryInfo(min: min);
               break;
             case 0x01:
-              var min = r.readU32();
-              var max = r.readU32();
+              var min = r.leb128();
+              var max = r.leb128();
               _log('  min: $min pages');
               _log('  max: $max pages');
               module.setMemoryInfo(min: min, max: max);
@@ -324,7 +331,7 @@ class Compiler {
   }
 
   void _parseGlobalSection(Reader r, Module module) {
-    int globalCount = r.readU32();
+    int globalCount = r.leb128();
 
     for (int i = 0; i < globalCount; i++) {
       var type = r.readUint8();
@@ -342,9 +349,9 @@ class Compiler {
   }
 
   void _parseDataSection(Reader r, Module module) {
-    var dataCount = r.readU32();
+    var dataCount = r.leb128();
     for (int i = 0; i < dataCount; i++) {
-      var type = r.readU32();
+      var type = r.leb128();
       switch (type) {
         case 0x00:
           var instructions = r.readInstructionsEndTerminated();
@@ -360,7 +367,7 @@ class Compiler {
           module.dataSegments.add(DataSegment(passive: true, bytes: bytes));
           break;
         case 0x02:
-          var memIndex = r.readU32();
+          var memIndex = r.leb128();
           if (memIndex != 0) {
             throw 'Only data segments with memory indexes of 0 are supported; '
                 'found $memIndex';
@@ -381,7 +388,7 @@ class Compiler {
 
   void _parseDataCountSection(Reader r, Module module, int length) {
     if (length > 0) {
-      var count = r.readU32();
+      var count = r.leb128();
       _log('  data count: $count');
     }
   }
@@ -423,6 +430,36 @@ void printModule(Module module, LibraryBuilder library) {
           if (module.maxMemory != null) literalNum(module.maxMemory!),
         ]).code),
     );
+  }
+
+  // global exports - getter and setter pairs
+  for (var export in module.globalExports) {
+    var global = export.global;
+
+    classBuilder.methods.add(Method(
+      (b) => b
+        ..name = export.name
+        ..type = MethodType.getter
+        ..returns = Reference(global.type.typeName)
+        ..body = refer('globals').property(global.name!).code,
+    ));
+
+    if (global.mutable) {
+      classBuilder.methods.add(Method(
+        (b) => b
+          ..name = export.name
+          ..type = MethodType.setter
+          ..requiredParameters.add((Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(global.type.typeName),
+          )))
+          ..body = refer('globals')
+              .property(global.name!)
+              .assign(refer('value'))
+              .code,
+      ));
+    }
   }
 
   // globals reference
@@ -527,38 +564,13 @@ class Reader {
     return val;
   }
 
-  int readInt64() => variable64();
+  int readInt64() => leb128();
 
   int readUint8() {
     return data.getUint8(pos++);
   }
 
-  int readU32() {
-    // read LEB128
-    int val = data.getUint8(pos++);
-    int ret = val & 0x7F;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 7 | ret;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 14 | ret;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 21 | ret;
-    return ret;
-  }
-
-  int variable64() {
+  int leb128() {
     // read LEB128
     int val = data.getUint8(pos++);
     int ret = val & 0x7F;
@@ -626,7 +638,7 @@ class Reader {
   List<ResultType> readResultTypeVector() {
     List<ResultType> result = [];
 
-    int vecCount = readU32();
+    int vecCount = leb128();
     for (int i = 0; i < vecCount; i++) {
       result.add(ResultType(readUint8()));
     }
@@ -641,14 +653,14 @@ class Reader {
   }
 
   Uint8List readByteVector() {
-    var len = readU32();
+    var len = leb128();
     return readUint8List(len);
   }
 
   String readName() => readUtf8();
 
   String readUtf8() {
-    var length = readU32();
+    var length = leb128();
     var bytes = readUint8List(length);
     return utf8.decoder.convert(bytes);
   }
@@ -765,6 +777,8 @@ class Module {
 
   List<DataSegment> dataSegments = [];
 
+  List<GlobalExport> globalExports = [];
+
   int minMemory = 0;
   int? maxMemory;
   bool memoryImported = false;
@@ -799,6 +813,10 @@ class Module {
 
   void exportMemory(String name, int memoryIndex) {
     // we make the memory field visible by default
+  }
+
+  void exportGlobal(String name, int globalIndex) {
+    globalExports.add(GlobalExport(name, globals[globalIndex]));
   }
 
   ModuleFunction? functionByIndex(int functionIndex) {
@@ -1090,6 +1108,13 @@ class Global {
   }
 }
 
+class GlobalExport {
+  final String name;
+  final Global global;
+
+  GlobalExport(this.name, this.global);
+}
+
 class DataSegment {
   final bool passive;
   final List<int> bytes;
@@ -1110,7 +1135,7 @@ class DataSegment {
         (b) => b
           ..name = 'data$i'
           ..type = Reference('Uint8List', 'dart:typed_data')
-          ..assignment = Code('hexDecode(_hex0)'),
+          ..assignment = Code('decodeDataLiteral(_hex$i)'),
       ));
     }
 
@@ -1171,7 +1196,7 @@ class DataSegment {
 
     for (int i = 0; i < module.dataSegments.length; i++) {
       var dataSegment = module.dataSegments[i];
-      var hexLiteral = buildHexLiteral(dataSegment.bytes);
+      var hexLiteral = buildDataLiteral(dataSegment.bytes);
 
       builder.fields.add(Field(
         (b) => b
@@ -1187,12 +1212,13 @@ class DataSegment {
   }
 }
 
-String buildHexLiteral(List<int> bytes) {
+String buildDataLiteral(List<int> bytes) {
   var buf = StringBuffer();
   var lines = <String>[];
-  for (var e in bytes) {
-    buf.write(e.toRadixString(16).padLeft(2, '0').toUpperCase());
-    if (buf.length >= 74) {
+  for (var value in bytes) {
+    var hex = value.toRadixString(16).padLeft(2, '0').toUpperCase();
+    buf.write('\\x$hex');
+    if (buf.length >= 72) {
       lines.add("'${buf.toString()}'");
       buf.clear();
     }
@@ -1506,6 +1532,11 @@ class Instruction {
   static final List<Instruction> instructions = _init();
   static final Map<int, Instruction> opcodeMap = _initOpcodeMap(instructions);
 
+  static const overflowOpcode = 0xFC;
+  static final List<Instruction> overflowInstructions = _initOverflow();
+  static final Map<int, Instruction> overflowOpcodeMap =
+      _initOpcodeMap(overflowInstructions);
+
   final String name;
   final int opcode;
   final List<ImmediateTypes> immediates;
@@ -1535,14 +1566,24 @@ class Instruction {
   String toString() => name;
 
   static Map<int, Instruction> _initOpcodeMap(List<Instruction> instructions) {
-    return Map<int, Instruction>.fromIterable(
-      instructions,
-      key: (instr) => (instr as Instruction).opcode,
-    );
+    var map = <int, Instruction>{};
+    for (var instr in instructions) {
+      if (map.containsKey(instr.opcode)) {
+        throw 'duplicate entries for ${hex(instr.opcode)}';
+      }
+      map[instr.opcode] = instr;
+    }
+    return map;
   }
 
   static Instr? parse(int opcode, Reader r) {
-    Instruction? instruction = opcodeMap[opcode];
+    Instruction? instruction;
+    if (opcode == overflowOpcode) {
+      opcode = r.readUint8();
+      instruction = overflowOpcodeMap[opcode];
+    } else {
+      instruction = opcodeMap[opcode];
+    }
     if (instruction == null) return null;
 
     if (instruction.immediates.isNotEmpty) {
@@ -1550,10 +1591,10 @@ class Instruction {
       for (var immediateType in instruction.immediates) {
         switch (immediateType) {
           case ImmediateTypes.var32:
-            args.add(r.readU32());
+            args.add(r.leb128());
             break;
           case ImmediateTypes.var64:
-            args.add(r.variable64());
+            args.add(r.leb128());
             break;
           case ImmediateTypes.f64:
             args.add(r.readF64());
@@ -1569,19 +1610,18 @@ class Instruction {
   }
 
   static List<Instruction> _init() {
-    var result = <Instruction>[];
-
-    result.addAll([
+    return [
       Instruction_Unreachable(), // unreachable, 0x00
       Instruction_Block(), // block, 0x02
       Instruction_Loop(), // loop, 0x03
       Instruction_If(), // if, 0x04
       Instruction_Else(), // else, 0x05
-      Instruction_CallLocalGet(), // call, 0x10
       Instruction_End(), // end, 0x0B
       Instruction_Br(), // br, 0x0C
       Instruction_BrLf(), // br_lf, 0x0D
       Instruction_Return(), // return, 0x0F
+      Instruction_CallLocalGet(), // call, 0x10
+      Instruction('drop', 0x1A),
       Instruction('select', 0x1B),
       Instruction_LocalGet(), // local.get, 0x20
       Instruction_LocalSet(), // local.set, 0x21
@@ -1599,9 +1639,12 @@ class Instruction {
       Instruction('i64.store8', 0x3C, immediates: _two),
       Instruction('i64.store16', 0x3D, immediates: _two),
       Instruction('i64.store32', 0x3E, immediates: _two),
+      Instruction('memory.size', 0x3F, immediates: _one),
+      Instruction('memory.grow', 0x40, immediates: _one),
       Instruction('i32.const', 0x41, immediates: _one),
       Instruction('i64.const', 0x42, immediates: [ImmediateTypes.var64]),
       Instruction('f64.const', 0x44, immediates: [ImmediateTypes.f64]),
+      Instruction('i32.eqz', 0x45),
       Instruction('i32.eq', 0x46),
       Instruction('i32.lt_s', 0x48),
       Instruction('i32.lt_u', 0x49),
@@ -1620,6 +1663,8 @@ class Instruction {
       Instruction('i32.rem_u', 0x70),
       Instruction('i32.and', 0x71),
       Instruction('i32.shl', 0x74),
+      Instruction('i32.shr_s', 0x75),
+      Instruction('i32.shr_u', 0x76),
       Instruction('i64.div_s', 0x7F),
       Instruction('i64.div_u', 0x80),
       Instruction('i64.and', 0x83),
@@ -1636,8 +1681,12 @@ class Instruction {
       Instruction('f64.max', 0xA5),
       Instruction('f64.convert_i32_s', 0xB7),
       Instruction('f64.convert_i32_u', 0xB8),
-    ]);
+    ];
+  }
 
-    return result;
+  static List<Instruction> _initOverflow() {
+    return [
+      Instruction('i32.trunc_sat_f64_u', 0x03),
+    ];
   }
 }
