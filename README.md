@@ -1,5 +1,4 @@
 
-
 ## What's this?
 
 An exploration of compiling Wasm to Dart.
@@ -27,3 +26,8 @@ https://webassembly.github.io/spec/core/appendix/index-instructions.html
 https://github.com/WebAssembly/spec/tree/main/test/core
 
 https://github.com/WebAssembly/wabt/tree/main/test/spec
+
+### Re-building
+
+- `wat2wasm --debug-names -o samples/mandelbrot.wasm --enable-multi-memory --enable-function-references samples/mandelbrot.wat`
+

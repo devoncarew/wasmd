@@ -1,4 +1,4 @@
-import 'package:dasm/runtime.dart';
+import 'package:wasmd/runtime.dart';
 
 import 'print.wasm.dart';
 

@@ -3,7 +3,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dasm/runtime.dart';
+import 'package:wasmd/runtime.dart';
 
 import 'mandelbrot.wasm.dart';
 

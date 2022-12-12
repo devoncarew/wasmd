@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:dasm/runtime.dart';
+import 'package:wasmd/runtime.dart';
 
 import 'rot13.wasm.dart';
 

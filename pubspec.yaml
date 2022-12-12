@@ -1,4 +1,4 @@
-name: dasm
+name: wasmd
 description: An exploration of compiling Wasm to Dart. 
 version: 0.1.0
 

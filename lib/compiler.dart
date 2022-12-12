@@ -28,7 +28,7 @@ class Compiler {
       'unused_local_variable',
     ]);
     library.directives.addAll([
-      Directive.import('package:dasm/runtime.dart'),
+      Directive.import('package:wasmd/runtime.dart'),
     ]);
 
     var module = _parse(file);

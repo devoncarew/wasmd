@@ -5,7 +5,7 @@
 
 import 'dart:typed_data';
 
-import 'package:dasm/runtime.dart';
+import 'package:wasmd/runtime.dart';
 
 class Module {
   Module({
