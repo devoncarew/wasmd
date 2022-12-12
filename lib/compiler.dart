@@ -106,6 +106,10 @@ class Compiler {
     length -= (r.pos - startPos);
     r.skip(length);
     _log('  skipping custom section [$name]');
+
+    // todo:
+    // 'name'
+    // https://webassembly.github.io/spec/core/appendix/custom.html#name-section
   }
 
   void _parseTypeSection(Reader r, Module module) {

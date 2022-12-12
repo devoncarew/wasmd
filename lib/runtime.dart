@@ -83,10 +83,6 @@ class Frame {
     return stack.last as T;
   }
 
-  void drop() {
-    stack.removeLast();
-  }
-
   void select() {
     i32 c = stack.removeLast() as i32;
     i32 val2 = stack.removeLast() as i32;
