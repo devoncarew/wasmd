@@ -13,6 +13,7 @@ dependencies:
   logging: ^1.1.0
 
 dev_dependencies:
+  benchmark_harness: ^2.2.0
   lints: ^2.0.0
 
 dependency_overrides:
