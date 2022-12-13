@@ -64,6 +64,18 @@ class Memory {
   }
 }
 
+class Table {
+  final int minSize;
+  final int? maxSize;
+
+  List<Function?> funcRefs = [];
+
+  Table(this.minSize, [this.maxSize])
+      : funcRefs = List.filled(minSize, null, growable: true);
+
+  Function? operator [](int index) => funcRefs[index];
+}
+
 class Frame {
   final Memory memory;
 
@@ -81,6 +93,10 @@ class Frame {
 
   T peek<T>() {
     return stack.last as T;
+  }
+
+  void drop() {
+    stack.removeLast();
   }
 
   void select() {
@@ -111,6 +127,12 @@ class Frame {
   void i64_load8_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
     i64 value = memory.data.getUint8(index + offset);
+    stack.add(value);
+  }
+
+  void i64_load32_u(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    i64 value = memory.data.getUint32(index + offset, Endian.little);
     stack.add(value);
   }
 
@@ -189,6 +211,13 @@ class Frame {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
     var result = arg0 == arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i32_ne() {
+    i32 arg1 = stack.removeLast() as i32;
+    i32 arg0 = stack.removeLast() as i32;
+    var result = arg0 != arg1 ? 1 : 0;
     stack.add(result);
   }
 
@@ -301,6 +330,20 @@ class Frame {
     u32 arg1 = stack.removeLast() as u32;
     u32 arg0 = stack.removeLast() as u32;
     var result = arg0 & arg1;
+    stack.add(result);
+  }
+
+  void i32_or() {
+    u32 arg1 = stack.removeLast() as u32;
+    u32 arg0 = stack.removeLast() as u32;
+    var result = arg0 | arg1;
+    stack.add(result);
+  }
+
+  void i32_xor() {
+    u32 arg1 = stack.removeLast() as u32;
+    u32 arg0 = stack.removeLast() as u32;
+    var result = arg0 ^ arg1;
     stack.add(result);
   }
 

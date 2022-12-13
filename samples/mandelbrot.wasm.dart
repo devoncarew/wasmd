@@ -193,25 +193,7 @@ class Module {
     frame.i32_store(2, 0);
   }
 
-  i32 iterateEquation(final f64 x0, final f64 y0, final i32 maxiterations) {
-    f64 local0 = 0;
-    f64 local1 = 0;
-    i32 local2 = 0;
-    f64 local3 = 0;
-
-    while (
-        maxiterations > local2 && (local1 * local1) + (local3 * local3) < 4.0) {
-      local1 = local0 * local3;
-      local1 = local1 + local1 + y0;
-      local3 = local3 * local3 - local0 * local0 + x0;
-      local0 = local1;
-      local2++;
-    }
-
-    return local2;
-  }
-
-  i32 iterateEquation_gen(f64 arg0, f64 arg1, i32 arg2) {
+  i32 iterateEquation(f64 arg0, f64 arg1, i32 arg2) {
     f64 local0 = 0;
     f64 local1 = 0;
     i32 local2 = 0;
@@ -609,6 +591,16 @@ class Module {
     globals.global3 = frame.pop();
   }
 }
+
+typedef FunctionType0 = void Function(i32, i32);
+typedef FunctionType1 = i32 Function(i32, i32);
+typedef FunctionType2 = i32 Function();
+typedef FunctionType3 = void Function(i32, i32, i32, i32);
+typedef FunctionType4 = i32 Function(f64, f64, i32);
+typedef FunctionType5 = f64 Function(f64, f64, f64, f64);
+typedef FunctionType6 = void Function(i32, i32, i32);
+typedef FunctionType7 = void Function(i32, f64, f64, f64);
+typedef FunctionType8 = void Function();
 
 class Globals {
   i32 global0 = _initGlobal0();

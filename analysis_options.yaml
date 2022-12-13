@@ -1,8 +1,8 @@
 include: package:lints/recommended.yaml
 
-# linter:
-#   rules:
-#     - camel_case_types
+linter:
+  rules:
+    - avoid_dynamic_calls
 
 # analyzer:
 #   exclude:

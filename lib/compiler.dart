@@ -8,6 +8,10 @@ import 'package:code_builder/code_builder.dart' hide FunctionType;
 import 'package:collection/collection.dart';
 import 'package:logging/logging.dart';
 
+import 'instructions.dart';
+
+// todo: convert some global initializers to consts
+
 class Compiler {
   final File file;
   final Logger logger;
@@ -74,9 +78,9 @@ class Compiler {
         _parseImportSection(r, module);
       } else if (sectionKind == SectionKind.function) {
         _parseFunctionSection(r, module);
-      }
-      // todo: table
-      else if (sectionKind == SectionKind.memory) {
+      } else if (sectionKind == SectionKind.table) {
+        _parseTableSection(r, module);
+      } else if (sectionKind == SectionKind.memory) {
         _parseMemorySection(r, module);
       } else if (sectionKind == SectionKind.global) {
         _parseGlobalSection(r, module);
@@ -84,9 +88,9 @@ class Compiler {
         _parseExportSection(r, module);
       } else if (sectionKind == SectionKind.start) {
         _parseStartSection(r, module);
-      }
-      // todo: element
-      else if (sectionKind == SectionKind.code) {
+      } else if (sectionKind == SectionKind.element) {
+        _parseElementSection(r, module);
+      } else if (sectionKind == SectionKind.code) {
         _parseCodeSection(r, module);
       } else if (sectionKind == SectionKind.data) {
         _parseDataSection(r, module);
@@ -151,6 +155,26 @@ class Compiler {
     }
   }
 
+  void _parseElementSection(Reader r, Module module) {
+    var count = r.leb128();
+    for (int i = 0; i < count; i++) {
+      var type = r.leb128();
+      switch (type) {
+        case 0x00:
+          var instrs = r.readInstructionsEndTerminated();
+          var funcCount = r.leb128();
+          var funcIndexs = <int>[];
+          for (int j = 0; j < funcCount; j++) {
+            funcIndexs.add(r.leb128());
+          }
+          module.addElementSegment(0, instrs, funcIndexs);
+          break;
+        default:
+          throw 'unhandled element section type: ${hex(type)}';
+      }
+    }
+  }
+
   void _parseCodeSection(Reader r, Module module) {
     // "It decodes into a vector of code entries that are pairs of value type
     // vectors and expressions. They represent the locals and body field of the
@@ -189,7 +213,11 @@ class Compiler {
 
       while (reader.bytesRemaining() > 0) {
         int opcode = reader.readUint8();
-        Instr? i = Instruction.parse(opcode, reader, logger: logger);
+        int? opcode2;
+        if (opcode == Instruction.overflowOpcode) {
+          opcode2 = reader.readUint8();
+        }
+        Instr? i = Instruction.parse(opcode, reader, opcode2: opcode2);
         if (i != null) {
           if (opcode == Instruction_Block.blockOpcode) {
             depth++;
@@ -203,7 +231,8 @@ class Compiler {
           instructions.add(i);
         } else {
           _log('    unknown opcode: ${hex(opcode)}');
-          print('unknown opcode: ${hex(opcode)}');
+          var opcode2Desc = opcode2 == null ? '' : ' ${hex(opcode2)}';
+          print('unknown opcode: ${hex(opcode)}$opcode2Desc');
           instructions.add(Instr(Instruction_Unreachable(), [hex(opcode)]));
           while (depth > 0) {
             instructions.add(Instr(Instruction_End()));
@@ -214,6 +243,33 @@ class Compiler {
       }
 
       function.setInstrs(instructions);
+    }
+  }
+
+  void _parseTableSection(Reader r, Module module) {
+    var tableCount = r.leb128();
+    for (int i = 0; i < tableCount; i++) {
+      var refType = r.readUint8();
+      var tableType = TableType.from(refType);
+      if (tableType == null) {
+        throw 'unknown table type: ${hex(refType)}';
+      }
+      var limitKind = r.readUint8();
+      switch (limitKind) {
+        case 0x00:
+          var min = r.leb128();
+          _log('  table ${tableType.name}: [$min) elements');
+          module.addTable(tableType, min);
+          break;
+        case 0x01:
+          var min = r.leb128();
+          var max = r.leb128();
+          _log('  table ${tableType.name}: [$min $max] elements');
+          module.addTable(tableType, min, max);
+          break;
+        default:
+          throw StateError('unsupported table limit: ${hex(limitKind)}');
+      }
     }
   }
 
@@ -349,6 +405,8 @@ class Compiler {
       );
       global.name = 'global$i';
       module.globals.add(global);
+
+      _log('  global: ${global.type} ${global.name}');
     }
   }
 
@@ -492,17 +550,83 @@ void printModule(Module module, LibraryBuilder library) {
     );
   }
 
+  // tables
+  if (module.tables.isNotEmpty) {
+    for (int i = 0; i < module.tables.length; i++) {
+      var table = module.tables[i];
+      classBuilder.fields.add(
+        Field(
+          (b) => b
+            ..name = 'table$i'
+            ..type = Reference('Table')
+            ..modifier = FieldModifier.final$
+            ..assignment = Reference('Table').call([
+              literalNum(table.minSize),
+              if (table.maxSize != null) literalNum(table.maxSize!),
+            ]).code,
+        ),
+      );
+    }
+
+    classBuilder.fields.add(
+      Field(
+        (b) => b
+          ..name = 'tables'
+          ..type = Reference('List<Table>')
+          ..modifier = FieldModifier.final$
+          ..late = true,
+      ),
+    );
+  }
+
+  // elementSegments reference
+  if (module.elementSegments.isNotEmpty) {
+    classBuilder.fields.add(
+      Field(
+        (b) => b
+          ..name = 'elementSegments'
+          ..type = Reference('ElementSegments')
+          ..modifier = FieldModifier.final$
+          ..assignment = Code('ElementSegments()'),
+      ),
+    );
+  }
+
   // emit an init method
   var constructor = ConstructorBuilder();
   var constructorStatements = [
     if (module.dataSegments.isNotEmpty)
       refer('dataSegments').property('init').call([refer('memory')]).statement,
-    if (module.startFunction != null)
-      refer(module.startFunction!.name).call([]).statement,
   ];
+
+  if (module.tables.isNotEmpty) {
+    int index = 0;
+    constructorStatements.add(
+      refer('tables')
+          .assign(
+            literalList(module.tables.map((t) => refer('table${index++}'))),
+          )
+          .statement,
+    );
+  }
+
+  if (module.elementSegments.isNotEmpty) {
+    constructorStatements.add(
+      refer('elementSegments').property('init').call([
+        refer('this'),
+      ]).statement,
+    );
+  }
+
+  if (module.startFunction != null) {
+    constructorStatements
+        .add(refer(module.startFunction!.name).call([]).statement);
+  }
+
   if (constructorStatements.isNotEmpty) {
     constructor.body = Block.of(constructorStatements);
   }
+
   for (var import in module.importModules) {
     constructor.optionalParameters.add(Parameter(
       (b) => b
@@ -530,6 +654,14 @@ void printModule(Module module, LibraryBuilder library) {
 
   library.body.add(classBuilder.build());
 
+  // todo: currently, we only need to generate these if tables are being used
+  for (int i = 0; i < module.functionTypes.length; i++) {
+    var functionType = module.functionTypes[i];
+    var ret = functionType.resultTypeDisplayName;
+    var params = functionType.parameterTypes.map((p) => p.typeName).join(', ');
+    library.body.add(Code('typedef FunctionType$i = $ret Function($params);'));
+  }
+
   if (module.globals.isNotEmpty) {
     library.body.add(Global.createGlobalsClassDef(module));
   }
@@ -540,6 +672,10 @@ void printModule(Module module, LibraryBuilder library) {
 
   if (module.dataSegments.isNotEmpty) {
     library.body.add(DataSegment.createDataSegmentClassDef(module));
+  }
+
+  if (module.elementSegments.isNotEmpty) {
+    library.body.add(ElementSegment.createElementSegmentsClassDef(module));
   }
 }
 
@@ -675,8 +811,12 @@ class Reader {
     var opcode = 0;
     while (opcode != Instruction_End.endOpcode) {
       opcode = readUint8();
+      int? opcode2;
+      if (opcode == Instruction.overflowOpcode) {
+        opcode2 = readUint8();
+      }
       if (opcode != Instruction_End.endOpcode) {
-        Instr? i = Instruction.parse(opcode, this);
+        Instr? i = Instruction.parse(opcode, this, opcode2: opcode2);
         if (i != null) {
           instructions.add(i);
         } else {
@@ -711,8 +851,26 @@ enum SectionKind {
   static Map<int, SectionKind>? _idMap;
 
   static SectionKind? from(int id) {
-    _idMap ??= Map.fromIterable(SectionKind.values, key: (kind) => kind.id);
+    _idMap ??= Map.fromIterable(SectionKind.values,
+        key: (kind) => (kind as SectionKind).id);
     return _idMap![id];
+  }
+}
+
+enum TableType {
+  externref(0x6F),
+  functype(0x70);
+
+  const TableType(this.code);
+
+  final int code;
+
+  static Map<int, TableType>? _codeMap;
+
+  static TableType? from(int id) {
+    _codeMap ??= Map.fromIterable(TableType.values,
+        key: (kind) => (kind as TableType).code);
+    return _codeMap![id];
   }
 }
 
@@ -732,16 +890,18 @@ class FunctionType {
 
   FunctionType(this.parameterTypes, this.resultType);
 
-  @override
-  String toString() {
-    var params = parameterTypes.map((e) => e.toString()).join(', ');
-    return '$resultTypeDisplayName func($params)';
-  }
-
   String get resultTypeDisplayName {
     return resultType.isEmpty
         ? 'void'
         : resultType.map((e) => e.toString()).join(', ');
+  }
+
+  bool get returnsVoid => resultType.isEmpty;
+
+  @override
+  String toString() {
+    var params = parameterTypes.map((e) => e.toString()).join(', ');
+    return '$resultTypeDisplayName func($params)';
   }
 }
 
@@ -783,6 +943,9 @@ class Module {
 
   List<GlobalExport> globalExports = [];
 
+  List<Table> tables = [];
+  List<ElementSegment> elementSegments = [];
+
   int minMemory = 0;
   int? maxMemory;
   bool memoryImported = false;
@@ -795,6 +958,10 @@ class Module {
   }) {
     minMemory = min;
     maxMemory = max;
+  }
+
+  void addTable(TableType type, int minSize, [int? maxSize]) {
+    tables.add(Table(type, minSize, maxSize));
   }
 
   ImportModule getCreateImportModule(String name) {
@@ -829,6 +996,16 @@ class Module {
 
   ModuleFunction? get startFunction =>
       startFunctionIndex == null ? null : functionByIndex(startFunctionIndex!);
+
+  void addElementSegment(
+    int tableIndex,
+    List<Instr> offsetInstrs,
+    List<int> functionIndexs,
+  ) {
+    // TODO: This only handles passive element segments of funcref type
+    elementSegments
+        .add(ElementSegment(tableIndex, offsetInstrs, functionIndexs));
+  }
 }
 
 class ImportModule {
@@ -1036,6 +1213,104 @@ class Variable {
   Variable({required this.name, required this.type});
 }
 
+class Table {
+  final TableType type;
+  final int minSize;
+  final int? maxSize;
+
+  Table(this.type, this.minSize, [this.maxSize]);
+}
+
+class ElementSegment {
+  final int tableIndex;
+  final List<Instr> offsetInstrs;
+  final List<int> functionIndexs;
+
+  ElementSegment(this.tableIndex, this.offsetInstrs, this.functionIndexs);
+
+  static Class createElementSegmentsClassDef(Module module) {
+    var fields = <Field>[];
+    var methods = <Method>[];
+
+    var statements = <Code>[
+      declareVar('offset', type: Reference('i32')).statement,
+    ];
+
+    for (int i = 0; i < module.elementSegments.length; i++) {
+      statements.add(Code('\n    // element segment $i'));
+
+      var segment = module.elementSegments[i];
+      statements.add(
+          refer('offset').assign(refer('_segmentOffset$i').call([])).statement);
+      for (int j = 0; j < segment.functionIndexs.length; j++) {
+        var functionIndex = segment.functionIndexs[j];
+        // module.table0.funcRefs[offset + 0] = module._func83;
+        var func = module.functionByIndex(functionIndex);
+        statements.add(Code(
+          'module.table${segment.tableIndex}.funcRefs[offset + $j] '
+          '= module.${func!.name};',
+        ));
+      }
+    }
+
+    var initMethod = Method(
+      (b) => b
+        ..name = 'init'
+        ..returns = Reference('void')
+        ..requiredParameters.add(Parameter(
+          (b) => b
+            ..name = 'module'
+            ..type = Reference('Module'),
+        ))
+        ..body = Block.of(statements),
+    );
+
+    // TODO: remove this memory instance - it's only used when we initialize
+    // globals.
+    // "static final Memory memory = Memory(0);"
+    fields.add(Field(
+      (b) => b
+        ..name = 'memory'
+        ..type = Reference('Memory')
+        ..modifier = FieldModifier.final$
+        ..static = true
+        ..assignment = Code('Memory(0)'),
+    ));
+
+    for (int i = 0; i < module.elementSegments.length; i++) {
+      var elementSegment = module.elementSegments[i];
+      var initFunction = DefinedFunction(module, 0, 0);
+
+      var method = Method(
+        (b) => b
+          ..name = '_segmentOffset$i'
+          ..returns = Reference('i32')
+          ..static = true
+          ..body = Block.of([
+            declareFinal('frame')
+                .assign(refer('Frame').call([refer('memory')]))
+                .statement,
+            for (var instr in elementSegment.offsetInstrs)
+              instr.generateToStatement(initFunction),
+            refer('frame').property('pop').call([]).returned.statement,
+          ]),
+      );
+
+      methods.add(method);
+    }
+
+    return Class(
+      (b) => b
+        ..name = 'ElementSegments'
+        ..fields.addAll(fields)
+        ..methods.addAll([
+          initMethod,
+          ...methods,
+        ]),
+    );
+  }
+}
+
 class Global {
   final ResultType type;
   final bool mutable;
@@ -1232,469 +1507,4 @@ String buildDataLiteral(List<int> bytes) {
     buf.clear();
   }
   return lines.join('\n');
-}
-
-class Instr {
-  final Instruction instruction;
-  final List<Object> args;
-
-  Instr(
-    this.instruction, [
-    this.args = const [],
-  ]);
-
-  Code generateToStatement(DefinedFunction function) {
-    return instruction.generateToStatement(this, function);
-  }
-
-  @override
-  String toString() {
-    return instruction.toString();
-  }
-}
-
-const List<ImmediateTypes> _one = [ImmediateTypes.var32];
-const List<ImmediateTypes> _two = [
-  ImmediateTypes.var32,
-  ImmediateTypes.var32,
-];
-
-class Instruction_Unreachable extends Instruction {
-  Instruction_Unreachable() : super('unreachable', 0x00);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    if (instr.args.isNotEmpty) {
-      var error = instr.args[0] as String;
-      return literalString('unreachable ($error)').thrown.statement;
-    } else {
-      return literalString('unreachable').thrown.statement;
-    }
-  }
-}
-
-class Instruction_Block extends Instruction {
-  static const blockOpcode = 0x02;
-
-  Instruction_Block() : super('block', blockOpcode, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    // todo: this needs to do some stack management
-
-    // todo: use blocktype
-    var blocktype = instr.args[0] as int;
-
-    function.enterBlock(BlockType.blockType);
-
-    var label = function.currentBlockLabel;
-    return Code('$label: {\n');
-  }
-}
-
-class Instruction_Loop extends Instruction {
-  static const loopOpcode = 0x03;
-
-  Instruction_Loop() : super('loop', loopOpcode, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    // todo: this needs to do some stack management
-
-    // todo: use blocktype
-    var blocktype = instr.args[0] as int;
-
-    function.enterBlock(BlockType.loopType);
-
-    var label = function.currentBlockLabel;
-    return Code('\n$label: for (;;) {\n');
-  }
-}
-
-class Instruction_If extends Instruction {
-  static const ifOpcode = 0x04;
-
-  Instruction_If() : super('if', ifOpcode, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    // todo: this needs to do some stack management
-
-    // todo: use blocktype
-    var blocktype = instr.args[0] as int;
-
-    function.enterBlock(BlockType.ifType);
-
-    var label = function.currentBlockLabel;
-    return Code('$label: if (frame.pop() != 0) {\n');
-  }
-}
-
-class Instruction_Else extends Instruction {
-  Instruction_Else() : super('else', 0x05);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    return Code('} else {\n');
-  }
-}
-
-class Instruction_End extends Instruction {
-  static const endOpcode = 0x0B;
-
-  Instruction_End() : super('end', endOpcode);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var frame = refer('frame');
-
-    var oldNesting = function.exitBlock();
-
-    if (oldNesting == BlockType.loopType) {
-      return Code('break;\n}');
-    } else if (oldNesting != null) {
-      return Code('}');
-    } else {
-      if (function.returnsVoid) {
-        return Code('');
-      } else {
-        return frame.property('pop').call([]).returned.statement;
-      }
-    }
-  }
-}
-
-class Instruction_Br extends Instruction {
-  Instruction_Br() : super('br', 0x0C, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var immediate = instr.args[0] as int;
-    var label = function.labelNameFromIndex(immediate);
-    var blockKind = function.blockNestingFromIndex(immediate);
-    var jumpKind = blockKind == BlockType.loopType ? 'continue' : 'break';
-
-    return Code('$jumpKind $label;');
-  }
-}
-
-class Instruction_BrLf extends Instruction {
-  Instruction_BrLf() : super('br_lf', 0x0D, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var immediate = instr.args[0] as int;
-    var label = function.labelNameFromIndex(immediate);
-    var blockKind = function.blockNestingFromIndex(immediate);
-    var jumpKind = blockKind == BlockType.loopType ? 'continue' : 'break';
-
-    return Code('if (frame.pop() != 0) $jumpKind $label;');
-  }
-}
-
-class Instruction_Return extends Instruction {
-  Instruction_Return() : super('return', 0x0F);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var frame = refer('frame');
-
-    if (function.returnsVoid) {
-      return Code('');
-    } else {
-      return frame.property('pop').call([]).returned.statement;
-    }
-  }
-}
-
-class Instruction_LocalGet extends Instruction {
-  Instruction_LocalGet() : super('local.get', 0x20, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var immediate = instr.args[0] as int;
-    var localName = function.variables[immediate].name;
-
-    return refer('frame').property('push').call([refer(localName)]).statement;
-  }
-}
-
-class Instruction_LocalSet extends Instruction {
-  Instruction_LocalSet() : super('local.set', 0x21, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var immediate = instr.args[0] as int;
-    var localName = function.variables[immediate].name;
-
-    return refer(localName)
-        .assign(refer('frame').property('pop').call([]))
-        .statement;
-  }
-}
-
-class Instruction_LocalTee extends Instruction {
-  Instruction_LocalTee() : super('local.tee', 0x22, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var immediate = instr.args[0] as int;
-    var localName = function.variables[immediate].name;
-
-    return refer(localName)
-        .assign(refer('frame').property('peek').call([]))
-        .statement;
-  }
-}
-
-class Instruction_GlobalGet extends Instruction {
-  Instruction_GlobalGet() : super('global.get', 0x23, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, ModuleFunction function) {
-    var immediate = instr.args[0] as int;
-    var global = function.module.globals[immediate];
-
-    return refer('frame')
-        .property('push')
-        .call([refer('globals').property(global.name!)]).statement;
-  }
-}
-
-class Instruction_GlobalSet extends Instruction {
-  Instruction_GlobalSet() : super('global.set', 0x24, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, ModuleFunction function) {
-    var immediate = instr.args[0] as int;
-    var global = function.module.globals[immediate];
-
-    return refer('globals')
-        .property(global.name!)
-        .assign(refer('frame').property('pop').call([]))
-        .statement;
-  }
-}
-
-class Instruction_CallLocalGet extends Instruction {
-  Instruction_CallLocalGet() : super('call', 0x10, immediates: _one);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var immediate = instr.args[0] as int;
-    var target = function.module.functionByIndex(immediate)!;
-
-    if (target.parameterTypes.length <= 1) {
-      Expression call = refer(target.name).call(
-        target.parameterTypes.map(
-          (type) => CodeExpression(Code('frame.pop()')),
-        ),
-      );
-
-      if (!target.returnsVoid) {
-        call = refer('frame.push').call([call]);
-      }
-
-      return call.statement;
-    } else {
-      var statements = <Code>[];
-      var temps = List.generate(target.parameterTypes.length, (i) => 't$i');
-      for (var temp in temps.reversed) {
-        statements.add(
-          declareVar(temp)
-              .assign(CodeExpression(Code('frame.pop()')))
-              .statement,
-        );
-      }
-
-      Expression call = refer(target.name).call([
-        ...temps.map((t) => refer(t)),
-      ]);
-
-      if (!target.returnsVoid) {
-        call = refer('frame.push').call([call]);
-      }
-
-      statements.add(call.statement);
-
-      return Block.of([
-        Code('{'),
-        ...statements,
-        Code('}'),
-      ]);
-    }
-  }
-}
-
-enum ImmediateTypes {
-  var32,
-  var64,
-  f64;
-}
-
-class Instruction {
-  static final List<Instruction> instructions = _init();
-  static final Map<int, Instruction> opcodeMap = _initOpcodeMap(instructions);
-
-  static const overflowOpcode = 0xFC;
-  static final List<Instruction> overflowInstructions = _initOverflow();
-  static final Map<int, Instruction> overflowOpcodeMap =
-      _initOpcodeMap(overflowInstructions);
-
-  final String name;
-  final int opcode;
-  final List<ImmediateTypes> immediates;
-
-  Instruction(
-    this.name,
-    this.opcode, {
-    this.immediates = const [],
-  });
-
-  String get methodName => name.replaceAll('.', '_');
-
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var frame = refer('frame');
-
-    if (immediates.isNotEmpty) {
-      return frame
-          .property(methodName)
-          .call(instr.args.map((arg) => literalNum(arg as num)))
-          .statement;
-    } else {
-      return frame.property(methodName).call([]).statement;
-    }
-  }
-
-  @override
-  String toString() => name;
-
-  static Map<int, Instruction> _initOpcodeMap(List<Instruction> instructions) {
-    var map = <int, Instruction>{};
-    for (var instr in instructions) {
-      if (map.containsKey(instr.opcode)) {
-        throw 'duplicate entries for ${hex(instr.opcode)}';
-      }
-      map[instr.opcode] = instr;
-    }
-    return map;
-  }
-
-  static Instr? parse(int opcode, Reader r, {Logger? logger}) {
-    Instruction? instruction;
-    if (opcode == overflowOpcode) {
-      opcode = r.readUint8();
-      instruction = overflowOpcodeMap[opcode];
-      if (instruction == null) {
-        logger?.info('    overflow: ${hex(opcode)}');
-      }
-    } else {
-      instruction = opcodeMap[opcode];
-    }
-    if (instruction == null) return null;
-
-    if (instruction.immediates.isNotEmpty) {
-      var args = <Object>[];
-      for (var immediateType in instruction.immediates) {
-        switch (immediateType) {
-          case ImmediateTypes.var32:
-            args.add(r.leb128());
-            break;
-          case ImmediateTypes.var64:
-            args.add(r.leb128());
-            break;
-          case ImmediateTypes.f64:
-            args.add(r.readF64());
-            break;
-          default:
-            throw 'unhandled immediate type: $immediateType';
-        }
-      }
-      return Instr(instruction, args);
-    } else {
-      return Instr(instruction);
-    }
-  }
-
-  static List<Instruction> _init() {
-    return [
-      Instruction_Unreachable(), // unreachable, 0x00
-      Instruction_Block(), // block, 0x02
-      Instruction_Loop(), // loop, 0x03
-      Instruction_If(), // if, 0x04
-      Instruction_Else(), // else, 0x05
-      Instruction_End(), // end, 0x0B
-      Instruction_Br(), // br, 0x0C
-      Instruction_BrLf(), // br_lf, 0x0D
-      Instruction_Return(), // return, 0x0F
-      Instruction_CallLocalGet(), // call, 0x10
-      Instruction('drop', 0x1A),
-      Instruction('select', 0x1B),
-      Instruction_LocalGet(), // local.get, 0x20
-      Instruction_LocalSet(), // local.set, 0x21
-      Instruction_LocalTee(), // local.tee, 0x22
-      Instruction_GlobalGet(), // global.get, 0x23
-      Instruction_GlobalSet(), // global.get, 0x24
-      Instruction('i32.load', 0x28, immediates: _two),
-      Instruction('i64.load', 0x29, immediates: _two),
-      Instruction('i32.load8_u', 0x2D, immediates: _two),
-      Instruction('i64.load8_u', 0x31, immediates: _two),
-      Instruction('i32.store', 0x36, immediates: _two),
-      Instruction('i64.store', 0x37, immediates: _two),
-      Instruction('i32.store8', 0x3A, immediates: _two),
-      Instruction('i32.store16', 0x3B, immediates: _two),
-      Instruction('i64.store8', 0x3C, immediates: _two),
-      Instruction('i64.store16', 0x3D, immediates: _two),
-      Instruction('i64.store32', 0x3E, immediates: _two),
-      Instruction('memory.size', 0x3F, immediates: _one),
-      Instruction('memory.grow', 0x40, immediates: _one),
-      Instruction('i32.const', 0x41, immediates: _one),
-      Instruction('i64.const', 0x42, immediates: [ImmediateTypes.var64]),
-      Instruction('f64.const', 0x44, immediates: [ImmediateTypes.f64]),
-      Instruction('i32.eqz', 0x45),
-      Instruction('i32.eq', 0x46),
-      Instruction('i32.lt_s', 0x48),
-      Instruction('i32.lt_u', 0x49),
-      Instruction('i32.gt_s', 0x4A),
-      Instruction('i32.gt_u', 0x4B),
-      Instruction('i32.le_s', 0x4C),
-      Instruction('i32.le_u', 0x4D),
-      Instruction('i32.ge_s', 0x4E),
-      Instruction('i32.ge_u', 0x4F),
-      Instruction('f64.gt', 0x64),
-      Instruction('f64.le', 0x65),
-      Instruction('i32.add', 0x6A),
-      Instruction('i32.sub', 0x6B),
-      Instruction('i32.mul', 0x6C),
-      Instruction('i32.div_u', 0x6E),
-      Instruction('i32.rem_u', 0x70),
-      Instruction('i32.and', 0x71),
-      Instruction('i32.shl', 0x74),
-      Instruction('i32.shr_s', 0x75),
-      Instruction('i32.shr_u', 0x76),
-      Instruction('i64.div_s', 0x7F),
-      Instruction('i64.div_u', 0x80),
-      Instruction('i64.and', 0x83),
-      Instruction('i64.or', 0x84),
-      Instruction('i64.xor', 0x85),
-      Instruction('i64.shr_u', 0x88),
-      Instruction('i64.rotl', 0x89),
-      Instruction('i64.rotr', 0x8A),
-      Instruction('f64.add', 0xA0),
-      Instruction('f64.sub', 0xA1),
-      Instruction('f64.mul', 0xA2),
-      Instruction('f64.div', 0xA3),
-      Instruction('f64.min', 0xA4),
-      Instruction('f64.max', 0xA5),
-      Instruction('f64.convert_i32_s', 0xB7),
-      Instruction('f64.convert_i32_u', 0xB8),
-    ];
-  }
-
-  static List<Instruction> _initOverflow() {
-    return [
-      Instruction('i32.trunc_sat_f64_u', 0x03),
-      Instruction('memory.fill', 0x0B, immediates: _one),
-    ];
-  }
 }
