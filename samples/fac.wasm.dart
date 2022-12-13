@@ -23,9 +23,14 @@ class Module {
       frame.push(arg0);
       frame.i32_const(1);
       frame.i32_sub();
-      frame.push(fac(frame.pop()));
+      {
+        var t0 = frame.pop();
+        frame.push(fac(t0));
+      }
       frame.i32_mul();
     }
     return frame.pop();
   }
 }
+
+typedef FunctionType0 = i32 Function(i32);

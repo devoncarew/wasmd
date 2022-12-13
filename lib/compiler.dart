@@ -10,8 +10,6 @@ import 'package:logging/logging.dart';
 
 import 'instructions.dart';
 
-// todo: convert some global initializers to consts
-
 class Compiler {
   final File file;
   final Logger logger;
@@ -192,11 +190,11 @@ class Compiler {
 
       _log('  func $i [len=$funcLength]');
 
-      var locals = <ResultType>[];
+      var locals = <ValueType>[];
       var declsCount = r.leb128();
       for (int i = 0; i < declsCount; i++) {
         var count = r.leb128();
-        var kind = ResultType(r.readUint8());
+        var kind = ValueType.fromCode(r.readUint8());
         locals.addAll(List.filled(count, kind));
       }
 
@@ -399,7 +397,7 @@ class Compiler {
       var instructions = r.readInstructionsEndTerminated();
 
       var global = Global(
-        type: ResultType(type),
+        type: ValueType.fromCode(type),
         mutable: mutability == 0x01,
         initExpression: instructions,
       );
@@ -775,12 +773,12 @@ class Reader {
     pos += len;
   }
 
-  List<ResultType> readResultTypeVector() {
-    List<ResultType> result = [];
+  List<ValueType> readResultTypeVector() {
+    List<ValueType> result = [];
 
     int vecCount = leb128();
     for (int i = 0; i < vecCount; i++) {
-      result.add(ResultType(readUint8()));
+      result.add(ValueType.fromCode(readUint8()));
     }
 
     return result;
@@ -885,8 +883,8 @@ enum BlockType {
 }
 
 class FunctionType {
-  final List<ResultType> parameterTypes;
-  final List<ResultType> resultType;
+  final List<ValueType> parameterTypes;
+  final List<ValueType> resultType;
 
   FunctionType(this.parameterTypes, this.resultType);
 
@@ -905,28 +903,26 @@ class FunctionType {
   }
 }
 
-class ResultType {
-  final int kind;
+enum ValueType {
+  f64(0x7C),
+  f32(0x7D),
+  i64(0x7E),
+  i32(0x7F);
 
-  ResultType(this.kind);
+  const ValueType(this.code);
 
-  String get typeName {
-    switch (kind) {
-      case 0x7C:
-        return "f64";
-      case 0x7D:
-        return "f32";
-      case 0x7E:
-        return "i64";
-      case 0x7F:
-        return "i32";
-      default:
-        throw 'unhandled type kind: ${hex(kind)}';
-    }
-  }
+  final int code;
+
+  String get typeName => name;
 
   @override
-  String toString() => typeName;
+  String toString() => name;
+
+  static ValueType fromCode(int code) {
+    return ValueType.values.firstWhere((e) => e.code == code, orElse: () {
+      throw 'unhandled type kind: ${hex(code)}';
+    });
+  }
 }
 
 class Module {
@@ -1072,9 +1068,9 @@ abstract class ModuleFunction {
 
   FunctionType get functionType => module.functionTypes[functionTypeIndex];
 
-  List<ResultType> get parameterTypes => functionType.parameterTypes;
+  List<ValueType> get parameterTypes => functionType.parameterTypes;
 
-  ResultType? get returnType => functionType.resultType.firstOrNull;
+  ValueType? get returnType => functionType.resultType.firstOrNull;
 
   bool get returnsVoid => functionType.resultType.isEmpty;
 }
@@ -1084,7 +1080,7 @@ class DefinedFunction extends ModuleFunction {
 
   String? exportName;
 
-  List<ResultType> locals = [];
+  List<ValueType> locals = [];
   List<Instr> instrs = [];
 
   late List<Variable> variables;
@@ -1103,7 +1099,7 @@ class DefinedFunction extends ModuleFunction {
     exportName = name;
   }
 
-  void setLocals(List<ResultType> locals) {
+  void setLocals(List<ValueType> locals) {
     this.locals = locals;
   }
 
@@ -1208,7 +1204,7 @@ String hex(int val, [int digits = 2]) {
 
 class Variable {
   final String name;
-  final ResultType type;
+  final ValueType type;
 
   Variable({required this.name, required this.type});
 }
@@ -1240,8 +1236,13 @@ class ElementSegment {
       statements.add(Code('\n    // element segment $i'));
 
       var segment = module.elementSegments[i];
-      statements.add(
-          refer('offset').assign(refer('_segmentOffset$i').call([])).statement);
+
+      var literal = Instruction.calcLiternal(segment.offsetInstrs);
+      var offsetExpr = literal == null
+          ? refer('_segmentOffset$i').call([])
+          : literalNum(literal.value as num);
+
+      statements.add(refer('offset').assign(offsetExpr).statement);
       for (int j = 0; j < segment.functionIndexs.length; j++) {
         var functionIndex = segment.functionIndexs[j];
         // module.table0.funcRefs[offset + 0] = module._func83;
@@ -1265,21 +1266,16 @@ class ElementSegment {
         ..body = Block.of(statements),
     );
 
-    // TODO: remove this memory instance - it's only used when we initialize
-    // globals.
-    // "static final Memory memory = Memory(0);"
-    fields.add(Field(
-      (b) => b
-        ..name = 'memory'
-        ..type = Reference('Memory')
-        ..modifier = FieldModifier.final$
-        ..static = true
-        ..assignment = Code('Memory(0)'),
-    ));
+    var needsMemoryReference = false;
 
     for (int i = 0; i < module.elementSegments.length; i++) {
       var elementSegment = module.elementSegments[i];
       var initFunction = DefinedFunction(module, 0, 0);
+
+      var literal = Instruction.calcLiternal(elementSegment.offsetInstrs);
+      if (literal != null) continue;
+
+      needsMemoryReference = true;
 
       var method = Method(
         (b) => b
@@ -1299,6 +1295,20 @@ class ElementSegment {
       methods.add(method);
     }
 
+    if (needsMemoryReference) {
+      // TODO: remove this memory instance - it's only used when we initialize
+      // segments.
+      // "static final Memory memory = Memory(0);"
+      fields.add(Field(
+        (b) => b
+          ..name = 'memory'
+          ..type = Reference('Memory')
+          ..modifier = FieldModifier.final$
+          ..static = true
+          ..assignment = Code('Memory(0)'),
+      ));
+    }
+
     return Class(
       (b) => b
         ..name = 'ElementSegments'
@@ -1312,7 +1322,7 @@ class ElementSegment {
 }
 
 class Global {
-  final ResultType type;
+  final ValueType type;
   final bool mutable;
   final List<Instr> initExpression;
 
@@ -1331,15 +1341,27 @@ class Global {
   static Class createGlobalsClassDef(Module module) {
     var fields = <Field>[];
 
+    var needsGlobalInitializer = false;
+
     for (int i = 0; i < module.globals.length; i++) {
       var global = module.globals[i];
+
+      Code assignment;
+      var literalValue = Instruction.calcLiternal(global.initExpression);
+      if (literalValue == null) {
+        needsGlobalInitializer = true;
+        assignment = Code('${global.initMethodName}()');
+      } else {
+        assignment = literalNum(literalValue.value as num).code;
+      }
+
       var field = Field(
         (b) => b
           ..name = global.name
           ..modifier =
               global.mutable ? FieldModifier.var$ : FieldModifier.final$
           ..type = refer(global.type.typeName)
-          ..assignment = Code('${global.initMethodName}()'),
+          ..assignment = assignment,
       );
       fields.add(field);
     }
@@ -1347,35 +1369,40 @@ class Global {
     // TODO: remove this memory instance - it's only used when we initialize
     // globals.
     // "static final Memory memory = Memory(0);"
-    fields.add(Field(
-      (b) => b
-        ..name = 'memory'
-        ..type = Reference('Memory')
-        ..modifier = FieldModifier.final$
-        ..static = true
-        ..assignment = Code('Memory(0)'),
-    ));
+    if (needsGlobalInitializer) {
+      fields.add(Field(
+        (b) => b
+          ..name = 'memory'
+          ..type = Reference('Memory')
+          ..modifier = FieldModifier.final$
+          ..static = true
+          ..assignment = Code('Memory(0)'),
+      ));
+    }
 
     var initMethods = <Method>[];
     for (var global in module.globals) {
       var initFunction = DefinedFunction(module, 0, 0);
+      var literalValue = Instruction.calcLiternal(global.initExpression);
 
-      var method = Method(
-        (b) => b
-          ..name = global.initMethodName
-          ..returns = Reference(global.type.typeName)
-          ..static = true
-          ..body = Block.of([
-            declareFinal('frame')
-                .assign(refer('Frame').call([refer('memory')]))
-                .statement,
-            for (var instr in global.initExpression)
-              instr.generateToStatement(initFunction),
-            refer('frame').property('pop').call([]).returned.statement,
-          ]),
-      );
+      if (literalValue == null) {
+        var method = Method(
+          (b) => b
+            ..name = global.initMethodName
+            ..returns = Reference(global.type.typeName)
+            ..static = true
+            ..body = Block.of([
+              declareFinal('frame')
+                  .assign(refer('Frame').call([refer('memory')]))
+                  .statement,
+              for (var instr in global.initExpression)
+                instr.generateToStatement(initFunction),
+              refer('frame').property('pop').call([]).returned.statement,
+            ]),
+        );
 
-      initMethods.add(method);
+        initMethods.add(method);
+      }
     }
 
     return Class(
@@ -1432,11 +1459,15 @@ class DataSegment {
       var dataSegment = module.dataSegments[i];
       if (dataSegment.passive) continue;
 
+      var literal = Instruction.calcLiternal(dataSegment.offsetExpression!);
+      var offsetExpr = literal == null
+          ? refer('_dataOffset$i(memory)')
+          : literalNum(literal.value as num);
+
       // memory.copyTo(data0, _dataOffset0(memory), data0.length);
       statements.add(refer('memory').property('copyTo').call([
         refer('data$i'),
-        refer('_dataOffset$i(memory)'),
-        // refer('data$i.length'),
+        offsetExpr,
       ]).statement);
     }
 
@@ -1446,6 +1477,9 @@ class DataSegment {
     for (int i = 0; i < module.dataSegments.length; i++) {
       var dataSegment = module.dataSegments[i];
       if (dataSegment.passive) continue;
+
+      var literal = Instruction.calcLiternal(dataSegment.offsetExpression!);
+      if (literal != null) continue;
 
       var offsetFunction = DefinedFunction(module, 0, 0);
 

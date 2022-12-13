@@ -50,3 +50,5 @@ class Module {
     return frame.pop();
   }
 }
+
+typedef FunctionType0 = i32 Function(i32);

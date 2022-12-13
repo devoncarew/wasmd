@@ -281,11 +281,15 @@ class Instruction_Call extends Instruction {
 
     statements.add(call.statement);
 
-    return Block.of([
-      Code('{'),
-      ...statements,
-      Code('}'),
-    ]);
+    if (statements.length == 1) {
+      return statements.first;
+    } else {
+      return Block.of([
+        Code('{'),
+        ...statements,
+        Code('}'),
+      ]);
+    }
   }
 }
 
@@ -334,11 +338,24 @@ enum ImmediateTypes {
   f64;
 }
 
+class Literal {
+  final ValueType type;
+  final Object value;
+
+  Literal(this.type, this.value);
+
+  @override
+  String toString() => value.toString();
+}
+
 class Instruction {
   static final List<Instruction> instructions = _init();
   static final Map<int, Instruction> opcodeMap = _initOpcodeMap(instructions);
 
+  static const i32ConstOpcode = 0x41;
+  static const i64ConstOpcode = 0x42;
   static const overflowOpcode = 0xFC;
+
   static final List<Instruction> overflowInstructions = _initOverflow();
   static final Map<int, Instruction> overflowOpcodeMap =
       _initOpcodeMap(overflowInstructions);
@@ -418,6 +435,24 @@ class Instruction {
     }
   }
 
+  static Literal? calcLiternal(List<Instr> instrs) {
+    if (instrs.length != 1) {
+      return null;
+    }
+
+    var inst = instrs.first;
+
+    // todo: f32, f64
+
+    if (inst.instruction.opcode == i32ConstOpcode) {
+      return Literal(ValueType.i32, inst.args.first as int);
+    } else if (inst.instruction.opcode == i64ConstOpcode) {
+      return Literal(ValueType.i64, inst.args.first as int);
+    } else {
+      return null;
+    }
+  }
+
   static List<Instruction> _init() {
     return [
       Instruction_Unreachable(), // unreachable, 0x00
@@ -453,8 +488,9 @@ class Instruction {
       Instruction('i64.store32', 0x3E, immediates: _two),
       Instruction('memory.size', 0x3F, immediates: _one),
       Instruction('memory.grow', 0x40, immediates: _one),
-      Instruction('i32.const', 0x41, immediates: _one),
-      Instruction('i64.const', 0x42, immediates: [ImmediateTypes.var64]),
+      Instruction('i32.const', i32ConstOpcode, immediates: _one),
+      Instruction('i64.const', i64ConstOpcode,
+          immediates: [ImmediateTypes.var64]),
       Instruction('f64.const', 0x44, immediates: [ImmediateTypes.f64]),
       Instruction('i32.eqz', 0x45),
       Instruction('i32.eq', 0x46),

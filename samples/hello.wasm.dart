@@ -46,35 +46,11 @@ class Module {
   }
 }
 
+typedef FunctionType0 = i32 Function(i32, i32);
+
 class Globals {
-  i64 global0 = _initGlobal0();
-  final i64 global1 = _initGlobal1();
-  final i64 global2 = _initGlobal2();
-  i64 global3 = _initGlobal3();
-
-  static final Memory memory = Memory(0);
-
-  static i64 _initGlobal0() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal1() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal2() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal3() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
+  i64 global0 = 0;
+  final i64 global1 = 0;
+  final i64 global2 = 0;
+  i64 global3 = 0;
 }

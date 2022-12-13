@@ -84,7 +84,10 @@ class Module {
         frame.push(local1);
         frame.push(local1);
         frame.i32_load8_u(0, 0);
-        frame.push(_func0(frame.pop()));
+        {
+          var t0 = frame.pop();
+          frame.push(_func0(t0));
+        }
         frame.i32_store8(0, 0);
         frame.push(local1);
         frame.i32_const(1);
@@ -103,6 +106,11 @@ class Module {
     }
   }
 }
+
+typedef FunctionType0 = i32 Function(i32, i32);
+typedef FunctionType1 = void Function(i32, i32);
+typedef FunctionType2 = i32 Function(i32);
+typedef FunctionType3 = void Function();
 
 /// A class representing the symbols imported from the 'host' module.
 abstract class HostImports {

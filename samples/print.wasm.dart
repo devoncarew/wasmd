@@ -34,6 +34,9 @@ class Module {
   }
 }
 
+typedef FunctionType0 = void Function(i32, i32);
+typedef FunctionType1 = void Function();
+
 /// A class representing the symbols imported from the 'console' module.
 abstract class ConsoleImports {
   /// The imported 'log' symbol.
@@ -47,12 +50,6 @@ class DataSegments {
       '\x48\x65\x6C\x6C\x6F\x20\x66\x72\x6F\x6D\x20\x77\x61\x73\x6D\x21';
 
   void init(Memory memory) {
-    memory.copyTo(data0, _dataOffset0(memory));
-  }
-
-  static u32 _dataOffset0(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(0);
-    return frame.pop();
+    memory.copyTo(data0, 0);
   }
 }

@@ -603,36 +603,10 @@ typedef FunctionType7 = void Function(i32, f64, f64, f64);
 typedef FunctionType8 = void Function();
 
 class Globals {
-  i32 global0 = _initGlobal0();
-  i32 global1 = _initGlobal1();
-  i32 global2 = _initGlobal2();
-  i32 global3 = _initGlobal3();
-
-  static final Memory memory = Memory(0);
-
-  static i32 _initGlobal0() {
-    final frame = Frame(memory);
-    frame.i32_const(1200);
-    return frame.pop();
-  }
-
-  static i32 _initGlobal1() {
-    final frame = Frame(memory);
-    frame.i32_const(800);
-    return frame.pop();
-  }
-
-  static i32 _initGlobal2() {
-    final frame = Frame(memory);
-    frame.i32_const(0);
-    return frame.pop();
-  }
-
-  static i32 _initGlobal3() {
-    final frame = Frame(memory);
-    frame.i32_const(0);
-    return frame.pop();
-  }
+  i32 global0 = 1200;
+  i32 global1 = 800;
+  i32 global2 = 0;
+  i32 global3 = 0;
 }
 
 /// A class representing the symbols imported from the 'env' module.
@@ -672,61 +646,13 @@ class DataSegments {
       '\x73';
 
   void init(Memory memory) {
-    memory.copyTo(data0, _dataOffset0(memory));
-    memory.copyTo(data1, _dataOffset1(memory));
-    memory.copyTo(data2, _dataOffset2(memory));
-    memory.copyTo(data3, _dataOffset3(memory));
-    memory.copyTo(data4, _dataOffset4(memory));
-    memory.copyTo(data5, _dataOffset5(memory));
-    memory.copyTo(data6, _dataOffset6(memory));
-    memory.copyTo(data7, _dataOffset7(memory));
-  }
-
-  static u32 _dataOffset0(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(1036);
-    return frame.pop();
-  }
-
-  static u32 _dataOffset1(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(1048);
-    return frame.pop();
-  }
-
-  static u32 _dataOffset2(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(1084);
-    return frame.pop();
-  }
-
-  static u32 _dataOffset3(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(1096);
-    return frame.pop();
-  }
-
-  static u32 _dataOffset4(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(1148);
-    return frame.pop();
-  }
-
-  static u32 _dataOffset5(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(1160);
-    return frame.pop();
-  }
-
-  static u32 _dataOffset6(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(1212);
-    return frame.pop();
-  }
-
-  static u32 _dataOffset7(Memory memory) {
-    final frame = Frame(memory);
-    frame.i32_const(1224);
-    return frame.pop();
+    memory.copyTo(data0, 1036);
+    memory.copyTo(data1, 1048);
+    memory.copyTo(data2, 1084);
+    memory.copyTo(data3, 1096);
+    memory.copyTo(data4, 1148);
+    memory.copyTo(data5, 1160);
+    memory.copyTo(data6, 1212);
+    memory.copyTo(data7, 1224);
   }
 }

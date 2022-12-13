@@ -155,7 +155,10 @@ class Module {
         if_label_2:
         if (frame.pop() != 0) {
           frame.push(arg0);
-          f_permute(frame.pop());
+          {
+            var t0 = frame.pop();
+            f_permute(t0);
+          }
           frame.i32_const(0);
           local0 = frame.pop();
         }
@@ -565,7 +568,10 @@ class Module {
         frame.i32_add();
         local1 = frame.pop();
         frame.push(arg0);
-        f_permute(frame.pop());
+        {
+          var t0 = frame.pop();
+          f_permute(t0);
+        }
         continue loop_label_1;
         break;
       }
@@ -1388,427 +1394,71 @@ class Module {
   }
 }
 
+typedef FunctionType0 = void Function(i32, i32, i32);
+typedef FunctionType1 = i32 Function(i32, i32, i32, i32);
+typedef FunctionType2 = i32 Function(i32, i32, i32);
+typedef FunctionType3 = void Function();
+typedef FunctionType4 = void Function(i32);
+
 class Globals {
-  i64 global0 = _initGlobal0();
-  i64 global1 = _initGlobal1();
-  i64 global2 = _initGlobal2();
-  i64 global3 = _initGlobal3();
-  i64 global4 = _initGlobal4();
-  i64 global5 = _initGlobal5();
-  i64 global6 = _initGlobal6();
-  i64 global7 = _initGlobal7();
-  i64 global8 = _initGlobal8();
-  i64 global9 = _initGlobal9();
-  i64 global10 = _initGlobal10();
-  i64 global11 = _initGlobal11();
-  i64 global12 = _initGlobal12();
-  i64 global13 = _initGlobal13();
-  i64 global14 = _initGlobal14();
-  i64 global15 = _initGlobal15();
-  i64 global16 = _initGlobal16();
-  i64 global17 = _initGlobal17();
-  i64 global18 = _initGlobal18();
-  i64 global19 = _initGlobal19();
-  i64 global20 = _initGlobal20();
-  i64 global21 = _initGlobal21();
-  i64 global22 = _initGlobal22();
-  i64 global23 = _initGlobal23();
-  i64 global24 = _initGlobal24();
-  i64 global25 = _initGlobal25();
-  i64 global26 = _initGlobal26();
-  i64 global27 = _initGlobal27();
-  i64 global28 = _initGlobal28();
-  i64 global29 = _initGlobal29();
-  i64 global30 = _initGlobal30();
-  i64 global31 = _initGlobal31();
-  i64 global32 = _initGlobal32();
-  i64 global33 = _initGlobal33();
-  i64 global34 = _initGlobal34();
-  i64 global35 = _initGlobal35();
-  i64 global36 = _initGlobal36();
-  i64 global37 = _initGlobal37();
-  i64 global38 = _initGlobal38();
-  i64 global39 = _initGlobal39();
-  i64 global40 = _initGlobal40();
-  i64 global41 = _initGlobal41();
-  i64 global42 = _initGlobal42();
-  i64 global43 = _initGlobal43();
-  i64 global44 = _initGlobal44();
-  i64 global45 = _initGlobal45();
-  i64 global46 = _initGlobal46();
-  i64 global47 = _initGlobal47();
-  i64 global48 = _initGlobal48();
-  i64 global49 = _initGlobal49();
-  i64 global50 = _initGlobal50();
-  i64 global51 = _initGlobal51();
-  i64 global52 = _initGlobal52();
-  i64 global53 = _initGlobal53();
-  i64 global54 = _initGlobal54();
-  i64 global55 = _initGlobal55();
-  i64 global56 = _initGlobal56();
-  i64 global57 = _initGlobal57();
-  i64 global58 = _initGlobal58();
-  i64 global59 = _initGlobal59();
-
-  static final Memory memory = Memory(0);
-
-  static i64 _initGlobal0() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal1() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal2() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal3() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal4() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal5() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal6() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal7() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal8() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal9() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal10() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal11() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal12() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal13() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal14() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal15() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal16() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal17() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal18() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal19() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal20() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal21() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal22() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal23() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal24() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal25() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal26() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal27() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal28() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal29() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal30() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal31() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal32() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal33() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal34() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal35() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal36() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal37() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal38() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal39() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal40() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal41() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal42() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal43() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal44() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal45() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal46() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal47() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal48() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal49() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal50() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal51() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal52() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal53() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal54() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal55() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal56() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal57() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal58() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
-
-  static i64 _initGlobal59() {
-    final frame = Frame(memory);
-    frame.i64_const(0);
-    return frame.pop();
-  }
+  i64 global0 = 0;
+  i64 global1 = 0;
+  i64 global2 = 0;
+  i64 global3 = 0;
+  i64 global4 = 0;
+  i64 global5 = 0;
+  i64 global6 = 0;
+  i64 global7 = 0;
+  i64 global8 = 0;
+  i64 global9 = 0;
+  i64 global10 = 0;
+  i64 global11 = 0;
+  i64 global12 = 0;
+  i64 global13 = 0;
+  i64 global14 = 0;
+  i64 global15 = 0;
+  i64 global16 = 0;
+  i64 global17 = 0;
+  i64 global18 = 0;
+  i64 global19 = 0;
+  i64 global20 = 0;
+  i64 global21 = 0;
+  i64 global22 = 0;
+  i64 global23 = 0;
+  i64 global24 = 0;
+  i64 global25 = 0;
+  i64 global26 = 0;
+  i64 global27 = 0;
+  i64 global28 = 0;
+  i64 global29 = 0;
+  i64 global30 = 0;
+  i64 global31 = 0;
+  i64 global32 = 0;
+  i64 global33 = 0;
+  i64 global34 = 0;
+  i64 global35 = 0;
+  i64 global36 = 0;
+  i64 global37 = 0;
+  i64 global38 = 0;
+  i64 global39 = 0;
+  i64 global40 = 0;
+  i64 global41 = 0;
+  i64 global42 = 0;
+  i64 global43 = 0;
+  i64 global44 = 0;
+  i64 global45 = 0;
+  i64 global46 = 0;
+  i64 global47 = 0;
+  i64 global48 = 0;
+  i64 global49 = 0;
+  i64 global50 = 0;
+  i64 global51 = 0;
+  i64 global52 = 0;
+  i64 global53 = 0;
+  i64 global54 = 0;
+  i64 global55 = 0;
+  i64 global56 = 0;
+  i64 global57 = 0;
+  i64 global58 = 0;
+  i64 global59 = 0;
 }
