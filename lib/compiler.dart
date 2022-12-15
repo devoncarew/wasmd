@@ -652,7 +652,7 @@ void printModule(Module module, LibraryBuilder library) {
 
   library.body.add(classBuilder.build());
 
-  // todo: currently, we only need to generate these if tables are being used
+  // TODO: currently, we only need to generate these if tables are being used
   for (int i = 0; i < module.functionTypes.length; i++) {
     var functionType = module.functionTypes[i];
     var ret = functionType.resultTypeDisplayName;

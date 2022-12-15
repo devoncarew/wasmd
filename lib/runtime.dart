@@ -124,6 +124,12 @@ class Frame {
     stack.add(value);
   }
 
+  void i32_load16_u(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    i32 value = memory.data.getUint16(index + offset, Endian.little);
+    stack.add(value);
+  }
+
   void i64_load8_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
     i64 value = memory.data.getUint8(index + offset);
@@ -277,6 +283,27 @@ class Frame {
     stack.add(result);
   }
 
+  void i64_gt_s() {
+    i64 arg1 = stack.removeLast() as i64;
+    i64 arg0 = stack.removeLast() as i64;
+    var result = arg0 > arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_gt_u() {
+    u64 arg1 = stack.removeLast() as u64;
+    u64 arg0 = stack.removeLast() as u64;
+    var result = arg0 > arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_lt_u() {
+    u64 arg1 = stack.removeLast() as u64;
+    u64 arg0 = stack.removeLast() as u64;
+    var result = arg0 < arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
   void f64_gt() {
     f64 arg1 = stack.removeLast() as f64;
     f64 arg0 = stack.removeLast() as f64;
@@ -368,6 +395,40 @@ class Frame {
     stack.add(result);
   }
 
+  void i32_rotl() {
+    const bitCount = 32;
+
+    u32 count = stack.removeLast() as i32;
+    i32 value = stack.removeLast() as i32;
+
+    assert(count >= 0 && count < bitCount);
+
+    i32 result =
+        count == 0 ? value : (value << count) | (value >>> (bitCount - count));
+    stack.add(result);
+  }
+
+  void i64_add() {
+    i64 arg1 = stack.removeLast() as i64;
+    i64 arg0 = stack.removeLast() as i64;
+    var result = arg0 + arg1;
+    stack.add(result);
+  }
+
+  void i64_sub() {
+    i64 arg1 = stack.removeLast() as i64;
+    i64 arg0 = stack.removeLast() as i64;
+    var result = arg0 - arg1;
+    stack.add(result);
+  }
+
+  void i64_mul() {
+    i64 arg1 = stack.removeLast() as i64;
+    i64 arg0 = stack.removeLast() as i64;
+    var result = arg0 * arg1;
+    stack.add(result);
+  }
+
   // todo: signed vs. unsigned
   void i64_div_s() {
     i64 arg1 = stack.removeLast() as i64;
@@ -402,6 +463,13 @@ class Frame {
     i64 arg1 = stack.removeLast() as i64;
     i64 arg0 = stack.removeLast() as i64;
     var result = arg0 ^ arg1;
+    stack.add(result);
+  }
+
+  void i64_shl() {
+    u64 arg1 = stack.removeLast() as u64;
+    u64 arg0 = stack.removeLast() as u64;
+    var result = arg0 << arg1;
     stack.add(result);
   }
 
@@ -478,6 +546,18 @@ class Frame {
     f64 arg1 = stack.removeLast() as f64;
     f64 arg0 = stack.removeLast() as f64;
     var result = max(arg0, arg1);
+    stack.add(result);
+  }
+
+  void i32_wrap_i64() {
+    i64 arg1 = stack.removeLast() as i64;
+    i32 result = arg1 * 0xFFFFFFFF;
+    stack.add(result);
+  }
+
+  void i64_extend_i32_u() {
+    u32 arg1 = stack.removeLast() as u32;
+    u64 result = arg1;
     stack.add(result);
   }
 
