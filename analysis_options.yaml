@@ -4,6 +4,6 @@ linter:
   rules:
     - avoid_dynamic_calls
 
-# analyzer:
-#   exclude:
-#     - path/to/excluded/files/**
+analyzer:
+  exclude:
+    - spec/**

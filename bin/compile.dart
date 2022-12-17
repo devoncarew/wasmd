@@ -1,12 +1,12 @@
-import 'dart:collection';
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:path/path.dart' as path;
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:logging/logging.dart';
+import 'package:path/path.dart' as path;
 import 'package:wasmd/compiler.dart';
+import 'package:wasmd/src/utils.dart';
 
 void main(List<String> args) async {
   var argsParser = ArgParser();
@@ -52,7 +52,6 @@ void main(List<String> args) async {
   var input = argsResult.rest.first;
   var verbose = argsResult['verbose'] as bool;
   var output = argsResult['output'] as String?;
-  var generateWastTest = argsResult['generate-wast-test'] as bool;
 
   output ??= '${path.withoutExtension(input)}.dart';
 
@@ -64,7 +63,7 @@ void main(List<String> args) async {
   }
 
   var compiler = Compiler(file: File(input), logger: logger);
-  var library = compiler.compile(generateWastTest: generateWastTest);
+  var library = compiler.compile();
 
   var formatter = DartFormatter();
   var emitter = DartEmitter(
@@ -83,22 +82,4 @@ void main(List<String> args) async {
   logger.info('\nEmitting $output.');
   var outFile = File(output);
   outFile.writeAsStringSync(code);
-}
-
-class NoPrefixAllocator implements Allocator {
-  final Set<String> _imports = SplayTreeSet();
-
-  NoPrefixAllocator();
-
-  @override
-  String allocate(Reference reference) {
-    if (reference.url != null) {
-      _imports.add(reference.url!);
-    }
-    return reference.symbol!;
-  }
-
-  @override
-  Iterable<Directive> get imports =>
-      _imports.map((url) => Directive.import(url));
 }

@@ -10,3 +10,6 @@ build/
 samples/brotli_wasm_bg.*
 samples/lz77_bg.*
 samples/rsa_lib_bg.*
+
+# Intermediary wat and wasm files
+test/wasm/

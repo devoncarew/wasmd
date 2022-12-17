@@ -1,53 +1,135 @@
 import 'dart:io';
 
+import 'package:code_builder/code_builder.dart' hide Expression;
+import 'package:dart_style/dart_style.dart';
+import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
+import 'package:wasmd/compiler.dart';
+import 'package:wasmd/src/utils.dart';
 
-import 's_expr.dart';
+import 'src/s_expr.dart';
 
 // Given an wast file, generate one or more wat module files that represent unit
 // tests.
 
+// spec/test/core/i32.wast
+
+// todo: write to test/wasm (wat)
+// todo: write to test/wasm (wasm)
+// todo: write to test/ (dart)
+
 void main(List<String> args) {
   if (args.isEmpty) {
-    print('usage: dart test/infra/generate.dart <wast file>');
+    print('usage: dart tools/generate.dart <wast file>');
     return;
   }
 
   for (var arg in args) {
-    var file = File(arg);
+    var wastFile = File(arg);
 
-    generateFor(file);
+    var basename = p.basenameWithoutExtension(arg);
+    var wasmDir = Directory(p.join('test/wasm'));
+    wasmDir.createSync();
+
+    var watFiles = generateWatForWast(wastFile, wasmDir, basename);
+
+    for (var watFile in watFiles) {
+      // test/wasm/i32_2.wat
+      var wasmFile = File('${p.withoutExtension(watFile.path)}.wasm');
+      compileWatToWasm(watFile, wasmFile);
+
+      var dartFile = File(
+        p.join('test', '${p.basenameWithoutExtension(watFile.path)}_test.dart'),
+      );
+      compileWasmToDart(wasmFile, dartFile);
+    }
   }
 }
 
-void generateFor(File file) {
-  print('parsing ${file.path}...');
+List<File> generateWatForWast(
+  File wastFile,
+  Directory outDir,
+  String basename,
+) {
+  print('parsing ${wastFile.path}...');
 
-  var compilationUnit = ComilationUnit.parse(file.readAsStringSync());
+  var compilationUnit = ComilationUnit.parse(wastFile.readAsStringSync());
   var testModules = _findTestModules(_process(compilationUnit));
-
-  var dir = file.parent;
-  var basename = p.basenameWithoutExtension(file.path);
+  var watFiles = <File>[];
 
   if (testModules.length == 1) {
-    var out = File(p.join(dir.path, '${basename}_test.wat'));
+    var out = File(p.join(outDir.path, '$basename.wat'));
+    watFiles.add(out);
     out.writeAsStringSync('''
-;; Generated from ${file.path}.
+;; Generated from ${wastFile.path}.
 
 ${testModules.first.prettyPrint()}''');
     print('wrote ${out.path}.');
   } else {
     var i = 0;
     for (var module in testModules) {
-      var out = File(p.join(dir.path, '${basename}_${i}_test.wat'));
+      var out = File(p.join(outDir.path, '${basename}_$i.wat'));
+      watFiles.add(out);
       i++;
       out.writeAsStringSync('''
-;; Generated from ${file.path}.
+;; Generated from ${wastFile.path}.
 
 ${module.prettyPrint()}''');
       print('wrote ${out.path}.');
+      print('');
     }
   }
+
+  return watFiles;
+}
+
+void compileWatToWasm(File watFile, File wasmFile) {
+  // wat2wasm -o wasmFile watFile
+  var args = ['wat2wasm', '-o', wasmFile.path, watFile.path];
+  print(args.join(' '));
+
+  var result = Process.runSync(args.first, args.skip(1).toList());
+  var out = (result.stdout as String).trim();
+  if (out.isNotEmpty) print(out);
+  var err = (result.stderr as String).trim();
+  if (err.isNotEmpty) stderr.writeln(err);
+
+  if (result.exitCode != 0) {
+    throw '${args.first} failed with exit code ${result.exitCode}';
+  }
+
+  print('Wrote ${wasmFile.path}.');
+}
+
+void compileWasmToDart(File wasmFile, File dartFile) {
+  print('Reading ${wasmFile.path}.');
+
+  var logger = Logger.detached('wasm2dart');
+  // if (verbose) {
+  //   logger.onRecord.listen((record) {
+  //     stderr.writeln(record.message);
+  //   });
+  // }
+
+  var compiler = Compiler(file: wasmFile, logger: logger);
+  var library = compiler.compile(generateWastTest: true);
+
+  var formatter = DartFormatter();
+  var emitter = DartEmitter(
+    orderDirectives: true,
+    useNullSafetySyntax: true,
+    allocator: NoPrefixAllocator(),
+  );
+
+  var code = library.accept(emitter).toString();
+  try {
+    code = formatter.format(code);
+  } catch (e) {
+    print(e);
+  }
+
+  print('Emitting ${dartFile.path}.');
+  dartFile.writeAsStringSync(code);
 }
 
 List<Expression> _process(ComilationUnit compilationUnit) {

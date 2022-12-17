@@ -29,3 +29,15 @@ https://github.com/WebAssembly/wabt/tree/main/test/spec
 ### Re-building
 
 - `wat2wasm --debug-names -o samples/mandelbrot.wasm --enable-multi-memory --enable-function-references samples/mandelbrot.wat`
+
+### Updating the spec files
+
+- `git submodule update`
+
+or:
+
+- `git submodule update --remote`
+
+### Re-generating test files
+
+- `dart tool/generate.dart spec/test/core/i32.wast`
