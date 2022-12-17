@@ -46,12 +46,12 @@ class Module {
 
     final frame = Frame(memory);
     frame.push(arg0);
-    frame.i32_const(1073741804);
+    frame.i32_const(0x3fffffec);
     frame.i32_gt_u();
     if_label_0:
     if (frame.pop() != 0) {
-      frame.i32_const(1168);
-      frame.i32_const(1232);
+      frame.i32_const(0x490);
+      frame.i32_const(0x4d0);
       frame.i32_const(86);
       frame.i32_const(30);
       {
@@ -72,12 +72,12 @@ class Module {
     frame.i32_const(16);
     frame.i32_add();
     local2 = frame.peek();
-    frame.i32_const(1073741820);
+    frame.i32_const(0x3ffffffc);
     frame.i32_gt_u();
     if_label_0:
     if (frame.pop() != 0) {
-      frame.i32_const(1168);
-      frame.i32_const(1232);
+      frame.i32_const(0x490);
+      frame.i32_const(0x4d0);
       frame.i32_const(33);
       frame.i32_const(29);
       {
@@ -126,9 +126,9 @@ class Module {
       frame.push(local3);
       frame.push(local5);
       frame.i32_sub();
-      frame.i32_const(65535);
+      frame.i32_const(0xffff);
       frame.i32_add();
-      frame.i32_const(-65536);
+      frame.i32_const(-0x10000);
       frame.i32_and();
       frame.i32_const(16);
       frame.i32_shr_u();
@@ -274,7 +274,7 @@ class Module {
     frame.i32_shl();
     frame.push(arg1);
     frame.i32_add();
-    frame.i32_const(1023);
+    frame.i32_const(0x3ff);
     frame.i32_and();
     arg0 = frame.peek();
     frame.i32_const(256);
@@ -512,7 +512,7 @@ class Module {
     i32 local1 = 0;
 
     final frame = Frame(memory);
-    frame.i32_const(1276);
+    frame.i32_const(0x4fc);
     globals.global2 = frame.pop();
     frame.i32_const(12);
     frame.i32_const(4);
@@ -555,7 +555,7 @@ class Module {
       var t0 = frame.pop();
       _func1(t0, t1);
     }
-    frame.i32_const(3840000);
+    frame.i32_const(0x3a9800);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -564,7 +564,7 @@ class Module {
     }
     local1 = frame.peek();
     frame.i32_const(0);
-    frame.i32_const(3840000);
+    frame.i32_const(0x3a9800);
     frame.memory_fill(0);
     frame.push(local0);
     frame.push(local1);
@@ -581,7 +581,7 @@ class Module {
       _func0(t0, t1);
     }
     frame.push(local0);
-    frame.i32_const(3840000);
+    frame.i32_const(0x3a9800);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -603,7 +603,7 @@ typedef FunctionType7 = void Function(i32, f64, f64, f64);
 typedef FunctionType8 = void Function();
 
 class Globals {
-  i32 global0 = 1200;
+  i32 global0 = 0x4b0;
   i32 global1 = 800;
   i32 global2 = 0;
   i32 global3 = 0;

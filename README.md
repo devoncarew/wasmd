@@ -28,7 +28,7 @@ https://github.com/WebAssembly/wabt/tree/main/test/spec
 
 ### Re-building
 
-- `wat2wasm --debug-names -o samples/mandelbrot.wasm --enable-multi-memory --enable-function-references samples/mandelbrot.wat`
+- `dart tool/regen.dart <wat file>`
 
 ### Updating the spec files
 
@@ -40,4 +40,4 @@ or:
 
 ### Re-generating test files
 
-- `dart tool/generate.dart spec/test/core/i32.wast`
+- `dart tool/spec.dart spec/test/core/i32.wast`

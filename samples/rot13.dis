@@ -28,7 +28,6 @@
 000001c: 00                                        ; num params
 000001d: 00                                        ; num results
 0000009: 14                                        ; FIXUP section size
-
 ; section "Import" (2)
 000001e: 02                                        ; section code
 000001f: 00                                        ; section size (guess)
@@ -56,7 +55,6 @@
 000004b: 00                                        ; import kind
 000004c: 01                                        ; import signature index
 000001f: 2d                                        ; FIXUP section size
-
 ; section "Function" (3)
 000004d: 03                                        ; section code
 000004e: 00                                        ; section size (guess)
@@ -64,7 +62,6 @@
 0000050: 02                                        ; function 0 signature index
 0000051: 03                                        ; function 1 signature index
 000004e: 03                                        ; FIXUP section size
-
 ; section "Export" (7)
 0000052: 07                                        ; section code
 0000053: 00                                        ; section size (guess)
@@ -193,3 +190,53 @@
 00000d2: 0b                                        ; end
 000009a: 38                                        ; FIXUP func body size
 000005e: 74                                        ; FIXUP section size
+; section "name"
+00000d3: 00                                        ; section code
+00000d4: 00                                        ; section size (guess)
+00000d5: 04                                        ; string length
+00000d6: 6e61 6d65                                name  ; custom section name
+00000da: 01                                        ; name subsection type
+00000db: 00                                        ; subsection size (guess)
+00000dc: 03                                        ; num names
+00000dd: 00                                        ; elem index
+00000de: 08                                        ; string length
+00000df: 6669 6c6c 5f62 7566                      fill_buf  ; elem name 0
+00000e7: 01                                        ; elem index
+00000e8: 08                                        ; string length
+00000e9: 6275 665f 646f 6e65                      buf_done  ; elem name 1
+00000f1: 02                                        ; elem index
+00000f2: 06                                        ; string length
+00000f3: 726f 7431 3363                           rot13c  ; elem name 2
+00000db: 1d                                        ; FIXUP subsection size
+00000f9: 02                                        ; local name type
+00000fa: 00                                        ; subsection size (guess)
+00000fb: 04                                        ; num functions
+00000fc: 00                                        ; function index
+00000fd: 00                                        ; num locals
+00000fe: 01                                        ; function index
+00000ff: 00                                        ; num locals
+0000100: 02                                        ; function index
+0000101: 02                                        ; num locals
+0000102: 00                                        ; local index
+0000103: 01                                        ; string length
+0000104: 63                                       c  ; local name 0
+0000105: 01                                        ; local index
+0000106: 02                                        ; string length
+0000107: 7563                                     uc  ; local name 1
+0000109: 03                                        ; function index
+000010a: 02                                        ; num locals
+000010b: 00                                        ; local index
+000010c: 04                                        ; string length
+000010d: 7369 7a65                                size  ; local name 0
+0000111: 01                                        ; local index
+0000112: 01                                        ; string length
+0000113: 69                                       i  ; local name 1
+00000fa: 19                                        ; FIXUP subsection size
+0000114: 06                                        ; name subsection type
+0000115: 00                                        ; subsection size (guess)
+0000116: 01                                        ; num names
+0000117: 00                                        ; elem index
+0000118: 03                                        ; string length
+0000119: 6d65 6d                                  mem  ; elem name 0
+0000115: 06                                        ; FIXUP subsection size
+00000d4: 47                                        ; FIXUP section size

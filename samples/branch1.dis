@@ -83,3 +83,34 @@
 000004d: 0b                                        ; end
 0000047: 06                                        ; FIXUP func body size
 000002f: 1e                                        ; FIXUP section size
+; section "name"
+000004e: 00                                        ; section code
+000004f: 00                                        ; section size (guess)
+0000050: 04                                        ; string length
+0000051: 6e61 6d65                                name  ; custom section name
+0000055: 01                                        ; name subsection type
+0000056: 00                                        ; subsection size (guess)
+0000057: 02                                        ; num names
+0000058: 00                                        ; elem index
+0000059: 06                                        ; string length
+000005a: 7361 6d70 6c65                           sample  ; elem name 0
+0000060: 01                                        ; elem index
+0000061: 03                                        ; string length
+0000062: 666f 6f                                  foo  ; elem name 1
+0000056: 0e                                        ; FIXUP subsection size
+0000065: 02                                        ; local name type
+0000066: 00                                        ; subsection size (guess)
+0000067: 02                                        ; num functions
+0000068: 00                                        ; function index
+0000069: 00                                        ; num locals
+000006a: 01                                        ; function index
+000006b: 00                                        ; num locals
+0000066: 05                                        ; FIXUP subsection size
+000006c: 07                                        ; name subsection type
+000006d: 00                                        ; subsection size (guess)
+000006e: 01                                        ; num names
+000006f: 00                                        ; elem index
+0000070: 01                                        ; string length
+0000071: 69                                       i  ; elem name 0
+000006d: 04                                        ; FIXUP subsection size
+000004f: 22                                        ; FIXUP section size

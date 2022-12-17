@@ -114,10 +114,9 @@ class Compiler {
     var name = r.readUtf8();
     length -= (r.pos - startPos);
     r.skip(length);
-    _log('  skipping custom section [$name]');
+    print('  skipping custom section [$name]');
 
-    // todo:
-    // 'name'
+    // todo: handle 'name' custom sections
     // https://webassembly.github.io/spec/core/appendix/custom.html#name-section
   }
 

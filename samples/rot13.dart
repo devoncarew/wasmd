@@ -63,7 +63,7 @@ class Module {
 
     final frame = Frame(memory);
     frame.i32_const(0);
-    frame.i32_const(1024);
+    frame.i32_const(0x400);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();

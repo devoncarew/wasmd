@@ -1,0 +1,525 @@
+0000000: 0061 736d                                 ; WASM_BINARY_MAGIC
+0000004: 0100 0000                                 ; WASM_BINARY_VERSION
+; section "Type" (1)
+0000008: 01                                        ; section code
+0000009: 00                                        ; section size (guess)
+000000a: 02                                        ; num types
+; func type 0
+000000b: 60                                        ; func
+000000c: 01                                        ; num params
+000000d: 7c                                        ; f64
+000000e: 01                                        ; num results
+000000f: 7c                                        ; f64
+; func type 1
+0000010: 60                                        ; func
+0000011: 03                                        ; num params
+0000012: 7f                                        ; i32
+0000013: 7f                                        ; i32
+0000014: 7f                                        ; i32
+0000015: 00                                        ; num results
+0000009: 0c                                        ; FIXUP section size
+; section "Import" (2)
+0000016: 02                                        ; section code
+0000017: 00                                        ; section size (guess)
+0000018: 03                                        ; num imports
+; import header 0
+0000019: 03                                        ; string length
+000001a: 656e 76                                  env  ; import module name
+000001d: 06                                        ; string length
+000001e: 6d65 6d6f 7279                           memory  ; import field name
+0000024: 02                                        ; import kind
+0000025: 00                                        ; limits: flags
+0000026: 00                                        ; limits: initial
+; import header 1
+0000027: 03                                        ; string length
+0000028: 656e 76                                  env  ; import module name
+000002b: 08                                        ; string length
+000002c: 4d61 7468 2e6c 6f67                      Math.log  ; import field name
+0000034: 00                                        ; import kind
+0000035: 00                                        ; import signature index
+; import header 2
+0000036: 03                                        ; string length
+0000037: 656e 76                                  env  ; import module name
+000003a: 09                                        ; string length
+000003b: 4d61 7468 2e6c 6f67 32                   Math.log2  ; import field name
+0000044: 00                                        ; import kind
+0000045: 00                                        ; import signature index
+0000017: 2e                                        ; FIXUP section size
+; section "Function" (3)
+0000046: 03                                        ; section code
+0000047: 00                                        ; section size (guess)
+0000048: 01                                        ; num functions
+0000049: 01                                        ; function 0 signature index
+0000047: 02                                        ; FIXUP section size
+; section "Export" (7)
+000004a: 07                                        ; section code
+000004b: 00                                        ; section size (guess)
+000004c: 02                                        ; num exports
+000004d: 06                                        ; string length
+000004e: 7570 6461 7465                           update  ; export name
+0000054: 00                                        ; export kind
+0000055: 02                                        ; export func index
+0000056: 06                                        ; string length
+0000057: 6d65 6d6f 7279                           memory  ; export name
+000005d: 02                                        ; export kind
+000005e: 00                                        ; export memory index
+000004b: 13                                        ; FIXUP section size
+; section "Code" (10)
+000005f: 0a                                        ; section code
+0000060: 00                                        ; section size (guess)
+0000061: 01                                        ; num functions
+; function body 0
+0000062: 00                                        ; func body size (guess)
+0000063: 05                                        ; local decl count
+0000064: 08                                        ; local type count
+0000065: 7c                                        ; f64
+0000066: 03                                        ; local type count
+0000067: 7f                                        ; i32
+0000068: 01                                        ; local type count
+0000069: 7c                                        ; f64
+000006a: 02                                        ; local type count
+000006b: 7f                                        ; i32
+000006c: 01                                        ; local type count
+000006d: 7c                                        ; f64
+000006e: 20                                        ; local.get
+000006f: 01                                        ; local index
+0000070: b8                                        ; f64.convert_i32_u
+0000071: 44                                        ; f64.const
+0000072: 0000 0000 0000 e03f                       ; f64 literal
+000007a: a2                                        ; f64.mul
+000007b: 21                                        ; local.set
+000007c: 07                                        ; local index
+000007d: 20                                        ; local.get
+000007e: 00                                        ; local index
+000007f: b8                                        ; f64.convert_i32_u
+0000080: 44                                        ; f64.const
+0000081: 0000 0000 0000 e43f                       ; f64 literal
+0000089: a2                                        ; f64.mul
+000008a: 44                                        ; f64.const
+000008b: 0000 0000 0000 2440                       ; f64 literal
+0000093: 20                                        ; local.get
+0000094: 00                                        ; local index
+0000095: 41                                        ; i32.const
+0000096: 01                                        ; i32 literal
+0000097: 74                                        ; i32.shl
+0000098: 22                                        ; local.tee
+0000099: 0c                                        ; local index
+000009a: 20                                        ; local.get
+000009b: 01                                        ; local index
+000009c: 41                                        ; i32.const
+000009d: 02                                        ; i32 literal
+000009e: 74                                        ; i32.shl
+000009f: 22                                        ; local.tee
+00000a0: 0d                                        ; local index
+00000a1: 20                                        ; local.get
+00000a2: 0c                                        ; local index
+00000a3: 20                                        ; local.get
+00000a4: 0d                                        ; local index
+00000a5: 48                                        ; i32.lt_s
+00000a6: 1b                                        ; select
+00000a7: b7                                        ; f64.convert_i32_s
+00000a8: a3                                        ; f64.div
+00000a9: 22                                        ; local.tee
+00000aa: 0a                                        ; local index
+00000ab: a2                                        ; f64.mul
+00000ac: 21                                        ; local.set
+00000ad: 06                                        ; local index
+00000ae: 44                                        ; f64.const
+00000af: 0000 0000 0000 f03f                       ; f64 literal
+00000b7: 20                                        ; local.get
+00000b8: 02                                        ; local index
+00000b9: b8                                        ; f64.convert_i32_u
+00000ba: a3                                        ; f64.div
+00000bb: 21                                        ; local.set
+00000bc: 05                                        ; local index
+00000bd: 41                                        ; i32.const
+00000be: 08                                        ; i32 literal
+00000bf: 20                                        ; local.get
+00000c0: 02                                        ; local index
+00000c1: 20                                        ; local.get
+00000c2: 02                                        ; local index
+00000c3: 41                                        ; i32.const
+00000c4: 08                                        ; i32 literal
+00000c5: 4b                                        ; i32.gt_u
+00000c6: 1b                                        ; select
+00000c7: 21                                        ; local.set
+00000c8: 0f                                        ; local index
+00000c9: 03                                        ; loop
+00000ca: 40                                        ; void
+00000cb: 20                                        ; local.get
+00000cc: 01                                        ; local index
+00000cd: 20                                        ; local.get
+00000ce: 0b                                        ; local index
+00000cf: 4b                                        ; i32.gt_u
+00000d0: 04                                        ; if
+00000d1: 40                                        ; void
+00000d2: 20                                        ; local.get
+00000d3: 0b                                        ; local index
+00000d4: b8                                        ; f64.convert_i32_u
+00000d5: 20                                        ; local.get
+00000d6: 07                                        ; local index
+00000d7: a1                                        ; f64.sub
+00000d8: 20                                        ; local.get
+00000d9: 0a                                        ; local index
+00000da: a2                                        ; f64.mul
+00000db: 21                                        ; local.set
+00000dc: 09                                        ; local index
+00000dd: 20                                        ; local.get
+00000de: 00                                        ; local index
+00000df: 20                                        ; local.get
+00000e0: 0b                                        ; local index
+00000e1: 6c                                        ; i32.mul
+00000e2: 41                                        ; i32.const
+00000e3: 01                                        ; i32 literal
+00000e4: 74                                        ; i32.shl
+00000e5: 21                                        ; local.set
+00000e6: 10                                        ; local index
+00000e7: 41                                        ; i32.const
+00000e8: 00                                        ; i32 literal
+00000e9: 21                                        ; local.set
+00000ea: 0c                                        ; local index
+00000eb: 03                                        ; loop
+00000ec: 40                                        ; void
+00000ed: 20                                        ; local.get
+00000ee: 00                                        ; local index
+00000ef: 20                                        ; local.get
+00000f0: 0c                                        ; local index
+00000f1: 4b                                        ; i32.gt_u
+00000f2: 04                                        ; if
+00000f3: 40                                        ; void
+00000f4: 20                                        ; local.get
+00000f5: 0c                                        ; local index
+00000f6: b8                                        ; f64.convert_i32_u
+00000f7: 20                                        ; local.get
+00000f8: 0a                                        ; local index
+00000f9: a2                                        ; f64.mul
+00000fa: 20                                        ; local.get
+00000fb: 06                                        ; local index
+00000fc: a1                                        ; f64.sub
+00000fd: 21                                        ; local.set
+00000fe: 08                                        ; local index
+00000ff: 44                                        ; f64.const
+0000100: 0000 0000 0000 0000                       ; f64 literal
+0000108: 21                                        ; local.set
+0000109: 03                                        ; local index
+000010a: 44                                        ; f64.const
+000010b: 0000 0000 0000 0000                       ; f64 literal
+0000113: 21                                        ; local.set
+0000114: 0e                                        ; local index
+0000115: 41                                        ; i32.const
+0000116: 00                                        ; i32 literal
+0000117: 21                                        ; local.set
+0000118: 0d                                        ; local index
+0000119: 03                                        ; loop
+000011a: 40                                        ; void
+000011b: 20                                        ; local.get
+000011c: 03                                        ; local index
+000011d: 20                                        ; local.get
+000011e: 03                                        ; local index
+000011f: a2                                        ; f64.mul
+0000120: 22                                        ; local.tee
+0000121: 04                                        ; local index
+0000122: 20                                        ; local.get
+0000123: 0e                                        ; local index
+0000124: 20                                        ; local.get
+0000125: 0e                                        ; local index
+0000126: a2                                        ; f64.mul
+0000127: 22                                        ; local.tee
+0000128: 11                                        ; local index
+0000129: a0                                        ; f64.add
+000012a: 44                                        ; f64.const
+000012b: 0000 0000 0000 1040                       ; f64 literal
+0000133: 65                                        ; f64.le
+0000134: 04                                        ; if
+0000135: 40                                        ; void
+0000136: 02                                        ; block
+0000137: 40                                        ; void
+0000138: 20                                        ; local.get
+0000139: 03                                        ; local index
+000013a: 20                                        ; local.get
+000013b: 03                                        ; local index
+000013c: a0                                        ; f64.add
+000013d: 20                                        ; local.get
+000013e: 0e                                        ; local index
+000013f: a2                                        ; f64.mul
+0000140: 20                                        ; local.get
+0000141: 09                                        ; local index
+0000142: a0                                        ; f64.add
+0000143: 21                                        ; local.set
+0000144: 0e                                        ; local index
+0000145: 20                                        ; local.get
+0000146: 04                                        ; local index
+0000147: 20                                        ; local.get
+0000148: 11                                        ; local index
+0000149: a1                                        ; f64.sub
+000014a: 20                                        ; local.get
+000014b: 08                                        ; local index
+000014c: a0                                        ; f64.add
+000014d: 21                                        ; local.set
+000014e: 03                                        ; local index
+000014f: 20                                        ; local.get
+0000150: 02                                        ; local index
+0000151: 20                                        ; local.get
+0000152: 0d                                        ; local index
+0000153: 4d                                        ; i32.le_u
+0000154: 0d                                        ; br_if
+0000155: 00                                        ; break depth
+0000156: 20                                        ; local.get
+0000157: 0d                                        ; local index
+0000158: 41                                        ; i32.const
+0000159: 01                                        ; i32 literal
+000015a: 6a                                        ; i32.add
+000015b: 21                                        ; local.set
+000015c: 0d                                        ; local index
+000015d: 0c                                        ; br
+000015e: 02                                        ; break depth
+000015f: 0b                                        ; end
+0000160: 0b                                        ; end
+0000161: 0b                                        ; end
+0000162: 03                                        ; loop
+0000163: 40                                        ; void
+0000164: 20                                        ; local.get
+0000165: 0d                                        ; local index
+0000166: 20                                        ; local.get
+0000167: 0f                                        ; local index
+0000168: 49                                        ; i32.lt_u
+0000169: 04                                        ; if
+000016a: 40                                        ; void
+000016b: 20                                        ; local.get
+000016c: 03                                        ; local index
+000016d: 20                                        ; local.get
+000016e: 03                                        ; local index
+000016f: a2                                        ; f64.mul
+0000170: 20                                        ; local.get
+0000171: 0e                                        ; local index
+0000172: 20                                        ; local.get
+0000173: 0e                                        ; local index
+0000174: a2                                        ; f64.mul
+0000175: a1                                        ; f64.sub
+0000176: 20                                        ; local.get
+0000177: 08                                        ; local index
+0000178: a0                                        ; f64.add
+0000179: 21                                        ; local.set
+000017a: 04                                        ; local index
+000017b: 20                                        ; local.get
+000017c: 03                                        ; local index
+000017d: 20                                        ; local.get
+000017e: 03                                        ; local index
+000017f: a0                                        ; f64.add
+0000180: 20                                        ; local.get
+0000181: 0e                                        ; local index
+0000182: a2                                        ; f64.mul
+0000183: 20                                        ; local.get
+0000184: 09                                        ; local index
+0000185: a0                                        ; f64.add
+0000186: 21                                        ; local.set
+0000187: 0e                                        ; local index
+0000188: 20                                        ; local.get
+0000189: 04                                        ; local index
+000018a: 21                                        ; local.set
+000018b: 03                                        ; local index
+000018c: 20                                        ; local.get
+000018d: 0d                                        ; local index
+000018e: 41                                        ; i32.const
+000018f: 01                                        ; i32 literal
+0000190: 6a                                        ; i32.add
+0000191: 21                                        ; local.set
+0000192: 0d                                        ; local index
+0000193: 0c                                        ; br
+0000194: 01                                        ; break depth
+0000195: 0b                                        ; end
+0000196: 0b                                        ; end
+0000197: 20                                        ; local.get
+0000198: 10                                        ; local index
+0000199: 20                                        ; local.get
+000019a: 0c                                        ; local index
+000019b: 41                                        ; i32.const
+000019c: 01                                        ; i32 literal
+000019d: 74                                        ; i32.shl
+000019e: 6a                                        ; i32.add
+000019f: 20                                        ; local.get
+00001a0: 03                                        ; local index
+00001a1: 20                                        ; local.get
+00001a2: 03                                        ; local index
+00001a3: a2                                        ; f64.mul
+00001a4: 20                                        ; local.get
+00001a5: 0e                                        ; local index
+00001a6: 20                                        ; local.get
+00001a7: 0e                                        ; local index
+00001a8: a2                                        ; f64.mul
+00001a9: a0                                        ; f64.add
+00001aa: 22                                        ; local.tee
+00001ab: 03                                        ; local index
+00001ac: 44                                        ; f64.const
+00001ad: 0000 0000 0000 f03f                       ; f64 literal
+00001b5: 64                                        ; f64.gt
+00001b6: 04                                        ; if
+00001b7: 7f                                        ; i32
+00001b8: 20                                        ; local.get
+00001b9: 0d                                        ; local index
+00001ba: 41                                        ; i32.const
+00001bb: 01                                        ; i32 literal
+00001bc: 6a                                        ; i32.add
+00001bd: b8                                        ; f64.convert_i32_u
+00001be: 20                                        ; local.get
+00001bf: 03                                        ; local index
+00001c0: 10                                        ; call
+00001c1: 00                                        ; function index
+00001c2: 44                                        ; f64.const
+00001c3: 0000 0000 0000 e03f                       ; f64 literal
+00001cb: a2                                        ; f64.mul
+00001cc: 10                                        ; call
+00001cd: 01                                        ; function index
+00001ce: a1                                        ; f64.sub
+00001cf: 20                                        ; local.get
+00001d0: 05                                        ; local index
+00001d1: a2                                        ; f64.mul
+00001d2: 44                                        ; f64.const
+00001d3: 0000 0000 0000 0000                       ; f64 literal
+00001db: a5                                        ; f64.max
+00001dc: 44                                        ; f64.const
+00001dd: 0000 0000 0000 f03f                       ; f64 literal
+00001e5: a4                                        ; f64.min
+00001e6: 44                                        ; f64.const
+00001e7: 0000 0000 00e0 6a40                       ; f64 literal
+00001ef: a2                                        ; f64.mul
+00001f0: fc                                        ; prefix
+00001f1: 03                                        ; i32.trunc_sat_f64_u
+00001f2: 05                                        ; else
+00001f3: 41                                        ; i32.const
+00001f4: d701                                      ; i32 literal
+00001f6: 0b                                        ; end
+00001f7: 3b                                        ; i32.store16
+00001f8: 01                                        ; alignment
+00001f9: 00                                        ; store offset
+00001fa: 20                                        ; local.get
+00001fb: 0c                                        ; local index
+00001fc: 41                                        ; i32.const
+00001fd: 01                                        ; i32 literal
+00001fe: 6a                                        ; i32.add
+00001ff: 21                                        ; local.set
+0000200: 0c                                        ; local index
+0000201: 0c                                        ; br
+0000202: 01                                        ; break depth
+0000203: 0b                                        ; end
+0000204: 0b                                        ; end
+0000205: 20                                        ; local.get
+0000206: 0b                                        ; local index
+0000207: 41                                        ; i32.const
+0000208: 01                                        ; i32 literal
+0000209: 6a                                        ; i32.add
+000020a: 21                                        ; local.set
+000020b: 0b                                        ; local index
+000020c: 0c                                        ; br
+000020d: 01                                        ; break depth
+000020e: 0b                                        ; end
+000020f: 0b                                        ; end
+0000210: 0b                                        ; end
+; move data: [63, 211) -> [64, 212)
+0000062: ae03                                      ; FIXUP func body size
+; move data: [61, 212) -> [62, 213)
+0000060: b103                                      ; FIXUP section size
+; section "name"
+0000213: 00                                        ; section code
+0000214: 00                                        ; section size (guess)
+0000215: 04                                        ; string length
+0000216: 6e61 6d65                                name  ; custom section name
+000021a: 01                                        ; name subsection type
+000021b: 00                                        ; subsection size (guess)
+000021c: 03                                        ; num names
+000021d: 00                                        ; elem index
+000021e: 1a                                        ; string length
+000021f: 7e6c 6962 2f62 696e 6469 6e67 732f 646f  ~lib/bindings/do
+000022f: 6d2f 4d61 7468 2e6c 6f67                 m/Math.log  ; elem name 0
+0000239: 01                                        ; elem index
+000023a: 1b                                        ; string length
+000023b: 7e6c 6962 2f62 696e 6469 6e67 732f 646f  ~lib/bindings/do
+000024b: 6d2f 4d61 7468 2e6c 6f67 32              m/Math.log2  ; elem name 1
+0000256: 02                                        ; elem index
+0000257: 0d                                        ; string length
+0000258: 6d6f 6475 6c65 2f75 7064 6174 65         module/update  ; elem name 2
+000021b: 49                                        ; FIXUP subsection size
+0000265: 02                                        ; local name type
+0000266: 00                                        ; subsection size (guess)
+0000267: 03                                        ; num functions
+0000268: 00                                        ; function index
+0000269: 00                                        ; num locals
+000026a: 01                                        ; function index
+000026b: 00                                        ; num locals
+000026c: 02                                        ; function index
+000026d: 12                                        ; num locals
+000026e: 00                                        ; local index
+000026f: 01                                        ; string length
+0000270: 30                                       0  ; local name 0
+0000271: 01                                        ; local index
+0000272: 01                                        ; string length
+0000273: 31                                       1  ; local name 1
+0000274: 02                                        ; local index
+0000275: 01                                        ; string length
+0000276: 32                                       2  ; local name 2
+0000277: 03                                        ; local index
+0000278: 01                                        ; string length
+0000279: 33                                       3  ; local name 3
+000027a: 04                                        ; local index
+000027b: 01                                        ; string length
+000027c: 34                                       4  ; local name 4
+000027d: 05                                        ; local index
+000027e: 01                                        ; string length
+000027f: 35                                       5  ; local name 5
+0000280: 06                                        ; local index
+0000281: 01                                        ; string length
+0000282: 36                                       6  ; local name 6
+0000283: 07                                        ; local index
+0000284: 01                                        ; string length
+0000285: 37                                       7  ; local name 7
+0000286: 08                                        ; local index
+0000287: 01                                        ; string length
+0000288: 38                                       8  ; local name 8
+0000289: 09                                        ; local index
+000028a: 01                                        ; string length
+000028b: 39                                       9  ; local name 9
+000028c: 0a                                        ; local index
+000028d: 02                                        ; string length
+000028e: 3130                                     10  ; local name 10
+0000290: 0b                                        ; local index
+0000291: 02                                        ; string length
+0000292: 3131                                     11  ; local name 11
+0000294: 0c                                        ; local index
+0000295: 02                                        ; string length
+0000296: 3132                                     12  ; local name 12
+0000298: 0d                                        ; local index
+0000299: 02                                        ; string length
+000029a: 3133                                     13  ; local name 13
+000029c: 0e                                        ; local index
+000029d: 02                                        ; string length
+000029e: 3134                                     14  ; local name 14
+00002a0: 0f                                        ; local index
+00002a1: 02                                        ; string length
+00002a2: 3135                                     15  ; local name 15
+00002a4: 10                                        ; local index
+00002a5: 02                                        ; string length
+00002a6: 3136                                     16  ; local name 16
+00002a8: 11                                        ; local index
+00002a9: 02                                        ; string length
+00002aa: 3137                                     17  ; local name 17
+0000266: 45                                        ; FIXUP subsection size
+00002ac: 04                                        ; name subsection type
+00002ad: 00                                        ; subsection size (guess)
+00002ae: 02                                        ; num names
+00002af: 00                                        ; elem index
+00002b0: 0a                                        ; string length
+00002b1: 6636 345f 3d3e 5f66 3634                 f64_=>_f64  ; elem name 0
+00002bb: 01                                        ; elem index
+00002bc: 13                                        ; string length
+00002bd: 6933 325f 6933 325f 6933 325f 3d3e 5f6e  i32_i32_i32_=>_n
+00002cd: 6f6e 65                                  one  ; elem name 1
+00002ad: 22                                        ; FIXUP subsection size
+00002d0: 06                                        ; name subsection type
+00002d1: 00                                        ; subsection size (guess)
+00002d2: 01                                        ; num names
+00002d3: 00                                        ; elem index
+00002d4: 01                                        ; string length
+00002d5: 30                                       0  ; elem name 0
+00002d1: 04                                        ; FIXUP subsection size
+; move data: [215, 2d6) -> [216, 2d7)
+0000214: c101                                      ; FIXUP section size

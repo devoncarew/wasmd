@@ -57,3 +57,15 @@
 0000037: 0b                                        ; end
 0000020: 17                                        ; FIXUP func body size
 000001e: 19                                        ; FIXUP section size
+; section "name"
+0000038: 00                                        ; section code
+0000039: 00                                        ; section size (guess)
+000003a: 04                                        ; string length
+000003b: 6e61 6d65                                name  ; custom section name
+000003f: 02                                        ; local name type
+0000040: 00                                        ; subsection size (guess)
+0000041: 01                                        ; num functions
+0000042: 00                                        ; function index
+0000043: 00                                        ; num locals
+0000040: 03                                        ; FIXUP subsection size
+0000039: 0a                                        ; FIXUP section size
