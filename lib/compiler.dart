@@ -7,6 +7,7 @@ import 'dart:typed_data';
 import 'package:code_builder/code_builder.dart' hide FunctionType;
 import 'package:collection/collection.dart';
 import 'package:logging/logging.dart';
+import 'package:path/path.dart' as path;
 
 import 'instructions.dart';
 
@@ -19,7 +20,7 @@ class Compiler {
     required this.logger,
   });
 
-  Library compile() {
+  Library compile({bool generateWastTest = false}) {
     var library = LibraryBuilder();
     library.comments.add('Generated from ${file.path}.');
     library.ignoreForFile.addAll([
@@ -30,12 +31,18 @@ class Compiler {
       'unused_local_variable',
     ]);
     library.directives.addAll([
+      if (generateWastTest) Directive.import('package:test/test.dart'),
       Directive.import('package:wasmd/runtime.dart'),
     ]);
 
     var module = _parse(file);
 
-    printModule(module, library);
+    printModule(
+      module,
+      library,
+      moduleName: path.basenameWithoutExtension(file.path),
+      generateWastTest: generateWastTest,
+    );
 
     return library.build();
   }
@@ -456,8 +463,52 @@ class Compiler {
   void _log([String? message]) => logger.info(message ?? '');
 }
 
-void printModule(Module module, LibraryBuilder library) {
+void printModule(
+  Module module,
+  LibraryBuilder library, {
+  required String moduleName,
+  bool generateWastTest = false,
+}) {
   final classBuilder = ClassBuilder()..name = 'Module';
+
+  if (generateWastTest) {
+    String generateTests() {
+      var buf = StringBuffer();
+      var functions =
+          module.allFunctions.where((f) => f.name.startsWith('test_'));
+      for (var func in functions) {
+        var testName = func.name;
+        var expectName = 'expect_${testName.substring('test_'.length)}';
+
+        buf.writeln("  test('$testName', () {");
+        buf.writeln('    expect(module.$testName(), module.$expectName);');
+        buf.writeln('  });');
+        buf.writeln();
+      }
+
+      return buf.toString();
+    }
+
+    var mainMethod = Method(
+      (b) => b
+        ..name = 'main'
+        ..returns = Reference('void')
+        ..body = Block.of([
+          Code('''
+  group('$moduleName', () {
+    late Module module;
+
+    setUp(() {
+      module = Module();
+    });
+
+    ${generateTests()}
+  });
+'''),
+        ]),
+    );
+    library.body.add(mainMethod);
+  }
 
   for (var import in module.importModules) {
     classBuilder.fields.add(

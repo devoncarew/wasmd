@@ -11,10 +11,12 @@ dependencies:
   collection: ^1.17.0
   dart_style: ^2.2.0
   logging: ^1.1.0
+  path: ^1.8.0
 
 dev_dependencies:
   benchmark_harness: ^2.2.0
   lints: ^2.0.0
+  test: ^1.22.0
 
 dependency_overrides:
   code_builder:

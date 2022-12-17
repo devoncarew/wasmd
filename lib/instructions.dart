@@ -512,7 +512,9 @@ class Instruction {
       Instruction('i32.add', 0x6A),
       Instruction('i32.sub', 0x6B),
       Instruction('i32.mul', 0x6C),
+      Instruction('i32.div_s', 0x6D),
       Instruction('i32.div_u', 0x6E),
+      Instruction('i32.rem_s', 0x6F),
       Instruction('i32.rem_u', 0x70),
       Instruction('i32.and', 0x71),
       Instruction('i32.or', 0x72),
@@ -543,6 +545,8 @@ class Instruction {
       Instruction('i64.extend_i32_u', 0xAD),
       Instruction('f64.convert_i32_s', 0xB7),
       Instruction('f64.convert_i32_u', 0xB8),
+      Instruction('i32.extend8_s', 0xC0),
+      Instruction('i32.extend16_s', 0xC1),
     ];
   }
 

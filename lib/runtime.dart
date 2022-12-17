@@ -339,10 +339,24 @@ class Frame {
     stack.add(result);
   }
 
+  void i32_div_s() {
+    i32 arg1 = stack.removeLast() as i32;
+    i32 arg0 = stack.removeLast() as i32;
+    var result = arg0 ~/ arg1;
+    stack.add(result);
+  }
+
   void i32_div_u() {
     u32 arg1 = stack.removeLast() as u32;
     u32 arg0 = stack.removeLast() as u32;
     var result = arg0 ~/ arg1;
+    stack.add(result);
+  }
+
+  void i32_rem_s() {
+    i32 arg1 = stack.removeLast() as i32;
+    i32 arg0 = stack.removeLast() as i32;
+    var result = arg0 % arg1;
     stack.add(result);
   }
 
@@ -556,21 +570,31 @@ class Frame {
   }
 
   void i64_extend_i32_u() {
-    u32 arg1 = stack.removeLast() as u32;
-    u64 result = arg1;
+    u32 arg = stack.removeLast() as u32;
+    u64 result = arg;
     stack.add(result);
   }
 
   void f64_convert_i32_s() {
-    i32 arg1 = stack.removeLast() as i32;
-    f64 result = arg1.toDouble();
+    i32 arg = stack.removeLast() as i32;
+    f64 result = arg.toDouble();
     stack.add(result);
   }
 
   void f64_convert_i32_u() {
-    u32 arg1 = stack.removeLast() as u32;
-    f64 result = arg1.toDouble();
+    u32 arg = stack.removeLast() as u32;
+    f64 result = arg.toDouble();
     stack.add(result);
+  }
+
+  void i32_extend8_s() {
+    i32 arg = stack.removeLast() as i32;
+    stack.add(arg);
+  }
+
+  void i32_extend16_s() {
+    i32 arg = stack.removeLast() as i32;
+    stack.add(arg);
   }
 
   void i32_trunc_sat_f64_u() {

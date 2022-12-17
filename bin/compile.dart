@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:path/path.dart' as path;
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:logging/logging.dart';
@@ -20,6 +21,11 @@ void main(List<String> args) async {
     abbr: 'o',
     valueHelp: 'file',
     help: 'Specify the location to write compilation output.',
+  );
+  argsParser.addFlag(
+    'generate-wast-test',
+    negatable: false,
+    help: 'This flag is only used to test wasd itself.',
   );
   argsParser.addFlag(
     'help',
@@ -46,8 +52,9 @@ void main(List<String> args) async {
   var input = argsResult.rest.first;
   var verbose = argsResult['verbose'] as bool;
   var output = argsResult['output'] as String?;
+  var generateWastTest = argsResult['generate-wast-test'] as bool;
 
-  output ??= '$input.dart';
+  output ??= '${path.withoutExtension(input)}.dart';
 
   var logger = Logger.detached('wasm2dart');
   if (verbose) {
@@ -57,7 +64,7 @@ void main(List<String> args) async {
   }
 
   var compiler = Compiler(file: File(input), logger: logger);
-  var library = compiler.compile();
+  var library = compiler.compile(generateWastTest: generateWastTest);
 
   var formatter = DartFormatter();
   var emitter = DartEmitter(
