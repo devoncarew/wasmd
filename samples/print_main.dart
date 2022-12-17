@@ -1,6 +1,6 @@
 import 'package:wasmd/runtime.dart';
 
-import 'print.wasm.dart';
+import 'print.dart';
 
 void main(List<String> args) {
   print('before module init');

@@ -5,7 +5,7 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-import 'mandelbrot.wasm.dart';
+import 'mandelbrot.dart';
 
 void main(List<String> args) {
   // var memBytes = 1200 * 800 * 4;

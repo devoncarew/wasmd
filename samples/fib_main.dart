@@ -1,4 +1,4 @@
-import 'fib.wasm.dart';
+import 'fib.dart';
 
 void main(List<String> args) {
   var module = Module();

@@ -2,7 +2,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-import 'rot13.wasm.dart';
+import 'rot13.dart';
 
 late Module module;
 

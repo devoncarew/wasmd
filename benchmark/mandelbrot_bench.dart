@@ -1,7 +1,7 @@
 import 'package:benchmark_harness/benchmark_harness.dart';
 import 'package:wasmd/runtime.dart';
 
-import '../samples/mandelbrot.wasm.dart' as m;
+import '../samples/mandelbrot.dart' as m;
 
 void main() => MandelbrotBenchmark().report();
 

@@ -1,4 +1,4 @@
-import 'sha3.wasm.dart';
+import 'sha3.dart';
 
 void main(List<String> args) {
   // Note that this main does not attempt to confirm sha3 correctness -

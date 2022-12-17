@@ -6,7 +6,7 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-import 'man2.wasm.dart';
+import 'man2.dart';
 
 void main(List<String> args) {
   final numColors = 216;

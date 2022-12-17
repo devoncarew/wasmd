@@ -1,4 +1,4 @@
-import 'branch1.wasm.dart';
+import 'branch1.dart';
 
 void main(List<String> args) {
   var module = Module();
