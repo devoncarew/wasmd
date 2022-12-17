@@ -13,3 +13,6 @@ samples/rsa_lib_bg.*
 
 # Intermediary wat and wasm files
 test/wasm/
+
+# Example output from spec/ build.py
+js/

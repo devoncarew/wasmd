@@ -96,18 +96,22 @@
 000005b: 01                                        ; local type count
 000005c: 7f                                        ; i32
 000005d: 41                                        ; i32.const
-000005e: 01                                        ; i32 literal
+000005e: 7f                                        ; i32 literal
 000005f: 21                                        ; local.set
 0000060: 02                                        ; local index
-0000061: 20                                        ; local.get
-0000062: 00                                        ; local index
-0000063: 20                                        ; local.get
-0000064: 01                                        ; local index
-0000065: 10                                        ; call
-0000066: 01                                        ; function index
-0000067: 20                                        ; local.get
+0000061: 41                                        ; i32.const
+0000062: 8080 8080 78                              ; i32 literal
+0000067: 21                                        ; local.set
 0000068: 02                                        ; local index
-0000069: 6c                                        ; i32.mul
-000006a: 0b                                        ; end
-0000059: 11                                        ; FIXUP func body size
-0000047: 23                                        ; FIXUP section size
+0000069: 20                                        ; local.get
+000006a: 00                                        ; local index
+000006b: 20                                        ; local.get
+000006c: 01                                        ; local index
+000006d: 10                                        ; call
+000006e: 01                                        ; function index
+000006f: 20                                        ; local.get
+0000070: 02                                        ; local index
+0000071: 6c                                        ; i32.mul
+0000072: 0b                                        ; end
+0000059: 19                                        ; FIXUP func body size
+0000047: 2b                                        ; FIXUP section size

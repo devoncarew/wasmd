@@ -33,6 +33,8 @@ class Module {
     final frame = Frame(memory);
     frame.i32_const(-1);
     local0 = frame.pop();
+    frame.i32_const(-0x80000000);
+    local0 = frame.pop();
     frame.push(arg0);
     frame.push(arg1);
     {

@@ -12,11 +12,10 @@ import 'src/s_expr.dart';
 // Given an wast file, generate one or more wat module files that represent unit
 // tests.
 
-// spec/test/core/i32.wast
+// todo: introduce some model objects here to make it easier to manipulate the
+// s-expressions
 
-// todo: write to test/wasm (wat)
-// todo: write to test/wasm (wasm)
-// todo: write to test/ (dart)
+// todo: figure out the different patterns in the wast files
 
 void main(List<String> args) {
   if (args.isEmpty) {
@@ -85,14 +84,27 @@ ${module.prettyPrint()}''');
 
 void compileWatToWasm(File watFile, File wasmFile) {
   // wat2wasm -o wasmFile watFile
-  var args = ['wat2wasm', '-o', wasmFile.path, watFile.path];
+  var args = [
+    'wat2wasm',
+    '--debug-names',
+    '-v',
+    '-o',
+    wasmFile.path,
+    watFile.path,
+  ];
   print(args.join(' '));
 
   var result = Process.runSync(args.first, args.skip(1).toList());
   var out = (result.stdout as String).trim();
   if (out.isNotEmpty) print(out);
   var err = (result.stderr as String).trim();
-  if (err.isNotEmpty) stderr.writeln(err);
+  if (result.exitCode == 0) {
+    var disFile = File('${p.withoutExtension(wasmFile.path)}.dis');
+    disFile.writeAsStringSync(err);
+    print('Wrote ${disFile.path}.');
+  } else {
+    if (err.isNotEmpty) stderr.writeln(err);
+  }
 
   if (result.exitCode != 0) {
     throw '${args.first} failed with exit code ${result.exitCode}';
@@ -214,13 +226,14 @@ List<Expression> _process(ComilationUnit compilationUnit) {
 }
 
 List<Expression> _findTestModules(List<Expression> expressions) {
-  return expressions.where((expression) {
-    if (!isModule(expression)) {
+  return expressions.where((module) {
+    if (!isModule(module)) {
       return false;
     }
 
-    // todo: more checks - has a test method
-    return true;
+    return module.nodes
+        .whereType<Expression>()
+        .any((child) => findName(child)?.startsWith('test_') ?? false);
   }).toList();
 }
 

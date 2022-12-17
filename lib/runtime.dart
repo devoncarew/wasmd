@@ -202,9 +202,12 @@ class Frame {
     stack.add(value);
   }
 
+  void f32_const(f32 value) {
+    stack.add(value);
+  }
+
   void f64_const(f64 value) {
-    f64 result = value.toDouble();
-    stack.add(result);
+    stack.add(value);
   }
 
   void i32_eqz() {
@@ -283,6 +286,40 @@ class Frame {
     stack.add(result);
   }
 
+  void i64_eqz() {
+    u64 arg = stack.removeLast() as u64;
+    var result = arg == 0 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_eq() {
+    u64 arg1 = stack.removeLast() as u64;
+    u64 arg0 = stack.removeLast() as u64;
+    var result = arg0 == arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_ne() {
+    u64 arg1 = stack.removeLast() as u64;
+    u64 arg0 = stack.removeLast() as u64;
+    var result = arg0 != arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_lt_s() {
+    i64 arg1 = stack.removeLast() as i64;
+    i64 arg0 = stack.removeLast() as i64;
+    var result = arg0 < arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_lt_u() {
+    u64 arg1 = stack.removeLast() as u64;
+    u64 arg0 = stack.removeLast() as u64;
+    var result = arg0 < arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
   void i64_gt_s() {
     i64 arg1 = stack.removeLast() as i64;
     i64 arg0 = stack.removeLast() as i64;
@@ -297,10 +334,31 @@ class Frame {
     stack.add(result);
   }
 
-  void i64_lt_u() {
+  void i64_le_s() {
+    i64 arg1 = stack.removeLast() as i64;
+    i64 arg0 = stack.removeLast() as i64;
+    var result = arg0 <= arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_le_u() {
     u64 arg1 = stack.removeLast() as u64;
     u64 arg0 = stack.removeLast() as u64;
-    var result = arg0 < arg1 ? 1 : 0;
+    var result = arg0 <= arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_ge_s() {
+    i64 arg1 = stack.removeLast() as i64;
+    i64 arg0 = stack.removeLast() as i64;
+    var result = arg0 >= arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void i64_ge_u() {
+    u64 arg1 = stack.removeLast() as u64;
+    u64 arg0 = stack.removeLast() as u64;
+    var result = arg0 >= arg1 ? 1 : 0;
     stack.add(result);
   }
 
@@ -335,7 +393,7 @@ class Frame {
   void i32_mul() {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
-    var result = arg0 * arg1;
+    var result = (arg0 * arg1) & 0xFFFFFFFF;
     stack.add(result);
   }
 
@@ -419,6 +477,36 @@ class Frame {
 
     i32 result =
         count == 0 ? value : (value << count) | (value >>> (bitCount - count));
+    stack.add(result);
+  }
+
+  void i64_ceil() {
+    i64 arg = stack.removeLast() as i64;
+    var result = arg.ceilToDouble();
+    stack.add(result);
+  }
+
+  void i64_foor() {
+    i64 arg = stack.removeLast() as i64;
+    var result = arg.floorToDouble();
+    stack.add(result);
+  }
+
+  void i64_trunc() {
+    i64 arg = stack.removeLast() as i64;
+    var result = arg.truncateToDouble();
+    stack.add(result);
+  }
+
+  void i64_nearest() {
+    i64 arg = stack.removeLast() as i64;
+    var result = arg.roundToDouble();
+    stack.add(result);
+  }
+
+  void i64_sqrt() {
+    i64 arg = stack.removeLast() as i64;
+    var result = sqrt(arg);
     stack.add(result);
   }
 

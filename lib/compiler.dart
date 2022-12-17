@@ -760,39 +760,108 @@ class Reader {
   int leb128() => leb128_u();
 
   int leb128_u() {
+    const CONTINUATION_BIT = 0x80;
+
     int result = 0;
     int shift = 0;
 
-    // read unsigned LEB128
-    for (int i = 0; i < 7; i++) {
+    do {
       int byte = data.getUint8(pos++);
-      result |= (byte & 0x7F) << shift;
+
+      // if (shift == 63 && byte != 0x00 && byte != 0x01) {
+      //   while (byte & CONTINUATION_BIT != 0) {
+      //     byte = data.getUint8(pos++);
+      //   }
+      //   throw 'leb128_u overflow';
+      // }
+
+      var lowBits = byte & 0x7F;
+      result |= lowBits << shift;
+
+      if (byte & CONTINUATION_BIT == 0) {
+        return result;
+      }
+
       shift += 7;
-      if (byte & 0x80 == 0) {
+    } while (true);
+  }
+
+  // int leb128_u() {
+  //   int result = 0;
+  //   int shift = 0;
+
+  //   // read unsigned LEB128
+  //   for (int i = 0; i < 7; i++) {
+  //     int byte = data.getUint8(pos++);
+  //     result |= (byte & 0x7F) << shift;
+  //     shift += 7;
+  //     if (byte & 0x80 == 0) {
+  //       break;
+  //     }
+  //   }
+
+  //   return result;
+  // }
+
+  int leb128_s({int bits = 64}) {
+    const CONTINUATION_BIT = 0x80;
+    const SIGN_BIT = 1 << 6;
+
+    int result = 0;
+    int shift = 0;
+    // int size = 64;
+    int byte;
+
+    do {
+      byte = data.getUint8(pos++);
+
+      // if (shift == 63 && byte != 0x00 && byte != 0x7f) {
+      //     while (byte & CONTINUATION_BIT != 0) {
+      //           byte = data.getUint8(pos++);
+      //     }
+      //       throw 'leb128_u overflow';
+      // }
+
+      var lowBits = byte & 0x7F;
+      result |= lowBits << shift;
+      shift += 7;
+
+      if (byte & CONTINUATION_BIT == 0) {
         break;
       }
+    } while (true);
+
+    if ((shift < bits) && ((SIGN_BIT & byte) == SIGN_BIT)) {
+      // Sign extend the result.
+      result |= ~0 << shift;
     }
 
     return result;
   }
 
-  int leb128_s({int bits = 64}) {
-    int result = 0;
-    int shift = 0;
+  // int leb128_s({int bits = 64}) {
+  //   int result = 0;
+  //   int shift = 0;
 
-    // read signed LEB128
-    for (int i = 0; i < 7; i++) {
-      int byte = data.getUint8(pos++);
-      result |= (byte & 0x7F) << shift;
-      shift += 7;
-      if (byte & 0x80 == 0) {
-        if (shift < bits && (byte & 0x40) != 0) {
-          result = result | (~0 << shift);
-        }
-        break;
-      }
-    }
+  //   // read signed LEB128
+  //   for (int i = 0; i < 7; i++) {
+  //     int byte = data.getUint8(pos++);
+  //     result |= (byte & 0x7F) << shift;
+  //     shift += 7;
+  //     if (byte & 0x80 == 0) {
+  //       if (shift < bits && (byte & 0x40) != 0) {
+  //         result = result | (~0 << shift);
+  //       }
+  //       break;
+  //     }
+  //   }
 
+  //   return result;
+  // }
+
+  double readF32() {
+    var result = data.getFloat32(pos, Endian.little);
+    pos += 4;
     return result;
   }
 
@@ -1385,7 +1454,7 @@ class Global {
         needsGlobalInitializer = true;
         assignment = Code('${global.initMethodName}()');
       } else {
-        assignment = literalNum(literalValue.value as num).code;
+        assignment = printLiteral(literalValue.value as num).code;
       }
 
       var field = Field(

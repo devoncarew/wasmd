@@ -26,6 +26,9 @@
     i32.const -1
     local.set $i
 
+    i32.const 0x80000000
+    local.set $i
+
     local.get $lhs
     local.get $rhs
     call $sub

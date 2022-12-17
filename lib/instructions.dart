@@ -337,6 +337,7 @@ enum ImmediateTypes {
   u32,
   i64,
   u64,
+  f32,
   f64;
 }
 
@@ -347,7 +348,37 @@ class Literal {
   Literal(this.type, this.value);
 
   @override
-  String toString() => value.toString();
+  String toString() {
+    if (value is num) {
+      return printLiteral(value as num).toString();
+    } else {
+      return value.toString();
+    }
+  }
+}
+
+Expression printLiteral(num n) {
+  if (n is int) {
+    if (n > 1000) {
+      return CodeExpression(Code('0x${n.toRadixString(16)}'));
+    } else if (n < -1000) {
+      return CodeExpression(Code('-0x${n.toRadixString(16).substring(1)}'));
+    } else {
+      return literalNum(n);
+    }
+  } else if (n is double) {
+    if (n.isNaN) {
+      return CodeExpression(Code('double.nan'));
+    } else if (n == double.negativeInfinity) {
+      return CodeExpression(Code('double.negativeInfinity'));
+    } else if (n == double.infinity) {
+      return CodeExpression(Code('double.infinity'));
+    } else {
+      return literalNum(n);
+    }
+  } else {
+    return literalNum(n);
+  }
 }
 
 class Instruction {
@@ -384,7 +415,7 @@ class Instruction {
     if (immediates.isNotEmpty) {
       return frame
           .property(methodName)
-          .call(instr.args.map((arg) => literalNum(arg as num)))
+          .call(instr.args.map((arg) => printLiteral(arg as num)))
           .statement;
     } else {
       return frame.property(methodName).call([]).statement;
@@ -422,13 +453,18 @@ class Instruction {
             args.add(r.leb128_u());
             break;
           case ImmediateTypes.i32:
-            args.add(r.leb128_s(bits: 32));
+            // ???
+            // args.add(r.leb128_s(bits: 32));
+            args.add(r.leb128_s(bits: 64));
             break;
           case ImmediateTypes.u64:
             args.add(r.leb128_u());
             break;
           case ImmediateTypes.i64:
             args.add(r.leb128_s(bits: 64));
+            break;
+          case ImmediateTypes.f32:
+            args.add(r.readF32());
             break;
           case ImmediateTypes.f64:
             args.add(r.readF64());
@@ -501,6 +537,7 @@ class Instruction {
           immediates: [ImmediateTypes.i32]),
       Instruction('i64.const', i64ConstOpcode,
           immediates: [ImmediateTypes.i64]),
+      Instruction('f32.const', 0x43, immediates: [ImmediateTypes.f32]),
       Instruction('f64.const', 0x44, immediates: [ImmediateTypes.f64]),
       Instruction('i32.eqz', 0x45),
       Instruction('i32.eq', 0x46),
@@ -513,9 +550,17 @@ class Instruction {
       Instruction('i32.le_u', 0x4D),
       Instruction('i32.ge_s', 0x4E),
       Instruction('i32.ge_u', 0x4F),
-      Instruction('i64.gt_s', 0x54),
-      Instruction('i64.gt_u', 0x55),
-      Instruction('i64.lt_u', 0x56),
+      Instruction('i64.eqz', 0x50),
+      Instruction('i64.eq', 0x51),
+      Instruction('i64.ne', 0x52),
+      Instruction('i64.lt_s', 0x53),
+      Instruction('i64.lt_u', 0x54),
+      Instruction('i64.gt_s', 0x55),
+      Instruction('i64.gt_u', 0x56),
+      Instruction('i64.le_s', 0x57),
+      Instruction('i64.le_u', 0x58),
+      Instruction('i64.ge_s', 0x59),
+      Instruction('i64.ge_u', 0x5A),
       Instruction('f64.gt', 0x64),
       Instruction('f64.le', 0x65),
       Instruction('i32.add', 0x6A),
@@ -544,6 +589,11 @@ class Instruction {
       Instruction('i64.shr_u', 0x88),
       Instruction('i64.rotl', 0x89),
       Instruction('i64.rotr', 0x8A),
+      Instruction('i64.ceil', 0x9B),
+      Instruction('i64.foor', 0x9C),
+      Instruction('i64.trunc', 0x9D),
+      Instruction('i64.nearest', 0x9E),
+      Instruction('i64.sqrt', 0x9F),
       Instruction('f64.add', 0xA0),
       Instruction('f64.sub', 0xA1),
       Instruction('f64.mul', 0xA2),
