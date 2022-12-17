@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names, camel_case_types
+// ignore_for_file: constant_identifier_names, camel_case_types, non_constant_identifier_names
 
 import 'dart:convert';
 import 'dart:io';
@@ -753,65 +753,47 @@ class Reader {
     return val;
   }
 
-  int readInt64() => leb128();
-
   int readUint8() {
     return data.getUint8(pos++);
   }
 
-  int leb128() {
-    // read LEB128
-    int val = data.getUint8(pos++);
-    int ret = val & 0x7F;
-    if (val <= 0x7F) {
-      return ret;
+  int leb128() => leb128_u();
+
+  int leb128_u() {
+    int result = 0;
+    int shift = 0;
+
+    // read unsigned LEB128
+    for (int i = 0; i < 7; i++) {
+      int byte = data.getUint8(pos++);
+      result |= (byte & 0x7F) << shift;
+      shift += 7;
+      if (byte & 0x80 == 0) {
+        break;
+      }
     }
 
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 7 | ret;
-    if (val <= 0x7F) {
-      return ret;
+    return result;
+  }
+
+  int leb128_s({int bits = 64}) {
+    int result = 0;
+    int shift = 0;
+
+    // read signed LEB128
+    for (int i = 0; i < 7; i++) {
+      int byte = data.getUint8(pos++);
+      result |= (byte & 0x7F) << shift;
+      shift += 7;
+      if (byte & 0x80 == 0) {
+        if (shift < bits && (byte & 0x40) != 0) {
+          result = result | (~0 << shift);
+        }
+        break;
+      }
     }
 
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 14 | ret;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 21 | ret;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 28 | ret;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 42 | ret;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 49 | ret;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 56 | ret;
-    if (val <= 0x7F) {
-      return ret;
-    }
-
-    val = data.getUint8(pos++);
-    ret = (val & 0x7F) << 63 | ret;
-    return ret;
+    return result;
   }
 
   double readF64() {

@@ -23,10 +23,10 @@ class Instr {
   }
 }
 
-const List<ImmediateTypes> _one = [ImmediateTypes.var32];
+const List<ImmediateTypes> _one = [ImmediateTypes.u32];
 const List<ImmediateTypes> _two = [
-  ImmediateTypes.var32,
-  ImmediateTypes.var32,
+  ImmediateTypes.u32,
+  ImmediateTypes.u32,
 ];
 
 class Instruction_Unreachable extends Instruction {
@@ -333,8 +333,10 @@ class Instruction_CallIndirect extends Instruction {
 }
 
 enum ImmediateTypes {
-  var32,
-  var64,
+  i32,
+  u32,
+  i64,
+  u64,
   f64;
 }
 
@@ -416,11 +418,17 @@ class Instruction {
       var args = <Object>[];
       for (var immediateType in instruction.immediates) {
         switch (immediateType) {
-          case ImmediateTypes.var32:
-            args.add(r.leb128());
+          case ImmediateTypes.u32:
+            args.add(r.leb128_u());
             break;
-          case ImmediateTypes.var64:
-            args.add(r.leb128());
+          case ImmediateTypes.i32:
+            args.add(r.leb128_s(bits: 32));
+            break;
+          case ImmediateTypes.u64:
+            args.add(r.leb128_u());
+            break;
+          case ImmediateTypes.i64:
+            args.add(r.leb128_s(bits: 64));
             break;
           case ImmediateTypes.f64:
             args.add(r.readF64());
@@ -489,9 +497,10 @@ class Instruction {
       Instruction('i64.store32', 0x3E, immediates: _two),
       Instruction('memory.size', 0x3F, immediates: _one),
       Instruction('memory.grow', 0x40, immediates: _one),
-      Instruction('i32.const', i32ConstOpcode, immediates: _one),
+      Instruction('i32.const', i32ConstOpcode,
+          immediates: [ImmediateTypes.i32]),
       Instruction('i64.const', i64ConstOpcode,
-          immediates: [ImmediateTypes.var64]),
+          immediates: [ImmediateTypes.i64]),
       Instruction('f64.const', 0x44, immediates: [ImmediateTypes.f64]),
       Instruction('i32.eqz', 0x45),
       Instruction('i32.eq', 0x46),

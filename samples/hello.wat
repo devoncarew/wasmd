@@ -23,7 +23,7 @@
   (func $complex (param $lhs i32) (param $rhs i32) (result i32)
     (local $i i32)
 
-    i32.const 1
+    i32.const -1
     local.set $i
 
     local.get $lhs

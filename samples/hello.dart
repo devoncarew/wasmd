@@ -31,7 +31,7 @@ class Module {
     i32 local0 = 0;
 
     final frame = Frame(memory);
-    frame.i32_const(1);
+    frame.i32_const(-1);
     local0 = frame.pop();
     frame.push(arg0);
     frame.push(arg1);

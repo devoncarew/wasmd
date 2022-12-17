@@ -2106,8 +2106,8 @@ class Module {
 
   i32 test_add_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2118,7 +2118,7 @@ class Module {
 
   i32 test_add_3() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -2143,7 +2143,7 @@ class Module {
   i32 test_add_5() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2202,8 +2202,8 @@ class Module {
 
   i32 test_sub_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2215,7 +2215,7 @@ class Module {
   i32 test_sub_3() {
     final frame = Frame(memory);
     frame.i32_const(2147483647);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2251,7 +2251,7 @@ class Module {
   i32 test_sub_6() {
     final frame = Frame(memory);
     frame.i32_const(1073741823);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2286,8 +2286,8 @@ class Module {
 
   i32 test_mul_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2323,7 +2323,7 @@ class Module {
   i32 test_mul_5() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2335,7 +2335,7 @@ class Module {
   i32 test_mul_6() {
     final frame = Frame(memory);
     frame.i32_const(2147483647);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2395,7 +2395,7 @@ class Module {
   i32 test_div_s_6() {
     final frame = Frame(memory);
     frame.i32_const(0);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2406,8 +2406,8 @@ class Module {
 
   i32 test_div_s_7() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2454,7 +2454,7 @@ class Module {
 
   i32 test_div_s_11() {
     final frame = Frame(memory);
-    frame.i32_const(123);
+    frame.i32_const(-5);
     frame.i32_const(2);
     {
       var t1 = frame.pop();
@@ -2467,7 +2467,7 @@ class Module {
   i32 test_div_s_12() {
     final frame = Frame(memory);
     frame.i32_const(5);
-    frame.i32_const(126);
+    frame.i32_const(-2);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2478,8 +2478,8 @@ class Module {
 
   i32 test_div_s_13() {
     final frame = Frame(memory);
-    frame.i32_const(123);
-    frame.i32_const(126);
+    frame.i32_const(-5);
+    frame.i32_const(-2);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2502,7 +2502,7 @@ class Module {
 
   i32 test_div_s_15() {
     final frame = Frame(memory);
-    frame.i32_const(121);
+    frame.i32_const(-7);
     frame.i32_const(3);
     {
       var t1 = frame.pop();
@@ -2515,7 +2515,7 @@ class Module {
   i32 test_div_s_16() {
     final frame = Frame(memory);
     frame.i32_const(7);
-    frame.i32_const(125);
+    frame.i32_const(-3);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2526,8 +2526,8 @@ class Module {
 
   i32 test_div_s_17() {
     final frame = Frame(memory);
-    frame.i32_const(121);
-    frame.i32_const(125);
+    frame.i32_const(-7);
+    frame.i32_const(-3);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2586,8 +2586,8 @@ class Module {
 
   i32 test_div_u_4() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2599,7 +2599,7 @@ class Module {
   i32 test_div_u_5() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2658,7 +2658,7 @@ class Module {
 
   i32 test_div_u_10() {
     final frame = Frame(memory);
-    frame.i32_const(123);
+    frame.i32_const(-5);
     frame.i32_const(2);
     {
       var t1 = frame.pop();
@@ -2671,7 +2671,7 @@ class Module {
   i32 test_div_u_11() {
     final frame = Frame(memory);
     frame.i32_const(5);
-    frame.i32_const(126);
+    frame.i32_const(-2);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2682,8 +2682,8 @@ class Module {
 
   i32 test_div_u_12() {
     final frame = Frame(memory);
-    frame.i32_const(123);
-    frame.i32_const(126);
+    frame.i32_const(-5);
+    frame.i32_const(-2);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2731,7 +2731,7 @@ class Module {
   i32 test_rem_s_2() {
     final frame = Frame(memory);
     frame.i32_const(2147483647);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2767,7 +2767,7 @@ class Module {
   i32 test_rem_s_5() {
     final frame = Frame(memory);
     frame.i32_const(0);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2778,8 +2778,8 @@ class Module {
 
   i32 test_rem_s_6() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2791,7 +2791,7 @@ class Module {
   i32 test_rem_s_7() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2838,7 +2838,7 @@ class Module {
 
   i32 test_rem_s_11() {
     final frame = Frame(memory);
-    frame.i32_const(123);
+    frame.i32_const(-5);
     frame.i32_const(2);
     {
       var t1 = frame.pop();
@@ -2851,7 +2851,7 @@ class Module {
   i32 test_rem_s_12() {
     final frame = Frame(memory);
     frame.i32_const(5);
-    frame.i32_const(126);
+    frame.i32_const(-2);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2862,8 +2862,8 @@ class Module {
 
   i32 test_rem_s_13() {
     final frame = Frame(memory);
-    frame.i32_const(123);
-    frame.i32_const(126);
+    frame.i32_const(-5);
+    frame.i32_const(-2);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2886,7 +2886,7 @@ class Module {
 
   i32 test_rem_s_15() {
     final frame = Frame(memory);
-    frame.i32_const(121);
+    frame.i32_const(-7);
     frame.i32_const(3);
     {
       var t1 = frame.pop();
@@ -2899,7 +2899,7 @@ class Module {
   i32 test_rem_s_16() {
     final frame = Frame(memory);
     frame.i32_const(7);
-    frame.i32_const(125);
+    frame.i32_const(-3);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2910,8 +2910,8 @@ class Module {
 
   i32 test_rem_s_17() {
     final frame = Frame(memory);
-    frame.i32_const(121);
-    frame.i32_const(125);
+    frame.i32_const(-7);
+    frame.i32_const(-3);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2970,8 +2970,8 @@ class Module {
 
   i32 test_rem_u_4() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -2983,7 +2983,7 @@ class Module {
   i32 test_rem_u_5() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3042,7 +3042,7 @@ class Module {
 
   i32 test_rem_u_10() {
     final frame = Frame(memory);
-    frame.i32_const(123);
+    frame.i32_const(-5);
     frame.i32_const(2);
     {
       var t1 = frame.pop();
@@ -3055,7 +3055,7 @@ class Module {
   i32 test_rem_u_11() {
     final frame = Frame(memory);
     frame.i32_const(5);
-    frame.i32_const(126);
+    frame.i32_const(-2);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3066,8 +3066,8 @@ class Module {
 
   i32 test_rem_u_12() {
     final frame = Frame(memory);
-    frame.i32_const(123);
-    frame.i32_const(126);
+    frame.i32_const(-5);
+    frame.i32_const(-2);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3175,7 +3175,7 @@ class Module {
   i32 test_and_5() {
     final frame = Frame(memory);
     frame.i32_const(2147483647);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3187,7 +3187,7 @@ class Module {
   i32 test_and_6() {
     final frame = Frame(memory);
     frame.i32_const(34107097087);
-    frame.i32_const(12528);
+    frame.i32_const(-3856);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3198,8 +3198,8 @@ class Module {
 
   i32 test_and_7() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3283,7 +3283,7 @@ class Module {
   i32 test_or_6() {
     final frame = Frame(memory);
     frame.i32_const(34107097087);
-    frame.i32_const(12528);
+    frame.i32_const(-3856);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3294,8 +3294,8 @@ class Module {
 
   i32 test_or_7() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3378,7 +3378,7 @@ class Module {
 
   i32 test_xor_6() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -3390,7 +3390,7 @@ class Module {
 
   i32 test_xor_7() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(2147483647);
     {
       var t1 = frame.pop();
@@ -3403,7 +3403,7 @@ class Module {
   i32 test_xor_8() {
     final frame = Frame(memory);
     frame.i32_const(34107097087);
-    frame.i32_const(12528);
+    frame.i32_const(-3856);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3414,8 +3414,8 @@ class Module {
 
   i32 test_xor_9() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3462,7 +3462,7 @@ class Module {
 
   i32 test_shl_3() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -3535,7 +3535,7 @@ class Module {
   i32 test_shl_9() {
     final frame = Frame(memory);
     frame.i32_const(1);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3582,7 +3582,7 @@ class Module {
 
   i32 test_shr_s_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -3655,7 +3655,7 @@ class Module {
   i32 test_shr_s_8() {
     final frame = Frame(memory);
     frame.i32_const(1);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3702,7 +3702,7 @@ class Module {
 
   i32 test_shr_s_12() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32);
     {
       var t1 = frame.pop();
@@ -3714,7 +3714,7 @@ class Module {
 
   i32 test_shr_s_13() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(33);
     {
       var t1 = frame.pop();
@@ -3726,8 +3726,8 @@ class Module {
 
   i32 test_shr_s_14() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3738,7 +3738,7 @@ class Module {
 
   i32 test_shr_s_15() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(2147483647);
     {
       var t1 = frame.pop();
@@ -3750,7 +3750,7 @@ class Module {
 
   i32 test_shr_s_16() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -3786,7 +3786,7 @@ class Module {
 
   i32 test_shr_u_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -3859,7 +3859,7 @@ class Module {
   i32 test_shr_u_8() {
     final frame = Frame(memory);
     frame.i32_const(1);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3906,7 +3906,7 @@ class Module {
 
   i32 test_shr_u_12() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32);
     {
       var t1 = frame.pop();
@@ -3918,7 +3918,7 @@ class Module {
 
   i32 test_shr_u_13() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(33);
     {
       var t1 = frame.pop();
@@ -3930,8 +3930,8 @@ class Module {
 
   i32 test_shr_u_14() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -3942,7 +3942,7 @@ class Module {
 
   i32 test_shr_u_15() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(2147483647);
     {
       var t1 = frame.pop();
@@ -3954,7 +3954,7 @@ class Module {
 
   i32 test_shr_u_16() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -3990,7 +3990,7 @@ class Module {
 
   i32 test_rotl_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -4026,7 +4026,7 @@ class Module {
 
   i32 test_rotl_5() {
     final frame = Frame(memory);
-    frame.i32_const(234937344);
+    frame.i32_const(-33498112);
     frame.i32_const(4);
     {
       var t1 = frame.pop();
@@ -4075,7 +4075,7 @@ class Module {
   i32 test_rotl_9() {
     final frame = Frame(memory);
     frame.i32_const(1989852383);
-    frame.i32_const(109);
+    frame.i32_const(-19);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -4146,7 +4146,7 @@ class Module {
 
   i32 test_rotr_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -4170,7 +4170,7 @@ class Module {
 
   i32 test_rotr_4() {
     final frame = Frame(memory);
-    frame.i32_const(251710464);
+    frame.i32_const(-16724992);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -4231,7 +4231,7 @@ class Module {
   i32 test_rotr_9() {
     final frame = Frame(memory);
     frame.i32_const(1989852383);
-    frame.i32_const(109);
+    frame.i32_const(-19);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -4278,7 +4278,7 @@ class Module {
 
   i32 test_clz_0() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t0 = frame.pop();
       frame.push(clz(t0));
@@ -4358,7 +4358,7 @@ class Module {
 
   i32 test_ctz_0() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t0 = frame.pop();
       frame.push(ctz(t0));
@@ -4418,7 +4418,7 @@ class Module {
 
   i32 test_popcnt_0() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t0 = frame.pop();
       frame.push(popcnt(t0));
@@ -4548,7 +4548,7 @@ class Module {
 
   i32 test_extend8_s_5() {
     final frame = Frame(memory);
-    frame.i32_const(249346688);
+    frame.i32_const(-19088768);
     {
       var t0 = frame.pop();
       frame.push(extend8_s(t0));
@@ -4558,7 +4558,7 @@ class Module {
 
   i32 test_extend8_s_6() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t0 = frame.pop();
       frame.push(extend8_s(t0));
@@ -4618,7 +4618,7 @@ class Module {
 
   i32 test_extend16_s_5() {
     final frame = Frame(memory);
-    frame.i32_const(249331712);
+    frame.i32_const(-19103744);
     {
       var t0 = frame.pop();
       frame.push(extend16_s(t0));
@@ -4628,7 +4628,7 @@ class Module {
 
   i32 test_extend16_s_6() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t0 = frame.pop();
       frame.push(extend16_s(t0));
@@ -4678,7 +4678,7 @@ class Module {
 
   i32 test_eqz_4() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t0 = frame.pop();
       frame.push(eqz(t0));
@@ -4712,7 +4712,7 @@ class Module {
 
   i32 test_eq_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -4748,8 +4748,8 @@ class Module {
 
   i32 test_eq_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -4809,7 +4809,7 @@ class Module {
   i32 test_eq_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -4820,7 +4820,7 @@ class Module {
 
   i32 test_eq_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -4880,7 +4880,7 @@ class Module {
 
   i32 test_ne_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -4916,8 +4916,8 @@ class Module {
 
   i32 test_ne_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -4977,7 +4977,7 @@ class Module {
   i32 test_ne_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -4988,7 +4988,7 @@ class Module {
 
   i32 test_ne_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -5048,7 +5048,7 @@ class Module {
 
   i32 test_lt_s_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -5084,8 +5084,8 @@ class Module {
 
   i32 test_lt_s_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5145,7 +5145,7 @@ class Module {
   i32 test_lt_s_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5156,7 +5156,7 @@ class Module {
 
   i32 test_lt_s_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -5216,7 +5216,7 @@ class Module {
 
   i32 test_lt_u_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -5252,8 +5252,8 @@ class Module {
 
   i32 test_lt_u_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5313,7 +5313,7 @@ class Module {
   i32 test_lt_u_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5324,7 +5324,7 @@ class Module {
 
   i32 test_lt_u_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -5384,7 +5384,7 @@ class Module {
 
   i32 test_le_s_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -5420,8 +5420,8 @@ class Module {
 
   i32 test_le_s_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5481,7 +5481,7 @@ class Module {
   i32 test_le_s_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5492,7 +5492,7 @@ class Module {
 
   i32 test_le_s_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -5552,7 +5552,7 @@ class Module {
 
   i32 test_le_u_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -5588,8 +5588,8 @@ class Module {
 
   i32 test_le_u_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5649,7 +5649,7 @@ class Module {
   i32 test_le_u_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5660,7 +5660,7 @@ class Module {
 
   i32 test_le_u_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -5720,7 +5720,7 @@ class Module {
 
   i32 test_gt_s_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -5756,8 +5756,8 @@ class Module {
 
   i32 test_gt_s_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5817,7 +5817,7 @@ class Module {
   i32 test_gt_s_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5828,7 +5828,7 @@ class Module {
 
   i32 test_gt_s_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -5888,7 +5888,7 @@ class Module {
 
   i32 test_gt_u_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -5924,8 +5924,8 @@ class Module {
 
   i32 test_gt_u_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5985,7 +5985,7 @@ class Module {
   i32 test_gt_u_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -5996,7 +5996,7 @@ class Module {
 
   i32 test_gt_u_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -6056,7 +6056,7 @@ class Module {
 
   i32 test_ge_s_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -6092,8 +6092,8 @@ class Module {
 
   i32 test_ge_s_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -6153,7 +6153,7 @@ class Module {
   i32 test_ge_s_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -6164,7 +6164,7 @@ class Module {
 
   i32 test_ge_s_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -6224,7 +6224,7 @@ class Module {
 
   i32 test_ge_u_2() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
@@ -6260,8 +6260,8 @@ class Module {
 
   i32 test_ge_u_5() {
     final frame = Frame(memory);
-    frame.i32_const(127);
-    frame.i32_const(127);
+    frame.i32_const(-1);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -6321,7 +6321,7 @@ class Module {
   i32 test_ge_u_10() {
     final frame = Frame(memory);
     frame.i32_const(32212254720);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -6332,7 +6332,7 @@ class Module {
 
   i32 test_ge_u_11() {
     final frame = Frame(memory);
-    frame.i32_const(127);
+    frame.i32_const(-1);
     frame.i32_const(32212254720);
     {
       var t1 = frame.pop();
@@ -6374,7 +6374,7 @@ typedef FunctionType2 = i32 Function();
 class Globals {
   final i32 global0 = 2;
   final i32 global1 = 1;
-  final i32 global2 = 126;
+  final i32 global2 = -2;
   final i32 global3 = 0;
   final i32 global4 = 32212254720;
   final i32 global5 = 2147483647;
@@ -6401,14 +6401,14 @@ class Globals {
   final i32 global26 = 0;
   final i32 global27 = 1;
   final i32 global28 = 33285996544;
-  final i32 global29 = 266287973;
+  final i32 global29 = -2147483;
   final i32 global30 = 2;
-  final i32 global31 = 126;
-  final i32 global32 = 126;
+  final i32 global31 = -2;
+  final i32 global32 = -2;
   final i32 global33 = 2;
   final i32 global34 = 2;
-  final i32 global35 = 126;
-  final i32 global36 = 126;
+  final i32 global35 = -2;
+  final i32 global36 = -2;
   final i32 global37 = 2;
   final i32 global38 = 2;
   final i32 global39 = 2;
@@ -6433,15 +6433,15 @@ class Globals {
   final i32 global58 = 0;
   final i32 global59 = 0;
   final i32 global60 = 0;
-  final i32 global61 = 15737;
+  final i32 global61 = -647;
   final i32 global62 = 1;
-  final i32 global63 = 127;
+  final i32 global63 = -1;
   final i32 global64 = 1;
-  final i32 global65 = 127;
+  final i32 global65 = -1;
   final i32 global66 = 1;
-  final i32 global67 = 127;
+  final i32 global67 = -1;
   final i32 global68 = 1;
-  final i32 global69 = 127;
+  final i32 global69 = -1;
   final i32 global70 = 1;
   final i32 global71 = 3;
   final i32 global72 = 0;
@@ -6454,7 +6454,7 @@ class Globals {
   final i32 global79 = 1;
   final i32 global80 = 1;
   final i32 global81 = 5;
-  final i32 global82 = 123;
+  final i32 global82 = -5;
   final i32 global83 = 1;
   final i32 global84 = 1;
   final i32 global85 = 3;
@@ -6465,20 +6465,20 @@ class Globals {
   final i32 global90 = 0;
   final i32 global91 = 2147483647;
   final i32 global92 = 34107093232;
-  final i32 global93 = 127;
+  final i32 global93 = -1;
   final i32 global94 = 1;
   final i32 global95 = 1;
   final i32 global96 = 1;
   final i32 global97 = 0;
-  final i32 global98 = 127;
+  final i32 global98 = -1;
   final i32 global99 = 32212254720;
-  final i32 global100 = 127;
-  final i32 global101 = 127;
+  final i32 global100 = -1;
+  final i32 global101 = -1;
   final i32 global102 = 1;
   final i32 global103 = 1;
   final i32 global104 = 0;
   final i32 global105 = 0;
-  final i32 global106 = 127;
+  final i32 global106 = -1;
   final i32 global107 = 32212254720;
   final i32 global108 = 2147483647;
   final i32 global109 = 32212254720;
@@ -6486,8 +6486,8 @@ class Globals {
   final i32 global111 = 0;
   final i32 global112 = 2;
   final i32 global113 = 1;
-  final i32 global114 = 126;
-  final i32 global115 = 126;
+  final i32 global114 = -2;
+  final i32 global115 = -2;
   final i32 global116 = 0;
   final i32 global117 = 32212254720;
   final i32 global118 = 32212254720;
@@ -6497,7 +6497,7 @@ class Globals {
   final i32 global122 = 32212254720;
   final i32 global123 = 0;
   final i32 global124 = 1;
-  final i32 global125 = 127;
+  final i32 global125 = -1;
   final i32 global126 = 1073741823;
   final i32 global127 = 33285996544;
   final i32 global128 = 536870912;
@@ -6506,12 +6506,12 @@ class Globals {
   final i32 global131 = 0;
   final i32 global132 = 0;
   final i32 global133 = 1;
-  final i32 global134 = 127;
-  final i32 global135 = 127;
-  final i32 global136 = 127;
-  final i32 global137 = 127;
-  final i32 global138 = 127;
-  final i32 global139 = 127;
+  final i32 global134 = -1;
+  final i32 global135 = -1;
+  final i32 global136 = -1;
+  final i32 global137 = -1;
+  final i32 global138 = -1;
+  final i32 global139 = -1;
   final i32 global140 = 0;
   final i32 global141 = 1;
   final i32 global142 = 2147483647;
@@ -6524,14 +6524,14 @@ class Globals {
   final i32 global149 = 0;
   final i32 global150 = 1;
   final i32 global151 = 1;
-  final i32 global152 = 127;
+  final i32 global152 = -1;
   final i32 global153 = 2147483647;
   final i32 global154 = 1;
   final i32 global155 = 1;
-  final i32 global156 = 127;
+  final i32 global156 = -1;
   final i32 global157 = 2;
   final i32 global158 = 1;
-  final i32 global159 = 127;
+  final i32 global159 = -1;
   final i32 global160 = 1;
   final i32 global161 = 1469788397;
   final i32 global162 = 33823768591;
@@ -6544,7 +6544,7 @@ class Globals {
   final i32 global169 = 1;
   final i32 global170 = 32212254720;
   final i32 global171 = 1;
-  final i32 global172 = 127;
+  final i32 global172 = -1;
   final i32 global173 = 1;
   final i32 global174 = 2139121152;
   final i32 global175 = 32768;
@@ -6579,18 +6579,18 @@ class Globals {
   final i32 global204 = 24;
   final i32 global205 = 0;
   final i32 global206 = 127;
-  final i32 global207 = 16256;
-  final i32 global208 = 127;
+  final i32 global207 = -128;
+  final i32 global208 = -1;
   final i32 global209 = 0;
-  final i32 global210 = 16256;
-  final i32 global211 = 127;
+  final i32 global210 = -128;
+  final i32 global211 = -1;
   final i32 global212 = 0;
   final i32 global213 = 32767;
-  final i32 global214 = 2064384;
-  final i32 global215 = 127;
+  final i32 global214 = -32768;
+  final i32 global215 = -1;
   final i32 global216 = 0;
-  final i32 global217 = 2064384;
-  final i32 global218 = 127;
+  final i32 global217 = -32768;
+  final i32 global218 = -1;
   final i32 global219 = 1;
   final i32 global220 = 0;
   final i32 global221 = 0;

@@ -1,4 +1,4 @@
-import 'hello.wasm.dart';
+import 'hello.dart';
 
 void main(List<String> args) {
   var module = Module();
