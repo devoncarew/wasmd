@@ -1,5 +1,4 @@
-
-## What's this?
+[![Dart CI](https://github.com/devoncarew/wasmd/actions/workflows/build.yaml/badge.svg)](https://github.com/devoncarew/wasmd/actions/workflows/build.yaml)
 
 An exploration of compiling Wasm to Dart.
 
@@ -30,4 +29,3 @@ https://github.com/WebAssembly/wabt/tree/main/test/spec
 ### Re-building
 
 - `wat2wasm --debug-names -o samples/mandelbrot.wasm --enable-multi-memory --enable-function-references samples/mandelbrot.wat`
-
