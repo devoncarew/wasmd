@@ -24,7 +24,10 @@ class Module {
       frame.i32_add();
       globals.global0 = frame.pop();
       frame.push(globals.global0);
-      consoleImports.log(frame.pop());
+      {
+        var t0 = frame.pop();
+        consoleImports.log(t0);
+      }
       frame.push(globals.global0);
       frame.i32_const(10);
       frame.i32_lt_s();
@@ -34,16 +37,11 @@ class Module {
   }
 }
 
+typedef FunctionType0 = void Function(i32);
+typedef FunctionType1 = void Function();
+
 class Globals {
-  i32 global0 = _initGlobal0();
-
-  static final Memory memory = Memory(0);
-
-  static i32 _initGlobal0() {
-    final frame = Frame(memory);
-    frame.i32_const(0);
-    return frame.pop();
-  }
+  i32 global0 = 0;
 }
 
 /// A class representing the symbols imported from the 'console' module.

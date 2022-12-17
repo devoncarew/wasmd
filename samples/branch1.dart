@@ -39,14 +39,9 @@ class Module {
   }
 }
 
+typedef FunctionType0 = i32 Function();
+typedef FunctionType1 = void Function();
+
 class Globals {
-  i32 global0 = _initGlobal0();
-
-  static final Memory memory = Memory(0);
-
-  static i32 _initGlobal0() {
-    final frame = Frame(memory);
-    frame.i32_const(0);
-    return frame.pop();
-  }
+  i32 global0 = 0;
 }

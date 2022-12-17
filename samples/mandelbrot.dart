@@ -103,7 +103,7 @@ class Module {
     frame.push(local2);
     frame.i32_const(19);
     frame.i32_add();
-    frame.i32_const(112);
+    frame.i32_const(-16);
     frame.i32_and();
     frame.i32_const(4);
     frame.i32_sub();
@@ -116,7 +116,7 @@ class Module {
     frame.i32_shl();
     frame.i32_const(15);
     frame.i32_add();
-    frame.i32_const(112);
+    frame.i32_const(-16);
     frame.i32_and();
     local5 = frame.peek();
     frame.i32_gt_u();
@@ -128,7 +128,7 @@ class Module {
       frame.i32_sub();
       frame.i32_const(65535);
       frame.i32_add();
-      frame.i32_const(2031616);
+      frame.i32_const(-65536);
       frame.i32_and();
       frame.i32_const(16);
       frame.i32_shr_u();
