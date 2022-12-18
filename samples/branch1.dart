@@ -7,7 +7,7 @@ import 'package:wasmd/runtime.dart';
 
 class Module {
   Module() {
-    _func1();
+    foo();
   }
 
   final Memory memory = Memory(0);
@@ -18,24 +18,24 @@ class Module {
 
     loop_label_0:
     for (;;) {
-      frame.push(globals.global0);
+      frame.push(globals.i);
       frame.i32_const(1);
       frame.i32_add();
-      globals.global0 = frame.pop();
-      frame.push(globals.global0);
+      globals.i = frame.pop();
+      frame.push(globals.i);
       frame.i32_const(10);
       frame.i32_lt_s();
       if (frame.pop() != 0) continue loop_label_0;
       break;
     }
-    frame.push(globals.global0);
+    frame.push(globals.i);
     return frame.pop();
   }
 
-  void _func1() {
+  void foo() {
     final frame = Frame(memory);
     frame.i32_const(1);
-    globals.global0 = frame.pop();
+    globals.i = frame.pop();
   }
 }
 
@@ -43,5 +43,5 @@ typedef FunctionType0 = i32 Function();
 typedef FunctionType1 = void Function();
 
 class Globals {
-  i32 global0 = 0;
+  i32 i = 0;
 }

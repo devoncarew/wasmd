@@ -16,19 +16,19 @@ class Module {
   /// min pages: 1
   final Memory memory;
 
-  i32 rot13c(i32 arg0) {
+  i32 rot13c(i32 c) {
     i32 uc = 0;
 
     final frame = Frame(memory);
-    frame.push(arg0);
+    frame.push(c);
     frame.i32_const(65);
     frame.i32_lt_u();
     if_label_0:
     if (frame.pop() != 0) {
-      frame.push(arg0);
+      frame.push(c);
       return frame.pop();
     }
-    frame.push(arg0);
+    frame.push(c);
     frame.i32_const(223);
     frame.i32_and();
     uc = frame.pop();
@@ -37,7 +37,7 @@ class Module {
     frame.i32_le_u();
     if_label_0:
     if (frame.pop() != 0) {
-      frame.push(arg0);
+      frame.push(c);
       frame.i32_const(13);
       frame.i32_add();
       return frame.pop();
@@ -47,18 +47,18 @@ class Module {
     frame.i32_le_u();
     if_label_0:
     if (frame.pop() != 0) {
-      frame.push(arg0);
+      frame.push(c);
       frame.i32_const(13);
       frame.i32_sub();
       return frame.pop();
     }
-    frame.push(arg0);
+    frame.push(c);
     return frame.pop();
     return frame.pop();
   }
 
   void rot13() {
-    i32 local0 = 0;
+    i32 size = 0;
     i32 i = 0;
 
     final frame = Frame(memory);
@@ -69,13 +69,13 @@ class Module {
       var t0 = frame.pop();
       frame.push(hostImports.fill_buf(t0, t1));
     }
-    local0 = frame.pop();
+    size = frame.pop();
     block_label_0:
     {
       loop_label_1:
       for (;;) {
         frame.push(i);
-        frame.push(local0);
+        frame.push(size);
         frame.i32_ge_u();
         if_label_2:
         if (frame.pop() != 0) {
@@ -98,7 +98,7 @@ class Module {
       }
     }
     frame.i32_const(0);
-    frame.push(local0);
+    frame.push(size);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();

@@ -19,16 +19,16 @@ class Module {
 
     loop_label_0:
     for (;;) {
-      frame.push(globals.global0);
+      frame.push(globals.i);
       frame.i32_const(1);
       frame.i32_add();
-      globals.global0 = frame.pop();
-      frame.push(globals.global0);
+      globals.i = frame.pop();
+      frame.push(globals.i);
       {
         var t0 = frame.pop();
         consoleImports.log(t0);
       }
-      frame.push(globals.global0);
+      frame.push(globals.i);
       frame.i32_const(10);
       frame.i32_lt_s();
       if (frame.pop() != 0) continue loop_label_0;
@@ -41,7 +41,7 @@ typedef FunctionType0 = void Function(i32);
 typedef FunctionType1 = void Function();
 
 class Globals {
-  i32 global0 = 0;
+  i32 i = 0;
 }
 
 /// A class representing the symbols imported from the 'console' module.
