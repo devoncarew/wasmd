@@ -232,11 +232,11 @@ class Instruction_GlobalGet extends Instruction {
   @override
   Code generateToStatement(Instr instr, ModuleFunction function) {
     var immediate = instr.args[0] as int;
-    var global = function.module.globals[immediate];
+    var global = function.module.globals.globals[immediate];
 
     return refer('frame')
         .property('push')
-        .call([refer('globals').property(global.name!)]).statement;
+        .call([refer('globals').property(global.name)]).statement;
   }
 }
 
@@ -246,10 +246,10 @@ class Instruction_GlobalSet extends Instruction {
   @override
   Code generateToStatement(Instr instr, ModuleFunction function) {
     var immediate = instr.args[0] as int;
-    var global = function.module.globals[immediate];
+    var global = function.module.globals.globals[immediate];
 
     return refer('globals')
-        .property(global.name!)
+        .property(global.name)
         .assign(refer('frame').property('pop').call([]))
         .statement;
   }
@@ -589,11 +589,13 @@ class Instruction {
       Instruction('i64.shr_u', 0x88),
       Instruction('i64.rotl', 0x89),
       Instruction('i64.rotr', 0x8A),
-      Instruction('i64.ceil', 0x9B),
-      Instruction('i64.foor', 0x9C),
-      Instruction('i64.trunc', 0x9D),
-      Instruction('i64.nearest', 0x9E),
-      Instruction('i64.sqrt', 0x9F),
+      Instruction('f64.abs', 0x99),
+      Instruction('f64.neg', 0x9A),
+      Instruction('f64.ceil', 0x9B),
+      Instruction('f64.foor', 0x9C),
+      Instruction('f64.trunc', 0x9D),
+      Instruction('f64.nearest', 0x9E),
+      Instruction('f64.sqrt', 0x9F),
       Instruction('f64.add', 0xA0),
       Instruction('f64.sub', 0xA1),
       Instruction('f64.mul', 0xA2),

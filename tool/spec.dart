@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:code_builder/code_builder.dart' hide Expression;
-import 'package:dart_style/dart_style.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:wasmd/compiler.dart';
@@ -52,7 +50,11 @@ List<File> generateWatForWast(
 ) {
   print('parsing ${wastFile.path}...');
 
-  var compilationUnit = ComilationUnit.parse(wastFile.readAsStringSync());
+  // todo: upgrade our testing of the flavors of nan
+  var compilationUnit = ComilationUnit.parse(
+    wastFile.readAsStringSync(),
+    tokenRewriter: _ReplaceNonstandardNan(),
+  );
   var testModules = _findTestModules(_process(compilationUnit));
   var watFiles = <File>[];
 
@@ -125,20 +127,7 @@ void compileWasmToDart(File wasmFile, File dartFile) {
 
   var compiler = Compiler(file: wasmFile, logger: logger);
   var library = compiler.compile(generateWastTest: true);
-
-  var formatter = DartFormatter();
-  var emitter = DartEmitter(
-    orderDirectives: true,
-    useNullSafetySyntax: true,
-    allocator: NoPrefixAllocator(),
-  );
-
-  var code = library.accept(emitter).toString();
-  try {
-    code = formatter.format(code);
-  } catch (e) {
-    print(e);
-  }
+  var code = emitFormatLibrary(library);
 
   print('Emitting ${dartFile.path}.');
   dartFile.writeAsStringSync(code);
@@ -190,8 +179,8 @@ List<Expression> _process(ComilationUnit compilationUnit) {
       if (expectInstrs != null)
         Expression([
           Atom('global'),
-          // Atom('\$$expectName'),
-          Expression([Atom('export'), Atom('"$expectName"')]),
+          Atom('\$$expectName'),
+          // Expression([Atom('export'), Atom('"$expectName"')]),
           Atom(typeName),
           ...expectInstrs.nodes,
         ]),
@@ -283,4 +272,13 @@ String getTypeForMethod(Expression module, String methodName) {
   }
 
   throw "could not find return type for method '$methodName'";
+}
+
+class _ReplaceNonstandardNan implements TokenRewriter {
+  @override
+  Token replace(Token token) {
+    if (token.value == 'nan:canonical') return Token('nan');
+    if (token.value == 'nan:arithmetic') return Token('nan');
+    return token;
+  }
 }

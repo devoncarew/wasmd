@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:code_builder/code_builder.dart' hide Expression;
-import 'package:dart_style/dart_style.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:wasmd/compiler.dart';
@@ -13,7 +11,14 @@ void main(List<String> args) {
     return;
   }
 
+  var verbose = false;
+
   for (var arg in args) {
+    if (arg == '-v') {
+      verbose = true;
+      continue;
+    }
+
     var watFile = File(arg);
 
     // compile the wat file to wasm and dis files
@@ -21,7 +26,7 @@ void main(List<String> args) {
 
     // compile the wasm file to dart
     var dartFile = File('${p.withoutExtension(watFile.path)}.dart');
-    compileWasmToDart(wasmFile, dartFile);
+    compileWasmToDart(wasmFile, dartFile, verbose: verbose);
   }
 }
 
@@ -33,7 +38,7 @@ File compileWatToWasm(File watFile) {
   var args = [
     'wat2wasm',
     '--debug-names',
-    // '--enable-multi-memory',
+    '--enable-multi-memory',
     '-v',
     '-o',
     wasmFile.path,
@@ -61,32 +66,19 @@ File compileWatToWasm(File watFile) {
   return wasmFile;
 }
 
-void compileWasmToDart(File wasmFile, File dartFile) {
+void compileWasmToDart(File wasmFile, File dartFile, {bool verbose = false}) {
   print('Reading ${wasmFile.path}.');
 
   var logger = Logger.detached('wasm2dart');
-  // if (verbose) {
-  //   logger.onRecord.listen((record) {
-  //     stderr.writeln(record.message);
-  //   });
-  // }
+  if (verbose) {
+    logger.onRecord.listen((record) {
+      stderr.writeln(record.message);
+    });
+  }
 
   var compiler = Compiler(file: wasmFile, logger: logger);
   var library = compiler.compile();
-
-  var formatter = DartFormatter();
-  var emitter = DartEmitter(
-    orderDirectives: true,
-    useNullSafetySyntax: true,
-    allocator: NoPrefixAllocator(),
-  );
-
-  var code = library.accept(emitter).toString();
-  try {
-    code = formatter.format(code);
-  } catch (e) {
-    print(e);
-  }
+  var code = emitFormatLibrary(library);
 
   print('Emitting ${dartFile.path}.');
   dartFile.writeAsStringSync(code);

@@ -16,8 +16,8 @@ class Module {
   /// min pages: 1
   final Memory memory;
 
-  i32 _func0(i32 arg0) {
-    i32 local0 = 0;
+  i32 rot13c(i32 arg0) {
+    i32 uc = 0;
 
     final frame = Frame(memory);
     frame.push(arg0);
@@ -31,8 +31,8 @@ class Module {
     frame.push(arg0);
     frame.i32_const(223);
     frame.i32_and();
-    local0 = frame.pop();
-    frame.push(local0);
+    uc = frame.pop();
+    frame.push(uc);
     frame.i32_const(77);
     frame.i32_le_u();
     if_label_0:
@@ -42,7 +42,7 @@ class Module {
       frame.i32_add();
       return frame.pop();
     }
-    frame.push(local0);
+    frame.push(uc);
     frame.i32_const(90);
     frame.i32_le_u();
     if_label_0:
@@ -59,7 +59,7 @@ class Module {
 
   void rot13() {
     i32 local0 = 0;
-    i32 local1 = 0;
+    i32 i = 0;
 
     final frame = Frame(memory);
     frame.i32_const(0);
@@ -74,25 +74,25 @@ class Module {
     {
       loop_label_1:
       for (;;) {
-        frame.push(local1);
+        frame.push(i);
         frame.push(local0);
         frame.i32_ge_u();
         if_label_2:
         if (frame.pop() != 0) {
           break block_label_0;
         }
-        frame.push(local1);
-        frame.push(local1);
+        frame.push(i);
+        frame.push(i);
         frame.i32_load8_u(0, 0);
         {
           var t0 = frame.pop();
-          frame.push(_func0(t0));
+          frame.push(rot13c(t0));
         }
         frame.i32_store8(0, 0);
-        frame.push(local1);
+        frame.push(i);
         frame.i32_const(1);
         frame.i32_add();
-        local1 = frame.pop();
+        i = frame.pop();
         continue loop_label_1;
         break;
       }

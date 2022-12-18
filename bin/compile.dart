@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:code_builder/code_builder.dart';
-import 'package:dart_style/dart_style.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 import 'package:wasmd/compiler.dart';
 import 'package:wasmd/src/utils.dart';
+
+// todo: have a flag to not use debug info when compiling
 
 void main(List<String> args) async {
   var argsParser = ArgParser();
@@ -64,20 +64,7 @@ void main(List<String> args) async {
 
   var compiler = Compiler(file: File(input), logger: logger);
   var library = compiler.compile();
-
-  var formatter = DartFormatter();
-  var emitter = DartEmitter(
-    orderDirectives: true,
-    useNullSafetySyntax: true,
-    allocator: NoPrefixAllocator(),
-  );
-
-  var code = library.accept(emitter).toString();
-  try {
-    code = formatter.format(code);
-  } catch (e) {
-    print(e);
-  }
+  var code = emitFormatLibrary(library);
 
   logger.info('\nEmitting $output.');
   var outFile = File(output);

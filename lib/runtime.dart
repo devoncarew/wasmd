@@ -480,32 +480,44 @@ class Frame {
     stack.add(result);
   }
 
-  void i64_ceil() {
-    i64 arg = stack.removeLast() as i64;
+  void f64_abs() {
+    f64 arg = stack.removeLast() as f64;
+    var result = arg.abs();
+    stack.add(result);
+  }
+
+  void f64_neg() {
+    f64 arg = stack.removeLast() as f64;
+    var result = -arg;
+    stack.add(result);
+  }
+
+  void f64_ceil() {
+    f64 arg = stack.removeLast() as f64;
     var result = arg.ceilToDouble();
     stack.add(result);
   }
 
-  void i64_foor() {
-    i64 arg = stack.removeLast() as i64;
+  void f64_foor() {
+    f64 arg = stack.removeLast() as f64;
     var result = arg.floorToDouble();
     stack.add(result);
   }
 
-  void i64_trunc() {
-    i64 arg = stack.removeLast() as i64;
+  void f64_trunc() {
+    f64 arg = stack.removeLast() as f64;
     var result = arg.truncateToDouble();
     stack.add(result);
   }
 
-  void i64_nearest() {
-    i64 arg = stack.removeLast() as i64;
+  void f64_nearest() {
+    f64 arg = stack.removeLast() as f64;
     var result = arg.roundToDouble();
     stack.add(result);
   }
 
-  void i64_sqrt() {
-    i64 arg = stack.removeLast() as i64;
+  void f64_sqrt() {
+    f64 arg = stack.removeLast() as f64;
     var result = sqrt(arg);
     stack.add(result);
   }

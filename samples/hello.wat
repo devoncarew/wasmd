@@ -1,10 +1,10 @@
-(module
+(module $HelloWorld
   (memory 10)
 
-  (global $a_0  (mut i64) i64.const 0)
-  (global $b_0  i64 i64.const 0)
-  (global $a_1  i64 i64.const 0)
-  (global $b_1  (mut i64) i64.const 0)
+  (global $a_0 (mut i64) i64.const 0)
+  (global $b_0 i64 i64.const 0)
+  (global $a_1 i64 i64.const 0)
+  (global $b_1 (mut i64) i64.const 0)
 
   (func $add (param $lhs i32) (param $rhs i32) (result i32)
     local.get $lhs

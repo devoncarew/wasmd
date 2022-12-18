@@ -1,7 +1,7 @@
 import 'hello.dart';
 
 void main(List<String> args) {
-  var module = Module();
+  var module = HelloWorldModule();
 
   print(' 2 + 2 is: ${module.add(2, 2)}');
 

@@ -120,64 +120,69 @@
 0000074: 00                                        ; section size (guess)
 0000075: 04                                        ; string length
 0000076: 6e61 6d65                                name  ; custom section name
-000007a: 01                                        ; name subsection type
+000007a: 00                                        ; module name type
 000007b: 00                                        ; subsection size (guess)
-000007c: 03                                        ; num names
-000007d: 00                                        ; elem index
-000007e: 03                                        ; string length
-000007f: 6164 64                                  add  ; elem name 0
-0000082: 01                                        ; elem index
-0000083: 03                                        ; string length
-0000084: 7375 62                                  sub  ; elem name 1
-0000087: 02                                        ; elem index
-0000088: 07                                        ; string length
-0000089: 636f 6d70 6c65 78                        complex  ; elem name 2
-000007b: 14                                        ; FIXUP subsection size
-0000090: 02                                        ; local name type
-0000091: 00                                        ; subsection size (guess)
-0000092: 03                                        ; num functions
-0000093: 00                                        ; function index
-0000094: 02                                        ; num locals
-0000095: 00                                        ; local index
-0000096: 03                                        ; string length
-0000097: 6c68 73                                  lhs  ; local name 0
-000009a: 01                                        ; local index
-000009b: 03                                        ; string length
-000009c: 7268 73                                  rhs  ; local name 1
-000009f: 01                                        ; function index
-00000a0: 02                                        ; num locals
-00000a1: 00                                        ; local index
-00000a2: 03                                        ; string length
-00000a3: 6c68 73                                  lhs  ; local name 0
-00000a6: 01                                        ; local index
-00000a7: 03                                        ; string length
-00000a8: 7268 73                                  rhs  ; local name 1
-00000ab: 02                                        ; function index
-00000ac: 03                                        ; num locals
-00000ad: 00                                        ; local index
-00000ae: 03                                        ; string length
-00000af: 6c68 73                                  lhs  ; local name 0
-00000b2: 01                                        ; local index
-00000b3: 03                                        ; string length
-00000b4: 7268 73                                  rhs  ; local name 1
-00000b7: 02                                        ; local index
-00000b8: 01                                        ; string length
-00000b9: 69                                       i  ; local name 2
-0000091: 28                                        ; FIXUP subsection size
-00000ba: 07                                        ; name subsection type
-00000bb: 00                                        ; subsection size (guess)
-00000bc: 04                                        ; num names
-00000bd: 00                                        ; elem index
-00000be: 03                                        ; string length
-00000bf: 615f 30                                  a_0  ; elem name 0
-00000c2: 01                                        ; elem index
-00000c3: 03                                        ; string length
-00000c4: 625f 30                                  b_0  ; elem name 1
-00000c7: 02                                        ; elem index
-00000c8: 03                                        ; string length
-00000c9: 615f 31                                  a_1  ; elem name 2
-00000cc: 03                                        ; elem index
-00000cd: 03                                        ; string length
-00000ce: 625f 31                                  b_1  ; elem name 3
-00000bb: 15                                        ; FIXUP subsection size
-0000074: 5c                                        ; FIXUP section size
+000007c: 0a                                        ; string length
+000007d: 4865 6c6c 6f57 6f72 6c64                 HelloWorld  ; module name
+000007b: 0b                                        ; FIXUP subsection size
+0000087: 01                                        ; name subsection type
+0000088: 00                                        ; subsection size (guess)
+0000089: 03                                        ; num names
+000008a: 00                                        ; elem index
+000008b: 03                                        ; string length
+000008c: 6164 64                                  add  ; elem name 0
+000008f: 01                                        ; elem index
+0000090: 03                                        ; string length
+0000091: 7375 62                                  sub  ; elem name 1
+0000094: 02                                        ; elem index
+0000095: 07                                        ; string length
+0000096: 636f 6d70 6c65 78                        complex  ; elem name 2
+0000088: 14                                        ; FIXUP subsection size
+000009d: 02                                        ; local name type
+000009e: 00                                        ; subsection size (guess)
+000009f: 03                                        ; num functions
+00000a0: 00                                        ; function index
+00000a1: 02                                        ; num locals
+00000a2: 00                                        ; local index
+00000a3: 03                                        ; string length
+00000a4: 6c68 73                                  lhs  ; local name 0
+00000a7: 01                                        ; local index
+00000a8: 03                                        ; string length
+00000a9: 7268 73                                  rhs  ; local name 1
+00000ac: 01                                        ; function index
+00000ad: 02                                        ; num locals
+00000ae: 00                                        ; local index
+00000af: 03                                        ; string length
+00000b0: 6c68 73                                  lhs  ; local name 0
+00000b3: 01                                        ; local index
+00000b4: 03                                        ; string length
+00000b5: 7268 73                                  rhs  ; local name 1
+00000b8: 02                                        ; function index
+00000b9: 03                                        ; num locals
+00000ba: 00                                        ; local index
+00000bb: 03                                        ; string length
+00000bc: 6c68 73                                  lhs  ; local name 0
+00000bf: 01                                        ; local index
+00000c0: 03                                        ; string length
+00000c1: 7268 73                                  rhs  ; local name 1
+00000c4: 02                                        ; local index
+00000c5: 01                                        ; string length
+00000c6: 69                                       i  ; local name 2
+000009e: 28                                        ; FIXUP subsection size
+00000c7: 07                                        ; name subsection type
+00000c8: 00                                        ; subsection size (guess)
+00000c9: 04                                        ; num names
+00000ca: 00                                        ; elem index
+00000cb: 03                                        ; string length
+00000cc: 615f 30                                  a_0  ; elem name 0
+00000cf: 01                                        ; elem index
+00000d0: 03                                        ; string length
+00000d1: 625f 30                                  b_0  ; elem name 1
+00000d4: 02                                        ; elem index
+00000d5: 03                                        ; string length
+00000d6: 615f 31                                  a_1  ; elem name 2
+00000d9: 03                                        ; elem index
+00000da: 03                                        ; string length
+00000db: 625f 31                                  b_1  ; elem name 3
+00000c8: 15                                        ; FIXUP subsection size
+0000074: 69                                        ; FIXUP section size

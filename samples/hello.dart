@@ -5,44 +5,44 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class HelloWorldModule {
+  HelloWorldModule();
 
   final Memory memory = Memory(10);
   final Globals globals = Globals();
 
-  i32 add(i32 arg0, i32 arg1) {
+  i32 add(i32 lhs, i32 rhs) {
     final frame = Frame(memory);
-    frame.push(arg0);
-    frame.push(arg1);
+    frame.push(lhs);
+    frame.push(rhs);
     frame.i32_add();
     return frame.pop();
   }
 
-  i32 _func1(i32 arg0, i32 arg1) {
+  i32 sub(i32 lhs, i32 rhs) {
     final frame = Frame(memory);
-    frame.push(arg0);
-    frame.push(arg1);
+    frame.push(lhs);
+    frame.push(rhs);
     frame.i32_sub();
     return frame.pop();
   }
 
-  i32 complex(i32 arg0, i32 arg1) {
-    i32 local0 = 0;
+  i32 complex(i32 lhs, i32 rhs) {
+    i32 i = 0;
 
     final frame = Frame(memory);
     frame.i32_const(-1);
-    local0 = frame.pop();
+    i = frame.pop();
     frame.i32_const(-0x80000000);
-    local0 = frame.pop();
-    frame.push(arg0);
-    frame.push(arg1);
+    i = frame.pop();
+    frame.push(lhs);
+    frame.push(rhs);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(_func1(t0, t1));
+      frame.push(sub(t0, t1));
     }
-    frame.push(local0);
+    frame.push(i);
     frame.i32_mul();
     return frame.pop();
   }
@@ -51,8 +51,8 @@ class Module {
 typedef FunctionType0 = i32 Function(i32, i32);
 
 class Globals {
-  i64 global0 = 0;
-  final i64 global1 = 0;
-  final i64 global2 = 0;
-  i64 global3 = 0;
+  i64 a_0 = 0;
+  final i64 b_0 = 0;
+  final i64 a_1 = 0;
+  i64 b_1 = 0;
 }

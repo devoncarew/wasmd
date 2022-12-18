@@ -59,11 +59,11 @@ class ComilationUnit {
     return buf.toString().trimRight();
   }
 
-  static ComilationUnit parse(String str) {
+  static ComilationUnit parse(String str, {TokenRewriter? tokenRewriter}) {
     final tokenizer = Tokenizer(str);
     var expressions = <Expression>[];
 
-    var tokens = tokenizer.parse();
+    var tokens = tokenizer.parse(tokenRewriter: tokenRewriter);
     var itor = tokens.iterator;
 
     Node parseNode() {
@@ -101,7 +101,15 @@ class Tokenizer {
 
   Tokenizer(this.str);
 
-  Iterable<Token> parse() sync* {
+  Iterable<Token> parse({TokenRewriter? tokenRewriter}) {
+    if (tokenRewriter == null) {
+      return _parse();
+    } else {
+      return _parse().map((token) => tokenRewriter.replace(token));
+    }
+  }
+
+  Iterable<Token> _parse() sync* {
     while (_pos < len) {
       var s = _next()!;
       if (s == '(') {
@@ -169,4 +177,8 @@ class Token {
 
   @override
   String toString() => value;
+}
+
+abstract class TokenRewriter {
+  Token replace(Token token);
 }

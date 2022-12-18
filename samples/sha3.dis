@@ -3033,3 +3033,25 @@
 00009bc: e405                                      ; FIXUP func body size
 ; move data: [1a2, ca2) -> [1a3, ca3)
 00001a1: 8016                                      ; FIXUP section size
+; section "name"
+0000ca3: 00                                        ; section code
+0000ca4: 00                                        ; section size (guess)
+0000ca5: 04                                        ; string length
+0000ca6: 6e61 6d65                                name  ; custom section name
+0000caa: 02                                        ; local name type
+0000cab: 00                                        ; subsection size (guess)
+0000cac: 06                                        ; num functions
+0000cad: 00                                        ; function index
+0000cae: 00                                        ; num locals
+0000caf: 01                                        ; function index
+0000cb0: 00                                        ; num locals
+0000cb1: 02                                        ; function index
+0000cb2: 00                                        ; num locals
+0000cb3: 03                                        ; function index
+0000cb4: 00                                        ; num locals
+0000cb5: 04                                        ; function index
+0000cb6: 00                                        ; num locals
+0000cb7: 05                                        ; function index
+0000cb8: 00                                        ; num locals
+0000cab: 0d                                        ; FIXUP subsection size
+0000ca4: 14                                        ; FIXUP section size

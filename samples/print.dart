@@ -45,9 +45,12 @@ abstract class ConsoleImports {
 
 class DataSegments {
   Uint8List data0 = decodeDataLiteral(_hex0);
+  Uint8List data1 = decodeDataLiteral(_hex1);
 
   static const String _hex0 =
-      '\x48\x65\x6C\x6C\x6F\x20\x66\x72\x6F\x6D\x20\x77\x61\x73\x6D\x21';
+      '\x48\x65\x6C\x6C\x6F\x20\x66\x72\x6F\x6D\x20\x77\x61\x73\x6D\x21\x00';
+  static const String _hex1 =
+      '\x62\x75\x65\x6E\x6F\x73\x20\x64\x69\x61\x73\x00';
 
   void init(Memory memory) {
     memory.copyTo(data0, 0);

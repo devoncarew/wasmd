@@ -58,7 +58,7 @@
 ; section "DataCount" (12)
 0000042: 0c                                        ; section code
 0000043: 00                                        ; section size (guess)
-0000044: 01                                        ; data count
+0000044: 02                                        ; data count
 0000043: 01                                        ; FIXUP section size
 ; section "Code" (10)
 0000045: 0a                                        ; section code
@@ -81,37 +81,53 @@
 ; section "Data" (11)
 000004e: 0b                                        ; section code
 000004f: 00                                        ; section size (guess)
-0000050: 01                                        ; num data segments
+0000050: 02                                        ; num data segments
 ; data segment header 0
 0000051: 00                                        ; segment flags
 0000052: 41                                        ; i32.const
 0000053: 00                                        ; i32 literal
 0000054: 0b                                        ; end
-0000055: 10                                        ; data segment size
+0000055: 11                                        ; data segment size
 ; data segment data 0
-0000056: 4865 6c6c 6f20 6672 6f6d 2077 6173 6d21   ; data segment data
-000004f: 16                                        ; FIXUP section size
+0000056: 4865 6c6c 6f20 6672 6f6d 2077 6173 6d21 
+0000066: 00                                        ; data segment data
+; data segment header 1
+0000067: 01                                        ; segment flags
+0000068: 0c                                        ; data segment size
+; data segment data 1
+0000069: 6275 656e 6f73 2064 6961 7300             ; data segment data
+000004f: 25                                        ; FIXUP section size
 ; section "name"
-0000066: 00                                        ; section code
-0000067: 00                                        ; section size (guess)
-0000068: 04                                        ; string length
-0000069: 6e61 6d65                                name  ; custom section name
-000006d: 01                                        ; name subsection type
-000006e: 00                                        ; subsection size (guess)
-000006f: 02                                        ; num names
-0000070: 00                                        ; elem index
-0000071: 03                                        ; string length
-0000072: 6c6f 67                                  log  ; elem name 0
-0000075: 01                                        ; elem index
-0000076: 07                                        ; string length
-0000077: 7772 6974 6548 69                        writeHi  ; elem name 1
-000006e: 0f                                        ; FIXUP subsection size
-000007e: 02                                        ; local name type
-000007f: 00                                        ; subsection size (guess)
-0000080: 02                                        ; num functions
-0000081: 00                                        ; function index
-0000082: 00                                        ; num locals
-0000083: 01                                        ; function index
-0000084: 00                                        ; num locals
-000007f: 05                                        ; FIXUP subsection size
-0000067: 1d                                        ; FIXUP section size
+0000075: 00                                        ; section code
+0000076: 00                                        ; section size (guess)
+0000077: 04                                        ; string length
+0000078: 6e61 6d65                                name  ; custom section name
+000007c: 01                                        ; name subsection type
+000007d: 00                                        ; subsection size (guess)
+000007e: 02                                        ; num names
+000007f: 00                                        ; elem index
+0000080: 03                                        ; string length
+0000081: 6c6f 67                                  log  ; elem name 0
+0000084: 01                                        ; elem index
+0000085: 07                                        ; string length
+0000086: 7772 6974 6548 69                        writeHi  ; elem name 1
+000007d: 0f                                        ; FIXUP subsection size
+000008d: 02                                        ; local name type
+000008e: 00                                        ; subsection size (guess)
+000008f: 02                                        ; num functions
+0000090: 00                                        ; function index
+0000091: 00                                        ; num locals
+0000092: 01                                        ; function index
+0000093: 00                                        ; num locals
+000008e: 05                                        ; FIXUP subsection size
+0000094: 09                                        ; name subsection type
+0000095: 00                                        ; subsection size (guess)
+0000096: 02                                        ; num names
+0000097: 00                                        ; elem index
+0000098: 0b                                        ; string length
+0000099: 6865 6c6c 6f53 7472 696e 67              helloString  ; elem name 0
+00000a4: 01                                        ; elem index
+00000a5: 0b                                        ; string length
+00000a6: 6f74 6865 7253 7472 696e 67              otherString  ; elem name 1
+0000095: 1b                                        ; FIXUP subsection size
+0000076: 3a                                        ; FIXUP section size

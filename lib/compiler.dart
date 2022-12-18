@@ -10,6 +10,7 @@ import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 
 import 'instructions.dart';
+import 'src/utils.dart';
 
 class Compiler {
   final File file;
@@ -110,14 +111,90 @@ class Compiler {
   }
 
   void _parseCustomSection(Reader r, Module module, int length) {
-    var startPos = r.pos;
-    var name = r.readUtf8();
-    length -= (r.pos - startPos);
-    r.skip(length);
-    print('  skipping custom section [$name]');
+    var data = r.readUint8List(length).toList();
+    var customSectionReader = Reader(Uint8List.fromList(data));
 
-    // todo: handle 'name' custom sections
+    var name = customSectionReader.readUtf8();
+    if (name == 'name') {
+      _parseNameCustomSection(customSectionReader, module);
+    } else {
+      print('  skipping custom section [$name]');
+    }
+  }
+
+  void _parseNameCustomSection(Reader r, Module module) {
     // https://webassembly.github.io/spec/core/appendix/custom.html#name-section
+
+    while (r.bytesRemaining() > 0) {
+      var subsectionId = r.readUint8();
+      var size = r.leb128_u();
+
+      // 4: type names
+      // 9: data segment names
+
+      switch (subsectionId) {
+        case 0:
+          // module name
+          var name = r.readUtf8();
+          if (isValidIdentifier(name)) {
+            module.debugInfo = DebugInfo(name: name);
+          }
+          _log('[$name]');
+          break;
+        case 1:
+          // function names
+          var functions = r.leb128_u();
+          for (int i = 0; i < functions; i++) {
+            var functionIndex = r.leb128_u();
+            var name = r.readUtf8();
+            if (isValidIdentifier(name)) {
+              _log('  [$name]');
+              var func = module.functionByIndex(functionIndex);
+              if (func is DefinedFunction) {
+                (func.debugInfo ??= DebugInfo()).name = name;
+              }
+            }
+          }
+          break;
+        case 2:
+          // local names
+          var functions = r.leb128_u();
+          for (int i = 0; i < functions; i++) {
+            var functionIndex = r.leb128_u();
+            var func = module.functionByIndex(functionIndex);
+            var locals = r.leb128_u();
+            for (int j = 0; j < locals; j++) {
+              var localIndex = r.leb128_u();
+              var name = r.readUtf8();
+              if (isValidIdentifier(name)) {
+                if (func is DefinedFunction) {
+                  var localMap = (func.debugInfo ??= DebugInfo()).indexedNames;
+                  localMap[localIndex] = name;
+                }
+              }
+            }
+          }
+          break;
+        case 7:
+          // global names
+          var functions = r.leb128_u();
+          for (int i = 0; i < functions; i++) {
+            var index = r.leb128_u();
+            var name = r.readUtf8();
+            if (isValidIdentifier(name)) {
+              _log('  [$name]');
+              var localMap =
+                  (module.globals.debugInfo ??= DebugInfo()).indexedNames;
+              localMap[index] = name;
+            }
+          }
+          break;
+        default:
+          _log('  unknown name subsection kind: ${hex(subsectionId)}');
+          r.skip(size);
+          break;
+      }
+    }
   }
 
   void _parseTypeSection(Reader r, Module module) {
@@ -211,7 +288,8 @@ class Compiler {
       // instructions* 0x0B
       int instructionsLength = funcLength - (r.pos - startPos);
 
-      Reader reader = Reader(r.readUint8List(instructionsLength));
+      var instrData = r.readUint8List(instructionsLength).toList();
+      var reader = Reader(Uint8List.fromList(instrData));
       List<Instr> instructions = [];
       var depth = 0;
 
@@ -327,7 +405,7 @@ class Compiler {
           // globalidx
           var globalIndex = r.leb128();
           _log("  export global (#$globalIndex)");
-          module.exportGlobal(name, globalIndex);
+          module.globals.exportGlobal(name, globalIndex);
           break;
         default:
           throw 'unhandled type: ${type.toRadixString(16)}';
@@ -403,11 +481,12 @@ class Compiler {
       var instructions = r.readInstructionsEndTerminated();
 
       var global = Global(
+        module: module,
+        index: module.globals.imports.length + i,
         type: ValueType.fromCode(type),
         mutable: mutability == 0x01,
         initExpression: instructions,
       );
-      global.name = 'global$i';
       module.globals.add(global);
 
       _log('  global: ${global.type} ${global.name}');
@@ -468,7 +547,8 @@ void printModule(
   required String moduleName,
   bool generateWastTest = false,
 }) {
-  final classBuilder = ClassBuilder()..name = 'Module';
+  var className = '${module.debugInfo?.name ?? ''}Module';
+  final classBuilder = ClassBuilder()..name = className;
 
   if (generateWastTest) {
     String generateTests() {
@@ -480,7 +560,7 @@ void printModule(
         var expectName = 'expect_${testName.substring('test_'.length)}';
 
         buf.writeln("  test('$testName', () {");
-        buf.writeln('    expect(module.$testName(), module.$expectName);');
+        buf.writeln('    expect(module.$testName(), globals.$expectName);');
         buf.writeln('  });');
         buf.writeln();
       }
@@ -496,9 +576,11 @@ void printModule(
           Code('''
   group('$moduleName', () {
     late Module module;
+    late Globals globals;
 
     setUp(() {
       module = Module();
+      globals = module.globals;
     });
 
     ${generateTests()}
@@ -543,7 +625,7 @@ void printModule(
   }
 
   // global exports - getter and setter pairs
-  for (var export in module.globalExports) {
+  for (var export in module.globals.globalExports) {
     var global = export.global;
 
     classBuilder.methods.add(Method(
@@ -551,7 +633,7 @@ void printModule(
         ..name = export.name
         ..type = MethodType.getter
         ..returns = Reference(global.type.typeName)
-        ..body = refer('globals').property(global.name!).code,
+        ..body = refer('globals').property(global.name).code,
     ));
 
     if (global.mutable) {
@@ -565,7 +647,7 @@ void printModule(
               ..type = Reference(global.type.typeName),
           )))
           ..body = refer('globals')
-              .property(global.name!)
+              .property(global.name)
               .assign(refer('value'))
               .code,
       ));
@@ -899,7 +981,7 @@ class Reader {
   String readName() => readUtf8();
 
   String readUtf8() {
-    var length = leb128();
+    var length = leb128_u();
     var bytes = readUint8List(length);
     return utf8.decoder.convert(bytes);
   }
@@ -1032,13 +1114,11 @@ class Module {
   List<DefinedFunction> definedFunctions = [];
   List<ModuleFunction> allFunctions = [];
 
-  List<Global> globals = [];
+  final Globals globals = Globals();
 
   List<ImportModule> importModules = [];
 
   List<DataSegment> dataSegments = [];
-
-  List<GlobalExport> globalExports = [];
 
   List<Table> tables = [];
   List<ElementSegment> elementSegments = [];
@@ -1048,6 +1128,7 @@ class Module {
   bool memoryImported = false;
 
   int? startFunctionIndex;
+  DebugInfo? debugInfo;
 
   void setMemoryInfo({
     required int min,
@@ -1083,10 +1164,6 @@ class Module {
     // we make the memory field visible by default
   }
 
-  void exportGlobal(String name, int globalIndex) {
-    globalExports.add(GlobalExport(name, globals[globalIndex]));
-  }
-
   ModuleFunction? functionByIndex(int functionIndex) {
     return allFunctions[functionIndex];
   }
@@ -1102,6 +1179,29 @@ class Module {
     // TODO: This only handles passive element segments of funcref type
     elementSegments
         .add(ElementSegment(tableIndex, offsetInstrs, functionIndexs));
+  }
+}
+
+class Globals {
+  final List<Global> globals = [];
+  // todo: handle global imports
+  List<String> imports = [];
+  List<GlobalExport> globalExports = [];
+
+  DebugInfo? debugInfo;
+
+  Globals();
+
+  bool get isNotEmpty => globals.isNotEmpty;
+
+  num get count => globals.length;
+
+  void add(Global global) {
+    globals.add(global);
+  }
+
+  void exportGlobal(String name, int globalIndex) {
+    globalExports.add(GlobalExport(name, globals[globalIndex]));
   }
 }
 
@@ -1180,6 +1280,7 @@ class DefinedFunction extends ModuleFunction {
   final int generatedIndex;
 
   String? exportName;
+  DebugInfo? debugInfo;
 
   List<ValueType> locals = [];
   List<Instr> instrs = [];
@@ -1191,7 +1292,7 @@ class DefinedFunction extends ModuleFunction {
   DefinedFunction(super.module, super.typeIndex, this.generatedIndex);
 
   @override
-  String get name => exportName ?? '_func$generatedIndex';
+  String get name => exportName ?? debugInfo?.name ?? '_func$generatedIndex';
 
   @override
   String toString() => name;
@@ -1236,9 +1337,14 @@ class DefinedFunction extends ModuleFunction {
 
     variables = <Variable>[];
 
+    var debugLocalNames = debugInfo?.indexedNames ?? {};
+
     var params = functionType.parameterTypes;
     for (int paramIndex = 0; paramIndex < params.length; paramIndex++) {
-      var variable = Variable(name: 'arg$paramIndex', type: params[paramIndex]);
+      var variable = Variable(
+        name: debugLocalNames[variables.length] ?? 'arg$paramIndex',
+        type: params[paramIndex],
+      );
       variables.add(variable);
       method.requiredParameters.add(
         Parameter(
@@ -1253,7 +1359,10 @@ class DefinedFunction extends ModuleFunction {
 
     if (locals.isNotEmpty) {
       for (int index = 0; index < locals.length; index++) {
-        var variable = Variable(name: 'local$index', type: locals[index]);
+        var variable = Variable(
+          name: debugLocalNames[variables.length] ?? 'local$index',
+          type: locals[index],
+        );
         variables.add(variable);
         statements.add(
             declareVar(variable.name, type: refer('${variable.type}'))
@@ -1423,20 +1532,32 @@ class ElementSegment {
 }
 
 class Global {
+  final Module module;
+  final int index;
   final ValueType type;
   final bool mutable;
   final List<Instr> initExpression;
 
-  String? name;
+  late String _generatedName;
 
   Global({
+    required this.module,
+    required this.index,
     required this.type,
     required this.mutable,
     required this.initExpression,
-  });
+  }) {
+    _generatedName = 'global$index';
+  }
+
+  String get name {
+    var debugInfo = module.globals.debugInfo;
+    if (debugInfo == null) return _generatedName;
+    return debugInfo.indexedNames[index] ?? _generatedName;
+  }
 
   String get initMethodName {
-    return '_init${name!.substring(0, 1).toUpperCase()}${name!.substring(1)}';
+    return '_init${name.substring(0, 1).toUpperCase()}${name.substring(1)}';
   }
 
   static Class createGlobalsClassDef(Module module) {
@@ -1444,8 +1565,8 @@ class Global {
 
     var needsGlobalInitializer = false;
 
-    for (int i = 0; i < module.globals.length; i++) {
-      var global = module.globals[i];
+    for (int i = 0; i < module.globals.count; i++) {
+      var global = module.globals.globals[i];
 
       Code assignment;
       var literalValue = Instruction.calcLiternal(global.initExpression);
@@ -1482,7 +1603,7 @@ class Global {
     }
 
     var initMethods = <Method>[];
-    for (var global in module.globals) {
+    for (var global in module.globals.globals) {
       var initFunction = DefinedFunction(module, 0, 0);
       var literalValue = Instruction.calcLiternal(global.initExpression);
 
@@ -1642,4 +1763,11 @@ String buildDataLiteral(List<int> bytes) {
     buf.clear();
   }
   return lines.join('\n');
+}
+
+class DebugInfo {
+  String? name;
+  final Map<int, String> indexedNames = {};
+
+  DebugInfo({this.name});
 }
