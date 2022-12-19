@@ -1564,14 +1564,16 @@ class Module {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
-    throw 'unreachable (0x81)';
+    frame.i64_rem_s();
+    return frame.pop();
   }
 
   i64 rem_u(i64 x, i64 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
-    throw 'unreachable (0x82)';
+    frame.i64_rem_u();
+    return frame.pop();
   }
 
   i64 and(i64 x, i64 y) {
@@ -1610,7 +1612,8 @@ class Module {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
-    throw 'unreachable (0x87)';
+    frame.i64_shr_s();
+    return frame.pop();
   }
 
   i64 shr_u(i64 x, i64 y) {
@@ -1640,37 +1643,43 @@ class Module {
   i64 clz(i64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0x79)';
+    frame.i64_clz();
+    return frame.pop();
   }
 
   i64 ctz(i64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0x7A)';
+    frame.i64_ctz();
+    return frame.pop();
   }
 
   i64 popcnt(i64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0x7B)';
+    frame.i64_popcnt();
+    return frame.pop();
   }
 
   i64 extend8_s(i64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xC2)';
+    frame.i64_extend8_s();
+    return frame.pop();
   }
 
   i64 extend16_s(i64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xC3)';
+    frame.i64_extend16_s();
+    return frame.pop();
   }
 
   i64 extend32_s(i64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xC4)';
+    frame.i64_extend32_s();
+    return frame.pop();
   }
 
   i32 eqz(i64 x) {
