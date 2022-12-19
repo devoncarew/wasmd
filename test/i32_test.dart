@@ -1602,19 +1602,22 @@ class Module {
   i32 clz(i32 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0x67)';
+    frame.i32_clz();
+    return frame.pop();
   }
 
   i32 ctz(i32 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0x68)';
+    frame.i32_ctz();
+    return frame.pop();
   }
 
   i32 popcnt(i32 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0x69)';
+    frame.i32_popcnt();
+    return frame.pop();
   }
 
   i32 extend8_s(i32 x) {

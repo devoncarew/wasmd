@@ -376,6 +376,47 @@ class Frame {
     stack.add(result);
   }
 
+  void i32_clz() {
+    // "Return the count of leading zero bits in i; all bits are considered
+    // leading zeros if i is 0."
+    u32 arg0 = stack.removeLast() as u32;
+    arg0 &= 0xFFFFFFFF;
+    stack.add(32 - arg0.bitLength);
+  }
+
+  void i32_ctz() {
+    // "Return the count of trailing zero bits in i; all bits are considered
+    // trailing zeros if i is 0."
+    u32 arg0 = stack.removeLast() as u32;
+
+    if (arg0 == 0) {
+      stack.add(32);
+    } else {
+      arg0 |= 0xFFFFFFFF00000000;
+      arg0 &= -arg0;
+      int clz;
+      if (arg0 & 0x8000000000000000 != 0) {
+        clz = 0;
+      } else {
+        clz = 32 - arg0.bitLength;
+      }
+      // function ctz4 (x)
+      //   x &= -x
+      //   return w - (clz(x) + 1)
+      stack.add(32 - (clz + 1));
+    }
+  }
+
+  void i32_popcnt() {
+    // "Return the count of non-zero bits in i."
+    u32 arg = stack.removeLast() as u32;
+    var result = popcntTable[arg & 0xFF];
+    result += popcntTable[(arg >> 8) & 0xFF];
+    result += popcntTable[(arg >> 16) & 0xFF];
+    result += popcntTable[(arg >> 24) & 0xFF];
+    stack.add(result);
+  }
+
   void i32_add() {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
@@ -655,7 +696,7 @@ class Frame {
     i64 arg1 = stack.removeLast() as i64;
     i64 arg0 = stack.removeLast() as i64;
     arg1 = arg1 & 0x3F; // shift right by arg1 bits modulo 64
-    var result = arg0 >>> arg1;
+    var result = arg0 >> arg1;
     stack.add(result);
   }
 
@@ -786,7 +827,8 @@ class Frame {
       i64 result = 0xFFFFFFFFFFFFFF00 | arg;
       stack.add(result);
     } else {
-      stack.add(arg);
+      i64 result = 0x00000000000000FF & arg;
+      stack.add(result);
     }
   }
 
@@ -796,7 +838,8 @@ class Frame {
       i64 result = 0xFFFFFFFFFFFF0000 | arg;
       stack.add(result);
     } else {
-      stack.add(arg);
+      i64 result = 0x000000000000FFFF & arg;
+      stack.add(result);
     }
   }
 
@@ -806,7 +849,8 @@ class Frame {
       i64 result = 0xFFFFFFFF00000000 | arg;
       stack.add(result);
     } else {
-      stack.add(arg);
+      i64 result = 0x00000000FFFFFFFF & arg;
+      stack.add(result);
     }
   }
 

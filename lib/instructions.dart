@@ -563,6 +563,9 @@ class Instruction {
       Instruction('i64.ge_u', 0x5A),
       Instruction('f64.gt', 0x64),
       Instruction('f64.le', 0x65),
+      Instruction('i32.clz', 0x67),
+      Instruction('i32.ctz', 0x68),
+      Instruction('i32.popcnt', 0x69),
       Instruction('i32.add', 0x6A),
       Instruction('i32.sub', 0x6B),
       Instruction('i32.mul', 0x6C),
@@ -577,6 +580,8 @@ class Instruction {
       Instruction('i32.shr_s', 0x75),
       Instruction('i32.shr_u', 0x76),
       Instruction('i32.rotl', 0x77),
+      // todo:
+      // Instruction('i32.rotr', 0x78),
       Instruction('i64.clz', 0x79),
       Instruction('i64.ctz', 0x7A),
       Instruction('i64.popcnt', 0x7B),

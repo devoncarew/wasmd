@@ -6,4 +6,5 @@ linter:
 
 analyzer:
   exclude:
+    - samples/large/**
     - spec/**
