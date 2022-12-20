@@ -67,7 +67,10 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(hostImports.fill_buf(t0, t1));
+      frame.push(hostImports.fill_buf(
+        t0,
+        t1,
+      ));
     }
     size = frame.pop();
     block_label_0:
@@ -83,12 +86,18 @@ class Module {
         }
         frame.push(i);
         frame.push(i);
-        frame.i32_load8_u(0, 0);
+        frame.i32_load8_u(
+          0,
+          0,
+        );
         {
           var t0 = frame.pop();
           frame.push(rot13c(t0));
         }
-        frame.i32_store8(0, 0);
+        frame.i32_store8(
+          0,
+          0,
+        );
         frame.push(i);
         frame.i32_const(1);
         frame.i32_add();
@@ -102,7 +111,10 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      hostImports.buf_done(t0, t1);
+      hostImports.buf_done(
+        t0,
+        t1,
+      );
     }
   }
 }
@@ -115,8 +127,14 @@ typedef FunctionType3 = void Function();
 /// A class representing the symbols imported from the 'host' module.
 abstract class HostImports {
   /// The imported 'fill_buf' symbol.
-  i32 fill_buf(i32 arg0, i32 arg1);
+  i32 fill_buf(
+    i32 arg0,
+    i32 arg1,
+  );
 
   /// The imported 'buf_done' symbol.
-  void buf_done(i32 arg0, i32 arg1);
+  void buf_done(
+    i32 arg0,
+    i32 arg1,
+  );
 }

@@ -11,7 +11,9 @@ class Module {
   }
 
   final ConsoleImports consoleImports;
+
   final Memory memory = Memory(0);
+
   final Globals globals = Globals();
 
   void _func0() {

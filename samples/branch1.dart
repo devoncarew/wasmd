@@ -11,6 +11,7 @@ class Module {
   }
 
   final Memory memory = Memory(0);
+
   final Globals globals = Globals();
 
   i32 sample() {

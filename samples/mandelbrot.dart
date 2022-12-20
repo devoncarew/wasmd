@@ -14,29 +14,47 @@ class Module {
   }
 
   final EnvImports envImports;
+
   final Memory memory = Memory(60);
+
   final Globals globals = Globals();
+
   final DataSegments dataSegments = DataSegments();
 
   i32 get width => globals.global0;
   set width(i32 value) => globals.global0 = value;
   i32 get height => globals.global1;
   set height(i32 value) => globals.global1 = value;
-  void _func0(i32 arg0, i32 arg1) {
+  void _func0(
+    i32 arg0,
+    i32 arg1,
+  ) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.push(arg1);
-    frame.i32_store(2, 4);
+    frame.i32_store(
+      2,
+      4,
+    );
   }
 
-  void _func1(i32 arg0, i32 arg1) {
+  void _func1(
+    i32 arg0,
+    i32 arg1,
+  ) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.push(arg1);
-    frame.i32_store(2, 8);
+    frame.i32_store(
+      2,
+      8,
+    );
   }
 
-  i32 _func2(i32 arg0, i32 arg1) {
+  i32 _func2(
+    i32 arg0,
+    i32 arg1,
+  ) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
@@ -156,7 +174,10 @@ class Module {
     globals.global2 = frame.pop();
     frame.push(local1);
     frame.push(local2);
-    frame.i32_store(2, 0);
+    frame.i32_store(
+      2,
+      0,
+    );
     frame.push(local0);
     frame.i32_const(4);
     frame.i32_sub();
@@ -165,35 +186,57 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func0(t0, t1);
+      _func0(
+        t0,
+        t1,
+      );
     }
     frame.push(local1);
     frame.i32_const(0);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func1(t0, t1);
+      _func1(
+        t0,
+        t1,
+      );
     }
     frame.push(local1);
     frame.push(arg1);
-    frame.i32_store(2, 12);
+    frame.i32_store(
+      2,
+      12,
+    );
     frame.push(local1);
     frame.push(arg0);
-    frame.i32_store(2, 16);
+    frame.i32_store(
+      2,
+      16,
+    );
     frame.push(local0);
     frame.i32_const(16);
     frame.i32_add();
     return frame.pop();
   }
 
-  void _func3(i32 arg0, i32 arg1) {
+  void _func3(
+    i32 arg0,
+    i32 arg1,
+  ) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.push(arg1);
-    frame.i32_store(2, 0);
+    frame.i32_store(
+      2,
+      0,
+    );
   }
 
-  i32 iterateEquation(f64 arg0, f64 arg1, i32 arg2) {
+  i32 iterateEquation(
+    f64 arg0,
+    f64 arg1,
+    i32 arg2,
+  ) {
     f64 local0 = 0;
     f64 local1 = 0;
     i32 local2 = 0;
@@ -251,7 +294,12 @@ class Module {
     return frame.pop();
   }
 
-  f64 _func5(f64 arg0, f64 arg1, f64 arg2, f64 arg3) {
+  f64 _func5(
+    f64 arg0,
+    f64 arg1,
+    f64 arg2,
+    f64 arg3,
+  ) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.push(arg1);
@@ -267,7 +315,10 @@ class Module {
     return frame.pop();
   }
 
-  i32 _func6(i32 arg0, i32 arg1) {
+  i32 _func6(
+    i32 arg0,
+    i32 arg1,
+  ) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.i32_const(2);
@@ -299,17 +350,32 @@ class Module {
     return frame.pop();
   }
 
-  void _func7(i32 arg0, i32 arg1, i32 arg2) {
+  void _func7(
+    i32 arg0,
+    i32 arg1,
+    i32 arg2,
+  ) {
     final frame = Frame(memory);
     frame.push(arg0);
-    frame.i32_load(2, 4);
+    frame.i32_load(
+      2,
+      4,
+    );
     frame.push(arg1);
     frame.i32_add();
     frame.push(arg2);
-    frame.i32_store8(0, 0);
+    frame.i32_store8(
+      0,
+      0,
+    );
   }
 
-  void mandelbrot(i32 arg0, f64 arg1, f64 arg2, f64 arg3) {
+  void mandelbrot(
+    i32 arg0,
+    f64 arg1,
+    f64 arg2,
+    f64 arg3,
+  ) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
@@ -385,7 +451,11 @@ class Module {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              frame.push(iterateEquation(t0, t1, t2));
+              frame.push(iterateEquation(
+                t0,
+                t1,
+                t2,
+              ));
             }
             local2 = frame.peek();
             frame.push(arg0);
@@ -410,14 +480,21 @@ class Module {
               {
                 var t1 = frame.pop();
                 var t0 = frame.pop();
-                frame.push(_func6(t0, t1));
+                frame.push(_func6(
+                  t0,
+                  t1,
+                ));
               }
             }
             {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              _func7(t0, t1, t2);
+              _func7(
+                t0,
+                t1,
+                t2,
+              );
             }
             frame.push(globals.global3);
             frame.push(local4);
@@ -433,14 +510,21 @@ class Module {
               {
                 var t1 = frame.pop();
                 var t0 = frame.pop();
-                frame.push(_func6(t0, t1));
+                frame.push(_func6(
+                  t0,
+                  t1,
+                ));
               }
             }
             {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              _func7(t0, t1, t2);
+              _func7(
+                t0,
+                t1,
+                t2,
+              );
             }
             frame.push(globals.global3);
             frame.push(local4);
@@ -456,14 +540,21 @@ class Module {
               {
                 var t1 = frame.pop();
                 var t0 = frame.pop();
-                frame.push(_func6(t0, t1));
+                frame.push(_func6(
+                  t0,
+                  t1,
+                ));
               }
             }
             {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              _func7(t0, t1, t2);
+              _func7(
+                t0,
+                t1,
+                t2,
+              );
             }
             frame.push(globals.global3);
             frame.push(local4);
@@ -474,7 +565,11 @@ class Module {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              _func7(t0, t1, t2);
+              _func7(
+                t0,
+                t1,
+                t2,
+              );
             }
             frame.push(local0);
             frame.i32_const(1);
@@ -503,7 +598,10 @@ class Module {
   i32 getDataBuffer() {
     final frame = Frame(memory);
     frame.push(globals.global3);
-    frame.i32_load(2, 0);
+    frame.i32_load(
+      2,
+      0,
+    );
     return frame.pop();
   }
 
@@ -519,7 +617,10 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(_func2(t0, t1));
+      frame.push(_func2(
+        t0,
+        t1,
+      ));
     }
     local0 = frame.peek();
     frame.i32_eqz();
@@ -530,7 +631,10 @@ class Module {
       {
         var t1 = frame.pop();
         var t0 = frame.pop();
-        frame.push(_func2(t0, t1));
+        frame.push(_func2(
+          t0,
+          t1,
+        ));
       }
       local0 = frame.pop();
     }
@@ -539,28 +643,40 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func3(t0, t1);
+      _func3(
+        t0,
+        t1,
+      );
     }
     frame.push(local0);
     frame.i32_const(0);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func0(t0, t1);
+      _func0(
+        t0,
+        t1,
+      );
     }
     frame.push(local0);
     frame.i32_const(0);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func1(t0, t1);
+      _func1(
+        t0,
+        t1,
+      );
     }
     frame.i32_const(0x3a9800);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(_func2(t0, t1));
+      frame.push(_func2(
+        t0,
+        t1,
+      ));
     }
     local1 = frame.peek();
     frame.i32_const(0);
@@ -571,21 +687,30 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func3(t0, t1);
+      _func3(
+        t0,
+        t1,
+      );
     }
     frame.push(local0);
     frame.push(local1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func0(t0, t1);
+      _func0(
+        t0,
+        t1,
+      );
     }
     frame.push(local0);
     frame.i32_const(0x3a9800);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func1(t0, t1);
+      _func1(
+        t0,
+        t1,
+      );
     }
     frame.push(local0);
     globals.global3 = frame.pop();
@@ -604,55 +729,101 @@ typedef FunctionType8 = void Function();
 
 class Globals {
   i32 global0 = 0x4b0;
+
   i32 global1 = 800;
+
   i32 global2 = 0;
+
   i32 global3 = 0;
 }
 
 /// A class representing the symbols imported from the 'env' module.
 abstract class EnvImports {
   /// The imported 'abort' symbol.
-  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3);
+  void abort(
+    i32 arg0,
+    i32 arg1,
+    i32 arg2,
+    i32 arg3,
+  );
 }
 
 class DataSegments {
   Uint8List data0 = decodeDataLiteral(_hex0);
+
   Uint8List data1 = decodeDataLiteral(_hex1);
+
   Uint8List data2 = decodeDataLiteral(_hex2);
+
   Uint8List data3 = decodeDataLiteral(_hex3);
+
   Uint8List data4 = decodeDataLiteral(_hex4);
+
   Uint8List data5 = decodeDataLiteral(_hex5);
+
   Uint8List data6 = decodeDataLiteral(_hex6);
+
   Uint8List data7 = decodeDataLiteral(_hex7);
 
   static const String _hex0 = '\x2C';
+
   static const String _hex1 =
       '\x02\x00\x00\x00\x1C\x00\x00\x00\x49\x00\x6E\x00\x76\x00\x61\x00\x6C\x00'
       '\x69\x00\x64\x00\x20\x00\x6C\x00\x65\x00\x6E\x00\x67\x00\x74\x00\x68';
+
   static const String _hex2 = '\x3C';
+
   static const String _hex3 =
       '\x02\x00\x00\x00\x26\x00\x00\x00\x7E\x00\x6C\x00\x69\x00\x62\x00\x2F\x00'
       '\x61\x00\x72\x00\x72\x00\x61\x00\x79\x00\x62\x00\x75\x00\x66\x00\x66\x00'
       '\x65\x00\x72\x00\x2E\x00\x74\x00\x73';
+
   static const String _hex4 = '\x3C';
+
   static const String _hex5 =
       '\x02\x00\x00\x00\x28\x00\x00\x00\x41\x00\x6C\x00\x6C\x00\x6F\x00\x63\x00'
       '\x61\x00\x74\x00\x69\x00\x6F\x00\x6E\x00\x20\x00\x74\x00\x6F\x00\x6F\x00'
       '\x20\x00\x6C\x00\x61\x00\x72\x00\x67\x00\x65';
+
   static const String _hex6 = '\x3C';
+
   static const String _hex7 =
       '\x02\x00\x00\x00\x1E\x00\x00\x00\x7E\x00\x6C\x00\x69\x00\x62\x00\x2F\x00'
       '\x72\x00\x74\x00\x2F\x00\x73\x00\x74\x00\x75\x00\x62\x00\x2E\x00\x74\x00'
       '\x73';
 
   void init(Memory memory) {
-    memory.copyTo(data0, 1036);
-    memory.copyTo(data1, 1048);
-    memory.copyTo(data2, 1084);
-    memory.copyTo(data3, 1096);
-    memory.copyTo(data4, 1148);
-    memory.copyTo(data5, 1160);
-    memory.copyTo(data6, 1212);
-    memory.copyTo(data7, 1224);
+    memory.copyTo(
+      data0,
+      1036,
+    );
+    memory.copyTo(
+      data1,
+      1048,
+    );
+    memory.copyTo(
+      data2,
+      1084,
+    );
+    memory.copyTo(
+      data3,
+      1096,
+    );
+    memory.copyTo(
+      data4,
+      1148,
+    );
+    memory.copyTo(
+      data5,
+      1160,
+    );
+    memory.copyTo(
+      data6,
+      1212,
+    );
+    memory.copyTo(
+      data7,
+      1224,
+    );
   }
 }
