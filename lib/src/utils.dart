@@ -2,6 +2,7 @@
 
 import 'dart:collection';
 
+import 'package:charcode/ascii.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 
@@ -23,6 +24,10 @@ class NoPrefixAllocator implements Allocator {
       _imports.map((url) => Directive.import(url));
 }
 
+String patchUpName(String name) {
+  return name.replaceAll('-', '_').replaceAll('.', '_');
+}
+
 bool isValidIdentifier(String str) {
   if (str.isEmpty) return false;
 
@@ -37,26 +42,18 @@ bool isValidIdentifier(String str) {
   return true;
 }
 
-const _0 = 48;
-const _9 = 57;
-const _A = 65;
-const _Z = 90;
-const _underscore = 95;
-const _a = 97;
-const _z = 122;
-
 bool isLetter(int char) {
-  if (char == _underscore) return true;
-  if (char >= _a && char <= _z) return true;
-  if (char >= _A && char <= _Z) return true;
+  if (char == $_) return true;
+  if (char >= $a && char <= $z) return true;
+  if (char >= $A && char <= $Z) return true;
   return false;
 }
 
 bool isLetterNumber(int char) {
-  if (char == _underscore) return true;
-  if (char >= _a && char <= _z) return true;
-  if (char >= _A && char <= _Z) return true;
-  if (char >= _0 && char <= _9) return true;
+  if (char == $_) return true;
+  if (char >= $a && char <= $z) return true;
+  if (char >= $A && char <= $Z) return true;
+  if (char >= $0 && char <= $9) return true;
   return false;
 }
 

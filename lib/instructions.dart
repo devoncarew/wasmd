@@ -628,6 +628,8 @@ class Instruction {
   static List<Instruction> _initOverflow() {
     return [
       Instruction('i32.trunc_sat_f64_u', 0x03),
+      // Instruction('memory.init', 0x08, immediates: _one),
+      Instruction('memory.copy', 0x0A, immediates: _two),
       Instruction('memory.fill', 0x0B, immediates: _one),
     ];
   }

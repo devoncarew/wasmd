@@ -53,7 +53,14 @@ class Memory {
 
     // TODO: find a faster copy method
     for (int i = 0; i < len; i++) {
-      data.setUint8(i + offset, bytes[i]);
+      data.setUint8(offset + i, bytes[i]);
+    }
+  }
+
+  void copy(i32 count, i32 sourceOffset, i32 destOffset) {
+    // TODO: find a faster copy method
+    for (int i = 0; i < count; i++) {
+      data.setUint8(destOffset + i, data.getUint8(sourceOffset + i));
     }
   }
 
@@ -860,6 +867,13 @@ class Frame {
     f64 arg0 = stack.removeLast() as f64;
     i32 result = arg0.toInt() & 0xFFFFFFFF;
     stack.add(result);
+  }
+
+  void memory_copy(u32 srcMemoryIndex, u32 destMemoryIndex) {
+    i32 count = stack.removeLast() as i32;
+    i32 sourceOffset = stack.removeLast() as i32;
+    i32 destOffset = stack.removeLast() as i32;
+    memory.copy(count, sourceOffset, destOffset);
   }
 
   void memory_fill(u32 memoryIndex) {

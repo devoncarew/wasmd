@@ -180,7 +180,7 @@ class Compiler {
           var functions = r.leb128_u();
           for (int i = 0; i < functions; i++) {
             var index = r.leb128_u();
-            var name = r.readUtf8();
+            var name = patchUpName(r.readUtf8());
             if (isValidIdentifier(name)) {
               _log('  [$name]');
               var localMap =
@@ -393,7 +393,7 @@ class Compiler {
           // funcidx
           var functionIndex = r.leb128();
           _log("  export func '$name' (#$functionIndex)");
-          module.exportFunction(name, functionIndex);
+          module.exportFunction(patchUpName(name), functionIndex);
           break;
         case 0x02:
           // memidx
@@ -1071,10 +1071,9 @@ class FunctionType {
 
   FunctionType(this.parameterTypes, this.resultType);
 
+  // todo: handle multiple return values
   String get resultTypeDisplayName {
-    return resultType.isEmpty
-        ? 'void'
-        : resultType.map((e) => e.toString()).join(', ');
+    return resultType.isEmpty ? 'void' : resultType.first.toString();
   }
 
   bool get returnsVoid => resultType.isEmpty;
