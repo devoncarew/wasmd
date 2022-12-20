@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
+import 'dart:math' as math;
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
@@ -8,38 +9,29 @@ import 'package:wasmd/runtime.dart';
 import 'mandelbrot.dart';
 
 void main(List<String> args) {
-  // var memBytes = 1200 * 800 * 4;
-  // final memory = Memory(memBytes ~/ Memory.pageSize + 1);
+  final numColors = 216;
 
-  var mandelbrot = Module(envImports: _EnvImports());
+  var width = 300;
+  var height = 300 * 9 ~/ 16;
 
-  mandelbrot.width = stdout.hasTerminal ? stdout.terminalColumns : 80;
-  mandelbrot.height = stdout.hasTerminal ? stdout.terminalLines - 2 : 40;
-  print('Calculating for ${mandelbrot.width}x${mandelbrot.height}:');
+  width = stdout.hasTerminal ? stdout.terminalColumns : 80;
+  height = (stdout.hasTerminal ? stdout.terminalLines - 2 : 40) * 2;
+  print('Calculating for ${width}x$height:');
   print('');
 
-  // iterations, cx, cy, diameter
-  // mandelbrot.mandelbrot(1000, 1.5, 0.75, 4.0);
-  mandelbrot.mandelbrot(1000, -0.7436447860, 0.1318252536, 0.00029336);
-  // mandelbrot.mandelbrot(1000, -0.7436447860, 0.1318252536, 0.00059336);
+  var memory = Memory(width * height * 2 ~/ Memory.pageSize + 1);
+  var mandelbrot = Module(envImports: _EnvImports(), memory: memory);
 
-  final range = 256.0 / 6;
-  final offset = mandelbrot.getDataBuffer();
-  final memory = mandelbrot.memory;
+  var stopwatch = Stopwatch()..start();
+  mandelbrot.update(width, height, numColors);
+  stopwatch.stop();
 
-  for (int y = 0; y < mandelbrot.height; y++) {
-    for (int x = 0; x < mandelbrot.width; x++) {
-      int color = memory.data.getUint32(
-        (x + y * mandelbrot.width) * 4 + offset,
-        Endian.little,
-      );
+  for (int y = 0; y < height; y += 2) {
+    for (int x = 0; x < width; x++) {
+      int color = memory.data.getUint16((x + y * width) * 2, Endian.little);
 
-      int r = (color >> 16) & 0xff;
-      int g = (color >> 8) & 0xff;
-      int b = color & 0xff;
-
-      int n = 16 + (r ~/ range) * 36 + (g ~/ range) * 6 + (b ~/ range);
-      var char = n == 16 ? ' ' : '•';
+      int n = color + 16;
+      var char = color == numColors - 1 ? ' ' : '•';
       stdout.write('\u001b[38;5;${n}m$char');
 
       // int grey = (r + g + b) ~/ 3;
@@ -48,12 +40,13 @@ void main(List<String> args) {
     stdout.writeln();
   }
 
-  stdout.writeln();
+  print('\u001b[0m${width}x$height ran in ${stopwatch.elapsedMilliseconds}ms');
 }
 
 class _EnvImports implements EnvImports {
   @override
-  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
-    // TODO:
-  }
+  f64 Math_log(f64 val) => math.log(val);
+
+  @override
+  f64 Math_log2(f64 val) => math.log(val) / math.log2e;
 }

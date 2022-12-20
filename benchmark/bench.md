@@ -1,9 +1,7 @@
 ## Mandelbrot
 
-240x160
+240x160 @ 200 max iterations
 
-- 12/11/2022: 20,092.5 sec (stock generated code)
-              14,077.3 sec (manually removed some stack operations)
-                 772.1 sec (removed all stack operations from iterateEquation)
+algorithm from https://www.assemblyscript.org/examples/mandelbrot.html
 
-25x faster w/o the stack operations
+12/19/2022: 4,680.6 sec
