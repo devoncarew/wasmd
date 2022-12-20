@@ -6,7 +6,7 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-import 'man2.dart';
+import 'mandelbrot.dart';
 
 void main(List<String> args) {
   final numColors = 216;
@@ -15,7 +15,7 @@ void main(List<String> args) {
   var height = 300 * 9 ~/ 16;
 
   width = stdout.hasTerminal ? stdout.terminalColumns : 80;
-  height = stdout.hasTerminal ? stdout.terminalLines - 2 : 40;
+  height = (stdout.hasTerminal ? stdout.terminalLines - 2 : 40) * 2;
   print('Calculating for ${width}x$height:');
   print('');
 
@@ -26,7 +26,7 @@ void main(List<String> args) {
   mandelbrot.update(width, height, numColors);
   stopwatch.stop();
 
-  for (int y = 0; y < height; y++) {
+  for (int y = 0; y < height; y += 2) {
     for (int x = 0; x < width; x++) {
       int color = memory.data.getUint16((x + y * width) * 2, Endian.little);
 
