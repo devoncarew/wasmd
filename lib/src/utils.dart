@@ -62,11 +62,7 @@ bool isLetterNumber(int char) {
 
 String emitFormatLibrary(Library library) {
   var formatter = DartFormatter();
-  var emitter = DartEmitter(
-    orderDirectives: true,
-    useNullSafetySyntax: true,
-    allocator: NoPrefixAllocator(),
-  );
+  var emitter = WasmCustomEmitter();
 
   var code = library.accept(emitter).toString();
   try {
@@ -75,4 +71,36 @@ String emitFormatLibrary(Library library) {
     print(e);
   }
   return code;
+}
+
+// todo: move these changes into package:code_builder
+class WasmCustomEmitter extends DartEmitter {
+  WasmCustomEmitter()
+      : super(
+          orderDirectives: true,
+          useNullSafetySyntax: true,
+          allocator: NoPrefixAllocator(),
+        );
+
+  // @override
+  // StringSink visitField(Field spec, [StringSink? output]) {
+  //   output ??= StringBuffer();
+  //   var replacement = StringBuffer();
+  //   super.visitField(spec, replacement);
+  //   var str = replacement.toString();
+  //   str = str.split('\n').where((s) => s.isNotEmpty).join('\n');
+  //   output.writeln(str);
+  //   return output;
+  // }
+
+  @override
+  StringSink visitMethod(Method spec, [StringSink? output]) {
+    output ??= StringBuffer();
+    var replacement = StringBuffer();
+    super.visitMethod(spec, replacement);
+    var str = replacement.toString();
+    str = str.replaceAll(', )', ')');
+    output.write(str);
+    return output;
+  }
 }

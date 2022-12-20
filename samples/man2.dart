@@ -16,11 +16,7 @@ class Module {
   /// min pages: 0
   final Memory memory;
 
-  void update(
-    i32 arg0,
-    i32 arg1,
-    i32 arg2,
-  ) {
+  void update(i32 arg0, i32 arg1, i32 arg2) {
     f64 local0 = 0;
     f64 local1 = 0;
     f64 local2 = 0;
@@ -247,10 +243,7 @@ class Module {
             } else {
               frame.i32_const(215);
             }
-            frame.i32_store16(
-              1,
-              0,
-            );
+            frame.i32_store16(1, 0);
             frame.push(local9);
             frame.i32_const(1);
             frame.i32_add();

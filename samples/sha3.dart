@@ -15,176 +15,89 @@ class Module {
 
   final Globals globals = Globals();
 
-  void init(
-    i32 arg0,
-    i32 arg1,
-    i32 arg2,
-  ) {
+  void init(i32 arg0, i32 arg1, i32 arg2) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      0,
-    );
+    frame.i64_store(3, 0);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      8,
-    );
+    frame.i64_store(3, 8);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      16,
-    );
+    frame.i64_store(3, 16);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      32,
-    );
+    frame.i64_store(3, 32);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      40,
-    );
+    frame.i64_store(3, 40);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      48,
-    );
+    frame.i64_store(3, 48);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      56,
-    );
+    frame.i64_store(3, 56);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      64,
-    );
+    frame.i64_store(3, 64);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      72,
-    );
+    frame.i64_store(3, 72);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      80,
-    );
+    frame.i64_store(3, 80);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      88,
-    );
+    frame.i64_store(3, 88);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      964,
-    );
+    frame.i64_store(3, 964);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      104,
-    );
+    frame.i64_store(3, 104);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      112,
-    );
+    frame.i64_store(3, 112);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      120,
-    );
+    frame.i64_store(3, 120);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      128,
-    );
+    frame.i64_store(3, 128);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      136,
-    );
+    frame.i64_store(3, 136);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      144,
-    );
+    frame.i64_store(3, 144);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      152,
-    );
+    frame.i64_store(3, 152);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      160,
-    );
+    frame.i64_store(3, 160);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      168,
-    );
+    frame.i64_store(3, 168);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      176,
-    );
+    frame.i64_store(3, 176);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      184,
-    );
+    frame.i64_store(3, 184);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      192,
-    );
+    frame.i64_store(3, 192);
     frame.push(arg0);
     frame.i64_const(0);
-    frame.i64_store(
-      3,
-      200,
-    );
+    frame.i64_store(3, 200);
     frame.push(arg0);
     frame.push(arg1);
-    frame.i32_store(
-      2,
-      0,
-    );
+    frame.i32_store(2, 0);
   }
 
-  i32 pad(
-    i32 arg0,
-    i32 arg1,
-    i32 arg2,
-    i32 arg3,
-  ) {
+  i32 pad(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
     i32 local0 = 0;
 
     final frame = Frame(memory);
@@ -209,11 +122,7 @@ class Module {
     }
   }
 
-  i32 absorb(
-    i32 arg0,
-    i32 arg1,
-    i32 arg2,
-  ) {
+  i32 absorb(i32 arg0, i32 arg1, i32 arg2) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
@@ -224,16 +133,10 @@ class Module {
     frame.push(arg1);
     local2 = frame.pop();
     frame.push(arg0);
-    frame.i32_load(
-      2,
-      0,
-    );
+    frame.i32_load(2, 0);
     local4 = frame.pop();
     frame.push(arg0);
-    frame.i32_load(
-      2,
-      4,
-    );
+    frame.i32_load(2, 4);
     frame.push(local4);
     frame.i32_const(8);
     frame.i32_div_u();
@@ -281,20 +184,11 @@ class Module {
           frame.push(arg0);
           frame.push(local0);
           frame.i32_add();
-          frame.i64_load(
-            3,
-            8,
-          );
+          frame.i64_load(3, 8);
           frame.push(arg1);
-          frame.i64_load(
-            3,
-            0,
-          );
+          frame.i64_load(3, 0);
           frame.i64_xor();
-          frame.i64_store(
-            3,
-            8,
-          );
+          frame.i64_store(3, 8);
           frame.push(arg1);
           frame.i32_const(8);
           frame.i32_add();
@@ -311,20 +205,11 @@ class Module {
         frame.push(arg0);
         frame.push(local0);
         frame.i32_add();
-        frame.i64_load8_u(
-          0,
-          8,
-        );
+        frame.i64_load8_u(0, 8);
         frame.push(arg1);
-        frame.i64_load8_u(
-          0,
-          0,
-        );
+        frame.i64_load8_u(0, 0);
         frame.i64_xor();
-        frame.i64_store8(
-          0,
-          8,
-        );
+        frame.i64_store8(0, 8);
         frame.push(arg1);
         frame.i32_const(1);
         frame.i32_add();
@@ -339,10 +224,7 @@ class Module {
     }
     frame.push(arg0);
     frame.push(arg0);
-    frame.i32_load(
-      2,
-      4,
-    );
+    frame.i32_load(2, 4);
     frame.i32_const(8);
     frame.i32_div_u();
     frame.i32_const(8);
@@ -351,10 +233,7 @@ class Module {
     frame.push(local2);
     frame.i32_sub();
     frame.i32_add();
-    frame.i32_store(
-      2,
-      4,
-    );
+    frame.i32_store(2, 4);
     frame.push(arg1);
     frame.push(local2);
     frame.i32_sub();
@@ -363,11 +242,7 @@ class Module {
     return frame.pop();
   }
 
-  void squeeze(
-    i32 arg0,
-    i32 arg1,
-    i32 arg2,
-  ) {
+  void squeeze(i32 arg0, i32 arg1, i32 arg2) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
@@ -379,10 +254,7 @@ class Module {
     frame.i32_add();
     local0 = frame.pop();
     frame.push(arg0);
-    frame.i32_load(
-      2,
-      0,
-    );
+    frame.i32_load(2, 0);
     frame.i32_const(8);
     frame.i32_div_u();
     local3 = frame.pop();
@@ -396,14 +268,8 @@ class Module {
         {
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            0,
-          );
-          frame.i64_store(
-            3,
-            0,
-          );
+          frame.i64_load(3, 0);
+          frame.i64_store(3, 0);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -414,14 +280,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            8,
-          );
-          frame.i64_store(
-            3,
-            8,
-          );
+          frame.i64_load(3, 8);
+          frame.i64_store(3, 8);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -432,14 +292,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            16,
-          );
-          frame.i64_store(
-            3,
-            16,
-          );
+          frame.i64_load(3, 16);
+          frame.i64_store(3, 16);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -450,14 +304,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            24,
-          );
-          frame.i64_store(
-            3,
-            24,
-          );
+          frame.i64_load(3, 24);
+          frame.i64_store(3, 24);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -468,14 +316,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            32,
-          );
-          frame.i64_store(
-            3,
-            32,
-          );
+          frame.i64_load(3, 32);
+          frame.i64_store(3, 32);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -486,14 +328,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            40,
-          );
-          frame.i64_store(
-            3,
-            40,
-          );
+          frame.i64_load(3, 40);
+          frame.i64_store(3, 40);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -504,14 +340,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            48,
-          );
-          frame.i64_store(
-            3,
-            48,
-          );
+          frame.i64_load(3, 48);
+          frame.i64_store(3, 48);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -522,14 +352,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            56,
-          );
-          frame.i64_store(
-            3,
-            56,
-          );
+          frame.i64_load(3, 56);
+          frame.i64_store(3, 56);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -540,14 +364,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            64,
-          );
-          frame.i64_store(
-            3,
-            64,
-          );
+          frame.i64_load(3, 64);
+          frame.i64_store(3, 64);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -558,14 +376,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            72,
-          );
-          frame.i64_store(
-            3,
-            72,
-          );
+          frame.i64_load(3, 72);
+          frame.i64_store(3, 72);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -576,14 +388,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            80,
-          );
-          frame.i64_store(
-            3,
-            80,
-          );
+          frame.i64_load(3, 80);
+          frame.i64_store(3, 80);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -594,14 +400,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            88,
-          );
-          frame.i64_store(
-            3,
-            88,
-          );
+          frame.i64_load(3, 88);
+          frame.i64_store(3, 88);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -612,14 +412,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            96,
-          );
-          frame.i64_store(
-            3,
-            96,
-          );
+          frame.i64_load(3, 96);
+          frame.i64_store(3, 96);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -630,14 +424,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            104,
-          );
-          frame.i64_store(
-            3,
-            104,
-          );
+          frame.i64_load(3, 104);
+          frame.i64_store(3, 104);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -648,14 +436,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            112,
-          );
-          frame.i64_store(
-            3,
-            112,
-          );
+          frame.i64_load(3, 112);
+          frame.i64_store(3, 112);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -666,14 +448,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            120,
-          );
-          frame.i64_store(
-            3,
-            120,
-          );
+          frame.i64_load(3, 120);
+          frame.i64_store(3, 120);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -684,14 +460,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            128,
-          );
-          frame.i64_store(
-            3,
-            128,
-          );
+          frame.i64_load(3, 128);
+          frame.i64_store(3, 128);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -702,14 +472,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            136,
-          );
-          frame.i64_store(
-            3,
-            136,
-          );
+          frame.i64_load(3, 136);
+          frame.i64_store(3, 136);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -720,14 +484,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            144,
-          );
-          frame.i64_store(
-            3,
-            144,
-          );
+          frame.i64_load(3, 144);
+          frame.i64_store(3, 144);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -738,14 +496,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            152,
-          );
-          frame.i64_store(
-            3,
-            152,
-          );
+          frame.i64_load(3, 152);
+          frame.i64_store(3, 152);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -756,14 +508,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            160,
-          );
-          frame.i64_store(
-            3,
-            160,
-          );
+          frame.i64_load(3, 160);
+          frame.i64_store(3, 160);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -774,14 +520,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            168,
-          );
-          frame.i64_store(
-            3,
-            168,
-          );
+          frame.i64_load(3, 168);
+          frame.i64_store(3, 168);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -792,14 +532,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            176,
-          );
-          frame.i64_store(
-            3,
-            176,
-          );
+          frame.i64_load(3, 176);
+          frame.i64_store(3, 176);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -810,14 +544,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            184,
-          );
-          frame.i64_store(
-            3,
-            184,
-          );
+          frame.i64_load(3, 184);
+          frame.i64_store(3, 184);
           frame.push(local2);
           frame.i32_const(8);
           frame.i32_add();
@@ -828,14 +556,8 @@ class Module {
           if (frame.pop() != 0) break block_label_2;
           frame.push(arg1);
           frame.push(local0);
-          frame.i64_load(
-            3,
-            192,
-          );
-          frame.i64_store(
-            3,
-            192,
-          );
+          frame.i64_load(3, 192);
+          frame.i64_store(3, 192);
         }
         frame.push(local1);
         frame.push(arg2);
@@ -1391,154 +1113,79 @@ class Module {
     frame.i32_add();
     local0 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      0,
-    );
+    frame.i64_load(3, 0);
     globals.global0 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      8,
-    );
+    frame.i64_load(3, 8);
     globals.global2 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      16,
-    );
+    frame.i64_load(3, 16);
     globals.global4 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      24,
-    );
+    frame.i64_load(3, 24);
     globals.global6 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      32,
-    );
+    frame.i64_load(3, 32);
     globals.global8 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      40,
-    );
+    frame.i64_load(3, 40);
     globals.global10 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      48,
-    );
+    frame.i64_load(3, 48);
     globals.global12 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      56,
-    );
+    frame.i64_load(3, 56);
     globals.global14 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      64,
-    );
+    frame.i64_load(3, 64);
     globals.global16 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      72,
-    );
+    frame.i64_load(3, 72);
     globals.global18 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      80,
-    );
+    frame.i64_load(3, 80);
     globals.global20 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      88,
-    );
+    frame.i64_load(3, 88);
     globals.global22 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      96,
-    );
+    frame.i64_load(3, 96);
     globals.global24 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      104,
-    );
+    frame.i64_load(3, 104);
     globals.global26 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      112,
-    );
+    frame.i64_load(3, 112);
     globals.global28 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      120,
-    );
+    frame.i64_load(3, 120);
     globals.global30 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      128,
-    );
+    frame.i64_load(3, 128);
     globals.global32 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      136,
-    );
+    frame.i64_load(3, 136);
     globals.global34 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      144,
-    );
+    frame.i64_load(3, 144);
     globals.global36 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      152,
-    );
+    frame.i64_load(3, 152);
     globals.global38 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      160,
-    );
+    frame.i64_load(3, 160);
     globals.global40 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      168,
-    );
+    frame.i64_load(3, 168);
     globals.global42 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      176,
-    );
+    frame.i64_load(3, 176);
     globals.global44 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      184,
-    );
+    frame.i64_load(3, 184);
     globals.global46 = frame.pop();
     frame.push(local0);
-    frame.i64_load(
-      3,
-      192,
-    );
+    frame.i64_load(3, 192);
     globals.global48 = frame.pop();
     _func4();
     frame.push(globals.global0);
@@ -1662,154 +1309,79 @@ class Module {
     globals.global0 = frame.pop();
     frame.push(local0);
     frame.push(globals.global0);
-    frame.i64_store(
-      3,
-      0,
-    );
+    frame.i64_store(3, 0);
     frame.push(local0);
     frame.push(globals.global2);
-    frame.i64_store(
-      3,
-      8,
-    );
+    frame.i64_store(3, 8);
     frame.push(local0);
     frame.push(globals.global4);
-    frame.i64_store(
-      3,
-      16,
-    );
+    frame.i64_store(3, 16);
     frame.push(local0);
     frame.push(globals.global6);
-    frame.i64_store(
-      3,
-      24,
-    );
+    frame.i64_store(3, 24);
     frame.push(local0);
     frame.push(globals.global8);
-    frame.i64_store(
-      3,
-      32,
-    );
+    frame.i64_store(3, 32);
     frame.push(local0);
     frame.push(globals.global10);
-    frame.i64_store(
-      3,
-      40,
-    );
+    frame.i64_store(3, 40);
     frame.push(local0);
     frame.push(globals.global12);
-    frame.i64_store(
-      3,
-      48,
-    );
+    frame.i64_store(3, 48);
     frame.push(local0);
     frame.push(globals.global14);
-    frame.i64_store(
-      3,
-      56,
-    );
+    frame.i64_store(3, 56);
     frame.push(local0);
     frame.push(globals.global16);
-    frame.i64_store(
-      3,
-      64,
-    );
+    frame.i64_store(3, 64);
     frame.push(local0);
     frame.push(globals.global18);
-    frame.i64_store(
-      3,
-      72,
-    );
+    frame.i64_store(3, 72);
     frame.push(local0);
     frame.push(globals.global20);
-    frame.i64_store(
-      3,
-      80,
-    );
+    frame.i64_store(3, 80);
     frame.push(local0);
     frame.push(globals.global22);
-    frame.i64_store(
-      3,
-      88,
-    );
+    frame.i64_store(3, 88);
     frame.push(local0);
     frame.push(globals.global24);
-    frame.i64_store(
-      3,
-      96,
-    );
+    frame.i64_store(3, 96);
     frame.push(local0);
     frame.push(globals.global26);
-    frame.i64_store(
-      3,
-      104,
-    );
+    frame.i64_store(3, 104);
     frame.push(local0);
     frame.push(globals.global28);
-    frame.i64_store(
-      3,
-      112,
-    );
+    frame.i64_store(3, 112);
     frame.push(local0);
     frame.push(globals.global30);
-    frame.i64_store(
-      3,
-      120,
-    );
+    frame.i64_store(3, 120);
     frame.push(local0);
     frame.push(globals.global32);
-    frame.i64_store(
-      3,
-      128,
-    );
+    frame.i64_store(3, 128);
     frame.push(local0);
     frame.push(globals.global34);
-    frame.i64_store(
-      3,
-      136,
-    );
+    frame.i64_store(3, 136);
     frame.push(local0);
     frame.push(globals.global36);
-    frame.i64_store(
-      3,
-      144,
-    );
+    frame.i64_store(3, 144);
     frame.push(local0);
     frame.push(globals.global38);
-    frame.i64_store(
-      3,
-      152,
-    );
+    frame.i64_store(3, 152);
     frame.push(local0);
     frame.push(globals.global40);
-    frame.i64_store(
-      3,
-      160,
-    );
+    frame.i64_store(3, 160);
     frame.push(local0);
     frame.push(globals.global42);
-    frame.i64_store(
-      3,
-      168,
-    );
+    frame.i64_store(3, 168);
     frame.push(local0);
     frame.push(globals.global44);
-    frame.i64_store(
-      3,
-      176,
-    );
+    frame.i64_store(3, 176);
     frame.push(local0);
     frame.push(globals.global46);
-    frame.i64_store(
-      3,
-      184,
-    );
+    frame.i64_store(3, 184);
     frame.push(local0);
     frame.push(globals.global48);
-    frame.i64_store(
-      3,
-      192,
-    );
+    frame.i64_store(3, 192);
   }
 }
 

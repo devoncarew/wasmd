@@ -25,36 +25,21 @@ class Module {
   set width(i32 value) => globals.global0 = value;
   i32 get height => globals.global1;
   set height(i32 value) => globals.global1 = value;
-  void _func0(
-    i32 arg0,
-    i32 arg1,
-  ) {
+  void _func0(i32 arg0, i32 arg1) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.push(arg1);
-    frame.i32_store(
-      2,
-      4,
-    );
+    frame.i32_store(2, 4);
   }
 
-  void _func1(
-    i32 arg0,
-    i32 arg1,
-  ) {
+  void _func1(i32 arg0, i32 arg1) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.push(arg1);
-    frame.i32_store(
-      2,
-      8,
-    );
+    frame.i32_store(2, 8);
   }
 
-  i32 _func2(
-    i32 arg0,
-    i32 arg1,
-  ) {
+  i32 _func2(i32 arg0, i32 arg1) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
@@ -77,12 +62,7 @@ class Module {
         var t2 = frame.pop();
         var t1 = frame.pop();
         var t0 = frame.pop();
-        envImports.abort(
-          t0,
-          t1,
-          t2,
-          t3,
-        );
+        envImports.abort(t0, t1, t2, t3);
       }
       throw 'unreachable';
     }
@@ -103,12 +83,7 @@ class Module {
         var t2 = frame.pop();
         var t1 = frame.pop();
         var t0 = frame.pop();
-        envImports.abort(
-          t0,
-          t1,
-          t2,
-          t3,
-        );
+        envImports.abort(t0, t1, t2, t3);
       }
       throw 'unreachable';
     }
@@ -174,10 +149,7 @@ class Module {
     globals.global2 = frame.pop();
     frame.push(local1);
     frame.push(local2);
-    frame.i32_store(
-      2,
-      0,
-    );
+    frame.i32_store(2, 0);
     frame.push(local0);
     frame.i32_const(4);
     frame.i32_sub();
@@ -186,57 +158,35 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func0(
-        t0,
-        t1,
-      );
+      _func0(t0, t1);
     }
     frame.push(local1);
     frame.i32_const(0);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func1(
-        t0,
-        t1,
-      );
+      _func1(t0, t1);
     }
     frame.push(local1);
     frame.push(arg1);
-    frame.i32_store(
-      2,
-      12,
-    );
+    frame.i32_store(2, 12);
     frame.push(local1);
     frame.push(arg0);
-    frame.i32_store(
-      2,
-      16,
-    );
+    frame.i32_store(2, 16);
     frame.push(local0);
     frame.i32_const(16);
     frame.i32_add();
     return frame.pop();
   }
 
-  void _func3(
-    i32 arg0,
-    i32 arg1,
-  ) {
+  void _func3(i32 arg0, i32 arg1) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.push(arg1);
-    frame.i32_store(
-      2,
-      0,
-    );
+    frame.i32_store(2, 0);
   }
 
-  i32 iterateEquation(
-    f64 arg0,
-    f64 arg1,
-    i32 arg2,
-  ) {
+  i32 iterateEquation(f64 arg0, f64 arg1, i32 arg2) {
     f64 local0 = 0;
     f64 local1 = 0;
     i32 local2 = 0;
@@ -294,12 +244,7 @@ class Module {
     return frame.pop();
   }
 
-  f64 _func5(
-    f64 arg0,
-    f64 arg1,
-    f64 arg2,
-    f64 arg3,
-  ) {
+  f64 _func5(f64 arg0, f64 arg1, f64 arg2, f64 arg3) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.push(arg1);
@@ -315,10 +260,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 _func6(
-    i32 arg0,
-    i32 arg1,
-  ) {
+  i32 _func6(i32 arg0, i32 arg1) {
     final frame = Frame(memory);
     frame.push(arg0);
     frame.i32_const(2);
@@ -350,32 +292,17 @@ class Module {
     return frame.pop();
   }
 
-  void _func7(
-    i32 arg0,
-    i32 arg1,
-    i32 arg2,
-  ) {
+  void _func7(i32 arg0, i32 arg1, i32 arg2) {
     final frame = Frame(memory);
     frame.push(arg0);
-    frame.i32_load(
-      2,
-      4,
-    );
+    frame.i32_load(2, 4);
     frame.push(arg1);
     frame.i32_add();
     frame.push(arg2);
-    frame.i32_store8(
-      0,
-      0,
-    );
+    frame.i32_store8(0, 0);
   }
 
-  void mandelbrot(
-    i32 arg0,
-    f64 arg1,
-    f64 arg2,
-    f64 arg3,
-  ) {
+  void mandelbrot(i32 arg0, f64 arg1, f64 arg2, f64 arg3) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
@@ -421,12 +348,7 @@ class Module {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              frame.push(_func5(
-                t0,
-                t1,
-                t2,
-                t3,
-              ));
+              frame.push(_func5(t0, t1, t2, t3));
             }
             frame.push(arg2);
             frame.push(local5);
@@ -439,23 +361,14 @@ class Module {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              frame.push(_func5(
-                t0,
-                t1,
-                t2,
-                t3,
-              ));
+              frame.push(_func5(t0, t1, t2, t3));
             }
             frame.push(arg0);
             {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              frame.push(iterateEquation(
-                t0,
-                t1,
-                t2,
-              ));
+              frame.push(iterateEquation(t0, t1, t2));
             }
             local2 = frame.peek();
             frame.push(arg0);
@@ -480,21 +393,14 @@ class Module {
               {
                 var t1 = frame.pop();
                 var t0 = frame.pop();
-                frame.push(_func6(
-                  t0,
-                  t1,
-                ));
+                frame.push(_func6(t0, t1));
               }
             }
             {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              _func7(
-                t0,
-                t1,
-                t2,
-              );
+              _func7(t0, t1, t2);
             }
             frame.push(globals.global3);
             frame.push(local4);
@@ -510,21 +416,14 @@ class Module {
               {
                 var t1 = frame.pop();
                 var t0 = frame.pop();
-                frame.push(_func6(
-                  t0,
-                  t1,
-                ));
+                frame.push(_func6(t0, t1));
               }
             }
             {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              _func7(
-                t0,
-                t1,
-                t2,
-              );
+              _func7(t0, t1, t2);
             }
             frame.push(globals.global3);
             frame.push(local4);
@@ -540,21 +439,14 @@ class Module {
               {
                 var t1 = frame.pop();
                 var t0 = frame.pop();
-                frame.push(_func6(
-                  t0,
-                  t1,
-                ));
+                frame.push(_func6(t0, t1));
               }
             }
             {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              _func7(
-                t0,
-                t1,
-                t2,
-              );
+              _func7(t0, t1, t2);
             }
             frame.push(globals.global3);
             frame.push(local4);
@@ -565,11 +457,7 @@ class Module {
               var t2 = frame.pop();
               var t1 = frame.pop();
               var t0 = frame.pop();
-              _func7(
-                t0,
-                t1,
-                t2,
-              );
+              _func7(t0, t1, t2);
             }
             frame.push(local0);
             frame.i32_const(1);
@@ -598,10 +486,7 @@ class Module {
   i32 getDataBuffer() {
     final frame = Frame(memory);
     frame.push(globals.global3);
-    frame.i32_load(
-      2,
-      0,
-    );
+    frame.i32_load(2, 0);
     return frame.pop();
   }
 
@@ -617,10 +502,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(_func2(
-        t0,
-        t1,
-      ));
+      frame.push(_func2(t0, t1));
     }
     local0 = frame.peek();
     frame.i32_eqz();
@@ -631,10 +513,7 @@ class Module {
       {
         var t1 = frame.pop();
         var t0 = frame.pop();
-        frame.push(_func2(
-          t0,
-          t1,
-        ));
+        frame.push(_func2(t0, t1));
       }
       local0 = frame.pop();
     }
@@ -643,40 +522,28 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func3(
-        t0,
-        t1,
-      );
+      _func3(t0, t1);
     }
     frame.push(local0);
     frame.i32_const(0);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func0(
-        t0,
-        t1,
-      );
+      _func0(t0, t1);
     }
     frame.push(local0);
     frame.i32_const(0);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func1(
-        t0,
-        t1,
-      );
+      _func1(t0, t1);
     }
     frame.i32_const(0x3a9800);
     frame.i32_const(1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(_func2(
-        t0,
-        t1,
-      ));
+      frame.push(_func2(t0, t1));
     }
     local1 = frame.peek();
     frame.i32_const(0);
@@ -687,30 +554,21 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func3(
-        t0,
-        t1,
-      );
+      _func3(t0, t1);
     }
     frame.push(local0);
     frame.push(local1);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func0(
-        t0,
-        t1,
-      );
+      _func0(t0, t1);
     }
     frame.push(local0);
     frame.i32_const(0x3a9800);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      _func1(
-        t0,
-        t1,
-      );
+      _func1(t0, t1);
     }
     frame.push(local0);
     globals.global3 = frame.pop();
@@ -740,12 +598,7 @@ class Globals {
 /// A class representing the symbols imported from the 'env' module.
 abstract class EnvImports {
   /// The imported 'abort' symbol.
-  void abort(
-    i32 arg0,
-    i32 arg1,
-    i32 arg2,
-    i32 arg3,
-  );
+  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3);
 }
 
 class DataSegments {
@@ -793,37 +646,13 @@ class DataSegments {
       '\x73';
 
   void init(Memory memory) {
-    memory.copyTo(
-      data0,
-      1036,
-    );
-    memory.copyTo(
-      data1,
-      1048,
-    );
-    memory.copyTo(
-      data2,
-      1084,
-    );
-    memory.copyTo(
-      data3,
-      1096,
-    );
-    memory.copyTo(
-      data4,
-      1148,
-    );
-    memory.copyTo(
-      data5,
-      1160,
-    );
-    memory.copyTo(
-      data6,
-      1212,
-    );
-    memory.copyTo(
-      data7,
-      1224,
-    );
+    memory.copyTo(data0, 1036);
+    memory.copyTo(data1, 1048);
+    memory.copyTo(data2, 1084);
+    memory.copyTo(data3, 1096);
+    memory.copyTo(data4, 1148);
+    memory.copyTo(data5, 1160);
+    memory.copyTo(data6, 1212);
+    memory.copyTo(data7, 1224);
   }
 }

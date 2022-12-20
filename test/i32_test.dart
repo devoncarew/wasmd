@@ -1481,10 +1481,7 @@ class Module {
 
   final Globals globals = Globals();
 
-  i32 add(
-    i32 x,
-    i32 y,
-  ) {
+  i32 add(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1492,10 +1489,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 sub(
-    i32 x,
-    i32 y,
-  ) {
+  i32 sub(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1503,10 +1497,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 mul(
-    i32 x,
-    i32 y,
-  ) {
+  i32 mul(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1514,10 +1505,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 div_s(
-    i32 x,
-    i32 y,
-  ) {
+  i32 div_s(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1525,10 +1513,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 div_u(
-    i32 x,
-    i32 y,
-  ) {
+  i32 div_u(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1536,10 +1521,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 rem_s(
-    i32 x,
-    i32 y,
-  ) {
+  i32 rem_s(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1547,10 +1529,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 rem_u(
-    i32 x,
-    i32 y,
-  ) {
+  i32 rem_u(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1558,10 +1537,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 and(
-    i32 x,
-    i32 y,
-  ) {
+  i32 and(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1569,10 +1545,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 or(
-    i32 x,
-    i32 y,
-  ) {
+  i32 or(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1580,10 +1553,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 xor(
-    i32 x,
-    i32 y,
-  ) {
+  i32 xor(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1591,10 +1561,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 shl(
-    i32 x,
-    i32 y,
-  ) {
+  i32 shl(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1602,10 +1569,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 shr_s(
-    i32 x,
-    i32 y,
-  ) {
+  i32 shr_s(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1613,10 +1577,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 shr_u(
-    i32 x,
-    i32 y,
-  ) {
+  i32 shr_u(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1624,10 +1585,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 rotl(
-    i32 x,
-    i32 y,
-  ) {
+  i32 rotl(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1635,10 +1593,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 rotr(
-    i32 x,
-    i32 y,
-  ) {
+  i32 rotr(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1687,10 +1642,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 eq(
-    i32 x,
-    i32 y,
-  ) {
+  i32 eq(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1698,10 +1650,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 ne(
-    i32 x,
-    i32 y,
-  ) {
+  i32 ne(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1709,10 +1658,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 lt_s(
-    i32 x,
-    i32 y,
-  ) {
+  i32 lt_s(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1720,10 +1666,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 lt_u(
-    i32 x,
-    i32 y,
-  ) {
+  i32 lt_u(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1731,10 +1674,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 le_s(
-    i32 x,
-    i32 y,
-  ) {
+  i32 le_s(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1742,10 +1682,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 le_u(
-    i32 x,
-    i32 y,
-  ) {
+  i32 le_u(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1753,10 +1690,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 gt_s(
-    i32 x,
-    i32 y,
-  ) {
+  i32 gt_s(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1764,10 +1698,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 gt_u(
-    i32 x,
-    i32 y,
-  ) {
+  i32 gt_u(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1775,10 +1706,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 ge_s(
-    i32 x,
-    i32 y,
-  ) {
+  i32 ge_s(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1786,10 +1714,7 @@ class Module {
     return frame.pop();
   }
 
-  i32 ge_u(
-    i32 x,
-    i32 y,
-  ) {
+  i32 ge_u(i32 x, i32 y) {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
@@ -1804,10 +1729,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(add(
-        t0,
-        t1,
-      ));
+      frame.push(add(t0, t1));
     }
     return frame.pop();
   }
@@ -1819,10 +1741,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(add(
-        t0,
-        t1,
-      ));
+      frame.push(add(t0, t1));
     }
     return frame.pop();
   }
@@ -1834,10 +1753,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(add(
-        t0,
-        t1,
-      ));
+      frame.push(add(t0, t1));
     }
     return frame.pop();
   }
@@ -1849,10 +1765,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(add(
-        t0,
-        t1,
-      ));
+      frame.push(add(t0, t1));
     }
     return frame.pop();
   }
@@ -1864,10 +1777,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(add(
-        t0,
-        t1,
-      ));
+      frame.push(add(t0, t1));
     }
     return frame.pop();
   }
@@ -1879,10 +1789,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(add(
-        t0,
-        t1,
-      ));
+      frame.push(add(t0, t1));
     }
     return frame.pop();
   }
@@ -1894,10 +1801,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(add(
-        t0,
-        t1,
-      ));
+      frame.push(add(t0, t1));
     }
     return frame.pop();
   }
@@ -1909,10 +1813,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(add(
-        t0,
-        t1,
-      ));
+      frame.push(add(t0, t1));
     }
     return frame.pop();
   }
@@ -1924,10 +1825,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(
-        t0,
-        t1,
-      ));
+      frame.push(sub(t0, t1));
     }
     return frame.pop();
   }
@@ -1939,10 +1837,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(
-        t0,
-        t1,
-      ));
+      frame.push(sub(t0, t1));
     }
     return frame.pop();
   }
@@ -1954,10 +1849,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(
-        t0,
-        t1,
-      ));
+      frame.push(sub(t0, t1));
     }
     return frame.pop();
   }
@@ -1969,10 +1861,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(
-        t0,
-        t1,
-      ));
+      frame.push(sub(t0, t1));
     }
     return frame.pop();
   }
@@ -1984,10 +1873,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(
-        t0,
-        t1,
-      ));
+      frame.push(sub(t0, t1));
     }
     return frame.pop();
   }
@@ -1999,10 +1885,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(
-        t0,
-        t1,
-      ));
+      frame.push(sub(t0, t1));
     }
     return frame.pop();
   }
@@ -2014,10 +1897,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(
-        t0,
-        t1,
-      ));
+      frame.push(sub(t0, t1));
     }
     return frame.pop();
   }
@@ -2029,10 +1909,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2044,10 +1921,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2059,10 +1933,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2074,10 +1945,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2089,10 +1957,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2104,10 +1969,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2119,10 +1981,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2134,10 +1993,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2149,10 +2005,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(mul(
-        t0,
-        t1,
-      ));
+      frame.push(mul(t0, t1));
     }
     return frame.pop();
   }
@@ -2164,10 +2017,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2179,10 +2029,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2194,10 +2041,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2209,10 +2053,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2224,10 +2065,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2239,10 +2077,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2254,10 +2089,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2269,10 +2101,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2284,10 +2113,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2299,10 +2125,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2314,10 +2137,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2329,10 +2149,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2344,10 +2161,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2359,10 +2173,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2374,10 +2185,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2389,10 +2197,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_s(
-        t0,
-        t1,
-      ));
+      frame.push(div_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2404,10 +2209,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2419,10 +2221,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2434,10 +2233,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2449,10 +2245,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2464,10 +2257,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2479,10 +2269,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2494,10 +2281,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2509,10 +2293,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2524,10 +2305,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2539,10 +2317,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2554,10 +2329,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2569,10 +2341,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2584,10 +2353,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2599,10 +2365,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(div_u(
-        t0,
-        t1,
-      ));
+      frame.push(div_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2614,10 +2377,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2629,10 +2389,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2644,10 +2401,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2659,10 +2413,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2674,10 +2425,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2689,10 +2437,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2704,10 +2449,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2719,10 +2461,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2734,10 +2473,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2749,10 +2485,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2764,10 +2497,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2779,10 +2509,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2794,10 +2521,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2809,10 +2533,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2824,10 +2545,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2839,10 +2557,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2854,10 +2569,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2869,10 +2581,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_s(
-        t0,
-        t1,
-      ));
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -2884,10 +2593,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2899,10 +2605,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2914,10 +2617,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2929,10 +2629,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2944,10 +2641,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2959,10 +2653,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2974,10 +2665,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -2989,10 +2677,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3004,10 +2689,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3019,10 +2701,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3034,10 +2713,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3049,10 +2725,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3064,10 +2737,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3079,10 +2749,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rem_u(
-        t0,
-        t1,
-      ));
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3094,10 +2761,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(and(
-        t0,
-        t1,
-      ));
+      frame.push(and(t0, t1));
     }
     return frame.pop();
   }
@@ -3109,10 +2773,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(and(
-        t0,
-        t1,
-      ));
+      frame.push(and(t0, t1));
     }
     return frame.pop();
   }
@@ -3124,10 +2785,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(and(
-        t0,
-        t1,
-      ));
+      frame.push(and(t0, t1));
     }
     return frame.pop();
   }
@@ -3139,10 +2797,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(and(
-        t0,
-        t1,
-      ));
+      frame.push(and(t0, t1));
     }
     return frame.pop();
   }
@@ -3154,10 +2809,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(and(
-        t0,
-        t1,
-      ));
+      frame.push(and(t0, t1));
     }
     return frame.pop();
   }
@@ -3169,10 +2821,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(and(
-        t0,
-        t1,
-      ));
+      frame.push(and(t0, t1));
     }
     return frame.pop();
   }
@@ -3184,10 +2833,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(and(
-        t0,
-        t1,
-      ));
+      frame.push(and(t0, t1));
     }
     return frame.pop();
   }
@@ -3199,10 +2845,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(and(
-        t0,
-        t1,
-      ));
+      frame.push(and(t0, t1));
     }
     return frame.pop();
   }
@@ -3214,10 +2857,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(or(
-        t0,
-        t1,
-      ));
+      frame.push(or(t0, t1));
     }
     return frame.pop();
   }
@@ -3229,10 +2869,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(or(
-        t0,
-        t1,
-      ));
+      frame.push(or(t0, t1));
     }
     return frame.pop();
   }
@@ -3244,10 +2881,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(or(
-        t0,
-        t1,
-      ));
+      frame.push(or(t0, t1));
     }
     return frame.pop();
   }
@@ -3259,10 +2893,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(or(
-        t0,
-        t1,
-      ));
+      frame.push(or(t0, t1));
     }
     return frame.pop();
   }
@@ -3274,10 +2905,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(or(
-        t0,
-        t1,
-      ));
+      frame.push(or(t0, t1));
     }
     return frame.pop();
   }
@@ -3289,10 +2917,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(or(
-        t0,
-        t1,
-      ));
+      frame.push(or(t0, t1));
     }
     return frame.pop();
   }
@@ -3304,10 +2929,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(or(
-        t0,
-        t1,
-      ));
+      frame.push(or(t0, t1));
     }
     return frame.pop();
   }
@@ -3319,10 +2941,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(or(
-        t0,
-        t1,
-      ));
+      frame.push(or(t0, t1));
     }
     return frame.pop();
   }
@@ -3334,10 +2953,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3349,10 +2965,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3364,10 +2977,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3379,10 +2989,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3394,10 +3001,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3409,10 +3013,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3424,10 +3025,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3439,10 +3037,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3454,10 +3049,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3469,10 +3061,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(xor(
-        t0,
-        t1,
-      ));
+      frame.push(xor(t0, t1));
     }
     return frame.pop();
   }
@@ -3484,10 +3073,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3499,10 +3085,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3514,10 +3097,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3529,10 +3109,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3544,10 +3121,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3559,10 +3133,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3574,10 +3145,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3589,10 +3157,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3604,10 +3169,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3619,10 +3181,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3634,10 +3193,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shl(
-        t0,
-        t1,
-      ));
+      frame.push(shl(t0, t1));
     }
     return frame.pop();
   }
@@ -3649,10 +3205,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3664,10 +3217,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3679,10 +3229,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3694,10 +3241,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3709,10 +3253,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3724,10 +3265,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3739,10 +3277,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3754,10 +3289,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3769,10 +3301,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3784,10 +3313,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3799,10 +3325,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3814,10 +3337,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3829,10 +3349,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3844,10 +3361,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3859,10 +3373,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3874,10 +3385,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3889,10 +3397,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_s(
-        t0,
-        t1,
-      ));
+      frame.push(shr_s(t0, t1));
     }
     return frame.pop();
   }
@@ -3904,10 +3409,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3919,10 +3421,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3934,10 +3433,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3949,10 +3445,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3964,10 +3457,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3979,10 +3469,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -3994,10 +3481,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4009,10 +3493,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4024,10 +3505,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4039,10 +3517,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4054,10 +3529,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4069,10 +3541,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4084,10 +3553,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4099,10 +3565,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4114,10 +3577,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4129,10 +3589,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4144,10 +3601,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(shr_u(
-        t0,
-        t1,
-      ));
+      frame.push(shr_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4159,10 +3613,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4174,10 +3625,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4189,10 +3637,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4204,10 +3649,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4219,10 +3661,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4234,10 +3673,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4249,10 +3685,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4264,10 +3697,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4279,10 +3709,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4294,10 +3721,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4309,10 +3733,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4324,10 +3745,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4339,10 +3757,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotl(
-        t0,
-        t1,
-      ));
+      frame.push(rotl(t0, t1));
     }
     return frame.pop();
   }
@@ -4354,10 +3769,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4369,10 +3781,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4384,10 +3793,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4399,10 +3805,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4414,10 +3817,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4429,10 +3829,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4444,10 +3841,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4459,10 +3853,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4474,10 +3865,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4489,10 +3877,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4504,10 +3889,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4519,10 +3901,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4534,10 +3913,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(rotr(
-        t0,
-        t1,
-      ));
+      frame.push(rotr(t0, t1));
     }
     return frame.pop();
   }
@@ -4959,10 +4335,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -4974,10 +4347,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -4989,10 +4359,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5004,10 +4371,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5019,10 +4383,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5034,10 +4395,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5049,10 +4407,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5064,10 +4419,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5079,10 +4431,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5094,10 +4443,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5109,10 +4455,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5124,10 +4467,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5139,10 +4479,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5154,10 +4491,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(eq(
-        t0,
-        t1,
-      ));
+      frame.push(eq(t0, t1));
     }
     return frame.pop();
   }
@@ -5169,10 +4503,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5184,10 +4515,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5199,10 +4527,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5214,10 +4539,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5229,10 +4551,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5244,10 +4563,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5259,10 +4575,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5274,10 +4587,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5289,10 +4599,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5304,10 +4611,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5319,10 +4623,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5334,10 +4635,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5349,10 +4647,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5364,10 +4659,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ne(
-        t0,
-        t1,
-      ));
+      frame.push(ne(t0, t1));
     }
     return frame.pop();
   }
@@ -5379,10 +4671,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5394,10 +4683,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5409,10 +4695,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5424,10 +4707,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5439,10 +4719,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5454,10 +4731,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5469,10 +4743,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5484,10 +4755,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5499,10 +4767,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5514,10 +4779,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5529,10 +4791,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5544,10 +4803,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5559,10 +4815,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5574,10 +4827,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_s(
-        t0,
-        t1,
-      ));
+      frame.push(lt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5589,10 +4839,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5604,10 +4851,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5619,10 +4863,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5634,10 +4875,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5649,10 +4887,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5664,10 +4899,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5679,10 +4911,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5694,10 +4923,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5709,10 +4935,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5724,10 +4947,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5739,10 +4959,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5754,10 +4971,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5769,10 +4983,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5784,10 +4995,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(lt_u(
-        t0,
-        t1,
-      ));
+      frame.push(lt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -5799,10 +5007,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5814,10 +5019,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5829,10 +5031,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5844,10 +5043,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5859,10 +5055,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5874,10 +5067,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5889,10 +5079,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5904,10 +5091,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5919,10 +5103,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5934,10 +5115,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5949,10 +5127,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5964,10 +5139,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5979,10 +5151,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -5994,10 +5163,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_s(
-        t0,
-        t1,
-      ));
+      frame.push(le_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6009,10 +5175,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6024,10 +5187,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6039,10 +5199,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6054,10 +5211,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6069,10 +5223,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6084,10 +5235,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6099,10 +5247,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6114,10 +5259,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6129,10 +5271,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6144,10 +5283,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6159,10 +5295,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6174,10 +5307,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6189,10 +5319,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6204,10 +5331,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(le_u(
-        t0,
-        t1,
-      ));
+      frame.push(le_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6219,10 +5343,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6234,10 +5355,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6249,10 +5367,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6264,10 +5379,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6279,10 +5391,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6294,10 +5403,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6309,10 +5415,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6324,10 +5427,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6339,10 +5439,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6354,10 +5451,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6369,10 +5463,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6384,10 +5475,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6399,10 +5487,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6414,10 +5499,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_s(
-        t0,
-        t1,
-      ));
+      frame.push(gt_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6429,10 +5511,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6444,10 +5523,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6459,10 +5535,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6474,10 +5547,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6489,10 +5559,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6504,10 +5571,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6519,10 +5583,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6534,10 +5595,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6549,10 +5607,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6564,10 +5619,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6579,10 +5631,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6594,10 +5643,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6609,10 +5655,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6624,10 +5667,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(gt_u(
-        t0,
-        t1,
-      ));
+      frame.push(gt_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6639,10 +5679,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6654,10 +5691,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6669,10 +5703,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6684,10 +5715,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6699,10 +5727,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6714,10 +5739,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6729,10 +5751,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6744,10 +5763,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6759,10 +5775,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6774,10 +5787,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6789,10 +5799,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6804,10 +5811,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6819,10 +5823,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6834,10 +5835,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_s(
-        t0,
-        t1,
-      ));
+      frame.push(ge_s(t0, t1));
     }
     return frame.pop();
   }
@@ -6849,10 +5847,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6864,10 +5859,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6879,10 +5871,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6894,10 +5883,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6909,10 +5895,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6924,10 +5907,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6939,10 +5919,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6954,10 +5931,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6969,10 +5943,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6984,10 +5955,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -6999,10 +5967,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -7014,10 +5979,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -7029,10 +5991,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }
@@ -7044,10 +6003,7 @@ class Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(ge_u(
-        t0,
-        t1,
-      ));
+      frame.push(ge_u(t0, t1));
     }
     return frame.pop();
   }

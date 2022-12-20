@@ -12,10 +12,7 @@ class HelloWorldModule {
 
   final Globals globals = Globals();
 
-  i32 add(
-    i32 lhs,
-    i32 rhs,
-  ) {
+  i32 add(i32 lhs, i32 rhs) {
     final frame = Frame(memory);
     frame.push(lhs);
     frame.push(rhs);
@@ -23,10 +20,7 @@ class HelloWorldModule {
     return frame.pop();
   }
 
-  i32 sub(
-    i32 lhs,
-    i32 rhs,
-  ) {
+  i32 sub(i32 lhs, i32 rhs) {
     final frame = Frame(memory);
     frame.push(lhs);
     frame.push(rhs);
@@ -34,10 +28,7 @@ class HelloWorldModule {
     return frame.pop();
   }
 
-  i32 complex(
-    i32 lhs,
-    i32 rhs,
-  ) {
+  i32 complex(i32 lhs, i32 rhs) {
     i32 i = 0;
 
     final frame = Frame(memory);
@@ -50,10 +41,7 @@ class HelloWorldModule {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(
-        t0,
-        t1,
-      ));
+      frame.push(sub(t0, t1));
     }
     frame.push(i);
     frame.i32_mul();
