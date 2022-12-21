@@ -561,10 +561,12 @@ void printModule(
         var expectName = 'expect_${testName.substring('test_'.length)}';
 
         buf.write("  returns('$testName', ");
-        // TODO: try to inline the expectations constant
-        buf.write("g.$expectName");
         // TODO: inline the test closure
-        buf.write(", m.$testName");
+        buf.write("m.$testName, ");
+        if (module.globals.getNamed(expectName) != null) {
+          // TODO: try to inline the expectations constant
+          buf.write("g.$expectName");
+        }
         buf.writeln(");");
       }
 
@@ -1199,6 +1201,10 @@ class Globals {
 
   void exportGlobal(String name, int globalIndex) {
     globalExports.add(GlobalExport(name, globals[globalIndex]));
+  }
+
+  Global? getNamed(String name) {
+    return globals.firstWhereOrNull((global) => global.name == name);
   }
 }
 

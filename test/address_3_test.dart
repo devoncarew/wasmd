@@ -15,20 +15,20 @@ void main() {
     final Module m = Module();
     final Globals g = m.globals;
 
-    returns('test_64_good1_0', g.expect_64_good1_0, m.test_64_good1_0);
-    returns('test_64_good2_0', g.expect_64_good2_0, m.test_64_good2_0);
-    returns('test_64_good3_0', g.expect_64_good3_0, m.test_64_good3_0);
-    returns('test_64_good4_0', g.expect_64_good4_0, m.test_64_good4_0);
-    returns('test_64_good5_0', g.expect_64_good5_0, m.test_64_good5_0);
-    returns('test_64_good1_1', g.expect_64_good1_1, m.test_64_good1_1);
-    returns('test_64_good2_1', g.expect_64_good2_1, m.test_64_good2_1);
-    returns('test_64_good3_1', g.expect_64_good3_1, m.test_64_good3_1);
-    returns('test_64_good4_1', g.expect_64_good4_1, m.test_64_good4_1);
-    returns('test_64_good5_1', g.expect_64_good5_1, m.test_64_good5_1);
-    returns('test_64_good1_2', g.expect_64_good1_2, m.test_64_good1_2);
-    returns('test_64_good2_2', g.expect_64_good2_2, m.test_64_good2_2);
-    returns('test_64_good3_2', g.expect_64_good3_2, m.test_64_good3_2);
-    returns('test_64_good4_2', g.expect_64_good4_2, m.test_64_good4_2);
+    returns('test_64_good1_0', m.test_64_good1_0, g.expect_64_good1_0);
+    returns('test_64_good2_0', m.test_64_good2_0, g.expect_64_good2_0);
+    returns('test_64_good3_0', m.test_64_good3_0, g.expect_64_good3_0);
+    returns('test_64_good4_0', m.test_64_good4_0, g.expect_64_good4_0);
+    returns('test_64_good5_0', m.test_64_good5_0, g.expect_64_good5_0);
+    returns('test_64_good1_1', m.test_64_good1_1, g.expect_64_good1_1);
+    returns('test_64_good2_1', m.test_64_good2_1, g.expect_64_good2_1);
+    returns('test_64_good3_1', m.test_64_good3_1, g.expect_64_good3_1);
+    returns('test_64_good4_1', m.test_64_good4_1, g.expect_64_good4_1);
+    returns('test_64_good5_1', m.test_64_good5_1, g.expect_64_good5_1);
+    returns('test_64_good1_2', m.test_64_good1_2, g.expect_64_good1_2);
+    returns('test_64_good2_2', m.test_64_good2_2, g.expect_64_good2_2);
+    returns('test_64_good3_2', m.test_64_good3_2, g.expect_64_good3_2);
+    returns('test_64_good4_2', m.test_64_good4_2, g.expect_64_good4_2);
   });
 }
 

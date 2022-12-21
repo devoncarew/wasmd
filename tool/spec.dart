@@ -164,7 +164,7 @@ List<Expression> _process(ComilationUnit compilationUnit) {
 
     var expectName = 'expect_${name.replaceAll('-', '_')}_$id';
     var expectInstrs =
-        node.nodes.length >= 2 ? node.nodes[2] as Expression : null;
+        node.nodes.length >= 3 ? node.nodes[2] as Expression : null;
 
     var typeName = getTypeForMethod(module, name);
 
@@ -172,7 +172,7 @@ List<Expression> _process(ComilationUnit compilationUnit) {
       Expression([
         Atom('func'),
         Expression([Atom('export'), Atom('"$testName"')]),
-        Expression([Atom('result'), Atom(typeName)]),
+        if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
         Expression([
           Atom('call'),
           Atom('\$$name'),
@@ -184,7 +184,7 @@ List<Expression> _process(ComilationUnit compilationUnit) {
           Atom('global'),
           Atom('\$$expectName'),
           // Expression([Atom('export'), Atom('"$expectName"')]),
-          Atom(typeName),
+          Atom(typeName!),
           ...expectInstrs.nodes,
         ]),
     ];
@@ -261,7 +261,7 @@ String stripQuotes(String str) {
   }
 }
 
-String getTypeForMethod(Expression module, String methodName) {
+String? getTypeForMethod(Expression module, String methodName) {
   for (var method in module.nodes.whereType<Expression>()) {
     if (kind(method) != 'func') continue;
 
@@ -274,7 +274,8 @@ String getTypeForMethod(Expression module, String methodName) {
     }
   }
 
-  throw "could not find return type for method '$methodName'";
+  // throw "could not find return type for method '$methodName'";
+  return null;
 }
 
 class _ReplaceNonstandardNan implements TokenRewriter {

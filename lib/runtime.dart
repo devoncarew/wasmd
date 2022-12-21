@@ -15,12 +15,15 @@ typedef f64 = double;
 // runtime support
 
 class Memory {
+  static const defaultMaxSize = 64 * 1024;
   static const pageSize = 64 * 1024;
 
   final int initialPageSize;
   final int? maxPageSize;
 
   ByteData data;
+
+  // TODO: guard against large initial page sizes
 
   Memory(this.initialPageSize, [this.maxPageSize])
       : data = ByteData(initialPageSize * pageSize);
@@ -31,10 +34,10 @@ class Memory {
   int grow(int growPages) {
     var oldSize = size;
 
-    if (maxPageSize != null) {
-      if (oldSize + growPages > maxPageSize!) {
-        return -1;
-      }
+    // TODO: guard against large values for maxPageSize
+
+    if (oldSize + growPages > (maxPageSize ?? defaultMaxSize)) {
+      return -1;
     }
 
     // TODO: find a faster way to do this

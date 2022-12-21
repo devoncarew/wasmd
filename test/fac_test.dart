@@ -13,14 +13,14 @@ void main() {
     final Module m = Module();
     final Globals g = m.globals;
 
-    returns('test_fac_rec_0', g.expect_fac_rec_0, m.test_fac_rec_0);
-    returns('test_fac_iter_0', g.expect_fac_iter_0, m.test_fac_iter_0);
-    returns('test_fac_rec_named_0', g.expect_fac_rec_named_0,
-        m.test_fac_rec_named_0);
-    returns('test_fac_iter_named_0', g.expect_fac_iter_named_0,
-        m.test_fac_iter_named_0);
-    returns('test_fac_opt_0', g.expect_fac_opt_0, m.test_fac_opt_0);
-    returns('test_fac_ssa_0', g.expect_fac_ssa_0, m.test_fac_ssa_0);
+    returns('test_fac_rec_0', m.test_fac_rec_0, g.expect_fac_rec_0);
+    returns('test_fac_iter_0', m.test_fac_iter_0, g.expect_fac_iter_0);
+    returns('test_fac_rec_named_0', m.test_fac_rec_named_0,
+        g.expect_fac_rec_named_0);
+    returns('test_fac_iter_named_0', m.test_fac_iter_named_0,
+        g.expect_fac_iter_named_0);
+    returns('test_fac_opt_0', m.test_fac_opt_0, g.expect_fac_opt_0);
+    returns('test_fac_ssa_0', m.test_fac_ssa_0, g.expect_fac_ssa_0);
   });
 }
 

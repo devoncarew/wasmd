@@ -13,13 +13,13 @@ void main() {
     final Module m = Module();
     final Globals g = m.globals;
 
-    returns('test_fac_expr_0', g.expect_fac_expr_0, m.test_fac_expr_0);
-    returns('test_fac_stack_0', g.expect_fac_stack_0, m.test_fac_stack_0);
-    returns('test_fac_mixed_0', g.expect_fac_mixed_0, m.test_fac_mixed_0);
-    returns('test_not_quite_a_tree_0', g.expect_not_quite_a_tree_0,
-        m.test_not_quite_a_tree_0);
-    returns('test_not_quite_a_tree_1', g.expect_not_quite_a_tree_1,
-        m.test_not_quite_a_tree_1);
+    returns('test_fac_expr_0', m.test_fac_expr_0, g.expect_fac_expr_0);
+    returns('test_fac_stack_0', m.test_fac_stack_0, g.expect_fac_stack_0);
+    returns('test_fac_mixed_0', m.test_fac_mixed_0, g.expect_fac_mixed_0);
+    returns('test_not_quite_a_tree_0', m.test_not_quite_a_tree_0,
+        g.expect_not_quite_a_tree_0);
+    returns('test_not_quite_a_tree_1', m.test_not_quite_a_tree_1,
+        g.expect_not_quite_a_tree_1);
   });
 }
 
