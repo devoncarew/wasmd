@@ -1,4 +1,5 @@
-// ignore_for_file: constant_identifier_names, camel_case_types, non_constant_identifier_names
+// ignore_for_file: constant_identifier_names, camel_case_types
+// ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
 import 'dart:io';
@@ -11,6 +12,8 @@ import 'package:path/path.dart' as path;
 
 import 'instructions.dart';
 import 'src/utils.dart';
+
+// TODO: handle f64, f32 literals
 
 class Compiler {
   final File file;
@@ -542,6 +545,8 @@ class Compiler {
   void _log([String? message]) => logger.info(message ?? '');
 }
 
+final DartEmitter _constEmitter = DartEmitter();
+
 void printModule(
   Module module,
   LibraryBuilder library, {
@@ -563,15 +568,26 @@ void printModule(
         buf.write("  returns('$testName', ");
         // TODO: inline the test closure
         buf.write("m.$testName, ");
-        if (module.globals.getNamed(expectName) != null) {
-          // TODO: try to inline the expectations constant
-          buf.write("g.$expectName");
+        var expectation = module.globals.getNamed(expectName);
+        if (expectation != null) {
+          var literalValue = expectation.calcLiteralValue;
+          if (literalValue != null) {
+            // inline the expectations constant
+            var expr = printLiteral(literalValue.value as num);
+            buf.write(expr.accept(_constEmitter).toString());
+            module.globals.globals.remove(expectation);
+          } else {
+            buf.write("g.$expectName");
+          }
         }
         buf.writeln(");");
       }
 
       return buf.toString();
     }
+
+    var testCode = generateTests();
+    var hasGlobals = module.globals.isNotEmpty;
 
     var mainMethod = Method(
       (b) => b
@@ -581,9 +597,9 @@ void printModule(
           Code('''
   group('$moduleName', () {
     final Module m = Module();
-    final Globals g = m.globals;
+    ${hasGlobals ? 'final Globals g = m.globals;' : ''}
 
-    ${generateTests()}
+    $testCode
   });
 '''),
         ]),
@@ -1563,6 +1579,9 @@ class Global {
     return '_init${name.substring(0, 1).toUpperCase()}${name.substring(1)}';
   }
 
+  /// Return the literal for this global value if it can be inferred.
+  Literal? get calcLiteralValue => Instruction.calcLiternal(initExpression);
+
   static Class createGlobalsClassDef(Module module) {
     var fields = <Field>[];
 
@@ -1572,7 +1591,7 @@ class Global {
       var global = module.globals.globals[i];
 
       Code assignment;
-      var literalValue = Instruction.calcLiternal(global.initExpression);
+      var literalValue = global.calcLiteralValue;
       if (literalValue == null) {
         needsGlobalInitializer = true;
         assignment = Code('${global.initMethodName}()');

@@ -48,7 +48,7 @@ class Instruction_Nop extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    return Code('/* nop */');
+    return Code('      /* nop */');
   }
 }
 

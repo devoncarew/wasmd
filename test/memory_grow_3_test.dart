@@ -11,25 +11,18 @@ import 'src/infra.dart';
 void main() {
   group('memory_grow_3', () {
     final Module m = Module();
-    final Globals g = m.globals;
 
-    returns('test_check_memory_zero_0', m.test_check_memory_zero_0,
-        g.expect_check_memory_zero_0);
-    returns('test_grow_0', m.test_grow_0, g.expect_grow_0);
-    returns('test_check_memory_zero_1', m.test_check_memory_zero_1,
-        g.expect_check_memory_zero_1);
-    returns('test_grow_1', m.test_grow_1, g.expect_grow_1);
-    returns('test_check_memory_zero_2', m.test_check_memory_zero_2,
-        g.expect_check_memory_zero_2);
-    returns('test_grow_2', m.test_grow_2, g.expect_grow_2);
-    returns('test_check_memory_zero_3', m.test_check_memory_zero_3,
-        g.expect_check_memory_zero_3);
-    returns('test_grow_3', m.test_grow_3, g.expect_grow_3);
-    returns('test_check_memory_zero_4', m.test_check_memory_zero_4,
-        g.expect_check_memory_zero_4);
-    returns('test_grow_4', m.test_grow_4, g.expect_grow_4);
-    returns('test_check_memory_zero_5', m.test_check_memory_zero_5,
-        g.expect_check_memory_zero_5);
+    returns('test_check_memory_zero_0', m.test_check_memory_zero_0, 0);
+    returns('test_grow_0', m.test_grow_0, 1);
+    returns('test_check_memory_zero_1', m.test_check_memory_zero_1, 0);
+    returns('test_grow_1', m.test_grow_1, 2);
+    returns('test_check_memory_zero_2', m.test_check_memory_zero_2, 0);
+    returns('test_grow_2', m.test_grow_2, 3);
+    returns('test_check_memory_zero_3', m.test_check_memory_zero_3, 0);
+    returns('test_grow_3', m.test_grow_3, 4);
+    returns('test_check_memory_zero_4', m.test_check_memory_zero_4, 0);
+    returns('test_grow_4', m.test_grow_4, 5);
+    returns('test_check_memory_zero_5', m.test_check_memory_zero_5, 0);
   });
 }
 
@@ -37,8 +30,6 @@ class Module {
   Module();
 
   final Memory memory = Memory(1);
-
-  final Globals globals = Globals();
 
   i32 grow(i32 arg0) {
     final frame = Frame(memory);
@@ -209,27 +200,3 @@ class Module {
 typedef FunctionType0 = i32 Function(i32);
 typedef FunctionType1 = i32 Function(i32, i32);
 typedef FunctionType2 = i32 Function();
-
-class Globals {
-  final i32 expect_check_memory_zero_0 = 0;
-
-  final i32 expect_grow_0 = 1;
-
-  final i32 expect_check_memory_zero_1 = 0;
-
-  final i32 expect_grow_1 = 2;
-
-  final i32 expect_check_memory_zero_2 = 0;
-
-  final i32 expect_grow_2 = 3;
-
-  final i32 expect_check_memory_zero_3 = 0;
-
-  final i32 expect_grow_3 = 4;
-
-  final i32 expect_check_memory_zero_4 = 0;
-
-  final i32 expect_grow_4 = 5;
-
-  final i32 expect_check_memory_zero_5 = 0;
-}

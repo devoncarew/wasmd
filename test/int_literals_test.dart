@@ -11,60 +11,37 @@ import 'src/infra.dart';
 void main() {
   group('int_literals', () {
     final Module m = Module();
-    final Globals g = m.globals;
 
-    returns('test_i32_test_0', m.test_i32_test_0, g.expect_i32_test_0);
-    returns('test_i32_umax_0', m.test_i32_umax_0, g.expect_i32_umax_0);
-    returns('test_i32_smax_0', m.test_i32_smax_0, g.expect_i32_smax_0);
-    returns(
-        'test_i32_neg_smax_0', m.test_i32_neg_smax_0, g.expect_i32_neg_smax_0);
-    returns('test_i32_smin_0', m.test_i32_smin_0, g.expect_i32_smin_0);
-    returns(
-        'test_i32_alt_smin_0', m.test_i32_alt_smin_0, g.expect_i32_alt_smin_0);
-    returns(
-        'test_i32_inc_smin_0', m.test_i32_inc_smin_0, g.expect_i32_inc_smin_0);
-    returns(
-        'test_i32_neg_zero_0', m.test_i32_neg_zero_0, g.expect_i32_neg_zero_0);
-    returns('test_i32_not_octal_0', m.test_i32_not_octal_0,
-        g.expect_i32_not_octal_0);
-    returns('test_i32_unsigned_decimal_0', m.test_i32_unsigned_decimal_0,
-        g.expect_i32_unsigned_decimal_0);
-    returns('test_i32_plus_sign_0', m.test_i32_plus_sign_0,
-        g.expect_i32_plus_sign_0);
-    returns('test_i64_test_0', m.test_i64_test_0, g.expect_i64_test_0);
-    returns('test_i64_umax_0', m.test_i64_umax_0, g.expect_i64_umax_0);
-    returns('test_i64_smax_0', m.test_i64_smax_0, g.expect_i64_smax_0);
-    returns(
-        'test_i64_neg_smax_0', m.test_i64_neg_smax_0, g.expect_i64_neg_smax_0);
-    returns('test_i64_smin_0', m.test_i64_smin_0, g.expect_i64_smin_0);
-    returns(
-        'test_i64_alt_smin_0', m.test_i64_alt_smin_0, g.expect_i64_alt_smin_0);
-    returns(
-        'test_i64_inc_smin_0', m.test_i64_inc_smin_0, g.expect_i64_inc_smin_0);
-    returns(
-        'test_i64_neg_zero_0', m.test_i64_neg_zero_0, g.expect_i64_neg_zero_0);
-    returns('test_i64_not_octal_0', m.test_i64_not_octal_0,
-        g.expect_i64_not_octal_0);
-    returns('test_i64_unsigned_decimal_0', m.test_i64_unsigned_decimal_0,
-        g.expect_i64_unsigned_decimal_0);
-    returns('test_i64_plus_sign_0', m.test_i64_plus_sign_0,
-        g.expect_i64_plus_sign_0);
-    returns(
-        'test_i32_dec_sep1_0', m.test_i32_dec_sep1_0, g.expect_i32_dec_sep1_0);
-    returns(
-        'test_i32_dec_sep2_0', m.test_i32_dec_sep2_0, g.expect_i32_dec_sep2_0);
-    returns(
-        'test_i32_hex_sep1_0', m.test_i32_hex_sep1_0, g.expect_i32_hex_sep1_0);
-    returns(
-        'test_i32_hex_sep2_0', m.test_i32_hex_sep2_0, g.expect_i32_hex_sep2_0);
-    returns(
-        'test_i64_dec_sep1_0', m.test_i64_dec_sep1_0, g.expect_i64_dec_sep1_0);
-    returns(
-        'test_i64_dec_sep2_0', m.test_i64_dec_sep2_0, g.expect_i64_dec_sep2_0);
-    returns(
-        'test_i64_hex_sep1_0', m.test_i64_hex_sep1_0, g.expect_i64_hex_sep1_0);
-    returns(
-        'test_i64_hex_sep2_0', m.test_i64_hex_sep2_0, g.expect_i64_hex_sep2_0);
+    returns('test_i32_test_0', m.test_i32_test_0, 0xbadd00d);
+    returns('test_i32_umax_0', m.test_i32_umax_0, -1);
+    returns('test_i32_smax_0', m.test_i32_smax_0, 0x7fffffff);
+    returns('test_i32_neg_smax_0', m.test_i32_neg_smax_0, -0x7fffffff);
+    returns('test_i32_smin_0', m.test_i32_smin_0, -0x80000000);
+    returns('test_i32_alt_smin_0', m.test_i32_alt_smin_0, -0x80000000);
+    returns('test_i32_inc_smin_0', m.test_i32_inc_smin_0, -0x7fffffff);
+    returns('test_i32_neg_zero_0', m.test_i32_neg_zero_0, 0);
+    returns('test_i32_not_octal_0', m.test_i32_not_octal_0, 10);
+    returns('test_i32_unsigned_decimal_0', m.test_i32_unsigned_decimal_0, -1);
+    returns('test_i32_plus_sign_0', m.test_i32_plus_sign_0, 42);
+    returns('test_i64_test_0', m.test_i64_test_0, 0xcabba6e0ba66a6e);
+    returns('test_i64_umax_0', m.test_i64_umax_0, -1);
+    returns('test_i64_smax_0', m.test_i64_smax_0, 0x7fffffffffffffff);
+    returns('test_i64_neg_smax_0', m.test_i64_neg_smax_0, -0x7fffffffffffffff);
+    returns('test_i64_smin_0', m.test_i64_smin_0, -0x8000000000000000);
+    returns('test_i64_alt_smin_0', m.test_i64_alt_smin_0, -0x8000000000000000);
+    returns('test_i64_inc_smin_0', m.test_i64_inc_smin_0, -0x7fffffffffffffff);
+    returns('test_i64_neg_zero_0', m.test_i64_neg_zero_0, 0);
+    returns('test_i64_not_octal_0', m.test_i64_not_octal_0, 10);
+    returns('test_i64_unsigned_decimal_0', m.test_i64_unsigned_decimal_0, -1);
+    returns('test_i64_plus_sign_0', m.test_i64_plus_sign_0, 42);
+    returns('test_i32_dec_sep1_0', m.test_i32_dec_sep1_0, 0xf4240);
+    returns('test_i32_dec_sep2_0', m.test_i32_dec_sep2_0, 1000);
+    returns('test_i32_hex_sep1_0', m.test_i32_hex_sep1_0, 0xa0f0099);
+    returns('test_i32_hex_sep2_0', m.test_i32_hex_sep2_0, 0x1aa0f);
+    returns('test_i64_dec_sep1_0', m.test_i64_dec_sep1_0, 0xf4240);
+    returns('test_i64_dec_sep2_0', m.test_i64_dec_sep2_0, 1000);
+    returns('test_i64_hex_sep1_0', m.test_i64_hex_sep1_0, 0xaf00f00009999);
+    returns('test_i64_hex_sep2_0', m.test_i64_hex_sep2_0, 0x1aa0f);
   });
 }
 
@@ -72,8 +49,6 @@ class Module {
   Module();
 
   final Memory memory = Memory(0);
-
-  final Globals globals = Globals();
 
   i32 i32_test() {
     final frame = Frame(memory);
@@ -464,65 +439,3 @@ class Module {
 
 typedef FunctionType0 = i32 Function();
 typedef FunctionType1 = i64 Function();
-
-class Globals {
-  final i32 expect_i32_test_0 = 0xbadd00d;
-
-  final i32 expect_i32_umax_0 = -1;
-
-  final i32 expect_i32_smax_0 = 0x7fffffff;
-
-  final i32 expect_i32_neg_smax_0 = -0x7fffffff;
-
-  final i32 expect_i32_smin_0 = -0x80000000;
-
-  final i32 expect_i32_alt_smin_0 = -0x80000000;
-
-  final i32 expect_i32_inc_smin_0 = -0x7fffffff;
-
-  final i32 expect_i32_neg_zero_0 = 0;
-
-  final i32 expect_i32_not_octal_0 = 10;
-
-  final i32 expect_i32_unsigned_decimal_0 = -1;
-
-  final i32 expect_i32_plus_sign_0 = 42;
-
-  final i64 expect_i64_test_0 = 0xcabba6e0ba66a6e;
-
-  final i64 expect_i64_umax_0 = -1;
-
-  final i64 expect_i64_smax_0 = 0x7fffffffffffffff;
-
-  final i64 expect_i64_neg_smax_0 = -0x7fffffffffffffff;
-
-  final i64 expect_i64_smin_0 = -0x8000000000000000;
-
-  final i64 expect_i64_alt_smin_0 = -0x8000000000000000;
-
-  final i64 expect_i64_inc_smin_0 = -0x7fffffffffffffff;
-
-  final i64 expect_i64_neg_zero_0 = 0;
-
-  final i64 expect_i64_not_octal_0 = 10;
-
-  final i64 expect_i64_unsigned_decimal_0 = -1;
-
-  final i64 expect_i64_plus_sign_0 = 42;
-
-  final i32 expect_i32_dec_sep1_0 = 0xf4240;
-
-  final i32 expect_i32_dec_sep2_0 = 1000;
-
-  final i32 expect_i32_hex_sep1_0 = 0xa0f0099;
-
-  final i32 expect_i32_hex_sep2_0 = 0x1aa0f;
-
-  final i64 expect_i64_dec_sep1_0 = 0xf4240;
-
-  final i64 expect_i64_dec_sep2_0 = 1000;
-
-  final i64 expect_i64_hex_sep1_0 = 0xaf00f00009999;
-
-  final i64 expect_i64_hex_sep2_0 = 0x1aa0f;
-}

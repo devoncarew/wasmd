@@ -11,16 +11,14 @@ import 'src/infra.dart';
 void main() {
   group('fac', () {
     final Module m = Module();
-    final Globals g = m.globals;
 
-    returns('test_fac_rec_0', m.test_fac_rec_0, g.expect_fac_rec_0);
-    returns('test_fac_iter_0', m.test_fac_iter_0, g.expect_fac_iter_0);
-    returns('test_fac_rec_named_0', m.test_fac_rec_named_0,
-        g.expect_fac_rec_named_0);
-    returns('test_fac_iter_named_0', m.test_fac_iter_named_0,
-        g.expect_fac_iter_named_0);
-    returns('test_fac_opt_0', m.test_fac_opt_0, g.expect_fac_opt_0);
-    returns('test_fac_ssa_0', m.test_fac_ssa_0, g.expect_fac_ssa_0);
+    returns('test_fac_rec_0', m.test_fac_rec_0, 0x619fb0907bc00000);
+    returns('test_fac_iter_0', m.test_fac_iter_0, 0x619fb0907bc00000);
+    returns('test_fac_rec_named_0', m.test_fac_rec_named_0, 0x619fb0907bc00000);
+    returns(
+        'test_fac_iter_named_0', m.test_fac_iter_named_0, 0x619fb0907bc00000);
+    returns('test_fac_opt_0', m.test_fac_opt_0, 0x619fb0907bc00000);
+    returns('test_fac_ssa_0', m.test_fac_ssa_0, 0x619fb0907bc00000);
   });
 }
 
@@ -28,8 +26,6 @@ class Module {
   Module();
 
   final Memory memory = Memory(0);
-
-  final Globals globals = Globals();
 
   i64 fac_rec(i64 arg0) {
     final frame = Frame(memory);
@@ -303,17 +299,3 @@ typedef FunctionType1 = i64 Function(i64);
 typedef FunctionType2 = i64 Function(i64, i64);
 typedef FunctionType3 = i64 Function(i64, i64);
 typedef FunctionType4 = i64 Function();
-
-class Globals {
-  final i64 expect_fac_rec_0 = 0x619fb0907bc00000;
-
-  final i64 expect_fac_iter_0 = 0x619fb0907bc00000;
-
-  final i64 expect_fac_rec_named_0 = 0x619fb0907bc00000;
-
-  final i64 expect_fac_iter_named_0 = 0x619fb0907bc00000;
-
-  final i64 expect_fac_opt_0 = 0x619fb0907bc00000;
-
-  final i64 expect_fac_ssa_0 = 0x619fb0907bc00000;
-}

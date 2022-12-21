@@ -13,98 +13,68 @@ void main() {
     final Module m = Module();
     final Globals g = m.globals;
 
-    returns('test_type_local_i32_0', m.test_type_local_i32_0,
-        g.expect_type_local_i32_0);
-    returns('test_type_local_i64_0', m.test_type_local_i64_0,
-        g.expect_type_local_i64_0);
+    returns('test_type_local_i32_0', m.test_type_local_i32_0, 0);
+    returns('test_type_local_i64_0', m.test_type_local_i64_0, 0);
     returns('test_type_local_f32_0', m.test_type_local_f32_0,
         g.expect_type_local_f32_0);
     returns('test_type_local_f64_0', m.test_type_local_f64_0,
         g.expect_type_local_f64_0);
-    returns('test_type_param_i32_0', m.test_type_param_i32_0,
-        g.expect_type_param_i32_0);
-    returns('test_type_param_i64_0', m.test_type_param_i64_0,
-        g.expect_type_param_i64_0);
+    returns('test_type_param_i32_0', m.test_type_param_i32_0, 10);
+    returns('test_type_param_i64_0', m.test_type_param_i64_0, 11);
     returns('test_type_param_f32_0', m.test_type_param_f32_0,
         g.expect_type_param_f32_0);
     returns('test_type_param_f64_0', m.test_type_param_f64_0,
         g.expect_type_param_f64_0);
-    returns('test_as_block_first_0', m.test_as_block_first_0,
-        g.expect_as_block_first_0);
-    returns(
-        'test_as_block_mid_0', m.test_as_block_mid_0, g.expect_as_block_mid_0);
-    returns('test_as_block_last_0', m.test_as_block_last_0,
-        g.expect_as_block_last_0);
-    returns('test_as_loop_first_0', m.test_as_loop_first_0,
-        g.expect_as_loop_first_0);
-    returns('test_as_loop_mid_0', m.test_as_loop_mid_0, g.expect_as_loop_mid_0);
-    returns(
-        'test_as_loop_last_0', m.test_as_loop_last_0, g.expect_as_loop_last_0);
-    returns('test_as_br_value_0', m.test_as_br_value_0, g.expect_as_br_value_0);
+    returns('test_as_block_first_0', m.test_as_block_first_0, 1);
+    returns('test_as_block_mid_0', m.test_as_block_mid_0, 1);
+    returns('test_as_block_last_0', m.test_as_block_last_0, 1);
+    returns('test_as_loop_first_0', m.test_as_loop_first_0, 3);
+    returns('test_as_loop_mid_0', m.test_as_loop_mid_0, 4);
+    returns('test_as_loop_last_0', m.test_as_loop_last_0, 5);
+    returns('test_as_br_value_0', m.test_as_br_value_0, 9);
     returns('test_as_br_if_cond_0', m.test_as_br_if_cond_0);
-    returns('test_as_br_if_value_0', m.test_as_br_if_value_0,
-        g.expect_as_br_if_value_0);
-    returns('test_as_br_if_value_cond_0', m.test_as_br_if_value_cond_0,
-        g.expect_as_br_if_value_cond_0);
+    returns('test_as_br_if_value_0', m.test_as_br_if_value_0, 8);
+    returns('test_as_br_if_value_cond_0', m.test_as_br_if_value_cond_0, 6);
     returns('test_as_br_table_index_0', m.test_as_br_table_index_0);
-    returns('test_as_br_table_value_0', m.test_as_br_table_value_0,
-        g.expect_as_br_table_value_0);
-    returns('test_as_br_table_value_index_0', m.test_as_br_table_value_index_0,
-        g.expect_as_br_table_value_index_0);
-    returns('test_as_return_value_0', m.test_as_return_value_0,
-        g.expect_as_return_value_0);
-    returns('test_as_if_cond_0', m.test_as_if_cond_0, g.expect_as_if_cond_0);
-    returns('test_as_if_then_0', m.test_as_if_then_0, g.expect_as_if_then_0);
-    returns('test_as_if_else_0', m.test_as_if_else_0, g.expect_as_if_else_0);
-    returns('test_as_select_first_0', m.test_as_select_first_0,
-        g.expect_as_select_first_0);
-    returns('test_as_select_second_0', m.test_as_select_second_0,
-        g.expect_as_select_second_0);
-    returns('test_as_select_cond_0', m.test_as_select_cond_0,
-        g.expect_as_select_cond_0);
-    returns('test_as_call_first_0', m.test_as_call_first_0,
-        g.expect_as_call_first_0);
-    returns('test_as_call_mid_0', m.test_as_call_mid_0, g.expect_as_call_mid_0);
+    returns('test_as_br_table_value_0', m.test_as_br_table_value_0, 10);
     returns(
-        'test_as_call_last_0', m.test_as_call_last_0, g.expect_as_call_last_0);
-    returns('test_as_call_indirect_first_0', m.test_as_call_indirect_first_0,
-        g.expect_as_call_indirect_first_0);
-    returns('test_as_call_indirect_mid_0', m.test_as_call_indirect_mid_0,
-        g.expect_as_call_indirect_mid_0);
-    returns('test_as_call_indirect_last_0', m.test_as_call_indirect_last_0,
-        g.expect_as_call_indirect_last_0);
-    returns('test_as_call_indirect_index_0', m.test_as_call_indirect_index_0,
-        g.expect_as_call_indirect_index_0);
+        'test_as_br_table_value_index_0', m.test_as_br_table_value_index_0, 6);
+    returns('test_as_return_value_0', m.test_as_return_value_0, 7);
+    returns('test_as_if_cond_0', m.test_as_if_cond_0, 0);
+    returns('test_as_if_then_0', m.test_as_if_then_0, 3);
+    returns('test_as_if_else_0', m.test_as_if_else_0, 4);
+    returns('test_as_select_first_0', m.test_as_select_first_0, 5);
+    returns('test_as_select_second_0', m.test_as_select_second_0, 6);
+    returns('test_as_select_cond_0', m.test_as_select_cond_0, 0);
+    returns('test_as_call_first_0', m.test_as_call_first_0, -1);
+    returns('test_as_call_mid_0', m.test_as_call_mid_0, -1);
+    returns('test_as_call_last_0', m.test_as_call_last_0, -1);
+    returns(
+        'test_as_call_indirect_first_0', m.test_as_call_indirect_first_0, -1);
+    returns('test_as_call_indirect_mid_0', m.test_as_call_indirect_mid_0, -1);
+    returns('test_as_call_indirect_last_0', m.test_as_call_indirect_last_0, -1);
+    returns(
+        'test_as_call_indirect_index_0', m.test_as_call_indirect_index_0, -1);
     returns('test_as_local_set_value_0', m.test_as_local_set_value_0);
-    returns('test_as_local_tee_value_0', m.test_as_local_tee_value_0,
-        g.expect_as_local_tee_value_0);
+    returns('test_as_local_tee_value_0', m.test_as_local_tee_value_0, 1);
     returns('test_as_global_set_value_0', m.test_as_global_set_value_0);
-    returns('test_as_load_address_0', m.test_as_load_address_0,
-        g.expect_as_load_address_0);
-    returns('test_as_loadN_address_0', m.test_as_loadN_address_0,
-        g.expect_as_loadN_address_0);
+    returns('test_as_load_address_0', m.test_as_load_address_0, 0);
+    returns('test_as_loadN_address_0', m.test_as_loadN_address_0, 0);
     returns('test_as_store_address_0', m.test_as_store_address_0);
     returns('test_as_store_value_0', m.test_as_store_value_0);
     returns('test_as_storeN_address_0', m.test_as_storeN_address_0);
     returns('test_as_storeN_value_0', m.test_as_storeN_value_0);
     returns('test_as_unary_operand_0', m.test_as_unary_operand_0,
         g.expect_as_unary_operand_0);
-    returns('test_as_binary_left_0', m.test_as_binary_left_0,
-        g.expect_as_binary_left_0);
-    returns('test_as_binary_right_0', m.test_as_binary_right_0,
-        g.expect_as_binary_right_0);
-    returns('test_as_test_operand_0', m.test_as_test_operand_0,
-        g.expect_as_test_operand_0);
-    returns('test_as_compare_left_0', m.test_as_compare_left_0,
-        g.expect_as_compare_left_0);
-    returns('test_as_compare_right_0', m.test_as_compare_right_0,
-        g.expect_as_compare_right_0);
-    returns('test_as_convert_operand_0', m.test_as_convert_operand_0,
-        g.expect_as_convert_operand_0);
-    returns('test_as_memory_grow_size_0', m.test_as_memory_grow_size_0,
-        g.expect_as_memory_grow_size_0);
+    returns('test_as_binary_left_0', m.test_as_binary_left_0, 13);
+    returns('test_as_binary_right_0', m.test_as_binary_right_0, 6);
+    returns('test_as_test_operand_0', m.test_as_test_operand_0, 1);
+    returns('test_as_compare_left_0', m.test_as_compare_left_0, 0);
+    returns('test_as_compare_right_0', m.test_as_compare_right_0, 1);
+    returns('test_as_convert_operand_0', m.test_as_convert_operand_0, 41);
+    returns('test_as_memory_grow_size_0', m.test_as_memory_grow_size_0, 1);
     returns('test_type_mixed_0', m.test_type_mixed_0);
-    returns('test_write_0', m.test_write_0, g.expect_write_0);
+    returns('test_write_0', m.test_write_0, 56);
     returns('test_result_0', m.test_result_0, g.expect_result_0);
   });
 }
@@ -1398,95 +1368,15 @@ typedef FunctionType15 = i32 Function(i64);
 class Globals {
   i32 g = 0;
 
-  final i32 expect_type_local_i32_0 = 0;
-
-  final i64 expect_type_local_i64_0 = 0;
-
   final f32 expect_type_local_f32_0 = _initExpect_type_local_f32_0();
 
   final f64 expect_type_local_f64_0 = _initExpect_type_local_f64_0();
-
-  final i32 expect_type_param_i32_0 = 10;
-
-  final i64 expect_type_param_i64_0 = 11;
 
   final f32 expect_type_param_f32_0 = _initExpect_type_param_f32_0();
 
   final f64 expect_type_param_f64_0 = _initExpect_type_param_f64_0();
 
-  final i32 expect_as_block_first_0 = 1;
-
-  final i32 expect_as_block_mid_0 = 1;
-
-  final i32 expect_as_block_last_0 = 1;
-
-  final i32 expect_as_loop_first_0 = 3;
-
-  final i32 expect_as_loop_mid_0 = 4;
-
-  final i32 expect_as_loop_last_0 = 5;
-
-  final i32 expect_as_br_value_0 = 9;
-
-  final i32 expect_as_br_if_value_0 = 8;
-
-  final i32 expect_as_br_if_value_cond_0 = 6;
-
-  final i32 expect_as_br_table_value_0 = 10;
-
-  final i32 expect_as_br_table_value_index_0 = 6;
-
-  final i32 expect_as_return_value_0 = 7;
-
-  final i32 expect_as_if_cond_0 = 0;
-
-  final i32 expect_as_if_then_0 = 3;
-
-  final i32 expect_as_if_else_0 = 4;
-
-  final i32 expect_as_select_first_0 = 5;
-
-  final i32 expect_as_select_second_0 = 6;
-
-  final i32 expect_as_select_cond_0 = 0;
-
-  final i32 expect_as_call_first_0 = -1;
-
-  final i32 expect_as_call_mid_0 = -1;
-
-  final i32 expect_as_call_last_0 = -1;
-
-  final i32 expect_as_call_indirect_first_0 = -1;
-
-  final i32 expect_as_call_indirect_mid_0 = -1;
-
-  final i32 expect_as_call_indirect_last_0 = -1;
-
-  final i32 expect_as_call_indirect_index_0 = -1;
-
-  final i32 expect_as_local_tee_value_0 = 1;
-
-  final i32 expect_as_load_address_0 = 0;
-
-  final i32 expect_as_loadN_address_0 = 0;
-
   final f32 expect_as_unary_operand_0 = _initExpect_as_unary_operand_0();
-
-  final i32 expect_as_binary_left_0 = 13;
-
-  final i32 expect_as_binary_right_0 = 6;
-
-  final i32 expect_as_test_operand_0 = 1;
-
-  final i32 expect_as_compare_left_0 = 0;
-
-  final i32 expect_as_compare_right_0 = 1;
-
-  final i32 expect_as_convert_operand_0 = 41;
-
-  final i32 expect_as_memory_grow_size_0 = 1;
-
-  final i64 expect_write_0 = 56;
 
   final f64 expect_result_0 = _initExpect_result_0();
 

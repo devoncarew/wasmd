@@ -11,19 +11,18 @@ import 'src/infra.dart';
 void main() {
   group('memory_size_2', () {
     final Module m = Module();
-    final Globals g = m.globals;
 
-    returns('test_size_0', m.test_size_0, g.expect_size_0);
+    returns('test_size_0', m.test_size_0, 0);
     returns('test_grow_0', m.test_grow_0);
-    returns('test_size_1', m.test_size_1, g.expect_size_1);
+    returns('test_size_1', m.test_size_1, 0);
     returns('test_grow_1', m.test_grow_1);
-    returns('test_size_2', m.test_size_2, g.expect_size_2);
+    returns('test_size_2', m.test_size_2, 1);
     returns('test_grow_2', m.test_grow_2);
-    returns('test_size_3', m.test_size_3, g.expect_size_3);
+    returns('test_size_3', m.test_size_3, 1);
     returns('test_grow_3', m.test_grow_3);
-    returns('test_size_4', m.test_size_4, g.expect_size_4);
+    returns('test_size_4', m.test_size_4, 1);
     returns('test_grow_4', m.test_grow_4);
-    returns('test_size_5', m.test_size_5, g.expect_size_5);
+    returns('test_size_5', m.test_size_5, 2);
   });
 }
 
@@ -34,8 +33,6 @@ class Module {
     0,
     2,
   );
-
-  final Globals globals = Globals();
 
   i32 size() {
     final frame = Frame(memory);
@@ -135,17 +132,3 @@ class Module {
 typedef FunctionType0 = i32 Function();
 typedef FunctionType1 = void Function(i32);
 typedef FunctionType2 = void Function();
-
-class Globals {
-  final i32 expect_size_0 = 0;
-
-  final i32 expect_size_1 = 0;
-
-  final i32 expect_size_2 = 1;
-
-  final i32 expect_size_3 = 1;
-
-  final i32 expect_size_4 = 1;
-
-  final i32 expect_size_5 = 2;
-}

@@ -11,7 +11,6 @@ import 'src/infra.dart';
 void main() {
   group('local_set', () {
     final Module m = Module();
-    final Globals g = m.globals;
 
     returns('test_type_local_i32_0', m.test_type_local_i32_0);
     returns('test_type_local_i64_0', m.test_type_local_i64_0);
@@ -31,7 +30,7 @@ void main() {
     returns('test_as_if_then_0', m.test_as_if_then_0);
     returns('test_as_if_else_0', m.test_as_if_else_0);
     returns('test_type_mixed_0', m.test_type_mixed_0);
-    returns('test_write_0', m.test_write_0, g.expect_write_0);
+    returns('test_write_0', m.test_write_0, 56);
   });
 }
 
@@ -39,8 +38,6 @@ class Module {
   Module();
 
   final Memory memory = Memory(0);
-
-  final Globals globals = Globals();
 
   void type_local_i32() {
     i32 local0 = 0;
@@ -443,7 +440,3 @@ typedef FunctionType4 = void Function(f64);
 typedef FunctionType5 = void Function(i64, f32, f64, i32, i32);
 typedef FunctionType6 = i64 Function(i64, f32, f64, i32, i32);
 typedef FunctionType7 = i64 Function();
-
-class Globals {
-  final i64 expect_write_0 = 56;
-}
