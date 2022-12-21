@@ -13,22 +13,21 @@ import 'src/infra.dart';
 void main() {
   group('address_3', () {
     final Module m = Module();
-    final Globals g = m.globals;
 
-    returns('test_64_good1_0', m.test_64_good1_0, g.expect_64_good1_0);
-    returns('test_64_good2_0', m.test_64_good2_0, g.expect_64_good2_0);
-    returns('test_64_good3_0', m.test_64_good3_0, g.expect_64_good3_0);
-    returns('test_64_good4_0', m.test_64_good4_0, g.expect_64_good4_0);
-    returns('test_64_good5_0', m.test_64_good5_0, g.expect_64_good5_0);
-    returns('test_64_good1_1', m.test_64_good1_1, g.expect_64_good1_1);
-    returns('test_64_good2_1', m.test_64_good2_1, g.expect_64_good2_1);
-    returns('test_64_good3_1', m.test_64_good3_1, g.expect_64_good3_1);
-    returns('test_64_good4_1', m.test_64_good4_1, g.expect_64_good4_1);
-    returns('test_64_good5_1', m.test_64_good5_1, g.expect_64_good5_1);
-    returns('test_64_good1_2', m.test_64_good1_2, g.expect_64_good1_2);
-    returns('test_64_good2_2', m.test_64_good2_2, g.expect_64_good2_2);
-    returns('test_64_good3_2', m.test_64_good3_2, g.expect_64_good3_2);
-    returns('test_64_good4_2', m.test_64_good4_2, g.expect_64_good4_2);
+    returns('test_64_good1_0', m.test_64_good1_0, 0.0);
+    returns('test_64_good2_0', m.test_64_good2_0, 0.0);
+    returns('test_64_good3_0', m.test_64_good3_0, 0.0);
+    returns('test_64_good4_0', m.test_64_good4_0, 0.0);
+    returns('test_64_good5_0', m.test_64_good5_0, double.nan);
+    returns('test_64_good1_1', m.test_64_good1_1, 0.0);
+    returns('test_64_good2_1', m.test_64_good2_1, 0.0);
+    returns('test_64_good3_1', m.test_64_good3_1, 0.0);
+    returns('test_64_good4_1', m.test_64_good4_1, 0.0);
+    returns('test_64_good5_1', m.test_64_good5_1, 0.0);
+    returns('test_64_good1_2', m.test_64_good1_2, 0.0);
+    returns('test_64_good2_2', m.test_64_good2_2, 0.0);
+    returns('test_64_good3_2', m.test_64_good3_2, 0.0);
+    returns('test_64_good4_2', m.test_64_good4_2, 0.0);
   });
 }
 
@@ -38,8 +37,6 @@ class Module {
   }
 
   final Memory memory = Memory(1);
-
-  final Globals globals = Globals();
 
   final DataSegments dataSegments = DataSegments();
 
@@ -229,122 +226,6 @@ class Module {
 typedef FunctionType0 = f64 Function(i32);
 typedef FunctionType1 = void Function(i32);
 typedef FunctionType2 = f64 Function();
-
-class Globals {
-  final f64 expect_64_good1_0 = _initExpect_64_good1_0();
-
-  final f64 expect_64_good2_0 = _initExpect_64_good2_0();
-
-  final f64 expect_64_good3_0 = _initExpect_64_good3_0();
-
-  final f64 expect_64_good4_0 = _initExpect_64_good4_0();
-
-  final f64 expect_64_good5_0 = _initExpect_64_good5_0();
-
-  final f64 expect_64_good1_1 = _initExpect_64_good1_1();
-
-  final f64 expect_64_good2_1 = _initExpect_64_good2_1();
-
-  final f64 expect_64_good3_1 = _initExpect_64_good3_1();
-
-  final f64 expect_64_good4_1 = _initExpect_64_good4_1();
-
-  final f64 expect_64_good5_1 = _initExpect_64_good5_1();
-
-  final f64 expect_64_good1_2 = _initExpect_64_good1_2();
-
-  final f64 expect_64_good2_2 = _initExpect_64_good2_2();
-
-  final f64 expect_64_good3_2 = _initExpect_64_good3_2();
-
-  final f64 expect_64_good4_2 = _initExpect_64_good4_2();
-
-  static final Memory memory = Memory(0);
-
-  static f64 _initExpect_64_good1_0() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good2_0() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good3_0() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good4_0() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good5_0() {
-    final frame = Frame(memory);
-    frame.f64_const(double.nan);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good1_1() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good2_1() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good3_1() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good4_1() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good5_1() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good1_2() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good2_2() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good3_2() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_64_good4_2() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-}
 
 class DataSegments {
   Uint8List data0 = decodeDataLiteral(_hex0);

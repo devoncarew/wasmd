@@ -387,6 +387,8 @@ class Instruction {
 
   static const i32ConstOpcode = 0x41;
   static const i64ConstOpcode = 0x42;
+  static const f32ConstOpcode = 0x43;
+  static const f64ConstOpcode = 0x44;
   static const overflowOpcode = 0xFC;
 
   static final List<Instruction> overflowInstructions = _initOverflow();
@@ -486,12 +488,14 @@ class Instruction {
 
     var inst = instrs.first;
 
-    // todo: f32, f64
-
     if (inst.instruction.opcode == i32ConstOpcode) {
       return Literal(ValueType.i32, inst.args.first as int);
     } else if (inst.instruction.opcode == i64ConstOpcode) {
       return Literal(ValueType.i64, inst.args.first as int);
+    } else if (inst.instruction.opcode == f32ConstOpcode) {
+      return Literal(ValueType.f32, inst.args.first as double);
+    } else if (inst.instruction.opcode == f64ConstOpcode) {
+      return Literal(ValueType.f64, inst.args.first as double);
     } else {
       return null;
     }
@@ -549,8 +553,10 @@ class Instruction {
           immediates: [ImmediateTypes.i32]),
       Instruction('i64.const', i64ConstOpcode,
           immediates: [ImmediateTypes.i64]),
-      Instruction('f32.const', 0x43, immediates: [ImmediateTypes.f32]),
-      Instruction('f64.const', 0x44, immediates: [ImmediateTypes.f64]),
+      Instruction('f32.const', f32ConstOpcode,
+          immediates: [ImmediateTypes.f32]),
+      Instruction('f64.const', f64ConstOpcode,
+          immediates: [ImmediateTypes.f64]),
       Instruction('i32.eqz', 0x45),
       Instruction('i32.eq', 0x46),
       Instruction('i32.ne', 0x47),

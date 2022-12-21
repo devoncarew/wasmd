@@ -13,8 +13,6 @@ import 'package:path/path.dart' as path;
 import 'instructions.dart';
 import 'src/utils.dart';
 
-// TODO: handle f64, f32 literals
-
 class Compiler {
   final File file;
   final Logger logger;

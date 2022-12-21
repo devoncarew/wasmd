@@ -11,20 +11,16 @@ import 'src/infra.dart';
 void main() {
   group('local_get', () {
     final Module m = Module();
-    final Globals g = m.globals;
 
     returns('test_type_local_i32_0', m.test_type_local_i32_0, 0);
     returns('test_type_local_i64_0', m.test_type_local_i64_0, 0);
-    returns('test_type_local_f32_0', m.test_type_local_f32_0,
-        g.expect_type_local_f32_0);
-    returns('test_type_local_f64_0', m.test_type_local_f64_0,
-        g.expect_type_local_f64_0);
+    returns('test_type_local_f32_0', m.test_type_local_f32_0, 0.0);
+    returns('test_type_local_f64_0', m.test_type_local_f64_0, 0.0);
     returns('test_type_param_i32_0', m.test_type_param_i32_0, 2);
     returns('test_type_param_i64_0', m.test_type_param_i64_0, 3);
-    returns('test_type_param_f32_0', m.test_type_param_f32_0,
-        g.expect_type_param_f32_0);
-    returns('test_type_param_f64_0', m.test_type_param_f64_0,
-        g.expect_type_param_f64_0);
+    returns(
+        'test_type_param_f32_0', m.test_type_param_f32_0, 4.400000095367432);
+    returns('test_type_param_f64_0', m.test_type_param_f64_0, 5.5);
     returns('test_as_block_value_0', m.test_as_block_value_0, 6);
     returns('test_as_loop_value_0', m.test_as_loop_value_0, 7);
     returns('test_as_br_value_0', m.test_as_br_value_0, 8);
@@ -35,7 +31,7 @@ void main() {
     returns('test_as_if_then_0', m.test_as_if_then_0, 1);
     returns('test_as_if_else_0', m.test_as_if_else_0, 0);
     returns('test_type_mixed_0', m.test_type_mixed_0);
-    returns('test_read_0', m.test_read_0, g.expect_read_0);
+    returns('test_read_0', m.test_read_0, 34.8);
   });
 }
 
@@ -43,8 +39,6 @@ class Module {
   Module();
 
   final Memory memory = Memory(0);
-
-  final Globals globals = Globals();
 
   i32 type_local_i32() {
     i32 local0 = 0;
@@ -477,47 +471,3 @@ typedef FunctionType7 = f64 Function(f64);
 typedef FunctionType8 = void Function(i64, f32, f64, i32, i32);
 typedef FunctionType9 = f64 Function(i64, f32, f64, i32, i32);
 typedef FunctionType10 = void Function();
-
-class Globals {
-  final f32 expect_type_local_f32_0 = _initExpect_type_local_f32_0();
-
-  final f64 expect_type_local_f64_0 = _initExpect_type_local_f64_0();
-
-  final f32 expect_type_param_f32_0 = _initExpect_type_param_f32_0();
-
-  final f64 expect_type_param_f64_0 = _initExpect_type_param_f64_0();
-
-  final f64 expect_read_0 = _initExpect_read_0();
-
-  static final Memory memory = Memory(0);
-
-  static f32 _initExpect_type_local_f32_0() {
-    final frame = Frame(memory);
-    frame.f32_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_type_local_f64_0() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f32 _initExpect_type_param_f32_0() {
-    final frame = Frame(memory);
-    frame.f32_const(4.400000095367432);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_type_param_f64_0() {
-    final frame = Frame(memory);
-    frame.f64_const(5.5);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_read_0() {
-    final frame = Frame(memory);
-    frame.f64_const(34.8);
-    return frame.pop();
-  }
-}

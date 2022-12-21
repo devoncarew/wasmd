@@ -15,16 +15,13 @@ void main() {
 
     returns('test_type_local_i32_0', m.test_type_local_i32_0, 0);
     returns('test_type_local_i64_0', m.test_type_local_i64_0, 0);
-    returns('test_type_local_f32_0', m.test_type_local_f32_0,
-        g.expect_type_local_f32_0);
-    returns('test_type_local_f64_0', m.test_type_local_f64_0,
-        g.expect_type_local_f64_0);
+    returns('test_type_local_f32_0', m.test_type_local_f32_0, 0.0);
+    returns('test_type_local_f64_0', m.test_type_local_f64_0, 0.0);
     returns('test_type_param_i32_0', m.test_type_param_i32_0, 10);
     returns('test_type_param_i64_0', m.test_type_param_i64_0, 11);
-    returns('test_type_param_f32_0', m.test_type_param_f32_0,
-        g.expect_type_param_f32_0);
-    returns('test_type_param_f64_0', m.test_type_param_f64_0,
-        g.expect_type_param_f64_0);
+    returns(
+        'test_type_param_f32_0', m.test_type_param_f32_0, 11.100000381469727);
+    returns('test_type_param_f64_0', m.test_type_param_f64_0, 12.2);
     returns('test_as_block_first_0', m.test_as_block_first_0, 1);
     returns('test_as_block_mid_0', m.test_as_block_mid_0, 1);
     returns('test_as_block_last_0', m.test_as_block_last_0, 1);
@@ -64,8 +61,7 @@ void main() {
     returns('test_as_store_value_0', m.test_as_store_value_0);
     returns('test_as_storeN_address_0', m.test_as_storeN_address_0);
     returns('test_as_storeN_value_0', m.test_as_storeN_value_0);
-    returns('test_as_unary_operand_0', m.test_as_unary_operand_0,
-        g.expect_as_unary_operand_0);
+    returns('test_as_unary_operand_0', m.test_as_unary_operand_0, double.nan);
     returns('test_as_binary_left_0', m.test_as_binary_left_0, 13);
     returns('test_as_binary_right_0', m.test_as_binary_right_0, 6);
     returns('test_as_test_operand_0', m.test_as_test_operand_0, 1);
@@ -75,7 +71,7 @@ void main() {
     returns('test_as_memory_grow_size_0', m.test_as_memory_grow_size_0, 1);
     returns('test_type_mixed_0', m.test_type_mixed_0);
     returns('test_write_0', m.test_write_0, 56);
-    returns('test_result_0', m.test_result_0, g.expect_result_0);
+    returns('test_result_0', m.test_result_0, 34.8);
   });
 }
 
@@ -1367,56 +1363,6 @@ typedef FunctionType15 = i32 Function(i64);
 
 class Globals {
   i32 g = 0;
-
-  final f32 expect_type_local_f32_0 = _initExpect_type_local_f32_0();
-
-  final f64 expect_type_local_f64_0 = _initExpect_type_local_f64_0();
-
-  final f32 expect_type_param_f32_0 = _initExpect_type_param_f32_0();
-
-  final f64 expect_type_param_f64_0 = _initExpect_type_param_f64_0();
-
-  final f32 expect_as_unary_operand_0 = _initExpect_as_unary_operand_0();
-
-  final f64 expect_result_0 = _initExpect_result_0();
-
-  static final Memory memory = Memory(0);
-
-  static f32 _initExpect_type_local_f32_0() {
-    final frame = Frame(memory);
-    frame.f32_const(0.0);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_type_local_f64_0() {
-    final frame = Frame(memory);
-    frame.f64_const(0.0);
-    return frame.pop();
-  }
-
-  static f32 _initExpect_type_param_f32_0() {
-    final frame = Frame(memory);
-    frame.f32_const(11.100000381469727);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_type_param_f64_0() {
-    final frame = Frame(memory);
-    frame.f64_const(12.2);
-    return frame.pop();
-  }
-
-  static f32 _initExpect_as_unary_operand_0() {
-    final frame = Frame(memory);
-    frame.f32_const(double.nan);
-    return frame.pop();
-  }
-
-  static f64 _initExpect_result_0() {
-    final frame = Frame(memory);
-    frame.f64_const(34.8);
-    return frame.pop();
-  }
 }
 
 class ElementSegments {
