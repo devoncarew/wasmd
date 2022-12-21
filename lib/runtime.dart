@@ -793,6 +793,12 @@ class Frame {
     stack.add(result);
   }
 
+  void f32_neg() {
+    f32 arg = stack.removeLast() as f32;
+    var result = -arg;
+    stack.add(result);
+  }
+
   void f64_sub() {
     f64 arg1 = stack.removeLast() as f64;
     f64 arg0 = stack.removeLast() as f64;
@@ -837,13 +843,19 @@ class Frame {
 
   void i32_wrap_i64() {
     i64 arg1 = stack.removeLast() as i64;
-    i32 result = arg1 * 0xFFFFFFFF;
+    i32 result = arg1 & 0xFFFFFFFF;
     stack.add(result);
   }
 
   void i64_extend_i32_u() {
     u32 arg = stack.removeLast() as u32;
     u64 result = arg;
+    stack.add(result);
+  }
+
+  void i64_trunc_f64_s() {
+    f64 arg = stack.removeLast() as f64;
+    i64 result = arg.truncate();
     stack.add(result);
   }
 
@@ -856,6 +868,24 @@ class Frame {
   void f64_convert_i32_u() {
     u32 arg = stack.removeLast() as u32;
     f64 result = arg.toDouble();
+    stack.add(result);
+  }
+
+  void f64_convert_i64_s() {
+    i64 arg = stack.removeLast() as i64;
+    f64 result = arg.toDouble();
+    stack.add(result);
+  }
+
+  void f64_convert_i64_u() {
+    u64 arg = stack.removeLast() as u64;
+    f64 result = arg.toDouble();
+    stack.add(result);
+  }
+
+  void f64_promote_f32() {
+    f32 arg = stack.removeLast() as f32;
+    f64 result = arg;
     stack.add(result);
   }
 

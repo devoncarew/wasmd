@@ -505,19 +505,23 @@ class Instruction {
       Instruction_Loop(), // loop, 0x03
       Instruction_If(), // if, 0x04
       Instruction_Else(), // else, 0x05
+      // reserved, 0x06 - 0x0A
       Instruction_End(), // end, 0x0B
       Instruction_Br(), // br, 0x0C
       Instruction_BrLf(), // br_lf, 0x0D
       Instruction_Return(), // return, 0x0F
       Instruction_Call(), // call, 0x10
       Instruction_CallIndirect(), // call_indirect, 0x11
+      // reserved, 0x12 - 0x19
       Instruction('drop', 0x1A),
       Instruction('select', 0x1B),
+      // reserved, 0x1D - 0x1F
       Instruction_LocalGet(), // local.get, 0x20
       Instruction_LocalSet(), // local.set, 0x21
       Instruction_LocalTee(), // local.tee, 0x22
       Instruction_GlobalGet(), // global.get, 0x23
       Instruction_GlobalSet(), // global.get, 0x24
+      // reserved, 0x27
       Instruction('i32.load', 0x28, immediates: _two),
       Instruction('i64.load', 0x29, immediates: _two),
       Instruction('f32.load', 0x2A, immediates: _two),
@@ -608,6 +612,7 @@ class Instruction {
       Instruction('i64.shr_u', 0x88),
       Instruction('i64.rotl', 0x89),
       Instruction('i64.rotr', 0x8A),
+      Instruction('f32.neg', 0x8C),
       Instruction('f64.abs', 0x99),
       Instruction('f64.neg', 0x9A),
       Instruction('f64.ceil', 0x9B),
@@ -623,13 +628,21 @@ class Instruction {
       Instruction('f64.max', 0xA5),
       Instruction('i32.wrap_i64', 0xA7),
       Instruction('i64.extend_i32_u', 0xAD),
+      Instruction('i64.trunc_f64_s', 0xB0),
       Instruction('f64.convert_i32_s', 0xB7),
       Instruction('f64.convert_i32_u', 0xB8),
+      Instruction('f64.convert_i64_s', 0xB9),
+      Instruction('f64.convert_i64_u', 0xBA),
+      Instruction('f64.promote_f32', 0xBB),
       Instruction('i32.extend8_s', 0xC0),
       Instruction('i32.extend16_s', 0xC1),
       Instruction('i64.extend8_s', 0xC2),
       Instruction('i64.extend16_s', 0xC3),
       Instruction('i64.extend32_s', 0xC4),
+      // reserved, 0xC5 - 0xCF
+      // reserved, 0xD3 - 0xFB
+      // 0xFC - overflow (below)
+      // 0xFD - vector
     ];
   }
 
