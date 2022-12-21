@@ -10,7 +10,7 @@ import 'src/s_expr.dart';
 // Given an wast file, generate one or more wat module files that represent unit
 // tests.
 
-// todo: introduce some model objects here to make it easier to manipulate the
+// TODO: introduce some model objects here to make it easier to manipulate the
 // s-expressions
 
 // Patterns:
@@ -146,6 +146,7 @@ List<Expression> _process(ComilationUnit compilationUnit) {
     Expression module,
     Expression node, {
     bool assertTrap = false,
+    bool invocation = false,
   }) {
     // (func (export "fac-ssa") (param i64) (result i64) (i64.const 1) (local.get 0) (loop $l (param i64 i64) (result i64) (call $pick1) (call $pick1) (i64.mul) (call $pick1) (i64.const 1) (i64.sub) (call $pick0) (i64.const 0) (i64.gt_u) (br_if $l) (drop) (return)))
     // (assert_return (invoke "fac-rec" (i64.const 25)) (i64.const 7034535277573963776))
@@ -154,9 +155,9 @@ List<Expression> _process(ComilationUnit compilationUnit) {
     var id = testNameMap[name] ?? 0;
     testNameMap[name] = id + 1;
     var testName = 'test_${name.replaceAll('-', '_')}_$id';
-    var testInstrs = node.nodes[1] as Expression;
 
     if (assertTrap) {
+      var testInstrs = node.nodes[1] as Expression;
       // (assert_trap (invoke "store_at_page_size") "out of bounds memory access")
       var typeName = getTypeForMethod(module, name);
       var message = (node.nodes[2] as Atom).value;
@@ -182,7 +183,25 @@ List<Expression> _process(ComilationUnit compilationUnit) {
           // Atom('"${stripQuotes(message)}\\00"'),
         ])
       ];
+    } else if (invocation) {
+      var testInstrs = Expression(node.nodes.skip(2).toList());
+      testName = 'test_invoke_${name.replaceAll('-', '_')}_$id';
+
+      return [
+        Expression([
+          Atom('func'),
+          Expression([Atom('export'), Atom('"$testName"')]),
+          // if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
+          Expression([
+            Atom('call'),
+            Atom('\$$name'),
+            ...testInstrs.nodes.skip(2),
+          ]),
+        ]),
+      ];
     } else {
+      var testInstrs = node.nodes[1] as Expression;
+
       var expectName = 'expect_${name.replaceAll('-', '_')}_$id';
       var expectInstrs =
           node.nodes.length >= 3 ? node.nodes[2] as Expression : null;
@@ -231,8 +250,11 @@ List<Expression> _process(ComilationUnit compilationUnit) {
       // re-write into the module as a test method
       module.nodes.addAll(transmute(module, expr));
     } else if (kind(expr) == 'assert_trap' && module != null) {
-      // re-write into the module as a test method
+      // re-write into the module as a trap test method
       module.nodes.addAll(transmute(module, expr, assertTrap: true));
+    } else if (kind(expr) == 'invoke' && module != null) {
+      // re-write into the module as a method invocation
+      module.nodes.addAll(transmute(module, expr, invocation: true));
     }
   }
 
@@ -265,6 +287,11 @@ String? kind(Expression expr) {
 }
 
 String? findName(Expression node) {
+  if (kind(node) == 'invoke') {
+    var val = (node.nodes[1] as Atom).value;
+    return stripQuotes(val);
+  }
+
   for (var child in node.nodes.whereType<Expression>()) {
     if (kind(child) == 'invoke' || kind(child) == 'export') {
       var val = (child.nodes[1] as Atom).value;

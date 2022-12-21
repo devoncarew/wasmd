@@ -285,6 +285,26 @@ class Frame {
     }
   }
 
+  void f32_store(u32 align, u32 offset) {
+    f32 value = stack.removeLast() as f32;
+    i32 index = stack.removeLast() as i32;
+    try {
+      memory.data.setFloat32(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
+
+  void f64_store(u32 align, u32 offset) {
+    f64 value = stack.removeLast() as f64;
+    i32 index = stack.removeLast() as i32;
+    try {
+      memory.data.setFloat64(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
+
   void i32_store8(u32 align, u32 offset) {
     i32 value = stack.removeLast() as i32;
     i32 index = stack.removeLast() as i32;
@@ -510,6 +530,13 @@ class Frame {
     u64 arg1 = stack.removeLast() as u64;
     u64 arg0 = stack.removeLast() as u64;
     var result = arg0 >= arg1 ? 1 : 0;
+    stack.add(result);
+  }
+
+  void f64_eq() {
+    f64 arg1 = stack.removeLast() as f64;
+    f64 arg0 = stack.removeLast() as f64;
+    var result = arg0 == arg1 ? 1 : 0;
     stack.add(result);
   }
 
@@ -979,6 +1006,15 @@ class Frame {
   void f64_promote_f32() {
     f32 arg = stack.removeLast() as f32;
     f64 result = arg;
+    stack.add(result);
+  }
+
+  final ByteData _reinterpretData = ByteData(8);
+
+  void f64_reinterpret_i64() {
+    i64 arg = stack.removeLast() as i64;
+    _reinterpretData.setUint64(0, arg, Endian.little);
+    f64 result = _reinterpretData.getFloat64(0, Endian.little);
     stack.add(result);
   }
 

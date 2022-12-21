@@ -573,8 +573,11 @@ void printModule(
         var testName = func.name;
         var name = testName.substring('test_'.length);
         var throwsMessage = module.dataSegments.getNamed('trap_$name');
+        var isInvoke = testName.startsWith('test_invoke_');
 
-        if (throwsMessage != null) {
+        if (isInvoke) {
+          buf.writeln("m.$testName();");
+        } else if (throwsMessage != null) {
           var message = utf8.decode(throwsMessage.bytes);
           buf.write("  traps('$testName', ");
           // TODO: inline the test closure
@@ -1824,6 +1827,8 @@ class DataSegment {
 }
 
 String buildDataLiteral(List<int> bytes) {
+  if (bytes.isEmpty) return "''";
+
   var buf = StringBuffer();
   var lines = <String>[];
   for (var value in bytes) {

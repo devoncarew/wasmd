@@ -545,7 +545,8 @@ class Instruction {
       Instruction('i64.load32_u', 0x35, immediates: _two),
       Instruction('i32.store', 0x36, immediates: _two),
       Instruction('i64.store', 0x37, immediates: _two),
-      //
+      Instruction('f32.store', 0x38, immediates: _two),
+      Instruction('f64.store', 0x39, immediates: _two),
       Instruction('i32.store8', 0x3A, immediates: _two),
       Instruction('i32.store16', 0x3B, immediates: _two),
       Instruction('i64.store8', 0x3C, immediates: _two),
@@ -579,6 +580,8 @@ class Instruction {
       Instruction('i64.le_u', 0x58),
       Instruction('i64.ge_s', 0x59),
       Instruction('i64.ge_u', 0x5A),
+      //
+      Instruction('f64.eq', 0x61),
       //
       Instruction('f64.gt', 0x64),
       Instruction('f64.le', 0x65),
@@ -648,6 +651,7 @@ class Instruction {
       Instruction('f64.convert_i64_u', 0xBA),
       Instruction('f64.promote_f32', 0xBB),
       //
+      Instruction('f64.reinterpret_i64', 0xBF),
       Instruction('i32.extend8_s', 0xC0),
       Instruction('i32.extend16_s', 0xC1),
       Instruction('i64.extend8_s', 0xC2),
