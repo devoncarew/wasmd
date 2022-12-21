@@ -76,8 +76,6 @@ class Compiler {
       var sectionKind = SectionKind.from(kind);
       _log('[section ${sectionKind?.name}] (bytes: $length)');
 
-      // todo: find a module that uses a name custom section.
-
       if (sectionKind == SectionKind.custom) {
         _parseCustomSection(r, module, length);
       } else if (sectionKind == SectionKind.type) {
@@ -132,7 +130,6 @@ class Compiler {
       var size = r.leb128_u();
 
       // 4: type names
-      // 9: data segment names
 
       switch (subsectionId) {
         case 0:
@@ -187,6 +184,19 @@ class Compiler {
               _log('  [$name]');
               var localMap =
                   (module.globals.debugInfo ??= DebugInfo()).indexedNames;
+              localMap[index] = name;
+            }
+          }
+          break;
+        case 9:
+          // data segment names
+          var items = r.leb128_u();
+          for (int i = 0; i < items; i++) {
+            var index = r.leb128_u();
+            var name = patchUpName(r.readUtf8());
+            if (isValidIdentifier(name)) {
+              var localMap =
+                  (module.dataSegments.debugInfo ??= DebugInfo()).indexedNames;
               localMap[index] = name;
             }
           }
@@ -503,15 +513,13 @@ class Compiler {
         case 0x00:
           var instructions = r.readInstructionsEndTerminated();
           var bytes = r.readByteVector();
-          module.dataSegments.add(DataSegment(
-            passive: false,
-            offsetExpression: instructions,
-            bytes: bytes,
-          ));
+          module.dataSegments.add(DataSegment(module, i,
+              passive: false, offsetExpression: instructions, bytes: bytes));
           break;
         case 0x01:
           var bytes = r.readByteVector();
-          module.dataSegments.add(DataSegment(passive: true, bytes: bytes));
+          module.dataSegments
+              .add(DataSegment(module, i, passive: true, bytes: bytes));
           break;
         case 0x02:
           var memIndex = r.leb128();
@@ -522,6 +530,8 @@ class Compiler {
           var instructions = r.readInstructionsEndTerminated();
           var bytes = r.readByteVector();
           module.dataSegments.add(DataSegment(
+            module,
+            i,
             passive: false,
             offsetExpression: instructions,
             bytes: bytes,
@@ -561,24 +571,36 @@ void printModule(
           module.allFunctions.where((f) => f.name.startsWith('test_'));
       for (var func in functions) {
         var testName = func.name;
-        var expectName = 'expect_${testName.substring('test_'.length)}';
+        var name = testName.substring('test_'.length);
+        var throwsMessage = module.dataSegments.getNamed('trap_$name');
 
-        buf.write("  returns('$testName', ");
-        // TODO: inline the test closure
-        buf.write("m.$testName, ");
-        var expectation = module.globals.getNamed(expectName);
-        if (expectation != null) {
-          var literalValue = expectation.calcLiteralValue;
-          if (literalValue != null) {
-            // inline the expectations constant
-            var expr = printLiteral(literalValue.value as num);
-            buf.write(expr.accept(_constEmitter).toString());
-            module.globals.globals.remove(expectation);
-          } else {
-            buf.write("g.$expectName");
+        if (throwsMessage != null) {
+          var message = utf8.decode(throwsMessage.bytes);
+          buf.write("  traps('$testName', ");
+          // TODO: inline the test closure
+          buf.write('m.$testName, ');
+          buf.write('"$message"');
+          buf.writeln(');');
+        } else {
+          var expectName = 'expect_$name';
+
+          buf.write("  returns('$testName', ");
+          // TODO: inline the test closure
+          buf.write("m.$testName, ");
+          var expectation = module.globals.getNamed(expectName);
+          if (expectation != null) {
+            var literalValue = expectation.calcLiteralValue;
+            if (literalValue != null) {
+              // inline the expectations constant
+              var expr = printLiteral(literalValue.value as num);
+              buf.write(expr.accept(_constEmitter).toString());
+              module.globals.globals.remove(expectation);
+            } else {
+              buf.write("g.$expectName");
+            }
           }
+          buf.writeln(");");
         }
-        buf.writeln(");");
       }
 
       return buf.toString();
@@ -1131,7 +1153,7 @@ class Module {
 
   List<ImportModule> importModules = [];
 
-  List<DataSegment> dataSegments = [];
+  final DataSegments dataSegments = DataSegments();
 
   List<Table> tables = [];
   List<ElementSegment> elementSegments = [];
@@ -1192,33 +1214,6 @@ class Module {
     // TODO: This only handles passive element segments of funcref type
     elementSegments
         .add(ElementSegment(tableIndex, offsetInstrs, functionIndexs));
-  }
-}
-
-class Globals {
-  final List<Global> globals = [];
-  // todo: handle global imports
-  List<String> imports = [];
-  List<GlobalExport> globalExports = [];
-
-  DebugInfo? debugInfo;
-
-  Globals();
-
-  bool get isNotEmpty => globals.isNotEmpty;
-
-  num get count => globals.length;
-
-  void add(Global global) {
-    globals.add(global);
-  }
-
-  void exportGlobal(String name, int globalIndex) {
-    globalExports.add(GlobalExport(name, globals[globalIndex]));
-  }
-
-  Global? getNamed(String name) {
-    return globals.firstWhereOrNull((global) => global.name == name);
   }
 }
 
@@ -1548,6 +1543,33 @@ class ElementSegment {
   }
 }
 
+class Globals {
+  final List<Global> globals = [];
+  // todo: handle global imports
+  List<String> imports = [];
+  List<GlobalExport> globalExports = [];
+
+  DebugInfo? debugInfo;
+
+  Globals();
+
+  bool get isNotEmpty => globals.isNotEmpty;
+
+  num get count => globals.length;
+
+  void add(Global global) {
+    globals.add(global);
+  }
+
+  void exportGlobal(String name, int globalIndex) {
+    globalExports.add(GlobalExport(name, globals[globalIndex]));
+  }
+
+  Global? getNamed(String name) {
+    return globals.firstWhereOrNull((global) => global.name == name);
+  }
+}
+
 class Global {
   final Module module;
   final int index;
@@ -1663,25 +1685,59 @@ class GlobalExport {
   GlobalExport(this.name, this.global);
 }
 
+class DataSegments {
+  final List<DataSegment> segments = [];
+
+  DebugInfo? debugInfo;
+
+  DataSegments();
+
+  bool get isNotEmpty => segments.isNotEmpty;
+
+  void add(DataSegment dataSegment) {
+    segments.add(dataSegment);
+  }
+
+  DataSegment? getNamed(String name) {
+    return segments.firstWhereOrNull((segment) => segment.name == name);
+  }
+}
+
 class DataSegment {
+  final Module module;
+  final int index;
   final bool passive;
   final List<int> bytes;
   final List<Instr>? offsetExpression;
 
-  DataSegment({
+  late String _generatedName;
+
+  DataSegment(
+    this.module,
+    this.index, {
     required this.passive,
     this.offsetExpression,
     required this.bytes,
-  });
+  }) {
+    _generatedName = 'data$index';
+  }
+
+  String get name {
+    var debugInfo = module.dataSegments.debugInfo;
+    if (debugInfo == null) return _generatedName;
+    return debugInfo.indexedNames[index] ?? _generatedName;
+  }
 
   static Class createDataSegmentClassDef(Module module) {
     ClassBuilder builder = ClassBuilder()..name = 'DataSegments';
 
     // TODO: we likely don't need to create fields for active data segments.
-    for (int i = 0; i < module.dataSegments.length; i++) {
+    var segments = module.dataSegments.segments;
+    for (int i = 0; i < segments.length; i++) {
+      var dataSegment = segments[i];
       builder.fields.add(Field(
         (b) => b
-          ..name = 'data$i'
+          ..name = dataSegment.name
           ..type = Reference('Uint8List', 'dart:typed_data')
           ..assignment = Code('decodeDataLiteral(_hex$i)'),
       ));
@@ -1697,8 +1753,8 @@ class DataSegment {
       ));
 
     var statements = <Code>[];
-    for (int i = 0; i < module.dataSegments.length; i++) {
-      var dataSegment = module.dataSegments[i];
+    for (int i = 0; i < segments.length; i++) {
+      var dataSegment = segments[i];
       if (dataSegment.passive) continue;
 
       var literal = Instruction.calcLiternal(dataSegment.offsetExpression!);
@@ -1708,7 +1764,7 @@ class DataSegment {
 
       // memory.copyTo(data0, _dataOffset0(memory), data0.length);
       statements.add(refer('memory').property('copyTo').call([
-        refer('data$i'),
+        refer(dataSegment.name),
         offsetExpr,
       ]).statement);
     }
@@ -1716,8 +1772,8 @@ class DataSegment {
     initMethod.body = Block.of(statements);
     builder.methods.add(initMethod.build());
 
-    for (int i = 0; i < module.dataSegments.length; i++) {
-      var dataSegment = module.dataSegments[i];
+    for (int i = 0; i < segments.length; i++) {
+      var dataSegment = segments[i];
       if (dataSegment.passive) continue;
 
       var literal = Instruction.calcLiternal(dataSegment.offsetExpression!);
@@ -1749,8 +1805,8 @@ class DataSegment {
       builder.methods.add(method);
     }
 
-    for (int i = 0; i < module.dataSegments.length; i++) {
-      var dataSegment = module.dataSegments[i];
+    for (int i = 0; i < segments.length; i++) {
+      var dataSegment = segments[i];
       var hexLiteral = buildDataLiteral(dataSegment.bytes);
 
       builder.fields.add(Field(

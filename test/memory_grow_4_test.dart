@@ -3,6 +3,8 @@
 // ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
 // ignore_for_file: unused_label, unused_local_variable
 
+import 'dart:typed_data';
+
 import 'package:test/test.dart';
 import 'package:wasmd/runtime.dart';
 
@@ -35,6 +37,8 @@ void main() {
         'test_as_call_indirect_first_0', m.test_as_call_indirect_first_0, -1);
     returns('test_as_call_indirect_mid_0', m.test_as_call_indirect_mid_0, -1);
     returns('test_as_call_indirect_last_0', m.test_as_call_indirect_last_0, -1);
+    traps('test_as_call_indirect_index_0', m.test_as_call_indirect_index_0,
+        "undefined element");
     returns('test_as_local_set_value_0', m.test_as_local_set_value_0);
     returns('test_as_local_tee_value_0', m.test_as_local_tee_value_0, 1);
     returns('test_as_global_set_value_0', m.test_as_global_set_value_0);
@@ -56,6 +60,7 @@ void main() {
 
 class Module {
   Module() {
+    dataSegments.init(memory);
     tables = [table0];
     elementSegments.init(this);
   }
@@ -63,6 +68,8 @@ class Module {
   final Memory memory = Memory(1);
 
   final Globals globals = Globals();
+
+  final DataSegments dataSegments = DataSegments();
 
   final Table table0 = Table(
     1,
@@ -616,6 +623,12 @@ class Module {
     return frame.pop();
   }
 
+  i32 test_as_call_indirect_index_0() {
+    final frame = Frame(memory);
+    frame.push(as_call_indirect_index());
+    return frame.pop();
+  }
+
   void test_as_local_set_value_0() {
     final frame = Frame(memory);
     as_local_set_value();
@@ -714,6 +727,15 @@ typedef FunctionType3 = i32 Function(i32, i32);
 
 class Globals {
   i32 g = 0;
+}
+
+class DataSegments {
+  Uint8List trap_as_call_indirect_index_0 = decodeDataLiteral(_hex0);
+
+  static const String _hex0 =
+      '\x75\x6E\x64\x65\x66\x69\x6E\x65\x64\x20\x65\x6C\x65\x6D\x65\x6E\x74';
+
+  void init(Memory memory) {}
 }
 
 class ElementSegments {

@@ -23,10 +23,10 @@ class Instr {
   }
 }
 
-const List<ImmediateTypes> _one = [ImmediateTypes.u32];
-const List<ImmediateTypes> _two = [
-  ImmediateTypes.u32,
-  ImmediateTypes.u32,
+const List<Immediates> _one = [Immediates.u32];
+const List<Immediates> _two = [
+  Immediates.u32,
+  Immediates.u32,
 ];
 
 class Instruction_Unreachable extends Instruction {
@@ -332,7 +332,7 @@ class Instruction_CallIndirect extends Instruction {
   }
 }
 
-enum ImmediateTypes {
+enum Immediates {
   i32,
   u32,
   i64,
@@ -397,9 +397,9 @@ class Instruction {
 
   final String name;
   final int opcode;
-  final List<ImmediateTypes> immediates;
-  final List<ImmediateTypes> args;
-  final ImmediateTypes? returns;
+  final List<Immediates> immediates;
+  final List<Immediates> args;
+  final Immediates? returns;
 
   Instruction(
     this.name,
@@ -451,24 +451,24 @@ class Instruction {
       var args = <Object>[];
       for (var immediateType in instruction.immediates) {
         switch (immediateType) {
-          case ImmediateTypes.u32:
+          case Immediates.u32:
             args.add(r.leb128_u());
             break;
-          case ImmediateTypes.i32:
+          case Immediates.i32:
             // ???
             // args.add(r.leb128_s(bits: 32));
             args.add(r.leb128_s(bits: 64));
             break;
-          case ImmediateTypes.u64:
+          case Immediates.u64:
             args.add(r.leb128_u());
             break;
-          case ImmediateTypes.i64:
+          case Immediates.i64:
             args.add(r.leb128_s(bits: 64));
             break;
-          case ImmediateTypes.f32:
+          case Immediates.f32:
             args.add(r.readF32());
             break;
-          case ImmediateTypes.f64:
+          case Immediates.f64:
             args.add(r.readF64());
             break;
           default:
@@ -513,18 +513,21 @@ class Instruction {
       Instruction_End(), // end, 0x0B
       Instruction_Br(), // br, 0x0C
       Instruction_BrLf(), // br_lf, 0x0D
+      //
       Instruction_Return(), // return, 0x0F
       Instruction_Call(), // call, 0x10
       Instruction_CallIndirect(), // call_indirect, 0x11
       // reserved, 0x12 - 0x19
       Instruction('drop', 0x1A),
       Instruction('select', 0x1B),
+      //
       // reserved, 0x1D - 0x1F
       Instruction_LocalGet(), // local.get, 0x20
       Instruction_LocalSet(), // local.set, 0x21
       Instruction_LocalTee(), // local.tee, 0x22
       Instruction_GlobalGet(), // global.get, 0x23
       Instruction_GlobalSet(), // global.get, 0x24
+      //
       // reserved, 0x27
       Instruction('i32.load', 0x28, immediates: _two),
       Instruction('i64.load', 0x29, immediates: _two),
@@ -542,6 +545,7 @@ class Instruction {
       Instruction('i64.load32_u', 0x35, immediates: _two),
       Instruction('i32.store', 0x36, immediates: _two),
       Instruction('i64.store', 0x37, immediates: _two),
+      //
       Instruction('i32.store8', 0x3A, immediates: _two),
       Instruction('i32.store16', 0x3B, immediates: _two),
       Instruction('i64.store8', 0x3C, immediates: _two),
@@ -549,14 +553,10 @@ class Instruction {
       Instruction('i64.store32', 0x3E, immediates: _two),
       Instruction('memory.size', 0x3F, immediates: _one),
       Instruction('memory.grow', 0x40, immediates: _one),
-      Instruction('i32.const', i32ConstOpcode,
-          immediates: [ImmediateTypes.i32]),
-      Instruction('i64.const', i64ConstOpcode,
-          immediates: [ImmediateTypes.i64]),
-      Instruction('f32.const', f32ConstOpcode,
-          immediates: [ImmediateTypes.f32]),
-      Instruction('f64.const', f64ConstOpcode,
-          immediates: [ImmediateTypes.f64]),
+      Instruction('i32.const', i32ConstOpcode, immediates: [Immediates.i32]),
+      Instruction('i64.const', i64ConstOpcode, immediates: [Immediates.i64]),
+      Instruction('f32.const', f32ConstOpcode, immediates: [Immediates.f32]),
+      Instruction('f64.const', f64ConstOpcode, immediates: [Immediates.f64]),
       Instruction('i32.eqz', 0x45),
       Instruction('i32.eq', 0x46),
       Instruction('i32.ne', 0x47),
@@ -579,6 +579,7 @@ class Instruction {
       Instruction('i64.le_u', 0x58),
       Instruction('i64.ge_s', 0x59),
       Instruction('i64.ge_u', 0x5A),
+      //
       Instruction('f64.gt', 0x64),
       Instruction('f64.le', 0x65),
       Instruction('i32.clz', 0x67),
@@ -618,7 +619,9 @@ class Instruction {
       Instruction('i64.shr_u', 0x88),
       Instruction('i64.rotl', 0x89),
       Instruction('i64.rotr', 0x8A),
+      //
       Instruction('f32.neg', 0x8C),
+      //
       Instruction('f64.abs', 0x99),
       Instruction('f64.neg', 0x9A),
       Instruction('f64.ceil', 0x9B),
@@ -632,14 +635,19 @@ class Instruction {
       Instruction('f64.div', 0xA3),
       Instruction('f64.min', 0xA4),
       Instruction('f64.max', 0xA5),
+      //
       Instruction('i32.wrap_i64', 0xA7),
+      //
       Instruction('i64.extend_i32_u', 0xAD),
+      //
       Instruction('i64.trunc_f64_s', 0xB0),
+      //
       Instruction('f64.convert_i32_s', 0xB7),
       Instruction('f64.convert_i32_u', 0xB8),
       Instruction('f64.convert_i64_s', 0xB9),
       Instruction('f64.convert_i64_u', 0xBA),
       Instruction('f64.promote_f32', 0xBB),
+      //
       Instruction('i32.extend8_s', 0xC0),
       Instruction('i32.extend16_s', 0xC1),
       Instruction('i64.extend8_s', 0xC2),

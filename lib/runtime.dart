@@ -74,6 +74,15 @@ class Memory {
   }
 }
 
+class Trap implements Exception {
+  final String message;
+
+  Trap(this.message);
+
+  @override
+  String toString() => message;
+}
+
 class Table {
   final int minSize;
   final int? maxSize;
@@ -118,128 +127,212 @@ class Frame {
 
   void i32_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i32 value = memory.data.getInt32(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      i32 value = memory.data.getInt32(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i64 value = memory.data.getInt64(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      i64 value = memory.data.getInt64(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void f32_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    f32 value = memory.data.getFloat32(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      f32 value = memory.data.getFloat32(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void f64_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    f64 value = memory.data.getFloat64(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      f64 value = memory.data.getFloat64(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i32_load8_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i32 value = memory.data.getInt8(index + offset);
-    stack.add(value);
+    try {
+      i32 value = memory.data.getInt8(index + offset);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i32_load8_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    u32 value = memory.data.getUint8(index + offset);
-    stack.add(value);
+    try {
+      u32 value = memory.data.getUint8(index + offset);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i32_load16_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i32 value = memory.data.getInt16(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      i32 value = memory.data.getInt16(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i32_load16_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    u32 value = memory.data.getUint16(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      u32 value = memory.data.getUint16(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_load8_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i32 value = memory.data.getInt8(index + offset);
-    stack.add(value);
+    try {
+      i32 value = memory.data.getInt8(index + offset);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_load8_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    u32 value = memory.data.getUint8(index + offset);
-    stack.add(value);
+    try {
+      u32 value = memory.data.getUint8(index + offset);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_load16_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i32 value = memory.data.getInt16(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      i32 value = memory.data.getInt16(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_load16_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    u32 value = memory.data.getUint16(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      u32 value = memory.data.getUint16(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_load32_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i32 value = memory.data.getInt32(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      i32 value = memory.data.getInt32(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_load32_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    u32 value = memory.data.getUint32(index + offset, Endian.little);
-    stack.add(value);
+    try {
+      u32 value = memory.data.getUint32(index + offset, Endian.little);
+      stack.add(value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i32_store(u32 align, u32 offset) {
     i32 value = stack.removeLast() as i32;
     i32 index = stack.removeLast() as i32;
-    memory.data.setInt32(index + offset, value, Endian.little);
+    try {
+      memory.data.setInt32(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_store(u32 align, u32 offset) {
     i64 value = stack.removeLast() as i64;
     i32 index = stack.removeLast() as i32;
-    memory.data.setInt64(index + offset, value, Endian.little);
+    try {
+      memory.data.setInt64(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i32_store8(u32 align, u32 offset) {
     i32 value = stack.removeLast() as i32;
     i32 index = stack.removeLast() as i32;
-    memory.data.setInt8(index + offset, value);
+    try {
+      memory.data.setInt8(index + offset, value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i32_store16(u32 align, u32 offset) {
     i32 value = stack.removeLast() as i32;
     i32 index = stack.removeLast() as i32;
-    memory.data.setInt16(index + offset, value, Endian.little);
+    try {
+      memory.data.setInt16(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_store8(u32 align, u32 offset) {
     i64 value = stack.removeLast() as i64;
     i32 index = stack.removeLast() as i32;
-    memory.data.setInt8(index + offset, value);
+    try {
+      memory.data.setInt8(index + offset, value);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_store16(u32 align, u32 offset) {
     i64 value = stack.removeLast() as i64;
     i32 index = stack.removeLast() as i32;
-    memory.data.setInt16(index + offset, value, Endian.little);
+    try {
+      memory.data.setInt16(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void i64_store32(u32 align, u32 offset) {
     i64 value = stack.removeLast() as i64;
     i32 index = stack.removeLast() as i32;
-    memory.data.setInt32(index + offset, value, Endian.little);
+    try {
+      memory.data.setInt32(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
   }
 
   void memory_size(u32 memoryIndex) {

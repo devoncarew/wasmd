@@ -149,7 +149,7 @@ List<Expression> _process(ComilationUnit compilationUnit) {
   }) {
     // (func (export "fac-ssa") (param i64) (result i64) (i64.const 1) (local.get 0) (loop $l (param i64 i64) (result i64) (call $pick1) (call $pick1) (i64.mul) (call $pick1) (i64.const 1) (i64.sub) (call $pick0) (i64.const 0) (i64.gt_u) (br_if $l) (drop) (return)))
     // (assert_return (invoke "fac-rec" (i64.const 25)) (i64.const 7034535277573963776))
-    var name = findName(node)!; // todo:
+    var name = findName(node)!;
 
     var id = testNameMap[name] ?? 0;
     testNameMap[name] = id + 1;
@@ -157,37 +157,59 @@ List<Expression> _process(ComilationUnit compilationUnit) {
     var testInstrs = node.nodes[1] as Expression;
 
     if (assertTrap) {
-      // todo: handle assert_traps
-      print('todo: handle assert_trap tests');
-      return [];
+      // (assert_trap (invoke "store_at_page_size") "out of bounds memory access")
+      var typeName = getTypeForMethod(module, name);
+      var message = (node.nodes[2] as Atom).value;
+
+      return [
+        Expression(
+          [
+            Atom('func'),
+            Expression([Atom('export'), Atom('"$testName"')]),
+            if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
+            Expression([
+              Atom('call'),
+              Atom('\$$name'),
+              ...testInstrs.nodes.skip(2),
+            ]),
+          ],
+        ),
+        // (data $otherString "buenos dias\00")
+        Expression([
+          Atom('data'),
+          Atom('\$trap_${name}_$id'),
+          Atom(message),
+          // Atom('"${stripQuotes(message)}\\00"'),
+        ])
+      ];
+    } else {
+      var expectName = 'expect_${name.replaceAll('-', '_')}_$id';
+      var expectInstrs =
+          node.nodes.length >= 3 ? node.nodes[2] as Expression : null;
+
+      var typeName = getTypeForMethod(module, name);
+
+      return [
+        Expression([
+          Atom('func'),
+          Expression([Atom('export'), Atom('"$testName"')]),
+          if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
+          Expression([
+            Atom('call'),
+            Atom('\$$name'),
+            ...testInstrs.nodes.skip(2),
+          ]),
+        ]),
+        if (expectInstrs != null)
+          Expression([
+            Atom('global'),
+            Atom('\$$expectName'),
+            // Expression([Atom('export'), Atom('"$expectName"')]),
+            Atom(typeName!),
+            ...expectInstrs.nodes,
+          ]),
+      ];
     }
-
-    var expectName = 'expect_${name.replaceAll('-', '_')}_$id';
-    var expectInstrs =
-        node.nodes.length >= 3 ? node.nodes[2] as Expression : null;
-
-    var typeName = getTypeForMethod(module, name);
-
-    return [
-      Expression([
-        Atom('func'),
-        Expression([Atom('export'), Atom('"$testName"')]),
-        if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
-        Expression([
-          Atom('call'),
-          Atom('\$$name'),
-          ...testInstrs.nodes.skip(2),
-        ]),
-      ]),
-      if (expectInstrs != null)
-        Expression([
-          Atom('global'),
-          Atom('\$$expectName'),
-          // Expression([Atom('export'), Atom('"$expectName"')]),
-          Atom(typeName!),
-          ...expectInstrs.nodes,
-        ]),
-    ];
   }
 
   for (var expr in compilationUnit.expressions) {
