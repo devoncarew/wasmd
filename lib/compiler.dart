@@ -1108,7 +1108,7 @@ class FunctionType {
 
   FunctionType(this.parameterTypes, this.resultType);
 
-  // todo: handle multiple return values
+  // TODO: handle multiple return values
   String get resultTypeDisplayName {
     return resultType.isEmpty ? 'void' : resultType.first.toString();
   }
@@ -1546,7 +1546,7 @@ class ElementSegment {
 
 class Globals {
   final List<Global> globals = [];
-  // todo: handle global imports
+  // TODO: handle global imports
   List<String> imports = [];
   List<GlobalExport> globalExports = [];
 

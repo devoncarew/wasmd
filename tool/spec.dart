@@ -53,7 +53,7 @@ List<File> generateWatForWast(
 ) {
   print('parsing ${wastFile.path}...');
 
-  // todo: upgrade our testing of the flavors of nan
+  // TODO: upgrade our testing of the flavors of nan
   var compilationUnit = ComilationUnit.parse(
     wastFile.readAsStringSync(),
     tokenRewriter: _ReplaceNonstandardNan(),

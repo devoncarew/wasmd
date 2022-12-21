@@ -6,7 +6,7 @@ import 'package:path/path.dart' as path;
 import 'package:wasmd/compiler.dart';
 import 'package:wasmd/src/utils.dart';
 
-// todo: have a flag to not use debug info when compiling
+// TODO: have a flag to not use debug info when compiling
 
 void main(List<String> args) async {
   var argsParser = ArgParser();
@@ -21,11 +21,6 @@ void main(List<String> args) async {
     abbr: 'o',
     valueHelp: 'file',
     help: 'Specify the location to write compilation output.',
-  );
-  argsParser.addFlag(
-    'generate-wast-test',
-    negatable: false,
-    help: 'This flag is only used to test wasd itself.',
   );
   argsParser.addFlag(
     'help',

@@ -59,9 +59,9 @@ class Instruction_Block extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    // todo: this needs to do some stack management
+    // TODO: this needs to do some stack management
 
-    // todo: use blocktype
+    // TODO: use blocktype
     var blocktype = instr.args[0] as int;
 
     function.enterBlock(BlockType.blockType);
@@ -78,9 +78,9 @@ class Instruction_Loop extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    // todo: this needs to do some stack management
+    // TODO: this needs to do some stack management
 
-    // todo: use blocktype
+    // TODO: use blocktype
     var blocktype = instr.args[0] as int;
 
     function.enterBlock(BlockType.loopType);
@@ -97,9 +97,9 @@ class Instruction_If extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    // todo: this needs to do some stack management
+    // TODO: this needs to do some stack management
 
-    // todo: use blocktype
+    // TODO: use blocktype
     var blocktype = instr.args[0] as int;
 
     function.enterBlock(BlockType.ifType);
@@ -602,7 +602,7 @@ class Instruction {
       Instruction('i32.shr_s', 0x75),
       Instruction('i32.shr_u', 0x76),
       Instruction('i32.rotl', 0x77),
-      // todo:
+      // TODO:
       // Instruction('i32.rotr', 0x78),
       Instruction('i64.clz', 0x79),
       Instruction('i64.ctz', 0x7A),

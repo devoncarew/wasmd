@@ -811,7 +811,6 @@ class Frame {
     stack.add(result);
   }
 
-  // todo: signed vs. unsigned
   void i64_div_s() {
     i64 arg1 = stack.removeLast() as i64;
     i64 arg0 = stack.removeLast() as i64;
@@ -819,7 +818,6 @@ class Frame {
     stack.add(result);
   }
 
-  // todo: signed vs. unsigned
   void i64_div_u() {
     u64 arg1 = stack.removeLast() as u64;
     u64 arg0 = stack.removeLast() as u64;
@@ -1073,7 +1071,7 @@ class Frame {
 
   void i32_trunc_sat_f64_u() {
     // f64 => i32
-    // todo: verify this logic
+    // TODO: verify this logic
     f64 arg0 = stack.removeLast() as f64;
     i32 result = arg0.toInt() & 0xFFFFFFFF;
     stack.add(result);
