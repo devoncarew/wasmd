@@ -125,27 +125,75 @@ class Frame {
     stack.add(value);
   }
 
+  void f32_load(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    f32 value = memory.data.getFloat32(index + offset, Endian.little);
+    stack.add(value);
+  }
+
+  void f64_load(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    f64 value = memory.data.getFloat64(index + offset, Endian.little);
+    stack.add(value);
+  }
+
+  void i32_load8_s(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    i32 value = memory.data.getInt8(index + offset);
+    stack.add(value);
+  }
+
   void i32_load8_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i32 value = memory.data.getUint8(index + offset);
+    u32 value = memory.data.getUint8(index + offset);
+    stack.add(value);
+  }
+
+  void i32_load16_s(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    i32 value = memory.data.getInt16(index + offset, Endian.little);
     stack.add(value);
   }
 
   void i32_load16_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i32 value = memory.data.getUint16(index + offset, Endian.little);
+    u32 value = memory.data.getUint16(index + offset, Endian.little);
+    stack.add(value);
+  }
+
+  void i64_load8_s(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    i32 value = memory.data.getInt8(index + offset);
     stack.add(value);
   }
 
   void i64_load8_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i64 value = memory.data.getUint8(index + offset);
+    u32 value = memory.data.getUint8(index + offset);
+    stack.add(value);
+  }
+
+  void i64_load16_s(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    i32 value = memory.data.getInt16(index + offset, Endian.little);
+    stack.add(value);
+  }
+
+  void i64_load16_u(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    u32 value = memory.data.getUint16(index + offset, Endian.little);
+    stack.add(value);
+  }
+
+  void i64_load32_s(u32 align, u32 offset) {
+    i32 index = stack.removeLast() as i32;
+    i32 value = memory.data.getInt32(index + offset, Endian.little);
     stack.add(value);
   }
 
   void i64_load32_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
-    i64 value = memory.data.getUint32(index + offset, Endian.little);
+    u32 value = memory.data.getUint32(index + offset, Endian.little);
     stack.add(value);
   }
 

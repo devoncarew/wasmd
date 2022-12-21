@@ -6,39 +6,21 @@
 import 'package:test/test.dart';
 import 'package:wasmd/runtime.dart';
 
+import 'src/infra.dart';
+
 void main() {
   group('fac', () {
-    late Module module;
-    late Globals globals;
+    final Module m = Module();
+    final Globals g = m.globals;
 
-    setUp(() {
-      module = Module();
-      globals = module.globals;
-    });
-
-    test('test_fac_rec_0', () {
-      expect(module.test_fac_rec_0(), globals.expect_fac_rec_0);
-    });
-
-    test('test_fac_iter_0', () {
-      expect(module.test_fac_iter_0(), globals.expect_fac_iter_0);
-    });
-
-    test('test_fac_rec_named_0', () {
-      expect(module.test_fac_rec_named_0(), globals.expect_fac_rec_named_0);
-    });
-
-    test('test_fac_iter_named_0', () {
-      expect(module.test_fac_iter_named_0(), globals.expect_fac_iter_named_0);
-    });
-
-    test('test_fac_opt_0', () {
-      expect(module.test_fac_opt_0(), globals.expect_fac_opt_0);
-    });
-
-    test('test_fac_ssa_0', () {
-      expect(module.test_fac_ssa_0(), globals.expect_fac_ssa_0);
-    });
+    returns('test_fac_rec_0', g.expect_fac_rec_0, m.test_fac_rec_0);
+    returns('test_fac_iter_0', g.expect_fac_iter_0, m.test_fac_iter_0);
+    returns('test_fac_rec_named_0', g.expect_fac_rec_named_0,
+        m.test_fac_rec_named_0);
+    returns('test_fac_iter_named_0', g.expect_fac_iter_named_0,
+        m.test_fac_iter_named_0);
+    returns('test_fac_opt_0', g.expect_fac_opt_0, m.test_fac_opt_0);
+    returns('test_fac_ssa_0', g.expect_fac_ssa_0, m.test_fac_ssa_0);
   });
 }
 

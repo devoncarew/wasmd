@@ -25,7 +25,11 @@ class NoPrefixAllocator implements Allocator {
 }
 
 String patchUpName(String name) {
-  return name.replaceAll('-', '_').replaceAll('.', '_');
+  name = name.replaceAll('-', '_').replaceAll('.', '_');
+  if (isNumber(name.codeUnits[0])) {
+    return '\$$name';
+  }
+  return name;
 }
 
 bool isValidIdentifier(String str) {
@@ -53,6 +57,11 @@ bool isLetterNumber(int char) {
   if (char == $_) return true;
   if (char >= $a && char <= $z) return true;
   if (char >= $A && char <= $Z) return true;
+  if (char >= $0 && char <= $9) return true;
+  return false;
+}
+
+bool isNumber(int char) {
   if (char >= $0 && char <= $9) return true;
   return false;
 }

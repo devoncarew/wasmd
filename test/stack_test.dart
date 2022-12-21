@@ -6,37 +6,20 @@
 import 'package:test/test.dart';
 import 'package:wasmd/runtime.dart';
 
+import 'src/infra.dart';
+
 void main() {
   group('stack', () {
-    late Module module;
-    late Globals globals;
+    final Module m = Module();
+    final Globals g = m.globals;
 
-    setUp(() {
-      module = Module();
-      globals = module.globals;
-    });
-
-    test('test_fac_expr_0', () {
-      expect(module.test_fac_expr_0(), globals.expect_fac_expr_0);
-    });
-
-    test('test_fac_stack_0', () {
-      expect(module.test_fac_stack_0(), globals.expect_fac_stack_0);
-    });
-
-    test('test_fac_mixed_0', () {
-      expect(module.test_fac_mixed_0(), globals.expect_fac_mixed_0);
-    });
-
-    test('test_not_quite_a_tree_0', () {
-      expect(
-          module.test_not_quite_a_tree_0(), globals.expect_not_quite_a_tree_0);
-    });
-
-    test('test_not_quite_a_tree_1', () {
-      expect(
-          module.test_not_quite_a_tree_1(), globals.expect_not_quite_a_tree_1);
-    });
+    returns('test_fac_expr_0', g.expect_fac_expr_0, m.test_fac_expr_0);
+    returns('test_fac_stack_0', g.expect_fac_stack_0, m.test_fac_stack_0);
+    returns('test_fac_mixed_0', g.expect_fac_mixed_0, m.test_fac_mixed_0);
+    returns('test_not_quite_a_tree_0', g.expect_not_quite_a_tree_0,
+        m.test_not_quite_a_tree_0);
+    returns('test_not_quite_a_tree_1', g.expect_not_quite_a_tree_1,
+        m.test_not_quite_a_tree_1);
   });
 }
 

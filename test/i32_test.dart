@@ -6,1471 +6,377 @@
 import 'package:test/test.dart';
 import 'package:wasmd/runtime.dart';
 
+import 'src/infra.dart';
+
 void main() {
   group('i32', () {
-    late Module module;
-    late Globals globals;
-
-    setUp(() {
-      module = Module();
-      globals = module.globals;
-    });
-
-    test('test_add_0', () {
-      expect(module.test_add_0(), globals.expect_add_0);
-    });
-
-    test('test_add_1', () {
-      expect(module.test_add_1(), globals.expect_add_1);
-    });
-
-    test('test_add_2', () {
-      expect(module.test_add_2(), globals.expect_add_2);
-    });
-
-    test('test_add_3', () {
-      expect(module.test_add_3(), globals.expect_add_3);
-    });
-
-    test('test_add_4', () {
-      expect(module.test_add_4(), globals.expect_add_4);
-    });
-
-    test('test_add_5', () {
-      expect(module.test_add_5(), globals.expect_add_5);
-    });
-
-    test('test_add_6', () {
-      expect(module.test_add_6(), globals.expect_add_6);
-    });
-
-    test('test_add_7', () {
-      expect(module.test_add_7(), globals.expect_add_7);
-    });
-
-    test('test_sub_0', () {
-      expect(module.test_sub_0(), globals.expect_sub_0);
-    });
-
-    test('test_sub_1', () {
-      expect(module.test_sub_1(), globals.expect_sub_1);
-    });
-
-    test('test_sub_2', () {
-      expect(module.test_sub_2(), globals.expect_sub_2);
-    });
-
-    test('test_sub_3', () {
-      expect(module.test_sub_3(), globals.expect_sub_3);
-    });
-
-    test('test_sub_4', () {
-      expect(module.test_sub_4(), globals.expect_sub_4);
-    });
-
-    test('test_sub_5', () {
-      expect(module.test_sub_5(), globals.expect_sub_5);
-    });
-
-    test('test_sub_6', () {
-      expect(module.test_sub_6(), globals.expect_sub_6);
-    });
-
-    test('test_mul_0', () {
-      expect(module.test_mul_0(), globals.expect_mul_0);
-    });
-
-    test('test_mul_1', () {
-      expect(module.test_mul_1(), globals.expect_mul_1);
-    });
-
-    test('test_mul_2', () {
-      expect(module.test_mul_2(), globals.expect_mul_2);
-    });
-
-    test('test_mul_3', () {
-      expect(module.test_mul_3(), globals.expect_mul_3);
-    });
-
-    test('test_mul_4', () {
-      expect(module.test_mul_4(), globals.expect_mul_4);
-    });
-
-    test('test_mul_5', () {
-      expect(module.test_mul_5(), globals.expect_mul_5);
-    });
-
-    test('test_mul_6', () {
-      expect(module.test_mul_6(), globals.expect_mul_6);
-    });
-
-    test('test_mul_7', () {
-      expect(module.test_mul_7(), globals.expect_mul_7);
-    });
-
-    test('test_mul_8', () {
-      expect(module.test_mul_8(), globals.expect_mul_8);
-    });
-
-    test('test_div_s_4', () {
-      expect(module.test_div_s_4(), globals.expect_div_s_4);
-    });
-
-    test('test_div_s_5', () {
-      expect(module.test_div_s_5(), globals.expect_div_s_5);
-    });
-
-    test('test_div_s_6', () {
-      expect(module.test_div_s_6(), globals.expect_div_s_6);
-    });
-
-    test('test_div_s_7', () {
-      expect(module.test_div_s_7(), globals.expect_div_s_7);
-    });
-
-    test('test_div_s_8', () {
-      expect(module.test_div_s_8(), globals.expect_div_s_8);
-    });
-
-    test('test_div_s_9', () {
-      expect(module.test_div_s_9(), globals.expect_div_s_9);
-    });
-
-    test('test_div_s_10', () {
-      expect(module.test_div_s_10(), globals.expect_div_s_10);
-    });
-
-    test('test_div_s_11', () {
-      expect(module.test_div_s_11(), globals.expect_div_s_11);
-    });
-
-    test('test_div_s_12', () {
-      expect(module.test_div_s_12(), globals.expect_div_s_12);
-    });
-
-    test('test_div_s_13', () {
-      expect(module.test_div_s_13(), globals.expect_div_s_13);
-    });
-
-    test('test_div_s_14', () {
-      expect(module.test_div_s_14(), globals.expect_div_s_14);
-    });
-
-    test('test_div_s_15', () {
-      expect(module.test_div_s_15(), globals.expect_div_s_15);
-    });
-
-    test('test_div_s_16', () {
-      expect(module.test_div_s_16(), globals.expect_div_s_16);
-    });
-
-    test('test_div_s_17', () {
-      expect(module.test_div_s_17(), globals.expect_div_s_17);
-    });
-
-    test('test_div_s_18', () {
-      expect(module.test_div_s_18(), globals.expect_div_s_18);
-    });
-
-    test('test_div_s_19', () {
-      expect(module.test_div_s_19(), globals.expect_div_s_19);
-    });
-
-    test('test_div_u_2', () {
-      expect(module.test_div_u_2(), globals.expect_div_u_2);
-    });
-
-    test('test_div_u_3', () {
-      expect(module.test_div_u_3(), globals.expect_div_u_3);
-    });
-
-    test('test_div_u_4', () {
-      expect(module.test_div_u_4(), globals.expect_div_u_4);
-    });
-
-    test('test_div_u_5', () {
-      expect(module.test_div_u_5(), globals.expect_div_u_5);
-    });
-
-    test('test_div_u_6', () {
-      expect(module.test_div_u_6(), globals.expect_div_u_6);
-    });
-
-    test('test_div_u_7', () {
-      expect(module.test_div_u_7(), globals.expect_div_u_7);
-    });
-
-    test('test_div_u_8', () {
-      expect(module.test_div_u_8(), globals.expect_div_u_8);
-    });
-
-    test('test_div_u_9', () {
-      expect(module.test_div_u_9(), globals.expect_div_u_9);
-    });
-
-    test('test_div_u_10', () {
-      expect(module.test_div_u_10(), globals.expect_div_u_10);
-    });
-
-    test('test_div_u_11', () {
-      expect(module.test_div_u_11(), globals.expect_div_u_11);
-    });
-
-    test('test_div_u_12', () {
-      expect(module.test_div_u_12(), globals.expect_div_u_12);
-    });
-
-    test('test_div_u_13', () {
-      expect(module.test_div_u_13(), globals.expect_div_u_13);
-    });
-
-    test('test_div_u_14', () {
-      expect(module.test_div_u_14(), globals.expect_div_u_14);
-    });
-
-    test('test_div_u_15', () {
-      expect(module.test_div_u_15(), globals.expect_div_u_15);
-    });
-
-    test('test_rem_s_2', () {
-      expect(module.test_rem_s_2(), globals.expect_rem_s_2);
-    });
-
-    test('test_rem_s_3', () {
-      expect(module.test_rem_s_3(), globals.expect_rem_s_3);
-    });
-
-    test('test_rem_s_4', () {
-      expect(module.test_rem_s_4(), globals.expect_rem_s_4);
-    });
-
-    test('test_rem_s_5', () {
-      expect(module.test_rem_s_5(), globals.expect_rem_s_5);
-    });
-
-    test('test_rem_s_6', () {
-      expect(module.test_rem_s_6(), globals.expect_rem_s_6);
-    });
-
-    test('test_rem_s_7', () {
-      expect(module.test_rem_s_7(), globals.expect_rem_s_7);
-    });
-
-    test('test_rem_s_8', () {
-      expect(module.test_rem_s_8(), globals.expect_rem_s_8);
-    });
-
-    test('test_rem_s_9', () {
-      expect(module.test_rem_s_9(), globals.expect_rem_s_9);
-    });
-
-    test('test_rem_s_10', () {
-      expect(module.test_rem_s_10(), globals.expect_rem_s_10);
-    });
-
-    test('test_rem_s_11', () {
-      expect(module.test_rem_s_11(), globals.expect_rem_s_11);
-    });
-
-    test('test_rem_s_12', () {
-      expect(module.test_rem_s_12(), globals.expect_rem_s_12);
-    });
-
-    test('test_rem_s_13', () {
-      expect(module.test_rem_s_13(), globals.expect_rem_s_13);
-    });
-
-    test('test_rem_s_14', () {
-      expect(module.test_rem_s_14(), globals.expect_rem_s_14);
-    });
-
-    test('test_rem_s_15', () {
-      expect(module.test_rem_s_15(), globals.expect_rem_s_15);
-    });
-
-    test('test_rem_s_16', () {
-      expect(module.test_rem_s_16(), globals.expect_rem_s_16);
-    });
-
-    test('test_rem_s_17', () {
-      expect(module.test_rem_s_17(), globals.expect_rem_s_17);
-    });
-
-    test('test_rem_s_18', () {
-      expect(module.test_rem_s_18(), globals.expect_rem_s_18);
-    });
-
-    test('test_rem_s_19', () {
-      expect(module.test_rem_s_19(), globals.expect_rem_s_19);
-    });
-
-    test('test_rem_u_2', () {
-      expect(module.test_rem_u_2(), globals.expect_rem_u_2);
-    });
-
-    test('test_rem_u_3', () {
-      expect(module.test_rem_u_3(), globals.expect_rem_u_3);
-    });
-
-    test('test_rem_u_4', () {
-      expect(module.test_rem_u_4(), globals.expect_rem_u_4);
-    });
-
-    test('test_rem_u_5', () {
-      expect(module.test_rem_u_5(), globals.expect_rem_u_5);
-    });
-
-    test('test_rem_u_6', () {
-      expect(module.test_rem_u_6(), globals.expect_rem_u_6);
-    });
-
-    test('test_rem_u_7', () {
-      expect(module.test_rem_u_7(), globals.expect_rem_u_7);
-    });
-
-    test('test_rem_u_8', () {
-      expect(module.test_rem_u_8(), globals.expect_rem_u_8);
-    });
-
-    test('test_rem_u_9', () {
-      expect(module.test_rem_u_9(), globals.expect_rem_u_9);
-    });
-
-    test('test_rem_u_10', () {
-      expect(module.test_rem_u_10(), globals.expect_rem_u_10);
-    });
-
-    test('test_rem_u_11', () {
-      expect(module.test_rem_u_11(), globals.expect_rem_u_11);
-    });
-
-    test('test_rem_u_12', () {
-      expect(module.test_rem_u_12(), globals.expect_rem_u_12);
-    });
-
-    test('test_rem_u_13', () {
-      expect(module.test_rem_u_13(), globals.expect_rem_u_13);
-    });
-
-    test('test_rem_u_14', () {
-      expect(module.test_rem_u_14(), globals.expect_rem_u_14);
-    });
-
-    test('test_rem_u_15', () {
-      expect(module.test_rem_u_15(), globals.expect_rem_u_15);
-    });
-
-    test('test_and_0', () {
-      expect(module.test_and_0(), globals.expect_and_0);
-    });
-
-    test('test_and_1', () {
-      expect(module.test_and_1(), globals.expect_and_1);
-    });
-
-    test('test_and_2', () {
-      expect(module.test_and_2(), globals.expect_and_2);
-    });
-
-    test('test_and_3', () {
-      expect(module.test_and_3(), globals.expect_and_3);
-    });
-
-    test('test_and_4', () {
-      expect(module.test_and_4(), globals.expect_and_4);
-    });
-
-    test('test_and_5', () {
-      expect(module.test_and_5(), globals.expect_and_5);
-    });
-
-    test('test_and_6', () {
-      expect(module.test_and_6(), globals.expect_and_6);
-    });
-
-    test('test_and_7', () {
-      expect(module.test_and_7(), globals.expect_and_7);
-    });
-
-    test('test_or_0', () {
-      expect(module.test_or_0(), globals.expect_or_0);
-    });
-
-    test('test_or_1', () {
-      expect(module.test_or_1(), globals.expect_or_1);
-    });
-
-    test('test_or_2', () {
-      expect(module.test_or_2(), globals.expect_or_2);
-    });
-
-    test('test_or_3', () {
-      expect(module.test_or_3(), globals.expect_or_3);
-    });
-
-    test('test_or_4', () {
-      expect(module.test_or_4(), globals.expect_or_4);
-    });
-
-    test('test_or_5', () {
-      expect(module.test_or_5(), globals.expect_or_5);
-    });
-
-    test('test_or_6', () {
-      expect(module.test_or_6(), globals.expect_or_6);
-    });
-
-    test('test_or_7', () {
-      expect(module.test_or_7(), globals.expect_or_7);
-    });
-
-    test('test_xor_0', () {
-      expect(module.test_xor_0(), globals.expect_xor_0);
-    });
-
-    test('test_xor_1', () {
-      expect(module.test_xor_1(), globals.expect_xor_1);
-    });
-
-    test('test_xor_2', () {
-      expect(module.test_xor_2(), globals.expect_xor_2);
-    });
-
-    test('test_xor_3', () {
-      expect(module.test_xor_3(), globals.expect_xor_3);
-    });
-
-    test('test_xor_4', () {
-      expect(module.test_xor_4(), globals.expect_xor_4);
-    });
-
-    test('test_xor_5', () {
-      expect(module.test_xor_5(), globals.expect_xor_5);
-    });
-
-    test('test_xor_6', () {
-      expect(module.test_xor_6(), globals.expect_xor_6);
-    });
-
-    test('test_xor_7', () {
-      expect(module.test_xor_7(), globals.expect_xor_7);
-    });
-
-    test('test_xor_8', () {
-      expect(module.test_xor_8(), globals.expect_xor_8);
-    });
-
-    test('test_xor_9', () {
-      expect(module.test_xor_9(), globals.expect_xor_9);
-    });
-
-    test('test_shl_0', () {
-      expect(module.test_shl_0(), globals.expect_shl_0);
-    });
-
-    test('test_shl_1', () {
-      expect(module.test_shl_1(), globals.expect_shl_1);
-    });
-
-    test('test_shl_2', () {
-      expect(module.test_shl_2(), globals.expect_shl_2);
-    });
-
-    test('test_shl_3', () {
-      expect(module.test_shl_3(), globals.expect_shl_3);
-    });
-
-    test('test_shl_4', () {
-      expect(module.test_shl_4(), globals.expect_shl_4);
-    });
-
-    test('test_shl_5', () {
-      expect(module.test_shl_5(), globals.expect_shl_5);
-    });
-
-    test('test_shl_6', () {
-      expect(module.test_shl_6(), globals.expect_shl_6);
-    });
-
-    test('test_shl_7', () {
-      expect(module.test_shl_7(), globals.expect_shl_7);
-    });
-
-    test('test_shl_8', () {
-      expect(module.test_shl_8(), globals.expect_shl_8);
-    });
-
-    test('test_shl_9', () {
-      expect(module.test_shl_9(), globals.expect_shl_9);
-    });
-
-    test('test_shl_10', () {
-      expect(module.test_shl_10(), globals.expect_shl_10);
-    });
-
-    test('test_shr_s_0', () {
-      expect(module.test_shr_s_0(), globals.expect_shr_s_0);
-    });
-
-    test('test_shr_s_1', () {
-      expect(module.test_shr_s_1(), globals.expect_shr_s_1);
-    });
-
-    test('test_shr_s_2', () {
-      expect(module.test_shr_s_2(), globals.expect_shr_s_2);
-    });
-
-    test('test_shr_s_3', () {
-      expect(module.test_shr_s_3(), globals.expect_shr_s_3);
-    });
-
-    test('test_shr_s_4', () {
-      expect(module.test_shr_s_4(), globals.expect_shr_s_4);
-    });
-
-    test('test_shr_s_5', () {
-      expect(module.test_shr_s_5(), globals.expect_shr_s_5);
-    });
-
-    test('test_shr_s_6', () {
-      expect(module.test_shr_s_6(), globals.expect_shr_s_6);
-    });
-
-    test('test_shr_s_7', () {
-      expect(module.test_shr_s_7(), globals.expect_shr_s_7);
-    });
-
-    test('test_shr_s_8', () {
-      expect(module.test_shr_s_8(), globals.expect_shr_s_8);
-    });
-
-    test('test_shr_s_9', () {
-      expect(module.test_shr_s_9(), globals.expect_shr_s_9);
-    });
-
-    test('test_shr_s_10', () {
-      expect(module.test_shr_s_10(), globals.expect_shr_s_10);
-    });
-
-    test('test_shr_s_11', () {
-      expect(module.test_shr_s_11(), globals.expect_shr_s_11);
-    });
-
-    test('test_shr_s_12', () {
-      expect(module.test_shr_s_12(), globals.expect_shr_s_12);
-    });
-
-    test('test_shr_s_13', () {
-      expect(module.test_shr_s_13(), globals.expect_shr_s_13);
-    });
-
-    test('test_shr_s_14', () {
-      expect(module.test_shr_s_14(), globals.expect_shr_s_14);
-    });
-
-    test('test_shr_s_15', () {
-      expect(module.test_shr_s_15(), globals.expect_shr_s_15);
-    });
-
-    test('test_shr_s_16', () {
-      expect(module.test_shr_s_16(), globals.expect_shr_s_16);
-    });
-
-    test('test_shr_u_0', () {
-      expect(module.test_shr_u_0(), globals.expect_shr_u_0);
-    });
-
-    test('test_shr_u_1', () {
-      expect(module.test_shr_u_1(), globals.expect_shr_u_1);
-    });
-
-    test('test_shr_u_2', () {
-      expect(module.test_shr_u_2(), globals.expect_shr_u_2);
-    });
-
-    test('test_shr_u_3', () {
-      expect(module.test_shr_u_3(), globals.expect_shr_u_3);
-    });
-
-    test('test_shr_u_4', () {
-      expect(module.test_shr_u_4(), globals.expect_shr_u_4);
-    });
-
-    test('test_shr_u_5', () {
-      expect(module.test_shr_u_5(), globals.expect_shr_u_5);
-    });
-
-    test('test_shr_u_6', () {
-      expect(module.test_shr_u_6(), globals.expect_shr_u_6);
-    });
-
-    test('test_shr_u_7', () {
-      expect(module.test_shr_u_7(), globals.expect_shr_u_7);
-    });
-
-    test('test_shr_u_8', () {
-      expect(module.test_shr_u_8(), globals.expect_shr_u_8);
-    });
-
-    test('test_shr_u_9', () {
-      expect(module.test_shr_u_9(), globals.expect_shr_u_9);
-    });
-
-    test('test_shr_u_10', () {
-      expect(module.test_shr_u_10(), globals.expect_shr_u_10);
-    });
-
-    test('test_shr_u_11', () {
-      expect(module.test_shr_u_11(), globals.expect_shr_u_11);
-    });
-
-    test('test_shr_u_12', () {
-      expect(module.test_shr_u_12(), globals.expect_shr_u_12);
-    });
-
-    test('test_shr_u_13', () {
-      expect(module.test_shr_u_13(), globals.expect_shr_u_13);
-    });
-
-    test('test_shr_u_14', () {
-      expect(module.test_shr_u_14(), globals.expect_shr_u_14);
-    });
-
-    test('test_shr_u_15', () {
-      expect(module.test_shr_u_15(), globals.expect_shr_u_15);
-    });
-
-    test('test_shr_u_16', () {
-      expect(module.test_shr_u_16(), globals.expect_shr_u_16);
-    });
-
-    test('test_rotl_0', () {
-      expect(module.test_rotl_0(), globals.expect_rotl_0);
-    });
-
-    test('test_rotl_1', () {
-      expect(module.test_rotl_1(), globals.expect_rotl_1);
-    });
-
-    test('test_rotl_2', () {
-      expect(module.test_rotl_2(), globals.expect_rotl_2);
-    });
-
-    test('test_rotl_3', () {
-      expect(module.test_rotl_3(), globals.expect_rotl_3);
-    });
-
-    test('test_rotl_4', () {
-      expect(module.test_rotl_4(), globals.expect_rotl_4);
-    });
-
-    test('test_rotl_5', () {
-      expect(module.test_rotl_5(), globals.expect_rotl_5);
-    });
-
-    test('test_rotl_6', () {
-      expect(module.test_rotl_6(), globals.expect_rotl_6);
-    });
-
-    test('test_rotl_7', () {
-      expect(module.test_rotl_7(), globals.expect_rotl_7);
-    });
-
-    test('test_rotl_8', () {
-      expect(module.test_rotl_8(), globals.expect_rotl_8);
-    });
-
-    test('test_rotl_9', () {
-      expect(module.test_rotl_9(), globals.expect_rotl_9);
-    });
-
-    test('test_rotl_10', () {
-      expect(module.test_rotl_10(), globals.expect_rotl_10);
-    });
-
-    test('test_rotl_11', () {
-      expect(module.test_rotl_11(), globals.expect_rotl_11);
-    });
-
-    test('test_rotl_12', () {
-      expect(module.test_rotl_12(), globals.expect_rotl_12);
-    });
-
-    test('test_rotr_0', () {
-      expect(module.test_rotr_0(), globals.expect_rotr_0);
-    });
-
-    test('test_rotr_1', () {
-      expect(module.test_rotr_1(), globals.expect_rotr_1);
-    });
-
-    test('test_rotr_2', () {
-      expect(module.test_rotr_2(), globals.expect_rotr_2);
-    });
-
-    test('test_rotr_3', () {
-      expect(module.test_rotr_3(), globals.expect_rotr_3);
-    });
-
-    test('test_rotr_4', () {
-      expect(module.test_rotr_4(), globals.expect_rotr_4);
-    });
-
-    test('test_rotr_5', () {
-      expect(module.test_rotr_5(), globals.expect_rotr_5);
-    });
-
-    test('test_rotr_6', () {
-      expect(module.test_rotr_6(), globals.expect_rotr_6);
-    });
-
-    test('test_rotr_7', () {
-      expect(module.test_rotr_7(), globals.expect_rotr_7);
-    });
-
-    test('test_rotr_8', () {
-      expect(module.test_rotr_8(), globals.expect_rotr_8);
-    });
-
-    test('test_rotr_9', () {
-      expect(module.test_rotr_9(), globals.expect_rotr_9);
-    });
-
-    test('test_rotr_10', () {
-      expect(module.test_rotr_10(), globals.expect_rotr_10);
-    });
-
-    test('test_rotr_11', () {
-      expect(module.test_rotr_11(), globals.expect_rotr_11);
-    });
-
-    test('test_rotr_12', () {
-      expect(module.test_rotr_12(), globals.expect_rotr_12);
-    });
-
-    test('test_clz_0', () {
-      expect(module.test_clz_0(), globals.expect_clz_0);
-    });
-
-    test('test_clz_1', () {
-      expect(module.test_clz_1(), globals.expect_clz_1);
-    });
-
-    test('test_clz_2', () {
-      expect(module.test_clz_2(), globals.expect_clz_2);
-    });
-
-    test('test_clz_3', () {
-      expect(module.test_clz_3(), globals.expect_clz_3);
-    });
-
-    test('test_clz_4', () {
-      expect(module.test_clz_4(), globals.expect_clz_4);
-    });
-
-    test('test_clz_5', () {
-      expect(module.test_clz_5(), globals.expect_clz_5);
-    });
-
-    test('test_clz_6', () {
-      expect(module.test_clz_6(), globals.expect_clz_6);
-    });
-
-    test('test_clz_7', () {
-      expect(module.test_clz_7(), globals.expect_clz_7);
-    });
-
-    test('test_ctz_0', () {
-      expect(module.test_ctz_0(), globals.expect_ctz_0);
-    });
-
-    test('test_ctz_1', () {
-      expect(module.test_ctz_1(), globals.expect_ctz_1);
-    });
-
-    test('test_ctz_2', () {
-      expect(module.test_ctz_2(), globals.expect_ctz_2);
-    });
-
-    test('test_ctz_3', () {
-      expect(module.test_ctz_3(), globals.expect_ctz_3);
-    });
-
-    test('test_ctz_4', () {
-      expect(module.test_ctz_4(), globals.expect_ctz_4);
-    });
-
-    test('test_ctz_5', () {
-      expect(module.test_ctz_5(), globals.expect_ctz_5);
-    });
-
-    test('test_popcnt_0', () {
-      expect(module.test_popcnt_0(), globals.expect_popcnt_0);
-    });
-
-    test('test_popcnt_1', () {
-      expect(module.test_popcnt_1(), globals.expect_popcnt_1);
-    });
-
-    test('test_popcnt_2', () {
-      expect(module.test_popcnt_2(), globals.expect_popcnt_2);
-    });
-
-    test('test_popcnt_3', () {
-      expect(module.test_popcnt_3(), globals.expect_popcnt_3);
-    });
-
-    test('test_popcnt_4', () {
-      expect(module.test_popcnt_4(), globals.expect_popcnt_4);
-    });
-
-    test('test_popcnt_5', () {
-      expect(module.test_popcnt_5(), globals.expect_popcnt_5);
-    });
-
-    test('test_popcnt_6', () {
-      expect(module.test_popcnt_6(), globals.expect_popcnt_6);
-    });
-
-    test('test_popcnt_7', () {
-      expect(module.test_popcnt_7(), globals.expect_popcnt_7);
-    });
-
-    test('test_extend8_s_0', () {
-      expect(module.test_extend8_s_0(), globals.expect_extend8_s_0);
-    });
-
-    test('test_extend8_s_1', () {
-      expect(module.test_extend8_s_1(), globals.expect_extend8_s_1);
-    });
-
-    test('test_extend8_s_2', () {
-      expect(module.test_extend8_s_2(), globals.expect_extend8_s_2);
-    });
-
-    test('test_extend8_s_3', () {
-      expect(module.test_extend8_s_3(), globals.expect_extend8_s_3);
-    });
-
-    test('test_extend8_s_4', () {
-      expect(module.test_extend8_s_4(), globals.expect_extend8_s_4);
-    });
-
-    test('test_extend8_s_5', () {
-      expect(module.test_extend8_s_5(), globals.expect_extend8_s_5);
-    });
-
-    test('test_extend8_s_6', () {
-      expect(module.test_extend8_s_6(), globals.expect_extend8_s_6);
-    });
-
-    test('test_extend16_s_0', () {
-      expect(module.test_extend16_s_0(), globals.expect_extend16_s_0);
-    });
-
-    test('test_extend16_s_1', () {
-      expect(module.test_extend16_s_1(), globals.expect_extend16_s_1);
-    });
-
-    test('test_extend16_s_2', () {
-      expect(module.test_extend16_s_2(), globals.expect_extend16_s_2);
-    });
-
-    test('test_extend16_s_3', () {
-      expect(module.test_extend16_s_3(), globals.expect_extend16_s_3);
-    });
-
-    test('test_extend16_s_4', () {
-      expect(module.test_extend16_s_4(), globals.expect_extend16_s_4);
-    });
-
-    test('test_extend16_s_5', () {
-      expect(module.test_extend16_s_5(), globals.expect_extend16_s_5);
-    });
-
-    test('test_extend16_s_6', () {
-      expect(module.test_extend16_s_6(), globals.expect_extend16_s_6);
-    });
-
-    test('test_eqz_0', () {
-      expect(module.test_eqz_0(), globals.expect_eqz_0);
-    });
-
-    test('test_eqz_1', () {
-      expect(module.test_eqz_1(), globals.expect_eqz_1);
-    });
-
-    test('test_eqz_2', () {
-      expect(module.test_eqz_2(), globals.expect_eqz_2);
-    });
-
-    test('test_eqz_3', () {
-      expect(module.test_eqz_3(), globals.expect_eqz_3);
-    });
-
-    test('test_eqz_4', () {
-      expect(module.test_eqz_4(), globals.expect_eqz_4);
-    });
-
-    test('test_eq_0', () {
-      expect(module.test_eq_0(), globals.expect_eq_0);
-    });
-
-    test('test_eq_1', () {
-      expect(module.test_eq_1(), globals.expect_eq_1);
-    });
-
-    test('test_eq_2', () {
-      expect(module.test_eq_2(), globals.expect_eq_2);
-    });
-
-    test('test_eq_3', () {
-      expect(module.test_eq_3(), globals.expect_eq_3);
-    });
-
-    test('test_eq_4', () {
-      expect(module.test_eq_4(), globals.expect_eq_4);
-    });
-
-    test('test_eq_5', () {
-      expect(module.test_eq_5(), globals.expect_eq_5);
-    });
-
-    test('test_eq_6', () {
-      expect(module.test_eq_6(), globals.expect_eq_6);
-    });
-
-    test('test_eq_7', () {
-      expect(module.test_eq_7(), globals.expect_eq_7);
-    });
-
-    test('test_eq_8', () {
-      expect(module.test_eq_8(), globals.expect_eq_8);
-    });
-
-    test('test_eq_9', () {
-      expect(module.test_eq_9(), globals.expect_eq_9);
-    });
-
-    test('test_eq_10', () {
-      expect(module.test_eq_10(), globals.expect_eq_10);
-    });
-
-    test('test_eq_11', () {
-      expect(module.test_eq_11(), globals.expect_eq_11);
-    });
-
-    test('test_eq_12', () {
-      expect(module.test_eq_12(), globals.expect_eq_12);
-    });
-
-    test('test_eq_13', () {
-      expect(module.test_eq_13(), globals.expect_eq_13);
-    });
-
-    test('test_ne_0', () {
-      expect(module.test_ne_0(), globals.expect_ne_0);
-    });
-
-    test('test_ne_1', () {
-      expect(module.test_ne_1(), globals.expect_ne_1);
-    });
-
-    test('test_ne_2', () {
-      expect(module.test_ne_2(), globals.expect_ne_2);
-    });
-
-    test('test_ne_3', () {
-      expect(module.test_ne_3(), globals.expect_ne_3);
-    });
-
-    test('test_ne_4', () {
-      expect(module.test_ne_4(), globals.expect_ne_4);
-    });
-
-    test('test_ne_5', () {
-      expect(module.test_ne_5(), globals.expect_ne_5);
-    });
-
-    test('test_ne_6', () {
-      expect(module.test_ne_6(), globals.expect_ne_6);
-    });
-
-    test('test_ne_7', () {
-      expect(module.test_ne_7(), globals.expect_ne_7);
-    });
-
-    test('test_ne_8', () {
-      expect(module.test_ne_8(), globals.expect_ne_8);
-    });
-
-    test('test_ne_9', () {
-      expect(module.test_ne_9(), globals.expect_ne_9);
-    });
-
-    test('test_ne_10', () {
-      expect(module.test_ne_10(), globals.expect_ne_10);
-    });
-
-    test('test_ne_11', () {
-      expect(module.test_ne_11(), globals.expect_ne_11);
-    });
-
-    test('test_ne_12', () {
-      expect(module.test_ne_12(), globals.expect_ne_12);
-    });
-
-    test('test_ne_13', () {
-      expect(module.test_ne_13(), globals.expect_ne_13);
-    });
-
-    test('test_lt_s_0', () {
-      expect(module.test_lt_s_0(), globals.expect_lt_s_0);
-    });
-
-    test('test_lt_s_1', () {
-      expect(module.test_lt_s_1(), globals.expect_lt_s_1);
-    });
-
-    test('test_lt_s_2', () {
-      expect(module.test_lt_s_2(), globals.expect_lt_s_2);
-    });
-
-    test('test_lt_s_3', () {
-      expect(module.test_lt_s_3(), globals.expect_lt_s_3);
-    });
-
-    test('test_lt_s_4', () {
-      expect(module.test_lt_s_4(), globals.expect_lt_s_4);
-    });
-
-    test('test_lt_s_5', () {
-      expect(module.test_lt_s_5(), globals.expect_lt_s_5);
-    });
-
-    test('test_lt_s_6', () {
-      expect(module.test_lt_s_6(), globals.expect_lt_s_6);
-    });
-
-    test('test_lt_s_7', () {
-      expect(module.test_lt_s_7(), globals.expect_lt_s_7);
-    });
-
-    test('test_lt_s_8', () {
-      expect(module.test_lt_s_8(), globals.expect_lt_s_8);
-    });
-
-    test('test_lt_s_9', () {
-      expect(module.test_lt_s_9(), globals.expect_lt_s_9);
-    });
-
-    test('test_lt_s_10', () {
-      expect(module.test_lt_s_10(), globals.expect_lt_s_10);
-    });
-
-    test('test_lt_s_11', () {
-      expect(module.test_lt_s_11(), globals.expect_lt_s_11);
-    });
-
-    test('test_lt_s_12', () {
-      expect(module.test_lt_s_12(), globals.expect_lt_s_12);
-    });
-
-    test('test_lt_s_13', () {
-      expect(module.test_lt_s_13(), globals.expect_lt_s_13);
-    });
-
-    test('test_lt_u_0', () {
-      expect(module.test_lt_u_0(), globals.expect_lt_u_0);
-    });
-
-    test('test_lt_u_1', () {
-      expect(module.test_lt_u_1(), globals.expect_lt_u_1);
-    });
-
-    test('test_lt_u_2', () {
-      expect(module.test_lt_u_2(), globals.expect_lt_u_2);
-    });
-
-    test('test_lt_u_3', () {
-      expect(module.test_lt_u_3(), globals.expect_lt_u_3);
-    });
-
-    test('test_lt_u_4', () {
-      expect(module.test_lt_u_4(), globals.expect_lt_u_4);
-    });
-
-    test('test_lt_u_5', () {
-      expect(module.test_lt_u_5(), globals.expect_lt_u_5);
-    });
-
-    test('test_lt_u_6', () {
-      expect(module.test_lt_u_6(), globals.expect_lt_u_6);
-    });
-
-    test('test_lt_u_7', () {
-      expect(module.test_lt_u_7(), globals.expect_lt_u_7);
-    });
-
-    test('test_lt_u_8', () {
-      expect(module.test_lt_u_8(), globals.expect_lt_u_8);
-    });
-
-    test('test_lt_u_9', () {
-      expect(module.test_lt_u_9(), globals.expect_lt_u_9);
-    });
-
-    test('test_lt_u_10', () {
-      expect(module.test_lt_u_10(), globals.expect_lt_u_10);
-    });
-
-    test('test_lt_u_11', () {
-      expect(module.test_lt_u_11(), globals.expect_lt_u_11);
-    });
-
-    test('test_lt_u_12', () {
-      expect(module.test_lt_u_12(), globals.expect_lt_u_12);
-    });
-
-    test('test_lt_u_13', () {
-      expect(module.test_lt_u_13(), globals.expect_lt_u_13);
-    });
-
-    test('test_le_s_0', () {
-      expect(module.test_le_s_0(), globals.expect_le_s_0);
-    });
-
-    test('test_le_s_1', () {
-      expect(module.test_le_s_1(), globals.expect_le_s_1);
-    });
-
-    test('test_le_s_2', () {
-      expect(module.test_le_s_2(), globals.expect_le_s_2);
-    });
-
-    test('test_le_s_3', () {
-      expect(module.test_le_s_3(), globals.expect_le_s_3);
-    });
-
-    test('test_le_s_4', () {
-      expect(module.test_le_s_4(), globals.expect_le_s_4);
-    });
-
-    test('test_le_s_5', () {
-      expect(module.test_le_s_5(), globals.expect_le_s_5);
-    });
-
-    test('test_le_s_6', () {
-      expect(module.test_le_s_6(), globals.expect_le_s_6);
-    });
-
-    test('test_le_s_7', () {
-      expect(module.test_le_s_7(), globals.expect_le_s_7);
-    });
-
-    test('test_le_s_8', () {
-      expect(module.test_le_s_8(), globals.expect_le_s_8);
-    });
-
-    test('test_le_s_9', () {
-      expect(module.test_le_s_9(), globals.expect_le_s_9);
-    });
-
-    test('test_le_s_10', () {
-      expect(module.test_le_s_10(), globals.expect_le_s_10);
-    });
-
-    test('test_le_s_11', () {
-      expect(module.test_le_s_11(), globals.expect_le_s_11);
-    });
-
-    test('test_le_s_12', () {
-      expect(module.test_le_s_12(), globals.expect_le_s_12);
-    });
-
-    test('test_le_s_13', () {
-      expect(module.test_le_s_13(), globals.expect_le_s_13);
-    });
-
-    test('test_le_u_0', () {
-      expect(module.test_le_u_0(), globals.expect_le_u_0);
-    });
-
-    test('test_le_u_1', () {
-      expect(module.test_le_u_1(), globals.expect_le_u_1);
-    });
-
-    test('test_le_u_2', () {
-      expect(module.test_le_u_2(), globals.expect_le_u_2);
-    });
-
-    test('test_le_u_3', () {
-      expect(module.test_le_u_3(), globals.expect_le_u_3);
-    });
-
-    test('test_le_u_4', () {
-      expect(module.test_le_u_4(), globals.expect_le_u_4);
-    });
-
-    test('test_le_u_5', () {
-      expect(module.test_le_u_5(), globals.expect_le_u_5);
-    });
-
-    test('test_le_u_6', () {
-      expect(module.test_le_u_6(), globals.expect_le_u_6);
-    });
-
-    test('test_le_u_7', () {
-      expect(module.test_le_u_7(), globals.expect_le_u_7);
-    });
-
-    test('test_le_u_8', () {
-      expect(module.test_le_u_8(), globals.expect_le_u_8);
-    });
-
-    test('test_le_u_9', () {
-      expect(module.test_le_u_9(), globals.expect_le_u_9);
-    });
-
-    test('test_le_u_10', () {
-      expect(module.test_le_u_10(), globals.expect_le_u_10);
-    });
-
-    test('test_le_u_11', () {
-      expect(module.test_le_u_11(), globals.expect_le_u_11);
-    });
-
-    test('test_le_u_12', () {
-      expect(module.test_le_u_12(), globals.expect_le_u_12);
-    });
-
-    test('test_le_u_13', () {
-      expect(module.test_le_u_13(), globals.expect_le_u_13);
-    });
-
-    test('test_gt_s_0', () {
-      expect(module.test_gt_s_0(), globals.expect_gt_s_0);
-    });
-
-    test('test_gt_s_1', () {
-      expect(module.test_gt_s_1(), globals.expect_gt_s_1);
-    });
-
-    test('test_gt_s_2', () {
-      expect(module.test_gt_s_2(), globals.expect_gt_s_2);
-    });
-
-    test('test_gt_s_3', () {
-      expect(module.test_gt_s_3(), globals.expect_gt_s_3);
-    });
-
-    test('test_gt_s_4', () {
-      expect(module.test_gt_s_4(), globals.expect_gt_s_4);
-    });
-
-    test('test_gt_s_5', () {
-      expect(module.test_gt_s_5(), globals.expect_gt_s_5);
-    });
-
-    test('test_gt_s_6', () {
-      expect(module.test_gt_s_6(), globals.expect_gt_s_6);
-    });
-
-    test('test_gt_s_7', () {
-      expect(module.test_gt_s_7(), globals.expect_gt_s_7);
-    });
-
-    test('test_gt_s_8', () {
-      expect(module.test_gt_s_8(), globals.expect_gt_s_8);
-    });
-
-    test('test_gt_s_9', () {
-      expect(module.test_gt_s_9(), globals.expect_gt_s_9);
-    });
-
-    test('test_gt_s_10', () {
-      expect(module.test_gt_s_10(), globals.expect_gt_s_10);
-    });
-
-    test('test_gt_s_11', () {
-      expect(module.test_gt_s_11(), globals.expect_gt_s_11);
-    });
-
-    test('test_gt_s_12', () {
-      expect(module.test_gt_s_12(), globals.expect_gt_s_12);
-    });
-
-    test('test_gt_s_13', () {
-      expect(module.test_gt_s_13(), globals.expect_gt_s_13);
-    });
-
-    test('test_gt_u_0', () {
-      expect(module.test_gt_u_0(), globals.expect_gt_u_0);
-    });
-
-    test('test_gt_u_1', () {
-      expect(module.test_gt_u_1(), globals.expect_gt_u_1);
-    });
-
-    test('test_gt_u_2', () {
-      expect(module.test_gt_u_2(), globals.expect_gt_u_2);
-    });
-
-    test('test_gt_u_3', () {
-      expect(module.test_gt_u_3(), globals.expect_gt_u_3);
-    });
-
-    test('test_gt_u_4', () {
-      expect(module.test_gt_u_4(), globals.expect_gt_u_4);
-    });
-
-    test('test_gt_u_5', () {
-      expect(module.test_gt_u_5(), globals.expect_gt_u_5);
-    });
-
-    test('test_gt_u_6', () {
-      expect(module.test_gt_u_6(), globals.expect_gt_u_6);
-    });
-
-    test('test_gt_u_7', () {
-      expect(module.test_gt_u_7(), globals.expect_gt_u_7);
-    });
-
-    test('test_gt_u_8', () {
-      expect(module.test_gt_u_8(), globals.expect_gt_u_8);
-    });
-
-    test('test_gt_u_9', () {
-      expect(module.test_gt_u_9(), globals.expect_gt_u_9);
-    });
-
-    test('test_gt_u_10', () {
-      expect(module.test_gt_u_10(), globals.expect_gt_u_10);
-    });
-
-    test('test_gt_u_11', () {
-      expect(module.test_gt_u_11(), globals.expect_gt_u_11);
-    });
-
-    test('test_gt_u_12', () {
-      expect(module.test_gt_u_12(), globals.expect_gt_u_12);
-    });
-
-    test('test_gt_u_13', () {
-      expect(module.test_gt_u_13(), globals.expect_gt_u_13);
-    });
-
-    test('test_ge_s_0', () {
-      expect(module.test_ge_s_0(), globals.expect_ge_s_0);
-    });
-
-    test('test_ge_s_1', () {
-      expect(module.test_ge_s_1(), globals.expect_ge_s_1);
-    });
-
-    test('test_ge_s_2', () {
-      expect(module.test_ge_s_2(), globals.expect_ge_s_2);
-    });
-
-    test('test_ge_s_3', () {
-      expect(module.test_ge_s_3(), globals.expect_ge_s_3);
-    });
-
-    test('test_ge_s_4', () {
-      expect(module.test_ge_s_4(), globals.expect_ge_s_4);
-    });
-
-    test('test_ge_s_5', () {
-      expect(module.test_ge_s_5(), globals.expect_ge_s_5);
-    });
-
-    test('test_ge_s_6', () {
-      expect(module.test_ge_s_6(), globals.expect_ge_s_6);
-    });
-
-    test('test_ge_s_7', () {
-      expect(module.test_ge_s_7(), globals.expect_ge_s_7);
-    });
-
-    test('test_ge_s_8', () {
-      expect(module.test_ge_s_8(), globals.expect_ge_s_8);
-    });
-
-    test('test_ge_s_9', () {
-      expect(module.test_ge_s_9(), globals.expect_ge_s_9);
-    });
-
-    test('test_ge_s_10', () {
-      expect(module.test_ge_s_10(), globals.expect_ge_s_10);
-    });
-
-    test('test_ge_s_11', () {
-      expect(module.test_ge_s_11(), globals.expect_ge_s_11);
-    });
-
-    test('test_ge_s_12', () {
-      expect(module.test_ge_s_12(), globals.expect_ge_s_12);
-    });
-
-    test('test_ge_s_13', () {
-      expect(module.test_ge_s_13(), globals.expect_ge_s_13);
-    });
-
-    test('test_ge_u_0', () {
-      expect(module.test_ge_u_0(), globals.expect_ge_u_0);
-    });
-
-    test('test_ge_u_1', () {
-      expect(module.test_ge_u_1(), globals.expect_ge_u_1);
-    });
-
-    test('test_ge_u_2', () {
-      expect(module.test_ge_u_2(), globals.expect_ge_u_2);
-    });
-
-    test('test_ge_u_3', () {
-      expect(module.test_ge_u_3(), globals.expect_ge_u_3);
-    });
-
-    test('test_ge_u_4', () {
-      expect(module.test_ge_u_4(), globals.expect_ge_u_4);
-    });
-
-    test('test_ge_u_5', () {
-      expect(module.test_ge_u_5(), globals.expect_ge_u_5);
-    });
-
-    test('test_ge_u_6', () {
-      expect(module.test_ge_u_6(), globals.expect_ge_u_6);
-    });
-
-    test('test_ge_u_7', () {
-      expect(module.test_ge_u_7(), globals.expect_ge_u_7);
-    });
-
-    test('test_ge_u_8', () {
-      expect(module.test_ge_u_8(), globals.expect_ge_u_8);
-    });
-
-    test('test_ge_u_9', () {
-      expect(module.test_ge_u_9(), globals.expect_ge_u_9);
-    });
-
-    test('test_ge_u_10', () {
-      expect(module.test_ge_u_10(), globals.expect_ge_u_10);
-    });
-
-    test('test_ge_u_11', () {
-      expect(module.test_ge_u_11(), globals.expect_ge_u_11);
-    });
-
-    test('test_ge_u_12', () {
-      expect(module.test_ge_u_12(), globals.expect_ge_u_12);
-    });
-
-    test('test_ge_u_13', () {
-      expect(module.test_ge_u_13(), globals.expect_ge_u_13);
-    });
+    final Module m = Module();
+    final Globals g = m.globals;
+
+    returns('test_add_0', g.expect_add_0, m.test_add_0);
+    returns('test_add_1', g.expect_add_1, m.test_add_1);
+    returns('test_add_2', g.expect_add_2, m.test_add_2);
+    returns('test_add_3', g.expect_add_3, m.test_add_3);
+    returns('test_add_4', g.expect_add_4, m.test_add_4);
+    returns('test_add_5', g.expect_add_5, m.test_add_5);
+    returns('test_add_6', g.expect_add_6, m.test_add_6);
+    returns('test_add_7', g.expect_add_7, m.test_add_7);
+    returns('test_sub_0', g.expect_sub_0, m.test_sub_0);
+    returns('test_sub_1', g.expect_sub_1, m.test_sub_1);
+    returns('test_sub_2', g.expect_sub_2, m.test_sub_2);
+    returns('test_sub_3', g.expect_sub_3, m.test_sub_3);
+    returns('test_sub_4', g.expect_sub_4, m.test_sub_4);
+    returns('test_sub_5', g.expect_sub_5, m.test_sub_5);
+    returns('test_sub_6', g.expect_sub_6, m.test_sub_6);
+    returns('test_mul_0', g.expect_mul_0, m.test_mul_0);
+    returns('test_mul_1', g.expect_mul_1, m.test_mul_1);
+    returns('test_mul_2', g.expect_mul_2, m.test_mul_2);
+    returns('test_mul_3', g.expect_mul_3, m.test_mul_3);
+    returns('test_mul_4', g.expect_mul_4, m.test_mul_4);
+    returns('test_mul_5', g.expect_mul_5, m.test_mul_5);
+    returns('test_mul_6', g.expect_mul_6, m.test_mul_6);
+    returns('test_mul_7', g.expect_mul_7, m.test_mul_7);
+    returns('test_mul_8', g.expect_mul_8, m.test_mul_8);
+    returns('test_div_s_4', g.expect_div_s_4, m.test_div_s_4);
+    returns('test_div_s_5', g.expect_div_s_5, m.test_div_s_5);
+    returns('test_div_s_6', g.expect_div_s_6, m.test_div_s_6);
+    returns('test_div_s_7', g.expect_div_s_7, m.test_div_s_7);
+    returns('test_div_s_8', g.expect_div_s_8, m.test_div_s_8);
+    returns('test_div_s_9', g.expect_div_s_9, m.test_div_s_9);
+    returns('test_div_s_10', g.expect_div_s_10, m.test_div_s_10);
+    returns('test_div_s_11', g.expect_div_s_11, m.test_div_s_11);
+    returns('test_div_s_12', g.expect_div_s_12, m.test_div_s_12);
+    returns('test_div_s_13', g.expect_div_s_13, m.test_div_s_13);
+    returns('test_div_s_14', g.expect_div_s_14, m.test_div_s_14);
+    returns('test_div_s_15', g.expect_div_s_15, m.test_div_s_15);
+    returns('test_div_s_16', g.expect_div_s_16, m.test_div_s_16);
+    returns('test_div_s_17', g.expect_div_s_17, m.test_div_s_17);
+    returns('test_div_s_18', g.expect_div_s_18, m.test_div_s_18);
+    returns('test_div_s_19', g.expect_div_s_19, m.test_div_s_19);
+    returns('test_div_u_2', g.expect_div_u_2, m.test_div_u_2);
+    returns('test_div_u_3', g.expect_div_u_3, m.test_div_u_3);
+    returns('test_div_u_4', g.expect_div_u_4, m.test_div_u_4);
+    returns('test_div_u_5', g.expect_div_u_5, m.test_div_u_5);
+    returns('test_div_u_6', g.expect_div_u_6, m.test_div_u_6);
+    returns('test_div_u_7', g.expect_div_u_7, m.test_div_u_7);
+    returns('test_div_u_8', g.expect_div_u_8, m.test_div_u_8);
+    returns('test_div_u_9', g.expect_div_u_9, m.test_div_u_9);
+    returns('test_div_u_10', g.expect_div_u_10, m.test_div_u_10);
+    returns('test_div_u_11', g.expect_div_u_11, m.test_div_u_11);
+    returns('test_div_u_12', g.expect_div_u_12, m.test_div_u_12);
+    returns('test_div_u_13', g.expect_div_u_13, m.test_div_u_13);
+    returns('test_div_u_14', g.expect_div_u_14, m.test_div_u_14);
+    returns('test_div_u_15', g.expect_div_u_15, m.test_div_u_15);
+    returns('test_rem_s_2', g.expect_rem_s_2, m.test_rem_s_2);
+    returns('test_rem_s_3', g.expect_rem_s_3, m.test_rem_s_3);
+    returns('test_rem_s_4', g.expect_rem_s_4, m.test_rem_s_4);
+    returns('test_rem_s_5', g.expect_rem_s_5, m.test_rem_s_5);
+    returns('test_rem_s_6', g.expect_rem_s_6, m.test_rem_s_6);
+    returns('test_rem_s_7', g.expect_rem_s_7, m.test_rem_s_7);
+    returns('test_rem_s_8', g.expect_rem_s_8, m.test_rem_s_8);
+    returns('test_rem_s_9', g.expect_rem_s_9, m.test_rem_s_9);
+    returns('test_rem_s_10', g.expect_rem_s_10, m.test_rem_s_10);
+    returns('test_rem_s_11', g.expect_rem_s_11, m.test_rem_s_11);
+    returns('test_rem_s_12', g.expect_rem_s_12, m.test_rem_s_12);
+    returns('test_rem_s_13', g.expect_rem_s_13, m.test_rem_s_13);
+    returns('test_rem_s_14', g.expect_rem_s_14, m.test_rem_s_14);
+    returns('test_rem_s_15', g.expect_rem_s_15, m.test_rem_s_15);
+    returns('test_rem_s_16', g.expect_rem_s_16, m.test_rem_s_16);
+    returns('test_rem_s_17', g.expect_rem_s_17, m.test_rem_s_17);
+    returns('test_rem_s_18', g.expect_rem_s_18, m.test_rem_s_18);
+    returns('test_rem_s_19', g.expect_rem_s_19, m.test_rem_s_19);
+    returns('test_rem_u_2', g.expect_rem_u_2, m.test_rem_u_2);
+    returns('test_rem_u_3', g.expect_rem_u_3, m.test_rem_u_3);
+    returns('test_rem_u_4', g.expect_rem_u_4, m.test_rem_u_4);
+    returns('test_rem_u_5', g.expect_rem_u_5, m.test_rem_u_5);
+    returns('test_rem_u_6', g.expect_rem_u_6, m.test_rem_u_6);
+    returns('test_rem_u_7', g.expect_rem_u_7, m.test_rem_u_7);
+    returns('test_rem_u_8', g.expect_rem_u_8, m.test_rem_u_8);
+    returns('test_rem_u_9', g.expect_rem_u_9, m.test_rem_u_9);
+    returns('test_rem_u_10', g.expect_rem_u_10, m.test_rem_u_10);
+    returns('test_rem_u_11', g.expect_rem_u_11, m.test_rem_u_11);
+    returns('test_rem_u_12', g.expect_rem_u_12, m.test_rem_u_12);
+    returns('test_rem_u_13', g.expect_rem_u_13, m.test_rem_u_13);
+    returns('test_rem_u_14', g.expect_rem_u_14, m.test_rem_u_14);
+    returns('test_rem_u_15', g.expect_rem_u_15, m.test_rem_u_15);
+    returns('test_and_0', g.expect_and_0, m.test_and_0);
+    returns('test_and_1', g.expect_and_1, m.test_and_1);
+    returns('test_and_2', g.expect_and_2, m.test_and_2);
+    returns('test_and_3', g.expect_and_3, m.test_and_3);
+    returns('test_and_4', g.expect_and_4, m.test_and_4);
+    returns('test_and_5', g.expect_and_5, m.test_and_5);
+    returns('test_and_6', g.expect_and_6, m.test_and_6);
+    returns('test_and_7', g.expect_and_7, m.test_and_7);
+    returns('test_or_0', g.expect_or_0, m.test_or_0);
+    returns('test_or_1', g.expect_or_1, m.test_or_1);
+    returns('test_or_2', g.expect_or_2, m.test_or_2);
+    returns('test_or_3', g.expect_or_3, m.test_or_3);
+    returns('test_or_4', g.expect_or_4, m.test_or_4);
+    returns('test_or_5', g.expect_or_5, m.test_or_5);
+    returns('test_or_6', g.expect_or_6, m.test_or_6);
+    returns('test_or_7', g.expect_or_7, m.test_or_7);
+    returns('test_xor_0', g.expect_xor_0, m.test_xor_0);
+    returns('test_xor_1', g.expect_xor_1, m.test_xor_1);
+    returns('test_xor_2', g.expect_xor_2, m.test_xor_2);
+    returns('test_xor_3', g.expect_xor_3, m.test_xor_3);
+    returns('test_xor_4', g.expect_xor_4, m.test_xor_4);
+    returns('test_xor_5', g.expect_xor_5, m.test_xor_5);
+    returns('test_xor_6', g.expect_xor_6, m.test_xor_6);
+    returns('test_xor_7', g.expect_xor_7, m.test_xor_7);
+    returns('test_xor_8', g.expect_xor_8, m.test_xor_8);
+    returns('test_xor_9', g.expect_xor_9, m.test_xor_9);
+    returns('test_shl_0', g.expect_shl_0, m.test_shl_0);
+    returns('test_shl_1', g.expect_shl_1, m.test_shl_1);
+    returns('test_shl_2', g.expect_shl_2, m.test_shl_2);
+    returns('test_shl_3', g.expect_shl_3, m.test_shl_3);
+    returns('test_shl_4', g.expect_shl_4, m.test_shl_4);
+    returns('test_shl_5', g.expect_shl_5, m.test_shl_5);
+    returns('test_shl_6', g.expect_shl_6, m.test_shl_6);
+    returns('test_shl_7', g.expect_shl_7, m.test_shl_7);
+    returns('test_shl_8', g.expect_shl_8, m.test_shl_8);
+    returns('test_shl_9', g.expect_shl_9, m.test_shl_9);
+    returns('test_shl_10', g.expect_shl_10, m.test_shl_10);
+    returns('test_shr_s_0', g.expect_shr_s_0, m.test_shr_s_0);
+    returns('test_shr_s_1', g.expect_shr_s_1, m.test_shr_s_1);
+    returns('test_shr_s_2', g.expect_shr_s_2, m.test_shr_s_2);
+    returns('test_shr_s_3', g.expect_shr_s_3, m.test_shr_s_3);
+    returns('test_shr_s_4', g.expect_shr_s_4, m.test_shr_s_4);
+    returns('test_shr_s_5', g.expect_shr_s_5, m.test_shr_s_5);
+    returns('test_shr_s_6', g.expect_shr_s_6, m.test_shr_s_6);
+    returns('test_shr_s_7', g.expect_shr_s_7, m.test_shr_s_7);
+    returns('test_shr_s_8', g.expect_shr_s_8, m.test_shr_s_8);
+    returns('test_shr_s_9', g.expect_shr_s_9, m.test_shr_s_9);
+    returns('test_shr_s_10', g.expect_shr_s_10, m.test_shr_s_10);
+    returns('test_shr_s_11', g.expect_shr_s_11, m.test_shr_s_11);
+    returns('test_shr_s_12', g.expect_shr_s_12, m.test_shr_s_12);
+    returns('test_shr_s_13', g.expect_shr_s_13, m.test_shr_s_13);
+    returns('test_shr_s_14', g.expect_shr_s_14, m.test_shr_s_14);
+    returns('test_shr_s_15', g.expect_shr_s_15, m.test_shr_s_15);
+    returns('test_shr_s_16', g.expect_shr_s_16, m.test_shr_s_16);
+    returns('test_shr_u_0', g.expect_shr_u_0, m.test_shr_u_0);
+    returns('test_shr_u_1', g.expect_shr_u_1, m.test_shr_u_1);
+    returns('test_shr_u_2', g.expect_shr_u_2, m.test_shr_u_2);
+    returns('test_shr_u_3', g.expect_shr_u_3, m.test_shr_u_3);
+    returns('test_shr_u_4', g.expect_shr_u_4, m.test_shr_u_4);
+    returns('test_shr_u_5', g.expect_shr_u_5, m.test_shr_u_5);
+    returns('test_shr_u_6', g.expect_shr_u_6, m.test_shr_u_6);
+    returns('test_shr_u_7', g.expect_shr_u_7, m.test_shr_u_7);
+    returns('test_shr_u_8', g.expect_shr_u_8, m.test_shr_u_8);
+    returns('test_shr_u_9', g.expect_shr_u_9, m.test_shr_u_9);
+    returns('test_shr_u_10', g.expect_shr_u_10, m.test_shr_u_10);
+    returns('test_shr_u_11', g.expect_shr_u_11, m.test_shr_u_11);
+    returns('test_shr_u_12', g.expect_shr_u_12, m.test_shr_u_12);
+    returns('test_shr_u_13', g.expect_shr_u_13, m.test_shr_u_13);
+    returns('test_shr_u_14', g.expect_shr_u_14, m.test_shr_u_14);
+    returns('test_shr_u_15', g.expect_shr_u_15, m.test_shr_u_15);
+    returns('test_shr_u_16', g.expect_shr_u_16, m.test_shr_u_16);
+    returns('test_rotl_0', g.expect_rotl_0, m.test_rotl_0);
+    returns('test_rotl_1', g.expect_rotl_1, m.test_rotl_1);
+    returns('test_rotl_2', g.expect_rotl_2, m.test_rotl_2);
+    returns('test_rotl_3', g.expect_rotl_3, m.test_rotl_3);
+    returns('test_rotl_4', g.expect_rotl_4, m.test_rotl_4);
+    returns('test_rotl_5', g.expect_rotl_5, m.test_rotl_5);
+    returns('test_rotl_6', g.expect_rotl_6, m.test_rotl_6);
+    returns('test_rotl_7', g.expect_rotl_7, m.test_rotl_7);
+    returns('test_rotl_8', g.expect_rotl_8, m.test_rotl_8);
+    returns('test_rotl_9', g.expect_rotl_9, m.test_rotl_9);
+    returns('test_rotl_10', g.expect_rotl_10, m.test_rotl_10);
+    returns('test_rotl_11', g.expect_rotl_11, m.test_rotl_11);
+    returns('test_rotl_12', g.expect_rotl_12, m.test_rotl_12);
+    returns('test_rotr_0', g.expect_rotr_0, m.test_rotr_0);
+    returns('test_rotr_1', g.expect_rotr_1, m.test_rotr_1);
+    returns('test_rotr_2', g.expect_rotr_2, m.test_rotr_2);
+    returns('test_rotr_3', g.expect_rotr_3, m.test_rotr_3);
+    returns('test_rotr_4', g.expect_rotr_4, m.test_rotr_4);
+    returns('test_rotr_5', g.expect_rotr_5, m.test_rotr_5);
+    returns('test_rotr_6', g.expect_rotr_6, m.test_rotr_6);
+    returns('test_rotr_7', g.expect_rotr_7, m.test_rotr_7);
+    returns('test_rotr_8', g.expect_rotr_8, m.test_rotr_8);
+    returns('test_rotr_9', g.expect_rotr_9, m.test_rotr_9);
+    returns('test_rotr_10', g.expect_rotr_10, m.test_rotr_10);
+    returns('test_rotr_11', g.expect_rotr_11, m.test_rotr_11);
+    returns('test_rotr_12', g.expect_rotr_12, m.test_rotr_12);
+    returns('test_clz_0', g.expect_clz_0, m.test_clz_0);
+    returns('test_clz_1', g.expect_clz_1, m.test_clz_1);
+    returns('test_clz_2', g.expect_clz_2, m.test_clz_2);
+    returns('test_clz_3', g.expect_clz_3, m.test_clz_3);
+    returns('test_clz_4', g.expect_clz_4, m.test_clz_4);
+    returns('test_clz_5', g.expect_clz_5, m.test_clz_5);
+    returns('test_clz_6', g.expect_clz_6, m.test_clz_6);
+    returns('test_clz_7', g.expect_clz_7, m.test_clz_7);
+    returns('test_ctz_0', g.expect_ctz_0, m.test_ctz_0);
+    returns('test_ctz_1', g.expect_ctz_1, m.test_ctz_1);
+    returns('test_ctz_2', g.expect_ctz_2, m.test_ctz_2);
+    returns('test_ctz_3', g.expect_ctz_3, m.test_ctz_3);
+    returns('test_ctz_4', g.expect_ctz_4, m.test_ctz_4);
+    returns('test_ctz_5', g.expect_ctz_5, m.test_ctz_5);
+    returns('test_popcnt_0', g.expect_popcnt_0, m.test_popcnt_0);
+    returns('test_popcnt_1', g.expect_popcnt_1, m.test_popcnt_1);
+    returns('test_popcnt_2', g.expect_popcnt_2, m.test_popcnt_2);
+    returns('test_popcnt_3', g.expect_popcnt_3, m.test_popcnt_3);
+    returns('test_popcnt_4', g.expect_popcnt_4, m.test_popcnt_4);
+    returns('test_popcnt_5', g.expect_popcnt_5, m.test_popcnt_5);
+    returns('test_popcnt_6', g.expect_popcnt_6, m.test_popcnt_6);
+    returns('test_popcnt_7', g.expect_popcnt_7, m.test_popcnt_7);
+    returns('test_extend8_s_0', g.expect_extend8_s_0, m.test_extend8_s_0);
+    returns('test_extend8_s_1', g.expect_extend8_s_1, m.test_extend8_s_1);
+    returns('test_extend8_s_2', g.expect_extend8_s_2, m.test_extend8_s_2);
+    returns('test_extend8_s_3', g.expect_extend8_s_3, m.test_extend8_s_3);
+    returns('test_extend8_s_4', g.expect_extend8_s_4, m.test_extend8_s_4);
+    returns('test_extend8_s_5', g.expect_extend8_s_5, m.test_extend8_s_5);
+    returns('test_extend8_s_6', g.expect_extend8_s_6, m.test_extend8_s_6);
+    returns('test_extend16_s_0', g.expect_extend16_s_0, m.test_extend16_s_0);
+    returns('test_extend16_s_1', g.expect_extend16_s_1, m.test_extend16_s_1);
+    returns('test_extend16_s_2', g.expect_extend16_s_2, m.test_extend16_s_2);
+    returns('test_extend16_s_3', g.expect_extend16_s_3, m.test_extend16_s_3);
+    returns('test_extend16_s_4', g.expect_extend16_s_4, m.test_extend16_s_4);
+    returns('test_extend16_s_5', g.expect_extend16_s_5, m.test_extend16_s_5);
+    returns('test_extend16_s_6', g.expect_extend16_s_6, m.test_extend16_s_6);
+    returns('test_eqz_0', g.expect_eqz_0, m.test_eqz_0);
+    returns('test_eqz_1', g.expect_eqz_1, m.test_eqz_1);
+    returns('test_eqz_2', g.expect_eqz_2, m.test_eqz_2);
+    returns('test_eqz_3', g.expect_eqz_3, m.test_eqz_3);
+    returns('test_eqz_4', g.expect_eqz_4, m.test_eqz_4);
+    returns('test_eq_0', g.expect_eq_0, m.test_eq_0);
+    returns('test_eq_1', g.expect_eq_1, m.test_eq_1);
+    returns('test_eq_2', g.expect_eq_2, m.test_eq_2);
+    returns('test_eq_3', g.expect_eq_3, m.test_eq_3);
+    returns('test_eq_4', g.expect_eq_4, m.test_eq_4);
+    returns('test_eq_5', g.expect_eq_5, m.test_eq_5);
+    returns('test_eq_6', g.expect_eq_6, m.test_eq_6);
+    returns('test_eq_7', g.expect_eq_7, m.test_eq_7);
+    returns('test_eq_8', g.expect_eq_8, m.test_eq_8);
+    returns('test_eq_9', g.expect_eq_9, m.test_eq_9);
+    returns('test_eq_10', g.expect_eq_10, m.test_eq_10);
+    returns('test_eq_11', g.expect_eq_11, m.test_eq_11);
+    returns('test_eq_12', g.expect_eq_12, m.test_eq_12);
+    returns('test_eq_13', g.expect_eq_13, m.test_eq_13);
+    returns('test_ne_0', g.expect_ne_0, m.test_ne_0);
+    returns('test_ne_1', g.expect_ne_1, m.test_ne_1);
+    returns('test_ne_2', g.expect_ne_2, m.test_ne_2);
+    returns('test_ne_3', g.expect_ne_3, m.test_ne_3);
+    returns('test_ne_4', g.expect_ne_4, m.test_ne_4);
+    returns('test_ne_5', g.expect_ne_5, m.test_ne_5);
+    returns('test_ne_6', g.expect_ne_6, m.test_ne_6);
+    returns('test_ne_7', g.expect_ne_7, m.test_ne_7);
+    returns('test_ne_8', g.expect_ne_8, m.test_ne_8);
+    returns('test_ne_9', g.expect_ne_9, m.test_ne_9);
+    returns('test_ne_10', g.expect_ne_10, m.test_ne_10);
+    returns('test_ne_11', g.expect_ne_11, m.test_ne_11);
+    returns('test_ne_12', g.expect_ne_12, m.test_ne_12);
+    returns('test_ne_13', g.expect_ne_13, m.test_ne_13);
+    returns('test_lt_s_0', g.expect_lt_s_0, m.test_lt_s_0);
+    returns('test_lt_s_1', g.expect_lt_s_1, m.test_lt_s_1);
+    returns('test_lt_s_2', g.expect_lt_s_2, m.test_lt_s_2);
+    returns('test_lt_s_3', g.expect_lt_s_3, m.test_lt_s_3);
+    returns('test_lt_s_4', g.expect_lt_s_4, m.test_lt_s_4);
+    returns('test_lt_s_5', g.expect_lt_s_5, m.test_lt_s_5);
+    returns('test_lt_s_6', g.expect_lt_s_6, m.test_lt_s_6);
+    returns('test_lt_s_7', g.expect_lt_s_7, m.test_lt_s_7);
+    returns('test_lt_s_8', g.expect_lt_s_8, m.test_lt_s_8);
+    returns('test_lt_s_9', g.expect_lt_s_9, m.test_lt_s_9);
+    returns('test_lt_s_10', g.expect_lt_s_10, m.test_lt_s_10);
+    returns('test_lt_s_11', g.expect_lt_s_11, m.test_lt_s_11);
+    returns('test_lt_s_12', g.expect_lt_s_12, m.test_lt_s_12);
+    returns('test_lt_s_13', g.expect_lt_s_13, m.test_lt_s_13);
+    returns('test_lt_u_0', g.expect_lt_u_0, m.test_lt_u_0);
+    returns('test_lt_u_1', g.expect_lt_u_1, m.test_lt_u_1);
+    returns('test_lt_u_2', g.expect_lt_u_2, m.test_lt_u_2);
+    returns('test_lt_u_3', g.expect_lt_u_3, m.test_lt_u_3);
+    returns('test_lt_u_4', g.expect_lt_u_4, m.test_lt_u_4);
+    returns('test_lt_u_5', g.expect_lt_u_5, m.test_lt_u_5);
+    returns('test_lt_u_6', g.expect_lt_u_6, m.test_lt_u_6);
+    returns('test_lt_u_7', g.expect_lt_u_7, m.test_lt_u_7);
+    returns('test_lt_u_8', g.expect_lt_u_8, m.test_lt_u_8);
+    returns('test_lt_u_9', g.expect_lt_u_9, m.test_lt_u_9);
+    returns('test_lt_u_10', g.expect_lt_u_10, m.test_lt_u_10);
+    returns('test_lt_u_11', g.expect_lt_u_11, m.test_lt_u_11);
+    returns('test_lt_u_12', g.expect_lt_u_12, m.test_lt_u_12);
+    returns('test_lt_u_13', g.expect_lt_u_13, m.test_lt_u_13);
+    returns('test_le_s_0', g.expect_le_s_0, m.test_le_s_0);
+    returns('test_le_s_1', g.expect_le_s_1, m.test_le_s_1);
+    returns('test_le_s_2', g.expect_le_s_2, m.test_le_s_2);
+    returns('test_le_s_3', g.expect_le_s_3, m.test_le_s_3);
+    returns('test_le_s_4', g.expect_le_s_4, m.test_le_s_4);
+    returns('test_le_s_5', g.expect_le_s_5, m.test_le_s_5);
+    returns('test_le_s_6', g.expect_le_s_6, m.test_le_s_6);
+    returns('test_le_s_7', g.expect_le_s_7, m.test_le_s_7);
+    returns('test_le_s_8', g.expect_le_s_8, m.test_le_s_8);
+    returns('test_le_s_9', g.expect_le_s_9, m.test_le_s_9);
+    returns('test_le_s_10', g.expect_le_s_10, m.test_le_s_10);
+    returns('test_le_s_11', g.expect_le_s_11, m.test_le_s_11);
+    returns('test_le_s_12', g.expect_le_s_12, m.test_le_s_12);
+    returns('test_le_s_13', g.expect_le_s_13, m.test_le_s_13);
+    returns('test_le_u_0', g.expect_le_u_0, m.test_le_u_0);
+    returns('test_le_u_1', g.expect_le_u_1, m.test_le_u_1);
+    returns('test_le_u_2', g.expect_le_u_2, m.test_le_u_2);
+    returns('test_le_u_3', g.expect_le_u_3, m.test_le_u_3);
+    returns('test_le_u_4', g.expect_le_u_4, m.test_le_u_4);
+    returns('test_le_u_5', g.expect_le_u_5, m.test_le_u_5);
+    returns('test_le_u_6', g.expect_le_u_6, m.test_le_u_6);
+    returns('test_le_u_7', g.expect_le_u_7, m.test_le_u_7);
+    returns('test_le_u_8', g.expect_le_u_8, m.test_le_u_8);
+    returns('test_le_u_9', g.expect_le_u_9, m.test_le_u_9);
+    returns('test_le_u_10', g.expect_le_u_10, m.test_le_u_10);
+    returns('test_le_u_11', g.expect_le_u_11, m.test_le_u_11);
+    returns('test_le_u_12', g.expect_le_u_12, m.test_le_u_12);
+    returns('test_le_u_13', g.expect_le_u_13, m.test_le_u_13);
+    returns('test_gt_s_0', g.expect_gt_s_0, m.test_gt_s_0);
+    returns('test_gt_s_1', g.expect_gt_s_1, m.test_gt_s_1);
+    returns('test_gt_s_2', g.expect_gt_s_2, m.test_gt_s_2);
+    returns('test_gt_s_3', g.expect_gt_s_3, m.test_gt_s_3);
+    returns('test_gt_s_4', g.expect_gt_s_4, m.test_gt_s_4);
+    returns('test_gt_s_5', g.expect_gt_s_5, m.test_gt_s_5);
+    returns('test_gt_s_6', g.expect_gt_s_6, m.test_gt_s_6);
+    returns('test_gt_s_7', g.expect_gt_s_7, m.test_gt_s_7);
+    returns('test_gt_s_8', g.expect_gt_s_8, m.test_gt_s_8);
+    returns('test_gt_s_9', g.expect_gt_s_9, m.test_gt_s_9);
+    returns('test_gt_s_10', g.expect_gt_s_10, m.test_gt_s_10);
+    returns('test_gt_s_11', g.expect_gt_s_11, m.test_gt_s_11);
+    returns('test_gt_s_12', g.expect_gt_s_12, m.test_gt_s_12);
+    returns('test_gt_s_13', g.expect_gt_s_13, m.test_gt_s_13);
+    returns('test_gt_u_0', g.expect_gt_u_0, m.test_gt_u_0);
+    returns('test_gt_u_1', g.expect_gt_u_1, m.test_gt_u_1);
+    returns('test_gt_u_2', g.expect_gt_u_2, m.test_gt_u_2);
+    returns('test_gt_u_3', g.expect_gt_u_3, m.test_gt_u_3);
+    returns('test_gt_u_4', g.expect_gt_u_4, m.test_gt_u_4);
+    returns('test_gt_u_5', g.expect_gt_u_5, m.test_gt_u_5);
+    returns('test_gt_u_6', g.expect_gt_u_6, m.test_gt_u_6);
+    returns('test_gt_u_7', g.expect_gt_u_7, m.test_gt_u_7);
+    returns('test_gt_u_8', g.expect_gt_u_8, m.test_gt_u_8);
+    returns('test_gt_u_9', g.expect_gt_u_9, m.test_gt_u_9);
+    returns('test_gt_u_10', g.expect_gt_u_10, m.test_gt_u_10);
+    returns('test_gt_u_11', g.expect_gt_u_11, m.test_gt_u_11);
+    returns('test_gt_u_12', g.expect_gt_u_12, m.test_gt_u_12);
+    returns('test_gt_u_13', g.expect_gt_u_13, m.test_gt_u_13);
+    returns('test_ge_s_0', g.expect_ge_s_0, m.test_ge_s_0);
+    returns('test_ge_s_1', g.expect_ge_s_1, m.test_ge_s_1);
+    returns('test_ge_s_2', g.expect_ge_s_2, m.test_ge_s_2);
+    returns('test_ge_s_3', g.expect_ge_s_3, m.test_ge_s_3);
+    returns('test_ge_s_4', g.expect_ge_s_4, m.test_ge_s_4);
+    returns('test_ge_s_5', g.expect_ge_s_5, m.test_ge_s_5);
+    returns('test_ge_s_6', g.expect_ge_s_6, m.test_ge_s_6);
+    returns('test_ge_s_7', g.expect_ge_s_7, m.test_ge_s_7);
+    returns('test_ge_s_8', g.expect_ge_s_8, m.test_ge_s_8);
+    returns('test_ge_s_9', g.expect_ge_s_9, m.test_ge_s_9);
+    returns('test_ge_s_10', g.expect_ge_s_10, m.test_ge_s_10);
+    returns('test_ge_s_11', g.expect_ge_s_11, m.test_ge_s_11);
+    returns('test_ge_s_12', g.expect_ge_s_12, m.test_ge_s_12);
+    returns('test_ge_s_13', g.expect_ge_s_13, m.test_ge_s_13);
+    returns('test_ge_u_0', g.expect_ge_u_0, m.test_ge_u_0);
+    returns('test_ge_u_1', g.expect_ge_u_1, m.test_ge_u_1);
+    returns('test_ge_u_2', g.expect_ge_u_2, m.test_ge_u_2);
+    returns('test_ge_u_3', g.expect_ge_u_3, m.test_ge_u_3);
+    returns('test_ge_u_4', g.expect_ge_u_4, m.test_ge_u_4);
+    returns('test_ge_u_5', g.expect_ge_u_5, m.test_ge_u_5);
+    returns('test_ge_u_6', g.expect_ge_u_6, m.test_ge_u_6);
+    returns('test_ge_u_7', g.expect_ge_u_7, m.test_ge_u_7);
+    returns('test_ge_u_8', g.expect_ge_u_8, m.test_ge_u_8);
+    returns('test_ge_u_9', g.expect_ge_u_9, m.test_ge_u_9);
+    returns('test_ge_u_10', g.expect_ge_u_10, m.test_ge_u_10);
+    returns('test_ge_u_11', g.expect_ge_u_11, m.test_ge_u_11);
+    returns('test_ge_u_12', g.expect_ge_u_12, m.test_ge_u_12);
+    returns('test_ge_u_13', g.expect_ge_u_13, m.test_ge_u_13);
   });
 }
 

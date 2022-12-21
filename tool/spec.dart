@@ -13,7 +13,10 @@ import 'src/s_expr.dart';
 // todo: introduce some model objects here to make it easier to manipulate the
 // s-expressions
 
-// todo: figure out the different patterns in the wast files
+// Patterns:
+// - tests must run in the order they're definied
+// - a failing test doesn'y prevent execution of the next test
+// - there is code that might optionally run between or before tests
 
 void main(List<String> args) {
   if (args.isEmpty) {

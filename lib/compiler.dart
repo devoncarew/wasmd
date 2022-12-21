@@ -34,6 +34,7 @@ class Compiler {
     library.directives.addAll([
       if (generateWastTest) Directive.import('package:test/test.dart'),
       Directive.import('package:wasmd/runtime.dart'),
+      if (generateWastTest) Directive.import('src/infra.dart'),
     ]);
 
     var module = _parse(file);
@@ -559,10 +560,12 @@ void printModule(
         var testName = func.name;
         var expectName = 'expect_${testName.substring('test_'.length)}';
 
-        buf.writeln("  test('$testName', () {");
-        buf.writeln('    expect(module.$testName(), globals.$expectName);');
-        buf.writeln('  });');
-        buf.writeln();
+        buf.write("  returns('$testName', ");
+        // TODO: try to inline the expectations constant
+        buf.write("g.$expectName");
+        // TODO: inline the test closure
+        buf.write(", m.$testName");
+        buf.writeln(");");
       }
 
       return buf.toString();
@@ -575,13 +578,8 @@ void printModule(
         ..body = Block.of([
           Code('''
   group('$moduleName', () {
-    late Module module;
-    late Globals globals;
-
-    setUp(() {
-      module = Module();
-      globals = module.globals;
-    });
+    final Module m = Module();
+    final Globals g = m.globals;
 
     ${generateTests()}
   });
