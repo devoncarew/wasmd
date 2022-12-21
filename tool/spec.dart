@@ -185,12 +185,12 @@ List<Expression> _process(ComilationUnit compilationUnit) {
       ];
     } else if (invocation) {
       var testInstrs = Expression(node.nodes.skip(2).toList());
-      testName = 'test_invoke_${name.replaceAll('-', '_')}_$id';
+      var methodName = 'invoke_${name.replaceAll('-', '_')}_$id';
 
       return [
         Expression([
           Atom('func'),
-          Expression([Atom('export'), Atom('"$testName"')]),
+          Expression([Atom('export'), Atom('"$methodName"')]),
           // if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
           Expression([
             Atom('call'),

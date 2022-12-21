@@ -12,6 +12,7 @@ void main() {
   group('memory_fill_5', () {
     final Module m = Module();
 
+    invoke('invoke_test_0', m.invoke_test_0);
     returns('test_checkRange_0', m.test_checkRange_0, -1);
     returns('test_checkRange_1', m.test_checkRange_1, -1);
     returns('test_checkRange_2', m.test_checkRange_2, -1);
@@ -64,6 +65,11 @@ class Module {
     frame.i32_const(170);
     frame.i32_const(0xfffe);
     frame.memory_fill(0);
+  }
+
+  void invoke_test_0() {
+    final frame = Frame(memory);
+    test();
   }
 
   i32 test_checkRange_0() {

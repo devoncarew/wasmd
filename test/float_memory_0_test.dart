@@ -16,16 +16,16 @@ void main() {
 
     returns('test_i32_load_0', m.test_i32_load_0, 0x7fa00000);
     returns('test_f32_load_0', m.test_f32_load_0, double.nan);
-    m.test_invoke_reset_0();
+    invoke('invoke_reset_0', m.invoke_reset_0);
     returns('test_i32_load_1', m.test_i32_load_1, 0);
     returns('test_f32_load_1', m.test_f32_load_1, 0.0);
-    m.test_invoke_f32_store_0();
+    invoke('invoke_f32_store_0', m.invoke_f32_store_0);
     returns('test_i32_load_2', m.test_i32_load_2, 0x7fa00000);
     returns('test_f32_load_2', m.test_f32_load_2, double.nan);
-    m.test_invoke_reset_1();
+    invoke('invoke_reset_1', m.invoke_reset_1);
     returns('test_i32_load_3', m.test_i32_load_3, 0);
     returns('test_f32_load_3', m.test_f32_load_3, 0.0);
-    m.test_invoke_i32_store_0();
+    invoke('invoke_i32_store_0', m.invoke_i32_store_0);
     returns('test_i32_load_4', m.test_i32_load_4, 0x7fa00000);
     returns('test_f32_load_4', m.test_f32_load_4, double.nan);
   });
@@ -90,7 +90,7 @@ class Module {
     return frame.pop();
   }
 
-  void test_invoke_reset_0() {
+  void invoke_reset_0() {
     final frame = Frame(memory);
     reset();
   }
@@ -107,7 +107,7 @@ class Module {
     return frame.pop();
   }
 
-  void test_invoke_f32_store_0() {
+  void invoke_f32_store_0() {
     final frame = Frame(memory);
     f32_store();
   }
@@ -124,7 +124,7 @@ class Module {
     return frame.pop();
   }
 
-  void test_invoke_reset_1() {
+  void invoke_reset_1() {
     final frame = Frame(memory);
     reset();
   }
@@ -141,7 +141,7 @@ class Module {
     return frame.pop();
   }
 
-  void test_invoke_i32_store_0() {
+  void invoke_i32_store_0() {
     final frame = Frame(memory);
     i32_store();
   }

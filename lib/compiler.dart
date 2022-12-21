@@ -567,23 +567,21 @@ void printModule(
   if (generateWastTest) {
     String generateTests() {
       var buf = StringBuffer();
-      var functions =
-          module.allFunctions.where((f) => f.name.startsWith('test_'));
+      var functions = module.allFunctions.where((f) {
+        return f.name.startsWith('test_') || f.name.startsWith('invoke_');
+      });
       for (var func in functions) {
         var testName = func.name;
         var name = testName.substring('test_'.length);
         var throwsMessage = module.dataSegments.getNamed('trap_$name');
-        var isInvoke = testName.startsWith('test_invoke_');
+        var isInvoke = testName.startsWith('invoke_');
 
         if (isInvoke) {
-          buf.writeln("m.$testName();");
+          buf.writeln("invoke('$testName', m.$testName);");
         } else if (throwsMessage != null) {
           var message = utf8.decode(throwsMessage.bytes);
-          buf.write("  traps('$testName', ");
           // TODO: inline the test closure
-          buf.write('m.$testName, ');
-          buf.write('"$message"');
-          buf.writeln(');');
+          buf.write("  traps('$testName', m.$testName, \"$message\");");
         } else {
           var expectName = 'expect_$name';
 
