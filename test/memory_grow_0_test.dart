@@ -14,32 +14,32 @@ void main() {
   group('memory_grow_0', () {
     final Module m = Module();
 
-    returns('test_size_0', m.test_size_0, 0);
-    traps('test_store_at_zero_0', m.test_store_at_zero_0,
+    returns('size_0', m.test_size_0, 0);
+    traps('store_at_zero_0', m.test_store_at_zero_0,
         "out of bounds memory access");
-    traps('test_load_at_zero_0', m.test_load_at_zero_0,
+    traps(
+        'load_at_zero_0', m.test_load_at_zero_0, "out of bounds memory access");
+    traps('store_at_page_size_0', m.test_store_at_page_size_0,
         "out of bounds memory access");
-    traps('test_store_at_page_size_0', m.test_store_at_page_size_0,
+    traps('load_at_page_size_0', m.test_load_at_page_size_0,
         "out of bounds memory access");
-    traps('test_load_at_page_size_0', m.test_load_at_page_size_0,
+    returns('grow_0', m.test_grow_0, 0);
+    returns('size_1', m.test_size_1, 1);
+    returns('load_at_zero_1', m.test_load_at_zero_1, 0);
+    returns('store_at_zero_1', m.test_store_at_zero_1);
+    returns('load_at_zero_2', m.test_load_at_zero_2, 2);
+    traps('store_at_page_size_1', m.test_store_at_page_size_1,
         "out of bounds memory access");
-    returns('test_grow_0', m.test_grow_0, 0);
-    returns('test_size_1', m.test_size_1, 1);
-    returns('test_load_at_zero_1', m.test_load_at_zero_1, 0);
-    returns('test_store_at_zero_1', m.test_store_at_zero_1);
-    returns('test_load_at_zero_2', m.test_load_at_zero_2, 2);
-    traps('test_store_at_page_size_1', m.test_store_at_page_size_1,
+    traps('load_at_page_size_1', m.test_load_at_page_size_1,
         "out of bounds memory access");
-    traps('test_load_at_page_size_1', m.test_load_at_page_size_1,
-        "out of bounds memory access");
-    returns('test_grow_1', m.test_grow_1, 1);
-    returns('test_size_2', m.test_size_2, 5);
-    returns('test_load_at_zero_3', m.test_load_at_zero_3, 2);
-    returns('test_store_at_zero_2', m.test_store_at_zero_2);
-    returns('test_load_at_zero_4', m.test_load_at_zero_4, 2);
-    returns('test_load_at_page_size_2', m.test_load_at_page_size_2, 0);
-    returns('test_store_at_page_size_2', m.test_store_at_page_size_2);
-    returns('test_load_at_page_size_3', m.test_load_at_page_size_3, 3);
+    returns('grow_1', m.test_grow_1, 1);
+    returns('size_2', m.test_size_2, 5);
+    returns('load_at_zero_3', m.test_load_at_zero_3, 2);
+    returns('store_at_zero_2', m.test_store_at_zero_2);
+    returns('load_at_zero_4', m.test_load_at_zero_4, 2);
+    returns('load_at_page_size_2', m.test_load_at_page_size_2, 0);
+    returns('store_at_page_size_2', m.test_store_at_page_size_2);
+    returns('load_at_page_size_3', m.test_load_at_page_size_3, 3);
   });
 }
 

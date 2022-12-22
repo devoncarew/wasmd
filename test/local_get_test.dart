@@ -12,26 +12,25 @@ void main() {
   group('local_get', () {
     final Module m = Module();
 
-    returns('test_type_local_i32_0', m.test_type_local_i32_0, 0);
-    returns('test_type_local_i64_0', m.test_type_local_i64_0, 0);
-    returns('test_type_local_f32_0', m.test_type_local_f32_0, 0.0);
-    returns('test_type_local_f64_0', m.test_type_local_f64_0, 0.0);
-    returns('test_type_param_i32_0', m.test_type_param_i32_0, 2);
-    returns('test_type_param_i64_0', m.test_type_param_i64_0, 3);
-    returns(
-        'test_type_param_f32_0', m.test_type_param_f32_0, 4.400000095367432);
-    returns('test_type_param_f64_0', m.test_type_param_f64_0, 5.5);
-    returns('test_as_block_value_0', m.test_as_block_value_0, 6);
-    returns('test_as_loop_value_0', m.test_as_loop_value_0, 7);
-    returns('test_as_br_value_0', m.test_as_br_value_0, 8);
-    returns('test_as_br_if_value_0', m.test_as_br_if_value_0, 9);
-    returns('test_as_br_if_value_cond_0', m.test_as_br_if_value_cond_0, 10);
-    returns('test_as_br_table_value_0', m.test_as_br_table_value_0, 2);
-    returns('test_as_return_value_0', m.test_as_return_value_0, 0);
-    returns('test_as_if_then_0', m.test_as_if_then_0, 1);
-    returns('test_as_if_else_0', m.test_as_if_else_0, 0);
-    returns('test_type_mixed_0', m.test_type_mixed_0);
-    returns('test_read_0', m.test_read_0, 34.8);
+    returns('type_local_i32_0', m.test_type_local_i32_0, 0);
+    returns('type_local_i64_0', m.test_type_local_i64_0, 0);
+    returns('type_local_f32_0', m.test_type_local_f32_0, 0.0);
+    returns('type_local_f64_0', m.test_type_local_f64_0, 0.0);
+    returns('type_param_i32_0', m.test_type_param_i32_0, 2);
+    returns('type_param_i64_0', m.test_type_param_i64_0, 3);
+    returns('type_param_f32_0', m.test_type_param_f32_0, 4.400000095367432);
+    returns('type_param_f64_0', m.test_type_param_f64_0, 5.5);
+    returns('as_block_value_0', m.test_as_block_value_0, 6);
+    returns('as_loop_value_0', m.test_as_loop_value_0, 7);
+    returns('as_br_value_0', m.test_as_br_value_0, 8);
+    returns('as_br_if_value_0', m.test_as_br_if_value_0, 9);
+    returns('as_br_if_value_cond_0', m.test_as_br_if_value_cond_0, 10);
+    returns('as_br_table_value_0', m.test_as_br_table_value_0, 2);
+    returns('as_return_value_0', m.test_as_return_value_0, 0);
+    returns('as_if_then_0', m.test_as_if_then_0, 1);
+    returns('as_if_else_0', m.test_as_if_else_0, 0);
+    returns('type_mixed_0', m.test_type_mixed_0);
+    returns('read_0', m.test_read_0, 34.8);
   });
 }
 
@@ -233,10 +232,27 @@ class Module {
         block_label_2:
         {
           frame.push(arg0);
-          throw 'unreachable (0x0E)';
+          var t0 = frame.pop();
+          switch (t0) {
+            case 0:
+              break block_label_2;
+            case 1:
+              break block_label_1;
+            default:
+              break block_label_0;
+          }
+
+          frame.i32_const(0);
+          return frame.pop();
         }
+        frame.i32_const(1);
+        return frame.pop();
       }
+      frame.i32_const(2);
+      return frame.pop();
     }
+    frame.i32_const(3);
+    return frame.pop();
   }
 
   i32 as_return_value(i32 arg0) {

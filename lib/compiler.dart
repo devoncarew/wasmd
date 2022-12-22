@@ -15,7 +15,6 @@ import 'src/utils.dart';
 
 // TODO: support element section type 0x01
 // TODO: support generating tests for bulk.wast
-// TODO: support switch opcode - 0x0E
 
 class Compiler {
   final File file;
@@ -581,15 +580,15 @@ void printModule(
         var isInvoke = testName.startsWith('invoke_');
 
         if (isInvoke) {
-          buf.writeln("invoke('$testName', m.$testName);");
+          buf.writeln("invoke('$name', m.$testName);");
         } else if (throwsMessage != null) {
           var message = utf8.decode(throwsMessage.bytes);
           // TODO: inline the test closure
-          buf.write("  traps('$testName', m.$testName, \"$message\");");
+          buf.write("  traps('$name', m.$testName, \"$message\");");
         } else {
           var expectName = 'expect_$name';
 
-          buf.write("  returns('$testName', ");
+          buf.write("  returns('$name', ");
           // TODO: inline the test closure
           buf.write("m.$testName, ");
           var expectation = module.globals.getNamed(expectName);

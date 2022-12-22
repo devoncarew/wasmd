@@ -12,17 +12,17 @@ void main() {
   group('memory_grow_3', () {
     final Module m = Module();
 
-    returns('test_check_memory_zero_0', m.test_check_memory_zero_0, 0);
-    returns('test_grow_0', m.test_grow_0, 1);
-    returns('test_check_memory_zero_1', m.test_check_memory_zero_1, 0);
-    returns('test_grow_1', m.test_grow_1, 2);
-    returns('test_check_memory_zero_2', m.test_check_memory_zero_2, 0);
-    returns('test_grow_2', m.test_grow_2, 3);
-    returns('test_check_memory_zero_3', m.test_check_memory_zero_3, 0);
-    returns('test_grow_3', m.test_grow_3, 4);
-    returns('test_check_memory_zero_4', m.test_check_memory_zero_4, 0);
-    returns('test_grow_4', m.test_grow_4, 5);
-    returns('test_check_memory_zero_5', m.test_check_memory_zero_5, 0);
+    returns('check_memory_zero_0', m.test_check_memory_zero_0, 0);
+    returns('grow_0', m.test_grow_0, 1);
+    returns('check_memory_zero_1', m.test_check_memory_zero_1, 0);
+    returns('grow_1', m.test_grow_1, 2);
+    returns('check_memory_zero_2', m.test_check_memory_zero_2, 0);
+    returns('grow_2', m.test_grow_2, 3);
+    returns('check_memory_zero_3', m.test_check_memory_zero_3, 0);
+    returns('grow_3', m.test_grow_3, 4);
+    returns('check_memory_zero_4', m.test_check_memory_zero_4, 0);
+    returns('grow_4', m.test_grow_4, 5);
+    returns('check_memory_zero_5', m.test_check_memory_zero_5, 0);
   });
 }
 

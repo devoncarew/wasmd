@@ -114,12 +114,75 @@ class Module {
             block_label_4:
             {
               frame.push(arg3);
-              throw 'unreachable (0x0E)';
+              var t0 = frame.pop();
+              switch (t0) {
+                case 0:
+                  break block_label_1;
+                case 1:
+                  break block_label_2;
+                default:
+                  break block_label_3;
+              }
             }
           }
+          frame.push(arg1);
+          frame.i64_const(31);
+          frame.i64_store8(0, 0);
+          break block_label_0;
         }
+        frame.push(arg1);
+        frame.i64_const(1);
+        frame.i64_store8(0, 0);
+        break block_label_0;
+      }
+      frame.push(arg1);
+      frame.i64_const(6);
+      frame.i64_store8(0, 0);
+      break block_label_0;
+    }
+    block_label_0:
+    {
+      loop_label_1:
+      for (;;) {
+        frame.push(arg2);
+        frame.i32_const(1);
+        frame.i32_add();
+        frame.i32_const(8);
+        frame.i32_mul();
+        frame.push(arg0);
+        frame.i32_rem_u();
+        frame.i32_const(0);
+        frame.i32_eq();
+        if (frame.pop() != 0) break block_label_0;
+        frame.push(arg2);
+        frame.i32_const(1);
+        frame.i32_add();
+        arg2 = frame.pop();
+        frame.push(arg1);
+        frame.i32_const(1);
+        frame.i32_add();
+        arg1 = frame.pop();
+        frame.push(arg1);
+        frame.i64_const(0);
+        frame.i64_store8(0, 0);
+        continue loop_label_1;
+        break;
       }
     }
+    frame.push(arg1);
+    frame.push(arg1);
+    frame.i64_load(3, 0);
+    frame.i64_const(128);
+    frame.i64_or();
+    frame.i64_store(3, 0);
+    frame.push(arg2);
+    frame.i32_const(1);
+    frame.i32_add();
+    arg2 = frame.pop();
+    frame.push(arg2);
+    frame.push(local0);
+    frame.i32_sub();
+    return frame.pop();
   }
 
   i32 absorb(i32 arg0, i32 arg1, i32 arg2) {

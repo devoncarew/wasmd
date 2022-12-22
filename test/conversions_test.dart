@@ -14,848 +14,755 @@ void main() {
   group('conversions', () {
     final Module m = Module();
 
-    returns('test_i64_extend_i32_s_0', m.test_i64_extend_i32_s_0, 0);
-    returns('test_i64_extend_i32_s_1', m.test_i64_extend_i32_s_1, 0x2710);
-    returns('test_i64_extend_i32_s_2', m.test_i64_extend_i32_s_2, -0x2710);
-    returns('test_i64_extend_i32_s_3', m.test_i64_extend_i32_s_3, -1);
-    returns('test_i64_extend_i32_s_4', m.test_i64_extend_i32_s_4, 0x7fffffff);
-    returns('test_i64_extend_i32_s_5', m.test_i64_extend_i32_s_5, -0x80000000);
-    returns('test_i64_extend_i32_u_0', m.test_i64_extend_i32_u_0, 0);
-    returns('test_i64_extend_i32_u_1', m.test_i64_extend_i32_u_1, 0x2710);
-    returns('test_i64_extend_i32_u_2', m.test_i64_extend_i32_u_2, 0xffffd8f0);
-    returns('test_i64_extend_i32_u_3', m.test_i64_extend_i32_u_3, 0xffffffff);
-    returns('test_i64_extend_i32_u_4', m.test_i64_extend_i32_u_4, 0x7fffffff);
-    returns('test_i64_extend_i32_u_5', m.test_i64_extend_i32_u_5, 0x80000000);
-    returns('test_i32_wrap_i64_0', m.test_i32_wrap_i64_0, -1);
-    returns('test_i32_wrap_i64_1', m.test_i32_wrap_i64_1, -0x186a0);
-    returns('test_i32_wrap_i64_2', m.test_i32_wrap_i64_2, -0x80000000);
-    returns('test_i32_wrap_i64_3', m.test_i32_wrap_i64_3, 0x7fffffff);
-    returns('test_i32_wrap_i64_4', m.test_i32_wrap_i64_4, 0);
-    returns('test_i32_wrap_i64_5', m.test_i32_wrap_i64_5, -1);
-    returns('test_i32_wrap_i64_6', m.test_i32_wrap_i64_6, 1);
-    returns('test_i32_wrap_i64_7', m.test_i32_wrap_i64_7, 0);
-    returns('test_i32_wrap_i64_8', m.test_i32_wrap_i64_8, -0x65432110);
-    returns('test_i32_wrap_i64_9', m.test_i32_wrap_i64_9, -1);
-    returns('test_i32_wrap_i64_10', m.test_i32_wrap_i64_10, 0);
-    returns('test_i32_wrap_i64_11', m.test_i32_wrap_i64_11, 1);
-    returns('test_i32_trunc_f32_s_0', m.test_i32_trunc_f32_s_0, 0);
-    returns('test_i32_trunc_f32_s_1', m.test_i32_trunc_f32_s_1, 0);
-    returns('test_i32_trunc_f32_s_2', m.test_i32_trunc_f32_s_2, 0);
-    returns('test_i32_trunc_f32_s_3', m.test_i32_trunc_f32_s_3, 0);
-    returns('test_i32_trunc_f32_s_4', m.test_i32_trunc_f32_s_4, 1);
-    returns('test_i32_trunc_f32_s_5', m.test_i32_trunc_f32_s_5, 1);
-    returns('test_i32_trunc_f32_s_6', m.test_i32_trunc_f32_s_6, 1);
-    returns('test_i32_trunc_f32_s_7', m.test_i32_trunc_f32_s_7, -1);
-    returns('test_i32_trunc_f32_s_8', m.test_i32_trunc_f32_s_8, -1);
-    returns('test_i32_trunc_f32_s_9', m.test_i32_trunc_f32_s_9, -1);
-    returns('test_i32_trunc_f32_s_10', m.test_i32_trunc_f32_s_10, -1);
-    returns('test_i32_trunc_f32_s_11', m.test_i32_trunc_f32_s_11, -2);
-    returns('test_i32_trunc_f32_s_12', m.test_i32_trunc_f32_s_12, 0x7fffff80);
-    returns('test_i32_trunc_f32_s_13', m.test_i32_trunc_f32_s_13, -0x80000000);
-    traps('test_i32_trunc_f32_s_14', m.test_i32_trunc_f32_s_14,
-        "integer overflow");
-    traps('test_i32_trunc_f32_s_15', m.test_i32_trunc_f32_s_15,
-        "integer overflow");
-    traps('test_i32_trunc_f32_s_16', m.test_i32_trunc_f32_s_16,
-        "integer overflow");
-    traps('test_i32_trunc_f32_s_17', m.test_i32_trunc_f32_s_17,
-        "integer overflow");
-    traps('test_i32_trunc_f32_s_18', m.test_i32_trunc_f32_s_18,
+    returns('i64_extend_i32_s_0', m.test_i64_extend_i32_s_0, 0);
+    returns('i64_extend_i32_s_1', m.test_i64_extend_i32_s_1, 0x2710);
+    returns('i64_extend_i32_s_2', m.test_i64_extend_i32_s_2, -0x2710);
+    returns('i64_extend_i32_s_3', m.test_i64_extend_i32_s_3, -1);
+    returns('i64_extend_i32_s_4', m.test_i64_extend_i32_s_4, 0x7fffffff);
+    returns('i64_extend_i32_s_5', m.test_i64_extend_i32_s_5, -0x80000000);
+    returns('i64_extend_i32_u_0', m.test_i64_extend_i32_u_0, 0);
+    returns('i64_extend_i32_u_1', m.test_i64_extend_i32_u_1, 0x2710);
+    returns('i64_extend_i32_u_2', m.test_i64_extend_i32_u_2, 0xffffd8f0);
+    returns('i64_extend_i32_u_3', m.test_i64_extend_i32_u_3, 0xffffffff);
+    returns('i64_extend_i32_u_4', m.test_i64_extend_i32_u_4, 0x7fffffff);
+    returns('i64_extend_i32_u_5', m.test_i64_extend_i32_u_5, 0x80000000);
+    returns('i32_wrap_i64_0', m.test_i32_wrap_i64_0, -1);
+    returns('i32_wrap_i64_1', m.test_i32_wrap_i64_1, -0x186a0);
+    returns('i32_wrap_i64_2', m.test_i32_wrap_i64_2, -0x80000000);
+    returns('i32_wrap_i64_3', m.test_i32_wrap_i64_3, 0x7fffffff);
+    returns('i32_wrap_i64_4', m.test_i32_wrap_i64_4, 0);
+    returns('i32_wrap_i64_5', m.test_i32_wrap_i64_5, -1);
+    returns('i32_wrap_i64_6', m.test_i32_wrap_i64_6, 1);
+    returns('i32_wrap_i64_7', m.test_i32_wrap_i64_7, 0);
+    returns('i32_wrap_i64_8', m.test_i32_wrap_i64_8, -0x65432110);
+    returns('i32_wrap_i64_9', m.test_i32_wrap_i64_9, -1);
+    returns('i32_wrap_i64_10', m.test_i32_wrap_i64_10, 0);
+    returns('i32_wrap_i64_11', m.test_i32_wrap_i64_11, 1);
+    returns('i32_trunc_f32_s_0', m.test_i32_trunc_f32_s_0, 0);
+    returns('i32_trunc_f32_s_1', m.test_i32_trunc_f32_s_1, 0);
+    returns('i32_trunc_f32_s_2', m.test_i32_trunc_f32_s_2, 0);
+    returns('i32_trunc_f32_s_3', m.test_i32_trunc_f32_s_3, 0);
+    returns('i32_trunc_f32_s_4', m.test_i32_trunc_f32_s_4, 1);
+    returns('i32_trunc_f32_s_5', m.test_i32_trunc_f32_s_5, 1);
+    returns('i32_trunc_f32_s_6', m.test_i32_trunc_f32_s_6, 1);
+    returns('i32_trunc_f32_s_7', m.test_i32_trunc_f32_s_7, -1);
+    returns('i32_trunc_f32_s_8', m.test_i32_trunc_f32_s_8, -1);
+    returns('i32_trunc_f32_s_9', m.test_i32_trunc_f32_s_9, -1);
+    returns('i32_trunc_f32_s_10', m.test_i32_trunc_f32_s_10, -1);
+    returns('i32_trunc_f32_s_11', m.test_i32_trunc_f32_s_11, -2);
+    returns('i32_trunc_f32_s_12', m.test_i32_trunc_f32_s_12, 0x7fffff80);
+    returns('i32_trunc_f32_s_13', m.test_i32_trunc_f32_s_13, -0x80000000);
+    traps('i32_trunc_f32_s_14', m.test_i32_trunc_f32_s_14, "integer overflow");
+    traps('i32_trunc_f32_s_15', m.test_i32_trunc_f32_s_15, "integer overflow");
+    traps('i32_trunc_f32_s_16', m.test_i32_trunc_f32_s_16, "integer overflow");
+    traps('i32_trunc_f32_s_17', m.test_i32_trunc_f32_s_17, "integer overflow");
+    traps('i32_trunc_f32_s_18', m.test_i32_trunc_f32_s_18,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f32_s_19', m.test_i32_trunc_f32_s_19,
+    traps('i32_trunc_f32_s_19', m.test_i32_trunc_f32_s_19,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f32_s_20', m.test_i32_trunc_f32_s_20,
+    traps('i32_trunc_f32_s_20', m.test_i32_trunc_f32_s_20,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f32_s_21', m.test_i32_trunc_f32_s_21,
+    traps('i32_trunc_f32_s_21', m.test_i32_trunc_f32_s_21,
         "invalid conversion to integer");
-    returns('test_i32_trunc_f32_u_0', m.test_i32_trunc_f32_u_0, 0);
-    returns('test_i32_trunc_f32_u_1', m.test_i32_trunc_f32_u_1, 0);
-    returns('test_i32_trunc_f32_u_2', m.test_i32_trunc_f32_u_2, 0);
-    returns('test_i32_trunc_f32_u_3', m.test_i32_trunc_f32_u_3, 0);
-    returns('test_i32_trunc_f32_u_4', m.test_i32_trunc_f32_u_4, 1);
-    returns('test_i32_trunc_f32_u_5', m.test_i32_trunc_f32_u_5, 1);
-    returns('test_i32_trunc_f32_u_6', m.test_i32_trunc_f32_u_6, 1);
-    returns('test_i32_trunc_f32_u_7', m.test_i32_trunc_f32_u_7, 1);
-    returns('test_i32_trunc_f32_u_8', m.test_i32_trunc_f32_u_8, 2);
-    returns('test_i32_trunc_f32_u_9', m.test_i32_trunc_f32_u_9, -0x80000000);
-    returns('test_i32_trunc_f32_u_10', m.test_i32_trunc_f32_u_10, -256);
-    returns('test_i32_trunc_f32_u_11', m.test_i32_trunc_f32_u_11, 0);
-    returns('test_i32_trunc_f32_u_12', m.test_i32_trunc_f32_u_12, 0);
-    traps('test_i32_trunc_f32_u_13', m.test_i32_trunc_f32_u_13,
-        "integer overflow");
-    traps('test_i32_trunc_f32_u_14', m.test_i32_trunc_f32_u_14,
-        "integer overflow");
-    traps('test_i32_trunc_f32_u_15', m.test_i32_trunc_f32_u_15,
-        "integer overflow");
-    traps('test_i32_trunc_f32_u_16', m.test_i32_trunc_f32_u_16,
-        "integer overflow");
-    traps('test_i32_trunc_f32_u_17', m.test_i32_trunc_f32_u_17,
+    returns('i32_trunc_f32_u_0', m.test_i32_trunc_f32_u_0, 0);
+    returns('i32_trunc_f32_u_1', m.test_i32_trunc_f32_u_1, 0);
+    returns('i32_trunc_f32_u_2', m.test_i32_trunc_f32_u_2, 0);
+    returns('i32_trunc_f32_u_3', m.test_i32_trunc_f32_u_3, 0);
+    returns('i32_trunc_f32_u_4', m.test_i32_trunc_f32_u_4, 1);
+    returns('i32_trunc_f32_u_5', m.test_i32_trunc_f32_u_5, 1);
+    returns('i32_trunc_f32_u_6', m.test_i32_trunc_f32_u_6, 1);
+    returns('i32_trunc_f32_u_7', m.test_i32_trunc_f32_u_7, 1);
+    returns('i32_trunc_f32_u_8', m.test_i32_trunc_f32_u_8, 2);
+    returns('i32_trunc_f32_u_9', m.test_i32_trunc_f32_u_9, -0x80000000);
+    returns('i32_trunc_f32_u_10', m.test_i32_trunc_f32_u_10, -256);
+    returns('i32_trunc_f32_u_11', m.test_i32_trunc_f32_u_11, 0);
+    returns('i32_trunc_f32_u_12', m.test_i32_trunc_f32_u_12, 0);
+    traps('i32_trunc_f32_u_13', m.test_i32_trunc_f32_u_13, "integer overflow");
+    traps('i32_trunc_f32_u_14', m.test_i32_trunc_f32_u_14, "integer overflow");
+    traps('i32_trunc_f32_u_15', m.test_i32_trunc_f32_u_15, "integer overflow");
+    traps('i32_trunc_f32_u_16', m.test_i32_trunc_f32_u_16, "integer overflow");
+    traps('i32_trunc_f32_u_17', m.test_i32_trunc_f32_u_17,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f32_u_18', m.test_i32_trunc_f32_u_18,
+    traps('i32_trunc_f32_u_18', m.test_i32_trunc_f32_u_18,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f32_u_19', m.test_i32_trunc_f32_u_19,
+    traps('i32_trunc_f32_u_19', m.test_i32_trunc_f32_u_19,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f32_u_20', m.test_i32_trunc_f32_u_20,
+    traps('i32_trunc_f32_u_20', m.test_i32_trunc_f32_u_20,
         "invalid conversion to integer");
-    returns('test_i32_trunc_f64_s_0', m.test_i32_trunc_f64_s_0, 0);
-    returns('test_i32_trunc_f64_s_1', m.test_i32_trunc_f64_s_1, 0);
-    returns('test_i32_trunc_f64_s_2', m.test_i32_trunc_f64_s_2, 0);
-    returns('test_i32_trunc_f64_s_3', m.test_i32_trunc_f64_s_3, 0);
-    returns('test_i32_trunc_f64_s_4', m.test_i32_trunc_f64_s_4, 1);
-    returns('test_i32_trunc_f64_s_5', m.test_i32_trunc_f64_s_5, 1);
-    returns('test_i32_trunc_f64_s_6', m.test_i32_trunc_f64_s_6, 1);
-    returns('test_i32_trunc_f64_s_7', m.test_i32_trunc_f64_s_7, -1);
-    returns('test_i32_trunc_f64_s_8', m.test_i32_trunc_f64_s_8, -1);
-    returns('test_i32_trunc_f64_s_9', m.test_i32_trunc_f64_s_9, -1);
-    returns('test_i32_trunc_f64_s_10', m.test_i32_trunc_f64_s_10, -1);
-    returns('test_i32_trunc_f64_s_11', m.test_i32_trunc_f64_s_11, -2);
-    returns('test_i32_trunc_f64_s_12', m.test_i32_trunc_f64_s_12, 0x7fffffff);
-    returns('test_i32_trunc_f64_s_13', m.test_i32_trunc_f64_s_13, -0x80000000);
-    returns('test_i32_trunc_f64_s_14', m.test_i32_trunc_f64_s_14, -0x80000000);
-    returns('test_i32_trunc_f64_s_15', m.test_i32_trunc_f64_s_15, 0x7fffffff);
-    traps('test_i32_trunc_f64_s_16', m.test_i32_trunc_f64_s_16,
-        "integer overflow");
-    traps('test_i32_trunc_f64_s_17', m.test_i32_trunc_f64_s_17,
-        "integer overflow");
-    traps('test_i32_trunc_f64_s_18', m.test_i32_trunc_f64_s_18,
-        "integer overflow");
-    traps('test_i32_trunc_f64_s_19', m.test_i32_trunc_f64_s_19,
-        "integer overflow");
-    traps('test_i32_trunc_f64_s_20', m.test_i32_trunc_f64_s_20,
+    returns('i32_trunc_f64_s_0', m.test_i32_trunc_f64_s_0, 0);
+    returns('i32_trunc_f64_s_1', m.test_i32_trunc_f64_s_1, 0);
+    returns('i32_trunc_f64_s_2', m.test_i32_trunc_f64_s_2, 0);
+    returns('i32_trunc_f64_s_3', m.test_i32_trunc_f64_s_3, 0);
+    returns('i32_trunc_f64_s_4', m.test_i32_trunc_f64_s_4, 1);
+    returns('i32_trunc_f64_s_5', m.test_i32_trunc_f64_s_5, 1);
+    returns('i32_trunc_f64_s_6', m.test_i32_trunc_f64_s_6, 1);
+    returns('i32_trunc_f64_s_7', m.test_i32_trunc_f64_s_7, -1);
+    returns('i32_trunc_f64_s_8', m.test_i32_trunc_f64_s_8, -1);
+    returns('i32_trunc_f64_s_9', m.test_i32_trunc_f64_s_9, -1);
+    returns('i32_trunc_f64_s_10', m.test_i32_trunc_f64_s_10, -1);
+    returns('i32_trunc_f64_s_11', m.test_i32_trunc_f64_s_11, -2);
+    returns('i32_trunc_f64_s_12', m.test_i32_trunc_f64_s_12, 0x7fffffff);
+    returns('i32_trunc_f64_s_13', m.test_i32_trunc_f64_s_13, -0x80000000);
+    returns('i32_trunc_f64_s_14', m.test_i32_trunc_f64_s_14, -0x80000000);
+    returns('i32_trunc_f64_s_15', m.test_i32_trunc_f64_s_15, 0x7fffffff);
+    traps('i32_trunc_f64_s_16', m.test_i32_trunc_f64_s_16, "integer overflow");
+    traps('i32_trunc_f64_s_17', m.test_i32_trunc_f64_s_17, "integer overflow");
+    traps('i32_trunc_f64_s_18', m.test_i32_trunc_f64_s_18, "integer overflow");
+    traps('i32_trunc_f64_s_19', m.test_i32_trunc_f64_s_19, "integer overflow");
+    traps('i32_trunc_f64_s_20', m.test_i32_trunc_f64_s_20,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f64_s_21', m.test_i32_trunc_f64_s_21,
+    traps('i32_trunc_f64_s_21', m.test_i32_trunc_f64_s_21,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f64_s_22', m.test_i32_trunc_f64_s_22,
+    traps('i32_trunc_f64_s_22', m.test_i32_trunc_f64_s_22,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f64_s_23', m.test_i32_trunc_f64_s_23,
+    traps('i32_trunc_f64_s_23', m.test_i32_trunc_f64_s_23,
         "invalid conversion to integer");
-    returns('test_i32_trunc_f64_u_0', m.test_i32_trunc_f64_u_0, 0);
-    returns('test_i32_trunc_f64_u_1', m.test_i32_trunc_f64_u_1, 0);
-    returns('test_i32_trunc_f64_u_2', m.test_i32_trunc_f64_u_2, 0);
-    returns('test_i32_trunc_f64_u_3', m.test_i32_trunc_f64_u_3, 0);
-    returns('test_i32_trunc_f64_u_4', m.test_i32_trunc_f64_u_4, 1);
-    returns('test_i32_trunc_f64_u_5', m.test_i32_trunc_f64_u_5, 1);
-    returns('test_i32_trunc_f64_u_6', m.test_i32_trunc_f64_u_6, 1);
-    returns('test_i32_trunc_f64_u_7', m.test_i32_trunc_f64_u_7, 1);
-    returns('test_i32_trunc_f64_u_8', m.test_i32_trunc_f64_u_8, 2);
-    returns('test_i32_trunc_f64_u_9', m.test_i32_trunc_f64_u_9, -0x80000000);
-    returns('test_i32_trunc_f64_u_10', m.test_i32_trunc_f64_u_10, -1);
-    returns('test_i32_trunc_f64_u_11', m.test_i32_trunc_f64_u_11, 0);
-    returns('test_i32_trunc_f64_u_12', m.test_i32_trunc_f64_u_12, 0);
-    returns('test_i32_trunc_f64_u_13', m.test_i32_trunc_f64_u_13, 0x5f5e100);
-    returns('test_i32_trunc_f64_u_14', m.test_i32_trunc_f64_u_14, 0);
-    returns('test_i32_trunc_f64_u_15', m.test_i32_trunc_f64_u_15, -1);
-    traps('test_i32_trunc_f64_u_16', m.test_i32_trunc_f64_u_16,
-        "integer overflow");
-    traps('test_i32_trunc_f64_u_17', m.test_i32_trunc_f64_u_17,
-        "integer overflow");
-    traps('test_i32_trunc_f64_u_18', m.test_i32_trunc_f64_u_18,
-        "integer overflow");
-    traps('test_i32_trunc_f64_u_19', m.test_i32_trunc_f64_u_19,
-        "integer overflow");
-    traps('test_i32_trunc_f64_u_20', m.test_i32_trunc_f64_u_20,
-        "integer overflow");
-    traps('test_i32_trunc_f64_u_21', m.test_i32_trunc_f64_u_21,
-        "integer overflow");
-    traps('test_i32_trunc_f64_u_22', m.test_i32_trunc_f64_u_22,
-        "integer overflow");
-    traps('test_i32_trunc_f64_u_23', m.test_i32_trunc_f64_u_23,
+    returns('i32_trunc_f64_u_0', m.test_i32_trunc_f64_u_0, 0);
+    returns('i32_trunc_f64_u_1', m.test_i32_trunc_f64_u_1, 0);
+    returns('i32_trunc_f64_u_2', m.test_i32_trunc_f64_u_2, 0);
+    returns('i32_trunc_f64_u_3', m.test_i32_trunc_f64_u_3, 0);
+    returns('i32_trunc_f64_u_4', m.test_i32_trunc_f64_u_4, 1);
+    returns('i32_trunc_f64_u_5', m.test_i32_trunc_f64_u_5, 1);
+    returns('i32_trunc_f64_u_6', m.test_i32_trunc_f64_u_6, 1);
+    returns('i32_trunc_f64_u_7', m.test_i32_trunc_f64_u_7, 1);
+    returns('i32_trunc_f64_u_8', m.test_i32_trunc_f64_u_8, 2);
+    returns('i32_trunc_f64_u_9', m.test_i32_trunc_f64_u_9, -0x80000000);
+    returns('i32_trunc_f64_u_10', m.test_i32_trunc_f64_u_10, -1);
+    returns('i32_trunc_f64_u_11', m.test_i32_trunc_f64_u_11, 0);
+    returns('i32_trunc_f64_u_12', m.test_i32_trunc_f64_u_12, 0);
+    returns('i32_trunc_f64_u_13', m.test_i32_trunc_f64_u_13, 0x5f5e100);
+    returns('i32_trunc_f64_u_14', m.test_i32_trunc_f64_u_14, 0);
+    returns('i32_trunc_f64_u_15', m.test_i32_trunc_f64_u_15, -1);
+    traps('i32_trunc_f64_u_16', m.test_i32_trunc_f64_u_16, "integer overflow");
+    traps('i32_trunc_f64_u_17', m.test_i32_trunc_f64_u_17, "integer overflow");
+    traps('i32_trunc_f64_u_18', m.test_i32_trunc_f64_u_18, "integer overflow");
+    traps('i32_trunc_f64_u_19', m.test_i32_trunc_f64_u_19, "integer overflow");
+    traps('i32_trunc_f64_u_20', m.test_i32_trunc_f64_u_20, "integer overflow");
+    traps('i32_trunc_f64_u_21', m.test_i32_trunc_f64_u_21, "integer overflow");
+    traps('i32_trunc_f64_u_22', m.test_i32_trunc_f64_u_22, "integer overflow");
+    traps('i32_trunc_f64_u_23', m.test_i32_trunc_f64_u_23,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f64_u_24', m.test_i32_trunc_f64_u_24,
+    traps('i32_trunc_f64_u_24', m.test_i32_trunc_f64_u_24,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f64_u_25', m.test_i32_trunc_f64_u_25,
+    traps('i32_trunc_f64_u_25', m.test_i32_trunc_f64_u_25,
         "invalid conversion to integer");
-    traps('test_i32_trunc_f64_u_26', m.test_i32_trunc_f64_u_26,
+    traps('i32_trunc_f64_u_26', m.test_i32_trunc_f64_u_26,
         "invalid conversion to integer");
-    returns('test_i64_trunc_f32_s_0', m.test_i64_trunc_f32_s_0, 0);
-    returns('test_i64_trunc_f32_s_1', m.test_i64_trunc_f32_s_1, 0);
-    returns('test_i64_trunc_f32_s_2', m.test_i64_trunc_f32_s_2, 0);
-    returns('test_i64_trunc_f32_s_3', m.test_i64_trunc_f32_s_3, 0);
-    returns('test_i64_trunc_f32_s_4', m.test_i64_trunc_f32_s_4, 1);
-    returns('test_i64_trunc_f32_s_5', m.test_i64_trunc_f32_s_5, 1);
-    returns('test_i64_trunc_f32_s_6', m.test_i64_trunc_f32_s_6, 1);
-    returns('test_i64_trunc_f32_s_7', m.test_i64_trunc_f32_s_7, -1);
-    returns('test_i64_trunc_f32_s_8', m.test_i64_trunc_f32_s_8, -1);
-    returns('test_i64_trunc_f32_s_9', m.test_i64_trunc_f32_s_9, -1);
-    returns('test_i64_trunc_f32_s_10', m.test_i64_trunc_f32_s_10, -1);
-    returns('test_i64_trunc_f32_s_11', m.test_i64_trunc_f32_s_11, -2);
-    returns('test_i64_trunc_f32_s_12', m.test_i64_trunc_f32_s_12, 0x100000000);
-    returns('test_i64_trunc_f32_s_13', m.test_i64_trunc_f32_s_13, -0x100000000);
-    returns('test_i64_trunc_f32_s_14', m.test_i64_trunc_f32_s_14,
+    returns('i64_trunc_f32_s_0', m.test_i64_trunc_f32_s_0, 0);
+    returns('i64_trunc_f32_s_1', m.test_i64_trunc_f32_s_1, 0);
+    returns('i64_trunc_f32_s_2', m.test_i64_trunc_f32_s_2, 0);
+    returns('i64_trunc_f32_s_3', m.test_i64_trunc_f32_s_3, 0);
+    returns('i64_trunc_f32_s_4', m.test_i64_trunc_f32_s_4, 1);
+    returns('i64_trunc_f32_s_5', m.test_i64_trunc_f32_s_5, 1);
+    returns('i64_trunc_f32_s_6', m.test_i64_trunc_f32_s_6, 1);
+    returns('i64_trunc_f32_s_7', m.test_i64_trunc_f32_s_7, -1);
+    returns('i64_trunc_f32_s_8', m.test_i64_trunc_f32_s_8, -1);
+    returns('i64_trunc_f32_s_9', m.test_i64_trunc_f32_s_9, -1);
+    returns('i64_trunc_f32_s_10', m.test_i64_trunc_f32_s_10, -1);
+    returns('i64_trunc_f32_s_11', m.test_i64_trunc_f32_s_11, -2);
+    returns('i64_trunc_f32_s_12', m.test_i64_trunc_f32_s_12, 0x100000000);
+    returns('i64_trunc_f32_s_13', m.test_i64_trunc_f32_s_13, -0x100000000);
+    returns(
+        'i64_trunc_f32_s_14', m.test_i64_trunc_f32_s_14, 0x7fffff8000000000);
+    returns(
+        'i64_trunc_f32_s_15', m.test_i64_trunc_f32_s_15, -0x8000000000000000);
+    traps('i64_trunc_f32_s_16', m.test_i64_trunc_f32_s_16, "integer overflow");
+    traps('i64_trunc_f32_s_17', m.test_i64_trunc_f32_s_17, "integer overflow");
+    traps('i64_trunc_f32_s_18', m.test_i64_trunc_f32_s_18, "integer overflow");
+    traps('i64_trunc_f32_s_19', m.test_i64_trunc_f32_s_19, "integer overflow");
+    traps('i64_trunc_f32_s_20', m.test_i64_trunc_f32_s_20,
+        "invalid conversion to integer");
+    traps('i64_trunc_f32_s_21', m.test_i64_trunc_f32_s_21,
+        "invalid conversion to integer");
+    traps('i64_trunc_f32_s_22', m.test_i64_trunc_f32_s_22,
+        "invalid conversion to integer");
+    traps('i64_trunc_f32_s_23', m.test_i64_trunc_f32_s_23,
+        "invalid conversion to integer");
+    returns('i64_trunc_f32_u_0', m.test_i64_trunc_f32_u_0, 0);
+    returns('i64_trunc_f32_u_1', m.test_i64_trunc_f32_u_1, 0);
+    returns('i64_trunc_f32_u_2', m.test_i64_trunc_f32_u_2, 0);
+    returns('i64_trunc_f32_u_3', m.test_i64_trunc_f32_u_3, 0);
+    returns('i64_trunc_f32_u_4', m.test_i64_trunc_f32_u_4, 1);
+    returns('i64_trunc_f32_u_5', m.test_i64_trunc_f32_u_5, 1);
+    returns('i64_trunc_f32_u_6', m.test_i64_trunc_f32_u_6, 1);
+    returns('i64_trunc_f32_u_7', m.test_i64_trunc_f32_u_7, 0x100000000);
+    returns('i64_trunc_f32_u_8', m.test_i64_trunc_f32_u_8, -0x10000000000);
+    returns('i64_trunc_f32_u_9', m.test_i64_trunc_f32_u_9, 0);
+    returns('i64_trunc_f32_u_10', m.test_i64_trunc_f32_u_10, 0);
+    traps('i64_trunc_f32_u_11', m.test_i64_trunc_f32_u_11, "integer overflow");
+    traps('i64_trunc_f32_u_12', m.test_i64_trunc_f32_u_12, "integer overflow");
+    traps('i64_trunc_f32_u_13', m.test_i64_trunc_f32_u_13, "integer overflow");
+    traps('i64_trunc_f32_u_14', m.test_i64_trunc_f32_u_14, "integer overflow");
+    traps('i64_trunc_f32_u_15', m.test_i64_trunc_f32_u_15,
+        "invalid conversion to integer");
+    traps('i64_trunc_f32_u_16', m.test_i64_trunc_f32_u_16,
+        "invalid conversion to integer");
+    traps('i64_trunc_f32_u_17', m.test_i64_trunc_f32_u_17,
+        "invalid conversion to integer");
+    traps('i64_trunc_f32_u_18', m.test_i64_trunc_f32_u_18,
+        "invalid conversion to integer");
+    returns('i64_trunc_f64_s_0', m.test_i64_trunc_f64_s_0, 0);
+    returns('i64_trunc_f64_s_1', m.test_i64_trunc_f64_s_1, 0);
+    returns('i64_trunc_f64_s_2', m.test_i64_trunc_f64_s_2, 0);
+    returns('i64_trunc_f64_s_3', m.test_i64_trunc_f64_s_3, 0);
+    returns('i64_trunc_f64_s_4', m.test_i64_trunc_f64_s_4, 1);
+    returns('i64_trunc_f64_s_5', m.test_i64_trunc_f64_s_5, 1);
+    returns('i64_trunc_f64_s_6', m.test_i64_trunc_f64_s_6, 1);
+    returns('i64_trunc_f64_s_7', m.test_i64_trunc_f64_s_7, -1);
+    returns('i64_trunc_f64_s_8', m.test_i64_trunc_f64_s_8, -1);
+    returns('i64_trunc_f64_s_9', m.test_i64_trunc_f64_s_9, -1);
+    returns('i64_trunc_f64_s_10', m.test_i64_trunc_f64_s_10, -1);
+    returns('i64_trunc_f64_s_11', m.test_i64_trunc_f64_s_11, -2);
+    returns('i64_trunc_f64_s_12', m.test_i64_trunc_f64_s_12, 0x100000000);
+    returns('i64_trunc_f64_s_13', m.test_i64_trunc_f64_s_13, -0x100000000);
+    returns(
+        'i64_trunc_f64_s_14', m.test_i64_trunc_f64_s_14, 0x7ffffffffffffc00);
+    returns(
+        'i64_trunc_f64_s_15', m.test_i64_trunc_f64_s_15, -0x8000000000000000);
+    traps('i64_trunc_f64_s_16', m.test_i64_trunc_f64_s_16, "integer overflow");
+    traps('i64_trunc_f64_s_17', m.test_i64_trunc_f64_s_17, "integer overflow");
+    traps('i64_trunc_f64_s_18', m.test_i64_trunc_f64_s_18, "integer overflow");
+    traps('i64_trunc_f64_s_19', m.test_i64_trunc_f64_s_19, "integer overflow");
+    traps('i64_trunc_f64_s_20', m.test_i64_trunc_f64_s_20,
+        "invalid conversion to integer");
+    traps('i64_trunc_f64_s_21', m.test_i64_trunc_f64_s_21,
+        "invalid conversion to integer");
+    traps('i64_trunc_f64_s_22', m.test_i64_trunc_f64_s_22,
+        "invalid conversion to integer");
+    traps('i64_trunc_f64_s_23', m.test_i64_trunc_f64_s_23,
+        "invalid conversion to integer");
+    returns('i64_trunc_f64_u_0', m.test_i64_trunc_f64_u_0, 0);
+    returns('i64_trunc_f64_u_1', m.test_i64_trunc_f64_u_1, 0);
+    returns('i64_trunc_f64_u_2', m.test_i64_trunc_f64_u_2, 0);
+    returns('i64_trunc_f64_u_3', m.test_i64_trunc_f64_u_3, 0);
+    returns('i64_trunc_f64_u_4', m.test_i64_trunc_f64_u_4, 1);
+    returns('i64_trunc_f64_u_5', m.test_i64_trunc_f64_u_5, 1);
+    returns('i64_trunc_f64_u_6', m.test_i64_trunc_f64_u_6, 1);
+    returns('i64_trunc_f64_u_7', m.test_i64_trunc_f64_u_7, 0xffffffff);
+    returns('i64_trunc_f64_u_8', m.test_i64_trunc_f64_u_8, 0x100000000);
+    returns('i64_trunc_f64_u_9', m.test_i64_trunc_f64_u_9, -0x800);
+    returns('i64_trunc_f64_u_10', m.test_i64_trunc_f64_u_10, 0);
+    returns('i64_trunc_f64_u_11', m.test_i64_trunc_f64_u_11, 0);
+    returns('i64_trunc_f64_u_12', m.test_i64_trunc_f64_u_12, 0x5f5e100);
+    returns('i64_trunc_f64_u_13', m.test_i64_trunc_f64_u_13, 0x2386f26fc10000);
+    returns(
+        'i64_trunc_f64_u_14', m.test_i64_trunc_f64_u_14, -0x8000000000000000);
+    traps('i64_trunc_f64_u_15', m.test_i64_trunc_f64_u_15, "integer overflow");
+    traps('i64_trunc_f64_u_16', m.test_i64_trunc_f64_u_16, "integer overflow");
+    traps('i64_trunc_f64_u_17', m.test_i64_trunc_f64_u_17, "integer overflow");
+    traps('i64_trunc_f64_u_18', m.test_i64_trunc_f64_u_18, "integer overflow");
+    traps('i64_trunc_f64_u_19', m.test_i64_trunc_f64_u_19,
+        "invalid conversion to integer");
+    traps('i64_trunc_f64_u_20', m.test_i64_trunc_f64_u_20,
+        "invalid conversion to integer");
+    traps('i64_trunc_f64_u_21', m.test_i64_trunc_f64_u_21,
+        "invalid conversion to integer");
+    traps('i64_trunc_f64_u_22', m.test_i64_trunc_f64_u_22,
+        "invalid conversion to integer");
+    returns('f32_convert_i32_s_0', m.test_f32_convert_i32_s_0, 1.0);
+    returns('f32_convert_i32_s_1', m.test_f32_convert_i32_s_1, -1.0);
+    returns('f32_convert_i32_s_2', m.test_f32_convert_i32_s_2, 0.0);
+    returns('f32_convert_i32_s_3', m.test_f32_convert_i32_s_3, 2147483648.0);
+    returns('f32_convert_i32_s_4', m.test_f32_convert_i32_s_4, -2147483648.0);
+    returns('f32_convert_i32_s_5', m.test_f32_convert_i32_s_5, 1234567936.0);
+    returns('i32_trunc_sat_f32_s_0', m.test_i32_trunc_sat_f32_s_0, 0);
+    returns('i32_trunc_sat_f32_s_1', m.test_i32_trunc_sat_f32_s_1, 0);
+    returns('i32_trunc_sat_f32_s_2', m.test_i32_trunc_sat_f32_s_2, 0);
+    returns('i32_trunc_sat_f32_s_3', m.test_i32_trunc_sat_f32_s_3, 0);
+    returns('i32_trunc_sat_f32_s_4', m.test_i32_trunc_sat_f32_s_4, 1);
+    returns('i32_trunc_sat_f32_s_5', m.test_i32_trunc_sat_f32_s_5, 1);
+    returns('i32_trunc_sat_f32_s_6', m.test_i32_trunc_sat_f32_s_6, 1);
+    returns('i32_trunc_sat_f32_s_7', m.test_i32_trunc_sat_f32_s_7, -1);
+    returns('i32_trunc_sat_f32_s_8', m.test_i32_trunc_sat_f32_s_8, -1);
+    returns('i32_trunc_sat_f32_s_9', m.test_i32_trunc_sat_f32_s_9, -1);
+    returns('i32_trunc_sat_f32_s_10', m.test_i32_trunc_sat_f32_s_10, -1);
+    returns('i32_trunc_sat_f32_s_11', m.test_i32_trunc_sat_f32_s_11, -2);
+    returns(
+        'i32_trunc_sat_f32_s_12', m.test_i32_trunc_sat_f32_s_12, 0x7fffff80);
+    returns(
+        'i32_trunc_sat_f32_s_13', m.test_i32_trunc_sat_f32_s_13, -0x80000000);
+    returns(
+        'i32_trunc_sat_f32_s_14', m.test_i32_trunc_sat_f32_s_14, 0x7fffffff);
+    returns(
+        'i32_trunc_sat_f32_s_15', m.test_i32_trunc_sat_f32_s_15, -0x80000000);
+    returns(
+        'i32_trunc_sat_f32_s_16', m.test_i32_trunc_sat_f32_s_16, 0x7fffffff);
+    returns(
+        'i32_trunc_sat_f32_s_17', m.test_i32_trunc_sat_f32_s_17, -0x80000000);
+    returns('i32_trunc_sat_f32_s_18', m.test_i32_trunc_sat_f32_s_18, 0);
+    returns('i32_trunc_sat_f32_s_19', m.test_i32_trunc_sat_f32_s_19, 0);
+    returns('i32_trunc_sat_f32_s_20', m.test_i32_trunc_sat_f32_s_20, 0);
+    returns('i32_trunc_sat_f32_s_21', m.test_i32_trunc_sat_f32_s_21, 0);
+    returns('i32_trunc_sat_f32_u_0', m.test_i32_trunc_sat_f32_u_0, 0);
+    returns('i32_trunc_sat_f32_u_1', m.test_i32_trunc_sat_f32_u_1, 0);
+    returns('i32_trunc_sat_f32_u_2', m.test_i32_trunc_sat_f32_u_2, 0);
+    returns('i32_trunc_sat_f32_u_3', m.test_i32_trunc_sat_f32_u_3, 0);
+    returns('i32_trunc_sat_f32_u_4', m.test_i32_trunc_sat_f32_u_4, 1);
+    returns('i32_trunc_sat_f32_u_5', m.test_i32_trunc_sat_f32_u_5, 1);
+    returns('i32_trunc_sat_f32_u_6', m.test_i32_trunc_sat_f32_u_6, 1);
+    returns('i32_trunc_sat_f32_u_7', m.test_i32_trunc_sat_f32_u_7, 1);
+    returns('i32_trunc_sat_f32_u_8', m.test_i32_trunc_sat_f32_u_8, 2);
+    returns('i32_trunc_sat_f32_u_9', m.test_i32_trunc_sat_f32_u_9, -0x80000000);
+    returns('i32_trunc_sat_f32_u_10', m.test_i32_trunc_sat_f32_u_10, -256);
+    returns('i32_trunc_sat_f32_u_11', m.test_i32_trunc_sat_f32_u_11, 0);
+    returns('i32_trunc_sat_f32_u_12', m.test_i32_trunc_sat_f32_u_12, 0);
+    returns('i32_trunc_sat_f32_u_13', m.test_i32_trunc_sat_f32_u_13, -1);
+    returns('i32_trunc_sat_f32_u_14', m.test_i32_trunc_sat_f32_u_14, 0);
+    returns('i32_trunc_sat_f32_u_15', m.test_i32_trunc_sat_f32_u_15, -1);
+    returns('i32_trunc_sat_f32_u_16', m.test_i32_trunc_sat_f32_u_16, 0);
+    returns('i32_trunc_sat_f32_u_17', m.test_i32_trunc_sat_f32_u_17, 0);
+    returns('i32_trunc_sat_f32_u_18', m.test_i32_trunc_sat_f32_u_18, 0);
+    returns('i32_trunc_sat_f32_u_19', m.test_i32_trunc_sat_f32_u_19, 0);
+    returns('i32_trunc_sat_f32_u_20', m.test_i32_trunc_sat_f32_u_20, 0);
+    returns('i32_trunc_sat_f64_s_0', m.test_i32_trunc_sat_f64_s_0, 0);
+    returns('i32_trunc_sat_f64_s_1', m.test_i32_trunc_sat_f64_s_1, 0);
+    returns('i32_trunc_sat_f64_s_2', m.test_i32_trunc_sat_f64_s_2, 0);
+    returns('i32_trunc_sat_f64_s_3', m.test_i32_trunc_sat_f64_s_3, 0);
+    returns('i32_trunc_sat_f64_s_4', m.test_i32_trunc_sat_f64_s_4, 1);
+    returns('i32_trunc_sat_f64_s_5', m.test_i32_trunc_sat_f64_s_5, 1);
+    returns('i32_trunc_sat_f64_s_6', m.test_i32_trunc_sat_f64_s_6, 1);
+    returns('i32_trunc_sat_f64_s_7', m.test_i32_trunc_sat_f64_s_7, -1);
+    returns('i32_trunc_sat_f64_s_8', m.test_i32_trunc_sat_f64_s_8, -1);
+    returns('i32_trunc_sat_f64_s_9', m.test_i32_trunc_sat_f64_s_9, -1);
+    returns('i32_trunc_sat_f64_s_10', m.test_i32_trunc_sat_f64_s_10, -1);
+    returns('i32_trunc_sat_f64_s_11', m.test_i32_trunc_sat_f64_s_11, -2);
+    returns(
+        'i32_trunc_sat_f64_s_12', m.test_i32_trunc_sat_f64_s_12, 0x7fffffff);
+    returns(
+        'i32_trunc_sat_f64_s_13', m.test_i32_trunc_sat_f64_s_13, -0x80000000);
+    returns(
+        'i32_trunc_sat_f64_s_14', m.test_i32_trunc_sat_f64_s_14, 0x7fffffff);
+    returns(
+        'i32_trunc_sat_f64_s_15', m.test_i32_trunc_sat_f64_s_15, -0x80000000);
+    returns(
+        'i32_trunc_sat_f64_s_16', m.test_i32_trunc_sat_f64_s_16, 0x7fffffff);
+    returns(
+        'i32_trunc_sat_f64_s_17', m.test_i32_trunc_sat_f64_s_17, -0x80000000);
+    returns('i32_trunc_sat_f64_s_18', m.test_i32_trunc_sat_f64_s_18, 0);
+    returns('i32_trunc_sat_f64_s_19', m.test_i32_trunc_sat_f64_s_19, 0);
+    returns('i32_trunc_sat_f64_s_20', m.test_i32_trunc_sat_f64_s_20, 0);
+    returns('i32_trunc_sat_f64_s_21', m.test_i32_trunc_sat_f64_s_21, 0);
+    returns('i32_trunc_sat_f64_u_0', m.test_i32_trunc_sat_f64_u_0, 0);
+    returns('i32_trunc_sat_f64_u_1', m.test_i32_trunc_sat_f64_u_1, 0);
+    returns('i32_trunc_sat_f64_u_2', m.test_i32_trunc_sat_f64_u_2, 0);
+    returns('i32_trunc_sat_f64_u_3', m.test_i32_trunc_sat_f64_u_3, 0);
+    returns('i32_trunc_sat_f64_u_4', m.test_i32_trunc_sat_f64_u_4, 1);
+    returns('i32_trunc_sat_f64_u_5', m.test_i32_trunc_sat_f64_u_5, 1);
+    returns('i32_trunc_sat_f64_u_6', m.test_i32_trunc_sat_f64_u_6, 1);
+    returns('i32_trunc_sat_f64_u_7', m.test_i32_trunc_sat_f64_u_7, 1);
+    returns('i32_trunc_sat_f64_u_8', m.test_i32_trunc_sat_f64_u_8, 2);
+    returns('i32_trunc_sat_f64_u_9', m.test_i32_trunc_sat_f64_u_9, -0x80000000);
+    returns('i32_trunc_sat_f64_u_10', m.test_i32_trunc_sat_f64_u_10, -1);
+    returns('i32_trunc_sat_f64_u_11', m.test_i32_trunc_sat_f64_u_11, 0);
+    returns('i32_trunc_sat_f64_u_12', m.test_i32_trunc_sat_f64_u_12, 0);
+    returns('i32_trunc_sat_f64_u_13', m.test_i32_trunc_sat_f64_u_13, 0x5f5e100);
+    returns('i32_trunc_sat_f64_u_14', m.test_i32_trunc_sat_f64_u_14, -1);
+    returns('i32_trunc_sat_f64_u_15', m.test_i32_trunc_sat_f64_u_15, 0);
+    returns('i32_trunc_sat_f64_u_16', m.test_i32_trunc_sat_f64_u_16, -1);
+    returns('i32_trunc_sat_f64_u_17', m.test_i32_trunc_sat_f64_u_17, -1);
+    returns('i32_trunc_sat_f64_u_18', m.test_i32_trunc_sat_f64_u_18, -1);
+    returns('i32_trunc_sat_f64_u_19', m.test_i32_trunc_sat_f64_u_19, -1);
+    returns('i32_trunc_sat_f64_u_20', m.test_i32_trunc_sat_f64_u_20, 0);
+    returns('i32_trunc_sat_f64_u_21', m.test_i32_trunc_sat_f64_u_21, 0);
+    returns('i32_trunc_sat_f64_u_22', m.test_i32_trunc_sat_f64_u_22, 0);
+    returns('i32_trunc_sat_f64_u_23', m.test_i32_trunc_sat_f64_u_23, 0);
+    returns('i32_trunc_sat_f64_u_24', m.test_i32_trunc_sat_f64_u_24, 0);
+    returns('i64_trunc_sat_f32_s_0', m.test_i64_trunc_sat_f32_s_0, 0);
+    returns('i64_trunc_sat_f32_s_1', m.test_i64_trunc_sat_f32_s_1, 0);
+    returns('i64_trunc_sat_f32_s_2', m.test_i64_trunc_sat_f32_s_2, 0);
+    returns('i64_trunc_sat_f32_s_3', m.test_i64_trunc_sat_f32_s_3, 0);
+    returns('i64_trunc_sat_f32_s_4', m.test_i64_trunc_sat_f32_s_4, 1);
+    returns('i64_trunc_sat_f32_s_5', m.test_i64_trunc_sat_f32_s_5, 1);
+    returns('i64_trunc_sat_f32_s_6', m.test_i64_trunc_sat_f32_s_6, 1);
+    returns('i64_trunc_sat_f32_s_7', m.test_i64_trunc_sat_f32_s_7, -1);
+    returns('i64_trunc_sat_f32_s_8', m.test_i64_trunc_sat_f32_s_8, -1);
+    returns('i64_trunc_sat_f32_s_9', m.test_i64_trunc_sat_f32_s_9, -1);
+    returns('i64_trunc_sat_f32_s_10', m.test_i64_trunc_sat_f32_s_10, -1);
+    returns('i64_trunc_sat_f32_s_11', m.test_i64_trunc_sat_f32_s_11, -2);
+    returns(
+        'i64_trunc_sat_f32_s_12', m.test_i64_trunc_sat_f32_s_12, 0x100000000);
+    returns(
+        'i64_trunc_sat_f32_s_13', m.test_i64_trunc_sat_f32_s_13, -0x100000000);
+    returns('i64_trunc_sat_f32_s_14', m.test_i64_trunc_sat_f32_s_14,
         0x7fffff8000000000);
-    returns('test_i64_trunc_f32_s_15', m.test_i64_trunc_f32_s_15,
+    returns('i64_trunc_sat_f32_s_15', m.test_i64_trunc_sat_f32_s_15,
         -0x8000000000000000);
-    traps('test_i64_trunc_f32_s_16', m.test_i64_trunc_f32_s_16,
-        "integer overflow");
-    traps('test_i64_trunc_f32_s_17', m.test_i64_trunc_f32_s_17,
-        "integer overflow");
-    traps('test_i64_trunc_f32_s_18', m.test_i64_trunc_f32_s_18,
-        "integer overflow");
-    traps('test_i64_trunc_f32_s_19', m.test_i64_trunc_f32_s_19,
-        "integer overflow");
-    traps('test_i64_trunc_f32_s_20', m.test_i64_trunc_f32_s_20,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f32_s_21', m.test_i64_trunc_f32_s_21,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f32_s_22', m.test_i64_trunc_f32_s_22,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f32_s_23', m.test_i64_trunc_f32_s_23,
-        "invalid conversion to integer");
-    returns('test_i64_trunc_f32_u_0', m.test_i64_trunc_f32_u_0, 0);
-    returns('test_i64_trunc_f32_u_1', m.test_i64_trunc_f32_u_1, 0);
-    returns('test_i64_trunc_f32_u_2', m.test_i64_trunc_f32_u_2, 0);
-    returns('test_i64_trunc_f32_u_3', m.test_i64_trunc_f32_u_3, 0);
-    returns('test_i64_trunc_f32_u_4', m.test_i64_trunc_f32_u_4, 1);
-    returns('test_i64_trunc_f32_u_5', m.test_i64_trunc_f32_u_5, 1);
-    returns('test_i64_trunc_f32_u_6', m.test_i64_trunc_f32_u_6, 1);
-    returns('test_i64_trunc_f32_u_7', m.test_i64_trunc_f32_u_7, 0x100000000);
-    returns('test_i64_trunc_f32_u_8', m.test_i64_trunc_f32_u_8, -0x10000000000);
-    returns('test_i64_trunc_f32_u_9', m.test_i64_trunc_f32_u_9, 0);
-    returns('test_i64_trunc_f32_u_10', m.test_i64_trunc_f32_u_10, 0);
-    traps('test_i64_trunc_f32_u_11', m.test_i64_trunc_f32_u_11,
-        "integer overflow");
-    traps('test_i64_trunc_f32_u_12', m.test_i64_trunc_f32_u_12,
-        "integer overflow");
-    traps('test_i64_trunc_f32_u_13', m.test_i64_trunc_f32_u_13,
-        "integer overflow");
-    traps('test_i64_trunc_f32_u_14', m.test_i64_trunc_f32_u_14,
-        "integer overflow");
-    traps('test_i64_trunc_f32_u_15', m.test_i64_trunc_f32_u_15,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f32_u_16', m.test_i64_trunc_f32_u_16,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f32_u_17', m.test_i64_trunc_f32_u_17,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f32_u_18', m.test_i64_trunc_f32_u_18,
-        "invalid conversion to integer");
-    returns('test_i64_trunc_f64_s_0', m.test_i64_trunc_f64_s_0, 0);
-    returns('test_i64_trunc_f64_s_1', m.test_i64_trunc_f64_s_1, 0);
-    returns('test_i64_trunc_f64_s_2', m.test_i64_trunc_f64_s_2, 0);
-    returns('test_i64_trunc_f64_s_3', m.test_i64_trunc_f64_s_3, 0);
-    returns('test_i64_trunc_f64_s_4', m.test_i64_trunc_f64_s_4, 1);
-    returns('test_i64_trunc_f64_s_5', m.test_i64_trunc_f64_s_5, 1);
-    returns('test_i64_trunc_f64_s_6', m.test_i64_trunc_f64_s_6, 1);
-    returns('test_i64_trunc_f64_s_7', m.test_i64_trunc_f64_s_7, -1);
-    returns('test_i64_trunc_f64_s_8', m.test_i64_trunc_f64_s_8, -1);
-    returns('test_i64_trunc_f64_s_9', m.test_i64_trunc_f64_s_9, -1);
-    returns('test_i64_trunc_f64_s_10', m.test_i64_trunc_f64_s_10, -1);
-    returns('test_i64_trunc_f64_s_11', m.test_i64_trunc_f64_s_11, -2);
-    returns('test_i64_trunc_f64_s_12', m.test_i64_trunc_f64_s_12, 0x100000000);
-    returns('test_i64_trunc_f64_s_13', m.test_i64_trunc_f64_s_13, -0x100000000);
-    returns('test_i64_trunc_f64_s_14', m.test_i64_trunc_f64_s_14,
+    returns('i64_trunc_sat_f32_s_16', m.test_i64_trunc_sat_f32_s_16,
+        0x7fffffffffffffff);
+    returns('i64_trunc_sat_f32_s_17', m.test_i64_trunc_sat_f32_s_17,
+        -0x8000000000000000);
+    returns('i64_trunc_sat_f32_s_18', m.test_i64_trunc_sat_f32_s_18,
+        0x7fffffffffffffff);
+    returns('i64_trunc_sat_f32_s_19', m.test_i64_trunc_sat_f32_s_19,
+        -0x8000000000000000);
+    returns('i64_trunc_sat_f32_s_20', m.test_i64_trunc_sat_f32_s_20, 0);
+    returns('i64_trunc_sat_f32_s_21', m.test_i64_trunc_sat_f32_s_21, 0);
+    returns('i64_trunc_sat_f32_s_22', m.test_i64_trunc_sat_f32_s_22, 0);
+    returns('i64_trunc_sat_f32_s_23', m.test_i64_trunc_sat_f32_s_23, 0);
+    returns('i64_trunc_sat_f32_u_0', m.test_i64_trunc_sat_f32_u_0, 0);
+    returns('i64_trunc_sat_f32_u_1', m.test_i64_trunc_sat_f32_u_1, 0);
+    returns('i64_trunc_sat_f32_u_2', m.test_i64_trunc_sat_f32_u_2, 0);
+    returns('i64_trunc_sat_f32_u_3', m.test_i64_trunc_sat_f32_u_3, 0);
+    returns('i64_trunc_sat_f32_u_4', m.test_i64_trunc_sat_f32_u_4, 1);
+    returns('i64_trunc_sat_f32_u_5', m.test_i64_trunc_sat_f32_u_5, 1);
+    returns('i64_trunc_sat_f32_u_6', m.test_i64_trunc_sat_f32_u_6, 1);
+    returns('i64_trunc_sat_f32_u_7', m.test_i64_trunc_sat_f32_u_7, 0x100000000);
+    returns(
+        'i64_trunc_sat_f32_u_8', m.test_i64_trunc_sat_f32_u_8, -0x10000000000);
+    returns('i64_trunc_sat_f32_u_9', m.test_i64_trunc_sat_f32_u_9, 0);
+    returns('i64_trunc_sat_f32_u_10', m.test_i64_trunc_sat_f32_u_10, 0);
+    returns('i64_trunc_sat_f32_u_11', m.test_i64_trunc_sat_f32_u_11, -1);
+    returns('i64_trunc_sat_f32_u_12', m.test_i64_trunc_sat_f32_u_12, 0);
+    returns('i64_trunc_sat_f32_u_13', m.test_i64_trunc_sat_f32_u_13, -1);
+    returns('i64_trunc_sat_f32_u_14', m.test_i64_trunc_sat_f32_u_14, 0);
+    returns('i64_trunc_sat_f32_u_15', m.test_i64_trunc_sat_f32_u_15, 0);
+    returns('i64_trunc_sat_f32_u_16', m.test_i64_trunc_sat_f32_u_16, 0);
+    returns('i64_trunc_sat_f32_u_17', m.test_i64_trunc_sat_f32_u_17, 0);
+    returns('i64_trunc_sat_f32_u_18', m.test_i64_trunc_sat_f32_u_18, 0);
+    returns('i64_trunc_sat_f64_s_0', m.test_i64_trunc_sat_f64_s_0, 0);
+    returns('i64_trunc_sat_f64_s_1', m.test_i64_trunc_sat_f64_s_1, 0);
+    returns('i64_trunc_sat_f64_s_2', m.test_i64_trunc_sat_f64_s_2, 0);
+    returns('i64_trunc_sat_f64_s_3', m.test_i64_trunc_sat_f64_s_3, 0);
+    returns('i64_trunc_sat_f64_s_4', m.test_i64_trunc_sat_f64_s_4, 1);
+    returns('i64_trunc_sat_f64_s_5', m.test_i64_trunc_sat_f64_s_5, 1);
+    returns('i64_trunc_sat_f64_s_6', m.test_i64_trunc_sat_f64_s_6, 1);
+    returns('i64_trunc_sat_f64_s_7', m.test_i64_trunc_sat_f64_s_7, -1);
+    returns('i64_trunc_sat_f64_s_8', m.test_i64_trunc_sat_f64_s_8, -1);
+    returns('i64_trunc_sat_f64_s_9', m.test_i64_trunc_sat_f64_s_9, -1);
+    returns('i64_trunc_sat_f64_s_10', m.test_i64_trunc_sat_f64_s_10, -1);
+    returns('i64_trunc_sat_f64_s_11', m.test_i64_trunc_sat_f64_s_11, -2);
+    returns(
+        'i64_trunc_sat_f64_s_12', m.test_i64_trunc_sat_f64_s_12, 0x100000000);
+    returns(
+        'i64_trunc_sat_f64_s_13', m.test_i64_trunc_sat_f64_s_13, -0x100000000);
+    returns('i64_trunc_sat_f64_s_14', m.test_i64_trunc_sat_f64_s_14,
         0x7ffffffffffffc00);
-    returns('test_i64_trunc_f64_s_15', m.test_i64_trunc_f64_s_15,
+    returns('i64_trunc_sat_f64_s_15', m.test_i64_trunc_sat_f64_s_15,
         -0x8000000000000000);
-    traps('test_i64_trunc_f64_s_16', m.test_i64_trunc_f64_s_16,
-        "integer overflow");
-    traps('test_i64_trunc_f64_s_17', m.test_i64_trunc_f64_s_17,
-        "integer overflow");
-    traps('test_i64_trunc_f64_s_18', m.test_i64_trunc_f64_s_18,
-        "integer overflow");
-    traps('test_i64_trunc_f64_s_19', m.test_i64_trunc_f64_s_19,
-        "integer overflow");
-    traps('test_i64_trunc_f64_s_20', m.test_i64_trunc_f64_s_20,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f64_s_21', m.test_i64_trunc_f64_s_21,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f64_s_22', m.test_i64_trunc_f64_s_22,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f64_s_23', m.test_i64_trunc_f64_s_23,
-        "invalid conversion to integer");
-    returns('test_i64_trunc_f64_u_0', m.test_i64_trunc_f64_u_0, 0);
-    returns('test_i64_trunc_f64_u_1', m.test_i64_trunc_f64_u_1, 0);
-    returns('test_i64_trunc_f64_u_2', m.test_i64_trunc_f64_u_2, 0);
-    returns('test_i64_trunc_f64_u_3', m.test_i64_trunc_f64_u_3, 0);
-    returns('test_i64_trunc_f64_u_4', m.test_i64_trunc_f64_u_4, 1);
-    returns('test_i64_trunc_f64_u_5', m.test_i64_trunc_f64_u_5, 1);
-    returns('test_i64_trunc_f64_u_6', m.test_i64_trunc_f64_u_6, 1);
-    returns('test_i64_trunc_f64_u_7', m.test_i64_trunc_f64_u_7, 0xffffffff);
-    returns('test_i64_trunc_f64_u_8', m.test_i64_trunc_f64_u_8, 0x100000000);
-    returns('test_i64_trunc_f64_u_9', m.test_i64_trunc_f64_u_9, -0x800);
-    returns('test_i64_trunc_f64_u_10', m.test_i64_trunc_f64_u_10, 0);
-    returns('test_i64_trunc_f64_u_11', m.test_i64_trunc_f64_u_11, 0);
-    returns('test_i64_trunc_f64_u_12', m.test_i64_trunc_f64_u_12, 0x5f5e100);
-    returns(
-        'test_i64_trunc_f64_u_13', m.test_i64_trunc_f64_u_13, 0x2386f26fc10000);
-    returns('test_i64_trunc_f64_u_14', m.test_i64_trunc_f64_u_14,
-        -0x8000000000000000);
-    traps('test_i64_trunc_f64_u_15', m.test_i64_trunc_f64_u_15,
-        "integer overflow");
-    traps('test_i64_trunc_f64_u_16', m.test_i64_trunc_f64_u_16,
-        "integer overflow");
-    traps('test_i64_trunc_f64_u_17', m.test_i64_trunc_f64_u_17,
-        "integer overflow");
-    traps('test_i64_trunc_f64_u_18', m.test_i64_trunc_f64_u_18,
-        "integer overflow");
-    traps('test_i64_trunc_f64_u_19', m.test_i64_trunc_f64_u_19,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f64_u_20', m.test_i64_trunc_f64_u_20,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f64_u_21', m.test_i64_trunc_f64_u_21,
-        "invalid conversion to integer");
-    traps('test_i64_trunc_f64_u_22', m.test_i64_trunc_f64_u_22,
-        "invalid conversion to integer");
-    returns('test_f32_convert_i32_s_0', m.test_f32_convert_i32_s_0, 1.0);
-    returns('test_f32_convert_i32_s_1', m.test_f32_convert_i32_s_1, -1.0);
-    returns('test_f32_convert_i32_s_2', m.test_f32_convert_i32_s_2, 0.0);
-    returns(
-        'test_f32_convert_i32_s_3', m.test_f32_convert_i32_s_3, 2147483648.0);
-    returns(
-        'test_f32_convert_i32_s_4', m.test_f32_convert_i32_s_4, -2147483648.0);
-    returns(
-        'test_f32_convert_i32_s_5', m.test_f32_convert_i32_s_5, 1234567936.0);
-    returns('test_i32_trunc_sat_f32_s_0', m.test_i32_trunc_sat_f32_s_0, 0);
-    returns('test_i32_trunc_sat_f32_s_1', m.test_i32_trunc_sat_f32_s_1, 0);
-    returns('test_i32_trunc_sat_f32_s_2', m.test_i32_trunc_sat_f32_s_2, 0);
-    returns('test_i32_trunc_sat_f32_s_3', m.test_i32_trunc_sat_f32_s_3, 0);
-    returns('test_i32_trunc_sat_f32_s_4', m.test_i32_trunc_sat_f32_s_4, 1);
-    returns('test_i32_trunc_sat_f32_s_5', m.test_i32_trunc_sat_f32_s_5, 1);
-    returns('test_i32_trunc_sat_f32_s_6', m.test_i32_trunc_sat_f32_s_6, 1);
-    returns('test_i32_trunc_sat_f32_s_7', m.test_i32_trunc_sat_f32_s_7, -1);
-    returns('test_i32_trunc_sat_f32_s_8', m.test_i32_trunc_sat_f32_s_8, -1);
-    returns('test_i32_trunc_sat_f32_s_9', m.test_i32_trunc_sat_f32_s_9, -1);
-    returns('test_i32_trunc_sat_f32_s_10', m.test_i32_trunc_sat_f32_s_10, -1);
-    returns('test_i32_trunc_sat_f32_s_11', m.test_i32_trunc_sat_f32_s_11, -2);
-    returns('test_i32_trunc_sat_f32_s_12', m.test_i32_trunc_sat_f32_s_12,
-        0x7fffff80);
-    returns('test_i32_trunc_sat_f32_s_13', m.test_i32_trunc_sat_f32_s_13,
-        -0x80000000);
-    returns('test_i32_trunc_sat_f32_s_14', m.test_i32_trunc_sat_f32_s_14,
-        0x7fffffff);
-    returns('test_i32_trunc_sat_f32_s_15', m.test_i32_trunc_sat_f32_s_15,
-        -0x80000000);
-    returns('test_i32_trunc_sat_f32_s_16', m.test_i32_trunc_sat_f32_s_16,
-        0x7fffffff);
-    returns('test_i32_trunc_sat_f32_s_17', m.test_i32_trunc_sat_f32_s_17,
-        -0x80000000);
-    returns('test_i32_trunc_sat_f32_s_18', m.test_i32_trunc_sat_f32_s_18, 0);
-    returns('test_i32_trunc_sat_f32_s_19', m.test_i32_trunc_sat_f32_s_19, 0);
-    returns('test_i32_trunc_sat_f32_s_20', m.test_i32_trunc_sat_f32_s_20, 0);
-    returns('test_i32_trunc_sat_f32_s_21', m.test_i32_trunc_sat_f32_s_21, 0);
-    returns('test_i32_trunc_sat_f32_u_0', m.test_i32_trunc_sat_f32_u_0, 0);
-    returns('test_i32_trunc_sat_f32_u_1', m.test_i32_trunc_sat_f32_u_1, 0);
-    returns('test_i32_trunc_sat_f32_u_2', m.test_i32_trunc_sat_f32_u_2, 0);
-    returns('test_i32_trunc_sat_f32_u_3', m.test_i32_trunc_sat_f32_u_3, 0);
-    returns('test_i32_trunc_sat_f32_u_4', m.test_i32_trunc_sat_f32_u_4, 1);
-    returns('test_i32_trunc_sat_f32_u_5', m.test_i32_trunc_sat_f32_u_5, 1);
-    returns('test_i32_trunc_sat_f32_u_6', m.test_i32_trunc_sat_f32_u_6, 1);
-    returns('test_i32_trunc_sat_f32_u_7', m.test_i32_trunc_sat_f32_u_7, 1);
-    returns('test_i32_trunc_sat_f32_u_8', m.test_i32_trunc_sat_f32_u_8, 2);
-    returns('test_i32_trunc_sat_f32_u_9', m.test_i32_trunc_sat_f32_u_9,
-        -0x80000000);
-    returns('test_i32_trunc_sat_f32_u_10', m.test_i32_trunc_sat_f32_u_10, -256);
-    returns('test_i32_trunc_sat_f32_u_11', m.test_i32_trunc_sat_f32_u_11, 0);
-    returns('test_i32_trunc_sat_f32_u_12', m.test_i32_trunc_sat_f32_u_12, 0);
-    returns('test_i32_trunc_sat_f32_u_13', m.test_i32_trunc_sat_f32_u_13, -1);
-    returns('test_i32_trunc_sat_f32_u_14', m.test_i32_trunc_sat_f32_u_14, 0);
-    returns('test_i32_trunc_sat_f32_u_15', m.test_i32_trunc_sat_f32_u_15, -1);
-    returns('test_i32_trunc_sat_f32_u_16', m.test_i32_trunc_sat_f32_u_16, 0);
-    returns('test_i32_trunc_sat_f32_u_17', m.test_i32_trunc_sat_f32_u_17, 0);
-    returns('test_i32_trunc_sat_f32_u_18', m.test_i32_trunc_sat_f32_u_18, 0);
-    returns('test_i32_trunc_sat_f32_u_19', m.test_i32_trunc_sat_f32_u_19, 0);
-    returns('test_i32_trunc_sat_f32_u_20', m.test_i32_trunc_sat_f32_u_20, 0);
-    returns('test_i32_trunc_sat_f64_s_0', m.test_i32_trunc_sat_f64_s_0, 0);
-    returns('test_i32_trunc_sat_f64_s_1', m.test_i32_trunc_sat_f64_s_1, 0);
-    returns('test_i32_trunc_sat_f64_s_2', m.test_i32_trunc_sat_f64_s_2, 0);
-    returns('test_i32_trunc_sat_f64_s_3', m.test_i32_trunc_sat_f64_s_3, 0);
-    returns('test_i32_trunc_sat_f64_s_4', m.test_i32_trunc_sat_f64_s_4, 1);
-    returns('test_i32_trunc_sat_f64_s_5', m.test_i32_trunc_sat_f64_s_5, 1);
-    returns('test_i32_trunc_sat_f64_s_6', m.test_i32_trunc_sat_f64_s_6, 1);
-    returns('test_i32_trunc_sat_f64_s_7', m.test_i32_trunc_sat_f64_s_7, -1);
-    returns('test_i32_trunc_sat_f64_s_8', m.test_i32_trunc_sat_f64_s_8, -1);
-    returns('test_i32_trunc_sat_f64_s_9', m.test_i32_trunc_sat_f64_s_9, -1);
-    returns('test_i32_trunc_sat_f64_s_10', m.test_i32_trunc_sat_f64_s_10, -1);
-    returns('test_i32_trunc_sat_f64_s_11', m.test_i32_trunc_sat_f64_s_11, -2);
-    returns('test_i32_trunc_sat_f64_s_12', m.test_i32_trunc_sat_f64_s_12,
-        0x7fffffff);
-    returns('test_i32_trunc_sat_f64_s_13', m.test_i32_trunc_sat_f64_s_13,
-        -0x80000000);
-    returns('test_i32_trunc_sat_f64_s_14', m.test_i32_trunc_sat_f64_s_14,
-        0x7fffffff);
-    returns('test_i32_trunc_sat_f64_s_15', m.test_i32_trunc_sat_f64_s_15,
-        -0x80000000);
-    returns('test_i32_trunc_sat_f64_s_16', m.test_i32_trunc_sat_f64_s_16,
-        0x7fffffff);
-    returns('test_i32_trunc_sat_f64_s_17', m.test_i32_trunc_sat_f64_s_17,
-        -0x80000000);
-    returns('test_i32_trunc_sat_f64_s_18', m.test_i32_trunc_sat_f64_s_18, 0);
-    returns('test_i32_trunc_sat_f64_s_19', m.test_i32_trunc_sat_f64_s_19, 0);
-    returns('test_i32_trunc_sat_f64_s_20', m.test_i32_trunc_sat_f64_s_20, 0);
-    returns('test_i32_trunc_sat_f64_s_21', m.test_i32_trunc_sat_f64_s_21, 0);
-    returns('test_i32_trunc_sat_f64_u_0', m.test_i32_trunc_sat_f64_u_0, 0);
-    returns('test_i32_trunc_sat_f64_u_1', m.test_i32_trunc_sat_f64_u_1, 0);
-    returns('test_i32_trunc_sat_f64_u_2', m.test_i32_trunc_sat_f64_u_2, 0);
-    returns('test_i32_trunc_sat_f64_u_3', m.test_i32_trunc_sat_f64_u_3, 0);
-    returns('test_i32_trunc_sat_f64_u_4', m.test_i32_trunc_sat_f64_u_4, 1);
-    returns('test_i32_trunc_sat_f64_u_5', m.test_i32_trunc_sat_f64_u_5, 1);
-    returns('test_i32_trunc_sat_f64_u_6', m.test_i32_trunc_sat_f64_u_6, 1);
-    returns('test_i32_trunc_sat_f64_u_7', m.test_i32_trunc_sat_f64_u_7, 1);
-    returns('test_i32_trunc_sat_f64_u_8', m.test_i32_trunc_sat_f64_u_8, 2);
-    returns('test_i32_trunc_sat_f64_u_9', m.test_i32_trunc_sat_f64_u_9,
-        -0x80000000);
-    returns('test_i32_trunc_sat_f64_u_10', m.test_i32_trunc_sat_f64_u_10, -1);
-    returns('test_i32_trunc_sat_f64_u_11', m.test_i32_trunc_sat_f64_u_11, 0);
-    returns('test_i32_trunc_sat_f64_u_12', m.test_i32_trunc_sat_f64_u_12, 0);
-    returns('test_i32_trunc_sat_f64_u_13', m.test_i32_trunc_sat_f64_u_13,
-        0x5f5e100);
-    returns('test_i32_trunc_sat_f64_u_14', m.test_i32_trunc_sat_f64_u_14, -1);
-    returns('test_i32_trunc_sat_f64_u_15', m.test_i32_trunc_sat_f64_u_15, 0);
-    returns('test_i32_trunc_sat_f64_u_16', m.test_i32_trunc_sat_f64_u_16, -1);
-    returns('test_i32_trunc_sat_f64_u_17', m.test_i32_trunc_sat_f64_u_17, -1);
-    returns('test_i32_trunc_sat_f64_u_18', m.test_i32_trunc_sat_f64_u_18, -1);
-    returns('test_i32_trunc_sat_f64_u_19', m.test_i32_trunc_sat_f64_u_19, -1);
-    returns('test_i32_trunc_sat_f64_u_20', m.test_i32_trunc_sat_f64_u_20, 0);
-    returns('test_i32_trunc_sat_f64_u_21', m.test_i32_trunc_sat_f64_u_21, 0);
-    returns('test_i32_trunc_sat_f64_u_22', m.test_i32_trunc_sat_f64_u_22, 0);
-    returns('test_i32_trunc_sat_f64_u_23', m.test_i32_trunc_sat_f64_u_23, 0);
-    returns('test_i32_trunc_sat_f64_u_24', m.test_i32_trunc_sat_f64_u_24, 0);
-    returns('test_i64_trunc_sat_f32_s_0', m.test_i64_trunc_sat_f32_s_0, 0);
-    returns('test_i64_trunc_sat_f32_s_1', m.test_i64_trunc_sat_f32_s_1, 0);
-    returns('test_i64_trunc_sat_f32_s_2', m.test_i64_trunc_sat_f32_s_2, 0);
-    returns('test_i64_trunc_sat_f32_s_3', m.test_i64_trunc_sat_f32_s_3, 0);
-    returns('test_i64_trunc_sat_f32_s_4', m.test_i64_trunc_sat_f32_s_4, 1);
-    returns('test_i64_trunc_sat_f32_s_5', m.test_i64_trunc_sat_f32_s_5, 1);
-    returns('test_i64_trunc_sat_f32_s_6', m.test_i64_trunc_sat_f32_s_6, 1);
-    returns('test_i64_trunc_sat_f32_s_7', m.test_i64_trunc_sat_f32_s_7, -1);
-    returns('test_i64_trunc_sat_f32_s_8', m.test_i64_trunc_sat_f32_s_8, -1);
-    returns('test_i64_trunc_sat_f32_s_9', m.test_i64_trunc_sat_f32_s_9, -1);
-    returns('test_i64_trunc_sat_f32_s_10', m.test_i64_trunc_sat_f32_s_10, -1);
-    returns('test_i64_trunc_sat_f32_s_11', m.test_i64_trunc_sat_f32_s_11, -2);
-    returns('test_i64_trunc_sat_f32_s_12', m.test_i64_trunc_sat_f32_s_12,
-        0x100000000);
-    returns('test_i64_trunc_sat_f32_s_13', m.test_i64_trunc_sat_f32_s_13,
-        -0x100000000);
-    returns('test_i64_trunc_sat_f32_s_14', m.test_i64_trunc_sat_f32_s_14,
-        0x7fffff8000000000);
-    returns('test_i64_trunc_sat_f32_s_15', m.test_i64_trunc_sat_f32_s_15,
-        -0x8000000000000000);
-    returns('test_i64_trunc_sat_f32_s_16', m.test_i64_trunc_sat_f32_s_16,
+    returns('i64_trunc_sat_f64_s_16', m.test_i64_trunc_sat_f64_s_16,
         0x7fffffffffffffff);
-    returns('test_i64_trunc_sat_f32_s_17', m.test_i64_trunc_sat_f32_s_17,
+    returns('i64_trunc_sat_f64_s_17', m.test_i64_trunc_sat_f64_s_17,
         -0x8000000000000000);
-    returns('test_i64_trunc_sat_f32_s_18', m.test_i64_trunc_sat_f32_s_18,
+    returns('i64_trunc_sat_f64_s_18', m.test_i64_trunc_sat_f64_s_18,
         0x7fffffffffffffff);
-    returns('test_i64_trunc_sat_f32_s_19', m.test_i64_trunc_sat_f32_s_19,
+    returns('i64_trunc_sat_f64_s_19', m.test_i64_trunc_sat_f64_s_19,
         -0x8000000000000000);
-    returns('test_i64_trunc_sat_f32_s_20', m.test_i64_trunc_sat_f32_s_20, 0);
-    returns('test_i64_trunc_sat_f32_s_21', m.test_i64_trunc_sat_f32_s_21, 0);
-    returns('test_i64_trunc_sat_f32_s_22', m.test_i64_trunc_sat_f32_s_22, 0);
-    returns('test_i64_trunc_sat_f32_s_23', m.test_i64_trunc_sat_f32_s_23, 0);
-    returns('test_i64_trunc_sat_f32_u_0', m.test_i64_trunc_sat_f32_u_0, 0);
-    returns('test_i64_trunc_sat_f32_u_1', m.test_i64_trunc_sat_f32_u_1, 0);
-    returns('test_i64_trunc_sat_f32_u_2', m.test_i64_trunc_sat_f32_u_2, 0);
-    returns('test_i64_trunc_sat_f32_u_3', m.test_i64_trunc_sat_f32_u_3, 0);
-    returns('test_i64_trunc_sat_f32_u_4', m.test_i64_trunc_sat_f32_u_4, 1);
-    returns('test_i64_trunc_sat_f32_u_5', m.test_i64_trunc_sat_f32_u_5, 1);
-    returns('test_i64_trunc_sat_f32_u_6', m.test_i64_trunc_sat_f32_u_6, 1);
-    returns('test_i64_trunc_sat_f32_u_7', m.test_i64_trunc_sat_f32_u_7,
-        0x100000000);
-    returns('test_i64_trunc_sat_f32_u_8', m.test_i64_trunc_sat_f32_u_8,
-        -0x10000000000);
-    returns('test_i64_trunc_sat_f32_u_9', m.test_i64_trunc_sat_f32_u_9, 0);
-    returns('test_i64_trunc_sat_f32_u_10', m.test_i64_trunc_sat_f32_u_10, 0);
-    returns('test_i64_trunc_sat_f32_u_11', m.test_i64_trunc_sat_f32_u_11, -1);
-    returns('test_i64_trunc_sat_f32_u_12', m.test_i64_trunc_sat_f32_u_12, 0);
-    returns('test_i64_trunc_sat_f32_u_13', m.test_i64_trunc_sat_f32_u_13, -1);
-    returns('test_i64_trunc_sat_f32_u_14', m.test_i64_trunc_sat_f32_u_14, 0);
-    returns('test_i64_trunc_sat_f32_u_15', m.test_i64_trunc_sat_f32_u_15, 0);
-    returns('test_i64_trunc_sat_f32_u_16', m.test_i64_trunc_sat_f32_u_16, 0);
-    returns('test_i64_trunc_sat_f32_u_17', m.test_i64_trunc_sat_f32_u_17, 0);
-    returns('test_i64_trunc_sat_f32_u_18', m.test_i64_trunc_sat_f32_u_18, 0);
-    returns('test_i64_trunc_sat_f64_s_0', m.test_i64_trunc_sat_f64_s_0, 0);
-    returns('test_i64_trunc_sat_f64_s_1', m.test_i64_trunc_sat_f64_s_1, 0);
-    returns('test_i64_trunc_sat_f64_s_2', m.test_i64_trunc_sat_f64_s_2, 0);
-    returns('test_i64_trunc_sat_f64_s_3', m.test_i64_trunc_sat_f64_s_3, 0);
-    returns('test_i64_trunc_sat_f64_s_4', m.test_i64_trunc_sat_f64_s_4, 1);
-    returns('test_i64_trunc_sat_f64_s_5', m.test_i64_trunc_sat_f64_s_5, 1);
-    returns('test_i64_trunc_sat_f64_s_6', m.test_i64_trunc_sat_f64_s_6, 1);
-    returns('test_i64_trunc_sat_f64_s_7', m.test_i64_trunc_sat_f64_s_7, -1);
-    returns('test_i64_trunc_sat_f64_s_8', m.test_i64_trunc_sat_f64_s_8, -1);
-    returns('test_i64_trunc_sat_f64_s_9', m.test_i64_trunc_sat_f64_s_9, -1);
-    returns('test_i64_trunc_sat_f64_s_10', m.test_i64_trunc_sat_f64_s_10, -1);
-    returns('test_i64_trunc_sat_f64_s_11', m.test_i64_trunc_sat_f64_s_11, -2);
-    returns('test_i64_trunc_sat_f64_s_12', m.test_i64_trunc_sat_f64_s_12,
-        0x100000000);
-    returns('test_i64_trunc_sat_f64_s_13', m.test_i64_trunc_sat_f64_s_13,
-        -0x100000000);
-    returns('test_i64_trunc_sat_f64_s_14', m.test_i64_trunc_sat_f64_s_14,
-        0x7ffffffffffffc00);
-    returns('test_i64_trunc_sat_f64_s_15', m.test_i64_trunc_sat_f64_s_15,
-        -0x8000000000000000);
-    returns('test_i64_trunc_sat_f64_s_16', m.test_i64_trunc_sat_f64_s_16,
-        0x7fffffffffffffff);
-    returns('test_i64_trunc_sat_f64_s_17', m.test_i64_trunc_sat_f64_s_17,
-        -0x8000000000000000);
-    returns('test_i64_trunc_sat_f64_s_18', m.test_i64_trunc_sat_f64_s_18,
-        0x7fffffffffffffff);
-    returns('test_i64_trunc_sat_f64_s_19', m.test_i64_trunc_sat_f64_s_19,
-        -0x8000000000000000);
-    returns('test_i64_trunc_sat_f64_s_20', m.test_i64_trunc_sat_f64_s_20, 0);
-    returns('test_i64_trunc_sat_f64_s_21', m.test_i64_trunc_sat_f64_s_21, 0);
-    returns('test_i64_trunc_sat_f64_s_22', m.test_i64_trunc_sat_f64_s_22, 0);
-    returns('test_i64_trunc_sat_f64_s_23', m.test_i64_trunc_sat_f64_s_23, 0);
-    returns('test_i64_trunc_sat_f64_u_0', m.test_i64_trunc_sat_f64_u_0, 0);
-    returns('test_i64_trunc_sat_f64_u_1', m.test_i64_trunc_sat_f64_u_1, 0);
-    returns('test_i64_trunc_sat_f64_u_2', m.test_i64_trunc_sat_f64_u_2, 0);
-    returns('test_i64_trunc_sat_f64_u_3', m.test_i64_trunc_sat_f64_u_3, 0);
-    returns('test_i64_trunc_sat_f64_u_4', m.test_i64_trunc_sat_f64_u_4, 1);
-    returns('test_i64_trunc_sat_f64_u_5', m.test_i64_trunc_sat_f64_u_5, 1);
-    returns('test_i64_trunc_sat_f64_u_6', m.test_i64_trunc_sat_f64_u_6, 1);
-    returns(
-        'test_i64_trunc_sat_f64_u_7', m.test_i64_trunc_sat_f64_u_7, 0xffffffff);
-    returns('test_i64_trunc_sat_f64_u_8', m.test_i64_trunc_sat_f64_u_8,
-        0x100000000);
-    returns('test_i64_trunc_sat_f64_u_9', m.test_i64_trunc_sat_f64_u_9, -0x800);
-    returns('test_i64_trunc_sat_f64_u_10', m.test_i64_trunc_sat_f64_u_10, 0);
-    returns('test_i64_trunc_sat_f64_u_11', m.test_i64_trunc_sat_f64_u_11, 0);
-    returns('test_i64_trunc_sat_f64_u_12', m.test_i64_trunc_sat_f64_u_12,
-        0x5f5e100);
-    returns('test_i64_trunc_sat_f64_u_13', m.test_i64_trunc_sat_f64_u_13,
+    returns('i64_trunc_sat_f64_s_20', m.test_i64_trunc_sat_f64_s_20, 0);
+    returns('i64_trunc_sat_f64_s_21', m.test_i64_trunc_sat_f64_s_21, 0);
+    returns('i64_trunc_sat_f64_s_22', m.test_i64_trunc_sat_f64_s_22, 0);
+    returns('i64_trunc_sat_f64_s_23', m.test_i64_trunc_sat_f64_s_23, 0);
+    returns('i64_trunc_sat_f64_u_0', m.test_i64_trunc_sat_f64_u_0, 0);
+    returns('i64_trunc_sat_f64_u_1', m.test_i64_trunc_sat_f64_u_1, 0);
+    returns('i64_trunc_sat_f64_u_2', m.test_i64_trunc_sat_f64_u_2, 0);
+    returns('i64_trunc_sat_f64_u_3', m.test_i64_trunc_sat_f64_u_3, 0);
+    returns('i64_trunc_sat_f64_u_4', m.test_i64_trunc_sat_f64_u_4, 1);
+    returns('i64_trunc_sat_f64_u_5', m.test_i64_trunc_sat_f64_u_5, 1);
+    returns('i64_trunc_sat_f64_u_6', m.test_i64_trunc_sat_f64_u_6, 1);
+    returns('i64_trunc_sat_f64_u_7', m.test_i64_trunc_sat_f64_u_7, 0xffffffff);
+    returns('i64_trunc_sat_f64_u_8', m.test_i64_trunc_sat_f64_u_8, 0x100000000);
+    returns('i64_trunc_sat_f64_u_9', m.test_i64_trunc_sat_f64_u_9, -0x800);
+    returns('i64_trunc_sat_f64_u_10', m.test_i64_trunc_sat_f64_u_10, 0);
+    returns('i64_trunc_sat_f64_u_11', m.test_i64_trunc_sat_f64_u_11, 0);
+    returns('i64_trunc_sat_f64_u_12', m.test_i64_trunc_sat_f64_u_12, 0x5f5e100);
+    returns('i64_trunc_sat_f64_u_13', m.test_i64_trunc_sat_f64_u_13,
         0x2386f26fc10000);
-    returns('test_i64_trunc_sat_f64_u_14', m.test_i64_trunc_sat_f64_u_14,
+    returns('i64_trunc_sat_f64_u_14', m.test_i64_trunc_sat_f64_u_14,
         -0x8000000000000000);
-    returns('test_i64_trunc_sat_f64_u_15', m.test_i64_trunc_sat_f64_u_15, -1);
-    returns('test_i64_trunc_sat_f64_u_16', m.test_i64_trunc_sat_f64_u_16, 0);
-    returns('test_i64_trunc_sat_f64_u_17', m.test_i64_trunc_sat_f64_u_17, -1);
-    returns('test_i64_trunc_sat_f64_u_18', m.test_i64_trunc_sat_f64_u_18, 0);
-    returns('test_i64_trunc_sat_f64_u_19', m.test_i64_trunc_sat_f64_u_19, 0);
-    returns('test_i64_trunc_sat_f64_u_20', m.test_i64_trunc_sat_f64_u_20, 0);
-    returns('test_i64_trunc_sat_f64_u_21', m.test_i64_trunc_sat_f64_u_21, 0);
-    returns('test_i64_trunc_sat_f64_u_22', m.test_i64_trunc_sat_f64_u_22, 0);
-    returns('test_f32_convert_i32_s_6', m.test_f32_convert_i32_s_6, 16777216.0);
-    returns(
-        'test_f32_convert_i32_s_7', m.test_f32_convert_i32_s_7, -16777216.0);
-    returns('test_f32_convert_i32_s_8', m.test_f32_convert_i32_s_8, 16777220.0);
-    returns(
-        'test_f32_convert_i32_s_9', m.test_f32_convert_i32_s_9, -16777220.0);
-    returns('test_f32_convert_i64_s_0', m.test_f32_convert_i64_s_0, 1.0);
-    returns('test_f32_convert_i64_s_1', m.test_f32_convert_i64_s_1, -1.0);
-    returns('test_f32_convert_i64_s_2', m.test_f32_convert_i64_s_2, 0.0);
-    returns('test_f32_convert_i64_s_3', m.test_f32_convert_i64_s_3,
+    returns('i64_trunc_sat_f64_u_15', m.test_i64_trunc_sat_f64_u_15, -1);
+    returns('i64_trunc_sat_f64_u_16', m.test_i64_trunc_sat_f64_u_16, 0);
+    returns('i64_trunc_sat_f64_u_17', m.test_i64_trunc_sat_f64_u_17, -1);
+    returns('i64_trunc_sat_f64_u_18', m.test_i64_trunc_sat_f64_u_18, 0);
+    returns('i64_trunc_sat_f64_u_19', m.test_i64_trunc_sat_f64_u_19, 0);
+    returns('i64_trunc_sat_f64_u_20', m.test_i64_trunc_sat_f64_u_20, 0);
+    returns('i64_trunc_sat_f64_u_21', m.test_i64_trunc_sat_f64_u_21, 0);
+    returns('i64_trunc_sat_f64_u_22', m.test_i64_trunc_sat_f64_u_22, 0);
+    returns('f32_convert_i32_s_6', m.test_f32_convert_i32_s_6, 16777216.0);
+    returns('f32_convert_i32_s_7', m.test_f32_convert_i32_s_7, -16777216.0);
+    returns('f32_convert_i32_s_8', m.test_f32_convert_i32_s_8, 16777220.0);
+    returns('f32_convert_i32_s_9', m.test_f32_convert_i32_s_9, -16777220.0);
+    returns('f32_convert_i64_s_0', m.test_f32_convert_i64_s_0, 1.0);
+    returns('f32_convert_i64_s_1', m.test_f32_convert_i64_s_1, -1.0);
+    returns('f32_convert_i64_s_2', m.test_f32_convert_i64_s_2, 0.0);
+    returns('f32_convert_i64_s_3', m.test_f32_convert_i64_s_3,
         9223372036854776000.0);
-    returns('test_f32_convert_i64_s_4', m.test_f32_convert_i64_s_4,
+    returns('f32_convert_i64_s_4', m.test_f32_convert_i64_s_4,
         -9223372036854776000.0);
-    returns('test_f32_convert_i64_s_5', m.test_f32_convert_i64_s_5,
-        314159275180032.0);
-    returns('test_f32_convert_i64_s_6', m.test_f32_convert_i64_s_6, 16777216.0);
     returns(
-        'test_f32_convert_i64_s_7', m.test_f32_convert_i64_s_7, -16777216.0);
-    returns('test_f32_convert_i64_s_8', m.test_f32_convert_i64_s_8, 16777220.0);
-    returns(
-        'test_f32_convert_i64_s_9', m.test_f32_convert_i64_s_9, -16777220.0);
-    returns('test_f32_convert_i64_s_10', m.test_f32_convert_i64_s_10,
+        'f32_convert_i64_s_5', m.test_f32_convert_i64_s_5, 314159275180032.0);
+    returns('f32_convert_i64_s_6', m.test_f32_convert_i64_s_6, 16777216.0);
+    returns('f32_convert_i64_s_7', m.test_f32_convert_i64_s_7, -16777216.0);
+    returns('f32_convert_i64_s_8', m.test_f32_convert_i64_s_8, 16777220.0);
+    returns('f32_convert_i64_s_9', m.test_f32_convert_i64_s_9, -16777220.0);
+    returns('f32_convert_i64_s_10', m.test_f32_convert_i64_s_10,
         9223371487098962000.0);
-    returns('test_f32_convert_i64_s_11', m.test_f32_convert_i64_s_11,
+    returns('f32_convert_i64_s_11', m.test_f32_convert_i64_s_11,
         -9223371487098962000.0);
-    returns('test_f32_convert_i64_s_12', m.test_f32_convert_i64_s_12,
+    returns('f32_convert_i64_s_12', m.test_f32_convert_i64_s_12,
         9007200328482816.0);
-    returns('test_f32_convert_i64_s_13', m.test_f32_convert_i64_s_13,
+    returns('f32_convert_i64_s_13', m.test_f32_convert_i64_s_13,
         -9007200328482816.0);
-    returns('test_f64_convert_i32_s_0', m.test_f64_convert_i32_s_0, 1.0);
-    returns('test_f64_convert_i32_s_1', m.test_f64_convert_i32_s_1, -1.0);
-    returns('test_f64_convert_i32_s_2', m.test_f64_convert_i32_s_2, 0.0);
-    returns(
-        'test_f64_convert_i32_s_3', m.test_f64_convert_i32_s_3, 2147483647.0);
-    returns(
-        'test_f64_convert_i32_s_4', m.test_f64_convert_i32_s_4, -2147483648.0);
-    returns(
-        'test_f64_convert_i32_s_5', m.test_f64_convert_i32_s_5, 987654321.0);
-    returns('test_f64_convert_i64_s_0', m.test_f64_convert_i64_s_0, 1.0);
-    returns('test_f64_convert_i64_s_1', m.test_f64_convert_i64_s_1, -1.0);
-    returns('test_f64_convert_i64_s_2', m.test_f64_convert_i64_s_2, 0.0);
-    returns('test_f64_convert_i64_s_3', m.test_f64_convert_i64_s_3,
+    returns('f64_convert_i32_s_0', m.test_f64_convert_i32_s_0, 1.0);
+    returns('f64_convert_i32_s_1', m.test_f64_convert_i32_s_1, -1.0);
+    returns('f64_convert_i32_s_2', m.test_f64_convert_i32_s_2, 0.0);
+    returns('f64_convert_i32_s_3', m.test_f64_convert_i32_s_3, 2147483647.0);
+    returns('f64_convert_i32_s_4', m.test_f64_convert_i32_s_4, -2147483648.0);
+    returns('f64_convert_i32_s_5', m.test_f64_convert_i32_s_5, 987654321.0);
+    returns('f64_convert_i64_s_0', m.test_f64_convert_i64_s_0, 1.0);
+    returns('f64_convert_i64_s_1', m.test_f64_convert_i64_s_1, -1.0);
+    returns('f64_convert_i64_s_2', m.test_f64_convert_i64_s_2, 0.0);
+    returns('f64_convert_i64_s_3', m.test_f64_convert_i64_s_3,
         9223372036854776000.0);
-    returns('test_f64_convert_i64_s_4', m.test_f64_convert_i64_s_4,
+    returns('f64_convert_i64_s_4', m.test_f64_convert_i64_s_4,
         -9223372036854776000.0);
-    returns('test_f64_convert_i64_s_5', m.test_f64_convert_i64_s_5,
-        4669201609102990.0);
-    returns('test_f64_convert_i64_s_6', m.test_f64_convert_i64_s_6,
-        9007199254740992.0);
-    returns('test_f64_convert_i64_s_7', m.test_f64_convert_i64_s_7,
-        -9007199254740992.0);
-    returns('test_f64_convert_i64_s_8', m.test_f64_convert_i64_s_8,
-        9007199254740996.0);
-    returns('test_f64_convert_i64_s_9', m.test_f64_convert_i64_s_9,
-        -9007199254740996.0);
-    returns('test_f32_convert_i32_u_0', m.test_f32_convert_i32_u_0, 1.0);
-    returns('test_f32_convert_i32_u_1', m.test_f32_convert_i32_u_1, 0.0);
     returns(
-        'test_f32_convert_i32_u_2', m.test_f32_convert_i32_u_2, 2147483648.0);
+        'f64_convert_i64_s_5', m.test_f64_convert_i64_s_5, 4669201609102990.0);
     returns(
-        'test_f32_convert_i32_u_3', m.test_f32_convert_i32_u_3, 2147483648.0);
+        'f64_convert_i64_s_6', m.test_f64_convert_i64_s_6, 9007199254740992.0);
     returns(
-        'test_f32_convert_i32_u_4', m.test_f32_convert_i32_u_4, 305419904.0);
+        'f64_convert_i64_s_7', m.test_f64_convert_i64_s_7, -9007199254740992.0);
     returns(
-        'test_f32_convert_i32_u_5', m.test_f32_convert_i32_u_5, 4294967296.0);
+        'f64_convert_i64_s_8', m.test_f64_convert_i64_s_8, 9007199254740996.0);
     returns(
-        'test_f32_convert_i32_u_6', m.test_f32_convert_i32_u_6, 2147483648.0);
-    returns(
-        'test_f32_convert_i32_u_7', m.test_f32_convert_i32_u_7, 2147483904.0);
-    returns(
-        'test_f32_convert_i32_u_8', m.test_f32_convert_i32_u_8, 2147483904.0);
-    returns(
-        'test_f32_convert_i32_u_9', m.test_f32_convert_i32_u_9, 4294966784.0);
-    returns(
-        'test_f32_convert_i32_u_10', m.test_f32_convert_i32_u_10, 4294967040.0);
-    returns(
-        'test_f32_convert_i32_u_11', m.test_f32_convert_i32_u_11, 4294967040.0);
-    returns(
-        'test_f32_convert_i32_u_12', m.test_f32_convert_i32_u_12, 16777216.0);
-    returns(
-        'test_f32_convert_i32_u_13', m.test_f32_convert_i32_u_13, 16777220.0);
-    returns('test_f32_convert_i64_u_0', m.test_f32_convert_i64_u_0, 1.0);
-    returns('test_f32_convert_i64_u_1', m.test_f32_convert_i64_u_1, 0.0);
-    returns('test_f32_convert_i64_u_2', m.test_f32_convert_i64_u_2,
+        'f64_convert_i64_s_9', m.test_f64_convert_i64_s_9, -9007199254740996.0);
+    returns('f32_convert_i32_u_0', m.test_f32_convert_i32_u_0, 1.0);
+    returns('f32_convert_i32_u_1', m.test_f32_convert_i32_u_1, 0.0);
+    returns('f32_convert_i32_u_2', m.test_f32_convert_i32_u_2, 2147483648.0);
+    returns('f32_convert_i32_u_3', m.test_f32_convert_i32_u_3, 2147483648.0);
+    returns('f32_convert_i32_u_4', m.test_f32_convert_i32_u_4, 305419904.0);
+    returns('f32_convert_i32_u_5', m.test_f32_convert_i32_u_5, 4294967296.0);
+    returns('f32_convert_i32_u_6', m.test_f32_convert_i32_u_6, 2147483648.0);
+    returns('f32_convert_i32_u_7', m.test_f32_convert_i32_u_7, 2147483904.0);
+    returns('f32_convert_i32_u_8', m.test_f32_convert_i32_u_8, 2147483904.0);
+    returns('f32_convert_i32_u_9', m.test_f32_convert_i32_u_9, 4294966784.0);
+    returns('f32_convert_i32_u_10', m.test_f32_convert_i32_u_10, 4294967040.0);
+    returns('f32_convert_i32_u_11', m.test_f32_convert_i32_u_11, 4294967040.0);
+    returns('f32_convert_i32_u_12', m.test_f32_convert_i32_u_12, 16777216.0);
+    returns('f32_convert_i32_u_13', m.test_f32_convert_i32_u_13, 16777220.0);
+    returns('f32_convert_i64_u_0', m.test_f32_convert_i64_u_0, 1.0);
+    returns('f32_convert_i64_u_1', m.test_f32_convert_i64_u_1, 0.0);
+    returns('f32_convert_i64_u_2', m.test_f32_convert_i64_u_2,
         9223372036854776000.0);
-    returns('test_f32_convert_i64_u_3', m.test_f32_convert_i64_u_3,
+    returns('f32_convert_i64_u_3', m.test_f32_convert_i64_u_3,
         9223372036854776000.0);
-    returns('test_f32_convert_i64_u_4', m.test_f32_convert_i64_u_4,
+    returns('f32_convert_i64_u_4', m.test_f32_convert_i64_u_4,
         18446744073709552000.0);
-    returns('test_f32_convert_i64_u_5', m.test_f32_convert_i64_u_5, 16777216.0);
-    returns('test_f32_convert_i64_u_6', m.test_f32_convert_i64_u_6, 16777220.0);
-    returns('test_f32_convert_i64_u_7', m.test_f32_convert_i64_u_7,
-        9007200328482816.0);
-    returns('test_f32_convert_i64_u_8', m.test_f32_convert_i64_u_8,
+    returns('f32_convert_i64_u_5', m.test_f32_convert_i64_u_5, 16777216.0);
+    returns('f32_convert_i64_u_6', m.test_f32_convert_i64_u_6, 16777220.0);
+    returns(
+        'f32_convert_i64_u_7', m.test_f32_convert_i64_u_7, 9007200328482816.0);
+    returns('f32_convert_i64_u_8', m.test_f32_convert_i64_u_8,
         9223371487098962000.0);
-    returns('test_f32_convert_i64_u_9', m.test_f32_convert_i64_u_9,
+    returns('f32_convert_i64_u_9', m.test_f32_convert_i64_u_9,
         9223373136366404000.0);
-    returns('test_f32_convert_i64_u_10', m.test_f32_convert_i64_u_10,
+    returns('f32_convert_i64_u_10', m.test_f32_convert_i64_u_10,
         18446742974197924000.0);
-    returns('test_f64_convert_i32_u_0', m.test_f64_convert_i32_u_0, 1.0);
-    returns('test_f64_convert_i32_u_1', m.test_f64_convert_i32_u_1, 0.0);
-    returns(
-        'test_f64_convert_i32_u_2', m.test_f64_convert_i32_u_2, 2147483647.0);
-    returns(
-        'test_f64_convert_i32_u_3', m.test_f64_convert_i32_u_3, 2147483648.0);
-    returns(
-        'test_f64_convert_i32_u_4', m.test_f64_convert_i32_u_4, 4294967295.0);
-    returns('test_f64_convert_i64_u_0', m.test_f64_convert_i64_u_0, 1.0);
-    returns('test_f64_convert_i64_u_1', m.test_f64_convert_i64_u_1, 0.0);
-    returns('test_f64_convert_i64_u_2', m.test_f64_convert_i64_u_2,
+    returns('f64_convert_i32_u_0', m.test_f64_convert_i32_u_0, 1.0);
+    returns('f64_convert_i32_u_1', m.test_f64_convert_i32_u_1, 0.0);
+    returns('f64_convert_i32_u_2', m.test_f64_convert_i32_u_2, 2147483647.0);
+    returns('f64_convert_i32_u_3', m.test_f64_convert_i32_u_3, 2147483648.0);
+    returns('f64_convert_i32_u_4', m.test_f64_convert_i32_u_4, 4294967295.0);
+    returns('f64_convert_i64_u_0', m.test_f64_convert_i64_u_0, 1.0);
+    returns('f64_convert_i64_u_1', m.test_f64_convert_i64_u_1, 0.0);
+    returns('f64_convert_i64_u_2', m.test_f64_convert_i64_u_2,
         9223372036854776000.0);
-    returns('test_f64_convert_i64_u_3', m.test_f64_convert_i64_u_3,
+    returns('f64_convert_i64_u_3', m.test_f64_convert_i64_u_3,
         9223372036854776000.0);
-    returns('test_f64_convert_i64_u_4', m.test_f64_convert_i64_u_4,
+    returns('f64_convert_i64_u_4', m.test_f64_convert_i64_u_4,
         18446744073709552000.0);
-    returns('test_f64_convert_i64_u_5', m.test_f64_convert_i64_u_5,
+    returns('f64_convert_i64_u_5', m.test_f64_convert_i64_u_5,
         9223372036854776000.0);
-    returns('test_f64_convert_i64_u_6', m.test_f64_convert_i64_u_6,
+    returns('f64_convert_i64_u_6', m.test_f64_convert_i64_u_6,
         9223372036854778000.0);
-    returns('test_f64_convert_i64_u_7', m.test_f64_convert_i64_u_7,
+    returns('f64_convert_i64_u_7', m.test_f64_convert_i64_u_7,
         9223372036854778000.0);
-    returns('test_f64_convert_i64_u_8', m.test_f64_convert_i64_u_8,
+    returns('f64_convert_i64_u_8', m.test_f64_convert_i64_u_8,
         18446744073709548000.0);
-    returns('test_f64_convert_i64_u_9', m.test_f64_convert_i64_u_9,
+    returns('f64_convert_i64_u_9', m.test_f64_convert_i64_u_9,
         18446744073709550000.0);
-    returns('test_f64_convert_i64_u_10', m.test_f64_convert_i64_u_10,
+    returns('f64_convert_i64_u_10', m.test_f64_convert_i64_u_10,
         18446744073709550000.0);
-    returns('test_f64_convert_i64_u_11', m.test_f64_convert_i64_u_11,
+    returns('f64_convert_i64_u_11', m.test_f64_convert_i64_u_11,
         9007199254740992.0);
-    returns('test_f64_convert_i64_u_12', m.test_f64_convert_i64_u_12,
+    returns('f64_convert_i64_u_12', m.test_f64_convert_i64_u_12,
         9007199254740996.0);
-    returns('test_f64_promote_f32_0', m.test_f64_promote_f32_0, 0.0);
-    returns('test_f64_promote_f32_1', m.test_f64_promote_f32_1, -0.0);
-    returns('test_f64_promote_f32_2', m.test_f64_promote_f32_2,
-        1.401298464324817e-45);
-    returns('test_f64_promote_f32_3', m.test_f64_promote_f32_3,
-        -1.401298464324817e-45);
-    returns('test_f64_promote_f32_4', m.test_f64_promote_f32_4, 1.0);
-    returns('test_f64_promote_f32_5', m.test_f64_promote_f32_5, -1.0);
-    returns('test_f64_promote_f32_6', m.test_f64_promote_f32_6,
-        -3.4028234663852886e+38);
-    returns('test_f64_promote_f32_7', m.test_f64_promote_f32_7,
-        3.4028234663852886e+38);
-    returns('test_f64_promote_f32_8', m.test_f64_promote_f32_8,
-        1.504632769052528e-36);
-    returns('test_f64_promote_f32_9', m.test_f64_promote_f32_9,
-        6.6382536710104395e+37);
+    returns('f64_promote_f32_0', m.test_f64_promote_f32_0, 0.0);
+    returns('f64_promote_f32_1', m.test_f64_promote_f32_1, -0.0);
     returns(
-        'test_f64_promote_f32_10', m.test_f64_promote_f32_10, double.infinity);
-    returns('test_f64_promote_f32_11', m.test_f64_promote_f32_11,
+        'f64_promote_f32_2', m.test_f64_promote_f32_2, 1.401298464324817e-45);
+    returns(
+        'f64_promote_f32_3', m.test_f64_promote_f32_3, -1.401298464324817e-45);
+    returns('f64_promote_f32_4', m.test_f64_promote_f32_4, 1.0);
+    returns('f64_promote_f32_5', m.test_f64_promote_f32_5, -1.0);
+    returns(
+        'f64_promote_f32_6', m.test_f64_promote_f32_6, -3.4028234663852886e+38);
+    returns(
+        'f64_promote_f32_7', m.test_f64_promote_f32_7, 3.4028234663852886e+38);
+    returns(
+        'f64_promote_f32_8', m.test_f64_promote_f32_8, 1.504632769052528e-36);
+    returns(
+        'f64_promote_f32_9', m.test_f64_promote_f32_9, 6.6382536710104395e+37);
+    returns('f64_promote_f32_10', m.test_f64_promote_f32_10, double.infinity);
+    returns('f64_promote_f32_11', m.test_f64_promote_f32_11,
         double.negativeInfinity);
-    returns('test_f64_promote_f32_12', m.test_f64_promote_f32_12, double.nan);
-    returns('test_f64_promote_f32_13', m.test_f64_promote_f32_13, double.nan);
-    returns('test_f64_promote_f32_14', m.test_f64_promote_f32_14, double.nan);
-    returns('test_f64_promote_f32_15', m.test_f64_promote_f32_15, double.nan);
-    returns('test_f32_demote_f64_0', m.test_f32_demote_f64_0, 0.0);
-    returns('test_f32_demote_f64_1', m.test_f32_demote_f64_1, -0.0);
-    returns('test_f32_demote_f64_2', m.test_f32_demote_f64_2, 0.0);
-    returns('test_f32_demote_f64_3', m.test_f32_demote_f64_3, -0.0);
-    returns('test_f32_demote_f64_4', m.test_f32_demote_f64_4, 1.0);
-    returns('test_f32_demote_f64_5', m.test_f32_demote_f64_5, -1.0);
-    returns('test_f32_demote_f64_6', m.test_f32_demote_f64_6,
-        1.1754943508222875e-38);
-    returns('test_f32_demote_f64_7', m.test_f32_demote_f64_7,
-        -1.1754943508222875e-38);
-    returns('test_f32_demote_f64_8', m.test_f32_demote_f64_8,
-        1.1754942106924411e-38);
-    returns('test_f32_demote_f64_9', m.test_f32_demote_f64_9,
-        -1.1754942106924411e-38);
-    returns('test_f32_demote_f64_10', m.test_f32_demote_f64_10,
+    returns('f64_promote_f32_12', m.test_f64_promote_f32_12, double.nan);
+    returns('f64_promote_f32_13', m.test_f64_promote_f32_13, double.nan);
+    returns('f64_promote_f32_14', m.test_f64_promote_f32_14, double.nan);
+    returns('f64_promote_f32_15', m.test_f64_promote_f32_15, double.nan);
+    returns('f32_demote_f64_0', m.test_f32_demote_f64_0, 0.0);
+    returns('f32_demote_f64_1', m.test_f32_demote_f64_1, -0.0);
+    returns('f32_demote_f64_2', m.test_f32_demote_f64_2, 0.0);
+    returns('f32_demote_f64_3', m.test_f32_demote_f64_3, -0.0);
+    returns('f32_demote_f64_4', m.test_f32_demote_f64_4, 1.0);
+    returns('f32_demote_f64_5', m.test_f32_demote_f64_5, -1.0);
+    returns(
+        'f32_demote_f64_6', m.test_f32_demote_f64_6, 1.1754943508222875e-38);
+    returns(
+        'f32_demote_f64_7', m.test_f32_demote_f64_7, -1.1754943508222875e-38);
+    returns(
+        'f32_demote_f64_8', m.test_f32_demote_f64_8, 1.1754942106924411e-38);
+    returns(
+        'f32_demote_f64_9', m.test_f32_demote_f64_9, -1.1754942106924411e-38);
+    returns(
+        'f32_demote_f64_10', m.test_f32_demote_f64_10, 1.401298464324817e-45);
+    returns(
+        'f32_demote_f64_11', m.test_f32_demote_f64_11, -1.401298464324817e-45);
+    returns(
+        'f32_demote_f64_12', m.test_f32_demote_f64_12, 3.4028232635611926e+38);
+    returns(
+        'f32_demote_f64_13', m.test_f32_demote_f64_13, -3.4028232635611926e+38);
+    returns(
+        'f32_demote_f64_14', m.test_f32_demote_f64_14, 3.4028234663852886e+38);
+    returns(
+        'f32_demote_f64_15', m.test_f32_demote_f64_15, -3.4028234663852886e+38);
+    returns(
+        'f32_demote_f64_16', m.test_f32_demote_f64_16, 3.4028234663852886e+38);
+    returns(
+        'f32_demote_f64_17', m.test_f32_demote_f64_17, -3.4028234663852886e+38);
+    returns(
+        'f32_demote_f64_18', m.test_f32_demote_f64_18, 3.4028234663852886e+38);
+    returns(
+        'f32_demote_f64_19', m.test_f32_demote_f64_19, -3.4028234663852886e+38);
+    returns('f32_demote_f64_20', m.test_f32_demote_f64_20, double.infinity);
+    returns(
+        'f32_demote_f64_21', m.test_f32_demote_f64_21, double.negativeInfinity);
+    returns(
+        'f32_demote_f64_22', m.test_f32_demote_f64_22, 1.504632769052528e-36);
+    returns(
+        'f32_demote_f64_23', m.test_f32_demote_f64_23, 6.6382536710104395e+37);
+    returns('f32_demote_f64_24', m.test_f32_demote_f64_24, double.infinity);
+    returns(
+        'f32_demote_f64_25', m.test_f32_demote_f64_25, double.negativeInfinity);
+    returns('f32_demote_f64_26', m.test_f32_demote_f64_26, 1.0);
+    returns('f32_demote_f64_27', m.test_f32_demote_f64_27, 1.0);
+    returns('f32_demote_f64_28', m.test_f32_demote_f64_28, 1.0);
+    returns('f32_demote_f64_29', m.test_f32_demote_f64_29, 1.0000001192092896);
+    returns('f32_demote_f64_30', m.test_f32_demote_f64_30, 1.0000001192092896);
+    returns('f32_demote_f64_31', m.test_f32_demote_f64_31, 1.000000238418579);
+    returns('f32_demote_f64_32', m.test_f32_demote_f64_32, 1.000000238418579);
+    returns('f32_demote_f64_33', m.test_f32_demote_f64_33, 16777216.0);
+    returns('f32_demote_f64_34', m.test_f32_demote_f64_34, 16777218.0);
+    returns('f32_demote_f64_35', m.test_f32_demote_f64_35, 16777218.0);
+    returns('f32_demote_f64_36', m.test_f32_demote_f64_36, 16777220.0);
+    returns(
+        'f32_demote_f64_37', m.test_f32_demote_f64_37, 4.2425845416862035e+32);
+    returns(
+        'f32_demote_f64_38', m.test_f32_demote_f64_38, 1.5692621142680845e-34);
+    returns(
+        'f32_demote_f64_39', m.test_f32_demote_f64_39, 1.055177323247048e-38);
+    returns('f32_demote_f64_40', m.test_f32_demote_f64_40, -2.823812961578369);
+    returns(
+        'f32_demote_f64_41', m.test_f32_demote_f64_41, -9.063376213401508e+33);
+    returns('f32_demote_f64_42', m.test_f32_demote_f64_42, double.nan);
+    returns('f32_demote_f64_43', m.test_f32_demote_f64_43, double.nan);
+    returns('f32_demote_f64_44', m.test_f32_demote_f64_44, double.nan);
+    returns('f32_demote_f64_45', m.test_f32_demote_f64_45, double.nan);
+    returns('f32_demote_f64_46', m.test_f32_demote_f64_46, 0.0);
+    returns('f32_demote_f64_47', m.test_f32_demote_f64_47, -0.0);
+    returns('f32_demote_f64_48', m.test_f32_demote_f64_48, 0.0);
+    returns('f32_demote_f64_49', m.test_f32_demote_f64_49, -0.0);
+    returns(
+        'f32_demote_f64_50', m.test_f32_demote_f64_50, 1.401298464324817e-45);
+    returns(
+        'f32_demote_f64_51', m.test_f32_demote_f64_51, -1.401298464324817e-45);
+    returns('f32_reinterpret_i32_0', m.test_f32_reinterpret_i32_0, 0.0);
+    returns('f32_reinterpret_i32_1', m.test_f32_reinterpret_i32_1, -0.0);
+    returns('f32_reinterpret_i32_2', m.test_f32_reinterpret_i32_2,
         1.401298464324817e-45);
-    returns('test_f32_demote_f64_11', m.test_f32_demote_f64_11,
-        -1.401298464324817e-45);
-    returns('test_f32_demote_f64_12', m.test_f32_demote_f64_12,
-        3.4028232635611926e+38);
-    returns('test_f32_demote_f64_13', m.test_f32_demote_f64_13,
-        -3.4028232635611926e+38);
-    returns('test_f32_demote_f64_14', m.test_f32_demote_f64_14,
-        3.4028234663852886e+38);
-    returns('test_f32_demote_f64_15', m.test_f32_demote_f64_15,
-        -3.4028234663852886e+38);
-    returns('test_f32_demote_f64_16', m.test_f32_demote_f64_16,
-        3.4028234663852886e+38);
-    returns('test_f32_demote_f64_17', m.test_f32_demote_f64_17,
-        -3.4028234663852886e+38);
-    returns('test_f32_demote_f64_18', m.test_f32_demote_f64_18,
-        3.4028234663852886e+38);
-    returns('test_f32_demote_f64_19', m.test_f32_demote_f64_19,
-        -3.4028234663852886e+38);
-    returns(
-        'test_f32_demote_f64_20', m.test_f32_demote_f64_20, double.infinity);
-    returns('test_f32_demote_f64_21', m.test_f32_demote_f64_21,
-        double.negativeInfinity);
-    returns('test_f32_demote_f64_22', m.test_f32_demote_f64_22,
-        1.504632769052528e-36);
-    returns('test_f32_demote_f64_23', m.test_f32_demote_f64_23,
-        6.6382536710104395e+37);
-    returns(
-        'test_f32_demote_f64_24', m.test_f32_demote_f64_24, double.infinity);
-    returns('test_f32_demote_f64_25', m.test_f32_demote_f64_25,
-        double.negativeInfinity);
-    returns('test_f32_demote_f64_26', m.test_f32_demote_f64_26, 1.0);
-    returns('test_f32_demote_f64_27', m.test_f32_demote_f64_27, 1.0);
-    returns('test_f32_demote_f64_28', m.test_f32_demote_f64_28, 1.0);
-    returns(
-        'test_f32_demote_f64_29', m.test_f32_demote_f64_29, 1.0000001192092896);
-    returns(
-        'test_f32_demote_f64_30', m.test_f32_demote_f64_30, 1.0000001192092896);
-    returns(
-        'test_f32_demote_f64_31', m.test_f32_demote_f64_31, 1.000000238418579);
-    returns(
-        'test_f32_demote_f64_32', m.test_f32_demote_f64_32, 1.000000238418579);
-    returns('test_f32_demote_f64_33', m.test_f32_demote_f64_33, 16777216.0);
-    returns('test_f32_demote_f64_34', m.test_f32_demote_f64_34, 16777218.0);
-    returns('test_f32_demote_f64_35', m.test_f32_demote_f64_35, 16777218.0);
-    returns('test_f32_demote_f64_36', m.test_f32_demote_f64_36, 16777220.0);
-    returns('test_f32_demote_f64_37', m.test_f32_demote_f64_37,
-        4.2425845416862035e+32);
-    returns('test_f32_demote_f64_38', m.test_f32_demote_f64_38,
-        1.5692621142680845e-34);
-    returns('test_f32_demote_f64_39', m.test_f32_demote_f64_39,
-        1.055177323247048e-38);
-    returns(
-        'test_f32_demote_f64_40', m.test_f32_demote_f64_40, -2.823812961578369);
-    returns('test_f32_demote_f64_41', m.test_f32_demote_f64_41,
-        -9.063376213401508e+33);
-    returns('test_f32_demote_f64_42', m.test_f32_demote_f64_42, double.nan);
-    returns('test_f32_demote_f64_43', m.test_f32_demote_f64_43, double.nan);
-    returns('test_f32_demote_f64_44', m.test_f32_demote_f64_44, double.nan);
-    returns('test_f32_demote_f64_45', m.test_f32_demote_f64_45, double.nan);
-    returns('test_f32_demote_f64_46', m.test_f32_demote_f64_46, 0.0);
-    returns('test_f32_demote_f64_47', m.test_f32_demote_f64_47, -0.0);
-    returns('test_f32_demote_f64_48', m.test_f32_demote_f64_48, 0.0);
-    returns('test_f32_demote_f64_49', m.test_f32_demote_f64_49, -0.0);
-    returns('test_f32_demote_f64_50', m.test_f32_demote_f64_50,
-        1.401298464324817e-45);
-    returns('test_f32_demote_f64_51', m.test_f32_demote_f64_51,
-        -1.401298464324817e-45);
-    returns('test_f32_reinterpret_i32_0', m.test_f32_reinterpret_i32_0, 0.0);
-    returns('test_f32_reinterpret_i32_1', m.test_f32_reinterpret_i32_1, -0.0);
-    returns('test_f32_reinterpret_i32_2', m.test_f32_reinterpret_i32_2,
-        1.401298464324817e-45);
-    returns(
-        'test_f32_reinterpret_i32_3', m.test_f32_reinterpret_i32_3, double.nan);
-    returns('test_f32_reinterpret_i32_4', m.test_f32_reinterpret_i32_4,
+    returns('f32_reinterpret_i32_3', m.test_f32_reinterpret_i32_3, double.nan);
+    returns('f32_reinterpret_i32_4', m.test_f32_reinterpret_i32_4,
         1.6535997013422565e-34);
-    returns('test_f32_reinterpret_i32_5', m.test_f32_reinterpret_i32_5,
+    returns('f32_reinterpret_i32_5', m.test_f32_reinterpret_i32_5,
         -1.401298464324817e-45);
-    returns('test_f32_reinterpret_i32_6', m.test_f32_reinterpret_i32_6,
-        double.infinity);
-    returns('test_f32_reinterpret_i32_7', m.test_f32_reinterpret_i32_7,
+    returns(
+        'f32_reinterpret_i32_6', m.test_f32_reinterpret_i32_6, double.infinity);
+    returns('f32_reinterpret_i32_7', m.test_f32_reinterpret_i32_7,
         double.negativeInfinity);
+    returns('f32_reinterpret_i32_8', m.test_f32_reinterpret_i32_8, double.nan);
+    returns('f32_reinterpret_i32_9', m.test_f32_reinterpret_i32_9, double.nan);
     returns(
-        'test_f32_reinterpret_i32_8', m.test_f32_reinterpret_i32_8, double.nan);
+        'f32_reinterpret_i32_10', m.test_f32_reinterpret_i32_10, double.nan);
     returns(
-        'test_f32_reinterpret_i32_9', m.test_f32_reinterpret_i32_9, double.nan);
-    returns('test_f32_reinterpret_i32_10', m.test_f32_reinterpret_i32_10,
-        double.nan);
-    returns('test_f32_reinterpret_i32_11', m.test_f32_reinterpret_i32_11,
-        double.nan);
-    returns('test_f64_reinterpret_i64_0', m.test_f64_reinterpret_i64_0, 0.0);
-    returns('test_f64_reinterpret_i64_1', m.test_f64_reinterpret_i64_1, 5e-324);
+        'f32_reinterpret_i32_11', m.test_f32_reinterpret_i32_11, double.nan);
+    returns('f64_reinterpret_i64_0', m.test_f64_reinterpret_i64_0, 0.0);
+    returns('f64_reinterpret_i64_1', m.test_f64_reinterpret_i64_1, 5e-324);
+    returns('f64_reinterpret_i64_2', m.test_f64_reinterpret_i64_2, double.nan);
+    returns('f64_reinterpret_i64_3', m.test_f64_reinterpret_i64_3, -0.0);
     returns(
-        'test_f64_reinterpret_i64_2', m.test_f64_reinterpret_i64_2, double.nan);
-    returns('test_f64_reinterpret_i64_3', m.test_f64_reinterpret_i64_3, -0.0);
-    returns('test_f64_reinterpret_i64_4', m.test_f64_reinterpret_i64_4,
-        6.09957582e-315);
+        'f64_reinterpret_i64_4', m.test_f64_reinterpret_i64_4, 6.09957582e-315);
+    returns('f64_reinterpret_i64_5', m.test_f64_reinterpret_i64_5, -5e-324);
     returns(
-        'test_f64_reinterpret_i64_5', m.test_f64_reinterpret_i64_5, -5e-324);
-    returns('test_f64_reinterpret_i64_6', m.test_f64_reinterpret_i64_6,
-        double.infinity);
-    returns('test_f64_reinterpret_i64_7', m.test_f64_reinterpret_i64_7,
+        'f64_reinterpret_i64_6', m.test_f64_reinterpret_i64_6, double.infinity);
+    returns('f64_reinterpret_i64_7', m.test_f64_reinterpret_i64_7,
         double.negativeInfinity);
+    returns('f64_reinterpret_i64_8', m.test_f64_reinterpret_i64_8, double.nan);
+    returns('f64_reinterpret_i64_9', m.test_f64_reinterpret_i64_9, double.nan);
     returns(
-        'test_f64_reinterpret_i64_8', m.test_f64_reinterpret_i64_8, double.nan);
+        'f64_reinterpret_i64_10', m.test_f64_reinterpret_i64_10, double.nan);
     returns(
-        'test_f64_reinterpret_i64_9', m.test_f64_reinterpret_i64_9, double.nan);
-    returns('test_f64_reinterpret_i64_10', m.test_f64_reinterpret_i64_10,
-        double.nan);
-    returns('test_f64_reinterpret_i64_11', m.test_f64_reinterpret_i64_11,
-        double.nan);
-    returns('test_i32_reinterpret_f32_0', m.test_i32_reinterpret_f32_0, 0);
-    returns('test_i32_reinterpret_f32_1', m.test_i32_reinterpret_f32_1,
-        -0x80000000);
-    returns('test_i32_reinterpret_f32_2', m.test_i32_reinterpret_f32_2, 1);
-    returns('test_i32_reinterpret_f32_3', m.test_i32_reinterpret_f32_3, -1);
-    returns('test_i32_reinterpret_f32_4', m.test_i32_reinterpret_f32_4,
-        -0x7fffffff);
+        'f64_reinterpret_i64_11', m.test_f64_reinterpret_i64_11, double.nan);
+    returns('i32_reinterpret_f32_0', m.test_i32_reinterpret_f32_0, 0);
+    returns('i32_reinterpret_f32_1', m.test_i32_reinterpret_f32_1, -0x80000000);
+    returns('i32_reinterpret_f32_2', m.test_i32_reinterpret_f32_2, 1);
+    returns('i32_reinterpret_f32_3', m.test_i32_reinterpret_f32_3, -1);
+    returns('i32_reinterpret_f32_4', m.test_i32_reinterpret_f32_4, -0x7fffffff);
+    returns('i32_reinterpret_f32_5', m.test_i32_reinterpret_f32_5, 0x3f800000);
+    returns('i32_reinterpret_f32_6', m.test_i32_reinterpret_f32_6, 0x40490fda);
+    returns('i32_reinterpret_f32_7', m.test_i32_reinterpret_f32_7, 0x7f7fffff);
+    returns('i32_reinterpret_f32_8', m.test_i32_reinterpret_f32_8, -0x800001);
+    returns('i32_reinterpret_f32_9', m.test_i32_reinterpret_f32_9, 0x7f800000);
+    returns('i32_reinterpret_f32_10', m.test_i32_reinterpret_f32_10, -0x800000);
     returns(
-        'test_i32_reinterpret_f32_5', m.test_i32_reinterpret_f32_5, 0x3f800000);
+        'i32_reinterpret_f32_11', m.test_i32_reinterpret_f32_11, 0x7fc00000);
+    returns('i32_reinterpret_f32_12', m.test_i32_reinterpret_f32_12, -0x400000);
     returns(
-        'test_i32_reinterpret_f32_6', m.test_i32_reinterpret_f32_6, 0x40490fda);
-    returns(
-        'test_i32_reinterpret_f32_7', m.test_i32_reinterpret_f32_7, 0x7f7fffff);
-    returns(
-        'test_i32_reinterpret_f32_8', m.test_i32_reinterpret_f32_8, -0x800001);
-    returns(
-        'test_i32_reinterpret_f32_9', m.test_i32_reinterpret_f32_9, 0x7f800000);
-    returns('test_i32_reinterpret_f32_10', m.test_i32_reinterpret_f32_10,
-        -0x800000);
-    returns('test_i32_reinterpret_f32_11', m.test_i32_reinterpret_f32_11,
-        0x7fc00000);
-    returns('test_i32_reinterpret_f32_12', m.test_i32_reinterpret_f32_12,
-        -0x400000);
-    returns('test_i32_reinterpret_f32_13', m.test_i32_reinterpret_f32_13,
-        0x7fa00000);
-    returns('test_i32_reinterpret_f32_14', m.test_i32_reinterpret_f32_14,
-        -0x600000);
-    returns('test_i64_reinterpret_f64_0', m.test_i64_reinterpret_f64_0, 0);
-    returns('test_i64_reinterpret_f64_1', m.test_i64_reinterpret_f64_1,
+        'i32_reinterpret_f32_13', m.test_i32_reinterpret_f32_13, 0x7fa00000);
+    returns('i32_reinterpret_f32_14', m.test_i32_reinterpret_f32_14, -0x600000);
+    returns('i64_reinterpret_f64_0', m.test_i64_reinterpret_f64_0, 0);
+    returns('i64_reinterpret_f64_1', m.test_i64_reinterpret_f64_1,
         -0x8000000000000000);
-    returns('test_i64_reinterpret_f64_2', m.test_i64_reinterpret_f64_2, 1);
-    returns('test_i64_reinterpret_f64_3', m.test_i64_reinterpret_f64_3, -1);
-    returns('test_i64_reinterpret_f64_4', m.test_i64_reinterpret_f64_4,
+    returns('i64_reinterpret_f64_2', m.test_i64_reinterpret_f64_2, 1);
+    returns('i64_reinterpret_f64_3', m.test_i64_reinterpret_f64_3, -1);
+    returns('i64_reinterpret_f64_4', m.test_i64_reinterpret_f64_4,
         -0x7fffffffffffffff);
-    returns('test_i64_reinterpret_f64_5', m.test_i64_reinterpret_f64_5,
+    returns('i64_reinterpret_f64_5', m.test_i64_reinterpret_f64_5,
         0x3ff0000000000000);
-    returns('test_i64_reinterpret_f64_6', m.test_i64_reinterpret_f64_6,
+    returns('i64_reinterpret_f64_6', m.test_i64_reinterpret_f64_6,
         0x400921fb54442d11);
-    returns('test_i64_reinterpret_f64_7', m.test_i64_reinterpret_f64_7,
+    returns('i64_reinterpret_f64_7', m.test_i64_reinterpret_f64_7,
         0x7fefffffffffffff);
-    returns('test_i64_reinterpret_f64_8', m.test_i64_reinterpret_f64_8,
+    returns('i64_reinterpret_f64_8', m.test_i64_reinterpret_f64_8,
         -0x10000000000001);
-    returns('test_i64_reinterpret_f64_9', m.test_i64_reinterpret_f64_9,
+    returns('i64_reinterpret_f64_9', m.test_i64_reinterpret_f64_9,
         0x7ff0000000000000);
-    returns('test_i64_reinterpret_f64_10', m.test_i64_reinterpret_f64_10,
+    returns('i64_reinterpret_f64_10', m.test_i64_reinterpret_f64_10,
         -0x10000000000000);
-    returns('test_i64_reinterpret_f64_11', m.test_i64_reinterpret_f64_11,
+    returns('i64_reinterpret_f64_11', m.test_i64_reinterpret_f64_11,
         0x7ff8000000000000);
-    returns('test_i64_reinterpret_f64_12', m.test_i64_reinterpret_f64_12,
+    returns('i64_reinterpret_f64_12', m.test_i64_reinterpret_f64_12,
         -0x8000000000000);
-    returns('test_i64_reinterpret_f64_13', m.test_i64_reinterpret_f64_13,
+    returns('i64_reinterpret_f64_13', m.test_i64_reinterpret_f64_13,
         0x7ff4000000000000);
-    returns('test_i64_reinterpret_f64_14', m.test_i64_reinterpret_f64_14,
+    returns('i64_reinterpret_f64_14', m.test_i64_reinterpret_f64_14,
         -0xc000000000000);
   });
 }

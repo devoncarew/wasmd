@@ -12,13 +12,12 @@ void main() {
   group('fac', () {
     final Module m = Module();
 
-    returns('test_fac_rec_0', m.test_fac_rec_0, 0x619fb0907bc00000);
-    returns('test_fac_iter_0', m.test_fac_iter_0, 0x619fb0907bc00000);
-    returns('test_fac_rec_named_0', m.test_fac_rec_named_0, 0x619fb0907bc00000);
-    returns(
-        'test_fac_iter_named_0', m.test_fac_iter_named_0, 0x619fb0907bc00000);
-    returns('test_fac_opt_0', m.test_fac_opt_0, 0x619fb0907bc00000);
-    returns('test_fac_ssa_0', m.test_fac_ssa_0, 0x619fb0907bc00000);
+    returns('fac_rec_0', m.test_fac_rec_0, 0x619fb0907bc00000);
+    returns('fac_iter_0', m.test_fac_iter_0, 0x619fb0907bc00000);
+    returns('fac_rec_named_0', m.test_fac_rec_named_0, 0x619fb0907bc00000);
+    returns('fac_iter_named_0', m.test_fac_iter_named_0, 0x619fb0907bc00000);
+    returns('fac_opt_0', m.test_fac_opt_0, 0x619fb0907bc00000);
+    returns('fac_ssa_0', m.test_fac_ssa_0, 0x619fb0907bc00000);
   });
 }
 

@@ -171,6 +171,52 @@ class Instruction_BrLf extends Instruction {
   }
 }
 
+class Instruction_BrTable extends Instruction {
+  Instruction_BrTable() : super('br_table', 0x0E);
+
+  @override
+  Instr parsefromOpcodes(Reader r) {
+    var count = r.leb128_u();
+    var labels = <int>[];
+    for (int i = 0; i < count; i++) {
+      labels.add(r.leb128_u());
+    }
+    int defaultLabel = r.leb128_u();
+    return Instr(this, [labels, defaultLabel]);
+  }
+
+  @override
+  Code generateToStatement(Instr instr, DefinedFunction function) {
+    var labelIndexes = instr.args[0] as List<int>;
+    var defaultIndex = instr.args[1] as int;
+
+    var switchStatement = StringBuffer('switch (t0) {');
+    for (int i = 0; i < labelIndexes.length; i++) {
+      var labelIndex = labelIndexes[i];
+      var label = function.labelNameFromIndex(labelIndex);
+      var blockKind = function.blockNestingFromIndex(labelIndex);
+      var jumpKind = blockKind == BlockType.loopType ? 'continue' : 'break';
+
+      switchStatement.writeln('case $i:');
+      switchStatement.writeln('$jumpKind $label;');
+    }
+    switchStatement.writeln('default:');
+    {
+      var label = function.labelNameFromIndex(defaultIndex);
+      var blockKind = function.blockNestingFromIndex(defaultIndex);
+      var jumpKind = blockKind == BlockType.loopType ? 'continue' : 'break';
+
+      switchStatement.writeln('$jumpKind $label;');
+    }
+    switchStatement.writeln('}');
+
+    return Block.of([
+      declareVar('t0').assign(CodeExpression(Code('frame.pop()'))).statement,
+      Code(switchStatement.toString()),
+    ]);
+  }
+}
+
 class Instruction_Return extends Instruction {
   Instruction_Return() : super('return', 0x0F);
 
@@ -411,6 +457,41 @@ class Instruction {
 
   String get methodName => name.replaceAll('.', '_');
 
+  Instr parsefromOpcodes(Reader r) {
+    if (immediates.isNotEmpty) {
+      var args = <Object>[];
+      for (var immediateType in immediates) {
+        switch (immediateType) {
+          case Immediates.u32:
+            args.add(r.leb128_u());
+            break;
+          case Immediates.i32:
+            // ???
+            // args.add(r.leb128_s(bits: 32));
+            args.add(r.leb128_s(bits: 64));
+            break;
+          case Immediates.u64:
+            args.add(r.leb128_u());
+            break;
+          case Immediates.i64:
+            args.add(r.leb128_s(bits: 64));
+            break;
+          case Immediates.f32:
+            args.add(r.readF32());
+            break;
+          case Immediates.f64:
+            args.add(r.readF64());
+            break;
+          default:
+            throw 'unhandled immediate type: $immediateType';
+        }
+      }
+      return Instr(this, args);
+    } else {
+      return Instr(this);
+    }
+  }
+
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var frame = refer('frame');
 
@@ -445,40 +526,8 @@ class Instruction {
     } else {
       instruction = opcodeMap[opcode];
     }
-    if (instruction == null) return null;
 
-    if (instruction.immediates.isNotEmpty) {
-      var args = <Object>[];
-      for (var immediateType in instruction.immediates) {
-        switch (immediateType) {
-          case Immediates.u32:
-            args.add(r.leb128_u());
-            break;
-          case Immediates.i32:
-            // ???
-            // args.add(r.leb128_s(bits: 32));
-            args.add(r.leb128_s(bits: 64));
-            break;
-          case Immediates.u64:
-            args.add(r.leb128_u());
-            break;
-          case Immediates.i64:
-            args.add(r.leb128_s(bits: 64));
-            break;
-          case Immediates.f32:
-            args.add(r.readF32());
-            break;
-          case Immediates.f64:
-            args.add(r.readF64());
-            break;
-          default:
-            throw 'unhandled immediate type: $immediateType';
-        }
-      }
-      return Instr(instruction, args);
-    } else {
-      return Instr(instruction);
-    }
+    return instruction?.parsefromOpcodes(r);
   }
 
   static Literal? calcLiternal(List<Instr> instrs) {
@@ -513,7 +562,7 @@ class Instruction {
       Instruction_End(), // end, 0x0B
       Instruction_Br(), // br, 0x0C
       Instruction_BrLf(), // br_lf, 0x0D
-      //
+      Instruction_BrTable(), // br_table, 0x0E
       Instruction_Return(), // return, 0x0F
       Instruction_Call(), // call, 0x10
       Instruction_CallIndirect(), // call_indirect, 0x11

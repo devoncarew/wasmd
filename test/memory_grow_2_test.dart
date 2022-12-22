@@ -12,14 +12,14 @@ void main() {
   group('memory_grow_2', () {
     final Module m = Module();
 
-    returns('test_grow_0', m.test_grow_0, 0);
-    returns('test_grow_1', m.test_grow_1, 0);
-    returns('test_grow_2', m.test_grow_2, 1);
-    returns('test_grow_3', m.test_grow_3, 2);
-    returns('test_grow_4', m.test_grow_4, 4);
-    returns('test_grow_5', m.test_grow_5, 10);
-    returns('test_grow_6', m.test_grow_6, -1);
-    returns('test_grow_7', m.test_grow_7, -1);
+    returns('grow_0', m.test_grow_0, 0);
+    returns('grow_1', m.test_grow_1, 0);
+    returns('grow_2', m.test_grow_2, 1);
+    returns('grow_3', m.test_grow_3, 2);
+    returns('grow_4', m.test_grow_4, 4);
+    returns('grow_5', m.test_grow_5, 10);
+    returns('grow_6', m.test_grow_6, -1);
+    returns('grow_7', m.test_grow_7, -1);
   });
 }
 

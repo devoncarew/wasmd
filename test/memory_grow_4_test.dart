@@ -15,46 +15,44 @@ void main() {
     final Module m = Module();
     final Globals g = m.globals;
 
-    returns('test_as_br_value_0', m.test_as_br_value_0, 1);
-    returns('test_as_br_if_cond_0', m.test_as_br_if_cond_0);
-    returns('test_as_br_if_value_0', m.test_as_br_if_value_0, 1);
-    returns('test_as_br_if_value_cond_0', m.test_as_br_if_value_cond_0, 6);
-    returns('test_as_br_table_index_0', m.test_as_br_table_index_0);
-    returns('test_as_br_table_value_0', m.test_as_br_table_value_0, 1);
-    returns(
-        'test_as_br_table_value_index_0', m.test_as_br_table_value_index_0, 6);
-    returns('test_as_return_value_0', m.test_as_return_value_0, 1);
-    returns('test_as_if_cond_0', m.test_as_if_cond_0, 0);
-    returns('test_as_if_then_0', m.test_as_if_then_0, 1);
-    returns('test_as_if_else_0', m.test_as_if_else_0, 1);
-    returns('test_as_select_first_0', m.test_as_select_first_0, 1);
-    returns('test_as_select_second_0', m.test_as_select_second_0, 1);
-    returns('test_as_select_cond_0', m.test_as_select_cond_0, 0);
-    returns('test_as_call_first_0', m.test_as_call_first_0, -1);
-    returns('test_as_call_mid_0', m.test_as_call_mid_0, -1);
-    returns('test_as_call_last_0', m.test_as_call_last_0, -1);
-    returns(
-        'test_as_call_indirect_first_0', m.test_as_call_indirect_first_0, -1);
-    returns('test_as_call_indirect_mid_0', m.test_as_call_indirect_mid_0, -1);
-    returns('test_as_call_indirect_last_0', m.test_as_call_indirect_last_0, -1);
-    traps('test_as_call_indirect_index_0', m.test_as_call_indirect_index_0,
+    returns('as_br_value_0', m.test_as_br_value_0, 1);
+    returns('as_br_if_cond_0', m.test_as_br_if_cond_0);
+    returns('as_br_if_value_0', m.test_as_br_if_value_0, 1);
+    returns('as_br_if_value_cond_0', m.test_as_br_if_value_cond_0, 6);
+    returns('as_br_table_index_0', m.test_as_br_table_index_0);
+    returns('as_br_table_value_0', m.test_as_br_table_value_0, 1);
+    returns('as_br_table_value_index_0', m.test_as_br_table_value_index_0, 6);
+    returns('as_return_value_0', m.test_as_return_value_0, 1);
+    returns('as_if_cond_0', m.test_as_if_cond_0, 0);
+    returns('as_if_then_0', m.test_as_if_then_0, 1);
+    returns('as_if_else_0', m.test_as_if_else_0, 1);
+    returns('as_select_first_0', m.test_as_select_first_0, 1);
+    returns('as_select_second_0', m.test_as_select_second_0, 1);
+    returns('as_select_cond_0', m.test_as_select_cond_0, 0);
+    returns('as_call_first_0', m.test_as_call_first_0, -1);
+    returns('as_call_mid_0', m.test_as_call_mid_0, -1);
+    returns('as_call_last_0', m.test_as_call_last_0, -1);
+    returns('as_call_indirect_first_0', m.test_as_call_indirect_first_0, -1);
+    returns('as_call_indirect_mid_0', m.test_as_call_indirect_mid_0, -1);
+    returns('as_call_indirect_last_0', m.test_as_call_indirect_last_0, -1);
+    traps('as_call_indirect_index_0', m.test_as_call_indirect_index_0,
         "undefined element");
-    returns('test_as_local_set_value_0', m.test_as_local_set_value_0);
-    returns('test_as_local_tee_value_0', m.test_as_local_tee_value_0, 1);
-    returns('test_as_global_set_value_0', m.test_as_global_set_value_0);
-    returns('test_as_load_address_0', m.test_as_load_address_0, 0);
-    returns('test_as_loadN_address_0', m.test_as_loadN_address_0, 0);
-    returns('test_as_store_address_0', m.test_as_store_address_0);
-    returns('test_as_store_value_0', m.test_as_store_value_0);
-    returns('test_as_storeN_address_0', m.test_as_storeN_address_0);
-    returns('test_as_storeN_value_0', m.test_as_storeN_value_0);
-    returns('test_as_unary_operand_0', m.test_as_unary_operand_0, 31);
-    returns('test_as_binary_left_0', m.test_as_binary_left_0, 11);
-    returns('test_as_binary_right_0', m.test_as_binary_right_0, 9);
-    returns('test_as_test_operand_0', m.test_as_test_operand_0, 0);
-    returns('test_as_compare_left_0', m.test_as_compare_left_0, 1);
-    returns('test_as_compare_right_0', m.test_as_compare_right_0, 1);
-    returns('test_as_memory_grow_size_0', m.test_as_memory_grow_size_0, 1);
+    returns('as_local_set_value_0', m.test_as_local_set_value_0);
+    returns('as_local_tee_value_0', m.test_as_local_tee_value_0, 1);
+    returns('as_global_set_value_0', m.test_as_global_set_value_0);
+    returns('as_load_address_0', m.test_as_load_address_0, 0);
+    returns('as_loadN_address_0', m.test_as_loadN_address_0, 0);
+    returns('as_store_address_0', m.test_as_store_address_0);
+    returns('as_store_value_0', m.test_as_store_value_0);
+    returns('as_storeN_address_0', m.test_as_storeN_address_0);
+    returns('as_storeN_value_0', m.test_as_storeN_value_0);
+    returns('as_unary_operand_0', m.test_as_unary_operand_0, 31);
+    returns('as_binary_left_0', m.test_as_binary_left_0, 11);
+    returns('as_binary_right_0', m.test_as_binary_right_0, 9);
+    returns('as_test_operand_0', m.test_as_test_operand_0, 0);
+    returns('as_compare_left_0', m.test_as_compare_left_0, 1);
+    returns('as_compare_right_0', m.test_as_compare_right_0, 1);
+    returns('as_memory_grow_size_0', m.test_as_memory_grow_size_0, 1);
   });
 }
 
@@ -135,7 +133,15 @@ class Module {
     {
       frame.i32_const(0);
       frame.memory_grow(0);
-      throw 'unreachable (0x0E)';
+      var t0 = frame.pop();
+      switch (t0) {
+        case 0:
+          break block_label_0;
+        case 1:
+          break block_label_0;
+        default:
+          break block_label_0;
+      }
     }
   }
 
@@ -146,8 +152,19 @@ class Module {
       frame.i32_const(0);
       frame.memory_grow(0);
       frame.i32_const(1);
-      throw 'unreachable (0x0E)';
+      var t0 = frame.pop();
+      switch (t0) {
+        case 0:
+          break block_label_0;
+        case 1:
+          break block_label_0;
+        default:
+          break block_label_0;
+      }
+
+      frame.i32_const(7);
     }
+    return frame.pop();
   }
 
   i32 as_br_table_value_index() {
@@ -157,8 +174,17 @@ class Module {
       frame.i32_const(6);
       frame.i32_const(0);
       frame.memory_grow(0);
-      throw 'unreachable (0x0E)';
+      var t0 = frame.pop();
+      switch (t0) {
+        case 0:
+          break block_label_0;
+        default:
+          break block_label_0;
+      }
+
+      frame.i32_const(7);
     }
+    return frame.pop();
   }
 
   i32 as_return_value() {

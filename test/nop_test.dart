@@ -13,96 +13,91 @@ void main() {
     final Module m = Module();
     final Globals g = m.globals;
 
-    returns('test_as_func_first_0', m.test_as_func_first_0, 1);
-    returns('test_as_func_mid_0', m.test_as_func_mid_0, 2);
-    returns('test_as_func_last_0', m.test_as_func_last_0, 3);
-    returns('test_as_func_everywhere_0', m.test_as_func_everywhere_0, 4);
-    returns('test_as_drop_first_0', m.test_as_drop_first_0);
-    returns('test_as_drop_last_0', m.test_as_drop_last_0);
-    returns('test_as_drop_everywhere_0', m.test_as_drop_everywhere_0);
-    returns('test_as_select_first_0', m.test_as_select_first_0, 3);
-    returns('test_as_select_mid1_0', m.test_as_select_mid1_0, 3);
-    returns('test_as_select_mid2_0', m.test_as_select_mid2_0, 3);
-    returns('test_as_select_last_0', m.test_as_select_last_0, 3);
-    returns('test_as_select_everywhere_0', m.test_as_select_everywhere_0, 3);
-    returns('test_as_block_first_0', m.test_as_block_first_0, 2);
-    returns('test_as_block_mid_0', m.test_as_block_mid_0, 2);
-    returns('test_as_block_last_0', m.test_as_block_last_0, 3);
-    returns('test_as_block_everywhere_0', m.test_as_block_everywhere_0, 4);
-    returns('test_as_loop_first_0', m.test_as_loop_first_0, 2);
-    returns('test_as_loop_mid_0', m.test_as_loop_mid_0, 2);
-    returns('test_as_loop_last_0', m.test_as_loop_last_0, 3);
-    returns('test_as_loop_everywhere_0', m.test_as_loop_everywhere_0, 4);
-    returns('test_as_if_condition_0', m.test_as_if_condition_0);
-    returns('test_as_if_condition_1', m.test_as_if_condition_1);
-    returns('test_as_if_then_0', m.test_as_if_then_0);
-    returns('test_as_if_then_1', m.test_as_if_then_1);
-    returns('test_as_if_else_0', m.test_as_if_else_0);
-    returns('test_as_if_else_1', m.test_as_if_else_1);
-    returns('test_as_br_first_0', m.test_as_br_first_0, 5);
-    returns('test_as_br_last_0', m.test_as_br_last_0, 6);
-    returns('test_as_br_everywhere_0', m.test_as_br_everywhere_0, 7);
-    returns('test_as_br_if_first_0', m.test_as_br_if_first_0, 4);
-    returns('test_as_br_if_mid_0', m.test_as_br_if_mid_0, 5);
-    returns('test_as_br_if_last_0', m.test_as_br_if_last_0, 6);
-    returns('test_as_br_if_everywhere_0', m.test_as_br_if_everywhere_0, 7);
-    returns('test_as_br_table_first_0', m.test_as_br_table_first_0, 4);
-    returns('test_as_br_table_mid_0', m.test_as_br_table_mid_0, 5);
-    returns('test_as_br_table_last_0', m.test_as_br_table_last_0, 6);
+    returns('as_func_first_0', m.test_as_func_first_0, 1);
+    returns('as_func_mid_0', m.test_as_func_mid_0, 2);
+    returns('as_func_last_0', m.test_as_func_last_0, 3);
+    returns('as_func_everywhere_0', m.test_as_func_everywhere_0, 4);
+    returns('as_drop_first_0', m.test_as_drop_first_0);
+    returns('as_drop_last_0', m.test_as_drop_last_0);
+    returns('as_drop_everywhere_0', m.test_as_drop_everywhere_0);
+    returns('as_select_first_0', m.test_as_select_first_0, 3);
+    returns('as_select_mid1_0', m.test_as_select_mid1_0, 3);
+    returns('as_select_mid2_0', m.test_as_select_mid2_0, 3);
+    returns('as_select_last_0', m.test_as_select_last_0, 3);
+    returns('as_select_everywhere_0', m.test_as_select_everywhere_0, 3);
+    returns('as_block_first_0', m.test_as_block_first_0, 2);
+    returns('as_block_mid_0', m.test_as_block_mid_0, 2);
+    returns('as_block_last_0', m.test_as_block_last_0, 3);
+    returns('as_block_everywhere_0', m.test_as_block_everywhere_0, 4);
+    returns('as_loop_first_0', m.test_as_loop_first_0, 2);
+    returns('as_loop_mid_0', m.test_as_loop_mid_0, 2);
+    returns('as_loop_last_0', m.test_as_loop_last_0, 3);
+    returns('as_loop_everywhere_0', m.test_as_loop_everywhere_0, 4);
+    returns('as_if_condition_0', m.test_as_if_condition_0);
+    returns('as_if_condition_1', m.test_as_if_condition_1);
+    returns('as_if_then_0', m.test_as_if_then_0);
+    returns('as_if_then_1', m.test_as_if_then_1);
+    returns('as_if_else_0', m.test_as_if_else_0);
+    returns('as_if_else_1', m.test_as_if_else_1);
+    returns('as_br_first_0', m.test_as_br_first_0, 5);
+    returns('as_br_last_0', m.test_as_br_last_0, 6);
+    returns('as_br_everywhere_0', m.test_as_br_everywhere_0, 7);
+    returns('as_br_if_first_0', m.test_as_br_if_first_0, 4);
+    returns('as_br_if_mid_0', m.test_as_br_if_mid_0, 5);
+    returns('as_br_if_last_0', m.test_as_br_if_last_0, 6);
+    returns('as_br_if_everywhere_0', m.test_as_br_if_everywhere_0, 7);
+    returns('as_br_table_first_0', m.test_as_br_table_first_0, 4);
+    returns('as_br_table_mid_0', m.test_as_br_table_mid_0, 5);
+    returns('as_br_table_last_0', m.test_as_br_table_last_0, 6);
+    returns('as_br_table_everywhere_0', m.test_as_br_table_everywhere_0, 7);
+    returns('as_return_first_0', m.test_as_return_first_0, 5);
+    returns('as_return_last_0', m.test_as_return_last_0, 6);
+    returns('as_return_everywhere_0', m.test_as_return_everywhere_0, 7);
+    returns('as_call_first_0', m.test_as_call_first_0, 2);
+    returns('as_call_mid1_0', m.test_as_call_mid1_0, 2);
+    returns('as_call_mid2_0', m.test_as_call_mid2_0, 2);
+    returns('as_call_last_0', m.test_as_call_last_0, 20);
+    returns('as_call_everywhere_0', m.test_as_call_everywhere_0, -2);
+    returns('as_unary_first_0', m.test_as_unary_first_0, 1);
+    returns('as_unary_last_0', m.test_as_unary_last_0, 1);
+    returns('as_unary_everywhere_0', m.test_as_unary_everywhere_0, 2);
+    returns('as_binary_first_0', m.test_as_binary_first_0, 6);
+    returns('as_binary_mid_0', m.test_as_binary_mid_0, 6);
+    returns('as_binary_last_0', m.test_as_binary_last_0, 6);
+    returns('as_binary_everywhere_0', m.test_as_binary_everywhere_0, 6);
+    returns('as_test_first_0', m.test_as_test_first_0, 1);
+    returns('as_test_last_0', m.test_as_test_last_0, 1);
+    returns('as_test_everywhere_0', m.test_as_test_everywhere_0, 1);
+    returns('as_compare_first_0', m.test_as_compare_first_0, 0);
+    returns('as_compare_mid_0', m.test_as_compare_mid_0, 0);
+    returns('as_compare_last_0', m.test_as_compare_last_0, 0);
+    returns('as_compare_everywhere_0', m.test_as_compare_everywhere_0, 1);
+    returns('as_memory_grow_first_0', m.test_as_memory_grow_first_0, 1);
+    returns('as_memory_grow_last_0', m.test_as_memory_grow_last_0, 1);
     returns(
-        'test_as_br_table_everywhere_0', m.test_as_br_table_everywhere_0, 7);
-    returns('test_as_return_first_0', m.test_as_return_first_0, 5);
-    returns('test_as_return_last_0', m.test_as_return_last_0, 6);
-    returns('test_as_return_everywhere_0', m.test_as_return_everywhere_0, 7);
-    returns('test_as_call_first_0', m.test_as_call_first_0, 2);
-    returns('test_as_call_mid1_0', m.test_as_call_mid1_0, 2);
-    returns('test_as_call_mid2_0', m.test_as_call_mid2_0, 2);
-    returns('test_as_call_last_0', m.test_as_call_last_0, 20);
-    returns('test_as_call_everywhere_0', m.test_as_call_everywhere_0, -2);
-    returns('test_as_unary_first_0', m.test_as_unary_first_0, 1);
-    returns('test_as_unary_last_0', m.test_as_unary_last_0, 1);
-    returns('test_as_unary_everywhere_0', m.test_as_unary_everywhere_0, 2);
-    returns('test_as_binary_first_0', m.test_as_binary_first_0, 6);
-    returns('test_as_binary_mid_0', m.test_as_binary_mid_0, 6);
-    returns('test_as_binary_last_0', m.test_as_binary_last_0, 6);
-    returns('test_as_binary_everywhere_0', m.test_as_binary_everywhere_0, 6);
-    returns('test_as_test_first_0', m.test_as_test_first_0, 1);
-    returns('test_as_test_last_0', m.test_as_test_last_0, 1);
-    returns('test_as_test_everywhere_0', m.test_as_test_everywhere_0, 1);
-    returns('test_as_compare_first_0', m.test_as_compare_first_0, 0);
-    returns('test_as_compare_mid_0', m.test_as_compare_mid_0, 0);
-    returns('test_as_compare_last_0', m.test_as_compare_last_0, 0);
-    returns('test_as_compare_everywhere_0', m.test_as_compare_everywhere_0, 1);
-    returns('test_as_memory_grow_first_0', m.test_as_memory_grow_first_0, 1);
-    returns('test_as_memory_grow_last_0', m.test_as_memory_grow_last_0, 1);
-    returns('test_as_memory_grow_everywhere_0',
-        m.test_as_memory_grow_everywhere_0, 3);
-    returns(
-        'test_as_call_indirect_first_0', m.test_as_call_indirect_first_0, 1);
-    returns('test_as_call_indirect_mid1_0', m.test_as_call_indirect_mid1_0, 1);
-    returns('test_as_call_indirect_mid2_0', m.test_as_call_indirect_mid2_0, 1);
-    returns('test_as_call_indirect_last_0', m.test_as_call_indirect_last_0, 1);
-    returns('test_as_call_indirect_everywhere_0',
+        'as_memory_grow_everywhere_0', m.test_as_memory_grow_everywhere_0, 3);
+    returns('as_call_indirect_first_0', m.test_as_call_indirect_first_0, 1);
+    returns('as_call_indirect_mid1_0', m.test_as_call_indirect_mid1_0, 1);
+    returns('as_call_indirect_mid2_0', m.test_as_call_indirect_mid2_0, 1);
+    returns('as_call_indirect_last_0', m.test_as_call_indirect_last_0, 1);
+    returns('as_call_indirect_everywhere_0',
         m.test_as_call_indirect_everywhere_0, 1);
-    returns('test_as_local_set_first_0', m.test_as_local_set_first_0, 2);
-    returns('test_as_local_set_last_0', m.test_as_local_set_last_0, 2);
-    returns(
-        'test_as_local_set_everywhere_0', m.test_as_local_set_everywhere_0, 2);
-    returns('test_as_local_tee_first_0', m.test_as_local_tee_first_0, 2);
-    returns('test_as_local_tee_last_0', m.test_as_local_tee_last_0, 2);
-    returns(
-        'test_as_local_tee_everywhere_0', m.test_as_local_tee_everywhere_0, 2);
-    returns('test_as_global_set_first_0', m.test_as_global_set_first_0, 2);
-    returns('test_as_global_set_last_0', m.test_as_global_set_last_0, 2);
-    returns('test_as_global_set_everywhere_0',
-        m.test_as_global_set_everywhere_0, 2);
-    returns('test_as_load_first_0', m.test_as_load_first_0, 0);
-    returns('test_as_load_last_0', m.test_as_load_last_0, 0);
-    returns('test_as_load_everywhere_0', m.test_as_load_everywhere_0, 0);
-    returns('test_as_store_first_0', m.test_as_store_first_0);
-    returns('test_as_store_mid_0', m.test_as_store_mid_0);
-    returns('test_as_store_last_0', m.test_as_store_last_0);
-    returns('test_as_store_everywhere_0', m.test_as_store_everywhere_0);
+    returns('as_local_set_first_0', m.test_as_local_set_first_0, 2);
+    returns('as_local_set_last_0', m.test_as_local_set_last_0, 2);
+    returns('as_local_set_everywhere_0', m.test_as_local_set_everywhere_0, 2);
+    returns('as_local_tee_first_0', m.test_as_local_tee_first_0, 2);
+    returns('as_local_tee_last_0', m.test_as_local_tee_last_0, 2);
+    returns('as_local_tee_everywhere_0', m.test_as_local_tee_everywhere_0, 2);
+    returns('as_global_set_first_0', m.test_as_global_set_first_0, 2);
+    returns('as_global_set_last_0', m.test_as_global_set_last_0, 2);
+    returns('as_global_set_everywhere_0', m.test_as_global_set_everywhere_0, 2);
+    returns('as_load_first_0', m.test_as_load_first_0, 0);
+    returns('as_load_last_0', m.test_as_load_last_0, 0);
+    returns('as_load_everywhere_0', m.test_as_load_everywhere_0, 0);
+    returns('as_store_first_0', m.test_as_store_first_0);
+    returns('as_store_mid_0', m.test_as_store_mid_0);
+    returns('as_store_last_0', m.test_as_store_last_0);
+    returns('as_store_everywhere_0', m.test_as_store_everywhere_0);
   });
 }
 
@@ -485,8 +480,15 @@ class Module {
       /* nop */
       frame.push(arg0);
       frame.push(arg0);
-      throw 'unreachable (0x0E)';
+      var t0 = frame.pop();
+      switch (t0) {
+        case 0:
+          break block_label_0;
+        default:
+          break block_label_0;
+      }
     }
+    return frame.pop();
   }
 
   i32 as_br_table_mid(i32 arg0) {
@@ -496,8 +498,15 @@ class Module {
       frame.push(arg0);
       /* nop */
       frame.push(arg0);
-      throw 'unreachable (0x0E)';
+      var t0 = frame.pop();
+      switch (t0) {
+        case 0:
+          break block_label_0;
+        default:
+          break block_label_0;
+      }
     }
+    return frame.pop();
   }
 
   i32 as_br_table_last(i32 arg0) {
@@ -507,8 +516,15 @@ class Module {
       frame.push(arg0);
       frame.push(arg0);
       /* nop */
-      throw 'unreachable (0x0E)';
+      var t0 = frame.pop();
+      switch (t0) {
+        case 0:
+          break block_label_0;
+        default:
+          break block_label_0;
+      }
     }
+    return frame.pop();
   }
 
   i32 as_br_table_everywhere(i32 arg0) {
@@ -523,8 +539,15 @@ class Module {
       frame.push(arg0);
       /* nop */
       /* nop */
-      throw 'unreachable (0x0E)';
+      var t0 = frame.pop();
+      switch (t0) {
+        case 0:
+          break block_label_0;
+        default:
+          break block_label_0;
+      }
     }
+    return frame.pop();
   }
 
   i32 as_return_first(i32 arg0) {
