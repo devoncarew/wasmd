@@ -13,6 +13,10 @@ import 'package:path/path.dart' as path;
 import 'instructions.dart';
 import 'src/utils.dart';
 
+// TODO: support element section type 0x01
+// TODO: support generating tests for bulk.wast
+// TODO: support switch opcode - 0x0E
+
 class Compiler {
   final File file;
   final Logger logger;

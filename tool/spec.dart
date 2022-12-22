@@ -38,9 +38,9 @@ void main(List<String> args) {
       var wasmFile = File('${p.withoutExtension(watFile.path)}.wasm');
       compileWatToWasm(watFile, wasmFile);
 
-      var dartFile = File(
-        p.join('test', '${p.basenameWithoutExtension(watFile.path)}_test.dart'),
-      );
+      var baseName =
+          p.basenameWithoutExtension(watFile.path).replaceAll('-', '_');
+      var dartFile = File(p.join('test', '${baseName}_test.dart'));
       compileWasmToDart(wasmFile, dartFile);
     }
   }
@@ -184,7 +184,7 @@ List<Expression> _process(ComilationUnit compilationUnit) {
         ])
       ];
     } else if (invocation) {
-      var testInstrs = Expression(node.nodes.skip(2).toList());
+      var testInstrs = node.nodes.skip(2);
       var methodName = 'invoke_${name.replaceAll('-', '_')}_$id';
 
       return [
@@ -195,7 +195,7 @@ List<Expression> _process(ComilationUnit compilationUnit) {
           Expression([
             Atom('call'),
             Atom('\$$name'),
-            ...testInstrs.nodes.skip(2),
+            ...testInstrs,
           ]),
         ]),
       ];
@@ -240,7 +240,7 @@ List<Expression> _process(ComilationUnit compilationUnit) {
 
       for (var child in module.nodes) {
         if (child is Expression && kind(child) == 'func') {
-          if (child.nodes[1] is Expression) {
+          if (child.nodes.length >= 2 && child.nodes[1] is Expression) {
             var name = findName(child);
             child.nodes.insert(1, Atom('\$$name'));
           }
