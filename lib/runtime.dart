@@ -1061,6 +1061,34 @@ class Frame {
     stack.add(result);
   }
 
+  void f32_div() {
+    f32 arg1 = stack.removeLast() as f32;
+    f32 arg0 = stack.removeLast() as f32;
+    var result = arg0 / arg1;
+    stack.add(result);
+  }
+
+  void f32_min() {
+    f32 arg1 = stack.removeLast() as f32;
+    f32 arg0 = stack.removeLast() as f32;
+    var result = min(arg0, arg1);
+    stack.add(result);
+  }
+
+  void f32_max() {
+    f32 arg1 = stack.removeLast() as f32;
+    f32 arg0 = stack.removeLast() as f32;
+    var result = max(arg0, arg1);
+    stack.add(result);
+  }
+
+  void f32_copysign() {
+    f32 arg1 = stack.removeLast() as f32;
+    f32 arg0 = stack.removeLast() as f32;
+    var result = arg0.isNegative == arg1.isNegative ? arg0 : -arg0;
+    stack.add(result);
+  }
+
   void f64_sub() {
     f64 arg1 = stack.removeLast() as f64;
     f64 arg0 = stack.removeLast() as f64;

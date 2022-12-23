@@ -14,18 +14,17 @@ void main() {
   group('bulk_3', () {
     final Module m = Module();
 
-    invoke('invoke_init_passive_0', m.invoke_init_passive_0);
-    invoke('invoke_drop_passive_0', m.invoke_drop_passive_0);
-    invoke('invoke_drop_passive_1', m.invoke_drop_passive_1);
-    returns('test_init_passive_1', m.test_init_passive_1);
-    traps('test_init_passive_2', m.test_init_passive_2,
-        "out of bounds memory access");
-    invoke('invoke_init_passive_3', m.invoke_init_passive_3);
-    invoke('invoke_drop_active_0', m.invoke_drop_active_0);
-    returns('test_init_active_0', m.test_init_active_0);
-    traps('test_init_active_1', m.test_init_active_1,
-        "out of bounds memory access");
-    invoke('invoke_init_active_2', m.invoke_init_active_2);
+    invoke('e_init_passive_0', m.invoke_init_passive_0);
+    invoke('e_drop_passive_0', m.invoke_drop_passive_0);
+    invoke('e_drop_passive_1', m.invoke_drop_passive_1);
+    returns('init_passive_1', m.test_init_passive_1);
+    traps(
+        'init_passive_2', m.test_init_passive_2, "out of bounds memory access");
+    invoke('e_init_passive_3', m.invoke_init_passive_3);
+    invoke('e_drop_active_0', m.invoke_drop_active_0);
+    returns('init_active_0', m.test_init_active_0);
+    traps('init_active_1', m.test_init_active_1, "out of bounds memory access");
+    invoke('e_init_active_2', m.invoke_init_active_2);
   });
 }
 

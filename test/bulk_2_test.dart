@@ -14,18 +14,18 @@ void main() {
   group('bulk_2', () {
     final Module m = Module();
 
-    invoke('invoke_init_0', m.invoke_init_0);
-    returns('test_load8_u_0', m.test_load8_u_0, 187);
-    returns('test_load8_u_1', m.test_load8_u_1, 204);
-    returns('test_load8_u_2', m.test_load8_u_2, 0);
-    invoke('invoke_init_1', m.invoke_init_1);
-    traps('test_init_2', m.test_init_2, "out of bounds memory access");
-    returns('test_load8_u_3', m.test_load8_u_3, 204);
-    returns('test_load8_u_4', m.test_load8_u_4, 221);
-    invoke('invoke_init_3', m.invoke_init_3);
-    invoke('invoke_init_4', m.invoke_init_4);
-    traps('test_init_5', m.test_init_5, "out of bounds memory access");
-    traps('test_init_6', m.test_init_6, "out of bounds memory access");
+    invoke('e_init_0', m.invoke_init_0);
+    returns('load8_u_0', m.test_load8_u_0, 187);
+    returns('load8_u_1', m.test_load8_u_1, 204);
+    returns('load8_u_2', m.test_load8_u_2, 0);
+    invoke('e_init_1', m.invoke_init_1);
+    traps('init_2', m.test_init_2, "out of bounds memory access");
+    returns('load8_u_3', m.test_load8_u_3, 204);
+    returns('load8_u_4', m.test_load8_u_4, 221);
+    invoke('e_init_3', m.invoke_init_3);
+    invoke('e_init_4', m.invoke_init_4);
+    traps('init_5', m.test_init_5, "out of bounds memory access");
+    traps('init_6', m.test_init_6, "out of bounds memory access");
   });
 }
 

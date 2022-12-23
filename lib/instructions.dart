@@ -686,7 +686,10 @@ class Instruction {
       Instruction('f32.add', 0x92),
       Instruction('f32.sub', 0x93),
       Instruction('f32.mul', 0x94),
-      //
+      Instruction('f32.div', 0x95),
+      Instruction('f32.min', 0x96),
+      Instruction('f32.max', 0x97),
+      Instruction('f32.copysign', 0x98),
       Instruction('f64.abs', 0x99),
       Instruction('f64.neg', 0x9A),
       Instruction('f64.ceil', 0x9B),

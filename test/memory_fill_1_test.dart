@@ -14,7 +14,7 @@ void main() {
   group('memory_fill_1', () {
     final Module m = Module();
 
-    traps('test_test_0', m.test_test_0, "out of bounds memory access");
+    traps('test_0', m.test_test_0, "out of bounds memory access");
   });
 }
 

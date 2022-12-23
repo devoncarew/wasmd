@@ -14,7 +14,7 @@ void main() {
   group('memory_2', () {
     final Module m = Module();
 
-    returns('test_memsize_0', m.test_memsize_0, 1);
+    returns('memsize_0', m.test_memsize_0, 1);
   });
 }
 

@@ -12,10 +12,10 @@ void main() {
   group('forward', () {
     final Module m = Module();
 
-    returns('test_even_0', m.test_even_0, 0);
-    returns('test_even_1', m.test_even_1, 1);
-    returns('test_odd_0', m.test_odd_0, 1);
-    returns('test_odd_1', m.test_odd_1, 0);
+    returns('even_0', m.test_even_0, 0);
+    returns('even_1', m.test_even_1, 1);
+    returns('odd_0', m.test_odd_0, 1);
+    returns('odd_1', m.test_odd_1, 0);
   });
 }
 

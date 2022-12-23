@@ -1091,7 +1091,10 @@ class Module {
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
-    throw 'unreachable (0x92)';
+    frame.f32_add();
+    frame.drop();
+    frame.push(get());
+    return frame.pop();
   }
 
   i32 f32_sub() {
@@ -1099,7 +1102,10 @@ class Module {
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
-    throw 'unreachable (0x93)';
+    frame.f32_sub();
+    frame.drop();
+    frame.push(get());
+    return frame.pop();
   }
 
   i32 f32_mul() {
@@ -1107,7 +1113,10 @@ class Module {
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
-    throw 'unreachable (0x94)';
+    frame.f32_mul();
+    frame.drop();
+    frame.push(get());
+    return frame.pop();
   }
 
   i32 f32_div() {
@@ -1115,7 +1124,10 @@ class Module {
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
-    throw 'unreachable (0x95)';
+    frame.f32_div();
+    frame.drop();
+    frame.push(get());
+    return frame.pop();
   }
 
   i32 f32_copysign() {
@@ -1123,7 +1135,10 @@ class Module {
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
-    throw 'unreachable (0x98)';
+    frame.f32_copysign();
+    frame.drop();
+    frame.push(get());
+    return frame.pop();
   }
 
   i32 f32_eq() {
@@ -1197,7 +1212,10 @@ class Module {
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
-    throw 'unreachable (0x96)';
+    frame.f32_min();
+    frame.drop();
+    frame.push(get());
+    return frame.pop();
   }
 
   i32 f32_max() {
@@ -1205,7 +1223,10 @@ class Module {
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
-    throw 'unreachable (0x97)';
+    frame.f32_max();
+    frame.drop();
+    frame.push(get());
+    return frame.pop();
   }
 
   i32 f32_store() {

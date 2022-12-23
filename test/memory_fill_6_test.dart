@@ -12,12 +12,12 @@ void main() {
   group('memory_fill_6', () {
     final Module m = Module();
 
-    invoke('invoke_test_0', m.invoke_test_0);
-    returns('test_checkRange_0', m.test_checkRange_0, -1);
-    returns('test_checkRange_1', m.test_checkRange_1, -1);
-    returns('test_checkRange_2', m.test_checkRange_2, -1);
-    returns('test_checkRange_3', m.test_checkRange_3, -1);
-    returns('test_checkRange_4', m.test_checkRange_4, -1);
+    invoke('e_test_0', m.invoke_test_0);
+    returns('checkRange_0', m.test_checkRange_0, -1);
+    returns('checkRange_1', m.test_checkRange_1, -1);
+    returns('checkRange_2', m.test_checkRange_2, -1);
+    returns('checkRange_3', m.test_checkRange_3, -1);
+    returns('checkRange_4', m.test_checkRange_4, -1);
   });
 }
 

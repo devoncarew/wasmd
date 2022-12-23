@@ -14,25 +14,25 @@ void main() {
   group('address_2', () {
     final Module m = Module();
 
-    returns('test_32_good1_0', m.test_32_good1_0, 0.0);
-    returns('test_32_good2_0', m.test_32_good2_0, 0.0);
-    returns('test_32_good3_0', m.test_32_good3_0, 0.0);
-    returns('test_32_good4_0', m.test_32_good4_0, 0.0);
-    returns('test_32_good5_0', m.test_32_good5_0, double.nan);
-    returns('test_32_good1_1', m.test_32_good1_1, 0.0);
-    returns('test_32_good2_1', m.test_32_good2_1, 0.0);
-    returns('test_32_good3_1', m.test_32_good3_1, 0.0);
-    returns('test_32_good4_1', m.test_32_good4_1, 0.0);
-    returns('test_32_good5_1', m.test_32_good5_1, 0.0);
-    returns('test_32_good1_2', m.test_32_good1_2, 0.0);
-    returns('test_32_good2_2', m.test_32_good2_2, 0.0);
-    returns('test_32_good3_2', m.test_32_good3_2, 0.0);
-    returns('test_32_good4_2', m.test_32_good4_2, 0.0);
-    traps('test_32_good5_2', m.test_32_good5_2, "out of bounds memory access");
-    traps('test_32_good3_3', m.test_32_good3_3, "out of bounds memory access");
-    traps('test_32_good3_4', m.test_32_good3_4, "out of bounds memory access");
-    traps('test_32_bad_0', m.test_32_bad_0, "out of bounds memory access");
-    traps('test_32_bad_1', m.test_32_bad_1, "out of bounds memory access");
+    returns('32_good1_0', m.test_32_good1_0, 0.0);
+    returns('32_good2_0', m.test_32_good2_0, 0.0);
+    returns('32_good3_0', m.test_32_good3_0, 0.0);
+    returns('32_good4_0', m.test_32_good4_0, 0.0);
+    returns('32_good5_0', m.test_32_good5_0, double.nan);
+    returns('32_good1_1', m.test_32_good1_1, 0.0);
+    returns('32_good2_1', m.test_32_good2_1, 0.0);
+    returns('32_good3_1', m.test_32_good3_1, 0.0);
+    returns('32_good4_1', m.test_32_good4_1, 0.0);
+    returns('32_good5_1', m.test_32_good5_1, 0.0);
+    returns('32_good1_2', m.test_32_good1_2, 0.0);
+    returns('32_good2_2', m.test_32_good2_2, 0.0);
+    returns('32_good3_2', m.test_32_good3_2, 0.0);
+    returns('32_good4_2', m.test_32_good4_2, 0.0);
+    traps('32_good5_2', m.test_32_good5_2, "out of bounds memory access");
+    traps('32_good3_3', m.test_32_good3_3, "out of bounds memory access");
+    traps('32_good3_4', m.test_32_good3_4, "out of bounds memory access");
+    traps('32_bad_0', m.test_32_bad_0, "out of bounds memory access");
+    traps('32_bad_1', m.test_32_bad_1, "out of bounds memory access");
   });
 }
 

@@ -14,21 +14,21 @@ void main() {
   group('bulk_0', () {
     final Module m = Module();
 
-    invoke('invoke_fill_0', m.invoke_fill_0);
-    returns('test_load8_u_0', m.test_load8_u_0, 0);
-    returns('test_load8_u_1', m.test_load8_u_1, 255);
-    returns('test_load8_u_2', m.test_load8_u_2, 255);
-    returns('test_load8_u_3', m.test_load8_u_3, 255);
-    returns('test_load8_u_4', m.test_load8_u_4, 0);
-    invoke('invoke_fill_1', m.invoke_fill_1);
-    returns('test_load8_u_5', m.test_load8_u_5, 170);
-    returns('test_load8_u_6', m.test_load8_u_6, 170);
-    invoke('invoke_fill_2', m.invoke_fill_2);
-    traps('test_fill_3', m.test_fill_3, "out of bounds memory access");
-    returns('test_load8_u_7', m.test_load8_u_7, 0);
-    returns('test_load8_u_8', m.test_load8_u_8, 0);
-    invoke('invoke_fill_4', m.invoke_fill_4);
-    traps('test_fill_5', m.test_fill_5, "out of bounds memory access");
+    invoke('e_fill_0', m.invoke_fill_0);
+    returns('load8_u_0', m.test_load8_u_0, 0);
+    returns('load8_u_1', m.test_load8_u_1, 255);
+    returns('load8_u_2', m.test_load8_u_2, 255);
+    returns('load8_u_3', m.test_load8_u_3, 255);
+    returns('load8_u_4', m.test_load8_u_4, 0);
+    invoke('e_fill_1', m.invoke_fill_1);
+    returns('load8_u_5', m.test_load8_u_5, 170);
+    returns('load8_u_6', m.test_load8_u_6, 170);
+    invoke('e_fill_2', m.invoke_fill_2);
+    traps('fill_3', m.test_fill_3, "out of bounds memory access");
+    returns('load8_u_7', m.test_load8_u_7, 0);
+    returns('load8_u_8', m.test_load8_u_8, 0);
+    invoke('e_fill_4', m.invoke_fill_4);
+    traps('fill_5', m.test_fill_5, "out of bounds memory access");
   });
 }
 
