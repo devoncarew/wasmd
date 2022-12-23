@@ -818,6 +818,10 @@ void printModule(
   classBuilder.constructors.add(constructor.build());
 
   for (var func in module.definedFunctions) {
+    if (func.functionType.returnsTuple) {
+      throw 'multiple return values not currently supported '
+          '(${func.name}: ${func.functionType.resultTypeDisplayName})';
+    }
     var method = func.generateToMethod();
     classBuilder.methods.add(method);
   }
@@ -1111,12 +1115,13 @@ class FunctionType {
 
   FunctionType(this.parameterTypes, this.resultType);
 
-  // TODO: handle multiple return values
   String get resultTypeDisplayName {
-    return resultType.isEmpty ? 'void' : resultType.first.toString();
+    return resultType.isEmpty ? 'void' : resultType.join(', ');
   }
 
   bool get returnsVoid => resultType.isEmpty;
+
+  bool get returnsTuple => resultType.length >= 2;
 
   @override
   String toString() {

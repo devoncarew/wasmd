@@ -3,6 +3,8 @@
 // ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
 // ignore_for_file: unused_label, unused_local_variable
 
+import 'dart:typed_data';
+
 import 'package:test/test.dart';
 import 'package:wasmd/runtime.dart';
 
@@ -12,377 +14,391 @@ void main() {
   group('i32', () {
     final Module m = Module();
 
-    returns('test_add_0', m.test_add_0, 2);
-    returns('test_add_1', m.test_add_1, 1);
-    returns('test_add_2', m.test_add_2, -2);
-    returns('test_add_3', m.test_add_3, 0);
-    returns('test_add_4', m.test_add_4, -0x80000000);
-    returns('test_add_5', m.test_add_5, 0x7fffffff);
-    returns('test_add_6', m.test_add_6, 0);
-    returns('test_add_7', m.test_add_7, 0x40000000);
-    returns('test_sub_0', m.test_sub_0, 0);
-    returns('test_sub_1', m.test_sub_1, 1);
-    returns('test_sub_2', m.test_sub_2, 0);
-    returns('test_sub_3', m.test_sub_3, -0x80000000);
-    returns('test_sub_4', m.test_sub_4, 0x7fffffff);
-    returns('test_sub_5', m.test_sub_5, 0);
-    returns('test_sub_6', m.test_sub_6, 0x40000000);
-    returns('test_mul_0', m.test_mul_0, 1);
-    returns('test_mul_1', m.test_mul_1, 0);
-    returns('test_mul_2', m.test_mul_2, 1);
-    returns('test_mul_3', m.test_mul_3, 0);
-    returns('test_mul_4', m.test_mul_4, 0);
-    returns('test_mul_5', m.test_mul_5, -0x80000000);
-    returns('test_mul_6', m.test_mul_6, -0x7fffffff);
-    returns('test_mul_7', m.test_mul_7, 0x358e7470);
-    returns('test_mul_8', m.test_mul_8, 1);
-    returns('test_div_s_4', m.test_div_s_4, 1);
-    returns('test_div_s_5', m.test_div_s_5, 0);
-    returns('test_div_s_6', m.test_div_s_6, 0);
-    returns('test_div_s_7', m.test_div_s_7, 1);
-    returns('test_div_s_8', m.test_div_s_8, -0x40000000);
-    returns('test_div_s_9', m.test_div_s_9, -0x20c49b);
-    returns('test_div_s_10', m.test_div_s_10, 2);
-    returns('test_div_s_11', m.test_div_s_11, -2);
-    returns('test_div_s_12', m.test_div_s_12, -2);
-    returns('test_div_s_13', m.test_div_s_13, 2);
-    returns('test_div_s_14', m.test_div_s_14, 2);
-    returns('test_div_s_15', m.test_div_s_15, -2);
-    returns('test_div_s_16', m.test_div_s_16, -2);
-    returns('test_div_s_17', m.test_div_s_17, 2);
-    returns('test_div_s_18', m.test_div_s_18, 2);
-    returns('test_div_s_19', m.test_div_s_19, 2);
-    returns('test_div_u_2', m.test_div_u_2, 1);
-    returns('test_div_u_3', m.test_div_u_3, 0);
-    returns('test_div_u_4', m.test_div_u_4, 1);
-    returns('test_div_u_5', m.test_div_u_5, 0);
-    returns('test_div_u_6', m.test_div_u_6, 0x40000000);
-    returns('test_div_u_7', m.test_div_u_7, 0x8fef);
-    returns('test_div_u_8', m.test_div_u_8, 0x20c49b);
-    returns('test_div_u_9', m.test_div_u_9, 2);
-    returns('test_div_u_10', m.test_div_u_10, 0x7ffffffd);
-    returns('test_div_u_11', m.test_div_u_11, 0);
-    returns('test_div_u_12', m.test_div_u_12, 0);
-    returns('test_div_u_13', m.test_div_u_13, 2);
-    returns('test_div_u_14', m.test_div_u_14, 2);
-    returns('test_div_u_15', m.test_div_u_15, 2);
-    returns('test_rem_s_2', m.test_rem_s_2, 0);
-    returns('test_rem_s_3', m.test_rem_s_3, 0);
-    returns('test_rem_s_4', m.test_rem_s_4, 0);
-    returns('test_rem_s_5', m.test_rem_s_5, 0);
-    returns('test_rem_s_6', m.test_rem_s_6, 0);
-    returns('test_rem_s_7', m.test_rem_s_7, 0);
-    returns('test_rem_s_8', m.test_rem_s_8, 0);
-    returns('test_rem_s_9', m.test_rem_s_9, -647);
-    returns('test_rem_s_10', m.test_rem_s_10, 1);
-    returns('test_rem_s_11', m.test_rem_s_11, -1);
-    returns('test_rem_s_12', m.test_rem_s_12, 1);
-    returns('test_rem_s_13', m.test_rem_s_13, -1);
-    returns('test_rem_s_14', m.test_rem_s_14, 1);
-    returns('test_rem_s_15', m.test_rem_s_15, -1);
-    returns('test_rem_s_16', m.test_rem_s_16, 1);
-    returns('test_rem_s_17', m.test_rem_s_17, -1);
-    returns('test_rem_s_18', m.test_rem_s_18, 1);
-    returns('test_rem_s_19', m.test_rem_s_19, 3);
-    returns('test_rem_u_2', m.test_rem_u_2, 0);
-    returns('test_rem_u_3', m.test_rem_u_3, 0);
-    returns('test_rem_u_4', m.test_rem_u_4, 0);
-    returns('test_rem_u_5', m.test_rem_u_5, -0x80000000);
-    returns('test_rem_u_6', m.test_rem_u_6, 0);
-    returns('test_rem_u_7', m.test_rem_u_7, 0x8001);
-    returns('test_rem_u_8', m.test_rem_u_8, 649);
-    returns('test_rem_u_9', m.test_rem_u_9, 1);
-    returns('test_rem_u_10', m.test_rem_u_10, 1);
-    returns('test_rem_u_11', m.test_rem_u_11, 5);
-    returns('test_rem_u_12', m.test_rem_u_12, -5);
-    returns('test_rem_u_13', m.test_rem_u_13, 1);
-    returns('test_rem_u_14', m.test_rem_u_14, 1);
-    returns('test_rem_u_15', m.test_rem_u_15, 3);
-    returns('test_and_0', m.test_and_0, 0);
-    returns('test_and_1', m.test_and_1, 0);
-    returns('test_and_2', m.test_and_2, 1);
-    returns('test_and_3', m.test_and_3, 0);
-    returns('test_and_4', m.test_and_4, 0);
-    returns('test_and_5', m.test_and_5, 0x7fffffff);
-    returns('test_and_6', m.test_and_6, -0xf0f0f10);
-    returns('test_and_7', m.test_and_7, -1);
-    returns('test_or_0', m.test_or_0, 1);
-    returns('test_or_1', m.test_or_1, 1);
-    returns('test_or_2', m.test_or_2, 1);
-    returns('test_or_3', m.test_or_3, 0);
-    returns('test_or_4', m.test_or_4, -1);
-    returns('test_or_5', m.test_or_5, -0x80000000);
-    returns('test_or_6', m.test_or_6, -1);
-    returns('test_or_7', m.test_or_7, -1);
-    returns('test_xor_0', m.test_xor_0, 1);
-    returns('test_xor_1', m.test_xor_1, 1);
-    returns('test_xor_2', m.test_xor_2, 0);
-    returns('test_xor_3', m.test_xor_3, 0);
-    returns('test_xor_4', m.test_xor_4, -1);
-    returns('test_xor_5', m.test_xor_5, -0x80000000);
-    returns('test_xor_6', m.test_xor_6, 0x7fffffff);
-    returns('test_xor_7', m.test_xor_7, -0x80000000);
-    returns('test_xor_8', m.test_xor_8, 0xf0f0f0f);
-    returns('test_xor_9', m.test_xor_9, 0);
-    returns('test_shl_0', m.test_shl_0, 2);
-    returns('test_shl_1', m.test_shl_1, 1);
-    returns('test_shl_2', m.test_shl_2, -2);
-    returns('test_shl_3', m.test_shl_3, -2);
-    returns('test_shl_4', m.test_shl_4, 0);
-    returns('test_shl_5', m.test_shl_5, -0x80000000);
-    returns('test_shl_6', m.test_shl_6, -0x80000000);
-    returns('test_shl_7', m.test_shl_7, 1);
-    returns('test_shl_8', m.test_shl_8, 2);
-    returns('test_shl_9', m.test_shl_9, -0x80000000);
-    returns('test_shl_10', m.test_shl_10, -0x80000000);
-    returns('test_shr_s_0', m.test_shr_s_0, 0);
-    returns('test_shr_s_1', m.test_shr_s_1, 1);
-    returns('test_shr_s_2', m.test_shr_s_2, -1);
-    returns('test_shr_s_3', m.test_shr_s_3, 0x3fffffff);
-    returns('test_shr_s_4', m.test_shr_s_4, -0x40000000);
-    returns('test_shr_s_5', m.test_shr_s_5, 0x20000000);
-    returns('test_shr_s_6', m.test_shr_s_6, 1);
-    returns('test_shr_s_7', m.test_shr_s_7, 0);
-    returns('test_shr_s_8', m.test_shr_s_8, 0);
-    returns('test_shr_s_9', m.test_shr_s_9, 0);
-    returns('test_shr_s_10', m.test_shr_s_10, 1);
-    returns('test_shr_s_11', m.test_shr_s_11, -1);
-    returns('test_shr_s_12', m.test_shr_s_12, -1);
-    returns('test_shr_s_13', m.test_shr_s_13, -1);
-    returns('test_shr_s_14', m.test_shr_s_14, -1);
-    returns('test_shr_s_15', m.test_shr_s_15, -1);
-    returns('test_shr_s_16', m.test_shr_s_16, -1);
-    returns('test_shr_u_0', m.test_shr_u_0, 0);
-    returns('test_shr_u_1', m.test_shr_u_1, 1);
-    returns('test_shr_u_2', m.test_shr_u_2, 0x7fffffff);
-    returns('test_shr_u_3', m.test_shr_u_3, 0x3fffffff);
-    returns('test_shr_u_4', m.test_shr_u_4, 0x40000000);
-    returns('test_shr_u_5', m.test_shr_u_5, 0x20000000);
-    returns('test_shr_u_6', m.test_shr_u_6, 1);
-    returns('test_shr_u_7', m.test_shr_u_7, 0);
-    returns('test_shr_u_8', m.test_shr_u_8, 0);
-    returns('test_shr_u_9', m.test_shr_u_9, 0);
-    returns('test_shr_u_10', m.test_shr_u_10, 1);
-    returns('test_shr_u_11', m.test_shr_u_11, 1);
-    returns('test_shr_u_12', m.test_shr_u_12, -1);
-    returns('test_shr_u_13', m.test_shr_u_13, 0x7fffffff);
-    returns('test_shr_u_14', m.test_shr_u_14, 1);
-    returns('test_shr_u_15', m.test_shr_u_15, 1);
-    returns('test_shr_u_16', m.test_shr_u_16, -1);
-    returns('test_rotl_0', m.test_rotl_0, 2);
-    returns('test_rotl_1', m.test_rotl_1, 1);
-    returns('test_rotl_2', m.test_rotl_2, -1);
-    returns('test_rotl_3', m.test_rotl_3, 1);
-    returns('test_rotl_4', m.test_rotl_4, 0x579b30ed);
-    returns('test_rotl_5', m.test_rotl_5, -0x1ff23ff1);
-    returns('test_rotl_6', m.test_rotl_6, 0x183a5c76);
-    returns('test_rotl_7', m.test_rotl_7, 0x100000);
-    returns('test_rotl_8', m.test_rotl_8, 0x183a5c76);
-    returns('test_rotl_9', m.test_rotl_9, 0x579beed3);
-    returns('test_rotl_10', m.test_rotl_10, 0x579beed3);
-    returns('test_rotl_11', m.test_rotl_11, -0x80000000);
-    returns('test_rotl_12', m.test_rotl_12, 1);
-    returns('test_rotr_0', m.test_rotr_0, -0x80000000);
-    returns('test_rotr_1', m.test_rotr_1, 1);
-    returns('test_rotr_2', m.test_rotr_2, -1);
-    returns('test_rotr_3', m.test_rotr_3, 1);
-    returns('test_rotr_4', m.test_rotr_4, 0x7f806600);
-    returns('test_rotr_5', m.test_rotr_5, 0x8000);
-    returns('test_rotr_6', m.test_rotr_6, 0x1d860e97);
-    returns('test_rotr_7', m.test_rotr_7, 0x400);
-    returns('test_rotr_8', m.test_rotr_8, 0x1d860e97);
-    returns('test_rotr_9', m.test_rotr_9, -0x19044b2b);
-    returns('test_rotr_10', m.test_rotr_10, -0x19044b2b);
-    returns('test_rotr_11', m.test_rotr_11, 2);
-    returns('test_rotr_12', m.test_rotr_12, 1);
-    returns('test_clz_0', m.test_clz_0, 0);
-    returns('test_clz_1', m.test_clz_1, 32);
-    returns('test_clz_2', m.test_clz_2, 16);
-    returns('test_clz_3', m.test_clz_3, 24);
-    returns('test_clz_4', m.test_clz_4, 0);
-    returns('test_clz_5', m.test_clz_5, 31);
-    returns('test_clz_6', m.test_clz_6, 30);
-    returns('test_clz_7', m.test_clz_7, 1);
-    returns('test_ctz_0', m.test_ctz_0, 0);
-    returns('test_ctz_1', m.test_ctz_1, 32);
-    returns('test_ctz_2', m.test_ctz_2, 15);
-    returns('test_ctz_3', m.test_ctz_3, 16);
-    returns('test_ctz_4', m.test_ctz_4, 31);
-    returns('test_ctz_5', m.test_ctz_5, 0);
-    returns('test_popcnt_0', m.test_popcnt_0, 32);
-    returns('test_popcnt_1', m.test_popcnt_1, 0);
-    returns('test_popcnt_2', m.test_popcnt_2, 1);
-    returns('test_popcnt_3', m.test_popcnt_3, 2);
-    returns('test_popcnt_4', m.test_popcnt_4, 31);
-    returns('test_popcnt_5', m.test_popcnt_5, 16);
-    returns('test_popcnt_6', m.test_popcnt_6, 16);
-    returns('test_popcnt_7', m.test_popcnt_7, 24);
-    returns('test_extend8_s_0', m.test_extend8_s_0, 0);
-    returns('test_extend8_s_1', m.test_extend8_s_1, 127);
-    returns('test_extend8_s_2', m.test_extend8_s_2, -128);
-    returns('test_extend8_s_3', m.test_extend8_s_3, -1);
-    returns('test_extend8_s_4', m.test_extend8_s_4, 0);
-    returns('test_extend8_s_5', m.test_extend8_s_5, -128);
-    returns('test_extend8_s_6', m.test_extend8_s_6, -1);
-    returns('test_extend16_s_0', m.test_extend16_s_0, 0);
-    returns('test_extend16_s_1', m.test_extend16_s_1, 0x7fff);
-    returns('test_extend16_s_2', m.test_extend16_s_2, -0x8000);
-    returns('test_extend16_s_3', m.test_extend16_s_3, -1);
-    returns('test_extend16_s_4', m.test_extend16_s_4, 0);
-    returns('test_extend16_s_5', m.test_extend16_s_5, -0x8000);
-    returns('test_extend16_s_6', m.test_extend16_s_6, -1);
-    returns('test_eqz_0', m.test_eqz_0, 1);
-    returns('test_eqz_1', m.test_eqz_1, 0);
-    returns('test_eqz_2', m.test_eqz_2, 0);
-    returns('test_eqz_3', m.test_eqz_3, 0);
-    returns('test_eqz_4', m.test_eqz_4, 0);
-    returns('test_eq_0', m.test_eq_0, 1);
-    returns('test_eq_1', m.test_eq_1, 1);
-    returns('test_eq_2', m.test_eq_2, 0);
-    returns('test_eq_3', m.test_eq_3, 1);
-    returns('test_eq_4', m.test_eq_4, 1);
-    returns('test_eq_5', m.test_eq_5, 1);
-    returns('test_eq_6', m.test_eq_6, 0);
-    returns('test_eq_7', m.test_eq_7, 0);
-    returns('test_eq_8', m.test_eq_8, 0);
-    returns('test_eq_9', m.test_eq_9, 0);
-    returns('test_eq_10', m.test_eq_10, 0);
-    returns('test_eq_11', m.test_eq_11, 0);
-    returns('test_eq_12', m.test_eq_12, 0);
-    returns('test_eq_13', m.test_eq_13, 0);
-    returns('test_ne_0', m.test_ne_0, 0);
-    returns('test_ne_1', m.test_ne_1, 0);
-    returns('test_ne_2', m.test_ne_2, 1);
-    returns('test_ne_3', m.test_ne_3, 0);
-    returns('test_ne_4', m.test_ne_4, 0);
-    returns('test_ne_5', m.test_ne_5, 0);
-    returns('test_ne_6', m.test_ne_6, 1);
-    returns('test_ne_7', m.test_ne_7, 1);
-    returns('test_ne_8', m.test_ne_8, 1);
-    returns('test_ne_9', m.test_ne_9, 1);
-    returns('test_ne_10', m.test_ne_10, 1);
-    returns('test_ne_11', m.test_ne_11, 1);
-    returns('test_ne_12', m.test_ne_12, 1);
-    returns('test_ne_13', m.test_ne_13, 1);
-    returns('test_lt_s_0', m.test_lt_s_0, 0);
-    returns('test_lt_s_1', m.test_lt_s_1, 0);
-    returns('test_lt_s_2', m.test_lt_s_2, 1);
-    returns('test_lt_s_3', m.test_lt_s_3, 0);
-    returns('test_lt_s_4', m.test_lt_s_4, 0);
-    returns('test_lt_s_5', m.test_lt_s_5, 0);
-    returns('test_lt_s_6', m.test_lt_s_6, 0);
-    returns('test_lt_s_7', m.test_lt_s_7, 1);
-    returns('test_lt_s_8', m.test_lt_s_8, 1);
-    returns('test_lt_s_9', m.test_lt_s_9, 0);
-    returns('test_lt_s_10', m.test_lt_s_10, 1);
-    returns('test_lt_s_11', m.test_lt_s_11, 0);
-    returns('test_lt_s_12', m.test_lt_s_12, 1);
-    returns('test_lt_s_13', m.test_lt_s_13, 0);
-    returns('test_lt_u_0', m.test_lt_u_0, 0);
-    returns('test_lt_u_1', m.test_lt_u_1, 0);
-    returns('test_lt_u_2', m.test_lt_u_2, 0);
-    returns('test_lt_u_3', m.test_lt_u_3, 0);
-    returns('test_lt_u_4', m.test_lt_u_4, 0);
-    returns('test_lt_u_5', m.test_lt_u_5, 0);
-    returns('test_lt_u_6', m.test_lt_u_6, 0);
-    returns('test_lt_u_7', m.test_lt_u_7, 1);
-    returns('test_lt_u_8', m.test_lt_u_8, 0);
-    returns('test_lt_u_9', m.test_lt_u_9, 1);
-    returns('test_lt_u_10', m.test_lt_u_10, 1);
-    returns('test_lt_u_11', m.test_lt_u_11, 0);
-    returns('test_lt_u_12', m.test_lt_u_12, 0);
-    returns('test_lt_u_13', m.test_lt_u_13, 1);
-    returns('test_le_s_0', m.test_le_s_0, 1);
-    returns('test_le_s_1', m.test_le_s_1, 1);
-    returns('test_le_s_2', m.test_le_s_2, 1);
-    returns('test_le_s_3', m.test_le_s_3, 1);
-    returns('test_le_s_4', m.test_le_s_4, 1);
-    returns('test_le_s_5', m.test_le_s_5, 1);
-    returns('test_le_s_6', m.test_le_s_6, 0);
-    returns('test_le_s_7', m.test_le_s_7, 1);
-    returns('test_le_s_8', m.test_le_s_8, 1);
-    returns('test_le_s_9', m.test_le_s_9, 0);
-    returns('test_le_s_10', m.test_le_s_10, 1);
-    returns('test_le_s_11', m.test_le_s_11, 0);
-    returns('test_le_s_12', m.test_le_s_12, 1);
-    returns('test_le_s_13', m.test_le_s_13, 0);
-    returns('test_le_u_0', m.test_le_u_0, 1);
-    returns('test_le_u_1', m.test_le_u_1, 1);
-    returns('test_le_u_2', m.test_le_u_2, 0);
-    returns('test_le_u_3', m.test_le_u_3, 1);
-    returns('test_le_u_4', m.test_le_u_4, 1);
-    returns('test_le_u_5', m.test_le_u_5, 1);
-    returns('test_le_u_6', m.test_le_u_6, 0);
-    returns('test_le_u_7', m.test_le_u_7, 1);
-    returns('test_le_u_8', m.test_le_u_8, 0);
-    returns('test_le_u_9', m.test_le_u_9, 1);
-    returns('test_le_u_10', m.test_le_u_10, 1);
-    returns('test_le_u_11', m.test_le_u_11, 0);
-    returns('test_le_u_12', m.test_le_u_12, 0);
-    returns('test_le_u_13', m.test_le_u_13, 1);
-    returns('test_gt_s_0', m.test_gt_s_0, 0);
-    returns('test_gt_s_1', m.test_gt_s_1, 0);
-    returns('test_gt_s_2', m.test_gt_s_2, 0);
-    returns('test_gt_s_3', m.test_gt_s_3, 0);
-    returns('test_gt_s_4', m.test_gt_s_4, 0);
-    returns('test_gt_s_5', m.test_gt_s_5, 0);
-    returns('test_gt_s_6', m.test_gt_s_6, 1);
-    returns('test_gt_s_7', m.test_gt_s_7, 0);
-    returns('test_gt_s_8', m.test_gt_s_8, 0);
-    returns('test_gt_s_9', m.test_gt_s_9, 1);
-    returns('test_gt_s_10', m.test_gt_s_10, 0);
-    returns('test_gt_s_11', m.test_gt_s_11, 1);
-    returns('test_gt_s_12', m.test_gt_s_12, 0);
-    returns('test_gt_s_13', m.test_gt_s_13, 1);
-    returns('test_gt_u_0', m.test_gt_u_0, 0);
-    returns('test_gt_u_1', m.test_gt_u_1, 0);
-    returns('test_gt_u_2', m.test_gt_u_2, 1);
-    returns('test_gt_u_3', m.test_gt_u_3, 0);
-    returns('test_gt_u_4', m.test_gt_u_4, 0);
-    returns('test_gt_u_5', m.test_gt_u_5, 0);
-    returns('test_gt_u_6', m.test_gt_u_6, 1);
-    returns('test_gt_u_7', m.test_gt_u_7, 0);
-    returns('test_gt_u_8', m.test_gt_u_8, 1);
-    returns('test_gt_u_9', m.test_gt_u_9, 0);
-    returns('test_gt_u_10', m.test_gt_u_10, 0);
-    returns('test_gt_u_11', m.test_gt_u_11, 1);
-    returns('test_gt_u_12', m.test_gt_u_12, 1);
-    returns('test_gt_u_13', m.test_gt_u_13, 0);
-    returns('test_ge_s_0', m.test_ge_s_0, 1);
-    returns('test_ge_s_1', m.test_ge_s_1, 1);
-    returns('test_ge_s_2', m.test_ge_s_2, 0);
-    returns('test_ge_s_3', m.test_ge_s_3, 1);
-    returns('test_ge_s_4', m.test_ge_s_4, 1);
-    returns('test_ge_s_5', m.test_ge_s_5, 1);
-    returns('test_ge_s_6', m.test_ge_s_6, 1);
-    returns('test_ge_s_7', m.test_ge_s_7, 0);
-    returns('test_ge_s_8', m.test_ge_s_8, 0);
-    returns('test_ge_s_9', m.test_ge_s_9, 1);
-    returns('test_ge_s_10', m.test_ge_s_10, 0);
-    returns('test_ge_s_11', m.test_ge_s_11, 1);
-    returns('test_ge_s_12', m.test_ge_s_12, 0);
-    returns('test_ge_s_13', m.test_ge_s_13, 1);
-    returns('test_ge_u_0', m.test_ge_u_0, 1);
-    returns('test_ge_u_1', m.test_ge_u_1, 1);
-    returns('test_ge_u_2', m.test_ge_u_2, 1);
-    returns('test_ge_u_3', m.test_ge_u_3, 1);
-    returns('test_ge_u_4', m.test_ge_u_4, 1);
-    returns('test_ge_u_5', m.test_ge_u_5, 1);
-    returns('test_ge_u_6', m.test_ge_u_6, 1);
-    returns('test_ge_u_7', m.test_ge_u_7, 0);
-    returns('test_ge_u_8', m.test_ge_u_8, 1);
-    returns('test_ge_u_9', m.test_ge_u_9, 0);
-    returns('test_ge_u_10', m.test_ge_u_10, 0);
-    returns('test_ge_u_11', m.test_ge_u_11, 1);
-    returns('test_ge_u_12', m.test_ge_u_12, 1);
-    returns('test_ge_u_13', m.test_ge_u_13, 0);
+    returns('add_0', m.test_add_0, 2);
+    returns('add_1', m.test_add_1, 1);
+    returns('add_2', m.test_add_2, -2);
+    returns('add_3', m.test_add_3, 0);
+    returns('add_4', m.test_add_4, -0x80000000);
+    returns('add_5', m.test_add_5, 0x7fffffff);
+    returns('add_6', m.test_add_6, 0);
+    returns('add_7', m.test_add_7, 0x40000000);
+    returns('sub_0', m.test_sub_0, 0);
+    returns('sub_1', m.test_sub_1, 1);
+    returns('sub_2', m.test_sub_2, 0);
+    returns('sub_3', m.test_sub_3, -0x80000000);
+    returns('sub_4', m.test_sub_4, 0x7fffffff);
+    returns('sub_5', m.test_sub_5, 0);
+    returns('sub_6', m.test_sub_6, 0x40000000);
+    returns('mul_0', m.test_mul_0, 1);
+    returns('mul_1', m.test_mul_1, 0);
+    returns('mul_2', m.test_mul_2, 1);
+    returns('mul_3', m.test_mul_3, 0);
+    returns('mul_4', m.test_mul_4, 0);
+    returns('mul_5', m.test_mul_5, -0x80000000);
+    returns('mul_6', m.test_mul_6, -0x7fffffff);
+    returns('mul_7', m.test_mul_7, 0x358e7470);
+    returns('mul_8', m.test_mul_8, 1);
+    traps('div_s_0', m.test_div_s_0, "integer divide by zero");
+    traps('div_s_1', m.test_div_s_1, "integer divide by zero");
+    traps('div_s_2', m.test_div_s_2, "integer overflow");
+    traps('div_s_3', m.test_div_s_3, "integer divide by zero");
+    returns('div_s_4', m.test_div_s_4, 1);
+    returns('div_s_5', m.test_div_s_5, 0);
+    returns('div_s_6', m.test_div_s_6, 0);
+    returns('div_s_7', m.test_div_s_7, 1);
+    returns('div_s_8', m.test_div_s_8, -0x40000000);
+    returns('div_s_9', m.test_div_s_9, -0x20c49b);
+    returns('div_s_10', m.test_div_s_10, 2);
+    returns('div_s_11', m.test_div_s_11, -2);
+    returns('div_s_12', m.test_div_s_12, -2);
+    returns('div_s_13', m.test_div_s_13, 2);
+    returns('div_s_14', m.test_div_s_14, 2);
+    returns('div_s_15', m.test_div_s_15, -2);
+    returns('div_s_16', m.test_div_s_16, -2);
+    returns('div_s_17', m.test_div_s_17, 2);
+    returns('div_s_18', m.test_div_s_18, 2);
+    returns('div_s_19', m.test_div_s_19, 2);
+    traps('div_u_0', m.test_div_u_0, "integer divide by zero");
+    traps('div_u_1', m.test_div_u_1, "integer divide by zero");
+    returns('div_u_2', m.test_div_u_2, 1);
+    returns('div_u_3', m.test_div_u_3, 0);
+    returns('div_u_4', m.test_div_u_4, 1);
+    returns('div_u_5', m.test_div_u_5, 0);
+    returns('div_u_6', m.test_div_u_6, 0x40000000);
+    returns('div_u_7', m.test_div_u_7, 0x8fef);
+    returns('div_u_8', m.test_div_u_8, 0x20c49b);
+    returns('div_u_9', m.test_div_u_9, 2);
+    returns('div_u_10', m.test_div_u_10, 0x7ffffffd);
+    returns('div_u_11', m.test_div_u_11, 0);
+    returns('div_u_12', m.test_div_u_12, 0);
+    returns('div_u_13', m.test_div_u_13, 2);
+    returns('div_u_14', m.test_div_u_14, 2);
+    returns('div_u_15', m.test_div_u_15, 2);
+    traps('rem_s_0', m.test_rem_s_0, "integer divide by zero");
+    traps('rem_s_1', m.test_rem_s_1, "integer divide by zero");
+    returns('rem_s_2', m.test_rem_s_2, 0);
+    returns('rem_s_3', m.test_rem_s_3, 0);
+    returns('rem_s_4', m.test_rem_s_4, 0);
+    returns('rem_s_5', m.test_rem_s_5, 0);
+    returns('rem_s_6', m.test_rem_s_6, 0);
+    returns('rem_s_7', m.test_rem_s_7, 0);
+    returns('rem_s_8', m.test_rem_s_8, 0);
+    returns('rem_s_9', m.test_rem_s_9, -647);
+    returns('rem_s_10', m.test_rem_s_10, 1);
+    returns('rem_s_11', m.test_rem_s_11, -1);
+    returns('rem_s_12', m.test_rem_s_12, 1);
+    returns('rem_s_13', m.test_rem_s_13, -1);
+    returns('rem_s_14', m.test_rem_s_14, 1);
+    returns('rem_s_15', m.test_rem_s_15, -1);
+    returns('rem_s_16', m.test_rem_s_16, 1);
+    returns('rem_s_17', m.test_rem_s_17, -1);
+    returns('rem_s_18', m.test_rem_s_18, 1);
+    returns('rem_s_19', m.test_rem_s_19, 3);
+    traps('rem_u_0', m.test_rem_u_0, "integer divide by zero");
+    traps('rem_u_1', m.test_rem_u_1, "integer divide by zero");
+    returns('rem_u_2', m.test_rem_u_2, 0);
+    returns('rem_u_3', m.test_rem_u_3, 0);
+    returns('rem_u_4', m.test_rem_u_4, 0);
+    returns('rem_u_5', m.test_rem_u_5, -0x80000000);
+    returns('rem_u_6', m.test_rem_u_6, 0);
+    returns('rem_u_7', m.test_rem_u_7, 0x8001);
+    returns('rem_u_8', m.test_rem_u_8, 649);
+    returns('rem_u_9', m.test_rem_u_9, 1);
+    returns('rem_u_10', m.test_rem_u_10, 1);
+    returns('rem_u_11', m.test_rem_u_11, 5);
+    returns('rem_u_12', m.test_rem_u_12, -5);
+    returns('rem_u_13', m.test_rem_u_13, 1);
+    returns('rem_u_14', m.test_rem_u_14, 1);
+    returns('rem_u_15', m.test_rem_u_15, 3);
+    returns('and_0', m.test_and_0, 0);
+    returns('and_1', m.test_and_1, 0);
+    returns('and_2', m.test_and_2, 1);
+    returns('and_3', m.test_and_3, 0);
+    returns('and_4', m.test_and_4, 0);
+    returns('and_5', m.test_and_5, 0x7fffffff);
+    returns('and_6', m.test_and_6, -0xf0f0f10);
+    returns('and_7', m.test_and_7, -1);
+    returns('or_0', m.test_or_0, 1);
+    returns('or_1', m.test_or_1, 1);
+    returns('or_2', m.test_or_2, 1);
+    returns('or_3', m.test_or_3, 0);
+    returns('or_4', m.test_or_4, -1);
+    returns('or_5', m.test_or_5, -0x80000000);
+    returns('or_6', m.test_or_6, -1);
+    returns('or_7', m.test_or_7, -1);
+    returns('xor_0', m.test_xor_0, 1);
+    returns('xor_1', m.test_xor_1, 1);
+    returns('xor_2', m.test_xor_2, 0);
+    returns('xor_3', m.test_xor_3, 0);
+    returns('xor_4', m.test_xor_4, -1);
+    returns('xor_5', m.test_xor_5, -0x80000000);
+    returns('xor_6', m.test_xor_6, 0x7fffffff);
+    returns('xor_7', m.test_xor_7, -0x80000000);
+    returns('xor_8', m.test_xor_8, 0xf0f0f0f);
+    returns('xor_9', m.test_xor_9, 0);
+    returns('shl_0', m.test_shl_0, 2);
+    returns('shl_1', m.test_shl_1, 1);
+    returns('shl_2', m.test_shl_2, -2);
+    returns('shl_3', m.test_shl_3, -2);
+    returns('shl_4', m.test_shl_4, 0);
+    returns('shl_5', m.test_shl_5, -0x80000000);
+    returns('shl_6', m.test_shl_6, -0x80000000);
+    returns('shl_7', m.test_shl_7, 1);
+    returns('shl_8', m.test_shl_8, 2);
+    returns('shl_9', m.test_shl_9, -0x80000000);
+    returns('shl_10', m.test_shl_10, -0x80000000);
+    returns('shr_s_0', m.test_shr_s_0, 0);
+    returns('shr_s_1', m.test_shr_s_1, 1);
+    returns('shr_s_2', m.test_shr_s_2, -1);
+    returns('shr_s_3', m.test_shr_s_3, 0x3fffffff);
+    returns('shr_s_4', m.test_shr_s_4, -0x40000000);
+    returns('shr_s_5', m.test_shr_s_5, 0x20000000);
+    returns('shr_s_6', m.test_shr_s_6, 1);
+    returns('shr_s_7', m.test_shr_s_7, 0);
+    returns('shr_s_8', m.test_shr_s_8, 0);
+    returns('shr_s_9', m.test_shr_s_9, 0);
+    returns('shr_s_10', m.test_shr_s_10, 1);
+    returns('shr_s_11', m.test_shr_s_11, -1);
+    returns('shr_s_12', m.test_shr_s_12, -1);
+    returns('shr_s_13', m.test_shr_s_13, -1);
+    returns('shr_s_14', m.test_shr_s_14, -1);
+    returns('shr_s_15', m.test_shr_s_15, -1);
+    returns('shr_s_16', m.test_shr_s_16, -1);
+    returns('shr_u_0', m.test_shr_u_0, 0);
+    returns('shr_u_1', m.test_shr_u_1, 1);
+    returns('shr_u_2', m.test_shr_u_2, 0x7fffffff);
+    returns('shr_u_3', m.test_shr_u_3, 0x3fffffff);
+    returns('shr_u_4', m.test_shr_u_4, 0x40000000);
+    returns('shr_u_5', m.test_shr_u_5, 0x20000000);
+    returns('shr_u_6', m.test_shr_u_6, 1);
+    returns('shr_u_7', m.test_shr_u_7, 0);
+    returns('shr_u_8', m.test_shr_u_8, 0);
+    returns('shr_u_9', m.test_shr_u_9, 0);
+    returns('shr_u_10', m.test_shr_u_10, 1);
+    returns('shr_u_11', m.test_shr_u_11, 1);
+    returns('shr_u_12', m.test_shr_u_12, -1);
+    returns('shr_u_13', m.test_shr_u_13, 0x7fffffff);
+    returns('shr_u_14', m.test_shr_u_14, 1);
+    returns('shr_u_15', m.test_shr_u_15, 1);
+    returns('shr_u_16', m.test_shr_u_16, -1);
+    returns('rotl_0', m.test_rotl_0, 2);
+    returns('rotl_1', m.test_rotl_1, 1);
+    returns('rotl_2', m.test_rotl_2, -1);
+    returns('rotl_3', m.test_rotl_3, 1);
+    returns('rotl_4', m.test_rotl_4, 0x579b30ed);
+    returns('rotl_5', m.test_rotl_5, -0x1ff23ff1);
+    returns('rotl_6', m.test_rotl_6, 0x183a5c76);
+    returns('rotl_7', m.test_rotl_7, 0x100000);
+    returns('rotl_8', m.test_rotl_8, 0x183a5c76);
+    returns('rotl_9', m.test_rotl_9, 0x579beed3);
+    returns('rotl_10', m.test_rotl_10, 0x579beed3);
+    returns('rotl_11', m.test_rotl_11, -0x80000000);
+    returns('rotl_12', m.test_rotl_12, 1);
+    returns('rotr_0', m.test_rotr_0, -0x80000000);
+    returns('rotr_1', m.test_rotr_1, 1);
+    returns('rotr_2', m.test_rotr_2, -1);
+    returns('rotr_3', m.test_rotr_3, 1);
+    returns('rotr_4', m.test_rotr_4, 0x7f806600);
+    returns('rotr_5', m.test_rotr_5, 0x8000);
+    returns('rotr_6', m.test_rotr_6, 0x1d860e97);
+    returns('rotr_7', m.test_rotr_7, 0x400);
+    returns('rotr_8', m.test_rotr_8, 0x1d860e97);
+    returns('rotr_9', m.test_rotr_9, -0x19044b2b);
+    returns('rotr_10', m.test_rotr_10, -0x19044b2b);
+    returns('rotr_11', m.test_rotr_11, 2);
+    returns('rotr_12', m.test_rotr_12, 1);
+    returns('clz_0', m.test_clz_0, 0);
+    returns('clz_1', m.test_clz_1, 32);
+    returns('clz_2', m.test_clz_2, 16);
+    returns('clz_3', m.test_clz_3, 24);
+    returns('clz_4', m.test_clz_4, 0);
+    returns('clz_5', m.test_clz_5, 31);
+    returns('clz_6', m.test_clz_6, 30);
+    returns('clz_7', m.test_clz_7, 1);
+    returns('ctz_0', m.test_ctz_0, 0);
+    returns('ctz_1', m.test_ctz_1, 32);
+    returns('ctz_2', m.test_ctz_2, 15);
+    returns('ctz_3', m.test_ctz_3, 16);
+    returns('ctz_4', m.test_ctz_4, 31);
+    returns('ctz_5', m.test_ctz_5, 0);
+    returns('popcnt_0', m.test_popcnt_0, 32);
+    returns('popcnt_1', m.test_popcnt_1, 0);
+    returns('popcnt_2', m.test_popcnt_2, 1);
+    returns('popcnt_3', m.test_popcnt_3, 2);
+    returns('popcnt_4', m.test_popcnt_4, 31);
+    returns('popcnt_5', m.test_popcnt_5, 16);
+    returns('popcnt_6', m.test_popcnt_6, 16);
+    returns('popcnt_7', m.test_popcnt_7, 24);
+    returns('extend8_s_0', m.test_extend8_s_0, 0);
+    returns('extend8_s_1', m.test_extend8_s_1, 127);
+    returns('extend8_s_2', m.test_extend8_s_2, -128);
+    returns('extend8_s_3', m.test_extend8_s_3, -1);
+    returns('extend8_s_4', m.test_extend8_s_4, 0);
+    returns('extend8_s_5', m.test_extend8_s_5, -128);
+    returns('extend8_s_6', m.test_extend8_s_6, -1);
+    returns('extend16_s_0', m.test_extend16_s_0, 0);
+    returns('extend16_s_1', m.test_extend16_s_1, 0x7fff);
+    returns('extend16_s_2', m.test_extend16_s_2, -0x8000);
+    returns('extend16_s_3', m.test_extend16_s_3, -1);
+    returns('extend16_s_4', m.test_extend16_s_4, 0);
+    returns('extend16_s_5', m.test_extend16_s_5, -0x8000);
+    returns('extend16_s_6', m.test_extend16_s_6, -1);
+    returns('eqz_0', m.test_eqz_0, 1);
+    returns('eqz_1', m.test_eqz_1, 0);
+    returns('eqz_2', m.test_eqz_2, 0);
+    returns('eqz_3', m.test_eqz_3, 0);
+    returns('eqz_4', m.test_eqz_4, 0);
+    returns('eq_0', m.test_eq_0, 1);
+    returns('eq_1', m.test_eq_1, 1);
+    returns('eq_2', m.test_eq_2, 0);
+    returns('eq_3', m.test_eq_3, 1);
+    returns('eq_4', m.test_eq_4, 1);
+    returns('eq_5', m.test_eq_5, 1);
+    returns('eq_6', m.test_eq_6, 0);
+    returns('eq_7', m.test_eq_7, 0);
+    returns('eq_8', m.test_eq_8, 0);
+    returns('eq_9', m.test_eq_9, 0);
+    returns('eq_10', m.test_eq_10, 0);
+    returns('eq_11', m.test_eq_11, 0);
+    returns('eq_12', m.test_eq_12, 0);
+    returns('eq_13', m.test_eq_13, 0);
+    returns('ne_0', m.test_ne_0, 0);
+    returns('ne_1', m.test_ne_1, 0);
+    returns('ne_2', m.test_ne_2, 1);
+    returns('ne_3', m.test_ne_3, 0);
+    returns('ne_4', m.test_ne_4, 0);
+    returns('ne_5', m.test_ne_5, 0);
+    returns('ne_6', m.test_ne_6, 1);
+    returns('ne_7', m.test_ne_7, 1);
+    returns('ne_8', m.test_ne_8, 1);
+    returns('ne_9', m.test_ne_9, 1);
+    returns('ne_10', m.test_ne_10, 1);
+    returns('ne_11', m.test_ne_11, 1);
+    returns('ne_12', m.test_ne_12, 1);
+    returns('ne_13', m.test_ne_13, 1);
+    returns('lt_s_0', m.test_lt_s_0, 0);
+    returns('lt_s_1', m.test_lt_s_1, 0);
+    returns('lt_s_2', m.test_lt_s_2, 1);
+    returns('lt_s_3', m.test_lt_s_3, 0);
+    returns('lt_s_4', m.test_lt_s_4, 0);
+    returns('lt_s_5', m.test_lt_s_5, 0);
+    returns('lt_s_6', m.test_lt_s_6, 0);
+    returns('lt_s_7', m.test_lt_s_7, 1);
+    returns('lt_s_8', m.test_lt_s_8, 1);
+    returns('lt_s_9', m.test_lt_s_9, 0);
+    returns('lt_s_10', m.test_lt_s_10, 1);
+    returns('lt_s_11', m.test_lt_s_11, 0);
+    returns('lt_s_12', m.test_lt_s_12, 1);
+    returns('lt_s_13', m.test_lt_s_13, 0);
+    returns('lt_u_0', m.test_lt_u_0, 0);
+    returns('lt_u_1', m.test_lt_u_1, 0);
+    returns('lt_u_2', m.test_lt_u_2, 0);
+    returns('lt_u_3', m.test_lt_u_3, 0);
+    returns('lt_u_4', m.test_lt_u_4, 0);
+    returns('lt_u_5', m.test_lt_u_5, 0);
+    returns('lt_u_6', m.test_lt_u_6, 0);
+    returns('lt_u_7', m.test_lt_u_7, 1);
+    returns('lt_u_8', m.test_lt_u_8, 0);
+    returns('lt_u_9', m.test_lt_u_9, 1);
+    returns('lt_u_10', m.test_lt_u_10, 1);
+    returns('lt_u_11', m.test_lt_u_11, 0);
+    returns('lt_u_12', m.test_lt_u_12, 0);
+    returns('lt_u_13', m.test_lt_u_13, 1);
+    returns('le_s_0', m.test_le_s_0, 1);
+    returns('le_s_1', m.test_le_s_1, 1);
+    returns('le_s_2', m.test_le_s_2, 1);
+    returns('le_s_3', m.test_le_s_3, 1);
+    returns('le_s_4', m.test_le_s_4, 1);
+    returns('le_s_5', m.test_le_s_5, 1);
+    returns('le_s_6', m.test_le_s_6, 0);
+    returns('le_s_7', m.test_le_s_7, 1);
+    returns('le_s_8', m.test_le_s_8, 1);
+    returns('le_s_9', m.test_le_s_9, 0);
+    returns('le_s_10', m.test_le_s_10, 1);
+    returns('le_s_11', m.test_le_s_11, 0);
+    returns('le_s_12', m.test_le_s_12, 1);
+    returns('le_s_13', m.test_le_s_13, 0);
+    returns('le_u_0', m.test_le_u_0, 1);
+    returns('le_u_1', m.test_le_u_1, 1);
+    returns('le_u_2', m.test_le_u_2, 0);
+    returns('le_u_3', m.test_le_u_3, 1);
+    returns('le_u_4', m.test_le_u_4, 1);
+    returns('le_u_5', m.test_le_u_5, 1);
+    returns('le_u_6', m.test_le_u_6, 0);
+    returns('le_u_7', m.test_le_u_7, 1);
+    returns('le_u_8', m.test_le_u_8, 0);
+    returns('le_u_9', m.test_le_u_9, 1);
+    returns('le_u_10', m.test_le_u_10, 1);
+    returns('le_u_11', m.test_le_u_11, 0);
+    returns('le_u_12', m.test_le_u_12, 0);
+    returns('le_u_13', m.test_le_u_13, 1);
+    returns('gt_s_0', m.test_gt_s_0, 0);
+    returns('gt_s_1', m.test_gt_s_1, 0);
+    returns('gt_s_2', m.test_gt_s_2, 0);
+    returns('gt_s_3', m.test_gt_s_3, 0);
+    returns('gt_s_4', m.test_gt_s_4, 0);
+    returns('gt_s_5', m.test_gt_s_5, 0);
+    returns('gt_s_6', m.test_gt_s_6, 1);
+    returns('gt_s_7', m.test_gt_s_7, 0);
+    returns('gt_s_8', m.test_gt_s_8, 0);
+    returns('gt_s_9', m.test_gt_s_9, 1);
+    returns('gt_s_10', m.test_gt_s_10, 0);
+    returns('gt_s_11', m.test_gt_s_11, 1);
+    returns('gt_s_12', m.test_gt_s_12, 0);
+    returns('gt_s_13', m.test_gt_s_13, 1);
+    returns('gt_u_0', m.test_gt_u_0, 0);
+    returns('gt_u_1', m.test_gt_u_1, 0);
+    returns('gt_u_2', m.test_gt_u_2, 1);
+    returns('gt_u_3', m.test_gt_u_3, 0);
+    returns('gt_u_4', m.test_gt_u_4, 0);
+    returns('gt_u_5', m.test_gt_u_5, 0);
+    returns('gt_u_6', m.test_gt_u_6, 1);
+    returns('gt_u_7', m.test_gt_u_7, 0);
+    returns('gt_u_8', m.test_gt_u_8, 1);
+    returns('gt_u_9', m.test_gt_u_9, 0);
+    returns('gt_u_10', m.test_gt_u_10, 0);
+    returns('gt_u_11', m.test_gt_u_11, 1);
+    returns('gt_u_12', m.test_gt_u_12, 1);
+    returns('gt_u_13', m.test_gt_u_13, 0);
+    returns('ge_s_0', m.test_ge_s_0, 1);
+    returns('ge_s_1', m.test_ge_s_1, 1);
+    returns('ge_s_2', m.test_ge_s_2, 0);
+    returns('ge_s_3', m.test_ge_s_3, 1);
+    returns('ge_s_4', m.test_ge_s_4, 1);
+    returns('ge_s_5', m.test_ge_s_5, 1);
+    returns('ge_s_6', m.test_ge_s_6, 1);
+    returns('ge_s_7', m.test_ge_s_7, 0);
+    returns('ge_s_8', m.test_ge_s_8, 0);
+    returns('ge_s_9', m.test_ge_s_9, 1);
+    returns('ge_s_10', m.test_ge_s_10, 0);
+    returns('ge_s_11', m.test_ge_s_11, 1);
+    returns('ge_s_12', m.test_ge_s_12, 0);
+    returns('ge_s_13', m.test_ge_s_13, 1);
+    returns('ge_u_0', m.test_ge_u_0, 1);
+    returns('ge_u_1', m.test_ge_u_1, 1);
+    returns('ge_u_2', m.test_ge_u_2, 1);
+    returns('ge_u_3', m.test_ge_u_3, 1);
+    returns('ge_u_4', m.test_ge_u_4, 1);
+    returns('ge_u_5', m.test_ge_u_5, 1);
+    returns('ge_u_6', m.test_ge_u_6, 1);
+    returns('ge_u_7', m.test_ge_u_7, 0);
+    returns('ge_u_8', m.test_ge_u_8, 1);
+    returns('ge_u_9', m.test_ge_u_9, 0);
+    returns('ge_u_10', m.test_ge_u_10, 0);
+    returns('ge_u_11', m.test_ge_u_11, 1);
+    returns('ge_u_12', m.test_ge_u_12, 1);
+    returns('ge_u_13', m.test_ge_u_13, 0);
   });
 }
 
 class Module {
-  Module();
+  Module() {
+    dataSegments.init(memory);
+  }
 
   final Memory memory = Memory(0);
+
+  final DataSegments dataSegments = DataSegments();
 
   i32 add(i32 x, i32 y) {
     final frame = Frame(memory);
@@ -500,7 +516,8 @@ class Module {
     final frame = Frame(memory);
     frame.push(x);
     frame.push(y);
-    throw 'unreachable (0x78)';
+    frame.i32_rotr();
+    return frame.pop();
   }
 
   i32 clz(i32 x) {
@@ -913,6 +930,54 @@ class Module {
     return frame.pop();
   }
 
+  i32 test_div_s_0() {
+    final frame = Frame(memory);
+    frame.i32_const(1);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(div_s(t0, t1));
+    }
+    return frame.pop();
+  }
+
+  i32 test_div_s_1() {
+    final frame = Frame(memory);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(div_s(t0, t1));
+    }
+    return frame.pop();
+  }
+
+  i32 test_div_s_2() {
+    final frame = Frame(memory);
+    frame.i32_const(-0x80000000);
+    frame.i32_const(-1);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(div_s(t0, t1));
+    }
+    return frame.pop();
+  }
+
+  i32 test_div_s_3() {
+    final frame = Frame(memory);
+    frame.i32_const(-0x80000000);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(div_s(t0, t1));
+    }
+    return frame.pop();
+  }
+
   i32 test_div_s_4() {
     final frame = Frame(memory);
     frame.i32_const(1);
@@ -1105,6 +1170,30 @@ class Module {
     return frame.pop();
   }
 
+  i32 test_div_u_0() {
+    final frame = Frame(memory);
+    frame.i32_const(1);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(div_u(t0, t1));
+    }
+    return frame.pop();
+  }
+
+  i32 test_div_u_1() {
+    final frame = Frame(memory);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(div_u(t0, t1));
+    }
+    return frame.pop();
+  }
+
   i32 test_div_u_2() {
     final frame = Frame(memory);
     frame.i32_const(1);
@@ -1269,6 +1358,30 @@ class Module {
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(div_u(t0, t1));
+    }
+    return frame.pop();
+  }
+
+  i32 test_rem_s_0() {
+    final frame = Frame(memory);
+    frame.i32_const(1);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(rem_s(t0, t1));
+    }
+    return frame.pop();
+  }
+
+  i32 test_rem_s_1() {
+    final frame = Frame(memory);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(rem_s(t0, t1));
     }
     return frame.pop();
   }
@@ -1485,6 +1598,30 @@ class Module {
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(rem_s(t0, t1));
+    }
+    return frame.pop();
+  }
+
+  i32 test_rem_u_0() {
+    final frame = Frame(memory);
+    frame.i32_const(1);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(rem_u(t0, t1));
+    }
+    return frame.pop();
+  }
+
+  i32 test_rem_u_1() {
+    final frame = Frame(memory);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      frame.push(rem_u(t0, t1));
     }
     return frame.pop();
   }
@@ -4915,3 +5052,66 @@ class Module {
 typedef FunctionType0 = i32 Function(i32, i32);
 typedef FunctionType1 = i32 Function(i32);
 typedef FunctionType2 = i32 Function();
+
+class DataSegments {
+  Uint8List trap_div_s_0 = decodeDataLiteral(_hex0);
+
+  Uint8List trap_div_s_1 = decodeDataLiteral(_hex1);
+
+  Uint8List trap_div_s_2 = decodeDataLiteral(_hex2);
+
+  Uint8List trap_div_s_3 = decodeDataLiteral(_hex3);
+
+  Uint8List trap_div_u_0 = decodeDataLiteral(_hex4);
+
+  Uint8List trap_div_u_1 = decodeDataLiteral(_hex5);
+
+  Uint8List trap_rem_s_0 = decodeDataLiteral(_hex6);
+
+  Uint8List trap_rem_s_1 = decodeDataLiteral(_hex7);
+
+  Uint8List trap_rem_u_0 = decodeDataLiteral(_hex8);
+
+  Uint8List trap_rem_u_1 = decodeDataLiteral(_hex9);
+
+  static const String _hex0 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  static const String _hex1 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  static const String _hex2 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x6F\x76\x65\x72\x66\x6C\x6F\x77';
+
+  static const String _hex3 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  static const String _hex4 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  static const String _hex5 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  static const String _hex6 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  static const String _hex7 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  static const String _hex8 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  static const String _hex9 =
+      '\x69\x6E\x74\x65\x67\x65\x72\x20\x64\x69\x76\x69\x64\x65\x20\x62\x79\x20'
+      '\x7A\x65\x72\x6F';
+
+  void init(Memory memory) {}
+}

@@ -658,8 +658,7 @@ class Instruction {
       Instruction('i32.shr_s', 0x75),
       Instruction('i32.shr_u', 0x76),
       Instruction('i32.rotl', 0x77),
-      // TODO:
-      // Instruction('i32.rotr', 0x78),
+      Instruction('i32.rotr', 0x78),
       Instruction('i64.clz', 0x79),
       Instruction('i64.ctz', 0x7A),
       Instruction('i64.popcnt', 0x7B),
@@ -680,6 +679,13 @@ class Instruction {
       Instruction('i64.rotr', 0x8A),
       //
       Instruction('f32.neg', 0x8C),
+      //
+      Instruction('f32.floor', 0x8E),
+      //
+      Instruction('f32.sqrt', 0x91),
+      Instruction('f32.add', 0x92),
+      Instruction('f32.sub', 0x93),
+      Instruction('f32.mul', 0x94),
       //
       Instruction('f64.abs', 0x99),
       Instruction('f64.neg', 0x9A),
@@ -710,7 +716,7 @@ class Instruction {
       Instruction('f32.convert_i32_u', 0xB3),
       Instruction('f32.convert_i64_s', 0xB4),
       Instruction('f32.convert_i64_u', 0xB5),
-      // Instruction('f32.demote_f64', 0xB6),
+      Instruction('f32.demote_f64', 0xB6),
       Instruction('f64.convert_i32_s', 0xB7),
       Instruction('f64.convert_i32_u', 0xB8),
       Instruction('f64.convert_i64_s', 0xB9),
@@ -733,7 +739,9 @@ class Instruction {
   }
 
   static List<Instruction> _initOverflow() {
+    // 0xFC 0xXX
     return [
+      Instruction('i32.trunc_sat_f32_u', 0x01),
       Instruction('i32.trunc_sat_f64_u', 0x03),
       // Instruction('memory.init', 0x08, immediates: _one),
       Instruction('memory.copy', 0x0A, immediates: _two),

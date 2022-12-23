@@ -1,4 +1,6 @@
-// ignore_for_file: camel_case_types, non_constant_identifier_names
+// ignore_for_file: camel_case_types
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: deprecated_member_use
 
 import 'dart:math';
 import 'dart:typed_data';
@@ -682,29 +684,45 @@ class Frame {
   void i32_div_s() {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
-    var result = arg0 ~/ arg1;
-    stack.add(result);
+    try {
+      var result = arg0 ~/ arg1;
+      stack.add(result);
+    } on IntegerDivisionByZeroException {
+      throw Trap('integer divide by zero');
+    }
   }
 
   void i32_div_u() {
     u32 arg1 = stack.removeLast() as u32;
     u32 arg0 = stack.removeLast() as u32;
-    var result = arg0 ~/ arg1;
-    stack.add(result);
+    try {
+      var result = arg0 ~/ arg1;
+      stack.add(result);
+    } on IntegerDivisionByZeroException {
+      throw Trap('integer divide by zero');
+    }
   }
 
   void i32_rem_s() {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
-    var result = arg0.remainder(arg1);
-    stack.add(result);
+    try {
+      var result = arg0.remainder(arg1);
+      stack.add(result);
+    } on IntegerDivisionByZeroException {
+      throw Trap('integer divide by zero');
+    }
   }
 
   void i32_rem_u() {
     u32 arg1 = stack.removeLast() as u32;
     u32 arg0 = stack.removeLast() as u32;
-    var result = arg0.remainder(arg1);
-    stack.add(result);
+    try {
+      var result = arg0.remainder(arg1);
+      stack.add(result);
+    } on IntegerDivisionByZeroException {
+      throw Trap('integer divide by zero');
+    }
   }
 
   void i32_and() {
@@ -762,6 +780,20 @@ class Frame {
 
     i32 result =
         count == 0 ? value : (value << count) | (value >>> (bitCount - count));
+    stack.add(result);
+  }
+
+  void i32_rotr() {
+    const bitCount = 64;
+
+    u32 count = stack.removeLast() as u32;
+    i32 value = stack.removeLast() as i32;
+
+    count = count & 0x1F; // count bits modulo 32
+
+    i32 result =
+        count == 0 ? value : (value << (bitCount - count)) | (value >>> count);
+
     stack.add(result);
   }
 
@@ -877,29 +909,45 @@ class Frame {
   void i64_div_s() {
     i64 arg1 = stack.removeLast() as i64;
     i64 arg0 = stack.removeLast() as i64;
-    var result = arg0 ~/ arg1;
-    stack.add(result);
+    try {
+      var result = arg0 ~/ arg1;
+      stack.add(result);
+    } on IntegerDivisionByZeroException {
+      throw Trap('integer divide by zero');
+    }
   }
 
   void i64_div_u() {
     u64 arg1 = stack.removeLast() as u64;
     u64 arg0 = stack.removeLast() as u64;
-    var result = arg0 ~/ arg1;
-    stack.add(result);
+    try {
+      var result = arg0 ~/ arg1;
+      stack.add(result);
+    } on IntegerDivisionByZeroException {
+      throw Trap('integer divide by zero');
+    }
   }
 
   void i64_rem_s() {
     i64 arg1 = stack.removeLast() as i64;
     i64 arg0 = stack.removeLast() as i64;
-    var result = arg0.remainder(arg1);
-    stack.add(result);
+    try {
+      var result = arg0.remainder(arg1);
+      stack.add(result);
+    } on IntegerDivisionByZeroException {
+      throw Trap('integer divide by zero');
+    }
   }
 
   void i64_rem_u() {
     u64 arg1 = stack.removeLast() as u64;
     u64 arg0 = stack.removeLast() as u64;
-    var result = arg0.remainder(arg1);
-    stack.add(result);
+    try {
+      var result = arg0.remainder(arg1);
+      stack.add(result);
+    } on IntegerDivisionByZeroException {
+      throw Trap('integer divide by zero');
+    }
   }
 
   void i64_and() {
@@ -980,6 +1028,39 @@ class Frame {
     stack.add(result);
   }
 
+  void f32_floor() {
+    f32 arg = stack.removeLast() as f32;
+    var result = arg.floorToDouble();
+    stack.add(result);
+  }
+
+  void f32_sqrt() {
+    f32 arg = stack.removeLast() as f32;
+    var result = sqrt(arg);
+    stack.add(result);
+  }
+
+  void f32_add() {
+    f32 arg1 = stack.removeLast() as f32;
+    f32 arg0 = stack.removeLast() as f32;
+    var result = arg0 + arg1;
+    stack.add(result);
+  }
+
+  void f32_sub() {
+    f32 arg1 = stack.removeLast() as f32;
+    f32 arg0 = stack.removeLast() as f32;
+    var result = arg0 - arg1;
+    stack.add(result);
+  }
+
+  void f32_mul() {
+    f32 arg1 = stack.removeLast() as f32;
+    f32 arg0 = stack.removeLast() as f32;
+    var result = arg0 * arg1;
+    stack.add(result);
+  }
+
   void f64_sub() {
     f64 arg1 = stack.removeLast() as f64;
     f64 arg0 = stack.removeLast() as f64;
@@ -1031,7 +1112,7 @@ class Frame {
 
   void i32_wrap_i64() {
     i64 arg1 = stack.removeLast() as i64;
-    i32 result = arg1 & 0xFFFFFFFF;
+    i32 result = arg1.remainder(0xFFFFFFFF);
     stack.add(result);
   }
 
@@ -1119,12 +1200,15 @@ class Frame {
     stack.add(result);
   }
 
-  // todo:
-  // void f32_demote_f64() {
-  //   f64 arg = stack.removeLast() as f64;
-  //   f32 result = arg.clamp(lowerLimit, upperLimit) as f32;
-  //   stack.add(result);
-  // }
+  void f32_demote_f64() {
+    // todo: verify this implementation
+    f64 arg = stack.removeLast() as f64;
+    f32 result = arg.clamp(
+      -3.4028234663852885981170418348451692544e+38,
+      3.4028235e38,
+    );
+    stack.add(result);
+  }
 
   void f64_convert_i32_s() {
     i32 arg = stack.removeLast() as i32;
@@ -1237,6 +1321,14 @@ class Frame {
       i64 result = 0x00000000FFFFFFFF & arg;
       stack.add(result);
     }
+  }
+
+  void i32_trunc_sat_f32_u() {
+    // f32 => i32
+    // TODO: verify this logic
+    f32 arg0 = stack.removeLast() as f32;
+    i32 result = arg0.toInt() & 0xFFFFFFFF;
+    stack.add(result);
   }
 
   void i32_trunc_sat_f64_u() {

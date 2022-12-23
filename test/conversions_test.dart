@@ -862,7 +862,8 @@ class Module {
   i32 i32_trunc_sat_f32_u(f32 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xFC)';
+    frame.i32_trunc_sat_f32_u();
+    return frame.pop();
   }
 
   i32 i32_trunc_sat_f64_s(f64 x) {
@@ -968,7 +969,8 @@ class Module {
   f32 f32_demote_f64(f64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xB6)';
+    frame.f32_demote_f64();
+    return frame.pop();
   }
 
   f32 f32_reinterpret_i32(i32 x) {
