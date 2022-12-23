@@ -13,11 +13,11 @@ void main() {
     final Module m = Module();
     final Globals g = m.globals;
 
-    returns('test_fac_expr_0', m.test_fac_expr_0, 0x619fb0907bc00000);
-    returns('test_fac_stack_0', m.test_fac_stack_0, 0x619fb0907bc00000);
-    returns('test_fac_mixed_0', m.test_fac_mixed_0, 0x619fb0907bc00000);
-    returns('test_not_quite_a_tree_0', m.test_not_quite_a_tree_0, 3);
-    returns('test_not_quite_a_tree_1', m.test_not_quite_a_tree_1, 9);
+    returns('fac_expr_0', m.test_fac_expr_0, 0x619fb0907bc00000);
+    returns('fac_stack_0', m.test_fac_stack_0, 0x619fb0907bc00000);
+    returns('fac_mixed_0', m.test_fac_mixed_0, 0x619fb0907bc00000);
+    returns('not_quite_a_tree_0', m.test_not_quite_a_tree_0, 3);
+    returns('not_quite_a_tree_1', m.test_not_quite_a_tree_1, 9);
   });
 }
 
