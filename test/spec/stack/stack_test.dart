@@ -2,7 +2,7 @@
 
 // ignore_for_file: unused_local_variable
 
-import '../../src/spec_infra.dart';
+import '../../src/infra.dart';
 import 'stack.0.dart' as stack_0;
 import 'stack.1.dart' as stack_1;
 

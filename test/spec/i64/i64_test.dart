@@ -2,7 +2,7 @@
 
 // ignore_for_file: unused_local_variable
 
-import '../../src/spec_infra.dart';
+import '../../src/infra.dart';
 import 'i64.0.dart' as i64_0;
 
 const String _idbz = 'integer divide by zero';

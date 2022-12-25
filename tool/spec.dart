@@ -115,7 +115,7 @@ void generateDartForJson(File jsonFile, File dartFile) {
     'unused_local_variable',
   ]);
   library.directives.addAll([
-    Directive.import('../../src/spec_infra.dart'),
+    Directive.import('../../src/infra.dart'),
   ]);
 
   // create a main() method

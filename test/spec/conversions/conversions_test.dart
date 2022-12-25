@@ -2,7 +2,7 @@
 
 // ignore_for_file: unused_local_variable
 
-import '../../src/spec_infra.dart';
+import '../../src/infra.dart';
 import 'conversions.0.dart' as conversions_0;
 
 const String _io = 'integer overflow';

@@ -2,7 +2,7 @@
 
 // ignore_for_file: unused_local_variable
 
-import '../../src/spec_infra.dart';
+import '../../src/infra.dart';
 import 'address.0.dart' as address_0;
 import 'address.2.dart' as address_2;
 import 'address.3.dart' as address_3;
