@@ -1,101 +1,70 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:code_builder/code_builder.dart';
+import 'package:collection/collection.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:wasmd/compiler.dart';
 import 'package:wasmd/src/utils.dart';
 
-import 'src/s_expr.dart';
-
 // Given an wast file, generate one or more wat module files that represent unit
 // tests.
+//
+// Based on the wast2json tool.
 
-// TODO: introduce some model objects here to make it easier to manipulate the
-// s-expressions
-
-// Patterns:
-// - tests must run in the order they're definied
-// - a failing test doesn'y prevent execution of the next test
-// - there is code that might optionally run between or before tests
+// TODO:? --disable-saturating-float-to-int --disable-sign-extension
+// --disable-multi-value --disable-simd
 
 void main(List<String> args) {
   if (args.isEmpty) {
-    print('usage: dart tools/spec.dart <wast file>');
+    print('usage: dart tools/spec_2.dart <wast file>');
     return;
+  }
+
+  if (args.first == '--all') {
+    var specDir = Directory(p.join('test', 'spec'));
+    args = specDir
+        .listSync()
+        .whereType<Directory>()
+        .map((d) => p.basename(d.path))
+        .map((n) => 'spec/test/core/$n.wast')
+        .toList();
   }
 
   for (var arg in args) {
     var wastFile = File(arg);
 
-    var basename = p.basenameWithoutExtension(arg);
-    var wasmDir = Directory(p.join('test/wasm'));
-    wasmDir.createSync();
+    var basename = p.basenameWithoutExtension(arg).replaceAll('-', '_');
+    var dir =
+        Directory(p.join('test', 'spec', p.basenameWithoutExtension(arg)));
+    dir.createSync(recursive: true);
 
-    var watFiles = generateWatForWast(wastFile, wasmDir, basename);
+    var jsonFile = File(p.join(dir.path, '$basename.json'));
+    var wasmFiles = wast2json(wastFile, jsonFile);
 
-    for (var watFile in watFiles) {
-      // test/wasm/i32_2.wat
-      var wasmFile = File('${p.withoutExtension(watFile.path)}.wasm');
-      compileWatToWasm(watFile, wasmFile);
+    // generate a dart file from the json testing file
+    var dartFile = File('${p.withoutExtension(jsonFile.path)}_test.dart');
+    generateDartForJson(jsonFile, dartFile);
 
-      var baseName =
-          p.basenameWithoutExtension(watFile.path).replaceAll('-', '_');
-      var dartFile = File(p.join('test', '${baseName}_test.dart'));
+    // compile wasm to dart
+    for (var wasmFile in wasmFiles) {
+      if (!wasmFile.existsSync()) continue;
+
+      var dartFile = File('${p.withoutExtension(wasmFile.path)}.dart');
       compileWasmToDart(wasmFile, dartFile);
     }
   }
 }
 
-List<File> generateWatForWast(
-  File wastFile,
-  Directory outDir,
-  String basename,
-) {
-  print('parsing ${wastFile.path}...');
-
-  // TODO: upgrade our testing of the flavors of nan
-  var compilationUnit = ComilationUnit.parse(
-    wastFile.readAsStringSync(),
-    tokenRewriter: _ReplaceNonstandardNan(),
-  );
-  var testModules = _findTestModules(_process(compilationUnit));
-  var watFiles = <File>[];
-
-  if (testModules.length == 1) {
-    var out = File(p.join(outDir.path, '$basename.wat'));
-    watFiles.add(out);
-    out.writeAsStringSync('''
-;; Generated from ${wastFile.path}.
-
-${testModules.first.prettyPrint()}''');
-    print('wrote ${out.path}.');
-  } else {
-    var i = 0;
-    for (var module in testModules) {
-      var out = File(p.join(outDir.path, '${basename}_$i.wat'));
-      watFiles.add(out);
-      i++;
-      out.writeAsStringSync('''
-;; Generated from ${wastFile.path}.
-
-${module.prettyPrint()}''');
-      print('wrote ${out.path}.');
-      print('');
-    }
-  }
-
-  return watFiles;
-}
-
-void compileWatToWasm(File watFile, File wasmFile) {
-  // wat2wasm -o wasmFile watFile
+List<File> wast2json(File wastFile, File jsonFile) {
+  // wast2json -o jsonFile wastFile
   var args = [
-    'wat2wasm',
-    '--debug-names',
-    '-v',
+    'wast2json',
+    '--debug-names', // todo: other flags as well
     '-o',
-    wasmFile.path,
-    watFile.path,
+    jsonFile.path,
+    wastFile.path,
   ];
   print(args.join(' '));
 
@@ -103,24 +72,22 @@ void compileWatToWasm(File watFile, File wasmFile) {
   var out = (result.stdout as String).trim();
   if (out.isNotEmpty) print(out);
   var err = (result.stderr as String).trim();
-  if (result.exitCode == 0) {
-    var disFile = File('${p.withoutExtension(wasmFile.path)}.dis');
-    disFile.writeAsStringSync(err);
-    print('Wrote ${disFile.path}.');
-  } else {
-    if (err.isNotEmpty) stderr.writeln(err);
-  }
+  if (err.isNotEmpty) stderr.writeln(err);
 
   if (result.exitCode != 0) {
     throw '${args.first} failed with exit code ${result.exitCode}';
   }
 
-  print('Wrote ${wasmFile.path}.');
+  print('Wrote ${jsonFile.path}.');
+
+  return jsonFile.parent
+      .listSync()
+      .whereType<File>()
+      .where((file) => file.path.endsWith('.wasm'))
+      .toList();
 }
 
 void compileWasmToDart(File wasmFile, File dartFile) {
-  print('Reading ${wasmFile.path}.');
-
   var logger = Logger.detached('wasm2dart');
   // if (verbose) {
   //   logger.onRecord.listen((record) {
@@ -129,209 +96,225 @@ void compileWasmToDart(File wasmFile, File dartFile) {
   // }
 
   var compiler = Compiler(file: wasmFile, logger: logger);
-  var library = compiler.compile(generateWastTest: true);
+  var library = compiler.compile();
   var code = emitFormatLibrary(library);
 
-  print('Emitting ${dartFile.path}.');
+  print('  emitting ${dartFile.path}');
   dartFile.writeAsStringSync(code);
 }
 
-List<Expression> _process(ComilationUnit compilationUnit) {
-  var modules = <Expression>[];
-  Expression? module;
-  var testNameMap = <String?, int>{};
-  var expectationTypeNames = <String>{};
+void generateDartForJson(File jsonFile, File dartFile) {
+  var base = p.basenameWithoutExtension(jsonFile.path);
+  var json = jsonDecode(jsonFile.readAsStringSync()) as Map<String, dynamic>;
+  var sourceFilename = json['source_filename'];
+  var commands = (json['commands'] as List).cast<Map<String, dynamic>>();
 
-  List<Expression> transmute(
-    Expression module,
-    Expression node, {
-    bool assertTrap = false,
-    bool invocation = false,
-  }) {
-    // (func (export "fac-ssa") (param i64) (result i64) (i64.const 1) (local.get 0) (loop $l (param i64 i64) (result i64) (call $pick1) (call $pick1) (i64.mul) (call $pick1) (i64.const 1) (i64.sub) (call $pick0) (i64.const 0) (i64.gt_u) (br_if $l) (drop) (return)))
-    // (assert_return (invoke "fac-rec" (i64.const 25)) (i64.const 7034535277573963776))
-    var name = findName(node)!;
+  var library = LibraryBuilder();
+  library.comments.add('Generated from $sourceFilename.');
+  library.ignoreForFile.addAll([
+    'unused_local_variable',
+  ]);
+  library.directives.addAll([
+    Directive.import('../../src/spec_infra.dart'),
+  ]);
 
-    var id = testNameMap[name] ?? 0;
-    testNameMap[name] = id + 1;
-    var testName = 'test_${name.replaceAll('-', '_')}_$id';
+  // create a main() method
+  var mainMethod = MethodBuilder()
+        ..name = 'main'
+        ..returns = Reference('void')
+      // ..requiredParameters.add(Parameter((b) => b
+      //   ..name = 'args'
+      //   ..type = Reference('List<String>')))
+      ;
 
-    if (assertTrap) {
-      var testInstrs = node.nodes[1] as Expression;
-      // (assert_trap (invoke "store_at_page_size") "out of bounds memory access")
-      var typeName = getTypeForMethod(module, name);
-      var message = (node.nodes[2] as Atom).value;
+  var statements = <Code>[
+    Code("group('$base', () {"),
+  ];
 
-      return [
-        Expression(
-          [
-            Atom('func'),
-            Expression([Atom('export'), Atom('"$testName"')]),
-            if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
-            Expression([
-              Atom('call'),
-              Atom('\$$name'),
-              ...testInstrs.nodes.skip(2),
-            ]),
-          ],
-        ),
-        // (data $otherString "buenos dias\00")
-        Expression([
-          Atom('data'),
-          Atom('\$trap_${name}_$id'),
-          Atom(message),
-          // Atom('"${stripQuotes(message)}\\00"'),
-        ])
-      ];
-    } else if (invocation) {
-      var testInstrs = node.nodes.skip(2);
-      var methodName = 'invoke_${name.replaceAll('-', '_')}_$id';
+  // create statements
+  var moduleCount = 0;
+  late String lastModule;
 
-      return [
-        Expression([
-          Atom('func'),
-          Expression([Atom('export'), Atom('"$methodName"')]),
-          // if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
-          Expression([
-            Atom('call'),
-            Atom('\$$name'),
-            ...testInstrs,
-          ]),
-        ]),
-      ];
-    } else {
-      var testInstrs = node.nodes[1] as Expression;
+  var testCount = <String, int>{};
+  var constMap = <String, String>{};
 
-      var expectName = 'expect_${name.replaceAll('-', '_')}_$id';
-      var expectInstrs =
-          node.nodes.length >= 3 ? node.nodes[2] as Expression : null;
+  for (var command in commands) {
+    var type = command['type'] as String;
 
-      var typeName = getTypeForMethod(module, name);
+    if (type == 'module') {
+      statements.add(Code(''));
 
-      return [
-        Expression([
-          Atom('func'),
-          Expression([Atom('export'), Atom('"$testName"')]),
-          if (typeName != null) Expression([Atom('result'), Atom(typeName)]),
-          Expression([
-            Atom('call'),
-            Atom('\$$name'),
-            ...testInstrs.nodes.skip(2),
-          ]),
-        ]),
-        if (expectInstrs != null)
-          Expression([
-            Atom('global'),
-            Atom('\$$expectName'),
-            // Expression([Atom('export'), Atom('"$expectName"')]),
-            Atom(typeName!),
-            ...expectInstrs.nodes,
-          ]),
-      ];
-    }
-  }
+      var filename = command['filename'] as String;
+      var name = command['name'] as String?;
+      name ??= 'm$moduleCount';
+      lastModule = name;
 
-  for (var expr in compilationUnit.expressions) {
-    if (isModule(expr)) {
-      testNameMap.clear();
-      expectationTypeNames.clear();
-      module = expr;
-      modules.add(module);
+      var shortName = p.withoutExtension(filename);
+      var prefix = shortName.replaceAll('.', '_');
 
-      for (var child in module.nodes) {
-        if (child is Expression && kind(child) == 'func') {
-          if (child.nodes.length >= 2 && child.nodes[1] is Expression) {
-            var name = findName(child);
-            child.nodes.insert(1, Atom('\$$name'));
-          }
-        }
+      moduleCount++;
+
+      var dartImport = '$shortName.dart';
+      statements.add(Code('    // module $dartImport'));
+      statements.add(Code('var $name = $prefix.Module();'));
+      statements.add(Code(''));
+      library.directives.add(Directive.import(dartImport, as: prefix));
+    } else if (type == 'action') {
+      var action = command['action'] as Map<String, dynamic>;
+
+      var actionType = action['type']; // 'invoke' or 'get'
+      var module = (action['module'] as String?) ?? lastModule;
+      var field = action['field'] as String;
+      var args = (action['args'] as List).cast<Map<String, dynamic>>();
+
+      field = patchUpName(field);
+
+      var invocation = '';
+      if (actionType == 'invoke') {
+        invocation = '(';
+        invocation += args.map((arg) {
+          return encodeType(arg['type'], arg['value']);
+        }).join(', ');
+        invocation += ')';
       }
-    } else if (kind(expr) == 'assert_return' && module != null) {
-      // re-write into the module as a test method
-      module.nodes.addAll(transmute(module, expr));
-    } else if (kind(expr) == 'assert_trap' && module != null) {
-      // re-write into the module as a trap test method
-      module.nodes.addAll(transmute(module, expr, assertTrap: true));
-    } else if (kind(expr) == 'invoke' && module != null) {
-      // re-write into the module as a method invocation
-      module.nodes.addAll(transmute(module, expr, invocation: true));
+
+      testCount[field] = (testCount[field] ?? -1) + 1;
+
+      var description = '${field}_${testCount[field]}';
+      description = description.replaceAll(r'$', '');
+
+      statements.add(Code(_addComma('invoke(\'$description\', '
+          '() => $module.$field$invocation);')));
+    } else if (type == 'assert_return') {
+      var action = command['action'] as Map<String, dynamic>;
+      var expected = (command['expected'] as List).cast<Map<String, dynamic>>();
+
+      var actionType = action['type']; // 'invoke' or 'get'
+      var module = (action['module'] as String?) ?? lastModule;
+      var field = action['field'] as String;
+      var args = (action['args'] as List).cast<Map<String, dynamic>>();
+
+      if (expected.length > 1) {
+        throw 'multiple return expectations not yet supported';
+      }
+
+      field = patchUpName(field);
+
+      var invocation = '';
+      if (actionType == 'invoke') {
+        invocation = '(';
+        invocation += args.map((arg) {
+          return encodeType(arg['type'], arg['value']);
+        }).join(', ');
+        invocation += ')';
+      }
+
+      var result = expected.map((arg) {
+        return encodeType(arg['type'], arg['value']);
+      }).firstOrNull;
+
+      testCount[field] = (testCount[field] ?? -1) + 1;
+
+      var description = '${field}_${testCount[field]}';
+      description = description.replaceAll(r'$', '');
+
+      statements.add(Code(_addComma('returns(\'$description\', '
+          '() => $module.$field$invocation, $result);')));
+    } else if (type == 'assert_trap') {
+      var action = command['action'] as Map<String, dynamic>;
+      var text = command['text'] as String;
+
+      var actionType = action['type']; // 'invoke' or 'get'
+      var module = (action['module'] as String?) ?? lastModule;
+      var field = action['field'] as String;
+      var args = (action['args'] as List).cast<Map<String, dynamic>>();
+
+      field = patchUpName(field);
+
+      var invocation = '';
+      if (actionType == 'invoke') {
+        invocation = '(';
+        invocation += args.map((arg) {
+          return encodeType(arg['type'], arg['value']);
+        }).join(', ');
+        invocation += ')';
+      }
+
+      var ref = '_${text.split(' ').map((e) => e.substring(0, 1)).join()}';
+      constMap[ref] = text;
+      testCount[field] = (testCount[field] ?? -1) + 1;
+
+      var description = '${field}_${testCount[field]}';
+      description = description.replaceAll(r'$', '');
+
+      statements.add(Code(_addComma('traps(\'$description\', '
+          '() => $module.$field$invocation, $ref);')));
+    } else if (type == 'assert_invalid') {
+      // a wasm file
+      var filename = command['filename'] as String;
+
+      // Remove this wasm module - we don't want to try to compile it.
+      var file = File(p.join(jsonFile.parent.path, filename));
+      file.deleteSync();
+    } else if (type == 'assert_malformed') {
+      // a wat file
+      var filename = command['filename'] as String;
+
+      // Remove this wat file - we don't try to compile or generate from it.
+      var file = File(p.join(jsonFile.parent.path, filename));
+      file.deleteSync();
+    } else {
+      // We ignore other command types.
+      // statements.add(Code('    // $type'));
     }
   }
 
-  return modules;
-}
-
-List<Expression> _findTestModules(List<Expression> expressions) {
-  return expressions.where((module) {
-    if (!isModule(module)) {
-      return false;
-    }
-
-    return module.nodes
-        .whereType<Expression>()
-        .any((child) => findName(child)?.startsWith('test_') ?? false);
-  }).toList();
-}
-
-bool isModule(Expression expr) => kind(expr) == 'module';
-
-String? kind(Expression expr) {
-  if (expr.nodes.isNotEmpty) {
-    var first = expr.nodes.first;
-    if (first is Atom) {
-      return first.value;
-    }
+  for (var key in constMap.keys) {
+    var value = constMap[key]!;
+    library.body.add(declareConst(key, type: Reference('String'))
+        .assign(literalString(value))
+        .statement);
   }
 
-  return null;
-}
-
-String? findName(Expression node) {
-  if (kind(node) == 'invoke') {
-    var val = (node.nodes[1] as Atom).value;
-    return stripQuotes(val);
+  if (constMap.isNotEmpty) {
+    library.body.add(Code('\n\n'));
   }
 
-  for (var child in node.nodes.whereType<Expression>()) {
-    if (kind(child) == 'invoke' || kind(child) == 'export') {
-      var val = (child.nodes[1] as Atom).value;
-      return stripQuotes(val);
-    }
-  }
+  mainMethod.body = Block.of([
+    ...statements,
+    Code('});'),
+  ]);
 
-  return null;
+  library.body.add(mainMethod.build());
+
+  var code = emitFormatLibrary(library.build());
+  dartFile.writeAsStringSync(code);
+  print('Wrote ${dartFile.path}.');
 }
 
-String stripQuotes(String str) {
-  if (str.startsWith('"') && str.endsWith('"')) {
-    return str.substring(1, str.length - 1);
+String _addComma(String str) {
+  if (str.length > 76 && str.endsWith(');')) {
+    return '${str.substring(0, str.length - 2)},);';
   } else {
     return str;
   }
 }
 
-String? getTypeForMethod(Expression module, String methodName) {
-  for (var method in module.nodes.whereType<Expression>()) {
-    if (kind(method) != 'func') continue;
-
-    if (findName(method) == methodName) {
-      for (var child in method.nodes.whereType<Expression>()) {
-        if (kind(child) == 'result') {
-          return (child.nodes[1] as Atom).value;
-        }
-      }
+String encodeType(String type, String value) {
+  if ((type == 'i32' || type == 'i64') && value.length <= 6) {
+    if (value == '0') {
+      return value;
+    } else {
+      var val = int.parse(value);
+      return '0x${val.toRadixString(16).toUpperCase()}';
     }
-  }
-
-  // throw "could not find return type for method '$methodName'";
-  return null;
-}
-
-class _ReplaceNonstandardNan implements TokenRewriter {
-  @override
-  Token replace(Token token) {
-    if (token.value == 'nan:canonical') return Token('nan');
-    if (token.value == 'nan:arithmetic') return Token('nan');
-    return token;
+  } else {
+    if ((type == 'f32' || type == 'f64') &&
+        (value == 'nan:arithmetic' || value == 'nan:canonical')) {
+      return 'double.nan';
+    } else {
+      var val = BigInt.parse(value);
+      return "$type('${val.toRadixString(16).toUpperCase()}')";
+    }
   }
 }

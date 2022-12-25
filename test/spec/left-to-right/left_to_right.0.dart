@@ -1,4 +1,4 @@
-// Generated from test/spec/left_to_right/left_to_right.0.wasm.
+// Generated from test/spec/left-to-right/left_to_right.0.wasm.
 
 // ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
 // ignore_for_file: unused_element, unused_label, unused_local_variable
