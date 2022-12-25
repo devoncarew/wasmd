@@ -23,12 +23,8 @@ class Instr {
   }
 }
 
-// todo: inline these
-const List<ValueType> _one = [ValueType.i32];
-const List<ValueType> _two = [
-  ValueType.i32,
-  ValueType.i32,
-];
+const List<ValueType> _memarg = [ValueType.u32, ValueType.u32];
+const List<ValueType> _blocktype = [ValueType.i32];
 
 class Instruction_Unreachable extends Instruction {
   Instruction_Unreachable() : super('unreachable', 0x00);
@@ -56,7 +52,8 @@ class Instruction_Nop extends Instruction {
 class Instruction_Block extends Instruction {
   static const blockOpcode = 0x02;
 
-  Instruction_Block() : super('block', blockOpcode, immediates: _one);
+  // the immediate is either 0x40, a valuetype, or a signed 33bit integer
+  Instruction_Block() : super('block', blockOpcode, immediates: _blocktype);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -75,7 +72,7 @@ class Instruction_Block extends Instruction {
 class Instruction_Loop extends Instruction {
   static const loopOpcode = 0x03;
 
-  Instruction_Loop() : super('loop', loopOpcode, immediates: _one);
+  Instruction_Loop() : super('loop', loopOpcode, immediates: _blocktype);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -94,7 +91,7 @@ class Instruction_Loop extends Instruction {
 class Instruction_If extends Instruction {
   static const ifOpcode = 0x04;
 
-  Instruction_If() : super('if', ifOpcode, immediates: _one);
+  Instruction_If() : super('if', ifOpcode, immediates: _blocktype);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -145,7 +142,7 @@ class Instruction_End extends Instruction {
 }
 
 class Instruction_Br extends Instruction {
-  Instruction_Br() : super('br', 0x0C, immediates: _one);
+  Instruction_Br() : super('br', 0x0C, immediates: [ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -159,7 +156,7 @@ class Instruction_Br extends Instruction {
 }
 
 class Instruction_BrLf extends Instruction {
-  Instruction_BrLf() : super('br_lf', 0x0D, immediates: _one);
+  Instruction_BrLf() : super('br_lf', 0x0D, immediates: [ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -234,7 +231,8 @@ class Instruction_Return extends Instruction {
 }
 
 class Instruction_LocalGet extends Instruction {
-  Instruction_LocalGet() : super('local.get', 0x20, immediates: _one);
+  Instruction_LocalGet()
+      : super('local.get', 0x20, immediates: [ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -246,7 +244,8 @@ class Instruction_LocalGet extends Instruction {
 }
 
 class Instruction_LocalSet extends Instruction {
-  Instruction_LocalSet() : super('local.set', 0x21, immediates: _one);
+  Instruction_LocalSet()
+      : super('local.set', 0x21, immediates: [ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -260,7 +259,8 @@ class Instruction_LocalSet extends Instruction {
 }
 
 class Instruction_LocalTee extends Instruction {
-  Instruction_LocalTee() : super('local.tee', 0x22, immediates: _one);
+  Instruction_LocalTee()
+      : super('local.tee', 0x22, immediates: [ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -274,7 +274,8 @@ class Instruction_LocalTee extends Instruction {
 }
 
 class Instruction_GlobalGet extends Instruction {
-  Instruction_GlobalGet() : super('global.get', 0x23, immediates: _one);
+  Instruction_GlobalGet()
+      : super('global.get', 0x23, immediates: [ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, ModuleFunction function) {
@@ -288,7 +289,8 @@ class Instruction_GlobalGet extends Instruction {
 }
 
 class Instruction_GlobalSet extends Instruction {
-  Instruction_GlobalSet() : super('global.set', 0x24, immediates: _one);
+  Instruction_GlobalSet()
+      : super('global.set', 0x24, immediates: [ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, ModuleFunction function) {
@@ -303,7 +305,7 @@ class Instruction_GlobalSet extends Instruction {
 }
 
 class Instruction_Call extends Instruction {
-  Instruction_Call() : super('call', 0x10, immediates: _one);
+  Instruction_Call() : super('call', 0x10, immediates: [ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -341,7 +343,9 @@ class Instruction_Call extends Instruction {
 }
 
 class Instruction_CallIndirect extends Instruction {
-  Instruction_CallIndirect() : super('call_indirect', 0x11, immediates: _two);
+  Instruction_CallIndirect()
+      : super('call_indirect', 0x11,
+            immediates: [ValueType.u32, ValueType.u32]);
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -390,7 +394,9 @@ enum ValueType {
   i64,
   f32,
   f64,
-  funcref;
+  funcref,
+  //
+  u32;
 }
 
 class Literal {
@@ -480,12 +486,9 @@ class Instruction {
           case ValueType.f64:
             args.add(r.readF64());
             break;
-          // case ValueType.u32:
-          //   args.add(r.leb128_u());
-          //   break;
-          // case ValueType.u64:
-          //   args.add(r.leb128_u());
-          //   break;
+          case ValueType.u32:
+            args.add(r.leb128_u());
+            break;
           default:
             throw 'unhandled immediate type: $immediateType';
         }
@@ -582,31 +585,31 @@ class Instruction {
       Instruction_GlobalSet(), // global.get, 0x24
       //
       // reserved, 0x27
-      Instruction('i32.load', 0x28, immediates: _two),
-      Instruction('i64.load', 0x29, immediates: _two),
-      Instruction('f32.load', 0x2A, immediates: _two),
-      Instruction('f64.load', 0x2B, immediates: _two),
-      Instruction('i32.load8_s', 0x2C, immediates: _two),
-      Instruction('i32.load8_u', 0x2D, immediates: _two),
-      Instruction('i32.load16_s', 0x2E, immediates: _two),
-      Instruction('i32.load16_u', 0x2F, immediates: _two),
-      Instruction('i64.load8_s', 0x30, immediates: _two),
-      Instruction('i64.load8_u', 0x31, immediates: _two),
-      Instruction('i64.load16_s', 0x32, immediates: _two),
-      Instruction('i64.load16_u', 0x33, immediates: _two),
-      Instruction('i64.load32_s', 0x34, immediates: _two),
-      Instruction('i64.load32_u', 0x35, immediates: _two),
-      Instruction('i32.store', 0x36, immediates: _two),
-      Instruction('i64.store', 0x37, immediates: _two),
-      Instruction('f32.store', 0x38, immediates: _two),
-      Instruction('f64.store', 0x39, immediates: _two),
-      Instruction('i32.store8', 0x3A, immediates: _two),
-      Instruction('i32.store16', 0x3B, immediates: _two),
-      Instruction('i64.store8', 0x3C, immediates: _two),
-      Instruction('i64.store16', 0x3D, immediates: _two),
-      Instruction('i64.store32', 0x3E, immediates: _two),
-      Instruction('memory.size', 0x3F, immediates: _one),
-      Instruction('memory.grow', 0x40, immediates: _one),
+      Instruction('i32.load', 0x28, immediates: _memarg),
+      Instruction('i64.load', 0x29, immediates: _memarg),
+      Instruction('f32.load', 0x2A, immediates: _memarg),
+      Instruction('f64.load', 0x2B, immediates: _memarg),
+      Instruction('i32.load8_s', 0x2C, immediates: _memarg),
+      Instruction('i32.load8_u', 0x2D, immediates: _memarg),
+      Instruction('i32.load16_s', 0x2E, immediates: _memarg),
+      Instruction('i32.load16_u', 0x2F, immediates: _memarg),
+      Instruction('i64.load8_s', 0x30, immediates: _memarg),
+      Instruction('i64.load8_u', 0x31, immediates: _memarg),
+      Instruction('i64.load16_s', 0x32, immediates: _memarg),
+      Instruction('i64.load16_u', 0x33, immediates: _memarg),
+      Instruction('i64.load32_s', 0x34, immediates: _memarg),
+      Instruction('i64.load32_u', 0x35, immediates: _memarg),
+      Instruction('i32.store', 0x36, immediates: _memarg),
+      Instruction('i64.store', 0x37, immediates: _memarg),
+      Instruction('f32.store', 0x38, immediates: _memarg),
+      Instruction('f64.store', 0x39, immediates: _memarg),
+      Instruction('i32.store8', 0x3A, immediates: _memarg),
+      Instruction('i32.store16', 0x3B, immediates: _memarg),
+      Instruction('i64.store8', 0x3C, immediates: _memarg),
+      Instruction('i64.store16', 0x3D, immediates: _memarg),
+      Instruction('i64.store32', 0x3E, immediates: _memarg),
+      Instruction('memory.size', 0x3F, immediates: [ValueType.u32]),
+      Instruction('memory.grow', 0x40, immediates: [ValueType.u32]),
       Instruction('i32.const', i32ConstOpcode, immediates: [ValueType.i32]),
       Instruction('i64.const', i64ConstOpcode, immediates: [ValueType.i64]),
       Instruction('f32.const', f32ConstOpcode, immediates: [ValueType.f32]),
@@ -751,8 +754,9 @@ class Instruction {
       Instruction('i32.trunc_sat_f32_u', 0x01),
       Instruction('i32.trunc_sat_f64_u', 0x03),
       // Instruction('memory.init', 0x08, immediates: _one),
-      Instruction('memory.copy', 0x0A, immediates: _two),
-      Instruction('memory.fill', 0x0B, immediates: _one),
+      Instruction('memory.copy', 0x0A,
+          immediates: [ValueType.u32, ValueType.u32]),
+      Instruction('memory.fill', 0x0B, immediates: [ValueType.u32]),
     ];
   }
 }
