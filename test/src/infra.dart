@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:test/test.dart' hide throws;
+import 'package:test/test.dart';
 import 'package:wasmd/runtime.dart';
 
 /// Assert that the result of the given closure matches the expected result.

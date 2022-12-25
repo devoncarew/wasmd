@@ -11,6 +11,9 @@ samples/large/
 
 # Intermediary wat and wasm files
 test/wasm/
+test/spec/**/*.json
+test/spec/**/*.wasm
+test/spec/**/*.wat
 
 # Example output from spec/ build.py
 js/

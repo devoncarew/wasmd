@@ -20,7 +20,7 @@ import 'src/s_expr.dart';
 
 void main(List<String> args) {
   if (args.isEmpty) {
-    print('usage: dart tools/generate.dart <wast file>');
+    print('usage: dart tools/spec.dart <wast file>');
     return;
   }
 

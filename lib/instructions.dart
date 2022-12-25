@@ -23,10 +23,11 @@ class Instr {
   }
 }
 
-const List<Immediates> _one = [Immediates.u32];
-const List<Immediates> _two = [
-  Immediates.u32,
-  Immediates.u32,
+// todo: inline these
+const List<ValueType> _one = [ValueType.i32];
+const List<ValueType> _two = [
+  ValueType.i32,
+  ValueType.i32,
 ];
 
 class Instruction_Unreachable extends Instruction {
@@ -378,13 +379,18 @@ class Instruction_CallIndirect extends Instruction {
   }
 }
 
-enum Immediates {
+// todo: write some code to determine what the stack looks like after each
+// operation
+
+/// valtype := numtype | vectype | reftype
+/// numtype := i32, i64, f32, f64
+/// reftype := functype | externref
+enum ValueType {
   i32,
-  u32,
   i64,
-  u64,
   f32,
-  f64;
+  f64,
+  funcref;
 }
 
 class Literal {
@@ -443,9 +449,9 @@ class Instruction {
 
   final String name;
   final int opcode;
-  final List<Immediates> immediates;
-  final List<Immediates> args;
-  final Immediates? returns;
+  final List<ValueType> immediates;
+  final List<ValueType> args;
+  final ValueType? returns;
 
   Instruction(
     this.name,
@@ -462,26 +468,24 @@ class Instruction {
       var args = <Object>[];
       for (var immediateType in immediates) {
         switch (immediateType) {
-          case Immediates.u32:
-            args.add(r.leb128_u());
-            break;
-          case Immediates.i32:
-            // ???
-            // args.add(r.leb128_s(bits: 32));
+          case ValueType.i32:
             args.add(r.leb128_s(bits: 64));
             break;
-          case Immediates.u64:
-            args.add(r.leb128_u());
-            break;
-          case Immediates.i64:
+          case ValueType.i64:
             args.add(r.leb128_s(bits: 64));
             break;
-          case Immediates.f32:
+          case ValueType.f32:
             args.add(r.readF32());
             break;
-          case Immediates.f64:
+          case ValueType.f64:
             args.add(r.readF64());
             break;
+          // case ValueType.u32:
+          //   args.add(r.leb128_u());
+          //   break;
+          // case ValueType.u64:
+          //   args.add(r.leb128_u());
+          //   break;
           default:
             throw 'unhandled immediate type: $immediateType';
         }
@@ -603,10 +607,10 @@ class Instruction {
       Instruction('i64.store32', 0x3E, immediates: _two),
       Instruction('memory.size', 0x3F, immediates: _one),
       Instruction('memory.grow', 0x40, immediates: _one),
-      Instruction('i32.const', i32ConstOpcode, immediates: [Immediates.i32]),
-      Instruction('i64.const', i64ConstOpcode, immediates: [Immediates.i64]),
-      Instruction('f32.const', f32ConstOpcode, immediates: [Immediates.f32]),
-      Instruction('f64.const', f64ConstOpcode, immediates: [Immediates.f64]),
+      Instruction('i32.const', i32ConstOpcode, immediates: [ValueType.i32]),
+      Instruction('i64.const', i64ConstOpcode, immediates: [ValueType.i64]),
+      Instruction('f32.const', f32ConstOpcode, immediates: [ValueType.f32]),
+      Instruction('f64.const', f64ConstOpcode, immediates: [ValueType.f64]),
       Instruction('i32.eqz', 0x45),
       Instruction('i32.eq', 0x46),
       Instruction('i32.ne', 0x47),

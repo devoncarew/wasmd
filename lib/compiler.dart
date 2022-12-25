@@ -32,6 +32,7 @@ class Compiler {
       'camel_case_types',
       'dead_code',
       'non_constant_identifier_names',
+      'unused_element',
       'unused_label',
       'unused_local_variable',
     ]);
