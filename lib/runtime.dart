@@ -14,6 +14,8 @@ typedef u64 = int;
 typedef f32 = double;
 typedef f64 = double;
 
+typedef FuncRef = Function;
+
 // runtime support
 
 class Memory {
@@ -95,6 +97,12 @@ class Table {
       : funcRefs = List.filled(minSize, null, growable: true);
 
   Function? operator [](int index) => funcRefs[index];
+
+  void copyFrom(List<Function> funcIndexes, int offset, int count) {
+    for (int i = 0; i < count; i++) {
+      funcRefs[offset + i] = funcIndexes[i];
+    }
+  }
 }
 
 class Frame {

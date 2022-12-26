@@ -255,20 +255,88 @@ class Compiler {
   void _parseElementSection(Reader r, Module module) {
     var count = r.leb128();
     for (int i = 0; i < count; i++) {
-      var type = r.leb128();
-      switch (type) {
+      var sectionType = r.leb128();
+      late ValueType elementKind;
+      late SegmentKind segmentKind;
+      int tableIndex = 0;
+      List<Instr>? offsetInstrs;
+      List<int>? functionIndexs;
+      List<List<Instr>>? functionInstrs;
+
+      ValueType readType() {
+        var elementKind = r.leb128_u();
+        if (elementKind != 0) {
+          throw 'elementKind type not yet supported (${hex(elementKind)})';
+        }
+        return ValueType.funcref;
+      }
+
+      // https://stackoverflow.com/questions/74218077/how-does-the-element-section-of-wasm-module-in-binary-format-looks
+
+      switch (sectionType) {
         case 0x00:
-          var instrs = r.readInstructionsEndTerminated();
-          var funcCount = r.leb128();
-          var funcIndexs = <int>[];
-          for (int j = 0; j < funcCount; j++) {
-            funcIndexs.add(r.leb128());
-          }
-          module.addElementSegment(0, instrs, funcIndexs);
+          // an active segment, implicit table index of 0, a vector of funcrefs
+          elementKind = ValueType.funcref;
+          segmentKind = SegmentKind.active;
+          offsetInstrs = r.readInstructionsEndTerminated();
+          functionIndexs = r.readVectorIndexes();
+          break;
+        case 0x01:
+          // a passive segment, the elemkind, followed by a vector of the items
+          elementKind = readType();
+          segmentKind = SegmentKind.passive;
+          functionIndexs = r.readVectorIndexes();
+          break;
+        case 0x02:
+          // an active segment
+          segmentKind = SegmentKind.active;
+          tableIndex = r.leb128_u();
+          offsetInstrs = r.readInstructionsEndTerminated();
+          elementKind = readType();
+          functionIndexs = r.readVectorIndexes();
+          break;
+        case 0x03:
+          // a declarative segment
+          segmentKind = SegmentKind.declaritive;
+          elementKind = readType();
+          functionIndexs = r.readVectorIndexes();
+          break;
+        case 0x04:
+          // an active segment, table index of 0, vector values are expressions
+          elementKind = ValueType.funcref;
+          segmentKind = SegmentKind.active;
+          offsetInstrs = r.readInstructionsEndTerminated();
+          functionInstrs = r.readVectorOfInstructions();
+          break;
+        case 0x05:
+          elementKind = readType();
+          segmentKind = SegmentKind.passive;
+          functionInstrs = r.readVectorOfInstructions();
+          break;
+        case 0x06:
+          segmentKind = SegmentKind.active;
+          tableIndex = r.leb128_u();
+          offsetInstrs = r.readInstructionsEndTerminated();
+          elementKind = readType();
+          functionInstrs = r.readVectorOfInstructions();
+          break;
+        case 0x07:
+          segmentKind = SegmentKind.declaritive;
+          elementKind = readType();
+          functionInstrs = r.readVectorOfInstructions();
           break;
         default:
-          throw 'unhandled element section type: ${hex(type)}';
+          throw 'unhandled element section type: ${hex(sectionType)}';
       }
+
+      module.elementSegments.addElementSegment(ElementSegment(
+        elementKind: elementKind,
+        segmentKind: segmentKind,
+        tableIndex: tableIndex,
+        offsetInstrs: offsetInstrs,
+        functionIndexs: functionIndexs,
+        functionInstrs: functionInstrs,
+      ));
     }
   }
 
@@ -755,10 +823,11 @@ void printModule(
     classBuilder.fields.add(
       Field(
         (b) => b
-          ..name = 'elementSegments'
+          ..name = 'segments'
           ..type = Reference('ElementSegments')
           ..modifier = FieldModifier.final$
-          ..assignment = Code('ElementSegments()'),
+          ..late = true
+          ..assignment = Code('ElementSegments(this)'),
       ),
     );
   }
@@ -783,9 +852,7 @@ void printModule(
 
   if (module.elementSegments.isNotEmpty) {
     constructorStatements.add(
-      refer('elementSegments').property('init').call([
-        refer('this'),
-      ]).statement,
+      refer('segments').property('init').call([]).statement,
     );
   }
 
@@ -850,7 +917,8 @@ void printModule(
   }
 
   if (module.elementSegments.isNotEmpty) {
-    library.body.add(ElementSegment.createElementSegmentsClassDef(module));
+    library.body
+        .add(module.elementSegments.createElementSegmentsClassDef(module));
   }
 }
 
@@ -1053,6 +1121,24 @@ class Reader {
 
     return instructions;
   }
+
+  List<int> readVectorIndexes() {
+    var count = leb128_u();
+    var indexs = <int>[];
+    for (int i = 0; i < count; i++) {
+      indexs.add(leb128_u());
+    }
+    return indexs;
+  }
+
+  List<List<Instr>> readVectorOfInstructions() {
+    var count = leb128_u();
+    var vector = <List<Instr>>[];
+    for (int i = 0; i < count; i++) {
+      vector.add(readInstructionsEndTerminated());
+    }
+    return vector;
+  }
 }
 
 enum SectionKind {
@@ -1117,7 +1203,9 @@ class FunctionType {
   FunctionType(this.parameterTypes, this.resultType);
 
   String get resultTypeDisplayName {
-    return resultType.isEmpty ? 'void' : resultType.join(', ');
+    return resultType.isEmpty
+        ? 'void'
+        : resultType.map((t) => t.typeName).join(', ');
   }
 
   bool get returnsVoid => resultType.isEmpty;
@@ -1132,16 +1220,23 @@ class FunctionType {
 }
 
 enum ValueType {
-  f64(0x7C),
-  f32(0x7D),
+  i32(0x7F),
   i64(0x7E),
-  i32(0x7F);
+  f32(0x7D),
+  f64(0x7C),
+  funcref(0x70);
 
   const ValueType(this.code);
 
   final int code;
 
-  String get typeName => name;
+  String get typeName {
+    if (this == funcref) {
+      return 'FuncRef?';
+    } else {
+      return name;
+    }
+  }
 
   @override
   String toString() => name;
@@ -1164,9 +1259,9 @@ class Module {
   List<ImportModule> importModules = [];
 
   final DataSegments dataSegments = DataSegments();
+  final ElementSegments elementSegments = ElementSegments();
 
   List<Table> tables = [];
-  List<ElementSegment> elementSegments = [];
 
   int minMemory = 0;
   int? maxMemory;
@@ -1215,16 +1310,6 @@ class Module {
 
   ModuleFunction? get startFunction =>
       startFunctionIndex == null ? null : functionByIndex(startFunctionIndex!);
-
-  void addElementSegment(
-    int tableIndex,
-    List<Instr> offsetInstrs,
-    List<int> functionIndexs,
-  ) {
-    // TODO: This only handles passive element segments of funcref type
-    elementSegments
-        .add(ElementSegment(tableIndex, offsetInstrs, functionIndexs));
-  }
 }
 
 class ImportModule {
@@ -1372,7 +1457,7 @@ class DefinedFunction extends ModuleFunction {
         Parameter(
           (p) => p
             ..name = variable.name
-            ..type = refer(variable.type.toString()),
+            ..type = refer(variable.type.typeName),
         ),
       );
     }
@@ -1449,40 +1534,113 @@ class Table {
   Table(this.type, this.minSize, [this.maxSize]);
 }
 
+enum SegmentKind {
+  passive,
+  active,
+  declaritive;
+}
+
 class ElementSegment {
+  // funcref, ...
+  final ValueType elementKind;
+  final SegmentKind segmentKind;
   final int tableIndex;
-  final List<Instr> offsetInstrs;
-  final List<int> functionIndexs;
+  final List<Instr>? offsetInstrs;
+  final List<int>? functionIndexs;
+  final List<List<Instr>>? functionInstrs;
 
-  ElementSegment(this.tableIndex, this.offsetInstrs, this.functionIndexs);
+  ElementSegment({
+    required this.elementKind,
+    required this.segmentKind,
+    required this.tableIndex,
+    this.offsetInstrs,
+    this.functionIndexs,
+    this.functionInstrs,
+  });
+}
 
-  static Class createElementSegmentsClassDef(Module module) {
+class ElementSegments {
+  final List<ElementSegment> segments = [];
+
+  bool get isNotEmpty => segments.isNotEmpty;
+
+  void addElementSegment(ElementSegment segment) {
+    segments.add(segment);
+  }
+
+  Class createElementSegmentsClassDef(Module module) {
     var fields = <Field>[];
     var methods = <Method>[];
 
-    var statements = <Code>[
-      declareVar('offset', type: Reference('i32')).statement,
-    ];
+    var statements = <Code>[];
 
-    for (int i = 0; i < module.elementSegments.length; i++) {
-      statements.add(Code('\n    // element segment $i'));
+    // final Module module;
+    fields.add(Field(
+      (b) => b
+        ..modifier = FieldModifier.final$
+        ..name = 'module'
+        ..type = Reference('Module'),
+    ));
 
-      var segment = module.elementSegments[i];
+    // late final List<Function> functionTable;
+    fields.add(Field(
+      (b) => b
+        ..modifier = FieldModifier.final$
+        ..late = true
+        ..name = 'functionTable'
+        ..type = Reference('List<Function>'),
+    ));
 
-      var literal = Instruction.calcLiternal(segment.offsetInstrs);
-      var offsetExpr = literal == null
-          ? refer('_segmentOffset$i').call([])
-          : literalNum(literal.value as num);
+    for (int i = 0; i < segments.length; i++) {
+      var segment = segments[i];
+      if (segment.segmentKind != SegmentKind.passive) continue;
 
-      statements.add(refer('offset').assign(offsetExpr).statement);
-      for (int j = 0; j < segment.functionIndexs.length; j++) {
-        var functionIndex = segment.functionIndexs[j];
-        // module.table0.funcRefs[offset + 0] = module._func83;
-        var func = module.functionByIndex(functionIndex);
-        statements.add(Code(
-          'module.table${segment.tableIndex}.funcRefs[offset + $j] '
-          '= module.${func!.name};',
-        ));
+      fields.add(Field(
+        (b) => b
+          ..modifier = FieldModifier.final$
+          ..late = true
+          ..name = 'segment$i'
+          ..type = Reference('List<int>'),
+      ));
+    }
+
+    // ElementSegments(this.module);
+    var fncNames = module.allFunctions.map((f) => 'module.${f.name}');
+    var constructor = Constructor(
+      (b) => b
+        ..requiredParameters.add((Parameter(
+          (b) => b
+            ..name = 'module'
+            ..toThis = true,
+        )))
+        ..body = Block.of([
+          Code('functionTable = [${fncNames.join(', ')}];'),
+        ]),
+    );
+
+    for (int i = 0; i < segments.length; i++) {
+      var segment = segments[i];
+      if (segment.segmentKind == SegmentKind.declaritive) continue;
+
+      String indexesText;
+      int itemCount;
+      if (segment.functionIndexs != null) {
+        itemCount = segment.functionIndexs!.length;
+        indexesText = '[${segment.functionIndexs!.map((i) => '$i').join(',')}]';
+      } else {
+        itemCount = segment.functionInstrs!.length;
+        indexesText = segment.functionInstrs!.map((instrs) {
+          return closureFrom(module, instrs);
+        }).join(', ');
+        indexesText = '[$indexesText]';
+      }
+
+      if (segment.segmentKind == SegmentKind.active) {
+        var destOffsetText = closureFrom(module, segment.offsetInstrs!);
+        statements.add(Code('copyTo(module.table$i, 0, $destOffsetText, '
+            '$itemCount, $indexesText); /* segment$i */'));
+      } else {
+        statements.add(Code('segment$i = $indexesText;'));
       }
     }
 
@@ -1490,66 +1648,70 @@ class ElementSegment {
       (b) => b
         ..name = 'init'
         ..returns = Reference('void')
-        ..requiredParameters.add(Parameter(
-          (b) => b
-            ..name = 'module'
-            ..type = Reference('Module'),
-        ))
         ..body = Block.of(statements),
     );
 
-    var needsMemoryReference = false;
-
-    for (int i = 0; i < module.elementSegments.length; i++) {
-      var elementSegment = module.elementSegments[i];
-      var initFunction = DefinedFunction(module, 0, 0);
-
-      var literal = Instruction.calcLiternal(elementSegment.offsetInstrs);
-      if (literal != null) continue;
-
-      needsMemoryReference = true;
-
-      var method = Method(
-        (b) => b
-          ..name = '_segmentOffset$i'
-          ..returns = Reference('i32')
-          ..static = true
-          ..body = Block.of([
-            declareFinal('frame')
-                .assign(refer('Frame').call([refer('memory')]))
-                .statement,
-            for (var instr in elementSegment.offsetInstrs)
-              instr.generateToStatement(initFunction),
-            refer('frame').property('pop').call([]).returned.statement,
-          ]),
-      );
-
-      methods.add(method);
-    }
-
-    if (needsMemoryReference) {
-      // TODO: remove this memory instance - it's only used when we initialize
-      // segments.
-      // "static final Memory memory = Memory(0);"
-      fields.add(Field(
-        (b) => b
-          ..name = 'memory'
-          ..type = Reference('Memory')
-          ..modifier = FieldModifier.final$
-          ..static = true
-          ..assignment = Code('Memory(0)'),
-      ));
-    }
+    // void copyTo(Table table, int offset, int count, List<int> indexes) {
+    var copyToMethod = Method(
+      (b) => b
+        ..name = 'copyTo'
+        ..returns = Reference('void')
+        ..requiredParameters.addAll([
+          Parameter((b) => b
+            ..name = 'table'
+            ..type = Reference('Table')),
+          Parameter((b) => b
+            ..name = 'src'
+            ..type = Reference('int')),
+          Parameter((b) => b
+            ..name = 'dest'
+            ..type = Reference('int')),
+          Parameter((b) => b
+            ..name = 'count'
+            ..type = Reference('int')),
+          Parameter((b) => b
+            ..name = 'indexes'
+            ..type = Reference('List<int>')),
+        ])
+        ..body = Block.of([
+          Code('indexes = indexes.sublist(src, src + count);'),
+          Code(
+              'var functions = indexes.map((i) => functionTable[i]).toList();'),
+          Code('table.copyFrom(functions, dest, count);'),
+        ]),
+    );
 
     return Class(
       (b) => b
         ..name = 'ElementSegments'
         ..fields.addAll(fields)
+        ..constructors.add(constructor)
         ..methods.addAll([
           initMethod,
+          copyToMethod,
           ...methods,
         ]),
     );
+  }
+
+  String closureFrom(Module module, List<Instr> instrs) {
+    final emitter = WasmCustomEmitter();
+
+    var literal = Instruction.calcLiternal(instrs);
+    if (literal != null) {
+      return literalNum(literal.value as num).accept(emitter).toString();
+    }
+
+    var initFunction = DefinedFunction(module, 0, 0);
+
+    var code = Block.of([
+      Code('final frame = Frame(module.memory);'),
+      for (var instr in instrs) instr.generateToStatement(initFunction),
+      Code('return frame.pop();'),
+    ]);
+
+    var str = code.accept(emitter).toString();
+    return '() {$str }()';
   }
 }
 

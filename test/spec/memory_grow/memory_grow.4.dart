@@ -8,7 +8,7 @@ import 'package:wasmd/runtime.dart';
 class Module {
   Module() {
     tables = [table0];
-    elementSegments.init(this);
+    segments.init();
   }
 
   final Memory memory = Memory(1);
@@ -22,7 +22,7 @@ class Module {
 
   late final List<Table> tables;
 
-  final ElementSegments elementSegments = ElementSegments();
+  late final ElementSegments segments = ElementSegments(this);
 
   i32 as_br_value() {
     final frame = Frame(memory);
@@ -476,11 +476,60 @@ class Globals {
 }
 
 class ElementSegments {
-  void init(Module module) {
-    i32 offset;
+  ElementSegments(this.module) {
+    functionTable = [
+      module.as_br_value,
+      module.as_br_if_cond,
+      module.as_br_if_value,
+      module.as_br_if_value_cond,
+      module.as_br_table_index,
+      module.as_br_table_value,
+      module.as_br_table_value_index,
+      module.as_return_value,
+      module.as_if_cond,
+      module.as_if_then,
+      module.as_if_else,
+      module.as_select_first,
+      module.as_select_second,
+      module.as_select_cond,
+      module.f,
+      module.as_call_first,
+      module.as_call_mid,
+      module.as_call_last,
+      module.as_call_indirect_first,
+      module.as_call_indirect_mid,
+      module.as_call_indirect_last,
+      module.as_call_indirect_index,
+      module.as_local_set_value,
+      module.as_local_tee_value,
+      module.as_global_set_value,
+      module.as_load_address,
+      module.as_loadN_address,
+      module.as_store_address,
+      module.as_store_value,
+      module.as_storeN_address,
+      module.as_storeN_value,
+      module.as_unary_operand,
+      module.as_binary_left,
+      module.as_binary_right,
+      module.as_test_operand,
+      module.as_compare_left,
+      module.as_compare_right,
+      module.as_memory_grow_size
+    ];
+  }
 
-    // element segment 0
-    offset = 0;
-    module.table0.funcRefs[offset + 0] = module.f;
+  final Module module;
+
+  late final List<Function> functionTable;
+
+  void init() {
+    copyTo(module.table0, 0, 0, 1, [14]); /* segment0 */
+  }
+
+  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
+    indexes = indexes.sublist(src, src + count);
+    var functions = indexes.map((i) => functionTable[i]).toList();
+    table.copyFrom(functions, dest, count);
   }
 }

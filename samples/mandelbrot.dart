@@ -11,7 +11,7 @@ class Module {
     required this.memory,
   }) {
     tables = [table0];
-    elementSegments.init(this);
+    segments.init();
   }
 
   final EnvImports envImports;
@@ -28,7 +28,7 @@ class Module {
 
   late final List<Table> tables;
 
-  final ElementSegments elementSegments = ElementSegments();
+  late final ElementSegments segments = ElementSegments(this);
 
   f64 _func0(f64 value, f64 minValue, f64 maxValue) {
     final frame = Frame(memory);
@@ -342,10 +342,26 @@ abstract class EnvImports {
 }
 
 class ElementSegments {
-  void init(Module module) {
-    i32 offset;
+  ElementSegments(this.module) {
+    functionTable = [
+      module.envImports.Math_log,
+      module.envImports.Math_log2,
+      module._func0,
+      module.update
+    ];
+  }
 
-    // element segment 0
-    offset = 1;
+  final Module module;
+
+  late final List<Function> functionTable;
+
+  void init() {
+    copyTo(module.table0, 0, 1, 0, []); /* segment0 */
+  }
+
+  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
+    indexes = indexes.sublist(src, src + count);
+    var functions = indexes.map((i) => functionTable[i]).toList();
+    table.copyFrom(functions, dest, count);
   }
 }

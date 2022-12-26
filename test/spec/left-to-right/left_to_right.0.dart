@@ -8,7 +8,7 @@ import 'package:wasmd/runtime.dart';
 class Module {
   Module() {
     tables = [table0];
-    elementSegments.init(this);
+    segments.init();
   }
 
   final Memory memory = Memory(1);
@@ -20,7 +20,7 @@ class Module {
 
   late final List<Table> tables;
 
-  final ElementSegments elementSegments = ElementSegments();
+  late final ElementSegments segments = ElementSegments(this);
 
   i32 i32_t0(i32 arg0, i32 arg1) {
     final frame = Frame(memory);
@@ -1428,18 +1428,152 @@ typedef FunctionType11 = void Function(f32, f32);
 typedef FunctionType12 = void Function(f64, f64);
 
 class ElementSegments {
-  void init(Module module) {
-    i32 offset;
+  ElementSegments(this.module) {
+    functionTable = [
+      module.i32_t0,
+      module.i32_t1,
+      module.i64_t0,
+      module.i64_t1,
+      module.f32_t0,
+      module.f32_t1,
+      module.f64_t0,
+      module.f64_t1,
+      module.reset,
+      module.bump,
+      module.get,
+      module.i32_left,
+      module.i32_right,
+      module.i32_another,
+      module.i32_callee,
+      module.i32_bool,
+      module.i64_left,
+      module.i64_right,
+      module.i64_another,
+      module.i64_callee,
+      module.i64_bool,
+      module.f32_left,
+      module.f32_right,
+      module.f32_another,
+      module.f32_callee,
+      module.f32_bool,
+      module.f64_left,
+      module.f64_right,
+      module.f64_another,
+      module.f64_callee,
+      module.f64_bool,
+      module.i32_dummy,
+      module.i64_dummy,
+      module.f32_dummy,
+      module.f64_dummy,
+      module.i32_add,
+      module.i32_sub,
+      module.i32_mul,
+      module.i32_div_s,
+      module.i32_div_u,
+      module.i32_rem_s,
+      module.i32_rem_u,
+      module.i32_and,
+      module.i32_or,
+      module.i32_xor,
+      module.i32_shl,
+      module.i32_shr_u,
+      module.i32_shr_s,
+      module.i32_eq,
+      module.i32_ne,
+      module.i32_lt_s,
+      module.i32_le_s,
+      module.i32_lt_u,
+      module.i32_le_u,
+      module.i32_gt_s,
+      module.i32_ge_s,
+      module.i32_gt_u,
+      module.i32_ge_u,
+      module.i32_store,
+      module.i32_store8,
+      module.i32_store16,
+      module.i32_call,
+      module.i32_call_indirect,
+      module.i32_select,
+      module.i64_add,
+      module.i64_sub,
+      module.i64_mul,
+      module.i64_div_s,
+      module.i64_div_u,
+      module.i64_rem_s,
+      module.i64_rem_u,
+      module.i64_and,
+      module.i64_or,
+      module.i64_xor,
+      module.i64_shl,
+      module.i64_shr_u,
+      module.i64_shr_s,
+      module.i64_eq,
+      module.i64_ne,
+      module.i64_lt_s,
+      module.i64_le_s,
+      module.i64_lt_u,
+      module.i64_le_u,
+      module.i64_gt_s,
+      module.i64_ge_s,
+      module.i64_gt_u,
+      module.i64_ge_u,
+      module.i64_store,
+      module.i64_store8,
+      module.i64_store16,
+      module.i64_store32,
+      module.i64_call,
+      module.i64_call_indirect,
+      module.i64_select,
+      module.f32_add,
+      module.f32_sub,
+      module.f32_mul,
+      module.f32_div,
+      module.f32_copysign,
+      module.f32_eq,
+      module.f32_ne,
+      module.f32_lt,
+      module.f32_le,
+      module.f32_gt,
+      module.f32_ge,
+      module.f32_min,
+      module.f32_max,
+      module.f32_store,
+      module.f32_call,
+      module.f32_call_indirect,
+      module.f32_select,
+      module.f64_add,
+      module.f64_sub,
+      module.f64_mul,
+      module.f64_div,
+      module.f64_copysign,
+      module.f64_eq,
+      module.f64_ne,
+      module.f64_lt,
+      module.f64_le,
+      module.f64_gt,
+      module.f64_ge,
+      module.f64_min,
+      module.f64_max,
+      module.f64_store,
+      module.f64_call,
+      module.f64_call_indirect,
+      module.f64_select,
+      module.br_if,
+      module.br_table
+    ];
+  }
 
-    // element segment 0
-    offset = 0;
-    module.table0.funcRefs[offset + 0] = module.i32_t0;
-    module.table0.funcRefs[offset + 1] = module.i32_t1;
-    module.table0.funcRefs[offset + 2] = module.i64_t0;
-    module.table0.funcRefs[offset + 3] = module.i64_t1;
-    module.table0.funcRefs[offset + 4] = module.f32_t0;
-    module.table0.funcRefs[offset + 5] = module.f32_t1;
-    module.table0.funcRefs[offset + 6] = module.f64_t0;
-    module.table0.funcRefs[offset + 7] = module.f64_t1;
+  final Module module;
+
+  late final List<Function> functionTable;
+
+  void init() {
+    copyTo(module.table0, 0, 0, 8, [0, 1, 2, 3, 4, 5, 6, 7]); /* segment0 */
+  }
+
+  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
+    indexes = indexes.sublist(src, src + count);
+    var functions = indexes.map((i) => functionTable[i]).toList();
+    table.copyFrom(functions, dest, count);
   }
 }

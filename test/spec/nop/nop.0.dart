@@ -8,7 +8,7 @@ import 'package:wasmd/runtime.dart';
 class Module {
   Module() {
     tables = [table0];
-    elementSegments.init(this);
+    segments.init();
   }
 
   final Memory memory = Memory(1);
@@ -22,7 +22,7 @@ class Module {
 
   late final List<Table> tables;
 
-  final ElementSegments elementSegments = ElementSegments();
+  late final ElementSegments segments = ElementSegments(this);
 
   void dummy() {
     final frame = Frame(memory);
@@ -992,11 +992,105 @@ class Globals {
 }
 
 class ElementSegments {
-  void init(Module module) {
-    i32 offset;
+  ElementSegments(this.module) {
+    functionTable = [
+      module.dummy,
+      module._func1,
+      module.as_func_first,
+      module.as_func_mid,
+      module.as_func_last,
+      module.as_func_everywhere,
+      module.as_drop_first,
+      module.as_drop_last,
+      module.as_drop_everywhere,
+      module.as_select_first,
+      module.as_select_mid1,
+      module.as_select_mid2,
+      module.as_select_last,
+      module.as_select_everywhere,
+      module.as_block_first,
+      module.as_block_mid,
+      module.as_block_last,
+      module.as_block_everywhere,
+      module.as_loop_first,
+      module.as_loop_mid,
+      module.as_loop_last,
+      module.as_loop_everywhere,
+      module.as_if_condition,
+      module.as_if_then,
+      module.as_if_else,
+      module.as_br_first,
+      module.as_br_last,
+      module.as_br_everywhere,
+      module.as_br_if_first,
+      module.as_br_if_mid,
+      module.as_br_if_last,
+      module.as_br_if_everywhere,
+      module.as_br_table_first,
+      module.as_br_table_mid,
+      module.as_br_table_last,
+      module.as_br_table_everywhere,
+      module.as_return_first,
+      module.as_return_last,
+      module.as_return_everywhere,
+      module.as_call_first,
+      module.as_call_mid1,
+      module.as_call_mid2,
+      module.as_call_last,
+      module.as_call_everywhere,
+      module.as_unary_first,
+      module.as_unary_last,
+      module.as_unary_everywhere,
+      module.as_binary_first,
+      module.as_binary_mid,
+      module.as_binary_last,
+      module.as_binary_everywhere,
+      module.as_test_first,
+      module.as_test_last,
+      module.as_test_everywhere,
+      module.as_compare_first,
+      module.as_compare_mid,
+      module.as_compare_last,
+      module.as_compare_everywhere,
+      module.as_memory_grow_first,
+      module.as_memory_grow_last,
+      module.as_memory_grow_everywhere,
+      module.func,
+      module.as_call_indirect_first,
+      module.as_call_indirect_mid1,
+      module.as_call_indirect_mid2,
+      module.as_call_indirect_last,
+      module.as_call_indirect_everywhere,
+      module.as_local_set_first,
+      module.as_local_set_last,
+      module.as_local_set_everywhere,
+      module.as_local_tee_first,
+      module.as_local_tee_last,
+      module.as_local_tee_everywhere,
+      module.as_global_set_first,
+      module.as_global_set_last,
+      module.as_global_set_everywhere,
+      module.as_load_first,
+      module.as_load_last,
+      module.as_load_everywhere,
+      module.as_store_first,
+      module.as_store_mid,
+      module.as_store_last,
+      module.as_store_everywhere
+    ];
+  }
 
-    // element segment 0
-    offset = 0;
-    module.table0.funcRefs[offset + 0] = module.func;
+  final Module module;
+
+  late final List<Function> functionTable;
+
+  void init() {
+    copyTo(module.table0, 0, 0, 1, [61]); /* segment0 */
+  }
+
+  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
+    indexes = indexes.sublist(src, src + count);
+    var functions = indexes.map((i) => functionTable[i]).toList();
+    table.copyFrom(functions, dest, count);
   }
 }

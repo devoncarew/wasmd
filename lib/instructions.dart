@@ -304,6 +304,38 @@ class Instruction_GlobalSet extends Instruction {
   }
 }
 
+class Instruction_TableGet extends Instruction {
+  Instruction_TableGet()
+      : super('table.get', 0x25, immediates: [ValueType.u32]);
+
+  @override
+  Code generateToStatement(Instr instr, ModuleFunction function) {
+    var immediate = instr.args[0] as int;
+    return refer('frame').property('push').call([
+      refer('table$immediate').index(refer('frame').property('pop').call([]))
+    ]).statement;
+  }
+}
+
+class Instruction_TableSet extends Instruction {
+  Instruction_TableSet()
+      : super('table.set', 0x26, immediates: [ValueType.u32]);
+
+  @override
+  Code generateToStatement(Instr instr, ModuleFunction function) {
+    var immediate = instr.args[0] as int;
+
+    return Block.of([
+      Code('{'),
+      declareVar('ref')
+          .assign(refer('frame').property('pop').call([]))
+          .statement,
+      Code('table$immediate.funcRefs[frame.pop() as int] = ref;'),
+      Code('}'),
+    ]);
+  }
+}
+
 class Instruction_Call extends Instruction {
   Instruction_Call() : super('call', 0x10, immediates: [ValueType.u32]);
 
@@ -378,6 +410,27 @@ class Instruction_CallIndirect extends Instruction {
     return Block.of([
       Code('{'),
       ...statements,
+      Code('}'),
+    ]);
+  }
+}
+
+class Instruction_TableInit extends Instruction {
+  Instruction_TableInit()
+      : super('table.init', 0x0C, immediates: [ValueType.u32, ValueType.u32]);
+
+  @override
+  Code generateToStatement(Instr instr, DefinedFunction function) {
+    var segment = instr.args[0] as int;
+    var table = instr.args[1] as int;
+
+    return Block.of([
+      Code('{'),
+      Code('i32 count = frame.pop() as i32;'),
+      Code('i32 sourceOffset = frame.pop() as i32;'),
+      Code('i32 destOffset = frame.pop() as i32;'),
+      Code('segments.copyTo(table$table, sourceOffset, destOffset, count, '
+          'segments.segment$segment);'),
       Code('}'),
     ]);
   }
@@ -583,7 +636,8 @@ class Instruction {
       Instruction_LocalTee(), // local.tee, 0x22
       Instruction_GlobalGet(), // global.get, 0x23
       Instruction_GlobalSet(), // global.get, 0x24
-      //
+      Instruction_TableGet(), // table.get, 0x25
+      Instruction_TableSet(), // table.get, 0x26
       // reserved, 0x27
       Instruction('i32.load', 0x28, immediates: _memarg),
       Instruction('i64.load', 0x29, immediates: _memarg),
@@ -754,9 +808,13 @@ class Instruction {
       Instruction('i32.trunc_sat_f32_u', 0x01),
       Instruction('i32.trunc_sat_f64_u', 0x03),
       // Instruction('memory.init', 0x08, immediates: _one),
-      Instruction('memory.copy', 0x0A,
-          immediates: [ValueType.u32, ValueType.u32]),
+      Instruction(
+        'memory.copy',
+        0x0A,
+        immediates: [ValueType.u32, ValueType.u32],
+      ),
       Instruction('memory.fill', 0x0B, immediates: [ValueType.u32]),
+      Instruction_TableInit(), // table.init, 0x0C
     ];
   }
 }
