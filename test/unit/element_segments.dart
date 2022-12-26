@@ -20,6 +20,8 @@ class Module {
 
   late final ElementSegments segments = ElementSegments(this);
 
+  late final List<Function> functionTable = _initFunctionTable();
+
   i32 f1() {
     final frame = Frame(memory);
     frame.i32_const(6);
@@ -78,6 +80,10 @@ class Module {
           table0, sourceOffset, destOffset, count, segments.segment1);
     }
   }
+
+  List<Function> _initFunctionTable() {
+    return [f1, f2, f3, callByIndex, table_get, table_set, init];
+  }
 }
 
 typedef FunctionType0 = i32 Function();
@@ -87,32 +93,20 @@ typedef FunctionType3 = void Function(i32, FuncRef?);
 typedef FunctionType4 = void Function();
 
 class ElementSegments {
-  ElementSegments(this.module) {
-    functionTable = [
-      module.f1,
-      module.f2,
-      module.f3,
-      module.callByIndex,
-      module.table_get,
-      module.table_set,
-      module.init
-    ];
-  }
+  ElementSegments(this.module);
 
   final Module module;
-
-  late final List<Function> functionTable;
 
   late final List<int> segment1;
 
   void init() {
-    copyTo(module.table0, 0, 0, 2, [0, 1]); // segment0
+    copyTo(module.table0, 0, 0, 2, [0, 1]); /* segment0 */
     segment1 = [2, 2, 2];
   }
 
   void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
     indexes = indexes.sublist(src, src + count);
-    var functions = indexes.map((i) => functionTable[i]).toList();
+    var functions = indexes.map((i) => module.functionTable[i]).toList();
     table.copyFrom(functions, dest, count);
   }
 }

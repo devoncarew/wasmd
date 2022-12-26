@@ -24,6 +24,8 @@ class Module {
 
   late final ElementSegments segments = ElementSegments(this);
 
+  late final List<Function> functionTable = _initFunctionTable();
+
   i32 type_local_i32() {
     i32 local0 = 0;
 
@@ -755,6 +757,68 @@ class Module {
     frame.memory_grow(0);
     return frame.pop();
   }
+
+  List<Function> _initFunctionTable() {
+    return [
+      type_local_i32,
+      type_local_i64,
+      type_local_f32,
+      type_local_f64,
+      type_param_i32,
+      type_param_i64,
+      type_param_f32,
+      type_param_f64,
+      type_mixed,
+      write,
+      result,
+      dummy,
+      as_block_first,
+      as_block_mid,
+      as_block_last,
+      as_loop_first,
+      as_loop_mid,
+      as_loop_last,
+      as_br_value,
+      as_br_if_cond,
+      as_br_if_value,
+      as_br_if_value_cond,
+      as_br_table_index,
+      as_br_table_value,
+      as_br_table_value_index,
+      as_return_value,
+      as_if_cond,
+      as_if_then,
+      as_if_else,
+      as_select_first,
+      as_select_second,
+      as_select_cond,
+      f,
+      as_call_first,
+      as_call_mid,
+      as_call_last,
+      as_call_indirect_first,
+      as_call_indirect_mid,
+      as_call_indirect_last,
+      as_call_indirect_index,
+      as_local_set_value,
+      as_local_tee_value,
+      as_global_set_value,
+      as_load_address,
+      as_loadN_address,
+      as_store_address,
+      as_store_value,
+      as_storeN_address,
+      as_storeN_value,
+      as_unary_operand,
+      as_binary_left,
+      as_binary_right,
+      as_test_operand,
+      as_compare_left,
+      as_compare_right,
+      as_convert_operand,
+      as_memory_grow_size
+    ];
+  }
 }
 
 typedef FunctionType0 = i32 Function(i32, i32, i32);
@@ -779,71 +843,9 @@ class Globals {
 }
 
 class ElementSegments {
-  ElementSegments(this.module) {
-    functionTable = [
-      module.type_local_i32,
-      module.type_local_i64,
-      module.type_local_f32,
-      module.type_local_f64,
-      module.type_param_i32,
-      module.type_param_i64,
-      module.type_param_f32,
-      module.type_param_f64,
-      module.type_mixed,
-      module.write,
-      module.result,
-      module.dummy,
-      module.as_block_first,
-      module.as_block_mid,
-      module.as_block_last,
-      module.as_loop_first,
-      module.as_loop_mid,
-      module.as_loop_last,
-      module.as_br_value,
-      module.as_br_if_cond,
-      module.as_br_if_value,
-      module.as_br_if_value_cond,
-      module.as_br_table_index,
-      module.as_br_table_value,
-      module.as_br_table_value_index,
-      module.as_return_value,
-      module.as_if_cond,
-      module.as_if_then,
-      module.as_if_else,
-      module.as_select_first,
-      module.as_select_second,
-      module.as_select_cond,
-      module.f,
-      module.as_call_first,
-      module.as_call_mid,
-      module.as_call_last,
-      module.as_call_indirect_first,
-      module.as_call_indirect_mid,
-      module.as_call_indirect_last,
-      module.as_call_indirect_index,
-      module.as_local_set_value,
-      module.as_local_tee_value,
-      module.as_global_set_value,
-      module.as_load_address,
-      module.as_loadN_address,
-      module.as_store_address,
-      module.as_store_value,
-      module.as_storeN_address,
-      module.as_storeN_value,
-      module.as_unary_operand,
-      module.as_binary_left,
-      module.as_binary_right,
-      module.as_test_operand,
-      module.as_compare_left,
-      module.as_compare_right,
-      module.as_convert_operand,
-      module.as_memory_grow_size
-    ];
-  }
+  ElementSegments(this.module);
 
   final Module module;
-
-  late final List<Function> functionTable;
 
   void init() {
     copyTo(module.table0, 0, 0, 1, [32]); /* segment0 */
@@ -851,7 +853,7 @@ class ElementSegments {
 
   void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
     indexes = indexes.sublist(src, src + count);
-    var functions = indexes.map((i) => functionTable[i]).toList();
+    var functions = indexes.map((i) => module.functionTable[i]).toList();
     table.copyFrom(functions, dest, count);
   }
 }

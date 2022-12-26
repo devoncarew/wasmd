@@ -637,6 +637,7 @@ void printModule(
   final classBuilder = ClassBuilder()..name = className;
 
   if (generateWastTest) {
+    // todo: remove this
     String generateTests() {
       var buf = StringBuffer();
       var functions = module.allFunctions.where((f) {
@@ -856,6 +857,18 @@ void printModule(
     );
   }
 
+  if (module.elementSegments.isNotEmpty) {
+    // late final List<Function> functionTable;
+    classBuilder.fields.add(Field(
+      (b) => b
+        ..modifier = FieldModifier.final$
+        ..late = true
+        ..name = 'functionTable'
+        ..type = Reference('List<Function>')
+        ..assignment = Code('_initFunctionTable()'),
+    ));
+  }
+
   if (module.startFunction != null) {
     constructorStatements
         .add(refer(module.startFunction!.name).call([]).statement);
@@ -892,6 +905,18 @@ void printModule(
     }
     var method = func.generateToMethod();
     classBuilder.methods.add(method);
+  }
+
+  if (module.elementSegments.isNotEmpty) {
+    classBuilder.methods.add(Method(
+      (b) => b
+        ..name = '_initFunctionTable'
+        ..returns = Reference('List<Function>')
+        ..body = Block.of([
+          Code(
+              'return [${module.allFunctions.map((f) => f.name).join(', ')}];'),
+        ]),
+    ));
   }
 
   library.body.add(classBuilder.build());
@@ -1582,15 +1607,6 @@ class ElementSegments {
         ..type = Reference('Module'),
     ));
 
-    // late final List<Function> functionTable;
-    fields.add(Field(
-      (b) => b
-        ..modifier = FieldModifier.final$
-        ..late = true
-        ..name = 'functionTable'
-        ..type = Reference('List<Function>'),
-    ));
-
     for (int i = 0; i < segments.length; i++) {
       var segment = segments[i];
       if (segment.segmentKind != SegmentKind.passive) continue;
@@ -1605,17 +1621,13 @@ class ElementSegments {
     }
 
     // ElementSegments(this.module);
-    var fncNames = module.allFunctions.map((f) => 'module.${f.name}');
     var constructor = Constructor(
       (b) => b
         ..requiredParameters.add((Parameter(
           (b) => b
             ..name = 'module'
             ..toThis = true,
-        )))
-        ..body = Block.of([
-          Code('functionTable = [${fncNames.join(', ')}];'),
-        ]),
+        ))),
     );
 
     for (int i = 0; i < segments.length; i++) {
@@ -1675,8 +1687,8 @@ class ElementSegments {
         ])
         ..body = Block.of([
           Code('indexes = indexes.sublist(src, src + count);'),
-          Code(
-              'var functions = indexes.map((i) => functionTable[i]).toList();'),
+          Code('var functions = indexes.map((i) '
+              '=> module.functionTable[i]).toList();'),
           Code('table.copyFrom(functions, dest, count);'),
         ]),
     );

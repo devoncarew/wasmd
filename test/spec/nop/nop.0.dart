@@ -24,6 +24,8 @@ class Module {
 
   late final ElementSegments segments = ElementSegments(this);
 
+  late final List<Function> functionTable = _initFunctionTable();
+
   void dummy() {
     final frame = Frame(memory);
   }
@@ -977,6 +979,94 @@ class Module {
     /* nop */
     frame.i32_store(2, 0);
   }
+
+  List<Function> _initFunctionTable() {
+    return [
+      dummy,
+      _func1,
+      as_func_first,
+      as_func_mid,
+      as_func_last,
+      as_func_everywhere,
+      as_drop_first,
+      as_drop_last,
+      as_drop_everywhere,
+      as_select_first,
+      as_select_mid1,
+      as_select_mid2,
+      as_select_last,
+      as_select_everywhere,
+      as_block_first,
+      as_block_mid,
+      as_block_last,
+      as_block_everywhere,
+      as_loop_first,
+      as_loop_mid,
+      as_loop_last,
+      as_loop_everywhere,
+      as_if_condition,
+      as_if_then,
+      as_if_else,
+      as_br_first,
+      as_br_last,
+      as_br_everywhere,
+      as_br_if_first,
+      as_br_if_mid,
+      as_br_if_last,
+      as_br_if_everywhere,
+      as_br_table_first,
+      as_br_table_mid,
+      as_br_table_last,
+      as_br_table_everywhere,
+      as_return_first,
+      as_return_last,
+      as_return_everywhere,
+      as_call_first,
+      as_call_mid1,
+      as_call_mid2,
+      as_call_last,
+      as_call_everywhere,
+      as_unary_first,
+      as_unary_last,
+      as_unary_everywhere,
+      as_binary_first,
+      as_binary_mid,
+      as_binary_last,
+      as_binary_everywhere,
+      as_test_first,
+      as_test_last,
+      as_test_everywhere,
+      as_compare_first,
+      as_compare_mid,
+      as_compare_last,
+      as_compare_everywhere,
+      as_memory_grow_first,
+      as_memory_grow_last,
+      as_memory_grow_everywhere,
+      func,
+      as_call_indirect_first,
+      as_call_indirect_mid1,
+      as_call_indirect_mid2,
+      as_call_indirect_last,
+      as_call_indirect_everywhere,
+      as_local_set_first,
+      as_local_set_last,
+      as_local_set_everywhere,
+      as_local_tee_first,
+      as_local_tee_last,
+      as_local_tee_everywhere,
+      as_global_set_first,
+      as_global_set_last,
+      as_global_set_everywhere,
+      as_load_first,
+      as_load_last,
+      as_load_everywhere,
+      as_store_first,
+      as_store_mid,
+      as_store_last,
+      as_store_everywhere
+    ];
+  }
 }
 
 typedef FunctionType0 = i32 Function(i32, i32);
@@ -992,97 +1082,9 @@ class Globals {
 }
 
 class ElementSegments {
-  ElementSegments(this.module) {
-    functionTable = [
-      module.dummy,
-      module._func1,
-      module.as_func_first,
-      module.as_func_mid,
-      module.as_func_last,
-      module.as_func_everywhere,
-      module.as_drop_first,
-      module.as_drop_last,
-      module.as_drop_everywhere,
-      module.as_select_first,
-      module.as_select_mid1,
-      module.as_select_mid2,
-      module.as_select_last,
-      module.as_select_everywhere,
-      module.as_block_first,
-      module.as_block_mid,
-      module.as_block_last,
-      module.as_block_everywhere,
-      module.as_loop_first,
-      module.as_loop_mid,
-      module.as_loop_last,
-      module.as_loop_everywhere,
-      module.as_if_condition,
-      module.as_if_then,
-      module.as_if_else,
-      module.as_br_first,
-      module.as_br_last,
-      module.as_br_everywhere,
-      module.as_br_if_first,
-      module.as_br_if_mid,
-      module.as_br_if_last,
-      module.as_br_if_everywhere,
-      module.as_br_table_first,
-      module.as_br_table_mid,
-      module.as_br_table_last,
-      module.as_br_table_everywhere,
-      module.as_return_first,
-      module.as_return_last,
-      module.as_return_everywhere,
-      module.as_call_first,
-      module.as_call_mid1,
-      module.as_call_mid2,
-      module.as_call_last,
-      module.as_call_everywhere,
-      module.as_unary_first,
-      module.as_unary_last,
-      module.as_unary_everywhere,
-      module.as_binary_first,
-      module.as_binary_mid,
-      module.as_binary_last,
-      module.as_binary_everywhere,
-      module.as_test_first,
-      module.as_test_last,
-      module.as_test_everywhere,
-      module.as_compare_first,
-      module.as_compare_mid,
-      module.as_compare_last,
-      module.as_compare_everywhere,
-      module.as_memory_grow_first,
-      module.as_memory_grow_last,
-      module.as_memory_grow_everywhere,
-      module.func,
-      module.as_call_indirect_first,
-      module.as_call_indirect_mid1,
-      module.as_call_indirect_mid2,
-      module.as_call_indirect_last,
-      module.as_call_indirect_everywhere,
-      module.as_local_set_first,
-      module.as_local_set_last,
-      module.as_local_set_everywhere,
-      module.as_local_tee_first,
-      module.as_local_tee_last,
-      module.as_local_tee_everywhere,
-      module.as_global_set_first,
-      module.as_global_set_last,
-      module.as_global_set_everywhere,
-      module.as_load_first,
-      module.as_load_last,
-      module.as_load_everywhere,
-      module.as_store_first,
-      module.as_store_mid,
-      module.as_store_last,
-      module.as_store_everywhere
-    ];
-  }
+  ElementSegments(this.module);
 
   final Module module;
-
-  late final List<Function> functionTable;
 
   void init() {
     copyTo(module.table0, 0, 0, 1, [61]); /* segment0 */
@@ -1090,7 +1092,7 @@ class ElementSegments {
 
   void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
     indexes = indexes.sublist(src, src + count);
-    var functions = indexes.map((i) => functionTable[i]).toList();
+    var functions = indexes.map((i) => module.functionTable[i]).toList();
     table.copyFrom(functions, dest, count);
   }
 }

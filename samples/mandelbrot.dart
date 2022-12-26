@@ -30,6 +30,8 @@ class Module {
 
   late final ElementSegments segments = ElementSegments(this);
 
+  late final List<Function> functionTable = _initFunctionTable();
+
   f64 _func0(f64 value, f64 minValue, f64 maxValue) {
     final frame = Frame(memory);
     frame.push(value);
@@ -322,6 +324,10 @@ class Module {
       break;
     }
   }
+
+  List<Function> _initFunctionTable() {
+    return [envImports.Math_log, envImports.Math_log2, _func0, update];
+  }
 }
 
 typedef FunctionType0 = f64 Function(f64);
@@ -342,18 +348,9 @@ abstract class EnvImports {
 }
 
 class ElementSegments {
-  ElementSegments(this.module) {
-    functionTable = [
-      module.envImports.Math_log,
-      module.envImports.Math_log2,
-      module._func0,
-      module.update
-    ];
-  }
+  ElementSegments(this.module);
 
   final Module module;
-
-  late final List<Function> functionTable;
 
   void init() {
     copyTo(module.table0, 0, 1, 0, []); /* segment0 */
@@ -361,7 +358,7 @@ class ElementSegments {
 
   void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
     indexes = indexes.sublist(src, src + count);
-    var functions = indexes.map((i) => functionTable[i]).toList();
+    var functions = indexes.map((i) => module.functionTable[i]).toList();
     table.copyFrom(functions, dest, count);
   }
 }
