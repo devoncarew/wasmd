@@ -22,7 +22,8 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
@@ -31,7 +32,8 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
       break;
@@ -41,7 +43,8 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
@@ -50,13 +53,15 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
@@ -64,7 +69,8 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
@@ -73,7 +79,8 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
       break;
@@ -83,7 +90,8 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
@@ -92,13 +100,15 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
@@ -107,7 +117,8 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType1;
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
         var t0 = frame.pop();
         func(t0);
       }
@@ -118,7 +129,8 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType1;
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
         var t0 = frame.pop();
         func(t0);
       }
@@ -130,7 +142,8 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType1;
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
         var t0 = frame.pop();
         func(t0);
       }
@@ -141,7 +154,8 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType1;
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
         var t0 = frame.pop();
         func(t0);
       }
@@ -149,7 +163,8 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType1;
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
         var t0 = frame.pop();
         func(t0);
       }
@@ -158,7 +173,8 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType2;
+        var func = table0[frame.pop()] as FunctionType2?;
+        if (func == null) throw Trap('uninitialized element');
         frame.push(func());
       }
     }
@@ -168,221 +184,8 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType2;
-        frame.push(func());
-      }
-      break;
-    }
-    frame.drop();
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType2;
-        frame.push(func());
-      }
-    } else {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType2;
-        frame.push(func());
-      }
-    }
-    frame.drop();
-    block_label_0:
-    {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-
-    loop_label_0:
-    for (;;) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-      break;
-    }
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    } else {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-    block_label_0:
-    {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-
-    loop_label_0:
-    for (;;) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-      break;
-    }
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    } else {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-    block_label_0:
-    {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-
-    loop_label_0:
-    for (;;) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-      break;
-    }
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    } else {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType0;
-        func();
-      }
-    }
-    block_label_0:
-    {
-      frame.i32_const(0);
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType1;
-        var t0 = frame.pop();
-        func(t0);
-      }
-    }
-
-    loop_label_0:
-    for (;;) {
-      frame.i32_const(0);
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType1;
-        var t0 = frame.pop();
-        func(t0);
-      }
-      break;
-    }
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType1;
-        var t0 = frame.pop();
-        func(t0);
-      }
-    }
-    frame.i32_const(0);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType1;
-        var t0 = frame.pop();
-        func(t0);
-      }
-    } else {
-      frame.i32_const(0);
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType1;
-        var t0 = frame.pop();
-        func(t0);
-      }
-    }
-    block_label_0:
-    {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType2;
-        frame.push(func());
-      }
-    }
-    frame.drop();
-
-    loop_label_0:
-    for (;;) {
-      frame.i32_const(0);
-      {
-        var func = table0[frame.pop()]! as FunctionType2;
+        var func = table0[frame.pop()] as FunctionType2?;
+        if (func == null) throw Trap('uninitialized element');
         frame.push(func());
       }
       break;
@@ -393,13 +196,15 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType2;
+        var func = table0[frame.pop()] as FunctionType2?;
+        if (func == null) throw Trap('uninitialized element');
         frame.push(func());
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType2;
+        var func = table0[frame.pop()] as FunctionType2?;
+        if (func == null) throw Trap('uninitialized element');
         frame.push(func());
       }
     }
@@ -408,7 +213,8 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
@@ -417,7 +223,8 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
       break;
@@ -427,7 +234,8 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
@@ -436,19 +244,260 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()]! as FunctionType0;
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+    block_label_0:
+    {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+
+    loop_label_0:
+    for (;;) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+      break;
+    }
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    } else {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+    block_label_0:
+    {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+
+    loop_label_0:
+    for (;;) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+      break;
+    }
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    } else {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+    block_label_0:
+    {
+      frame.i32_const(0);
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
+        var t0 = frame.pop();
+        func(t0);
+      }
+    }
+
+    loop_label_0:
+    for (;;) {
+      frame.i32_const(0);
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
+        var t0 = frame.pop();
+        func(t0);
+      }
+      break;
+    }
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
+        var t0 = frame.pop();
+        func(t0);
+      }
+    }
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
+        var t0 = frame.pop();
+        func(t0);
+      }
+    } else {
+      frame.i32_const(0);
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType1?;
+        if (func == null) throw Trap('uninitialized element');
+        var t0 = frame.pop();
+        func(t0);
+      }
+    }
+    block_label_0:
+    {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType2?;
+        if (func == null) throw Trap('uninitialized element');
+        frame.push(func());
+      }
+    }
+    frame.drop();
+
+    loop_label_0:
+    for (;;) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType2?;
+        if (func == null) throw Trap('uninitialized element');
+        frame.push(func());
+      }
+      break;
+    }
+    frame.drop();
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType2?;
+        if (func == null) throw Trap('uninitialized element');
+        frame.push(func());
+      }
+    } else {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType2?;
+        if (func == null) throw Trap('uninitialized element');
+        frame.push(func());
+      }
+    }
+    frame.drop();
+    block_label_0:
+    {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+
+    loop_label_0:
+    for (;;) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+      break;
+    }
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    }
+    frame.i32_const(0);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
+        func();
+      }
+    } else {
+      frame.i32_const(0);
+      {
+        var func = table0[frame.pop()] as FunctionType0?;
+        if (func == null) throw Trap('uninitialized element');
         func();
       }
     }
     frame.i32_const(0);
     {
-      var func = table0[frame.pop()]! as FunctionType0;
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
       func();
     }
   }

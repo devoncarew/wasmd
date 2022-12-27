@@ -387,8 +387,11 @@ class Instruction_CallIndirect extends Instruction {
     var funcType = function.module.functionTypes[sigIndex];
     var statements = <Code>[];
 
-    statements.add(Code(
-        'var func = table$tableIndex[frame.pop()]! as FunctionType$sigIndex;'));
+    statements.addAll([
+      Code(
+          'var func = table$tableIndex[frame.pop()] as FunctionType$sigIndex?;'),
+      Code('if (func == null) throw Trap(\'uninitialized element\');'),
+    ]);
 
     var temps = List.generate(funcType.parameterTypes.length, (i) => 't$i');
     for (var temp in temps.reversed) {

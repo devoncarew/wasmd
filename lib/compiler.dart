@@ -1644,12 +1644,20 @@ class ElementSegments {
             ..type = Reference('List<int>')),
         ])
         ..body = Block.of([
-          Code('indexes = indexes.sublist(src, src + count);'),
+          Code('try {'),
+          Code('  indexes = indexes.sublist(src, src + count);'),
+          Code('} on RangeError {'),
+          Code('   throw Trap(\'out of bounds table access\');'),
+          Code('}'),
           Code('var functions = indexes.map((i) '
               '=> module.functionTable[i]).toList();'),
           Code('table.copyFrom(functions, dest, count);'),
         ]),
     );
+
+// } on RangeError {
+    //   throw Trap('out of bounds table access');
+    // }
 
     return Class(
       (b) => b

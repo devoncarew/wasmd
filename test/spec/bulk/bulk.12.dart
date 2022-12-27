@@ -57,7 +57,8 @@ class Bulk12Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     {
-      var func = table0[frame.pop()]! as FunctionType0;
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
       frame.push(func());
     }
     return frame.pop();
@@ -82,7 +83,11 @@ class ElementSegments {
   }
 
   void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    indexes = indexes.sublist(src, src + count);
+    try {
+      indexes = indexes.sublist(src, src + count);
+    } on RangeError {
+      throw Trap('out of bounds table access');
+    }
     var functions = indexes.map((i) => module.functionTable[i]).toList();
     table.copyFrom(functions, dest, count);
   }

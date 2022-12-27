@@ -66,6 +66,11 @@ class Memory {
   }
 
   void copy(i32 count, i32 sourceOffset, i32 destOffset) {
+    var len = data.lengthInBytes;
+    if (sourceOffset + count > len || destOffset + count > len) {
+      throw Trap('out of bounds memory access');
+    }
+
     // TODO: find a faster copy method
     for (int i = 0; i < count; i++) {
       data.setUint8(destOffset + i, data.getUint8(sourceOffset + i));
@@ -73,6 +78,10 @@ class Memory {
   }
 
   void fill(i32 value, i32 offset, i32 count) {
+    if (offset < 0 || count < 0 || offset + count > data.lengthInBytes) {
+      throw Trap('out of bounds memory access');
+    }
+
     for (int i = 0; i < count; i++) {
       data.setUint8(i + offset, value);
     }
@@ -116,12 +125,21 @@ class Table {
   }
 
   void copyFrom(List<Function> funcIndexes, int offset, int count) {
+    if (count > funcIndexes.length || offset + count > funcRefs.length) {
+      throw Trap('out of bounds table access');
+    }
+
     for (int i = 0; i < count; i++) {
       funcRefs[offset + i] = funcIndexes[i];
     }
   }
 
   void copyTo(Table dest, int sourceOffset, int destOffset, int count) {
+    if (sourceOffset + count > funcRefs.length ||
+        destOffset + count > dest.funcRefs.length) {
+      throw Trap('out of bounds table access');
+    }
+
     for (int i = 0; i < count; i++) {
       dest.funcRefs[destOffset + i] = funcRefs[sourceOffset + i];
     }
@@ -191,6 +209,7 @@ class Frame {
 
   void i32_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       i32 value = memory.data.getInt32(index + offset, Endian.little);
       stack.add(value);
@@ -201,6 +220,7 @@ class Frame {
 
   void i64_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       i64 value = memory.data.getInt64(index + offset, Endian.little);
       stack.add(value);
@@ -211,6 +231,7 @@ class Frame {
 
   void f32_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       f32 value = memory.data.getFloat32(index + offset, Endian.little);
       stack.add(value);
@@ -221,6 +242,7 @@ class Frame {
 
   void f64_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       f64 value = memory.data.getFloat64(index + offset, Endian.little);
       stack.add(value);
@@ -231,6 +253,7 @@ class Frame {
 
   void i32_load8_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       i32 value = memory.data.getInt8(index + offset);
       stack.add(value);
@@ -241,6 +264,7 @@ class Frame {
 
   void i32_load8_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       u32 value = memory.data.getUint8(index + offset);
       stack.add(value);
@@ -251,6 +275,7 @@ class Frame {
 
   void i32_load16_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       i32 value = memory.data.getInt16(index + offset, Endian.little);
       stack.add(value);
@@ -261,6 +286,7 @@ class Frame {
 
   void i32_load16_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       u32 value = memory.data.getUint16(index + offset, Endian.little);
       stack.add(value);
@@ -271,6 +297,7 @@ class Frame {
 
   void i64_load8_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       i32 value = memory.data.getInt8(index + offset);
       stack.add(value);
@@ -281,6 +308,7 @@ class Frame {
 
   void i64_load8_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       u32 value = memory.data.getUint8(index + offset);
       stack.add(value);
@@ -291,6 +319,7 @@ class Frame {
 
   void i64_load16_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       i32 value = memory.data.getInt16(index + offset, Endian.little);
       stack.add(value);
@@ -301,6 +330,7 @@ class Frame {
 
   void i64_load16_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       u32 value = memory.data.getUint16(index + offset, Endian.little);
       stack.add(value);
@@ -311,6 +341,7 @@ class Frame {
 
   void i64_load32_s(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       i32 value = memory.data.getInt32(index + offset, Endian.little);
       stack.add(value);
@@ -321,6 +352,7 @@ class Frame {
 
   void i64_load32_u(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
+    if (index < 0) throw Trap('out of bounds memory access');
     try {
       u32 value = memory.data.getUint32(index + offset, Endian.little);
       stack.add(value);

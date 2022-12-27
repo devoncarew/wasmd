@@ -471,7 +471,8 @@ class Return0Module implements Module {
     frame.i32_const(2);
     frame.i32_const(3);
     {
-      var func = table0[frame.pop()]! as FunctionType0;
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -488,7 +489,8 @@ class Return0Module implements Module {
     frame.i32_const(2);
     frame.i32_const(3);
     {
-      var func = table0[frame.pop()]! as FunctionType0;
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -505,7 +507,8 @@ class Return0Module implements Module {
     return frame.pop();
     frame.i32_const(3);
     {
-      var func = table0[frame.pop()]! as FunctionType0;
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -522,7 +525,8 @@ class Return0Module implements Module {
     frame.i32_const(23);
     return frame.pop();
     {
-      var func = table0[frame.pop()]! as FunctionType0;
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -773,7 +777,11 @@ class ElementSegments {
   }
 
   void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    indexes = indexes.sublist(src, src + count);
+    try {
+      indexes = indexes.sublist(src, src + count);
+    } on RangeError {
+      throw Trap('out of bounds table access');
+    }
     var functions = indexes.map((i) => module.functionTable[i]).toList();
     table.copyFrom(functions, dest, count);
   }

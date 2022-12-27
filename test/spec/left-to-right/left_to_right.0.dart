@@ -626,7 +626,8 @@ class LeftToRight0Module implements Module {
     frame.push(i32_right());
     frame.push(i32_callee());
     {
-      var func = table0[frame.pop()]! as FunctionType0;
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(func(t0, t1));
@@ -962,7 +963,8 @@ class LeftToRight0Module implements Module {
     frame.push(i64_right());
     frame.push(i64_callee());
     {
-      var func = table0[frame.pop()]! as FunctionType1;
+      var func = table0[frame.pop()] as FunctionType1?;
+      if (func == null) throw Trap('uninitialized element');
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(func(t0, t1));
@@ -1158,7 +1160,8 @@ class LeftToRight0Module implements Module {
     frame.push(f32_right());
     frame.push(f32_callee());
     {
-      var func = table0[frame.pop()]! as FunctionType2;
+      var func = table0[frame.pop()] as FunctionType2?;
+      if (func == null) throw Trap('uninitialized element');
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(func(t0, t1));
@@ -1354,7 +1357,8 @@ class LeftToRight0Module implements Module {
     frame.push(f64_right());
     frame.push(f64_callee());
     {
-      var func = table0[frame.pop()]! as FunctionType3;
+      var func = table0[frame.pop()] as FunctionType3?;
+      if (func == null) throw Trap('uninitialized element');
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(func(t0, t1));
@@ -1575,7 +1579,11 @@ class ElementSegments {
   }
 
   void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    indexes = indexes.sublist(src, src + count);
+    try {
+      indexes = indexes.sublist(src, src + count);
+    } on RangeError {
+      throw Trap('out of bounds table access');
+    }
     var functions = indexes.map((i) => module.functionTable[i]).toList();
     table.copyFrom(functions, dest, count);
   }

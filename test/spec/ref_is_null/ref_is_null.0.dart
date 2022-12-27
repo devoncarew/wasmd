@@ -1,12 +1,12 @@
-// Generated from test/spec/table_get/table_get.0.wasm.
+// Generated from test/spec/ref_is_null/ref_is_null.0.wasm.
 
 // ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
 // ignore_for_file: unused_element, unused_label, unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
-class TableGet0Module implements Module {
-  TableGet0Module() {
+class RefIsNull0Module implements Module {
+  RefIsNull0Module() {
     segments.init();
   }
 
@@ -15,7 +15,7 @@ class TableGet0Module implements Module {
 
   final Table table0 = Table(2);
 
-  final Table table1 = Table(3);
+  final Table table1 = Table(2);
 
   @override
   late final List<Table> tables = [
@@ -27,6 +27,20 @@ class TableGet0Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
+  i32 funcref(FuncRef? x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.ref_is_null();
+    return frame.pop();
+  }
+
+  i32 externref(ExternRef? x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.ref_is_null();
+    return frame.pop();
+  }
+
   void dummy() {
     final frame = Frame(this);
   }
@@ -37,60 +51,74 @@ class TableGet0Module implements Module {
     frame.push(r);
     {
       var ref = frame.pop();
+      table1[frame.pop() as int] = ref;
+    }
+  }
+
+  void deinit() {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    frame.ref_null(112);
+    {
+      var ref = frame.pop();
       table0[frame.pop() as int] = ref;
     }
-    frame.i32_const(2);
     frame.i32_const(1);
-    frame.push(table1[frame.pop()]);
+    frame.ref_null(111);
     {
       var ref = frame.pop();
       table1[frame.pop() as int] = ref;
     }
   }
 
-  ExternRef? get_externref(i32 i) {
+  i32 funcref_elem(i32 x) {
     final frame = Frame(this);
-    frame.push(i);
+    frame.push(x);
     frame.push(table0[frame.pop()]);
-    return frame.pop();
-  }
-
-  FuncRef? get_funcref(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.push(table1[frame.pop()]);
-    return frame.pop();
-  }
-
-  i32 is_null_funcref(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
     {
       var t0 = frame.pop();
-      frame.push(get_funcref(t0));
+      frame.push(funcref(t0));
     }
-    frame.ref_is_null();
+    return frame.pop();
+  }
+
+  i32 externref_elem(i32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(table1[frame.pop()]);
+    {
+      var t0 = frame.pop();
+      frame.push(externref(t0));
+    }
     return frame.pop();
   }
 
   List<Function> _initFunctionTable() {
-    return [dummy, init, get_externref, get_funcref, is_null_funcref];
+    return [
+      funcref,
+      externref,
+      dummy,
+      init,
+      deinit,
+      funcref_elem,
+      externref_elem
+    ];
   }
 }
 
-typedef FunctionType0 = void Function();
-typedef FunctionType1 = void Function(ExternRef?);
-typedef FunctionType2 = ExternRef? Function(i32);
-typedef FunctionType3 = FuncRef? Function(i32);
+typedef FunctionType0 = i32 Function(FuncRef?);
+typedef FunctionType1 = i32 Function(ExternRef?);
+typedef FunctionType2 = void Function();
+typedef FunctionType3 = void Function(ExternRef?);
 typedef FunctionType4 = i32 Function(i32);
 
 class ElementSegments {
   ElementSegments(this.module);
 
-  final TableGet0Module module;
+  final RefIsNull0Module module;
 
   void init() {
-    copyTo(module.table1, 0, 1, 1, [0]); /* segment0 */
+    copyTo(module.table0, 0, 1, 1, [2]); /* segment0 */
   }
 
   void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
