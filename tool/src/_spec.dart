@@ -129,7 +129,7 @@ void compileWasmToDart(File wasmFile, File dartFile) {
   // }
 
   var compiler = Compiler(file: wasmFile, logger: logger);
-  var library = compiler.compile(generateWastTest: true);
+  var library = compiler.compile(/*generateWastTest: true*/);
   var code = emitFormatLibrary(library);
 
   print('Emitting ${dartFile.path}.');

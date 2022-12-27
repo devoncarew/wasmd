@@ -25,7 +25,7 @@ class Compiler {
     required this.logger,
   });
 
-  Library compile({bool generateWastTest = false}) {
+  Library compile() {
     var library = LibraryBuilder();
     library.comments.add('Generated from ${file.path}.');
     library.ignoreForFile.addAll([
@@ -37,9 +37,7 @@ class Compiler {
       'unused_local_variable',
     ]);
     library.directives.addAll([
-      if (generateWastTest) Directive.import('package:test/test.dart'),
       Directive.import('package:wasmd/runtime.dart'),
-      if (generateWastTest) Directive.import('src/infra.dart'),
     ]);
 
     var module = _parse(file);
@@ -48,7 +46,6 @@ class Compiler {
       module,
       library,
       moduleName: path.basenameWithoutExtension(file.path),
-      generateWastTest: generateWastTest,
     );
 
     return library.build();
@@ -627,13 +624,10 @@ class Compiler {
   void _log([String? message]) => logger.info(message ?? '');
 }
 
-final DartEmitter _constEmitter = DartEmitter();
-
 void printModule(
   Module module,
   LibraryBuilder library, {
   required String moduleName,
-  bool generateWastTest = false,
 }) {
   var name = module.debugInfo?.name ?? moduleName;
   name = titleCase(patchUpName(name));
@@ -642,71 +636,6 @@ void printModule(
   final classBuilder = ClassBuilder()
     ..name = module.className
     ..implements.add(Reference('Module'));
-
-  if (generateWastTest) {
-    // todo: remove this
-    String generateTests() {
-      var buf = StringBuffer();
-      var functions = module.allFunctions.where((f) {
-        return f.name.startsWith('test_') || f.name.startsWith('invoke_');
-      });
-      for (var func in functions) {
-        var testName = func.name;
-        var name = testName.substring('test_'.length);
-        var throwsMessage = module.dataSegments.getNamed('trap_$name');
-        var isInvoke = testName.startsWith('invoke_');
-
-        if (isInvoke) {
-          buf.writeln("invoke('$name', m.$testName);");
-        } else if (throwsMessage != null) {
-          var message = utf8.decode(throwsMessage.bytes);
-          // TODO: inline the test closure
-          buf.write("  traps('$name', m.$testName, \"$message\");");
-        } else {
-          var expectName = 'expect_$name';
-
-          buf.write("  returns('$name', ");
-          // TODO: inline the test closure
-          buf.write("m.$testName, ");
-          var expectation = module.globals.getNamed(expectName);
-          if (expectation != null) {
-            var literalValue = expectation.calcLiteralValue;
-            if (literalValue != null) {
-              // inline the expectations constant
-              var expr = printLiteral(literalValue.value as num);
-              buf.write(expr.accept(_constEmitter).toString());
-              module.globals.globals.remove(expectation);
-            } else {
-              buf.write("g.$expectName");
-            }
-          }
-          buf.writeln(");");
-        }
-      }
-
-      return buf.toString();
-    }
-
-    var testCode = generateTests();
-    var hasGlobals = module.globals.isNotEmpty;
-
-    var mainMethod = Method(
-      (b) => b
-        ..name = 'main'
-        ..returns = Reference('void')
-        ..body = Block.of([
-          Code('''
-  group('$moduleName', () {
-    final Module m = Module();
-    ${hasGlobals ? 'final Globals g = m.globals;' : ''}
-
-    $testCode
-  });
-'''),
-        ]),
-    );
-    library.body.add(mainMethod);
-  }
 
   for (var import in module.importModules) {
     classBuilder.fields.add(
