@@ -1204,6 +1204,8 @@ enum ValueType {
     }
   }
 
+  bool get refType => this == funcref || this == externref;
+
   @override
   String toString() => name;
 
@@ -1437,11 +1439,16 @@ class DefinedFunction extends ModuleFunction {
           name: debugLocalNames[variables.length] ?? 'local$index',
           type: locals[index],
         );
+        var type = variable.type;
         variables.add(variable);
-        statements.add(
-            declareVar(variable.name, type: refer('${variable.type}'))
-                .assign(literalNum(0))
-                .statement);
+        if (type.refType) {
+          statements.add(
+              declareVar(variable.name, type: refer(type.typeName)).statement);
+        } else {
+          statements.add(declareVar(variable.name, type: refer(type.typeName))
+              .assign(literalNum(0))
+              .statement);
+        }
       }
       statements.add(Code('\n'));
     }

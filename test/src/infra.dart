@@ -94,9 +94,19 @@ Function externref(String value) {
 }
 
 final List<Function> _testExterns = [
-  int.parse,
-  print,
-  double.parse,
-  Object.hashAll,
-  bool.fromEnvironment,
+  extern0,
+  extern1,
+  extern2,
+  extern3,
+  extern4,
+  extern5,
+  extern6,
 ];
+
+int extern0() => 0;
+int extern1(int p) => p * p;
+int extern2(int p0, int p1) => p0 + p1;
+int extern3(int p0, int p1, int p2) => p0 + p1;
+int extern4(int p0, int p1, int p2, int p3) => p0 + p1;
+int extern5(int p0, int p1, int p2, int p3, int p4) => p0 + p1;
+int extern6(int p0, int p1, int p2, int p3, int p4, int p5) => p0 + p1;

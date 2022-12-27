@@ -1,0 +1,88 @@
+// Generated from test/spec/table_grow/table_grow.4.wasm.
+
+// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
+// ignore_for_file: unused_element, unused_label, unused_local_variable
+
+import 'package:wasmd/runtime.dart';
+
+class TableGrow4Module implements Module {
+  TableGrow4Module() {
+    segments.init();
+  }
+
+  @override
+  final Memory memory = Memory(0);
+
+  final Table table0 = Table(10);
+
+  @override
+  late final List<Table> tables = [table0];
+
+  late final ElementSegments segments = ElementSegments(this);
+
+  late final List<Function> functionTable = _initFunctionTable();
+
+  i32 grow(i32 arg0) {
+    final frame = Frame(this);
+    frame.ref_null(112);
+    frame.push(arg0);
+    frame.table_grow(0);
+    return frame.pop();
+  }
+
+  FuncRef? check_table_null(i32 arg0, i32 arg1) {
+    FuncRef? local0;
+
+    final frame = Frame(this);
+    frame.push(check_table_null);
+    local0 = frame.pop();
+    block_label_0:
+    {
+      loop_label_1:
+      for (;;) {
+        frame.push(arg0);
+        frame.push(table0[frame.pop()]);
+        local0 = frame.pop();
+        frame.push(local0);
+        frame.ref_is_null();
+        frame.i32_eqz();
+        if (frame.pop() != 0) break block_label_0;
+        frame.push(arg0);
+        frame.push(arg1);
+        frame.i32_ge_u();
+        if (frame.pop() != 0) break block_label_0;
+        frame.push(arg0);
+        frame.i32_const(1);
+        frame.i32_add();
+        arg0 = frame.pop();
+        frame.push(arg0);
+        frame.push(arg1);
+        frame.i32_le_u();
+        if (frame.pop() != 0) continue loop_label_1;
+        break;
+      }
+    }
+    frame.push(local0);
+    return frame.pop();
+  }
+
+  List<Function> _initFunctionTable() {
+    return [grow, check_table_null];
+  }
+}
+
+typedef FunctionType0 = i32 Function(i32);
+typedef FunctionType1 = FuncRef? Function(i32, i32);
+
+class ElementSegments {
+  ElementSegments(this.module);
+
+  final TableGrow4Module module;
+
+  void init() {}
+  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
+    indexes = indexes.sublist(src, src + count);
+    var functions = indexes.map((i) => module.functionTable[i]).toList();
+    table.copyFrom(functions, dest, count);
+  }
+}

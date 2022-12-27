@@ -127,14 +127,27 @@ class Table {
     }
   }
 
-  bool grow(int growBy) {
-    var newSize = funcRefs.length + growBy;
+  void fill(Function? val, i32 offset, i32 count) {
+    if (offset < 0 || (offset + count > funcRefs.length)) {
+      throw Trap('out of bounds table access');
+    }
 
-    if (maxSize != null && newSize > maxSize!) {
+    for (int i = 0; i < count; i++) {
+      funcRefs[offset + i] = val;
+    }
+  }
+
+  bool grow(int growBy, Function? fillRef) {
+    var newSize = funcRefs.length + growBy;
+    if (growBy < 0 || newSize > (maxSize ?? 0xFFFFFFFF)) {
       return false;
     }
 
     funcRefs.length = newSize;
+    for (int i = 0; i < growBy; i++) {
+      funcRefs[newSize - i - 1] = fillRef;
+    }
+
     return true;
   }
 }
@@ -1442,7 +1455,9 @@ class Frame {
   void table_grow(u32 index) {
     var table = module.tables[index];
     var oldSize = table.size;
-    if (table.grow(pop())) {
+    var growBy = pop() as int;
+    var ref = pop() as Function?;
+    if (table.grow(growBy, ref)) {
       push(oldSize);
     } else {
       push(-1);
@@ -1451,6 +1466,15 @@ class Frame {
 
   void table_size(u32 index) {
     stack.add(module.tables[index].size);
+  }
+
+  void table_fill(u32 index) {
+    i32 n = stack.removeLast() as i32;
+    Function? val = stack.removeLast() as Function?;
+    i32 offset = stack.removeLast() as i32;
+
+    var table = module.tables[index];
+    table.fill(val, offset, n);
   }
 }
 

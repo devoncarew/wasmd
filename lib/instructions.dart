@@ -889,6 +889,7 @@ class Instruction {
       Instruction_TableCopy(), // table.copy, 0x0E
       Instruction('table.grow', 0x0F, immediates: [ValueType.u32]),
       Instruction('table.size', 0x10, immediates: [ValueType.u32]),
+      Instruction('table.fill', 0x11, immediates: [ValueType.u32]),
     ];
   }
 }
