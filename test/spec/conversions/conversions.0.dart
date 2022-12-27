@@ -90,7 +90,7 @@ class Module {
   i32 i32_trunc_sat_f32_s(f32 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xFC)';
+    throw 'unreachable (0xFC 0x00)';
   }
 
   i32 i32_trunc_sat_f32_u(f32 x) {
@@ -103,7 +103,7 @@ class Module {
   i32 i32_trunc_sat_f64_s(f64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xFC)';
+    throw 'unreachable (0xFC 0x02)';
   }
 
   i32 i32_trunc_sat_f64_u(f64 x) {
@@ -116,25 +116,25 @@ class Module {
   i64 i64_trunc_sat_f32_s(f32 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xFC)';
+    throw 'unreachable (0xFC 0x04)';
   }
 
   i64 i64_trunc_sat_f32_u(f32 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xFC)';
+    throw 'unreachable (0xFC 0x05)';
   }
 
   i64 i64_trunc_sat_f64_s(f64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xFC)';
+    throw 'unreachable (0xFC 0x06)';
   }
 
   i64 i64_trunc_sat_f64_u(f64 x) {
     final frame = Frame(memory);
     frame.push(x);
-    throw 'unreachable (0xFC)';
+    throw 'unreachable (0xFC 0x07)';
   }
 
   f32 f32_convert_i32_s(i32 x) {

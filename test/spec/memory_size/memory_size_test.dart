@@ -10,7 +10,7 @@ import 'memory_size.3.dart' as memory_size_3;
 
 void main() {
   group('memory_size', () {
-    // module memory_size.0.dart
+    // module memory_size.0.dart (line 1)
     var m0 = memory_size_0.Module();
 
     returns('size_0', () => m0.size(), 0);
@@ -21,7 +21,7 @@ void main() {
     returns('grow_2', () => m0.grow(0), null);
     returns('size_3', () => m0.size(), 0x5);
 
-    // module memory_size.1.dart
+    // module memory_size.1.dart (line 15)
     var m1 = memory_size_1.Module();
 
     returns('size_4', () => m1.size(), 0x1);
@@ -32,7 +32,7 @@ void main() {
     returns('grow_5', () => m1.grow(0), null);
     returns('size_7', () => m1.size(), 0x6);
 
-    // module memory_size.2.dart
+    // module memory_size.2.dart (line 29)
     var m2 = memory_size_2.Module();
 
     returns('size_8', () => m2.size(), 0);
@@ -47,7 +47,7 @@ void main() {
     returns('grow_10', () => m2.grow(0x1), null);
     returns('size_13', () => m2.size(), 0x2);
 
-    // module memory_size.3.dart
+    // module memory_size.3.dart (line 47)
     var m3 = memory_size_3.Module();
 
     returns('size_14', () => m3.size(), 0x3);

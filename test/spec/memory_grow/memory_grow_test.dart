@@ -14,7 +14,7 @@ const String _ue = 'undefined element';
 
 void main() {
   group('memory_grow', () {
-    // module memory_grow.0.dart
+    // module memory_grow.0.dart (line 1)
     var m0 = memory_grow_0.Module();
 
     returns('size_0', () => m0.size(), 0);
@@ -38,7 +38,7 @@ void main() {
     returns('store_at_page_size_2', () => m0.store_at_page_size(), null);
     returns('load_at_page_size_3', () => m0.load_at_page_size(), 0x3);
 
-    // module memory_grow.1.dart
+    // module memory_grow.1.dart (line 36)
     var m1 = memory_grow_1.Module();
 
     returns('grow_2', () => m1.grow(0), 0);
@@ -50,7 +50,7 @@ void main() {
     returns('grow_8', () => m1.grow(0xFCE0), i32('FFFFFFFF'));
     returns('grow_9', () => m1.grow(0x1), 0x323);
 
-    // module memory_grow.2.dart
+    // module memory_grow.2.dart (line 50)
     var m2 = memory_grow_2.Module();
 
     returns('grow_10', () => m2.grow(0), 0);
@@ -62,7 +62,7 @@ void main() {
     returns('grow_16', () => m2.grow(0x1), i32('FFFFFFFF'));
     returns('grow_17', () => m2.grow(0x10000), i32('FFFFFFFF'));
 
-    // module memory_grow.3.dart
+    // module memory_grow.3.dart (line 66)
     var m3 = memory_grow_3.Module();
 
     returns('check_memory_zero_0', () => m3.check_memory_zero(0, 0xFFFF), 0);
@@ -97,7 +97,7 @@ void main() {
       0,
     );
 
-    // module memory_grow.4.dart
+    // module memory_grow.4.dart (line 101)
     var m4 = memory_grow_4.Module();
 
     returns('as_br_value_0', () => m4.as_br_value(), 0x1);

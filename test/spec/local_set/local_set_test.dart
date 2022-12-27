@@ -7,7 +7,7 @@ import 'local_set.0.dart' as local_set_0;
 
 void main() {
   group('local_set', () {
-    // module local_set.0.dart
+    // module local_set.0.dart (line 3)
     var m0 = local_set_0.Module();
 
     returns('type_local_i32_0', () => m0.type_local_i32(), null);

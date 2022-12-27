@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, camel_case_types
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -256,19 +257,19 @@ class Compiler {
     var count = r.leb128();
     for (int i = 0; i < count; i++) {
       var sectionType = r.leb128();
-      late ValueType elementKind;
       late SegmentKind segmentKind;
+      ValueType? elementKind;
       int tableIndex = 0;
       List<Instr>? offsetInstrs;
       List<int>? functionIndexs;
       List<List<Instr>>? functionInstrs;
 
-      ValueType readType() {
+      ValueType? readType() {
         var elementKind = r.leb128_u();
-        if (elementKind != 0) {
+        if (elementKind != 0 && elementKind != ValueType.funcref.code) {
           throw 'elementKind type not yet supported (${hex(elementKind)})';
         }
-        return ValueType.funcref;
+        return elementKind == 0 ? null : ValueType.fromCode(elementKind);
       }
 
       // https://stackoverflow.com/questions/74218077/how-does-the-element-section-of-wasm-module-in-binary-format-looks
@@ -399,7 +400,9 @@ class Compiler {
           _log('    unknown opcode: ${hex(opcode)}');
           var opcode2Desc = opcode2 == null ? '' : ' ${hex(opcode2)}';
           print('unknown opcode: ${hex(opcode)}$opcode2Desc');
-          instructions.add(Instr(Instruction_Unreachable(), [hex(opcode)]));
+          instructions.add(Instr(Instruction_Unreachable(), [
+            opcode2 != null ? '${hex(opcode)} ${hex(opcode2)}' : hex(opcode),
+          ]));
           while (depth > 0) {
             instructions.add(Instr(Instruction_End()));
             depth--;
@@ -1566,18 +1569,17 @@ enum SegmentKind {
 }
 
 class ElementSegment {
-  // funcref, ...
-  final ValueType elementKind;
   final SegmentKind segmentKind;
   final int tableIndex;
+  final ValueType? elementKind;
   final List<Instr>? offsetInstrs;
   final List<int>? functionIndexs;
   final List<List<Instr>>? functionInstrs;
 
   ElementSegment({
-    required this.elementKind,
     required this.segmentKind,
     required this.tableIndex,
+    this.elementKind,
     this.offsetInstrs,
     this.functionIndexs,
     this.functionInstrs,
@@ -1591,6 +1593,10 @@ class ElementSegments {
 
   void addElementSegment(ElementSegment segment) {
     segments.add(segment);
+  }
+
+  static bool get inSegmentContext {
+    return Zone.current['segments'] == true;
   }
 
   Class createElementSegmentsClassDef(Module module) {
@@ -1611,12 +1617,17 @@ class ElementSegments {
       var segment = segments[i];
       if (segment.segmentKind != SegmentKind.passive) continue;
 
+      // TODO: there's more work to do to properly support FuncRef instruction
+      // initializers.
+      var listType =
+          segment.elementKind == null ? 'int' : segment.elementKind!.typeName;
+
       fields.add(Field(
         (b) => b
           ..modifier = FieldModifier.final$
           ..late = true
           ..name = 'segment$i'
-          ..type = Reference('List<int>'),
+          ..type = Reference('List<$listType>'),
       ));
     }
 
@@ -1649,7 +1660,8 @@ class ElementSegments {
 
       if (segment.segmentKind == SegmentKind.active) {
         var destOffsetText = closureFrom(module, segment.offsetInstrs!);
-        statements.add(Code('copyTo(module.table$i, 0, $destOffsetText, '
+        statements.add(Code(
+            'copyTo(module.table${segment.tableIndex}, 0, $destOffsetText, '
             '$itemCount, $indexesText); /* segment$i */'));
       } else {
         statements.add(Code('segment$i = $indexesText;'));
@@ -1714,16 +1726,18 @@ class ElementSegments {
       return literalNum(literal.value as num).accept(emitter).toString();
     }
 
-    var initFunction = DefinedFunction(module, 0, 0);
+    return runZoned<String>(() {
+      var initFunction = DefinedFunction(module, 0, 0);
 
-    var code = Block.of([
-      Code('final frame = Frame(module.memory);'),
-      for (var instr in instrs) instr.generateToStatement(initFunction),
-      Code('return frame.pop();'),
-    ]);
+      var code = Block.of([
+        Code('final frame = Frame(module.memory);'),
+        for (var instr in instrs) instr.generateToStatement(initFunction),
+        Code('return frame.pop();'),
+      ]);
 
-    var str = code.accept(emitter).toString();
-    return '() {$str }()';
+      var str = code.accept(emitter).toString();
+      return '() {$str }()';
+    }, zoneValues: {'segments': true});
   }
 }
 

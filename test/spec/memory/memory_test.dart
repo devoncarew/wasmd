@@ -16,40 +16,40 @@ import 'memory.9.dart' as memory_9;
 
 void main() {
   group('memory', () {
-    // module memory.0.dart
+    // module memory.0.dart (line 3)
     var m0 = memory_0.Module();
 
-    // module memory.1.dart
+    // module memory.1.dart (line 4)
     var m1 = memory_1.Module();
 
-    // module memory.2.dart
+    // module memory.2.dart (line 5)
     var m2 = memory_2.Module();
 
-    // module memory.3.dart
+    // module memory.3.dart (line 6)
     var m3 = memory_3.Module();
 
-    // module memory.4.dart
+    // module memory.4.dart (line 7)
     var m4 = memory_4.Module();
 
-    // module memory.5.dart
+    // module memory.5.dart (line 8)
     var m5 = memory_5.Module();
 
-    // module memory.8.dart
+    // module memory.8.dart (line 13)
     var m6 = memory_8.Module();
 
     returns('memsize_0', () => m6.memsize(), 0);
 
-    // module memory.9.dart
+    // module memory.9.dart (line 15)
     var m7 = memory_9.Module();
 
     returns('memsize_1', () => m7.memsize(), 0);
 
-    // module memory.10.dart
+    // module memory.10.dart (line 17)
     var m8 = memory_10.Module();
 
     returns('memsize_2', () => m8.memsize(), 0x1);
 
-    // module memory.30.dart
+    // module memory.30.dart (line 92)
     var m9 = memory_30.Module();
 
     returns('data_0', () => m9.data(), 0x1);

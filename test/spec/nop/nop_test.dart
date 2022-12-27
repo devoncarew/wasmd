@@ -7,7 +7,7 @@ import 'nop.0.dart' as nop_0;
 
 void main() {
   group('nop', () {
-    // module nop.0.dart
+    // module nop.0.dart (line 3)
     var m0 = nop_0.Module();
 
     returns('as_func_first_0', () => m0.as_func_first(), 0x1);

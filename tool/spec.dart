@@ -140,6 +140,7 @@ void generateDartForJson(File jsonFile, File dartFile) {
 
   for (var command in commands) {
     var type = command['type'] as String;
+    var line = command['line'] as int;
 
     if (type == 'module') {
       statements.add(Code(''));
@@ -155,7 +156,7 @@ void generateDartForJson(File jsonFile, File dartFile) {
       moduleCount++;
 
       var dartImport = '$shortName.dart';
-      statements.add(Code('    // module $dartImport'));
+      statements.add(Code('    // module $dartImport (line $line)'));
       statements.add(Code('var $name = $prefix.Module();'));
       statements.add(Code(''));
       library.directives.add(Directive.import(dartImport, as: prefix));

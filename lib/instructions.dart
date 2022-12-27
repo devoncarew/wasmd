@@ -424,6 +424,13 @@ class Instruction_TableInit extends Instruction {
     var segment = instr.args[0] as int;
     var table = instr.args[1] as int;
 
+    var seg = function.module.elementSegments.segments[segment];
+    if (seg.segmentKind != SegmentKind.passive) {
+      var error =
+          'table.init does not support ${seg.segmentKind.name} element segments';
+      return literalString(error).thrown.statement;
+    }
+
     return Block.of([
       Code('{'),
       Code('i32 count = frame.pop() as i32;'),
@@ -433,6 +440,62 @@ class Instruction_TableInit extends Instruction {
           'segments.segment$segment);'),
       Code('}'),
     ]);
+  }
+}
+
+class Instruction_TableCopy extends Instruction {
+  Instruction_TableCopy()
+      : super('table.copy', 0x0E, immediates: [ValueType.u32, ValueType.u32]);
+
+  @override
+  Code generateToStatement(Instr instr, DefinedFunction function) {
+    var srcTable = instr.args[0] as int;
+    var destTable = instr.args[1] as int;
+
+    return Block.of([
+      Code('{'),
+      Code('i32 count = frame.pop() as i32;'),
+      Code('i32 sourceOffset = frame.pop() as i32;'),
+      Code('i32 destOffset = frame.pop() as i32;'),
+      Code('table$srcTable.copyTo('
+          'table$destTable, sourceOffset, destOffset, count);'),
+      Code('}'),
+    ]);
+  }
+}
+
+class Instruction_ElemDrop extends Instruction {
+  Instruction_ElemDrop()
+      : super('elem.drop', 0x0D, immediates: [ValueType.u32]);
+
+  @override
+  Code generateToStatement(Instr instr, DefinedFunction function) {
+    var segment = instr.args[0] as int;
+    return Code('    /* elem.drop segment $segment */');
+  }
+}
+
+class Instruction_DataDrop extends Instruction {
+  Instruction_DataDrop()
+      : super('data.drop', 0x09, immediates: [ValueType.u32]);
+
+  @override
+  Code generateToStatement(Instr instr, DefinedFunction function) {
+    var immediate = instr.args[0] as int;
+    return Code('    /* data.drop index $immediate */');
+  }
+}
+
+class Instruction_RefFunc extends Instruction {
+  Instruction_RefFunc() : super('ref.func', 0xD2, immediates: [ValueType.u32]);
+
+  @override
+  Code generateToStatement(Instr instr, DefinedFunction function) {
+    var funcIndex = instr.args[0] as int;
+    var func = function.module.allFunctions[funcIndex];
+    var name =
+        ElementSegments.inSegmentContext ? 'module.${func.name}' : func.name;
+    return refer('frame.push').call([refer(name)]).statement;
   }
 }
 
@@ -796,6 +859,9 @@ class Instruction {
       Instruction('i64.extend16_s', 0xC3),
       Instruction('i64.extend32_s', 0xC4),
       // reserved, 0xC5 - 0xCF
+      Instruction('ref.null', 0xD0, immediates: [ValueType.u32]),
+      //
+      Instruction_RefFunc(), // ref.func, 0xD2
       // reserved, 0xD3 - 0xFB
       // 0xFC - overflow (below)
       // 0xFD - vector
@@ -807,7 +873,8 @@ class Instruction {
     return [
       Instruction('i32.trunc_sat_f32_u', 0x01),
       Instruction('i32.trunc_sat_f64_u', 0x03),
-      // Instruction('memory.init', 0x08, immediates: _one),
+      // Instruction_MemoryInit(), // memory.init, 0x08
+      Instruction_DataDrop(), // data.drop, 0x09
       Instruction(
         'memory.copy',
         0x0A,
@@ -815,6 +882,8 @@ class Instruction {
       ),
       Instruction('memory.fill', 0x0B, immediates: [ValueType.u32]),
       Instruction_TableInit(), // table.init, 0x0C
+      Instruction_ElemDrop(), // elem.drop, 0x0D
+      Instruction_TableCopy(), // table.copy, 0x0E
     ];
   }
 }

@@ -10,6 +10,7 @@ build/
 samples/large/
 
 # Intermediary wat and wasm files
+test/spec/**/*.dis
 test/spec/**/*.json
 test/spec/**/*.wasm
 test/spec/**/*.wat

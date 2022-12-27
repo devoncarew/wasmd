@@ -19,7 +19,7 @@ const String _oobma = 'out of bounds memory access';
 
 void main() {
   group('memory_fill', () {
-    // module memory_fill.0.dart
+    // module memory_fill.0.dart (line 6)
     var m0 = memory_fill_0.Module();
 
     invoke('test_0', () => m0.test());
@@ -30,17 +30,17 @@ void main() {
       i32('FFFFFFFF'),
     );
 
-    // module memory_fill.1.dart
+    // module memory_fill.1.dart (line 28)
     var m1 = memory_fill_1.Module();
 
     traps('test_1', () => m1.test(), _oobma);
 
-    // module memory_fill.2.dart
+    // module memory_fill.2.dart (line 46)
     var m2 = memory_fill_2.Module();
 
     traps('test_2', () => m2.test(), _oobma);
 
-    // module memory_fill.3.dart
+    // module memory_fill.3.dart (line 64)
     var m3 = memory_fill_3.Module();
 
     invoke('test_3', () => m3.test());
@@ -50,17 +50,17 @@ void main() {
       i32('FFFFFFFF'),
     );
 
-    // module memory_fill.4.dart
+    // module memory_fill.4.dart (line 84)
     var m4 = memory_fill_4.Module();
 
     invoke('test_4', () => m4.test());
 
-    // module memory_fill.5.dart
+    // module memory_fill.5.dart (line 102)
     var m5 = memory_fill_5.Module();
 
     traps('test_5', () => m5.test(), _oobma);
 
-    // module memory_fill.6.dart
+    // module memory_fill.6.dart (line 120)
     var m6 = memory_fill_6.Module();
 
     invoke('test_6', () => m6.test());
@@ -76,7 +76,7 @@ void main() {
       i32('FFFFFFFF'),
     );
 
-    // module memory_fill.7.dart
+    // module memory_fill.7.dart (line 145)
     var m7 = memory_fill_7.Module();
 
     invoke('test_7', () => m7.test());
@@ -102,19 +102,19 @@ void main() {
       i32('FFFFFFFF'),
     );
 
-    // module memory_fill.72.dart
+    // module memory_fill.72.dart (line 621)
     var m8 = memory_fill_72.Module();
 
     traps('run_0', () => m8.run(0xFF00, 0x25, 0x200), _oobma);
     returns('checkRange_11', () => m8.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
 
-    // module memory_fill.73.dart
+    // module memory_fill.73.dart (line 643)
     var m9 = memory_fill_73.Module();
 
     traps('run_1', () => m9.run(0xFEFF, 0x25, 0x202), _oobma);
     returns('checkRange_12', () => m9.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
 
-    // module memory_fill.74.dart
+    // module memory_fill.74.dart (line 665)
     var m10 = memory_fill_74.Module();
 
     traps('run_2', () => m10.run(0xFEFF, 0x25, i32('FFFFFFFF')), _oobma);

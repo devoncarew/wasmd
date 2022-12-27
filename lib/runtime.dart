@@ -103,6 +103,12 @@ class Table {
       funcRefs[offset + i] = funcIndexes[i];
     }
   }
+
+  void copyTo(Table dest, int sourceOffset, int destOffset, int count) {
+    for (int i = 0; i < count; i++) {
+      dest.funcRefs[destOffset + i] = funcRefs[sourceOffset + i];
+    }
+  }
 }
 
 class Frame {
@@ -1357,6 +1363,10 @@ class Frame {
       i64 result = 0x00000000FFFFFFFF & arg;
       stack.add(result);
     }
+  }
+
+  void ref_null(u32 refType) {
+    stack.add(null);
   }
 
   void i32_trunc_sat_f32_u() {
