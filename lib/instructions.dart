@@ -330,7 +330,7 @@ class Instruction_TableSet extends Instruction {
       declareVar('ref')
           .assign(refer('frame').property('pop').call([]))
           .statement,
-      Code('table$immediate.funcRefs[frame.pop() as int] = ref;'),
+      Code('table$immediate[frame.pop() as int] = ref;'),
       Code('}'),
     ]);
   }
@@ -860,7 +860,7 @@ class Instruction {
       Instruction('i64.extend32_s', 0xC4),
       // reserved, 0xC5 - 0xCF
       Instruction('ref.null', 0xD0, immediates: [ValueType.u32]),
-      //
+      Instruction('ref.is_null', 0xD1),
       Instruction_RefFunc(), // ref.func, 0xD2
       // reserved, 0xD3 - 0xFB
       // 0xFC - overflow (below)

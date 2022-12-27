@@ -15,6 +15,7 @@ typedef f32 = double;
 typedef f64 = double;
 
 typedef FuncRef = Function;
+typedef ExternRef = Function;
 
 // runtime support
 
@@ -96,7 +97,21 @@ class Table {
   Table(this.minSize, [this.maxSize])
       : funcRefs = List.filled(minSize, null, growable: true);
 
-  Function? operator [](int index) => funcRefs[index];
+  Function? operator [](int index) {
+    try {
+      return funcRefs[index];
+    } on RangeError {
+      throw Trap('out of bounds table access');
+    }
+  }
+
+  void operator []=(int index, Function? value) {
+    try {
+      funcRefs[index] = value;
+    } on RangeError {
+      throw Trap('out of bounds table access');
+    }
+  }
 
   void copyFrom(List<Function> funcIndexes, int offset, int count) {
     for (int i = 0; i < count; i++) {
@@ -1367,6 +1382,11 @@ class Frame {
 
   void ref_null(u32 refType) {
     stack.add(null);
+  }
+
+  void ref_is_null() {
+    var ref = stack.removeLast();
+    stack.add(ref == null ? 1 : 0);
   }
 
   void i32_trunc_sat_f32_u() {

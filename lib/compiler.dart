@@ -929,7 +929,13 @@ void printModule(
     var functionType = module.functionTypes[i];
     var ret = functionType.resultTypeDisplayName;
     var params = functionType.parameterTypes.map((p) => p.typeName).join(', ');
-    library.body.add(Code('typedef FunctionType$i = $ret Function($params);'));
+    if (functionType.returnsTuple) {
+      library.body.add(Code('// TODO: FunctionType$i - support multiple return '
+          'values ($ret)\n'));
+    } else {
+      library.body
+          .add(Code('typedef FunctionType$i = $ret Function($params);\n'));
+    }
   }
 
   if (module.globals.isNotEmpty) {
@@ -1252,7 +1258,8 @@ enum ValueType {
   i64(0x7E),
   f32(0x7D),
   f64(0x7C),
-  funcref(0x70);
+  funcref(0x70),
+  externref(0x6F);
 
   const ValueType(this.code);
 
@@ -1261,6 +1268,8 @@ enum ValueType {
   String get typeName {
     if (this == funcref) {
       return 'FuncRef?';
+    } else if (this == externref) {
+      return 'ExternRef?';
     } else {
       return name;
     }

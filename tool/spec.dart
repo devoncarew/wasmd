@@ -302,7 +302,9 @@ String _addComma(String str) {
 }
 
 String encodeType(String type, String value) {
-  if ((type == 'i32' || type == 'i64') && value.length <= 6) {
+  if (value == 'null') {
+    return value;
+  } else if ((type == 'i32' || type == 'i64') && value.length <= 6) {
     if (value == '0') {
       return value;
     } else {
