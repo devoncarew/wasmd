@@ -868,6 +868,9 @@ class Instruction {
     ];
   }
 
+  // todo: look for table, memory instructions that can be converted into
+  // runtime methods (from generated code)
+
   static List<Instruction> _initOverflow() {
     // 0xFC 0xXX
     return [
@@ -884,6 +887,8 @@ class Instruction {
       Instruction_TableInit(), // table.init, 0x0C
       Instruction_ElemDrop(), // elem.drop, 0x0D
       Instruction_TableCopy(), // table.copy, 0x0E
+      Instruction('table.grow', 0x0F, immediates: [ValueType.u32]),
+      Instruction('table.size', 0x10, immediates: [ValueType.u32]),
     ];
   }
 }

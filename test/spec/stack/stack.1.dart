@@ -5,19 +5,19 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
-    tables = [table0];
-  }
+class Stack1Module implements Module {
+  Stack1Module();
 
+  @override
   final Memory memory = Memory(0);
 
   final Table table0 = Table(1);
 
-  late final List<Table> tables;
+  @override
+  late final List<Table> tables = [table0];
 
   void _func0() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(0);

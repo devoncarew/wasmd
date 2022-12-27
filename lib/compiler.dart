@@ -14,8 +14,7 @@ import 'package:path/path.dart' as path;
 import 'instructions.dart';
 import 'src/utils.dart';
 
-// TODO: support element section type 0x01
-// TODO: support generating tests for bulk.wast
+// TODO: handle passing a module instance into constant evaluation
 
 class Compiler {
   final File file;
@@ -636,8 +635,13 @@ void printModule(
   required String moduleName,
   bool generateWastTest = false,
 }) {
-  var className = '${module.debugInfo?.name ?? ''}Module';
-  final classBuilder = ClassBuilder()..name = className;
+  var name = module.debugInfo?.name ?? moduleName;
+  name = titleCase(patchUpName(name));
+  module.className = '${name}Module';
+
+  final classBuilder = ClassBuilder()
+    ..name = module.className
+    ..implements.add(Reference('Module'));
 
   if (generateWastTest) {
     // todo: remove this
@@ -721,6 +725,7 @@ void printModule(
           ..name = 'memory'
           ..type = Reference('Memory')
           ..modifier = FieldModifier.final$
+          ..annotations.add(refer('override'))
           ..docs.add('/// min pages: ${module.minMemory}'),
       ),
     );
@@ -730,6 +735,7 @@ void printModule(
         ..name = 'memory'
         ..type = Reference('Memory')
         ..modifier = FieldModifier.final$
+        ..annotations.add(refer('override'))
         ..assignment = refer('Memory').call([
           literalNum(module.minMemory),
           if (module.maxMemory != null) literalNum(module.maxMemory!),
@@ -780,6 +786,7 @@ void printModule(
     );
   }
 
+  // todo: rename this to 'data'
   // dataSegments reference
   if (module.dataSegments.isNotEmpty) {
     classBuilder.fields.add(
@@ -794,7 +801,7 @@ void printModule(
   }
 
   // tables
-  if (module.tables.isNotEmpty) {
+  {
     for (int i = 0; i < module.tables.length; i++) {
       var table = module.tables[i];
       classBuilder.fields.add(
@@ -811,13 +818,17 @@ void printModule(
       );
     }
 
+    int tableIndex = 0;
     classBuilder.fields.add(
       Field(
         (b) => b
           ..name = 'tables'
           ..type = Reference('List<Table>')
           ..modifier = FieldModifier.final$
-          ..late = true,
+          ..annotations.add(refer('override'))
+          ..late = true
+          ..assignment = literalList(
+              module.tables.map((t) => refer('table${tableIndex++}'))).code,
       ),
     );
   }
@@ -842,17 +853,6 @@ void printModule(
     if (module.dataSegments.isNotEmpty)
       refer('dataSegments').property('init').call([refer('memory')]).statement,
   ];
-
-  if (module.tables.isNotEmpty) {
-    int index = 0;
-    constructorStatements.add(
-      refer('tables')
-          .assign(
-            literalList(module.tables.map((t) => refer('table${index++}'))),
-          )
-          .statement,
-    );
-  }
 
   if (module.elementSegments.isNotEmpty) {
     constructorStatements.add(
@@ -1306,6 +1306,7 @@ class Module {
 
   int? startFunctionIndex;
   DebugInfo? debugInfo;
+  String? className;
 
   void setMemoryInfo({
     required int min,
@@ -1524,7 +1525,7 @@ class DefinedFunction extends ModuleFunction {
 
     statements.add(
       declareFinal('frame')
-          .assign(refer('Frame').call([refer('memory')]))
+          .assign(refer('Frame').call([refer('this')]))
           .statement,
     );
 
@@ -1619,7 +1620,7 @@ class ElementSegments {
       (b) => b
         ..modifier = FieldModifier.final$
         ..name = 'module'
-        ..type = Reference('Module'),
+        ..type = Reference(module.className),
     ));
 
     for (int i = 0; i < segments.length; i++) {
@@ -1739,7 +1740,7 @@ class ElementSegments {
       var initFunction = DefinedFunction(module, 0, 0);
 
       var code = Block.of([
-        Code('final frame = Frame(module.memory);'),
+        Code('final frame = Frame(module);'),
         for (var instr in instrs) instr.generateToStatement(initFunction),
         Code('return frame.pop();'),
       ]);
@@ -1812,15 +1813,12 @@ class Global {
   static Class createGlobalsClassDef(Module module) {
     var fields = <Field>[];
 
-    var needsGlobalInitializer = false;
-
     for (int i = 0; i < module.globals.count; i++) {
       var global = module.globals.globals[i];
 
       Code assignment;
       var literalValue = global.calcLiteralValue;
       if (literalValue == null) {
-        needsGlobalInitializer = true;
         assignment = Code('${global.initMethodName}()');
       } else {
         assignment = printLiteral(literalValue.value as num).code;
@@ -1837,24 +1835,10 @@ class Global {
       fields.add(field);
     }
 
-    // TODO: remove this memory instance - it's only used when we initialize
-    // globals.
-    // "static final Memory memory = Memory(0);"
-    if (needsGlobalInitializer) {
-      fields.add(Field(
-        (b) => b
-          ..name = 'memory'
-          ..type = Reference('Memory')
-          ..modifier = FieldModifier.final$
-          ..static = true
-          ..assignment = Code('Memory(0)'),
-      ));
-    }
-
     var initMethods = <Method>[];
     for (var global in module.globals.globals) {
       var initFunction = DefinedFunction(module, 0, 0);
-      var literalValue = Instruction.calcLiternal(global.initExpression);
+      var literalValue = global.calcLiteralValue;
 
       if (literalValue == null) {
         var method = Method(
@@ -1864,7 +1848,7 @@ class Global {
             ..static = true
             ..body = Block.of([
               declareFinal('frame')
-                  .assign(refer('Frame').call([refer('memory')]))
+                  .assign(refer('Frame').call([refer('stubModule')]))
                   .statement,
               for (var instr in global.initExpression)
                 instr.generateToStatement(initFunction),

@@ -7,11 +7,12 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
+class FloatMemory2Module implements Module {
+  FloatMemory2Module() {
     dataSegments.init(memory);
   }
 
+  @override
   final Memory memory = Memory(
     1,
     1,
@@ -19,36 +20,39 @@ class Module {
 
   final DataSegments dataSegments = DataSegments();
 
+  @override
+  late final List<Table> tables = [];
+
   f32 f32_load() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.f32_load(2, 0);
     return frame.pop();
   }
 
   i32 i32_load() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_load(2, 0);
     return frame.pop();
   }
 
   void f32_store() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.f32_const(double.nan);
     frame.f32_store(2, 0);
   }
 
   void i32_store() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(0x7fa00000);
     frame.i32_store(2, 0);
   }
 
   void reset() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(0);
     frame.i32_store(2, 0);

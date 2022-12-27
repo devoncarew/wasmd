@@ -5,12 +5,12 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
-    tables = [table0];
+class LeftToRight0Module implements Module {
+  LeftToRight0Module() {
     segments.init();
   }
 
+  @override
   final Memory memory = Memory(1);
 
   final Table table0 = Table(
@@ -18,69 +18,70 @@ class Module {
     8,
   );
 
-  late final List<Table> tables;
+  @override
+  late final List<Table> tables = [table0];
 
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
   i32 i32_t0(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-1);
     return frame.pop();
   }
 
   i32 i32_t1(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-2);
     return frame.pop();
   }
 
   i32 i64_t0(i64 arg0, i64 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-1);
     return frame.pop();
   }
 
   i32 i64_t1(i64 arg0, i64 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-2);
     return frame.pop();
   }
 
   i32 f32_t0(f32 arg0, f32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-1);
     return frame.pop();
   }
 
   i32 f32_t1(f32 arg0, f32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-2);
     return frame.pop();
   }
 
   i32 f64_t0(f64 arg0, f64 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-1);
     return frame.pop();
   }
 
   i32 f64_t1(f64 arg0, f64 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-2);
     return frame.pop();
   }
 
   void reset() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.i32_const(0);
     frame.i32_store(2, 0);
   }
 
   void bump() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(11);
     frame.i32_const(10);
     frame.i32_load8_u(0, 0);
@@ -99,14 +100,14 @@ class Module {
   }
 
   i32 get() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.i32_load(2, 0);
     return frame.pop();
   }
 
   i32 i32_left() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(1);
@@ -116,7 +117,7 @@ class Module {
   }
 
   i32 i32_right() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(2);
@@ -126,7 +127,7 @@ class Module {
   }
 
   i32 i32_another() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(3);
@@ -136,7 +137,7 @@ class Module {
   }
 
   i32 i32_callee() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(4);
@@ -146,7 +147,7 @@ class Module {
   }
 
   i32 i32_bool() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(5);
@@ -156,7 +157,7 @@ class Module {
   }
 
   i64 i64_left() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(1);
@@ -166,7 +167,7 @@ class Module {
   }
 
   i64 i64_right() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(2);
@@ -176,7 +177,7 @@ class Module {
   }
 
   i64 i64_another() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(3);
@@ -186,7 +187,7 @@ class Module {
   }
 
   i32 i64_callee() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(4);
@@ -196,7 +197,7 @@ class Module {
   }
 
   i32 i64_bool() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(5);
@@ -206,7 +207,7 @@ class Module {
   }
 
   f32 f32_left() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(1);
@@ -216,7 +217,7 @@ class Module {
   }
 
   f32 f32_right() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(2);
@@ -226,7 +227,7 @@ class Module {
   }
 
   f32 f32_another() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(3);
@@ -236,7 +237,7 @@ class Module {
   }
 
   i32 f32_callee() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(4);
@@ -246,7 +247,7 @@ class Module {
   }
 
   i32 f32_bool() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(5);
@@ -256,7 +257,7 @@ class Module {
   }
 
   f64 f64_left() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(1);
@@ -266,7 +267,7 @@ class Module {
   }
 
   f64 f64_right() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(2);
@@ -276,7 +277,7 @@ class Module {
   }
 
   f64 f64_another() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(3);
@@ -286,7 +287,7 @@ class Module {
   }
 
   i32 f64_callee() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(4);
@@ -296,7 +297,7 @@ class Module {
   }
 
   i32 f64_bool() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     bump();
     frame.i32_const(8);
     frame.i32_const(5);
@@ -306,23 +307,23 @@ class Module {
   }
 
   void i32_dummy(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
   }
 
   void i64_dummy(i64 arg0, i64 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
   }
 
   void f32_dummy(f32 arg0, f32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
   }
 
   void f64_dummy(f64 arg0, f64 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
   }
 
   i32 i32_add() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -333,7 +334,7 @@ class Module {
   }
 
   i32 i32_sub() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -344,7 +345,7 @@ class Module {
   }
 
   i32 i32_mul() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -355,7 +356,7 @@ class Module {
   }
 
   i32 i32_div_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -366,7 +367,7 @@ class Module {
   }
 
   i32 i32_div_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -377,7 +378,7 @@ class Module {
   }
 
   i32 i32_rem_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -388,7 +389,7 @@ class Module {
   }
 
   i32 i32_rem_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -399,7 +400,7 @@ class Module {
   }
 
   i32 i32_and() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -410,7 +411,7 @@ class Module {
   }
 
   i32 i32_or() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -421,7 +422,7 @@ class Module {
   }
 
   i32 i32_xor() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -432,7 +433,7 @@ class Module {
   }
 
   i32 i32_shl() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -443,7 +444,7 @@ class Module {
   }
 
   i32 i32_shr_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -454,7 +455,7 @@ class Module {
   }
 
   i32 i32_shr_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -465,7 +466,7 @@ class Module {
   }
 
   i32 i32_eq() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -476,7 +477,7 @@ class Module {
   }
 
   i32 i32_ne() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -487,7 +488,7 @@ class Module {
   }
 
   i32 i32_lt_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -498,7 +499,7 @@ class Module {
   }
 
   i32 i32_le_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -509,7 +510,7 @@ class Module {
   }
 
   i32 i32_lt_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -520,7 +521,7 @@ class Module {
   }
 
   i32 i32_le_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -531,7 +532,7 @@ class Module {
   }
 
   i32 i32_gt_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -542,7 +543,7 @@ class Module {
   }
 
   i32 i32_ge_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -553,7 +554,7 @@ class Module {
   }
 
   i32 i32_gt_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -564,7 +565,7 @@ class Module {
   }
 
   i32 i32_ge_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -575,7 +576,7 @@ class Module {
   }
 
   i32 i32_store() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -585,7 +586,7 @@ class Module {
   }
 
   i32 i32_store8() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -595,7 +596,7 @@ class Module {
   }
 
   i32 i32_store16() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -605,7 +606,7 @@ class Module {
   }
 
   i32 i32_call() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -619,7 +620,7 @@ class Module {
   }
 
   i32 i32_call_indirect() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -636,7 +637,7 @@ class Module {
   }
 
   i32 i32_select() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i32_right());
@@ -648,7 +649,7 @@ class Module {
   }
 
   i32 i64_add() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -659,7 +660,7 @@ class Module {
   }
 
   i32 i64_sub() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -670,7 +671,7 @@ class Module {
   }
 
   i32 i64_mul() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -681,7 +682,7 @@ class Module {
   }
 
   i32 i64_div_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -692,7 +693,7 @@ class Module {
   }
 
   i32 i64_div_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -703,7 +704,7 @@ class Module {
   }
 
   i32 i64_rem_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -714,7 +715,7 @@ class Module {
   }
 
   i32 i64_rem_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -725,7 +726,7 @@ class Module {
   }
 
   i32 i64_and() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -736,7 +737,7 @@ class Module {
   }
 
   i32 i64_or() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -747,7 +748,7 @@ class Module {
   }
 
   i32 i64_xor() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -758,7 +759,7 @@ class Module {
   }
 
   i32 i64_shl() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -769,7 +770,7 @@ class Module {
   }
 
   i32 i64_shr_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -780,7 +781,7 @@ class Module {
   }
 
   i32 i64_shr_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -791,7 +792,7 @@ class Module {
   }
 
   i32 i64_eq() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -802,7 +803,7 @@ class Module {
   }
 
   i32 i64_ne() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -813,7 +814,7 @@ class Module {
   }
 
   i32 i64_lt_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -824,7 +825,7 @@ class Module {
   }
 
   i32 i64_le_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -835,7 +836,7 @@ class Module {
   }
 
   i32 i64_lt_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -846,7 +847,7 @@ class Module {
   }
 
   i32 i64_le_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -857,7 +858,7 @@ class Module {
   }
 
   i32 i64_gt_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -868,7 +869,7 @@ class Module {
   }
 
   i32 i64_ge_s() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -879,7 +880,7 @@ class Module {
   }
 
   i32 i64_gt_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -890,7 +891,7 @@ class Module {
   }
 
   i32 i64_ge_u() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -901,7 +902,7 @@ class Module {
   }
 
   i32 i64_store() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i64_right());
@@ -911,7 +912,7 @@ class Module {
   }
 
   i32 i64_store8() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i64_right());
@@ -921,7 +922,7 @@ class Module {
   }
 
   i32 i64_store16() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i64_right());
@@ -931,7 +932,7 @@ class Module {
   }
 
   i32 i64_store32() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(i64_right());
@@ -941,7 +942,7 @@ class Module {
   }
 
   i32 i64_call() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -955,7 +956,7 @@ class Module {
   }
 
   i32 i64_call_indirect() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -972,7 +973,7 @@ class Module {
   }
 
   i32 i64_select() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i64_left());
     frame.push(i64_right());
@@ -984,7 +985,7 @@ class Module {
   }
 
   i32 f32_add() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -995,7 +996,7 @@ class Module {
   }
 
   i32 f32_sub() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1006,7 +1007,7 @@ class Module {
   }
 
   i32 f32_mul() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1017,7 +1018,7 @@ class Module {
   }
 
   i32 f32_div() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1028,7 +1029,7 @@ class Module {
   }
 
   i32 f32_copysign() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1039,7 +1040,7 @@ class Module {
   }
 
   i32 f32_eq() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1050,7 +1051,7 @@ class Module {
   }
 
   i32 f32_ne() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1061,7 +1062,7 @@ class Module {
   }
 
   i32 f32_lt() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1072,7 +1073,7 @@ class Module {
   }
 
   i32 f32_le() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1083,7 +1084,7 @@ class Module {
   }
 
   i32 f32_gt() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1094,7 +1095,7 @@ class Module {
   }
 
   i32 f32_ge() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1105,7 +1106,7 @@ class Module {
   }
 
   i32 f32_min() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1116,7 +1117,7 @@ class Module {
   }
 
   i32 f32_max() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1127,7 +1128,7 @@ class Module {
   }
 
   i32 f32_store() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(f32_right());
@@ -1137,7 +1138,7 @@ class Module {
   }
 
   i32 f32_call() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1151,7 +1152,7 @@ class Module {
   }
 
   i32 f32_call_indirect() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1168,7 +1169,7 @@ class Module {
   }
 
   i32 f32_select() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f32_left());
     frame.push(f32_right());
@@ -1180,7 +1181,7 @@ class Module {
   }
 
   i32 f64_add() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1191,7 +1192,7 @@ class Module {
   }
 
   i32 f64_sub() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1202,7 +1203,7 @@ class Module {
   }
 
   i32 f64_mul() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1213,7 +1214,7 @@ class Module {
   }
 
   i32 f64_div() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1224,7 +1225,7 @@ class Module {
   }
 
   i32 f64_copysign() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1235,7 +1236,7 @@ class Module {
   }
 
   i32 f64_eq() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1246,7 +1247,7 @@ class Module {
   }
 
   i32 f64_ne() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1257,7 +1258,7 @@ class Module {
   }
 
   i32 f64_lt() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1268,7 +1269,7 @@ class Module {
   }
 
   i32 f64_le() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1279,7 +1280,7 @@ class Module {
   }
 
   i32 f64_gt() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1290,7 +1291,7 @@ class Module {
   }
 
   i32 f64_ge() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1301,7 +1302,7 @@ class Module {
   }
 
   i32 f64_min() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1312,7 +1313,7 @@ class Module {
   }
 
   i32 f64_max() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1323,7 +1324,7 @@ class Module {
   }
 
   i32 f64_store() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(i32_left());
     frame.push(f64_right());
@@ -1333,7 +1334,7 @@ class Module {
   }
 
   i32 f64_call() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1347,7 +1348,7 @@ class Module {
   }
 
   i32 f64_call_indirect() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1364,7 +1365,7 @@ class Module {
   }
 
   i32 f64_select() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     reset();
     frame.push(f64_left());
     frame.push(f64_right());
@@ -1376,7 +1377,7 @@ class Module {
   }
 
   i32 br_if() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       reset();
@@ -1392,7 +1393,7 @@ class Module {
   }
 
   i32 br_table() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       reset();
@@ -1567,7 +1568,7 @@ typedef FunctionType12 = void Function(f64, f64);
 class ElementSegments {
   ElementSegments(this.module);
 
-  final Module module;
+  final LeftToRight0Module module;
 
   void init() {
     copyTo(module.table0, 0, 0, 8, [0, 1, 2, 3, 4, 5, 6, 7]); /* segment0 */

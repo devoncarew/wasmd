@@ -8,7 +8,7 @@ import 'local_get.0.dart' as local_get_0;
 void main() {
   group('local_get', () {
     // module local_get.0.dart (line 3)
-    var m0 = local_get_0.Module();
+    var m0 = local_get_0.LocalGet0Module();
 
     returns('type_local_i32_0', () => m0.type_local_i32(), 0);
     returns('type_local_i64_0', () => m0.type_local_i64(), 0);

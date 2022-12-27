@@ -11,7 +11,7 @@ const String _io = 'integer overflow';
 void main() {
   group('i64', () {
     // module i64.0.dart (line 3)
-    var m0 = i64_0.Module();
+    var m0 = i64_0.I640Module();
 
     returns('add_0', () => m0.add(0x1, 0x1), 0x2);
     returns('add_1', () => m0.add(0x1, 0), 0x1);

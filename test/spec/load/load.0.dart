@@ -5,12 +5,12 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
-    tables = [table0];
+class Load0Module implements Module {
+  Load0Module() {
     segments.init();
   }
 
+  @override
   final Memory memory = Memory(1);
 
   final Globals globals = Globals();
@@ -20,14 +20,15 @@ class Module {
     1,
   );
 
-  late final List<Table> tables;
+  @override
+  late final List<Table> tables = [table0];
 
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
   i32 as_br_value() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(0);
@@ -38,7 +39,7 @@ class Module {
   }
 
   void as_br_if_cond() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(0);
@@ -48,7 +49,7 @@ class Module {
   }
 
   i32 as_br_if_value() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(0);
@@ -62,7 +63,7 @@ class Module {
   }
 
   i32 as_br_if_value_cond() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(6);
@@ -76,7 +77,7 @@ class Module {
   }
 
   void as_br_table_index() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(0);
@@ -94,7 +95,7 @@ class Module {
   }
 
   i32 as_br_table_value() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(0);
@@ -116,7 +117,7 @@ class Module {
   }
 
   i32 as_br_table_value_index() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(6);
@@ -136,7 +137,7 @@ class Module {
   }
 
   i32 as_return_value() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     return frame.pop();
@@ -144,7 +145,7 @@ class Module {
   }
 
   i32 as_if_cond() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     if_label_0:
@@ -157,7 +158,7 @@ class Module {
   }
 
   i32 as_if_then() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     if_label_0:
     if (frame.pop() != 0) {
@@ -170,7 +171,7 @@ class Module {
   }
 
   i32 as_if_else() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     if_label_0:
     if (frame.pop() != 0) {
@@ -183,7 +184,7 @@ class Module {
   }
 
   i32 as_select_first(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     frame.push(arg0);
@@ -193,7 +194,7 @@ class Module {
   }
 
   i32 as_select_second(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.i32_const(0);
     frame.i32_load(2, 0);
@@ -203,7 +204,7 @@ class Module {
   }
 
   i32 as_select_cond() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(1);
     frame.i32_const(0);
@@ -213,13 +214,13 @@ class Module {
   }
 
   i32 f(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-1);
     return frame.pop();
   }
 
   i32 as_call_first() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     frame.i32_const(2);
@@ -234,7 +235,7 @@ class Module {
   }
 
   i32 as_call_mid() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(0);
     frame.i32_load(2, 0);
@@ -249,7 +250,7 @@ class Module {
   }
 
   i32 as_call_last() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(2);
     frame.i32_const(0);
@@ -264,7 +265,7 @@ class Module {
   }
 
   i32 as_call_indirect_first() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     frame.i32_const(2);
@@ -281,7 +282,7 @@ class Module {
   }
 
   i32 as_call_indirect_mid() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(0);
     frame.i32_load(2, 0);
@@ -298,7 +299,7 @@ class Module {
   }
 
   i32 as_call_indirect_last() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(2);
     frame.i32_const(0);
@@ -315,7 +316,7 @@ class Module {
   }
 
   i32 as_call_indirect_index() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(2);
     frame.i32_const(3);
@@ -334,7 +335,7 @@ class Module {
   void as_local_set_value() {
     i32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     local0 = frame.pop();
@@ -343,7 +344,7 @@ class Module {
   i32 as_local_tee_value() {
     i32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     local0 = frame.peek();
@@ -353,14 +354,14 @@ class Module {
   void as_global_set_value() {
     i32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     globals.g = frame.pop();
   }
 
   i32 as_load_address() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     frame.i32_load(2, 0);
@@ -368,7 +369,7 @@ class Module {
   }
 
   i32 as_loadN_address() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     frame.i32_load8_s(0, 0);
@@ -376,7 +377,7 @@ class Module {
   }
 
   void as_store_address() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     frame.i32_const(7);
@@ -384,7 +385,7 @@ class Module {
   }
 
   void as_store_value() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(2);
     frame.i32_const(0);
     frame.i32_load(2, 0);
@@ -392,7 +393,7 @@ class Module {
   }
 
   void as_storeN_address() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load8_s(0, 0);
     frame.i32_const(7);
@@ -400,7 +401,7 @@ class Module {
   }
 
   void as_storeN_value() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(2);
     frame.i32_const(0);
     frame.i32_load(2, 0);
@@ -408,7 +409,7 @@ class Module {
   }
 
   i32 as_unary_operand() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(100);
     frame.i32_load(2, 0);
     frame.i32_clz();
@@ -416,7 +417,7 @@ class Module {
   }
 
   i32 as_binary_left() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(100);
     frame.i32_load(2, 0);
     frame.i32_const(10);
@@ -425,7 +426,7 @@ class Module {
   }
 
   i32 as_binary_right() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(10);
     frame.i32_const(100);
     frame.i32_load(2, 0);
@@ -434,7 +435,7 @@ class Module {
   }
 
   i32 as_test_operand() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(100);
     frame.i32_load(2, 0);
     frame.i32_eqz();
@@ -442,7 +443,7 @@ class Module {
   }
 
   i32 as_compare_left() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(100);
     frame.i32_load(2, 0);
     frame.i32_const(10);
@@ -451,7 +452,7 @@ class Module {
   }
 
   i32 as_compare_right() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(10);
     frame.i32_const(100);
     frame.i32_load(2, 0);
@@ -460,7 +461,7 @@ class Module {
   }
 
   i32 as_memory_grow_size() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(100);
     frame.i32_load(2, 0);
     frame.memory_grow(0);
@@ -523,7 +524,7 @@ class Globals {
 class ElementSegments {
   ElementSegments(this.module);
 
-  final Module module;
+  final Load0Module module;
 
   void init() {
     copyTo(module.table0, 0, 0, 1, [14]); /* segment0 */

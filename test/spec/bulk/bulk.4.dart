@@ -7,17 +7,21 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
+class Bulk4Module implements Module {
+  Bulk4Module() {
     dataSegments.init(memory);
   }
 
+  @override
   final Memory memory = Memory(1);
 
   final DataSegments dataSegments = DataSegments();
 
+  @override
+  late final List<Table> tables = [];
+
   void init(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg1);
     frame.push(arg2);
@@ -25,7 +29,7 @@ class Module {
   }
 
   i32 load8_u(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.i32_load8_u(0, 0);
     return frame.pop();

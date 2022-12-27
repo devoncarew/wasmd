@@ -20,7 +20,7 @@ void main(List<String> args) {
   print('');
 
   var memory = Memory(width * height * 2 ~/ Memory.pageSize + 1);
-  var mandelbrot = Module(envImports: _EnvImports(), memory: memory);
+  var mandelbrot = MandelbrotModule(envImports: _EnvImports(), memory: memory);
 
   var stopwatch = Stopwatch()..start();
   mandelbrot.update(width, height, numColors);

@@ -10,7 +10,7 @@ const String _oobta = 'out of bounds table access';
 void main() {
   group('table_set', () {
     // module table_set.0.dart (line 1)
-    var m0 = table_set_0.Module();
+    var m0 = table_set_0.TableSet0Module();
 
     returns('get_externref_0', () => m0.get_externref(0), null);
     returns('set_externref_0', () => m0.set_externref(0, externref('1')), null);

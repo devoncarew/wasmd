@@ -8,7 +8,7 @@ import 'left_to_right.0.dart' as left_to_right_0;
 void main() {
   group('left_to_right', () {
     // module left_to_right.0.dart (line 1)
-    var m0 = left_to_right_0.Module();
+    var m0 = left_to_right_0.LeftToRight0Module();
 
     returns('i32_add_0', () => m0.i32_add(), 0x102);
     returns('i64_add_0', () => m0.i64_add(), 0x102);

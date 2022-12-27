@@ -5,36 +5,37 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
-    tables = [table0];
+class Bulk8Module implements Module {
+  Bulk8Module() {
     segments.init();
   }
 
+  @override
   final Memory memory = Memory(0);
 
   final Table table0 = Table(3);
 
-  late final List<Table> tables;
+  @override
+  late final List<Table> tables = [table0];
 
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
   i32 zero() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     return frame.pop();
   }
 
   i32 one() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     return frame.pop();
   }
 
   void init(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg1);
     frame.push(arg2);
@@ -48,7 +49,7 @@ class Module {
   }
 
   i32 call(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     {
       var func = table0[frame.pop()]! as FunctionType0;
@@ -69,7 +70,7 @@ typedef FunctionType2 = i32 Function(i32);
 class ElementSegments {
   ElementSegments(this.module);
 
-  final Module module;
+  final Bulk8Module module;
 
   late final List<int> segment0;
 

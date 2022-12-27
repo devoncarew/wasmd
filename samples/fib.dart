@@ -5,17 +5,21 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class FibModule implements Module {
+  FibModule();
 
+  @override
   final Memory memory = Memory(0);
+
+  @override
+  late final List<Table> tables = [];
 
   i32 fib(i32 arg0) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     local0 = frame.pop();
     frame.push(arg0);

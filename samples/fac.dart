@@ -5,13 +5,17 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class FacModule implements Module {
+  FacModule();
 
+  @override
   final Memory memory = Memory(0);
 
+  @override
+  late final List<Table> tables = [];
+
   i32 fac(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.i32_const(0);
     frame.i32_eq();

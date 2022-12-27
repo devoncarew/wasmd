@@ -4,10 +4,10 @@ import 'element_segments.dart';
 
 void main() {
   group('element segments', () {
-    late Module module;
+    late ElementSegmentsModule module;
 
     setUp(() {
-      module = Module();
+      module = ElementSegmentsModule();
     });
 
     test('number of tables', () {

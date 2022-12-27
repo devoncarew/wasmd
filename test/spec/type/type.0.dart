@@ -5,10 +5,14 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class Type0Module implements Module {
+  Type0Module();
 
+  @override
   final Memory memory = Memory(0);
+
+  @override
+  late final List<Table> tables = [];
 }
 
 typedef FunctionType0 = void Function();

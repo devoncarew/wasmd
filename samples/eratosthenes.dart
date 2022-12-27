@@ -7,7 +7,7 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class EratosthenesModule {
+class EratosthenesModule implements Module {
   EratosthenesModule({required this.envImports}) {
     dataSegments.init(memory);
     _func2();
@@ -15,11 +15,15 @@ class EratosthenesModule {
 
   final EnvImports envImports;
 
+  @override
   final Memory memory = Memory(1);
 
   final Globals globals = Globals();
 
   final DataSegments dataSegments = DataSegments();
+
+  @override
+  late final List<Table> tables = [];
 
   i32 prime(i32 arg0) {
     i32 local0 = 0;
@@ -31,7 +35,7 @@ class EratosthenesModule {
     i32 local6 = 0;
     i32 local7 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.i32_const(2);
     frame.i32_eq();
@@ -342,7 +346,7 @@ class EratosthenesModule {
   }
 
   void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0x510);
     frame.i32_const(0x540);
     frame.i32_const(64);
@@ -358,7 +362,7 @@ class EratosthenesModule {
   }
 
   void _func2() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0x55c);
     globals.global0 = frame.pop();
   }

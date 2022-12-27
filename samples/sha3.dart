@@ -5,9 +5,10 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class Sha3Module implements Module {
+  Sha3Module();
 
+  @override
   final Memory memory = Memory(
     10,
     65536,
@@ -15,8 +16,11 @@ class Module {
 
   final Globals globals = Globals();
 
+  @override
+  late final List<Table> tables = [];
+
   void init(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.i64_const(0);
     frame.i64_store(3, 0);
@@ -100,7 +104,7 @@ class Module {
   i32 pad(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
     i32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg2);
     local0 = frame.pop();
     block_label_0:
@@ -192,7 +196,7 @@ class Module {
     i64 local3 = 0;
     i32 local4 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg1);
     local2 = frame.pop();
     frame.push(arg0);
@@ -311,7 +315,7 @@ class Module {
     i32 local2 = 0;
     i32 local3 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.i32_const(8);
     frame.i32_add();
@@ -646,7 +650,7 @@ class Module {
   }
 
   void _func4() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(globals.global0);
     globals.global50 = frame.pop();
     frame.push(globals.global2);
@@ -1170,7 +1174,7 @@ class Module {
   void f_permute(i32 arg0) {
     i32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.i32_const(8);
     frame.i32_add();

@@ -11,7 +11,7 @@ const String _icti = 'invalid conversion to integer';
 void main() {
   group('conversions', () {
     // module conversions.0.dart (line 1)
-    var m0 = conversions_0.Module();
+    var m0 = conversions_0.Conversions0Module();
 
     returns('i64_extend_i32_s_0', () => m0.i64_extend_i32_s(0), 0);
     returns('i64_extend_i32_s_1', () => m0.i64_extend_i32_s(0x2710), 0x2710);

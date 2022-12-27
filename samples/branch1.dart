@@ -5,17 +5,21 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
+class Branch1Module implements Module {
+  Branch1Module() {
     foo();
   }
 
+  @override
   final Memory memory = Memory(0);
 
   final Globals globals = Globals();
 
+  @override
+  late final List<Table> tables = [];
+
   i32 sample() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
 
     loop_label_0:
     for (;;) {
@@ -34,7 +38,7 @@ class Module {
   }
 
   void foo() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     globals.i = frame.pop();
   }

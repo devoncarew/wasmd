@@ -5,47 +5,48 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
-    tables = [
-      table0,
-      table1,
-    ];
+class TableSet0Module implements Module {
+  TableSet0Module() {
     segments.init();
   }
 
+  @override
   final Memory memory = Memory(0);
 
   final Table table0 = Table(1);
 
   final Table table1 = Table(2);
 
-  late final List<Table> tables;
+  @override
+  late final List<Table> tables = [
+    table0,
+    table1,
+  ];
 
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
   void dummy() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
   }
 
   ExternRef? get_externref(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.push(table0[frame.pop()]);
     return frame.pop();
   }
 
   FuncRef? get_funcref(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.push(table1[frame.pop()]);
     return frame.pop();
   }
 
   void set_externref(i32 i, ExternRef? r) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.push(r);
     {
@@ -55,7 +56,7 @@ class Module {
   }
 
   void set_funcref(i32 i, FuncRef? r) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.push(r);
     {
@@ -65,7 +66,7 @@ class Module {
   }
 
   void set_funcref_from(i32 i, i32 j) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.push(j);
     frame.push(table1[frame.pop()]);
@@ -76,7 +77,7 @@ class Module {
   }
 
   i32 is_null_funcref(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     {
       var t0 = frame.pop();
@@ -110,7 +111,7 @@ typedef FunctionType6 = i32 Function(i32);
 class ElementSegments {
   ElementSegments(this.module);
 
-  final Module module;
+  final TableSet0Module module;
 
   void init() {
     copyTo(module.table1, 0, 1, 1, [0]); /* segment0 */

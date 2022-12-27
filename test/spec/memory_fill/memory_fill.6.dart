@@ -5,16 +5,20 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class MemoryFill6Module implements Module {
+  MemoryFill6Module();
 
+  @override
   final Memory memory = Memory(
     1,
     1,
   );
 
+  @override
+  late final List<Table> tables = [];
+
   i32 checkRange(i32 from, i32 to, i32 expected) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
 
     loop_label_0:
     for (;;) {
@@ -46,7 +50,7 @@ class Module {
   }
 
   void test() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(170);
     frame.i32_const(0xfffe);

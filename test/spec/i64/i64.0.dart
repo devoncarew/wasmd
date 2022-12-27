@@ -5,13 +5,17 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class I640Module implements Module {
+  I640Module();
 
+  @override
   final Memory memory = Memory(0);
 
+  @override
+  late final List<Table> tables = [];
+
   i64 add(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_add();
@@ -19,7 +23,7 @@ class Module {
   }
 
   i64 sub(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_sub();
@@ -27,7 +31,7 @@ class Module {
   }
 
   i64 mul(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_mul();
@@ -35,7 +39,7 @@ class Module {
   }
 
   i64 div_s(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_div_s();
@@ -43,7 +47,7 @@ class Module {
   }
 
   i64 div_u(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_div_u();
@@ -51,7 +55,7 @@ class Module {
   }
 
   i64 rem_s(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_rem_s();
@@ -59,7 +63,7 @@ class Module {
   }
 
   i64 rem_u(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_rem_u();
@@ -67,7 +71,7 @@ class Module {
   }
 
   i64 and(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_and();
@@ -75,7 +79,7 @@ class Module {
   }
 
   i64 or(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_or();
@@ -83,7 +87,7 @@ class Module {
   }
 
   i64 xor(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_xor();
@@ -91,7 +95,7 @@ class Module {
   }
 
   i64 shl(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_shl();
@@ -99,7 +103,7 @@ class Module {
   }
 
   i64 shr_s(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_shr_s();
@@ -107,7 +111,7 @@ class Module {
   }
 
   i64 shr_u(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_shr_u();
@@ -115,7 +119,7 @@ class Module {
   }
 
   i64 rotl(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_rotl();
@@ -123,7 +127,7 @@ class Module {
   }
 
   i64 rotr(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_rotr();
@@ -131,56 +135,56 @@ class Module {
   }
 
   i64 clz(i64 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i64_clz();
     return frame.pop();
   }
 
   i64 ctz(i64 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i64_ctz();
     return frame.pop();
   }
 
   i64 popcnt(i64 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i64_popcnt();
     return frame.pop();
   }
 
   i64 extend8_s(i64 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i64_extend8_s();
     return frame.pop();
   }
 
   i64 extend16_s(i64 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i64_extend16_s();
     return frame.pop();
   }
 
   i64 extend32_s(i64 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i64_extend32_s();
     return frame.pop();
   }
 
   i32 eqz(i64 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i64_eqz();
     return frame.pop();
   }
 
   i32 eq(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_eq();
@@ -188,7 +192,7 @@ class Module {
   }
 
   i32 ne(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_ne();
@@ -196,7 +200,7 @@ class Module {
   }
 
   i32 lt_s(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_lt_s();
@@ -204,7 +208,7 @@ class Module {
   }
 
   i32 lt_u(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_lt_u();
@@ -212,7 +216,7 @@ class Module {
   }
 
   i32 le_s(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_le_s();
@@ -220,7 +224,7 @@ class Module {
   }
 
   i32 le_u(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_le_u();
@@ -228,7 +232,7 @@ class Module {
   }
 
   i32 gt_s(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_gt_s();
@@ -236,7 +240,7 @@ class Module {
   }
 
   i32 gt_u(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_gt_u();
@@ -244,7 +248,7 @@ class Module {
   }
 
   i32 ge_s(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_ge_s();
@@ -252,7 +256,7 @@ class Module {
   }
 
   i32 ge_u(i64 x, i64 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i64_ge_u();

@@ -5,18 +5,18 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module({
+class MandelbrotModule implements Module {
+  MandelbrotModule({
     required this.envImports,
     required this.memory,
   }) {
-    tables = [table0];
     segments.init();
   }
 
   final EnvImports envImports;
 
   /// min pages: 0
+  @override
   final Memory memory;
 
   final Globals globals = Globals();
@@ -26,14 +26,15 @@ class Module {
     1,
   );
 
-  late final List<Table> tables;
+  @override
+  late final List<Table> tables = [table0];
 
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
   f64 _func0(f64 value, f64 minValue, f64 maxValue) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(value);
     frame.push(minValue);
     frame.f64_max();
@@ -69,7 +70,7 @@ class Module {
     f64 distanceSq = 0;
     f64 fraction = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(width);
     frame.f64_convert_i32_u();
     frame.f64_const(1.0);
@@ -350,7 +351,7 @@ abstract class EnvImports {
 class ElementSegments {
   ElementSegments(this.module);
 
-  final Module module;
+  final MandelbrotModule module;
 
   void init() {
     copyTo(module.table0, 0, 1, 0, []); /* segment0 */

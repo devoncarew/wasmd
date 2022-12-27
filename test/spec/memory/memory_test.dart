@@ -17,40 +17,40 @@ import 'memory.9.dart' as memory_9;
 void main() {
   group('memory', () {
     // module memory.0.dart (line 3)
-    var m0 = memory_0.Module();
+    var m0 = memory_0.Memory0Module();
 
     // module memory.1.dart (line 4)
-    var m1 = memory_1.Module();
+    var m1 = memory_1.Memory1Module();
 
     // module memory.2.dart (line 5)
-    var m2 = memory_2.Module();
+    var m2 = memory_2.Memory2Module();
 
     // module memory.3.dart (line 6)
-    var m3 = memory_3.Module();
+    var m3 = memory_3.Memory3Module();
 
     // module memory.4.dart (line 7)
-    var m4 = memory_4.Module();
+    var m4 = memory_4.Memory4Module();
 
     // module memory.5.dart (line 8)
-    var m5 = memory_5.Module();
+    var m5 = memory_5.Memory5Module();
 
     // module memory.8.dart (line 13)
-    var m6 = memory_8.Module();
+    var m6 = memory_8.Memory8Module();
 
     returns('memsize_0', () => m6.memsize(), 0);
 
     // module memory.9.dart (line 15)
-    var m7 = memory_9.Module();
+    var m7 = memory_9.Memory9Module();
 
     returns('memsize_1', () => m7.memsize(), 0);
 
     // module memory.10.dart (line 17)
-    var m8 = memory_10.Module();
+    var m8 = memory_10.Memory10Module();
 
     returns('memsize_2', () => m8.memsize(), 0x1);
 
     // module memory.30.dart (line 92)
-    var m9 = memory_30.Module();
+    var m9 = memory_30.Memory30Module();
 
     returns('data_0', () => m9.data(), 0x1);
     returns('cast_0', () => m9.cast(), f64('4045000000000000'));

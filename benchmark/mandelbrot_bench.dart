@@ -12,12 +12,12 @@ void main() => MandelbrotBenchmark().report();
 class MandelbrotBenchmark extends BenchmarkBase {
   MandelbrotBenchmark() : super('mandelbrot');
 
-  late m.Module mandelbrot;
+  late m.MandelbrotModule mandelbrot;
 
   @override
   void setup() {
     var memory = Memory(50);
-    mandelbrot = m.Module(envImports: _EnvImports(), memory: memory);
+    mandelbrot = m.MandelbrotModule(envImports: _EnvImports(), memory: memory);
   }
 
   @override

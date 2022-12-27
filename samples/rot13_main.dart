@@ -4,12 +4,12 @@ import 'package:wasmd/runtime.dart';
 
 import 'rot13.dart';
 
-late Module module;
+late Rot13Module module;
 
 void main(List<String> args) {
   var str = 'test string';
   var memory = Memory(10);
-  module = Module(hostImports: Rot13Env(str, memory), memory: memory);
+  module = Rot13Module(hostImports: Rot13Env(str, memory), memory: memory);
   print(str);
   print('calling rot13:');
   module.rot13();

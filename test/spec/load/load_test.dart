@@ -8,7 +8,7 @@ import 'load.0.dart' as load_0;
 void main() {
   group('load', () {
     // module load.0.dart (line 3)
-    var m0 = load_0.Module();
+    var m0 = load_0.Load0Module();
 
     returns('as_br_value_0', () => m0.as_br_value(), 0);
     returns('as_br_if_cond_0', () => m0.as_br_if_cond(), null);

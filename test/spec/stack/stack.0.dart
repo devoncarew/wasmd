@@ -5,18 +5,22 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class Stack0Module implements Module {
+  Stack0Module();
 
+  @override
   final Memory memory = Memory(0);
 
   final Globals globals = Globals();
+
+  @override
+  late final List<Table> tables = [];
 
   i64 fac_expr(i64 n) {
     i64 i = 0;
     i64 res = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(n);
     i = frame.pop();
     frame.i64_const(1);
@@ -53,7 +57,7 @@ class Module {
     i64 i = 0;
     i64 res = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(n);
     i = frame.pop();
     frame.i64_const(1);
@@ -90,7 +94,7 @@ class Module {
     i64 i = 0;
     i64 res = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(n);
     i = frame.pop();
     frame.i64_const(1);
@@ -127,7 +131,7 @@ class Module {
     i64 i = 0;
     i64 res = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(n);
     i = frame.pop();
     frame.i64_const(1);
@@ -164,7 +168,7 @@ class Module {
     i64 i = 0;
     i64 res = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(n);
     i = frame.pop();
     frame.i64_const(1);
@@ -200,7 +204,7 @@ class Module {
   i32 add_one_to_global() {
     i32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     frame.push(globals.temp);
     frame.i32_add();
@@ -210,13 +214,13 @@ class Module {
   }
 
   void add_one_to_global_and_drop() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(add_one_to_global());
     frame.drop();
   }
 
   i32 not_quite_a_tree() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(add_one_to_global());
     frame.push(add_one_to_global());
     add_one_to_global_and_drop();

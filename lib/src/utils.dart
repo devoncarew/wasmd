@@ -32,6 +32,12 @@ String patchUpName(String name) {
   return name;
 }
 
+String titleCase(String name) {
+  return name.split('_').map((s) {
+    return '${s.substring(0, 1).toUpperCase()}${s.substring(1)}';
+  }).join();
+}
+
 bool isValidIdentifier(String str) {
   if (str.isEmpty) return false;
 

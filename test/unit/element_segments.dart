@@ -5,43 +5,44 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
-    tables = [table0];
+class ElementSegmentsModule implements Module {
+  ElementSegmentsModule() {
     segments.init();
     init();
   }
 
+  @override
   final Memory memory = Memory(0);
 
   final Table table0 = Table(6);
 
-  late final List<Table> tables;
+  @override
+  late final List<Table> tables = [table0];
 
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
   i32 f1() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(6);
     return frame.pop();
   }
 
   i32 f2() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(7);
     return frame.pop();
   }
 
   i32 f3() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(42);
     return frame.pop();
   }
 
   i32 callByIndex(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     {
       var func = table0[frame.pop()]! as FunctionType0;
@@ -51,24 +52,24 @@ class Module {
   }
 
   FuncRef? table_get(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.push(table0[frame.pop()]);
     return frame.pop();
   }
 
   void table_set(i32 i, FuncRef? ref) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.push(ref);
     {
       var ref = frame.pop();
-      table0.funcRefs[frame.pop() as int] = ref;
+      table0[frame.pop() as int] = ref;
     }
   }
 
   void init() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(3);
     frame.i32_const(0);
     frame.i32_const(3);
@@ -95,7 +96,7 @@ typedef FunctionType4 = void Function();
 class ElementSegments {
   ElementSegments(this.module);
 
-  final Module module;
+  final ElementSegmentsModule module;
 
   late final List<int> segment1;
 

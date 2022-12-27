@@ -7,17 +7,21 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
+class Memory30Module implements Module {
+  Memory30Module() {
     dataSegments.init(memory);
   }
 
+  @override
   final Memory memory = Memory(1);
 
   final DataSegments dataSegments = DataSegments();
 
+  @override
+  late final List<Table> tables = [];
+
   i32 data() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load8_u(0, 0);
     frame.i32_const(65);
@@ -61,7 +65,7 @@ class Module {
   }
 
   f64 cast() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.i64_const(-0x3039);
     frame.i64_store(3, 0);
@@ -87,7 +91,7 @@ class Module {
   }
 
   i32 i32_load8_s(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i32_store8(0, 0);
@@ -97,7 +101,7 @@ class Module {
   }
 
   i32 i32_load8_u(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i32_store8(0, 0);
@@ -107,7 +111,7 @@ class Module {
   }
 
   i32 i32_load16_s(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i32_store16(1, 0);
@@ -117,7 +121,7 @@ class Module {
   }
 
   i32 i32_load16_u(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i32_store16(1, 0);
@@ -127,7 +131,7 @@ class Module {
   }
 
   i64 i64_load8_s(i64 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i64_store8(0, 0);
@@ -137,7 +141,7 @@ class Module {
   }
 
   i64 i64_load8_u(i64 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i64_store8(0, 0);
@@ -147,7 +151,7 @@ class Module {
   }
 
   i64 i64_load16_s(i64 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i64_store16(1, 0);
@@ -157,7 +161,7 @@ class Module {
   }
 
   i64 i64_load16_u(i64 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i64_store16(1, 0);
@@ -167,7 +171,7 @@ class Module {
   }
 
   i64 i64_load32_s(i64 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i64_store32(2, 0);
@@ -177,7 +181,7 @@ class Module {
   }
 
   i64 i64_load32_u(i64 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i64_store32(2, 0);

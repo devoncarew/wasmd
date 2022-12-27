@@ -5,8 +5,8 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module({
+class Rot13Module implements Module {
+  Rot13Module({
     required this.hostImports,
     required this.memory,
   });
@@ -14,12 +14,16 @@ class Module {
   final HostImports hostImports;
 
   /// min pages: 1
+  @override
   final Memory memory;
+
+  @override
+  late final List<Table> tables = [];
 
   i32 rot13c(i32 c) {
     i32 uc = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(c);
     frame.i32_const(65);
     frame.i32_lt_u();
@@ -61,7 +65,7 @@ class Module {
     i32 size = 0;
     i32 i = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(0x400);
     {

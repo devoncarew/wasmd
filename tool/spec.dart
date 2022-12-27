@@ -156,8 +156,9 @@ void generateDartForJson(File jsonFile, File dartFile) {
       moduleCount++;
 
       var dartImport = '$shortName.dart';
+      var className = titleCase(patchUpName('${shortName}Module'));
       statements.add(Code('    // module $dartImport (line $line)'));
-      statements.add(Code('var $name = $prefix.Module();'));
+      statements.add(Code('var $name = $prefix.$className();'));
       statements.add(Code(''));
       library.directives.add(Directive.import(dartImport, as: prefix));
     } else if (type == 'action') {

@@ -5,19 +5,23 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module({required this.consoleImports}) {
+class Branch2Module implements Module {
+  Branch2Module({required this.consoleImports}) {
     _func0();
   }
 
   final ConsoleImports consoleImports;
 
+  @override
   final Memory memory = Memory(0);
 
   final Globals globals = Globals();
 
+  @override
+  late final List<Table> tables = [];
+
   void _func0() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
 
     loop_label_0:
     for (;;) {

@@ -5,19 +5,23 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
+class Bulk11Module implements Module {
+  Bulk11Module() {
     segments.init();
   }
 
+  @override
   final Memory memory = Memory(0);
+
+  @override
+  late final List<Table> tables = [];
 
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
   void _func0() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* elem.drop segment 0 */
   }
 
@@ -31,7 +35,7 @@ typedef FunctionType0 = void Function();
 class ElementSegments {
   ElementSegments(this.module);
 
-  final Module module;
+  final Bulk11Module module;
 
   late final List<int> segment0;
 

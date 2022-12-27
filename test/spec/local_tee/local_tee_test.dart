@@ -8,7 +8,7 @@ import 'local_tee.0.dart' as local_tee_0;
 void main() {
   group('local_tee', () {
     // module local_tee.0.dart (line 3)
-    var m0 = local_tee_0.Module();
+    var m0 = local_tee_0.LocalTee0Module();
 
     returns('type_local_i32_0', () => m0.type_local_i32(), 0);
     returns('type_local_i64_0', () => m0.type_local_i64(), 0);

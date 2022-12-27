@@ -7,52 +7,56 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
+class Address3Module implements Module {
+  Address3Module() {
     dataSegments.init(memory);
   }
 
+  @override
   final Memory memory = Memory(1);
 
   final DataSegments dataSegments = DataSegments();
 
+  @override
+  late final List<Table> tables = [];
+
   f32 $32_good1(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.f32_load(2, 0);
     return frame.pop();
   }
 
   f32 $32_good2(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.f32_load(0, 0);
     return frame.pop();
   }
 
   f32 $32_good3(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.f32_load(0, 1);
     return frame.pop();
   }
 
   f32 $32_good4(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.f32_load(1, 2);
     return frame.pop();
   }
 
   f32 $32_good5(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.f32_load(2, 8);
     return frame.pop();
   }
 
   void $32_bad(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(i);
     frame.f32_load(2, 0xffffffff);
     frame.drop();

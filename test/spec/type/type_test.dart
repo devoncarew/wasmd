@@ -8,6 +8,6 @@ import 'type.0.dart' as type_0;
 void main() {
   group('type', () {
     // module type.0.dart (line 3)
-    var m0 = type_0.Module();
+    var m0 = type_0.Type0Module();
   });
 }

@@ -8,7 +8,7 @@ import 'return.0.dart' as return_0;
 void main() {
   group('return', () {
     // module return.0.dart (line 3)
-    var m0 = return_0.Module();
+    var m0 = return_0.Return0Module();
 
     returns('type_i32_0', () => m0.type_i32(), null);
     returns('type_i64_0', () => m0.type_i64(), null);

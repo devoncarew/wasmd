@@ -5,15 +5,19 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class Switch0Module implements Module {
+  Switch0Module();
 
+  @override
   final Memory memory = Memory(0);
+
+  @override
+  late final List<Table> tables = [];
 
   i32 stmt(i32 i) {
     i32 j = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(100);
     j = frame.pop();
     block_label_0:
@@ -92,7 +96,7 @@ class Module {
   i64 expr(i64 i) {
     i64 j = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i64_const(100);
     j = frame.pop();
     block_label_0:
@@ -165,7 +169,7 @@ class Module {
   }
 
   i32 arg(i32 i) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(10);
@@ -206,7 +210,7 @@ class Module {
   }
 
   i32 corner() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(0);

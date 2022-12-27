@@ -5,15 +5,19 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class LocalGet0Module implements Module {
+  LocalGet0Module();
 
+  @override
   final Memory memory = Memory(0);
+
+  @override
+  late final List<Table> tables = [];
 
   i32 type_local_i32() {
     i32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(local0);
     return frame.pop();
   }
@@ -21,7 +25,7 @@ class Module {
   i64 type_local_i64() {
     i64 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(local0);
     return frame.pop();
   }
@@ -29,7 +33,7 @@ class Module {
   f32 type_local_f32() {
     f32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(local0);
     return frame.pop();
   }
@@ -37,31 +41,31 @@ class Module {
   f64 type_local_f64() {
     f64 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(local0);
     return frame.pop();
   }
 
   i32 type_param_i32(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     return frame.pop();
   }
 
   i64 type_param_i64(i64 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     return frame.pop();
   }
 
   f32 type_param_f32(f32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     return frame.pop();
   }
 
   f64 type_param_f64(f64 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     return frame.pop();
   }
@@ -72,7 +76,7 @@ class Module {
     i64 local2 = 0;
     f64 local3 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.i64_eqz();
     frame.drop();
@@ -108,7 +112,7 @@ class Module {
     i64 local2 = 0;
     f64 local3 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.f32_const(5.5);
     local0 = frame.pop();
     frame.i64_const(6);
@@ -143,7 +147,7 @@ class Module {
   }
 
   i32 as_block_value(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -152,7 +156,7 @@ class Module {
   }
 
   i32 as_loop_value(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
 
     loop_label_0:
     for (;;) {
@@ -163,7 +167,7 @@ class Module {
   }
 
   i32 as_br_value(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -173,7 +177,7 @@ class Module {
   }
 
   i32 as_br_if_value(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -184,7 +188,7 @@ class Module {
   }
 
   i32 as_br_if_value_cond(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -195,7 +199,7 @@ class Module {
   }
 
   i32 as_br_table_value(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       block_label_1:
@@ -227,14 +231,14 @@ class Module {
   }
 
   i32 as_return_value(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     return frame.pop();
     return frame.pop();
   }
 
   i32 as_if_then(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     if_label_0:
     if (frame.pop() != 0) {
@@ -246,7 +250,7 @@ class Module {
   }
 
   i32 as_if_else(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     if_label_0:
     if (frame.pop() != 0) {

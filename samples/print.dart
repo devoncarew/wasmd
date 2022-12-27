@@ -7,8 +7,8 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module({
+class PrintModule implements Module {
+  PrintModule({
     required this.consoleImports,
     required this.memory,
   }) {
@@ -19,12 +19,16 @@ class Module {
   final ConsoleImports consoleImports;
 
   /// min pages: 1
+  @override
   final Memory memory;
 
   final DataSegments dataSegments = DataSegments();
 
+  @override
+  late final List<Table> tables = [];
+
   void writeHi() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(16);
     {

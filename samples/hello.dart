@@ -5,15 +5,19 @@
 
 import 'package:wasmd/runtime.dart';
 
-class HelloWorldModule {
+class HelloWorldModule implements Module {
   HelloWorldModule();
 
+  @override
   final Memory memory = Memory(10);
 
   final Globals globals = Globals();
 
+  @override
+  late final List<Table> tables = [];
+
   i32 add(i32 lhs, i32 rhs) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(lhs);
     frame.push(rhs);
     frame.i32_add();
@@ -21,7 +25,7 @@ class HelloWorldModule {
   }
 
   i32 sub(i32 lhs, i32 rhs) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(lhs);
     frame.push(rhs);
     frame.i32_sub();
@@ -31,7 +35,7 @@ class HelloWorldModule {
   i32 complex(i32 lhs, i32 rhs) {
     i32 i = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(-1);
     i = frame.pop();
     frame.i32_const(-0x80000000);

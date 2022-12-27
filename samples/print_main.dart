@@ -6,7 +6,7 @@ void main(List<String> args) {
   print('before module init');
   var memory = Memory(1);
   // ignore: unused_local_variable
-  var module = Module(
+  var module = PrintModule(
     consoleImports: _ConsoleImports(memory),
     memory: memory,
   );

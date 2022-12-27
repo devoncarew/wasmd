@@ -13,7 +13,7 @@ import 'float_memory.5.dart' as float_memory_5;
 void main() {
   group('float_memory', () {
     // module float_memory.0.dart (line 5)
-    var m0 = float_memory_0.Module();
+    var m0 = float_memory_0.FloatMemory0Module();
 
     returns('i32_load_0', () => m0.i32_load(), i32('7FA00000'));
     returns('f32_load_0', () => m0.f32_load(), f32('7FA00000'));
@@ -31,7 +31,7 @@ void main() {
     returns('f32_load_4', () => m0.f32_load(), f32('7FA00000'));
 
     // module float_memory.1.dart (line 30)
-    var m1 = float_memory_1.Module();
+    var m1 = float_memory_1.FloatMemory1Module();
 
     returns('i64_load_0', () => m1.i64_load(), i64('7FF4000000000000'));
     returns('f64_load_0', () => m1.f64_load(), f64('7FF4000000000000'));
@@ -49,7 +49,7 @@ void main() {
     returns('f64_load_4', () => m1.f64_load(), f64('7FF4000000000000'));
 
     // module float_memory.2.dart (line 57)
-    var m2 = float_memory_2.Module();
+    var m2 = float_memory_2.FloatMemory2Module();
 
     returns('i32_load_5', () => m2.i32_load(), i32('7FA00000'));
     returns('f32_load_5', () => m2.f32_load(), f32('7FA00000'));
@@ -67,7 +67,7 @@ void main() {
     returns('f32_load_9', () => m2.f32_load(), f32('7FA00000'));
 
     // module float_memory.3.dart (line 82)
-    var m3 = float_memory_3.Module();
+    var m3 = float_memory_3.FloatMemory3Module();
 
     returns('i64_load_5', () => m3.i64_load(), i64('7FF4000000000000'));
     returns('f64_load_5', () => m3.f64_load(), f64('7FF4000000000000'));
@@ -85,7 +85,7 @@ void main() {
     returns('f64_load_9', () => m3.f64_load(), f64('7FF4000000000000'));
 
     // module float_memory.4.dart (line 109)
-    var m4 = float_memory_4.Module();
+    var m4 = float_memory_4.FloatMemory4Module();
 
     returns('i32_load_10', () => m4.i32_load(), i32('7FD00001'));
     returns('f32_load_10', () => m4.f32_load(), f32('7FD00001'));
@@ -103,7 +103,7 @@ void main() {
     returns('f32_load_14', () => m4.f32_load(), f32('7FD00001'));
 
     // module float_memory.5.dart (line 134)
-    var m5 = float_memory_5.Module();
+    var m5 = float_memory_5.FloatMemory5Module();
 
     returns('i64_load_10', () => m5.i64_load(), i64('7FFC000000000001'));
     returns('f64_load_10', () => m5.f64_load(), f64('7FFC000000000001'));

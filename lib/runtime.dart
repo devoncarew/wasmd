@@ -97,6 +97,8 @@ class Table {
   Table(this.minSize, [this.maxSize])
       : funcRefs = List.filled(minSize, null, growable: true);
 
+  int get size => funcRefs.length;
+
   Function? operator [](int index) {
     try {
       return funcRefs[index];
@@ -124,14 +126,32 @@ class Table {
       dest.funcRefs[destOffset + i] = funcRefs[sourceOffset + i];
     }
   }
+
+  bool grow(int growBy) {
+    var newSize = funcRefs.length + growBy;
+
+    if (maxSize != null && newSize > maxSize!) {
+      return false;
+    }
+
+    funcRefs.length = newSize;
+    return true;
+  }
+}
+
+abstract class Module {
+  Memory get memory;
+  List<Table> get tables;
 }
 
 class Frame {
-  final Memory memory;
+  final Module module;
 
   List<Object?> stack = [];
 
-  Frame(this.memory);
+  Frame(this.module);
+
+  Memory get memory => module.memory;
 
   void push<T>(T item) {
     stack.add(item);
@@ -1418,6 +1438,30 @@ class Frame {
     i32 offset = stack.removeLast() as i32;
     memory.fill(value, offset, count);
   }
+
+  void table_grow(u32 index) {
+    var table = module.tables[index];
+    var oldSize = table.size;
+    if (table.grow(pop())) {
+      push(oldSize);
+    } else {
+      push(-1);
+    }
+  }
+
+  void table_size(u32 index) {
+    stack.add(module.tables[index].size);
+  }
+}
+
+final Module stubModule = _StubModule();
+
+class _StubModule implements Module {
+  @override
+  final Memory memory = Memory(0);
+
+  @override
+  final List<Table> tables = [];
 }
 
 Uint8List decodeDataLiteral(String value) {

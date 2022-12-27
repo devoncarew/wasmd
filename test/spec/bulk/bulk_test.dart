@@ -25,13 +25,13 @@ const String _ue = 'uninitialized element';
 void main() {
   group('bulk', () {
     // module bulk.0.dart (line 2)
-    var m0 = bulk_0.Module();
+    var m0 = bulk_0.Bulk0Module();
 
     // module bulk.1.dart (line 6)
-    var m1 = bulk_1.Module();
+    var m1 = bulk_1.Bulk1Module();
 
     // module bulk.2.dart (line 13)
-    var m2 = bulk_2.Module();
+    var m2 = bulk_2.Bulk2Module();
 
     invoke('fill_0', () => m2.fill(0x1, 0xFF, 0x3));
     returns('load8_u_0', () => m2.load8_u(0), 0);
@@ -50,7 +50,7 @@ void main() {
     traps('fill_5', () => m2.fill(0x10001, 0, 0), _oobma);
 
     // module bulk.3.dart (line 57)
-    var m3 = bulk_3.Module();
+    var m3 = bulk_3.Bulk3Module();
 
     invoke('copy_0', () => m3.copy(0xA, 0, 0x4));
     returns('load8_u_9', () => m3.load8_u(0x9), 0);
@@ -82,7 +82,7 @@ void main() {
     traps('copy_8', () => m3.copy(0, 0x10001, 0), _oobma);
 
     // module bulk.4.dart (line 115)
-    var m4 = bulk_4.Module();
+    var m4 = bulk_4.Bulk4Module();
 
     invoke('init_0', () => m4.init(0, 0x1, 0x2));
     returns('load8_u_28', () => m4.load8_u(0), 0xBB);
@@ -98,7 +98,7 @@ void main() {
     traps('init_6', () => m4.init(0, 0x5, 0), _oobma);
 
     // module bulk.5.dart (line 154)
-    var m5 = bulk_5.Module();
+    var m5 = bulk_5.Bulk5Module();
 
     invoke('init_passive_0', () => m5.init_passive(0x1));
     invoke('drop_passive_0', () => m5.drop_passive());
@@ -112,13 +112,13 @@ void main() {
     invoke('init_active_2', () => m5.init_active(0));
 
     // module bulk.6.dart (line 181)
-    var m6 = bulk_6.Module();
+    var m6 = bulk_6.Bulk6Module();
 
     // module bulk.7.dart (line 196)
-    var m7 = bulk_7.Module();
+    var m7 = bulk_7.Bulk7Module();
 
     // module bulk.8.dart (line 199)
-    var m8 = bulk_8.Module();
+    var m8 = bulk_8.Bulk8Module();
 
     traps('init_7', () => m8.init(0x2, 0, 0x2), _oobta);
     traps('call_0', () => m8.call(0x2), _ue2);
@@ -133,7 +133,7 @@ void main() {
     traps('init_13', () => m8.init(0, 0x5, 0), _oobta);
 
     // module bulk.9.dart (line 244)
-    var m9 = bulk_9.Module();
+    var m9 = bulk_9.Bulk9Module();
 
     invoke('init_passive_4', () => m9.init_passive(0x1));
     invoke('drop_passive_2', () => m9.drop_passive());
@@ -147,13 +147,13 @@ void main() {
     invoke('init_active_5', () => m9.init_active(0));
 
     // module bulk.10.dart (line 274)
-    var m10 = bulk_10.Module();
+    var m10 = bulk_10.Bulk10Module();
 
     // module bulk.11.dart (line 297)
-    var m11 = bulk_11.Module();
+    var m11 = bulk_11.Bulk11Module();
 
     // module bulk.12.dart (line 300)
-    var m12 = bulk_12.Module();
+    var m12 = bulk_12.Bulk12Module();
 
     invoke('copy_9', () => m12.copy(0x3, 0, 0x3));
     returns('call_4', () => m12.call(0x3), 0);

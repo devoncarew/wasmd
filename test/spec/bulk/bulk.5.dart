@@ -7,22 +7,26 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
+class Bulk5Module implements Module {
+  Bulk5Module() {
     dataSegments.init(memory);
   }
 
+  @override
   final Memory memory = Memory(1);
 
   final DataSegments dataSegments = DataSegments();
 
+  @override
+  late final List<Table> tables = [];
+
   void drop_passive() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* data.drop index 0 */
   }
 
   void init_passive(i32 len) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(0);
     frame.push(len);
@@ -30,12 +34,12 @@ class Module {
   }
 
   void drop_active() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* data.drop index 1 */
   }
 
   void init_active(i32 len) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(0);
     frame.push(len);

@@ -7,11 +7,12 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
+class Memory9Module implements Module {
+  Memory9Module() {
     dataSegments.init(memory);
   }
 
+  @override
   final Memory memory = Memory(
     0,
     0,
@@ -19,8 +20,11 @@ class Module {
 
   final DataSegments dataSegments = DataSegments();
 
+  @override
+  late final List<Table> tables = [];
+
   i32 memsize() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.memory_size(0);
     return frame.pop();
   }

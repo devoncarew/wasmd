@@ -13,7 +13,7 @@ const String _oobma = 'out of bounds memory access';
 void main() {
   group('address', () {
     // module address.0.dart (line 3)
-    var m0 = address_0.Module();
+    var m0 = address_0.Address0Module();
 
     returns('8u_good1_0', () => m0.$8u_good1(0), 0x61);
     returns('8u_good2_0', () => m0.$8u_good2(0), 0x61);
@@ -108,7 +108,7 @@ void main() {
     traps('32_bad_1', () => m0.$32_bad(0x1), _oobma);
 
     // module address.2.dart (line 223)
-    var m1 = address_2.Module();
+    var m1 = address_2.Address2Module();
 
     returns('8u_good1_3', () => m1.$8u_good1(0), 0x61);
     returns('8u_good2_3', () => m1.$8u_good2(0), 0x61);
@@ -238,7 +238,7 @@ void main() {
     traps('64_bad_1', () => m1.$64_bad(0x1), _oobma);
 
     // module address.3.dart (line 514)
-    var m2 = address_3.Module();
+    var m2 = address_3.Address3Module();
 
     returns('32_good1_3', () => m2.$32_good1(0), f32('0'));
     returns('32_good2_3', () => m2.$32_good2(0), f32('0'));
@@ -261,7 +261,7 @@ void main() {
     traps('32_bad_3', () => m2.$32_bad(0x1), _oobma);
 
     // module address.4.dart (line 564)
-    var m3 = address_4.Module();
+    var m3 = address_4.Address4Module();
 
     returns('64_good1_3', () => m3.$64_good1(0), f64('0'));
     returns('64_good2_3', () => m3.$64_good2(0), f64('0'));

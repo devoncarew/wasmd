@@ -5,13 +5,17 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class MemoryGrow3Module implements Module {
+  MemoryGrow3Module();
 
+  @override
   final Memory memory = Memory(1);
 
+  @override
+  late final List<Table> tables = [];
+
   i32 grow(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.memory_grow(0);
     return frame.pop();
@@ -20,7 +24,7 @@ class Module {
   i32 check_memory_zero(i32 arg0, i32 arg1) {
     i32 local0 = 0;
 
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(1);
     local0 = frame.pop();
     block_label_0:

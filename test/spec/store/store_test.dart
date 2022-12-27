@@ -8,7 +8,7 @@ import 'store.0.dart' as store_0;
 void main() {
   group('store', () {
     // module store.0.dart (line 3)
-    var m0 = store_0.Module();
+    var m0 = store_0.Store0Module();
 
     returns('as_block_value_0', () => m0.as_block_value(), null);
     returns('as_loop_value_0', () => m0.as_loop_value(), null);

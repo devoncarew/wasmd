@@ -5,12 +5,12 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module() {
-    tables = [table0];
+class Nop0Module implements Module {
+  Nop0Module() {
     segments.init();
   }
 
+  @override
   final Memory memory = Memory(1);
 
   final Globals globals = Globals();
@@ -20,18 +20,19 @@ class Module {
     1,
   );
 
-  late final List<Table> tables;
+  @override
+  late final List<Table> tables = [table0];
 
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
   void dummy() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
   }
 
   i32 _func1(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg1);
     frame.push(arg2);
@@ -41,14 +42,14 @@ class Module {
   }
 
   i32 as_func_first() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.i32_const(1);
     return frame.pop();
   }
 
   i32 as_func_mid() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     dummy();
     /* nop */
     frame.i32_const(2);
@@ -56,7 +57,7 @@ class Module {
   }
 
   i32 as_func_last() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     dummy();
     frame.i32_const(3);
     /* nop */
@@ -64,7 +65,7 @@ class Module {
   }
 
   i32 as_func_everywhere() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     dummy();
@@ -76,21 +77,21 @@ class Module {
   }
 
   void as_drop_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.drop();
   }
 
   void as_drop_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.drop();
   }
 
   void as_drop_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.push(arg0);
@@ -100,7 +101,7 @@ class Module {
   }
 
   i32 as_select_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.push(arg0);
@@ -110,7 +111,7 @@ class Module {
   }
 
   i32 as_select_mid1(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.push(arg0);
@@ -120,7 +121,7 @@ class Module {
   }
 
   i32 as_select_mid2(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg0);
     /* nop */
@@ -130,7 +131,7 @@ class Module {
   }
 
   i32 as_select_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg0);
     frame.push(arg0);
@@ -140,7 +141,7 @@ class Module {
   }
 
   i32 as_select_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     /* nop */
@@ -156,7 +157,7 @@ class Module {
   }
 
   i32 as_block_first() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -166,7 +167,7 @@ class Module {
   }
 
   i32 as_block_mid() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       dummy();
@@ -177,7 +178,7 @@ class Module {
   }
 
   i32 as_block_last() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -189,7 +190,7 @@ class Module {
   }
 
   i32 as_block_everywhere() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -204,7 +205,7 @@ class Module {
   }
 
   i32 as_loop_first() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
 
     loop_label_0:
     for (;;) {
@@ -216,7 +217,7 @@ class Module {
   }
 
   i32 as_loop_mid() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
 
     loop_label_0:
     for (;;) {
@@ -229,7 +230,7 @@ class Module {
   }
 
   i32 as_loop_last() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
 
     loop_label_0:
     for (;;) {
@@ -242,7 +243,7 @@ class Module {
   }
 
   i32 as_loop_everywhere() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
 
     loop_label_0:
     for (;;) {
@@ -259,7 +260,7 @@ class Module {
   }
 
   void as_if_condition(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     if_label_0:
@@ -269,7 +270,7 @@ class Module {
   }
 
   void as_if_then(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     if_label_0:
     if (frame.pop() != 0) {
@@ -280,7 +281,7 @@ class Module {
   }
 
   void as_if_else(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     if_label_0:
     if (frame.pop() != 0) {
@@ -291,7 +292,7 @@ class Module {
   }
 
   i32 as_br_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -302,7 +303,7 @@ class Module {
   }
 
   i32 as_br_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -313,7 +314,7 @@ class Module {
   }
 
   i32 as_br_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -327,7 +328,7 @@ class Module {
   }
 
   i32 as_br_if_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -339,7 +340,7 @@ class Module {
   }
 
   i32 as_br_if_mid(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -351,7 +352,7 @@ class Module {
   }
 
   i32 as_br_if_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -363,7 +364,7 @@ class Module {
   }
 
   i32 as_br_if_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -380,7 +381,7 @@ class Module {
   }
 
   i32 as_br_table_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -398,7 +399,7 @@ class Module {
   }
 
   i32 as_br_table_mid(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -416,7 +417,7 @@ class Module {
   }
 
   i32 as_br_table_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.push(arg0);
@@ -434,7 +435,7 @@ class Module {
   }
 
   i32 as_br_table_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -457,7 +458,7 @@ class Module {
   }
 
   i32 as_return_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     return frame.pop();
@@ -465,7 +466,7 @@ class Module {
   }
 
   i32 as_return_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     return frame.pop();
@@ -473,7 +474,7 @@ class Module {
   }
 
   i32 as_return_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.push(arg0);
@@ -484,7 +485,7 @@ class Module {
   }
 
   i32 as_call_first(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.push(arg1);
@@ -499,7 +500,7 @@ class Module {
   }
 
   i32 as_call_mid1(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.push(arg1);
@@ -514,7 +515,7 @@ class Module {
   }
 
   i32 as_call_mid2(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg1);
     /* nop */
@@ -529,7 +530,7 @@ class Module {
   }
 
   i32 as_call_last(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg1);
     frame.push(arg2);
@@ -544,7 +545,7 @@ class Module {
   }
 
   i32 as_call_everywhere(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.push(arg0);
@@ -566,7 +567,7 @@ class Module {
   }
 
   i32 as_unary_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.i32_ctz();
@@ -574,7 +575,7 @@ class Module {
   }
 
   i32 as_unary_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.i32_ctz();
@@ -582,7 +583,7 @@ class Module {
   }
 
   i32 as_unary_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.push(arg0);
@@ -593,7 +594,7 @@ class Module {
   }
 
   i32 as_binary_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.push(arg0);
@@ -602,7 +603,7 @@ class Module {
   }
 
   i32 as_binary_mid(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.push(arg0);
@@ -611,7 +612,7 @@ class Module {
   }
 
   i32 as_binary_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg0);
     /* nop */
@@ -620,7 +621,7 @@ class Module {
   }
 
   i32 as_binary_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     /* nop */
@@ -633,7 +634,7 @@ class Module {
   }
 
   i32 as_test_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.i32_eqz();
@@ -641,7 +642,7 @@ class Module {
   }
 
   i32 as_test_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.i32_eqz();
@@ -649,7 +650,7 @@ class Module {
   }
 
   i32 as_test_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.push(arg0);
@@ -660,7 +661,7 @@ class Module {
   }
 
   i32 as_compare_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.push(arg0);
@@ -669,7 +670,7 @@ class Module {
   }
 
   i32 as_compare_mid(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.push(arg0);
@@ -678,7 +679,7 @@ class Module {
   }
 
   i32 as_compare_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg0);
     /* nop */
@@ -687,7 +688,7 @@ class Module {
   }
 
   i32 as_compare_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     /* nop */
@@ -700,7 +701,7 @@ class Module {
   }
 
   i32 as_memory_grow_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.memory_grow(0);
@@ -708,7 +709,7 @@ class Module {
   }
 
   i32 as_memory_grow_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.memory_grow(0);
@@ -716,7 +717,7 @@ class Module {
   }
 
   i32 as_memory_grow_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.push(arg0);
@@ -727,13 +728,13 @@ class Module {
   }
 
   i32 func(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     return frame.pop();
   }
 
   i32 as_call_indirect_first() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -751,7 +752,7 @@ class Module {
   }
 
   i32 as_call_indirect_mid1() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(1);
@@ -769,7 +770,7 @@ class Module {
   }
 
   i32 as_call_indirect_mid2() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(1);
@@ -787,7 +788,7 @@ class Module {
   }
 
   i32 as_call_indirect_last() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       frame.i32_const(1);
@@ -805,7 +806,7 @@ class Module {
   }
 
   i32 as_call_indirect_everywhere() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     block_label_0:
     {
       /* nop */
@@ -830,7 +831,7 @@ class Module {
   }
 
   i32 as_local_set_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.i32_const(2);
     arg0 = frame.pop();
@@ -839,7 +840,7 @@ class Module {
   }
 
   i32 as_local_set_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(2);
     /* nop */
     arg0 = frame.pop();
@@ -848,7 +849,7 @@ class Module {
   }
 
   i32 as_local_set_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.i32_const(2);
@@ -860,7 +861,7 @@ class Module {
   }
 
   i32 as_local_tee_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.i32_const(2);
     arg0 = frame.peek();
@@ -868,7 +869,7 @@ class Module {
   }
 
   i32 as_local_tee_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(2);
     /* nop */
     arg0 = frame.peek();
@@ -876,7 +877,7 @@ class Module {
   }
 
   i32 as_local_tee_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.i32_const(2);
@@ -887,7 +888,7 @@ class Module {
   }
 
   i32 as_global_set_first() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.i32_const(2);
     globals.a = frame.pop();
@@ -896,7 +897,7 @@ class Module {
   }
 
   i32 as_global_set_last() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.i32_const(2);
     /* nop */
     globals.a = frame.pop();
@@ -905,7 +906,7 @@ class Module {
   }
 
   i32 as_global_set_everywhere() {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.i32_const(2);
@@ -917,7 +918,7 @@ class Module {
   }
 
   i32 as_load_first(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.i32_load(2, 0);
@@ -925,7 +926,7 @@ class Module {
   }
 
   i32 as_load_last(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.i32_load(2, 0);
@@ -933,7 +934,7 @@ class Module {
   }
 
   i32 as_load_everywhere(i32 arg0) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.push(arg0);
@@ -944,7 +945,7 @@ class Module {
   }
 
   void as_store_first(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     frame.push(arg0);
     frame.push(arg1);
@@ -952,7 +953,7 @@ class Module {
   }
 
   void as_store_mid(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     /* nop */
     frame.push(arg1);
@@ -960,7 +961,7 @@ class Module {
   }
 
   void as_store_last(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg1);
     /* nop */
@@ -968,7 +969,7 @@ class Module {
   }
 
   void as_store_everywhere(i32 arg0, i32 arg1) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     /* nop */
     /* nop */
     frame.push(arg0);
@@ -1084,7 +1085,7 @@ class Globals {
 class ElementSegments {
   ElementSegments(this.module);
 
-  final Module module;
+  final Nop0Module module;
 
   void init() {
     copyTo(module.table0, 0, 0, 1, [61]); /* segment0 */

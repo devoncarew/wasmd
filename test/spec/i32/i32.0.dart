@@ -5,13 +5,17 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class I320Module implements Module {
+  I320Module();
 
+  @override
   final Memory memory = Memory(0);
 
+  @override
+  late final List<Table> tables = [];
+
   i32 add(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_add();
@@ -19,7 +23,7 @@ class Module {
   }
 
   i32 sub(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_sub();
@@ -27,7 +31,7 @@ class Module {
   }
 
   i32 mul(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_mul();
@@ -35,7 +39,7 @@ class Module {
   }
 
   i32 div_s(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_div_s();
@@ -43,7 +47,7 @@ class Module {
   }
 
   i32 div_u(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_div_u();
@@ -51,7 +55,7 @@ class Module {
   }
 
   i32 rem_s(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_rem_s();
@@ -59,7 +63,7 @@ class Module {
   }
 
   i32 rem_u(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_rem_u();
@@ -67,7 +71,7 @@ class Module {
   }
 
   i32 and(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_and();
@@ -75,7 +79,7 @@ class Module {
   }
 
   i32 or(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_or();
@@ -83,7 +87,7 @@ class Module {
   }
 
   i32 xor(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_xor();
@@ -91,7 +95,7 @@ class Module {
   }
 
   i32 shl(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_shl();
@@ -99,7 +103,7 @@ class Module {
   }
 
   i32 shr_s(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_shr_s();
@@ -107,7 +111,7 @@ class Module {
   }
 
   i32 shr_u(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_shr_u();
@@ -115,7 +119,7 @@ class Module {
   }
 
   i32 rotl(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_rotl();
@@ -123,7 +127,7 @@ class Module {
   }
 
   i32 rotr(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_rotr();
@@ -131,49 +135,49 @@ class Module {
   }
 
   i32 clz(i32 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i32_clz();
     return frame.pop();
   }
 
   i32 ctz(i32 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i32_ctz();
     return frame.pop();
   }
 
   i32 popcnt(i32 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i32_popcnt();
     return frame.pop();
   }
 
   i32 extend8_s(i32 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i32_extend8_s();
     return frame.pop();
   }
 
   i32 extend16_s(i32 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i32_extend16_s();
     return frame.pop();
   }
 
   i32 eqz(i32 x) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.i32_eqz();
     return frame.pop();
   }
 
   i32 eq(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_eq();
@@ -181,7 +185,7 @@ class Module {
   }
 
   i32 ne(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_ne();
@@ -189,7 +193,7 @@ class Module {
   }
 
   i32 lt_s(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_lt_s();
@@ -197,7 +201,7 @@ class Module {
   }
 
   i32 lt_u(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_lt_u();
@@ -205,7 +209,7 @@ class Module {
   }
 
   i32 le_s(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_le_s();
@@ -213,7 +217,7 @@ class Module {
   }
 
   i32 le_u(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_le_u();
@@ -221,7 +225,7 @@ class Module {
   }
 
   i32 gt_s(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_gt_s();
@@ -229,7 +233,7 @@ class Module {
   }
 
   i32 gt_u(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_gt_u();
@@ -237,7 +241,7 @@ class Module {
   }
 
   i32 ge_s(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_ge_s();
@@ -245,7 +249,7 @@ class Module {
   }
 
   i32 ge_u(i32 x, i32 y) {
-    final frame = Frame(memory);
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.i32_ge_u();

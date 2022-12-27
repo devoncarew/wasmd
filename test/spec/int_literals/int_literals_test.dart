@@ -8,7 +8,7 @@ import 'int_literals.0.dart' as int_literals_0;
 void main() {
   group('int_literals', () {
     // module int_literals.0.dart (line 1)
-    var m0 = int_literals_0.Module();
+    var m0 = int_literals_0.IntLiterals0Module();
 
     returns('i32_test_0', () => m0.i32_test(), i32('BADD00D'));
     returns('i32_umax_0', () => m0.i32_umax(), i32('FFFFFFFF'));

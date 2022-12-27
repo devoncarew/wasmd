@@ -5,11 +5,15 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Module {
-  Module();
+class Memory2Module implements Module {
+  Memory2Module();
 
+  @override
   final Memory memory = Memory(
     0,
     0,
   );
+
+  @override
+  late final List<Table> tables = [];
 }

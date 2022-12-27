@@ -8,7 +8,7 @@ import 'switch.0.dart' as switch_0;
 void main() {
   group('switch', () {
     // module switch.0.dart (line 1)
-    var m0 = switch_0.Module();
+    var m0 = switch_0.Switch0Module();
 
     returns('stmt_0', () => m0.stmt(0), 0);
     returns('stmt_1', () => m0.stmt(0x1), i32('FFFFFFFF'));
