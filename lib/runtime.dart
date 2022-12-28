@@ -207,6 +207,13 @@ class Frame {
     stack.add(c != 0 ? val1 : val2);
   }
 
+  void select_t(u32 valType) {
+    i32 c = stack.removeLast() as i32;
+    var val2 = stack.removeLast();
+    var val1 = stack.removeLast();
+    stack.add(c != 0 ? val1 : val2);
+  }
+
   void i32_load(u32 align, u32 offset) {
     i32 index = stack.removeLast() as i32;
     if (index < 0) throw Trap('out of bounds memory access');
@@ -1116,15 +1123,39 @@ class Frame {
     stack.add(result);
   }
 
+  void f32_abs() {
+    f32 arg = stack.removeLast() as f32;
+    var result = arg.abs();
+    stack.add(result);
+  }
+
   void f32_neg() {
     f32 arg = stack.removeLast() as f32;
     var result = -arg;
     stack.add(result);
   }
 
+  void f32_ceil() {
+    f32 arg = stack.removeLast() as f32;
+    var result = arg.ceilToDouble();
+    stack.add(result);
+  }
+
   void f32_floor() {
     f32 arg = stack.removeLast() as f32;
     var result = arg.floorToDouble();
+    stack.add(result);
+  }
+
+  void f32_trunc() {
+    f32 arg = stack.removeLast() as f32;
+    var result = arg.truncateToDouble();
+    stack.add(result);
+  }
+
+  void f32_nearest() {
+    f32 arg = stack.removeLast() as f32;
+    var result = arg.roundToDouble();
     stack.add(result);
   }
 

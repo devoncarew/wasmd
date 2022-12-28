@@ -695,7 +695,7 @@ class Instruction {
       // reserved, 0x12 - 0x19
       Instruction('drop', 0x1A),
       Instruction('select', 0x1B),
-      //
+      Instruction('select_t', 0x1C, immediates: [ValueType.u32]),
       // reserved, 0x1D - 0x1F
       Instruction_LocalGet(), // local.get, 0x20
       Instruction_LocalSet(), // local.set, 0x21
@@ -804,11 +804,12 @@ class Instruction {
       Instruction('i64.shr_u', 0x88),
       Instruction('i64.rotl', 0x89),
       Instruction('i64.rotr', 0x8A),
-      //
+      Instruction('f32.abs', 0x8B),
       Instruction('f32.neg', 0x8C),
-      //
+      Instruction('f32.ceil', 0x8D),
       Instruction('f32.floor', 0x8E),
-      //
+      Instruction('f32.trunc', 0x8F),
+      Instruction('f32.nearest', 0x90),
       Instruction('f32.sqrt', 0x91),
       Instruction('f32.add', 0x92),
       Instruction('f32.sub', 0x93),
@@ -871,21 +872,24 @@ class Instruction {
     ];
   }
 
-  // todo: look for table, memory instructions that can be converted into
+  // TODO: look for table, memory instructions that can be converted into
   // runtime methods (from generated code)
 
   static List<Instruction> _initOverflow() {
     // 0xFC 0xXX
+
     return [
       Instruction('i32.trunc_sat_f32_u', 0x01),
+      // TODO: 0x02
       Instruction('i32.trunc_sat_f64_u', 0x03),
+      // TODO: 0x04
+      // TODO: 0x05
+      // TODO: 0x06
+      // TODO: 0x07
       // Instruction_MemoryInit(), // memory.init, 0x08
       Instruction_DataDrop(), // data.drop, 0x09
-      Instruction(
-        'memory.copy',
-        0x0A,
-        immediates: [ValueType.u32, ValueType.u32],
-      ),
+      Instruction('memory.copy', 0x0A,
+          immediates: [ValueType.u32, ValueType.u32]),
       Instruction('memory.fill', 0x0B, immediates: [ValueType.u32]),
       Instruction_TableInit(), // table.init, 0x0C
       Instruction_ElemDrop(), // elem.drop, 0x0D
