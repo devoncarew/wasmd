@@ -13,6 +13,8 @@ void returns(
   Function() testClosure, [
   Object? expected,
 ]) {
+  const floatEpsilon = 1 / 1000000;
+
   test(testName, () {
     final actual = testClosure();
     if (expected != null) {
@@ -20,6 +22,11 @@ void returns(
         expect(actual, isNaN);
       } else if (expected is int && expected.isNaN) {
         expect(actual, isNaN);
+      } else if (expected is double && expected.isFinite) {
+        // TODO: we only want to do this check for floats, not doubles (we did
+        // the intermediate calculations with more precision than an actual
+        // float, so can have some variance nine or ten places out).
+        expect(actual, closeTo(expected, (expected * floatEpsilon).abs()));
       } else {
         expect(actual, expected);
       }
@@ -64,14 +71,6 @@ int i32(String value) {
 int i64(String value) {
   var n = BigInt.parse(value, radix: 16);
   return n.toSigned(64).toInt();
-
-  // if (n.isValidInt) {
-  //   return n.toInt();
-  // } else {
-  //   int higher = (n >> 8).toInt();
-  //   int lower = (n & BigInt.from(0xFF)).toInt();
-  //   return (higher << 8 | lower);
-  // }
 }
 
 final ByteData _reinterpretData = ByteData(8);
