@@ -1547,9 +1547,7 @@ class ElementSegments {
 
   Class createElementSegmentsClassDef(Module module) {
     var fields = <Field>[];
-    var methods = <Method>[];
-
-    var statements = <Code>[];
+    var initStatements = <Code>[];
 
     // final Module module;
     fields.add(Field(
@@ -1587,6 +1585,16 @@ class ElementSegments {
         ))),
     );
 
+    var functionTableGetter = Method(
+      (b) => b
+        ..name = 'functionTable'
+        ..returns = Reference('List<Function>')
+        ..annotations.add(Reference('override'))
+        ..type = MethodType.getter
+        ..lambda = true
+        ..body = Code('module.functionTable'),
+    );
+
     for (int i = 0; i < segments.length; i++) {
       var segment = segments[i];
       if (segment.segmentKind == SegmentKind.declaritive) continue;
@@ -1606,68 +1614,30 @@ class ElementSegments {
 
       if (segment.segmentKind == SegmentKind.active) {
         var destOffsetText = closureFrom(module, segment.offsetInstrs!);
-        statements.add(Code(
+        initStatements.add(Code(
             'copyTo(module.table${segment.tableIndex}, 0, $destOffsetText, '
             '$itemCount, $indexesText); /* segment$i */'));
       } else {
-        statements.add(Code('segment$i = $indexesText;'));
+        initStatements.add(Code('segment$i = $indexesText;'));
       }
     }
 
     var initMethod = Method(
       (b) => b
         ..name = 'init'
-        ..returns = Reference('void')
-        ..body = Block.of(statements),
+        ..returns = Reference('\nvoid')
+        ..body = Block.of(initStatements),
     );
-
-    // void copyTo(Table table, int offset, int count, List<int> indexes) {
-    var copyToMethod = Method(
-      (b) => b
-        ..name = 'copyTo'
-        ..returns = Reference('void')
-        ..requiredParameters.addAll([
-          Parameter((b) => b
-            ..name = 'table'
-            ..type = Reference('Table')),
-          Parameter((b) => b
-            ..name = 'src'
-            ..type = Reference('int')),
-          Parameter((b) => b
-            ..name = 'dest'
-            ..type = Reference('int')),
-          Parameter((b) => b
-            ..name = 'count'
-            ..type = Reference('int')),
-          Parameter((b) => b
-            ..name = 'indexes'
-            ..type = Reference('List<int>')),
-        ])
-        ..body = Block.of([
-          Code('try {'),
-          Code('  indexes = indexes.sublist(src, src + count);'),
-          Code('} on RangeError {'),
-          Code('   throw Trap(\'out of bounds table access\');'),
-          Code('}'),
-          Code('var functions = indexes.map((i) '
-              '=> module.functionTable[i]).toList();'),
-          Code('table.copyFrom(functions, dest, count);'),
-        ]),
-    );
-
-// } on RangeError {
-    //   throw Trap('out of bounds table access');
-    // }
 
     return Class(
       (b) => b
         ..name = 'ElementSegments'
+        ..extend = Reference('AbstractElementSegments')
         ..fields.addAll(fields)
         ..constructors.add(constructor)
         ..methods.addAll([
+          functionTableGetter,
           initMethod,
-          copyToMethod,
-          ...methods,
         ]),
     );
   }

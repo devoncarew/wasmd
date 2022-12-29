@@ -175,6 +175,27 @@ abstract class Module {
   List<Table> get tables;
 }
 
+abstract class AbstractElementSegments {
+  List<Function> get functionTable;
+
+  void copyTo(
+    Table table,
+    int sourceOffset,
+    int destOffset,
+    int count,
+    List<int> functionIndexes,
+  ) {
+    try {
+      functionIndexes =
+          functionIndexes.sublist(sourceOffset, sourceOffset + count);
+    } on RangeError {
+      throw Trap('out of bounds table access');
+    }
+    var functions = functionIndexes.map((i) => functionTable[i]).toList();
+    table.copyFrom(functions, destOffset, count);
+  }
+}
+
 class Frame {
   final Module module;
 

@@ -84,22 +84,15 @@ typedef FunctionType2 = ExternRef? Function(i32);
 typedef FunctionType3 = FuncRef? Function(i32);
 typedef FunctionType4 = i32 Function(i32);
 
-class ElementSegments {
+class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final TableGet0Module module;
 
+  @override
+  List<Function> get functionTable => module.functionTable;
+
   void init() {
     copyTo(module.table1, 0, 1, 1, [0]); /* segment0 */
-  }
-
-  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    try {
-      indexes = indexes.sublist(src, src + count);
-    } on RangeError {
-      throw Trap('out of bounds table access');
-    }
-    var functions = indexes.map((i) => module.functionTable[i]).toList();
-    table.copyFrom(functions, dest, count);
   }
 }

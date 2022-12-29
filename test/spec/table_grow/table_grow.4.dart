@@ -74,19 +74,13 @@ class TableGrow4Module implements Module {
 typedef FunctionType0 = i32 Function(i32);
 typedef FunctionType1 = FuncRef? Function(i32, i32);
 
-class ElementSegments {
+class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final TableGrow4Module module;
 
+  @override
+  List<Function> get functionTable => module.functionTable;
+
   void init() {}
-  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    try {
-      indexes = indexes.sublist(src, src + count);
-    } on RangeError {
-      throw Trap('out of bounds table access');
-    }
-    var functions = indexes.map((i) => module.functionTable[i]).toList();
-    table.copyFrom(functions, dest, count);
-  }
 }

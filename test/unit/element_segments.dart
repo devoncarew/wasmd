@@ -45,7 +45,8 @@ class ElementSegmentsModule implements Module {
     final frame = Frame(this);
     frame.push(i);
     {
-      var func = table0[frame.pop()]! as FunctionType0;
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
       frame.push(func());
     }
     return frame.pop();
@@ -93,21 +94,18 @@ typedef FunctionType2 = FuncRef? Function(i32);
 typedef FunctionType3 = void Function(i32, FuncRef?);
 typedef FunctionType4 = void Function();
 
-class ElementSegments {
+class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final ElementSegmentsModule module;
 
   late final List<int> segment1;
 
+  @override
+  List<Function> get functionTable => module.functionTable;
+
   void init() {
     copyTo(module.table0, 0, 0, 2, [0, 1]); /* segment0 */
     segment1 = [2, 2, 2];
-  }
-
-  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    indexes = indexes.sublist(src, src + count);
-    var functions = indexes.map((i) => module.functionTable[i]).toList();
-    table.copyFrom(functions, dest, count);
   }
 }

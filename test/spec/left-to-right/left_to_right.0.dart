@@ -1569,22 +1569,15 @@ typedef FunctionType10 = void Function(i64, i64);
 typedef FunctionType11 = void Function(f32, f32);
 typedef FunctionType12 = void Function(f64, f64);
 
-class ElementSegments {
+class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final LeftToRight0Module module;
 
+  @override
+  List<Function> get functionTable => module.functionTable;
+
   void init() {
     copyTo(module.table0, 0, 0, 8, [0, 1, 2, 3, 4, 5, 6, 7]); /* segment0 */
-  }
-
-  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    try {
-      indexes = indexes.sublist(src, src + count);
-    } on RangeError {
-      throw Trap('out of bounds table access');
-    }
-    var functions = indexes.map((i) => module.functionTable[i]).toList();
-    table.copyFrom(functions, dest, count);
   }
 }

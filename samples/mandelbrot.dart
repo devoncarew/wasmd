@@ -348,22 +348,15 @@ abstract class EnvImports {
   f64 Math_log2(f64 arg0);
 }
 
-class ElementSegments {
+class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final MandelbrotModule module;
 
+  @override
+  List<Function> get functionTable => module.functionTable;
+
   void init() {
     copyTo(module.table0, 0, 1, 0, []); /* segment0 */
-  }
-
-  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    try {
-      indexes = indexes.sublist(src, src + count);
-    } on RangeError {
-      throw Trap('out of bounds table access');
-    }
-    var functions = indexes.map((i) => module.functionTable[i]).toList();
-    table.copyFrom(functions, dest, count);
   }
 }

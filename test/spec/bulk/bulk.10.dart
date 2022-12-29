@@ -32,7 +32,7 @@ class Bulk10Module implements Module {
 
 typedef FunctionType0 = void Function();
 
-class ElementSegments {
+class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final Bulk10Module module;
@@ -167,6 +167,9 @@ class ElementSegments {
 
   late final List<int> segment64;
 
+  @override
+  List<Function> get functionTable => module.functionTable;
+
   void init() {
     segment0 = [];
     segment1 = [];
@@ -233,15 +236,5 @@ class ElementSegments {
     segment62 = [];
     segment63 = [];
     segment64 = [];
-  }
-
-  void copyTo(Table table, int src, int dest, int count, List<int> indexes) {
-    try {
-      indexes = indexes.sublist(src, src + count);
-    } on RangeError {
-      throw Trap('out of bounds table access');
-    }
-    var functions = indexes.map((i) => module.functionTable[i]).toList();
-    table.copyFrom(functions, dest, count);
   }
 }
