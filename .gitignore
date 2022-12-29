@@ -6,6 +6,8 @@ pubspec.lock
 # Conventional directory for build output.
 build/
 
+samples/*.dis
+
 # Large samples.
 samples/large/
 

@@ -4,4 +4,9 @@
 
 algorithm from https://www.assemblyscript.org/examples/mandelbrot.html
 
-12/19/2022: 4,680.6 sec
+12/19/2022: 
+mandelbrot(RunTime): 4,680.6 sec
+
+12/29/2022:
+gcd(RunTime): 630.7285 us.
+mandelbrot(RunTime): 4672985.5 us.
