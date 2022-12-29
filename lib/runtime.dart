@@ -1292,26 +1292,58 @@ class Frame {
 
   void i32_trunc_f32_s() {
     f32 arg = stack.removeLast() as f32;
-    i32 result = arg.truncate();
-    stack.add(result);
+    try {
+      i32 result = arg.truncate();
+      stack.add(result);
+    } on UnsupportedError {
+      if (arg.isInfinite) {
+        throw Trap('integer overflow');
+      } else {
+        throw Trap('invalid conversion to integer');
+      }
+    }
   }
 
   void i32_trunc_f32_u() {
     f32 arg = stack.removeLast() as f32;
-    u32 result = arg.truncate();
-    stack.add(result);
+    try {
+      u32 result = arg.truncate();
+      stack.add(result);
+    } on UnsupportedError {
+      if (arg.isInfinite) {
+        throw Trap('integer overflow');
+      } else {
+        throw Trap('invalid conversion to integer');
+      }
+    }
   }
 
   void i32_trunc_f64_s() {
     f64 arg = stack.removeLast() as f64;
-    i32 result = arg.truncate();
-    stack.add(result);
+    try {
+      i32 result = arg.truncate();
+      stack.add(result);
+    } on UnsupportedError {
+      if (arg.isInfinite) {
+        throw Trap('integer overflow');
+      } else {
+        throw Trap('invalid conversion to integer');
+      }
+    }
   }
 
   void i32_trunc_f64_u() {
     f64 arg = stack.removeLast() as f64;
-    u32 result = arg.truncate();
-    stack.add(result);
+    try {
+      u32 result = arg.truncate();
+      stack.add(result);
+    } on UnsupportedError {
+      if (arg.isInfinite) {
+        throw Trap('integer overflow');
+      } else {
+        throw Trap('invalid conversion to integer');
+      }
+    }
   }
 
   void i64_extend_i32_s() {
@@ -1328,26 +1360,58 @@ class Frame {
 
   void i64_trunc_f32_s() {
     f32 arg = stack.removeLast() as f32;
-    i64 result = arg.truncate();
-    stack.add(result);
+    try {
+      i64 result = arg.truncate();
+      stack.add(result);
+    } on UnsupportedError {
+      if (arg.isInfinite) {
+        throw Trap('integer overflow');
+      } else {
+        throw Trap('invalid conversion to integer');
+      }
+    }
   }
 
   void i64_trunc_f32_u() {
     f32 arg = stack.removeLast() as f32;
-    u64 result = arg.truncate();
-    stack.add(result);
+    try {
+      u64 result = arg.truncate();
+      stack.add(result);
+    } on UnsupportedError {
+      if (arg.isInfinite) {
+        throw Trap('integer overflow');
+      } else {
+        throw Trap('invalid conversion to integer');
+      }
+    }
   }
 
   void i64_trunc_f64_s() {
     f64 arg = stack.removeLast() as f64;
-    i64 result = arg.truncate();
-    stack.add(result);
+    try {
+      i64 result = arg.truncate();
+      stack.add(result);
+    } on UnsupportedError {
+      if (arg.isInfinite) {
+        throw Trap('integer overflow');
+      } else {
+        throw Trap('invalid conversion to integer');
+      }
+    }
   }
 
   void i64_trunc_f64_u() {
     f64 arg = stack.removeLast() as f64;
-    u64 result = arg.truncate();
-    stack.add(result);
+    try {
+      u64 result = arg.truncate();
+      stack.add(result);
+    } on UnsupportedError {
+      if (arg.isInfinite) {
+        throw Trap('integer overflow');
+      } else {
+        throw Trap('invalid conversion to integer');
+      }
+    }
   }
 
   void f32_convert_i32_s() {
@@ -1506,10 +1570,26 @@ class Frame {
     stack.add(ref == null ? 1 : 0);
   }
 
+  void i32_trunc_sat_f32_s() {
+    // f32 => i32
+    // TODO: verify this logic
+    f32 arg0 = stack.removeLast() as f32;
+    i32 result = arg0.toInt() & 0xFFFFFFFF;
+    stack.add(result);
+  }
+
   void i32_trunc_sat_f32_u() {
     // f32 => i32
     // TODO: verify this logic
     f32 arg0 = stack.removeLast() as f32;
+    i32 result = arg0.toInt() & 0xFFFFFFFF;
+    stack.add(result);
+  }
+
+  void i32_trunc_sat_f64_s() {
+    // f64 => i32
+    // TODO: verify this logic
+    f64 arg0 = stack.removeLast() as f64;
     i32 result = arg0.toInt() & 0xFFFFFFFF;
     stack.add(result);
   }
@@ -1519,6 +1599,38 @@ class Frame {
     // TODO: verify this logic
     f64 arg0 = stack.removeLast() as f64;
     i32 result = arg0.toInt() & 0xFFFFFFFF;
+    stack.add(result);
+  }
+
+  void i64_trunc_sat_f32_s() {
+    // f32 => i64
+    // TODO: verify this logic
+    f32 arg0 = stack.removeLast() as f32;
+    i64 result = arg0.toInt();
+    stack.add(result);
+  }
+
+  void i64_trunc_sat_f32_u() {
+    // f32 => i64
+    // TODO: verify this logic
+    f32 arg0 = stack.removeLast() as f32;
+    i64 result = arg0.toInt();
+    stack.add(result);
+  }
+
+  void i64_trunc_sat_f64_s() {
+    // f64 => i64
+    // TODO: verify this logic
+    f64 arg0 = stack.removeLast() as f64;
+    i64 result = arg0.toInt();
+    stack.add(result);
+  }
+
+  void i64_trunc_sat_f64_u() {
+    // f64 => i64
+    // TODO: verify this logic
+    f64 arg0 = stack.removeLast() as f64;
+    i64 result = arg0.toInt();
     stack.add(result);
   }
 

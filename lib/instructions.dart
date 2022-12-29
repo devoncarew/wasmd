@@ -879,13 +879,15 @@ class Instruction {
     // 0xFC 0xXX
 
     return [
+      Instruction('i32.trunc_sat_f32_s', 0x00),
       Instruction('i32.trunc_sat_f32_u', 0x01),
-      // TODO: 0x02
+      Instruction('i32.trunc_sat_f64_s', 0x02),
       Instruction('i32.trunc_sat_f64_u', 0x03),
-      // TODO: 0x04
-      // TODO: 0x05
-      // TODO: 0x06
-      // TODO: 0x07
+      Instruction('i64.trunc_sat_f32_s', 0x04),
+      Instruction('i64.trunc_sat_f32_u', 0x05),
+      Instruction('i64.trunc_sat_f64_s', 0x06),
+      Instruction('i64.trunc_sat_f64_u', 0x07),
+      // TODO:
       // Instruction_MemoryInit(), // memory.init, 0x08
       Instruction_DataDrop(), // data.drop, 0x09
       Instruction('memory.copy', 0x0A,
