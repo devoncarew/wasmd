@@ -60,6 +60,7 @@ class Instruction_Block extends Instruction {
     // TODO: this needs to do some stack management
 
     // TODO: use blocktype
+    // ignore: unused_local_variable
     var blocktype = instr.args[0] as int;
 
     function.enterBlock(BlockType.blockType);
@@ -79,6 +80,7 @@ class Instruction_Loop extends Instruction {
     // TODO: this needs to do some stack management
 
     // TODO: use blocktype
+    // ignore: unused_local_variable
     var blocktype = instr.args[0] as int;
 
     function.enterBlock(BlockType.loopType);
@@ -98,6 +100,7 @@ class Instruction_If extends Instruction {
     // TODO: this needs to do some stack management
 
     // TODO: use blocktype
+    // ignore: unused_local_variable
     var blocktype = instr.args[0] as int;
 
     function.enterBlock(BlockType.ifType);
@@ -541,14 +544,14 @@ Expression printLiteral(num n) {
 }
 
 class Instruction {
-  static final List<Instruction> instructions = _init();
-  static final Map<int, Instruction> opcodeMap = _initOpcodeMap(instructions);
-
   static const i32ConstOpcode = 0x41;
   static const i64ConstOpcode = 0x42;
   static const f32ConstOpcode = 0x43;
   static const f64ConstOpcode = 0x44;
   static const overflowOpcode = 0xFC;
+
+  static final List<Instruction> instructions = _init();
+  static final Map<int, Instruction> opcodeMap = _initOpcodeMap(instructions);
 
   static final List<Instruction> overflowInstructions = _initOverflow();
   static final Map<int, Instruction> overflowOpcodeMap =
@@ -557,15 +560,15 @@ class Instruction {
   final String name;
   final int opcode;
   final List<ValueType> immediates;
-  final List<ValueType> args;
   final ValueType? returns;
+  final List<ValueType> args;
 
   Instruction(
     this.name,
     this.opcode, {
     this.immediates = const [],
-    this.args = const [],
     this.returns,
+    this.args = const [],
   });
 
   String get methodName => name.replaceAll('.', '_');
