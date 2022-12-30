@@ -26,7 +26,8 @@ void returns(
         // TODO: we only want to do this check for floats, not doubles (we did
         // the intermediate calculations with more precision than an actual
         // float, so can have some variance nine or ten places out).
-        expect(actual, closeTo(expected, (expected * floatEpsilon).abs()));
+        final e = expected == 0.0 ? 1e-38 : (expected * floatEpsilon).abs();
+        expect(actual, closeTo(expected, e));
       } else {
         expect(actual, expected);
       }
@@ -76,13 +77,13 @@ int i64(String value) {
 final ByteData _reinterpretData = ByteData(8);
 
 double f32(String value) {
-  int val = int.parse(value, radix: 16);
-  _reinterpretData.setInt64(0, val, Endian.little);
+  var val = i32(value);
+  _reinterpretData.setInt32(0, val, Endian.little);
   return _reinterpretData.getFloat32(0, Endian.little);
 }
 
 double f64(String value) {
-  int val = i64(value);
+  var val = i64(value);
   _reinterpretData.setInt64(0, val, Endian.little);
   return _reinterpretData.getFloat64(0, Endian.little);
 }
