@@ -27,10 +27,7 @@ jobs:
         # run: dart analyze --fatal-infos
         run: dart analyze
 
-      # TODO: verify that the generators work
-
-      # - name: Run tests
-      #   run: dart test
+      # TODO: verify that the generators work (regen, spec)
 
       - name: Run tests
-        run: dart tool/run_tests.dart
+        run: dart tool/tests.dart
