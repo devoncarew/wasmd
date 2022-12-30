@@ -96,7 +96,7 @@ void compileWasmToDart(File wasmFile, File dartFile) {
   // }
 
   var compiler = Compiler(file: wasmFile, logger: logger);
-  var library = compiler.compile();
+  var library = compiler.compile(compileForWastTest: true);
   var code = emitFormatLibrary(library);
 
   print('  emitting ${dartFile.path}');
@@ -112,6 +112,7 @@ void generateDartForJson(File jsonFile, File dartFile) {
   var library = LibraryBuilder();
   library.comments.add('Generated from $sourceFilename.');
   library.ignoreForFile.addAll([
+    'non_constant_identifier_names',
     'unused_local_variable',
   ]);
   library.directives.addAll([
@@ -156,10 +157,15 @@ void generateDartForJson(File jsonFile, File dartFile) {
       moduleCount++;
 
       var dartImport = '$shortName.dart';
+      var importInterfaces = _readImportInterfaces(dartFile.parent, dartImport);
       var className = titleCase(patchUpName('${shortName}Module'));
       statements.add(Code('    // module $dartImport (line $line)'));
-      statements.add(Code('var $name = $prefix.$className();'));
-      statements.add(Code(''));
+      statements.add(Code('var $name = $prefix.$className('));
+      for (var import in importInterfaces) {
+        statements.add(
+            Code('${import.paramName}: $prefix.${import.implClassName}(),'));
+      }
+      statements.add(Code(');'));
       library.directives.add(Directive.import(dartImport, as: prefix));
     } else if (type == 'action') {
       var action = command['action'] as Map<String, dynamic>;
@@ -292,6 +298,27 @@ void generateDartForJson(File jsonFile, File dartFile) {
   var code = emitFormatLibrary(library.build());
   dartFile.writeAsStringSync(code);
   print('Wrote ${dartFile.path}.');
+}
+
+List<ImportInterface> _readImportInterfaces(
+    Directory dir, String dartImportFile) {
+  String source = File(p.join(dir.path, dartImportFile)).readAsStringSync();
+  var regex = RegExp(r'abstract class (\S+)Imports {');
+  return regex.allMatches(source).map((match) {
+    var name = match.group(1)!;
+    return ImportInterface(name);
+  }).toList();
+}
+
+class ImportInterface {
+  final String name;
+
+  ImportInterface(this.name);
+
+  String get paramName =>
+      '${name.substring(0, 1).toLowerCase()}${name.substring(1)}Imports';
+
+  String get implClassName => '${name}ImportsImpl';
 }
 
 String _addComma(String str) {

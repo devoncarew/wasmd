@@ -143,15 +143,10 @@ class Test implements Comparable<Test> {
   bool get passed => result == 'success';
 
   String get describe {
-    // \x1B[31m
     var status = passed ? '✅' : '❌';
-
     var location = path;
-    if (location != null) {
-      return '  $status $location: $name';
-    } else {
-      return '  $status $name';
-    }
+
+    return location == null ? '$status $name' : '$status $location: $name';
   }
 
   String? get path {
