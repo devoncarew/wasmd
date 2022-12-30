@@ -2,33 +2,45 @@
 
 An exploration of compiling Wasm to Dart.
 
-## TODO items
+## Useful docs
 
-### read wasm format
+- https://webassembly.github.io/spec/core/_download/WebAssembly.pdf
+- https://webassembly.github.io/spec/core/exec/runtime.html
+- https://webassembly.github.io/spec/core/intro/introduction.html
+- https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format
+- https://webassembly.github.io/spec/core/appendix/index-instructions.html
 
-https://webassembly.github.io/spec/core/_download/WebAssembly.pdf
+## Conformance tests
 
-https://webassembly.github.io/spec/core/exec/runtime.html
+We generate our spec tests from the conformance suite at
+https://github.com/WebAssembly/spec/tree/main/test/core.
 
-https://webassembly.github.io/spec/core/intro/introduction.html
+You need to have the wabt tools (wat2wasm, wasm2wat, ...) installed locally.
 
-https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format
+## Benchmarking
 
-https://webassembly.github.io/spec/core/appendix/index-instructions.html
+We have some initial benchmarks in the benchmark/ directory. Run either:
 
-### have several hello-world apps
+- `dart benchmark/gcd_bench.dart`, or
+- `dart benchmark/mandelbrot_bench.dart`
 
-### Set up benchmarking
+## Re-building
 
-### write tests using a conformance test
+### Updating all the spec tests (test/spec/)
 
-https://github.com/WebAssembly/spec/tree/main/test/core
+- `dart tool/spec.dart --all`
 
-https://github.com/WebAssembly/wabt/tree/main/test/spec
+### Re-generating a single spec test
 
-### Re-building
+- `dart tool/spec.dart spec/test/core/i32.wast`
 
-- `dart tool/regen.dart <wat file>`
+### Rebuilding all the samples (samples/)
+
+- `dart tool/regen.dart samples/*.wat`
+
+### Rebuilding a single sample
+
+- `dart tool/regen.dart samples/bcd.wat`
 
 ### Updating the spec files
 
@@ -37,7 +49,3 @@ https://github.com/WebAssembly/wabt/tree/main/test/spec
 or:
 
 - `git submodule update --remote`
-
-### Re-generating test files
-
-- `dart tool/spec.dart spec/test/core/i32.wast`

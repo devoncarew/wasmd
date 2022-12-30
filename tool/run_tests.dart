@@ -422,8 +422,6 @@ void main(List<String> args) async {
         tests[testID]!.hidden = true;
       }
     }
-
-    print(type);
   }
 
   var allTests = tests.values.where((t) => !(t.hidden ?? false)).toList();
