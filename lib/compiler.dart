@@ -1868,9 +1868,11 @@ class DataSegment {
           : literalNum(literal.value as num);
 
       // memory.copyTo(data0, _dataOffset0(memory), data0.length);
-      statements.add(refer('memory').property('copyTo').call([
+      statements.add(refer('memory').property('copyFrom').call([
         refer(dataSegment.name),
-        offsetExpr,
+        literalNum(0), // source offset
+        offsetExpr, // dest offset
+        refer(dataSegment.name).property('length'), // length
       ]).statement);
     }
 

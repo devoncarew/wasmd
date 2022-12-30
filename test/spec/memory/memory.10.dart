@@ -38,6 +38,6 @@ class DataSegments {
   static const String _hex0 = '\x78';
 
   void init(Memory memory) {
-    memory.copyTo(data0, 0);
+    memory.copyFrom(data0, 0, 0, data0.length);
   }
 }

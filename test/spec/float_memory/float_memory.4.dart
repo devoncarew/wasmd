@@ -69,6 +69,6 @@ class DataSegments {
   static const String _hex0 = '\x01\x00\xD0\x7F';
 
   void init(Memory memory) {
-    memory.copyTo(data0, 0);
+    memory.copyFrom(data0, 0, 0, data0.length);
   }
 }

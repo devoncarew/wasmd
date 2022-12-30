@@ -1,4 +1,4 @@
-// Generated from test/spec/bulk/bulk.4.wasm.
+// Generated from test/spec/memory_init/memory_init.11.wasm.
 
 // ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
 // ignore_for_file: unused_element, unused_label, unused_local_variable
@@ -7,8 +7,8 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Bulk4Module implements Module {
-  Bulk4Module() {
+class MemoryInit11Module implements Module {
+  MemoryInit11Module() {
     dataSegments.init(memory);
   }
 
@@ -20,11 +20,20 @@ class Bulk4Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void init(i32 arg0, i32 arg1, i32 arg2) {
+  void test() {
     final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.push(arg2);
+    frame.i32_const(1);
+    frame.i32_const(0);
+    frame.i32_const(1);
+    {
+      i32 count = frame.pop() as i32;
+      i32 sourceOffset = frame.pop() as i32;
+      i32 destOffset = frame.pop() as i32;
+      memory.copyFrom(dataSegments.data0, sourceOffset, destOffset, count);
+    }
+    frame.i32_const(1);
+    frame.i32_const(0);
+    frame.i32_const(1);
     {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
@@ -32,22 +41,14 @@ class Bulk4Module implements Module {
       memory.copyFrom(dataSegments.data0, sourceOffset, destOffset, count);
     }
   }
-
-  i32 load8_u(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
-  }
 }
 
-typedef FunctionType0 = void Function(i32, i32, i32);
-typedef FunctionType1 = i32 Function(i32);
+typedef FunctionType0 = void Function();
 
 class DataSegments {
   Uint8List data0 = decodeDataLiteral(_hex0);
 
-  static const String _hex0 = '\xAA\xBB\xCC\xDD';
+  static const String _hex0 = '\x37';
 
   void init(Memory memory) {}
 }

@@ -28,7 +28,7 @@ class Bulk9Module implements Module {
 
   void drop_passive() {
     final frame = Frame(this);
-    /* elem.drop segment 0 */
+    frame.elem_drop(0);
   }
 
   void init_passive(i32 len) {
@@ -47,7 +47,7 @@ class Bulk9Module implements Module {
 
   void drop_active() {
     final frame = Frame(this);
-    /* elem.drop segment 1 */
+    frame.elem_drop(1);
   }
 
   void init_active(i32 len) {

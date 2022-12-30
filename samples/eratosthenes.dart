@@ -447,17 +447,17 @@ class DataSegments {
       '\x65\x00\x2E\x00\x74\x00\x73';
 
   void init(Memory memory) {
-    memory.copyTo(data0, 1036);
-    memory.copyTo(data1, 1048);
-    memory.copyTo(data2, 1084);
-    memory.copyTo(data3, 1096);
-    memory.copyTo(data4, 1148);
-    memory.copyTo(data5, 1160);
-    memory.copyTo(data6, 1212);
-    memory.copyTo(data7, 1224);
-    memory.copyTo(data8, 1276);
-    memory.copyTo(data9, 1288);
-    memory.copyTo(data10, 1324);
-    memory.copyTo(data11, 1336);
+    memory.copyFrom(data0, 0, 1036, data0.length);
+    memory.copyFrom(data1, 0, 1048, data1.length);
+    memory.copyFrom(data2, 0, 1084, data2.length);
+    memory.copyFrom(data3, 0, 1096, data3.length);
+    memory.copyFrom(data4, 0, 1148, data4.length);
+    memory.copyFrom(data5, 0, 1160, data5.length);
+    memory.copyFrom(data6, 0, 1212, data6.length);
+    memory.copyFrom(data7, 0, 1224, data7.length);
+    memory.copyFrom(data8, 0, 1276, data8.length);
+    memory.copyFrom(data9, 0, 1288, data9.length);
+    memory.copyFrom(data10, 0, 1324, data10.length);
+    memory.copyFrom(data11, 0, 1336, data11.length);
   }
 }

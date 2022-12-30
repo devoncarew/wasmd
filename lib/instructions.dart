@@ -418,6 +418,31 @@ class Instruction_CallIndirect extends Instruction {
   }
 }
 
+class Instruction_MemoryInit extends Instruction {
+  Instruction_MemoryInit()
+      : super('memory.init', 0x08, immediates: [ValueType.u32, ValueType.u32]);
+
+  @override
+  Code generateToStatement(Instr instr, DefinedFunction function) {
+    var dataSegment = instr.args[0] as int;
+    // ignore: unused_local_variable
+    var memIndex = instr.args[1] as int;
+
+    var module = function.module;
+    var segmentName = module.dataSegments.segments[dataSegment].name;
+
+    return Block.of([
+      Code('{'),
+      Code('i32 count = frame.pop() as i32;'),
+      Code('i32 sourceOffset = frame.pop() as i32;'),
+      Code('i32 destOffset = frame.pop() as i32;'),
+      Code('memory.copyFrom(dataSegments.$segmentName, '
+          'sourceOffset, destOffset, count);'),
+      Code('}'),
+    ]);
+  }
+}
+
 class Instruction_TableInit extends Instruction {
   Instruction_TableInit()
       : super('table.init', 0x0C, immediates: [ValueType.u32, ValueType.u32]);
@@ -443,49 +468,6 @@ class Instruction_TableInit extends Instruction {
           'segments.segment$segment);'),
       Code('}'),
     ]);
-  }
-}
-
-class Instruction_TableCopy extends Instruction {
-  Instruction_TableCopy()
-      : super('table.copy', 0x0E, immediates: [ValueType.u32, ValueType.u32]);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var srcTable = instr.args[0] as int;
-    var destTable = instr.args[1] as int;
-
-    return Block.of([
-      Code('{'),
-      Code('i32 count = frame.pop() as i32;'),
-      Code('i32 sourceOffset = frame.pop() as i32;'),
-      Code('i32 destOffset = frame.pop() as i32;'),
-      Code('table$srcTable.copyTo('
-          'table$destTable, sourceOffset, destOffset, count);'),
-      Code('}'),
-    ]);
-  }
-}
-
-class Instruction_ElemDrop extends Instruction {
-  Instruction_ElemDrop()
-      : super('elem.drop', 0x0D, immediates: [ValueType.u32]);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var segment = instr.args[0] as int;
-    return Code('    /* elem.drop segment $segment */');
-  }
-}
-
-class Instruction_DataDrop extends Instruction {
-  Instruction_DataDrop()
-      : super('data.drop', 0x09, immediates: [ValueType.u32]);
-
-  @override
-  Code generateToStatement(Instr instr, DefinedFunction function) {
-    var immediate = instr.args[0] as int;
-    return Code('    /* data.drop index $immediate */');
   }
 }
 
@@ -887,15 +869,15 @@ class Instruction {
       Instruction('i64.trunc_sat_f32_u', 0x05),
       Instruction('i64.trunc_sat_f64_s', 0x06),
       Instruction('i64.trunc_sat_f64_u', 0x07),
-      // TODO:
-      // Instruction_MemoryInit(), // memory.init, 0x08
-      Instruction_DataDrop(), // data.drop, 0x09
+      Instruction_MemoryInit(), // memory.init, 0x08
+      Instruction('data.drop', 0x09, immediates: [ValueType.u32]),
       Instruction('memory.copy', 0x0A,
           immediates: [ValueType.u32, ValueType.u32]),
       Instruction('memory.fill', 0x0B, immediates: [ValueType.u32]),
       Instruction_TableInit(), // table.init, 0x0C
-      Instruction_ElemDrop(), // elem.drop, 0x0D
-      Instruction_TableCopy(), // table.copy, 0x0E
+      Instruction('elem.drop', 0x0D, immediates: [ValueType.u32]),
+      Instruction('table.copy', 0x0E,
+          immediates: [ValueType.u32, ValueType.u32]),
       Instruction('table.grow', 0x0F, immediates: [ValueType.u32]),
       Instruction('table.size', 0x10, immediates: [ValueType.u32]),
       Instruction('table.fill', 0x11, immediates: [ValueType.u32]),

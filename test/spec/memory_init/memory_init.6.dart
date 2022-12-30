@@ -1,4 +1,4 @@
-// Generated from test/spec/memory/memory.9.wasm.
+// Generated from test/spec/memory_init/memory_init.6.wasm.
 
 // ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
 // ignore_for_file: unused_element, unused_label, unused_local_variable
@@ -7,37 +7,32 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Memory9Module implements Module {
-  Memory9Module() {
+class MemoryInit6Module implements Module {
+  MemoryInit6Module() {
     dataSegments.init(memory);
   }
 
   @override
-  final Memory memory = Memory(
-    0,
-    0,
-  );
+  final Memory memory = Memory(1);
 
   final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
 
-  i32 memsize() {
+  void test() {
     final frame = Frame(this);
-    frame.memory_size(0);
-    return frame.pop();
+    frame.data_drop(0);
+    frame.data_drop(0);
   }
 }
 
-typedef FunctionType0 = i32 Function();
+typedef FunctionType0 = void Function();
 
 class DataSegments {
   Uint8List data0 = decodeDataLiteral(_hex0);
 
-  static const String _hex0 = '';
+  static const String _hex0 = '\x37';
 
-  void init(Memory memory) {
-    memory.copyFrom(data0, 0, 0, data0.length);
-  }
+  void init(Memory memory) {}
 }

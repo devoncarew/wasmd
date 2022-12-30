@@ -22,7 +22,7 @@ class Bulk5Module implements Module {
 
   void drop_passive() {
     final frame = Frame(this);
-    /* data.drop index 0 */
+    frame.data_drop(0);
   }
 
   void init_passive(i32 len) {
@@ -30,12 +30,17 @@ class Bulk5Module implements Module {
     frame.i32_const(0);
     frame.i32_const(0);
     frame.push(len);
-    throw 'unreachable (0xFC 0x08)';
+    {
+      i32 count = frame.pop() as i32;
+      i32 sourceOffset = frame.pop() as i32;
+      i32 destOffset = frame.pop() as i32;
+      memory.copyFrom(dataSegments.p, sourceOffset, destOffset, count);
+    }
   }
 
   void drop_active() {
     final frame = Frame(this);
-    /* data.drop index 1 */
+    frame.data_drop(1);
   }
 
   void init_active(i32 len) {
@@ -43,7 +48,12 @@ class Bulk5Module implements Module {
     frame.i32_const(0);
     frame.i32_const(0);
     frame.push(len);
-    throw 'unreachable (0xFC 0x08)';
+    {
+      i32 count = frame.pop() as i32;
+      i32 sourceOffset = frame.pop() as i32;
+      i32 destOffset = frame.pop() as i32;
+      memory.copyFrom(dataSegments.a, sourceOffset, destOffset, count);
+    }
   }
 }
 
@@ -60,6 +70,6 @@ class DataSegments {
   static const String _hex1 = '\x78';
 
   void init(Memory memory) {
-    memory.copyTo(a, 0);
+    memory.copyFrom(a, 0, 0, a.length);
   }
 }

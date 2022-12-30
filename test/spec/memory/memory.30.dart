@@ -206,7 +206,7 @@ class DataSegments {
   static const String _hex1 = '\x57\x41\x53\x4D';
 
   void init(Memory memory) {
-    memory.copyTo(data0, 0);
-    memory.copyTo(data1, 20);
+    memory.copyFrom(data0, 0, 0, data0.length);
+    memory.copyFrom(data1, 0, 20, data1.length);
   }
 }

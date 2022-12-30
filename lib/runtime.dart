@@ -56,12 +56,21 @@ class Memory {
     return oldSize;
   }
 
-  void copyTo(Uint8List bytes, int offset) {
-    final len = bytes.length;
+  void copyFrom(Uint8List bytes, int sourceOffset, int destOffset, int length) {
+    if (sourceOffset < 0 || sourceOffset + length > bytes.length) {
+      throw Trap('out of bounds memory access');
+    }
 
-    // TODO: find a faster copy method
-    for (int i = 0; i < len; i++) {
-      data.setUint8(offset + i, bytes[i]);
+    if (destOffset < 0 || destOffset + length > data.lengthInBytes) {
+      throw Trap('out of bounds memory access');
+    }
+
+    if (length < 0) {
+      throw Trap('out of bounds memory access');
+    }
+
+    for (int i = 0; i < length; i++) {
+      data.setUint8(destOffset + i, bytes[sourceOffset + i]);
     }
   }
 
@@ -1634,6 +1643,10 @@ class Frame {
     stack.add(result);
   }
 
+  void data_drop(u32 index) {
+    // nothing to do (optionally drop data segment 'index')
+  }
+
   void memory_copy(u32 srcMemoryIndex, u32 destMemoryIndex) {
     i32 count = stack.removeLast() as i32;
     i32 sourceOffset = stack.removeLast() as i32;
@@ -1646,6 +1659,19 @@ class Frame {
     i32 value = stack.removeLast() as i32;
     i32 offset = stack.removeLast() as i32;
     memory.fill(value, offset, count);
+  }
+
+  void elem_drop(u32 segment) {
+    // nothing to do (optionally, drop the given element segment)
+  }
+
+  void table_copy(u32 srcTable, u32 destTable) {
+    i32 count = pop<i32>();
+    i32 sourceOffset = pop<i32>();
+    i32 destOffset = pop<i32>();
+
+    module.tables[srcTable]
+        .copyTo(module.tables[destTable], sourceOffset, destOffset, count);
   }
 
   void table_grow(u32 index) {

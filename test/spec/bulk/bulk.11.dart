@@ -22,7 +22,7 @@ class Bulk11Module implements Module {
 
   void _func0() {
     final frame = Frame(this);
-    /* elem.drop segment 0 */
+    frame.elem_drop(0);
   }
 
   List<Function> _initFunctionTable() {

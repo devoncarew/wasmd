@@ -45,12 +45,7 @@ class Bulk12Module implements Module {
     frame.push(arg0);
     frame.push(arg1);
     frame.push(arg2);
-    {
-      i32 count = frame.pop() as i32;
-      i32 sourceOffset = frame.pop() as i32;
-      i32 destOffset = frame.pop() as i32;
-      table0.copyTo(table0, sourceOffset, destOffset, count);
-    }
+    frame.table_copy(0, 0);
   }
 
   i32 call(i32 arg0) {

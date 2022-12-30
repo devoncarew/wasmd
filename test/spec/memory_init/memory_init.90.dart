@@ -1,4 +1,4 @@
-// Generated from test/spec/bulk/bulk.6.wasm.
+// Generated from test/spec/memory_init/memory_init.90.wasm.
 
 // ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
 // ignore_for_file: unused_element, unused_label, unused_local_variable
@@ -7,13 +7,13 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Bulk6Module implements Module {
-  Bulk6Module() {
+class MemoryInit90Module implements Module {
+  MemoryInit90Module() {
     dataSegments.init(memory);
   }
 
   @override
-  final Memory memory = Memory(0);
+  final Memory memory = Memory(1);
 
   final DataSegments dataSegments = DataSegments();
 
@@ -22,7 +22,15 @@ class Bulk6Module implements Module {
 
   void _func0() {
     final frame = Frame(this);
-    frame.data_drop(64);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    {
+      i32 count = frame.pop() as i32;
+      i32 sourceOffset = frame.pop() as i32;
+      i32 destOffset = frame.pop() as i32;
+      memory.copyFrom(dataSegments.data64, sourceOffset, destOffset, count);
+    }
   }
 }
 

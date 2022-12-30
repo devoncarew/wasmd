@@ -1,4 +1,4 @@
-// Generated from test/spec/bulk/bulk.3.wasm.
+// Generated from test/spec/memory_init/memory_init.0.wasm.
 
 // ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
 // ignore_for_file: unused_element, unused_label, unused_local_variable
@@ -7,8 +7,8 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Bulk3Module implements Module {
-  Bulk3Module() {
+class MemoryInit0Module implements Module {
+  MemoryInit0Module() {
     dataSegments.init(memory);
   }
 
@@ -23,12 +23,9 @@ class Bulk3Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void copy(i32 arg0, i32 arg1, i32 arg2) {
+  void test() {
     final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.memory_copy(0, 0);
+    /* nop */
   }
 
   i32 load8_u(i32 arg0) {
@@ -39,15 +36,28 @@ class Bulk3Module implements Module {
   }
 }
 
-typedef FunctionType0 = void Function(i32, i32, i32);
+typedef FunctionType0 = void Function();
 typedef FunctionType1 = i32 Function(i32);
 
 class DataSegments {
   Uint8List data0 = decodeDataLiteral(_hex0);
 
-  static const String _hex0 = '\xAA\xBB\xCC\xDD';
+  Uint8List data1 = decodeDataLiteral(_hex1);
+
+  Uint8List data2 = decodeDataLiteral(_hex2);
+
+  Uint8List data3 = decodeDataLiteral(_hex3);
+
+  static const String _hex0 = '\x03\x01\x04\x01';
+
+  static const String _hex1 = '\x02\x07\x01\x08';
+
+  static const String _hex2 = '\x07\x05\x02\x03\x06';
+
+  static const String _hex3 = '\x05\x09\x02\x07\x06';
 
   void init(Memory memory) {
-    memory.copyFrom(data0, 0, 0, data0.length);
+    memory.copyFrom(data0, 0, 2, data0.length);
+    memory.copyFrom(data2, 0, 12, data2.length);
   }
 }

@@ -73,6 +73,6 @@ class DataSegments {
       '\x00\x00\x00\x00\x00\x00\xA0\x7F\x01\x00\xD0\x7F';
 
   void init(Memory memory) {
-    memory.copyTo(data0, 0);
+    memory.copyFrom(data0, 0, 0, data0.length);
   }
 }
