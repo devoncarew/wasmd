@@ -1,6 +1,6 @@
 // Generated from spec/test/core/local_set.wast.
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import '../../src/infra.dart';
 import 'local_set.0.dart' as local_set_0;

@@ -1,6 +1,6 @@
 // Generated from spec/test/core/ref_is_null.wast.
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import '../../src/infra.dart';
 import 'ref_is_null.0.dart' as ref_is_null_0;

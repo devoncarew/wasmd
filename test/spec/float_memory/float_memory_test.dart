@@ -1,6 +1,6 @@
 // Generated from spec/test/core/float_memory.wast.
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import '../../src/infra.dart';
 import 'float_memory.0.dart' as float_memory_0;

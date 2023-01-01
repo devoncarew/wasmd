@@ -13,6 +13,7 @@ void main() {
   group('start', () {
     // module start.3.dart (line 21)
     var m0 = start_3.Start3Module();
+
     returns('get_0', () => m0.get(), 0x44);
     invoke('inc_0', () => m0.inc());
     returns('get_1', () => m0.get(), 0x45);
@@ -21,6 +22,7 @@ void main() {
 
     // module start.4.dart (line 51)
     var m1 = start_4.Start4Module();
+
     returns('get_3', () => m1.get(), 0x44);
     invoke('inc_2', () => m1.inc());
     returns('get_4', () => m1.get(), 0x45);

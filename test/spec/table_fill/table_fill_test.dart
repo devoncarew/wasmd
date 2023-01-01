@@ -1,6 +1,6 @@
 // Generated from spec/test/core/table_fill.wast.
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import '../../src/infra.dart';
 import 'table_fill.0.dart' as table_fill_0;

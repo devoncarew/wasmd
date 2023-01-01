@@ -1,6 +1,6 @@
 // Generated from spec/test/core/int_literals.wast.
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import '../../src/infra.dart';
 import 'int_literals.0.dart' as int_literals_0;

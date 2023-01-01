@@ -1,6 +1,6 @@
 // Generated from spec/test/core/forward.wast.
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import '../../src/infra.dart';
 import 'forward.0.dart' as forward_0;

@@ -1,6 +1,6 @@
 // Generated from spec/test/core/f32.wast.
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import '../../src/infra.dart';
 import 'f32.0.dart' as f32_0;

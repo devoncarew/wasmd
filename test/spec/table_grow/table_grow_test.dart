@@ -1,6 +1,6 @@
 // Generated from spec/test/core/table_grow.wast.
 
-// ignore_for_file: unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import '../../src/infra.dart';
 import 'table_grow.0.dart' as table_grow_0;
