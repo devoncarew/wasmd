@@ -15,8 +15,6 @@ import 'instructions.dart' hide BlockType;
 import 'instructions.dart' as instructions show BlockType;
 import 'src/utils.dart';
 
-// TODO: handle passing a module instance into constant evaluation
-
 class Compiler {
   final File file;
   final Logger logger;
@@ -718,7 +716,7 @@ void printModule(
     );
   }
 
-  // todo: rename this to 'data'
+  // TODO: rename this to 'data'
   // dataSegments reference
   if (module.dataSegments.isNotEmpty) {
     classBuilder.fields.add(

@@ -6,7 +6,6 @@ import 'package:path/path.dart' as p;
 void main(List<String> args) async {
   print('Running test suite...');
 
-  // todo: 'dart test --reporter=json'
   var result = await Process.run(
       Platform.resolvedExecutable, ['test', '--reporter=json']);
 

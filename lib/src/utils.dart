@@ -93,7 +93,7 @@ String emitFormatLibrary(Library library) {
   return code;
 }
 
-// todo: move these changes into package:code_builder
+// TODO: move these changes into package:code_builder
 class WasmCustomEmitter extends DartEmitter {
   WasmCustomEmitter()
       : super(
