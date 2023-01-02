@@ -496,7 +496,7 @@ class Instruction_RefFunc extends Instruction {
   }
 }
 
-// todo: write some code to determine what the stack looks like after each
+// TODO: write some code to determine what the stack looks like after each
 // operation
 
 /// valtype := numtype | vectype | reftype

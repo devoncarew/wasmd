@@ -1459,7 +1459,7 @@ class Frame {
   }
 
   void f32_demote_f64() {
-    // todo: verify this implementation
+    // TODO: verify this implementation
     f64 arg = stack.removeLast() as f64;
     f32 result = arg.clamp(
       -3.4028234663852885981170418348451692544e+38,
