@@ -29,7 +29,8 @@ void main(List<String> args) {
         .whereType<Directory>()
         .map((d) => p.basename(d.path))
         .map((n) => 'spec/test/core/$n.wast')
-        .toList();
+        .toList()
+      ..sort();
   }
 
   for (var arg in args) {
@@ -157,6 +158,7 @@ void generateDartForJson(File jsonFile, File dartFile) {
       moduleCount++;
 
       var dartImport = '$shortName.dart';
+      // TODO: at the time of initial generation, these files don't yet exist.
       var importInterfaces = _readImportInterfaces(dartFile.parent, dartImport);
       var className = titleCase(patchUpName('${shortName}Module'));
       statements.add(Code('    // module $dartImport (line $line)'));
@@ -165,7 +167,7 @@ void generateDartForJson(File jsonFile, File dartFile) {
         statements.add(
             Code('${import.paramName}: $prefix.${import.implClassName}(),'));
       }
-      statements.add(Code(');'));
+      statements.add(Code(');\n'));
       library.directives.add(Directive.import(dartImport, as: prefix));
     } else if (type == 'action') {
       var action = command['action'] as Map<String, dynamic>;
@@ -202,11 +204,13 @@ void generateDartForJson(File jsonFile, File dartFile) {
       var field = action['field'] as String;
       var args = (action['args'] as List).cast<Map<String, dynamic>>();
 
-      if (expected.length > 1) {
-        throw 'multiple return expectations not yet supported';
-      }
-
       field = patchUpName(field);
+
+      if (expected.length > 1) {
+        // TODO:
+        print('multiple return expectations not yet supported ($type $field)');
+        continue;
+      }
 
       var invocation = '';
       if (actionType == 'invoke') {
@@ -302,7 +306,10 @@ void generateDartForJson(File jsonFile, File dartFile) {
 
 List<ImportInterface> _readImportInterfaces(
     Directory dir, String dartImportFile) {
-  String source = File(p.join(dir.path, dartImportFile)).readAsStringSync();
+  var sourceFile = File(p.join(dir.path, dartImportFile));
+  if (!sourceFile.existsSync()) return [];
+
+  String source = sourceFile.readAsStringSync();
   var regex = RegExp(r'abstract class (\S+)Imports {');
   return regex.allMatches(source).map((match) {
     var name = match.group(1)!;

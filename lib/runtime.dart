@@ -226,6 +226,17 @@ class Frame {
     return stack.last as T;
   }
 
+  /// Remove all but the oldest [depth] stack entries, but keep the top
+  /// [paramCount] stack items.
+  void unwindTo(int depth, int paramCount) {
+    if (stack.length == depth + paramCount) {
+      return;
+    }
+
+    // Keep [0, start), [length-paramCount, length)
+    stack.removeRange(depth, stack.length - paramCount);
+  }
+
   void drop() {
     stack.removeLast();
   }

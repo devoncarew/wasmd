@@ -11,7 +11,8 @@ import 'package:collection/collection.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 
-import 'instructions.dart';
+import 'instructions.dart' hide BlockType;
+import 'instructions.dart' as instructions show BlockType;
 import 'src/utils.dart';
 
 // TODO: handle passing a module instance into constant evaluation
@@ -1156,13 +1157,50 @@ enum TableType {
 }
 
 enum BlockType {
-  blockType('block'),
-  ifType('if'),
-  loopType('loop');
+  $block('block'),
+  $if('if'),
+  $loop('loop'),
+  $return('return');
 
-  final String short;
+  final String shortName;
 
-  const BlockType(this.short);
+  const BlockType(this.shortName);
+
+  bool get returnType => this == BlockType.$return;
+
+  // loop types use 'continue' to re-start the block
+  bool get loopType => this == BlockType.$loop;
+
+  bool get breakType => this == BlockType.$block || this == BlockType.$if;
+
+  Code generateBranchFor(
+    DefinedFunction function,
+    String? label,
+    Scope scope, {
+    bool popCondition = false,
+  }) {
+    if (returnType) {
+      if (function.returnsVoid) {
+        return Code('return;');
+      } else {
+        return Code('return frame.pop();');
+      }
+    } else {
+      var jumpKind = loopType ? 'continue' : 'break';
+
+      var code = popCondition ? 'if (frame.pop() != 0) {\n' : '';
+      if (breakType) {
+        // adjust stack
+        code +=
+            '  frame.unwindTo(${scope.entryDepth}, ${scope.blockArgCount});\n';
+      }
+      code += '  $jumpKind $label;\n';
+      if (popCondition) {
+        code += '}';
+      }
+      return Code(code);
+    }
+  }
 }
 
 class FunctionType {
@@ -1402,6 +1440,7 @@ class DefinedFunction extends ModuleFunction {
   late List<Variable> variables;
 
   final List<BlockType> nesting = [];
+  final List<Scope> scopes = [Scope()];
 
   DefinedFunction(super.module, super.typeIndex, this.generatedIndex);
 
@@ -1423,24 +1462,40 @@ class DefinedFunction extends ModuleFunction {
     this.instrs = instrs;
   }
 
-  void enterBlock(BlockType blockType) {
+  void enterBlock(BlockType blockType, instructions.BlockType blockType2) {
     nesting.add(blockType);
+    scopes.add(Scope(parent: scope, blockType: blockType2));
   }
 
-  String get currentBlockLabel => labelNameFromIndex(0);
+  String get currentBlockLabel => labelNameFromIndex(0)!;
 
   BlockType? exitBlock() {
-    if (nesting.isEmpty) return null;
+    if (nesting.isEmpty) {
+      return null;
+    }
+
+    scopes.removeLast();
     return nesting.removeLast();
   }
 
-  String labelNameFromIndex(int index) {
+  Scope get scope => scopes.last;
+
+  String? labelNameFromIndex(int index) {
+    if (index >= nesting.length) return null;
+
     var block = blockNestingFromIndex(index);
     var depth = nesting.length - 1 - index;
-    return '${block.short}_label_$depth';
+    return '${block.shortName}_label_$depth';
+  }
+
+  Scope scopeForIndex(int index) {
+    return scopes[scopes.length - 1 - index];
   }
 
   BlockType blockNestingFromIndex(int index) {
+    // Special case asking for the outermost nesting - the function entrypoint.
+    if (index == nesting.length) return BlockType.$return;
+
     return nesting[nesting.length - 1 - index];
   }
 
@@ -1510,6 +1565,35 @@ class DefinedFunction extends ModuleFunction {
 
     return method.build();
   }
+}
+
+class Scope {
+  final Scope? parent;
+  final instructions.BlockType? blockType;
+
+  int _stackDepth = 0;
+
+  int nextTempId = 0;
+
+  Scope({this.parent, this.blockType}) {
+    // TODO: improve the temp allocation logic
+    if (parent != null) {
+      nextTempId = parent!.nextTempId;
+    }
+  }
+
+  String get nextTempName => 't${nextTempId++}';
+
+  void updateStackDepth(int adjust) {
+    _stackDepth += adjust;
+  }
+
+  int get stackDepth =>
+      parent == null ? _stackDepth : parent!.stackDepth + _stackDepth;
+
+  int get entryDepth => parent?.stackDepth ?? 0;
+
+  int get blockArgCount => blockType?.returnItems ?? 0;
 }
 
 class ImportedFunction extends ModuleFunction {
