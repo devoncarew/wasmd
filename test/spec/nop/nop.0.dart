@@ -297,6 +297,7 @@ class Nop0Module implements Module {
     {
       /* nop */
       frame.push(arg0);
+      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -308,6 +309,7 @@ class Nop0Module implements Module {
     {
       frame.push(arg0);
       /* nop */
+      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -322,6 +324,7 @@ class Nop0Module implements Module {
       frame.push(arg0);
       /* nop */
       /* nop */
+      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -334,7 +337,10 @@ class Nop0Module implements Module {
       /* nop */
       frame.push(arg0);
       frame.push(arg0);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
     }
     return frame.pop();
   }
@@ -346,7 +352,10 @@ class Nop0Module implements Module {
       frame.push(arg0);
       /* nop */
       frame.push(arg0);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
     }
     return frame.pop();
   }
@@ -358,7 +367,10 @@ class Nop0Module implements Module {
       frame.push(arg0);
       frame.push(arg0);
       /* nop */
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
     }
     return frame.pop();
   }
@@ -375,7 +387,10 @@ class Nop0Module implements Module {
       frame.push(arg0);
       /* nop */
       /* nop */
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
     }
     return frame.pop();
   }
@@ -390,8 +405,11 @@ class Nop0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
+          frame.unwindTo(0, 1);
           break block_label_0;
+
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -408,8 +426,11 @@ class Nop0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
+          frame.unwindTo(0, 1);
           break block_label_0;
+
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -426,8 +447,11 @@ class Nop0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
+          frame.unwindTo(0, 1);
           break block_label_0;
+
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -449,8 +473,11 @@ class Nop0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
+          frame.unwindTo(0, 1);
           break block_label_0;
+
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }

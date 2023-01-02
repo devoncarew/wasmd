@@ -29,8 +29,16 @@ String patchUpName(String name) {
   if (isNumber(name.codeUnits[0])) {
     return '\$$name';
   }
+  if (_keywords.contains(name)) {
+    return '\$$name';
+  }
   return name;
 }
+
+const Set<String> _keywords = {
+  'for',
+  'while',
+};
 
 String titleCase(String name) {
   return name.split('_').map((s) {

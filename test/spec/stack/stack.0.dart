@@ -34,6 +34,7 @@ class Stack0Module implements Module {
         frame.i64_eq();
         if_label_2:
         if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
           break block_label_0;
         } else {
           frame.push(i);
@@ -46,6 +47,7 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
+
         break;
       }
     }
@@ -71,6 +73,7 @@ class Stack0Module implements Module {
         frame.i64_eq();
         if_label_2:
         if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
           break block_label_0;
         } else {
           frame.push(i);
@@ -83,6 +86,7 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
+
         break;
       }
     }
@@ -108,6 +112,7 @@ class Stack0Module implements Module {
         frame.i64_eq();
         if_label_2:
         if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
           break block_label_0;
         } else {
           frame.push(i);
@@ -120,6 +125,7 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
+
         break;
       }
     }
@@ -145,6 +151,7 @@ class Stack0Module implements Module {
         frame.i64_eq();
         if_label_2:
         if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
           break block_label_0;
         } else {
           frame.push(i);
@@ -157,6 +164,7 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
+
         break;
       }
     }
@@ -182,6 +190,7 @@ class Stack0Module implements Module {
         frame.i64_eq();
         if_label_2:
         if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
           break block_label_0;
         } else {
           frame.push(i);
@@ -194,6 +203,7 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
+
         break;
       }
     }

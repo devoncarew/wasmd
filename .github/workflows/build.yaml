@@ -19,7 +19,14 @@ jobs:
 
       - name: Install dependencies
         run: dart pub get
-  
+
+      - name: Show generated file sizes
+        run: |
+          echo "File sizes in KB"
+          echo ""
+          ls -skS -1 -R test/spec/**/*.dart
+          ls -skS -1 -R samples/*.dart
+
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 

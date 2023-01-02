@@ -1,8 +1,10 @@
 // ignore_for_file: camel_case_types
 
 import 'package:code_builder/code_builder.dart';
+import 'package:collection/collection.dart';
 
-import 'compiler.dart';
+import 'compiler.dart' hide ValueType;
+import 'compiler.dart' as compiler show BlockType, FunctionType, ValueType;
 
 class Instr {
   final Instruction instruction;
@@ -14,7 +16,9 @@ class Instr {
   ]);
 
   Code generateToStatement(DefinedFunction function) {
-    return instruction.generateToStatement(this, function);
+    var code = instruction.generateToStatement(this, function);
+    instruction.updateStackDepth(function);
+    return code;
   }
 
   @override
@@ -23,11 +27,8 @@ class Instr {
   }
 }
 
-const List<ValueType> _memarg = [ValueType.u32, ValueType.u32];
-const List<ValueType> _blocktype = [ValueType.i32];
-
 class Instruction_Unreachable extends Instruction {
-  Instruction_Unreachable() : super('unreachable', 0x00);
+  Instruction_Unreachable() : super('unreachable', 0x00, '');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -41,7 +42,7 @@ class Instruction_Unreachable extends Instruction {
 }
 
 class Instruction_Nop extends Instruction {
-  Instruction_Nop() : super('nop', 0x01);
+  Instruction_Nop() : super('nop', 0x01, '');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -52,66 +53,54 @@ class Instruction_Nop extends Instruction {
 class Instruction_Block extends Instruction {
   static const blockOpcode = 0x02;
 
-  // the immediate is either 0x40, a valuetype, or a signed 33bit integer
-  Instruction_Block() : super('block', blockOpcode, immediates: _blocktype);
+  // the immediate is either 0x40, a valuetype, or a positive 33bit integer
+  Instruction_Block() : super('block', blockOpcode, '(i32)');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    // TODO: this needs to do some stack management
+    var blocktype = BlockType.from(instr.args[0] as int, function);
 
-    // TODO: use blocktype
-    // ignore: unused_local_variable
-    var blocktype = instr.args[0] as int;
-
-    function.enterBlock(BlockType.blockType);
+    function.enterBlock(compiler.BlockType.$block, blocktype);
 
     var label = function.currentBlockLabel;
-    return Code('$label: {\n');
+    return Code('$label: {');
   }
 }
 
 class Instruction_Loop extends Instruction {
   static const loopOpcode = 0x03;
 
-  Instruction_Loop() : super('loop', loopOpcode, immediates: _blocktype);
+  Instruction_Loop() : super('loop', loopOpcode, '(i32)');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    // TODO: this needs to do some stack management
+    var blocktype = BlockType.from(instr.args[0] as int, function);
 
-    // TODO: use blocktype
-    // ignore: unused_local_variable
-    var blocktype = instr.args[0] as int;
-
-    function.enterBlock(BlockType.loopType);
+    function.enterBlock(compiler.BlockType.$loop, blocktype);
 
     var label = function.currentBlockLabel;
-    return Code('\n$label: for (;;) {\n');
+    return Code('\n$label: for (;;) {');
   }
 }
 
 class Instruction_If extends Instruction {
   static const ifOpcode = 0x04;
 
-  Instruction_If() : super('if', ifOpcode, immediates: _blocktype);
+  Instruction_If() : super('if', ifOpcode, '(i32) i32');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    // TODO: this needs to do some stack management
+    var blocktype = BlockType.from(instr.args[0] as int, function);
 
-    // TODO: use blocktype
-    // ignore: unused_local_variable
-    var blocktype = instr.args[0] as int;
-
-    function.enterBlock(BlockType.ifType);
+    function.enterBlock(compiler.BlockType.$if, blocktype);
 
     var label = function.currentBlockLabel;
-    return Code('$label: if (frame.pop() != 0) {\n');
+    return Code('$label: if (frame.pop() != 0) {');
   }
 }
 
 class Instruction_Else extends Instruction {
-  Instruction_Else() : super('else', 0x05);
+  Instruction_Else() : super('else', 0x05, '');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -122,7 +111,7 @@ class Instruction_Else extends Instruction {
 class Instruction_End extends Instruction {
   static const endOpcode = 0x0B;
 
-  Instruction_End() : super('end', endOpcode);
+  Instruction_End() : super('end', endOpcode, '');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -130,7 +119,7 @@ class Instruction_End extends Instruction {
 
     var oldNesting = function.exitBlock();
 
-    if (oldNesting == BlockType.loopType) {
+    if (oldNesting != null && oldNesting.loopType) {
       return Code('break;\n}');
     } else if (oldNesting != null) {
       return Code('}');
@@ -145,35 +134,34 @@ class Instruction_End extends Instruction {
 }
 
 class Instruction_Br extends Instruction {
-  Instruction_Br() : super('br', 0x0C, immediates: [ValueType.u32]);
+  Instruction_Br() : super('br', 0x0C, '(u32)');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
     var label = function.labelNameFromIndex(immediate);
+    var scope = function.scopeForIndex(immediate);
     var blockKind = function.blockNestingFromIndex(immediate);
-    var jumpKind = blockKind == BlockType.loopType ? 'continue' : 'break';
-
-    return Code('$jumpKind $label;');
+    return blockKind.generateBranchFor(function, label, scope);
   }
 }
 
-class Instruction_BrLf extends Instruction {
-  Instruction_BrLf() : super('br_lf', 0x0D, immediates: [ValueType.u32]);
+class Instruction_BrIf extends Instruction {
+  Instruction_BrIf() : super('br_if', 0x0D, '(u32)');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
     var label = function.labelNameFromIndex(immediate);
+    var scope = function.scopeForIndex(immediate);
     var blockKind = function.blockNestingFromIndex(immediate);
-    var jumpKind = blockKind == BlockType.loopType ? 'continue' : 'break';
-
-    return Code('if (frame.pop() != 0) $jumpKind $label;');
+    return blockKind.generateBranchFor(function, label, scope,
+        popCondition: true);
   }
 }
 
 class Instruction_BrTable extends Instruction {
-  Instruction_BrTable() : super('br_table', 0x0E);
+  Instruction_BrTable() : super('br_table', 0x0E, '(u32) i32');
 
   @override
   Instr parsefromOpcodes(Reader r) {
@@ -191,35 +179,39 @@ class Instruction_BrTable extends Instruction {
     var labelIndexes = instr.args[0] as List<int>;
     var defaultIndex = instr.args[1] as int;
 
-    var switchStatement = StringBuffer('switch (t0) {');
+    var varName = function.scope.nextTempName;
+
+    var switchStatement = StringBuffer('switch ($varName) {');
     for (int i = 0; i < labelIndexes.length; i++) {
       var labelIndex = labelIndexes[i];
       var label = function.labelNameFromIndex(labelIndex);
+      var scope = function.scopeForIndex(labelIndex);
       var blockKind = function.blockNestingFromIndex(labelIndex);
-      var jumpKind = blockKind == BlockType.loopType ? 'continue' : 'break';
+      var code = blockKind.generateBranchFor(function, label, scope);
 
       switchStatement.writeln('case $i:');
-      switchStatement.writeln('$jumpKind $label;');
+      switchStatement.writeln(code.toString());
     }
-    switchStatement.writeln('default:');
     {
       var label = function.labelNameFromIndex(defaultIndex);
+      var scope = function.scopeForIndex(defaultIndex);
       var blockKind = function.blockNestingFromIndex(defaultIndex);
-      var jumpKind = blockKind == BlockType.loopType ? 'continue' : 'break';
+      var code = blockKind.generateBranchFor(function, label, scope);
 
-      switchStatement.writeln('$jumpKind $label;');
+      switchStatement.writeln('default:');
+      switchStatement.writeln(code.toString());
     }
     switchStatement.writeln('}');
 
     return Block.of([
-      declareVar('t0').assign(CodeExpression(Code('frame.pop()'))).statement,
+      declareVar(varName).assign(CodeExpression(Code('frame.pop()'))).statement,
       Code(switchStatement.toString()),
     ]);
   }
 }
 
 class Instruction_Return extends Instruction {
-  Instruction_Return() : super('return', 0x0F);
+  Instruction_Return() : super('return', 0x0F, '');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -233,9 +225,35 @@ class Instruction_Return extends Instruction {
   }
 }
 
+class BlockType {
+  compiler.ValueType? valueType;
+  compiler.FunctionType? functionType;
+
+  BlockType.from(int code, DefinedFunction function) {
+    if (code == -0x40) {
+      // no block type
+    } else if (code < 0) {
+      valueType = compiler.ValueType.fromCode(code & 0x7F);
+    } else {
+      functionType = function.module.functionTypes[code];
+    }
+  }
+
+  int get returnItems {
+    if (valueType != null) return 1;
+    if (functionType != null) return functionType!.resultType.length;
+    return 0;
+  }
+
+  String get describe {
+    if (valueType != null) return valueType!.name;
+    if (functionType != null) return functionType!.toString();
+    return '';
+  }
+}
+
 class Instruction_LocalGet extends Instruction {
-  Instruction_LocalGet()
-      : super('local.get', 0x20, immediates: [ValueType.u32]);
+  Instruction_LocalGet() : super('local.get', 0x20, '(u32) => any');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -247,8 +265,7 @@ class Instruction_LocalGet extends Instruction {
 }
 
 class Instruction_LocalSet extends Instruction {
-  Instruction_LocalSet()
-      : super('local.set', 0x21, immediates: [ValueType.u32]);
+  Instruction_LocalSet() : super('local.set', 0x21, '(u32) any');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -262,8 +279,7 @@ class Instruction_LocalSet extends Instruction {
 }
 
 class Instruction_LocalTee extends Instruction {
-  Instruction_LocalTee()
-      : super('local.tee', 0x22, immediates: [ValueType.u32]);
+  Instruction_LocalTee() : super('local.tee', 0x22, '(u32) any => any');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -277,8 +293,7 @@ class Instruction_LocalTee extends Instruction {
 }
 
 class Instruction_GlobalGet extends Instruction {
-  Instruction_GlobalGet()
-      : super('global.get', 0x23, immediates: [ValueType.u32]);
+  Instruction_GlobalGet() : super('global.get', 0x23, '(u32) => any');
 
   @override
   Code generateToStatement(Instr instr, ModuleFunction function) {
@@ -292,8 +307,7 @@ class Instruction_GlobalGet extends Instruction {
 }
 
 class Instruction_GlobalSet extends Instruction {
-  Instruction_GlobalSet()
-      : super('global.set', 0x24, immediates: [ValueType.u32]);
+  Instruction_GlobalSet() : super('global.set', 0x24, '(u32) any');
 
   @override
   Code generateToStatement(Instr instr, ModuleFunction function) {
@@ -308,8 +322,7 @@ class Instruction_GlobalSet extends Instruction {
 }
 
 class Instruction_TableGet extends Instruction {
-  Instruction_TableGet()
-      : super('table.get', 0x25, immediates: [ValueType.u32]);
+  Instruction_TableGet() : super('table.get', 0x25, '(u32) i32 => any');
 
   @override
   Code generateToStatement(Instr instr, ModuleFunction function) {
@@ -321,8 +334,7 @@ class Instruction_TableGet extends Instruction {
 }
 
 class Instruction_TableSet extends Instruction {
-  Instruction_TableSet()
-      : super('table.set', 0x26, immediates: [ValueType.u32]);
+  Instruction_TableSet() : super('table.set', 0x26, '(u32) i32 => any');
 
   @override
   Code generateToStatement(Instr instr, ModuleFunction function) {
@@ -340,7 +352,7 @@ class Instruction_TableSet extends Instruction {
 }
 
 class Instruction_Call extends Instruction {
-  Instruction_Call() : super('call', 0x10, immediates: [ValueType.u32]);
+  Instruction_Call() : super('call', 0x10, '(u32)');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -378,9 +390,7 @@ class Instruction_Call extends Instruction {
 }
 
 class Instruction_CallIndirect extends Instruction {
-  Instruction_CallIndirect()
-      : super('call_indirect', 0x11,
-            immediates: [ValueType.u32, ValueType.u32]);
+  Instruction_CallIndirect() : super('call_indirect', 0x11, '(u32 u32)');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -423,7 +433,7 @@ class Instruction_CallIndirect extends Instruction {
 
 class Instruction_MemoryInit extends Instruction {
   Instruction_MemoryInit()
-      : super('memory.init', 0x08, immediates: [ValueType.u32, ValueType.u32]);
+      : super('memory.init', 0x08, '(u32 u32) i32 i32 i32');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -447,8 +457,7 @@ class Instruction_MemoryInit extends Instruction {
 }
 
 class Instruction_TableInit extends Instruction {
-  Instruction_TableInit()
-      : super('table.init', 0x0C, immediates: [ValueType.u32, ValueType.u32]);
+  Instruction_TableInit() : super('table.init', 0x0C, '(u32 u32) i32 i32 i32');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -475,7 +484,7 @@ class Instruction_TableInit extends Instruction {
 }
 
 class Instruction_RefFunc extends Instruction {
-  Instruction_RefFunc() : super('ref.func', 0xD2, immediates: [ValueType.u32]);
+  Instruction_RefFunc() : super('ref.func', 0xD2, '(u32) => funcref');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -499,8 +508,15 @@ enum ValueType {
   f32,
   f64,
   funcref,
-  //
-  u32;
+  u32,
+  reftype,
+  any;
+
+  static ValueType fromString(String str) {
+    var ret = values.firstWhereOrNull((e) => e.name == str);
+    if (ret == null) throw 'no ValueType found for \'$str\'';
+    return ret;
+  }
 }
 
 class Literal {
@@ -559,17 +575,39 @@ class Instruction {
 
   final String name;
   final int opcode;
-  final List<ValueType> immediates;
-  final ValueType? returns;
-  final List<ValueType> args;
+  late final List<ValueType> immediates;
+  late final List<ValueType> params;
+  late final ValueType? returns;
 
-  Instruction(
-    this.name,
-    this.opcode, {
-    this.immediates = const [],
-    this.returns,
-    this.args = const [],
-  });
+  Instruction(this.name, this.opcode, String shorthand) {
+    _parseShorthand(shorthand);
+  }
+
+  void _parseShorthand(String shorthand) {
+    // '(immediates+) params* => return?'
+    if (shorthand.contains(')')) {
+      shorthand = shorthand.substring(1);
+      var imm = shorthand.substring(0, shorthand.indexOf(')'));
+      immediates = imm.split(' ').map(ValueType.fromString).toList();
+      shorthand = shorthand.substring(shorthand.indexOf(')') + 1).trim();
+    } else {
+      immediates = const [];
+    }
+
+    if (shorthand.contains('=>')) {
+      var ret = shorthand.substring(shorthand.indexOf('=>') + 2).trim();
+      returns = ValueType.fromString(ret);
+      shorthand = shorthand.substring(0, shorthand.indexOf('=>')).trim();
+    } else {
+      returns = null;
+    }
+
+    if (shorthand.isNotEmpty) {
+      params = shorthand.split(' ').map(ValueType.fromString).toList();
+    } else {
+      params = const [];
+    }
+  }
 
   String get methodName => name.replaceAll('.', '_');
 
@@ -614,6 +652,10 @@ class Instruction {
     } else {
       return frame.property(methodName).call([]).statement;
     }
+  }
+
+  void updateStackDepth(DefinedFunction function) {
+    function.scope.updateStackDepth((returns != null ? 1 : 0) - params.length);
   }
 
   @override
@@ -672,15 +714,15 @@ class Instruction {
       // reserved, 0x06 - 0x0A
       Instruction_End(), // end, 0x0B
       Instruction_Br(), // br, 0x0C
-      Instruction_BrLf(), // br_lf, 0x0D
+      Instruction_BrIf(), // br_if, 0x0D
       Instruction_BrTable(), // br_table, 0x0E
       Instruction_Return(), // return, 0x0F
       Instruction_Call(), // call, 0x10
       Instruction_CallIndirect(), // call_indirect, 0x11
       // reserved, 0x12 - 0x19
-      Instruction('drop', 0x1A),
-      Instruction('select', 0x1B),
-      Instruction('select_t', 0x1C, immediates: [ValueType.u32]),
+      Instruction('drop', 0x1A, 'any'),
+      Instruction('select', 0x1B, 'any any i32 => any'),
+      Instruction('select_t', 0x1C, '(u32) any any i32 => any'),
       // reserved, 0x1D - 0x1F
       Instruction_LocalGet(), // local.get, 0x20
       Instruction_LocalSet(), // local.set, 0x21
@@ -690,166 +732,166 @@ class Instruction {
       Instruction_TableGet(), // table.get, 0x25
       Instruction_TableSet(), // table.get, 0x26
       // reserved, 0x27
-      Instruction('i32.load', 0x28, immediates: _memarg),
-      Instruction('i64.load', 0x29, immediates: _memarg),
-      Instruction('f32.load', 0x2A, immediates: _memarg),
-      Instruction('f64.load', 0x2B, immediates: _memarg),
-      Instruction('i32.load8_s', 0x2C, immediates: _memarg),
-      Instruction('i32.load8_u', 0x2D, immediates: _memarg),
-      Instruction('i32.load16_s', 0x2E, immediates: _memarg),
-      Instruction('i32.load16_u', 0x2F, immediates: _memarg),
-      Instruction('i64.load8_s', 0x30, immediates: _memarg),
-      Instruction('i64.load8_u', 0x31, immediates: _memarg),
-      Instruction('i64.load16_s', 0x32, immediates: _memarg),
-      Instruction('i64.load16_u', 0x33, immediates: _memarg),
-      Instruction('i64.load32_s', 0x34, immediates: _memarg),
-      Instruction('i64.load32_u', 0x35, immediates: _memarg),
-      Instruction('i32.store', 0x36, immediates: _memarg),
-      Instruction('i64.store', 0x37, immediates: _memarg),
-      Instruction('f32.store', 0x38, immediates: _memarg),
-      Instruction('f64.store', 0x39, immediates: _memarg),
-      Instruction('i32.store8', 0x3A, immediates: _memarg),
-      Instruction('i32.store16', 0x3B, immediates: _memarg),
-      Instruction('i64.store8', 0x3C, immediates: _memarg),
-      Instruction('i64.store16', 0x3D, immediates: _memarg),
-      Instruction('i64.store32', 0x3E, immediates: _memarg),
-      Instruction('memory.size', 0x3F, immediates: [ValueType.u32]),
-      Instruction('memory.grow', 0x40, immediates: [ValueType.u32]),
-      Instruction('i32.const', i32ConstOpcode, immediates: [ValueType.i32]),
-      Instruction('i64.const', i64ConstOpcode, immediates: [ValueType.i64]),
-      Instruction('f32.const', f32ConstOpcode, immediates: [ValueType.f32]),
-      Instruction('f64.const', f64ConstOpcode, immediates: [ValueType.f64]),
-      Instruction('i32.eqz', 0x45),
-      Instruction('i32.eq', 0x46),
-      Instruction('i32.ne', 0x47),
-      Instruction('i32.lt_s', 0x48),
-      Instruction('i32.lt_u', 0x49),
-      Instruction('i32.gt_s', 0x4A),
-      Instruction('i32.gt_u', 0x4B),
-      Instruction('i32.le_s', 0x4C),
-      Instruction('i32.le_u', 0x4D),
-      Instruction('i32.ge_s', 0x4E),
-      Instruction('i32.ge_u', 0x4F),
-      Instruction('i64.eqz', 0x50),
-      Instruction('i64.eq', 0x51),
-      Instruction('i64.ne', 0x52),
-      Instruction('i64.lt_s', 0x53),
-      Instruction('i64.lt_u', 0x54),
-      Instruction('i64.gt_s', 0x55),
-      Instruction('i64.gt_u', 0x56),
-      Instruction('i64.le_s', 0x57),
-      Instruction('i64.le_u', 0x58),
-      Instruction('i64.ge_s', 0x59),
-      Instruction('i64.ge_u', 0x5A),
-      Instruction('f32.eq', 0x5B),
-      Instruction('f32.ne', 0x5C),
-      Instruction('f32.lt', 0x5D),
-      Instruction('f32.gt', 0x5E),
-      Instruction('f32.le', 0x5F),
-      Instruction('f32.ge', 0x60),
-      Instruction('f64.eq', 0x61),
-      Instruction('f64.ne', 0x62),
-      Instruction('f64.lt', 0x63),
-      Instruction('f64.gt', 0x64),
-      Instruction('f64.le', 0x65),
-      Instruction('f64.ge', 0x66),
-      Instruction('i32.clz', 0x67),
-      Instruction('i32.ctz', 0x68),
-      Instruction('i32.popcnt', 0x69),
-      Instruction('i32.add', 0x6A),
-      Instruction('i32.sub', 0x6B),
-      Instruction('i32.mul', 0x6C),
-      Instruction('i32.div_s', 0x6D),
-      Instruction('i32.div_u', 0x6E),
-      Instruction('i32.rem_s', 0x6F),
-      Instruction('i32.rem_u', 0x70),
-      Instruction('i32.and', 0x71),
-      Instruction('i32.or', 0x72),
-      Instruction('i32.xor', 0x73),
-      Instruction('i32.shl', 0x74),
-      Instruction('i32.shr_s', 0x75),
-      Instruction('i32.shr_u', 0x76),
-      Instruction('i32.rotl', 0x77),
-      Instruction('i32.rotr', 0x78),
-      Instruction('i64.clz', 0x79),
-      Instruction('i64.ctz', 0x7A),
-      Instruction('i64.popcnt', 0x7B),
-      Instruction('i64.add', 0x7C),
-      Instruction('i64.sub', 0x7D),
-      Instruction('i64.mul', 0x7E),
-      Instruction('i64.div_s', 0x7F),
-      Instruction('i64.div_u', 0x80),
-      Instruction('i64.rem_s', 0x81),
-      Instruction('i64.rem_u', 0x82),
-      Instruction('i64.and', 0x83),
-      Instruction('i64.or', 0x84),
-      Instruction('i64.xor', 0x85),
-      Instruction('i64.shl', 0x86),
-      Instruction('i64.shr_s', 0x87),
-      Instruction('i64.shr_u', 0x88),
-      Instruction('i64.rotl', 0x89),
-      Instruction('i64.rotr', 0x8A),
-      Instruction('f32.abs', 0x8B),
-      Instruction('f32.neg', 0x8C),
-      Instruction('f32.ceil', 0x8D),
-      Instruction('f32.floor', 0x8E),
-      Instruction('f32.trunc', 0x8F),
-      Instruction('f32.nearest', 0x90),
-      Instruction('f32.sqrt', 0x91),
-      Instruction('f32.add', 0x92),
-      Instruction('f32.sub', 0x93),
-      Instruction('f32.mul', 0x94),
-      Instruction('f32.div', 0x95),
-      Instruction('f32.min', 0x96),
-      Instruction('f32.max', 0x97),
-      Instruction('f32.copysign', 0x98),
-      Instruction('f64.abs', 0x99),
-      Instruction('f64.neg', 0x9A),
-      Instruction('f64.ceil', 0x9B),
-      Instruction('f64.foor', 0x9C),
-      Instruction('f64.trunc', 0x9D),
-      Instruction('f64.nearest', 0x9E),
-      Instruction('f64.sqrt', 0x9F),
-      Instruction('f64.add', 0xA0),
-      Instruction('f64.sub', 0xA1),
-      Instruction('f64.mul', 0xA2),
-      Instruction('f64.div', 0xA3),
-      Instruction('f64.min', 0xA4),
-      Instruction('f64.max', 0xA5),
-      Instruction('f64.copysign', 0xA6),
-      Instruction('i32.wrap_i64', 0xA7),
-      Instruction('i32.trunc_f32_s', 0xA8),
-      Instruction('i32.trunc_f32_u', 0xA9),
-      Instruction('i32.trunc_f64_s', 0xAA),
-      Instruction('i32.trunc_f64_u', 0xAB),
-      Instruction('i64.extend_i32_s', 0xAC),
-      Instruction('i64.extend_i32_u', 0xAD),
-      Instruction('i64.trunc_f32_s', 0xAE),
-      Instruction('i64.trunc_f32_u', 0xAF),
-      Instruction('i64.trunc_f64_s', 0xB0),
-      Instruction('i64.trunc_f64_u', 0xB1),
-      Instruction('f32.convert_i32_s', 0xB2),
-      Instruction('f32.convert_i32_u', 0xB3),
-      Instruction('f32.convert_i64_s', 0xB4),
-      Instruction('f32.convert_i64_u', 0xB5),
-      Instruction('f32.demote_f64', 0xB6),
-      Instruction('f64.convert_i32_s', 0xB7),
-      Instruction('f64.convert_i32_u', 0xB8),
-      Instruction('f64.convert_i64_s', 0xB9),
-      Instruction('f64.convert_i64_u', 0xBA),
-      Instruction('f64.promote_f32', 0xBB),
-      Instruction('i32.reinterpret_f32', 0xBC),
-      Instruction('i64.reinterpret_f64', 0xBD),
-      Instruction('f32.reinterpret_i32', 0xBE),
-      Instruction('f64.reinterpret_i64', 0xBF),
-      Instruction('i32.extend8_s', 0xC0),
-      Instruction('i32.extend16_s', 0xC1),
-      Instruction('i64.extend8_s', 0xC2),
-      Instruction('i64.extend16_s', 0xC3),
-      Instruction('i64.extend32_s', 0xC4),
+      Instruction('i32.load', 0x28, '(u32 u32) i32 => i32'),
+      Instruction('i64.load', 0x29, '(u32 u32) i32 => i64'),
+      Instruction('f32.load', 0x2A, '(u32 u32) i32 => f32'),
+      Instruction('f64.load', 0x2B, '(u32 u32) i32 => f64'),
+      Instruction('i32.load8_s', 0x2C, '(u32 u32) i32 => i32'),
+      Instruction('i32.load8_u', 0x2D, '(u32 u32) i32 => i32'),
+      Instruction('i32.load16_s', 0x2E, '(u32 u32) i32 => i32'),
+      Instruction('i32.load16_u', 0x2F, '(u32 u32) i32 => i32'),
+      Instruction('i64.load8_s', 0x30, '(u32 u32) i32 => i64'),
+      Instruction('i64.load8_u', 0x31, '(u32 u32) i32 => i64'),
+      Instruction('i64.load16_s', 0x32, '(u32 u32) i32 => i64'),
+      Instruction('i64.load16_u', 0x33, '(u32 u32) i32 => i64'),
+      Instruction('i64.load32_s', 0x34, '(u32 u32) i32 => i64'),
+      Instruction('i64.load32_u', 0x35, '(u32 u32) i32 => i64'),
+      Instruction('i32.store', 0x36, '(u32 u32) i32 i32'),
+      Instruction('i64.store', 0x37, '(u32 u32) i32 i64'),
+      Instruction('f32.store', 0x38, '(u32 u32) i32 f32'),
+      Instruction('f64.store', 0x39, '(u32 u32) i32 f64'),
+      Instruction('i32.store8', 0x3A, '(u32 u32) i32 i32'),
+      Instruction('i32.store16', 0x3B, '(u32 u32) i32 i32'),
+      Instruction('i64.store8', 0x3C, '(u32 u32) i32 i64'),
+      Instruction('i64.store16', 0x3D, '(u32 u32) i32 i64'),
+      Instruction('i64.store32', 0x3E, '(u32 u32) i32 i64'),
+      Instruction('memory.size', 0x3F, '(u32) => i32'),
+      Instruction('memory.grow', 0x40, '(u32) i32 => i32'),
+      Instruction('i32.const', i32ConstOpcode, '(i32) => i32'),
+      Instruction('i64.const', i64ConstOpcode, '(i64) => i64'),
+      Instruction('f32.const', f32ConstOpcode, '(f32) => f32'),
+      Instruction('f64.const', f64ConstOpcode, '(f64) => f64'),
+      Instruction('i32.eqz', 0x45, 'i32 => i32'),
+      Instruction('i32.eq', 0x46, 'i32 i32 => i32'),
+      Instruction('i32.ne', 0x47, 'i32 i32 => i32'),
+      Instruction('i32.lt_s', 0x48, 'i32 i32 => i32'),
+      Instruction('i32.lt_u', 0x49, 'i32 i32 => i32'),
+      Instruction('i32.gt_s', 0x4A, 'i32 i32 => i32'),
+      Instruction('i32.gt_u', 0x4B, 'i32 i32 => i32'),
+      Instruction('i32.le_s', 0x4C, 'i32 i32 => i32'),
+      Instruction('i32.le_u', 0x4D, 'i32 i32 => i32'),
+      Instruction('i32.ge_s', 0x4E, 'i32 i32 => i32'),
+      Instruction('i32.ge_u', 0x4F, 'i32 i32 => i32'),
+      Instruction('i64.eqz', 0x50, 'i64 => i32'),
+      Instruction('i64.eq', 0x51, 'i64 i64 => i32'),
+      Instruction('i64.ne', 0x52, 'i64 i64 => i32'),
+      Instruction('i64.lt_s', 0x53, 'i64 i64 => i32'),
+      Instruction('i64.lt_u', 0x54, 'i64 i64 => i32'),
+      Instruction('i64.gt_s', 0x55, 'i64 i64 => i32'),
+      Instruction('i64.gt_u', 0x56, 'i64 i64 => i32'),
+      Instruction('i64.le_s', 0x57, 'i64 i64 => i32'),
+      Instruction('i64.le_u', 0x58, 'i64 i64 => i32'),
+      Instruction('i64.ge_s', 0x59, 'i64 i64 => i32'),
+      Instruction('i64.ge_u', 0x5A, 'i64 i64 => i32'),
+      Instruction('f32.eq', 0x5B, 'f32 f32 => i32'),
+      Instruction('f32.ne', 0x5C, 'f32 f32 => i32'),
+      Instruction('f32.lt', 0x5D, 'f32 f32 => i32'),
+      Instruction('f32.gt', 0x5E, 'f32 f32 => i32'),
+      Instruction('f32.le', 0x5F, 'f32 f32 => i32'),
+      Instruction('f32.ge', 0x60, 'f32 f32 => i32'),
+      Instruction('f64.eq', 0x61, 'f64 f64 => i32'),
+      Instruction('f64.ne', 0x62, 'f64 f64 => i32'),
+      Instruction('f64.lt', 0x63, 'f64 f64 => i32'),
+      Instruction('f64.gt', 0x64, 'f64 f64 => i32'),
+      Instruction('f64.le', 0x65, 'f64 f64 => i32'),
+      Instruction('f64.ge', 0x66, 'f64 f64 => i32'),
+      Instruction('i32.clz', 0x67, 'i32 => i32'),
+      Instruction('i32.ctz', 0x68, 'i32 => i32'),
+      Instruction('i32.popcnt', 0x69, 'i32 => i32'),
+      Instruction('i32.add', 0x6A, 'i32 i32 => i32'),
+      Instruction('i32.sub', 0x6B, 'i32 i32 => i32'),
+      Instruction('i32.mul', 0x6C, 'i32 i32 => i32'),
+      Instruction('i32.div_s', 0x6D, 'i32 i32 => i32'),
+      Instruction('i32.div_u', 0x6E, 'i32 i32 => i32'),
+      Instruction('i32.rem_s', 0x6F, 'i32 i32 => i32'),
+      Instruction('i32.rem_u', 0x70, 'i32 i32 => i32'),
+      Instruction('i32.and', 0x71, 'i32 i32 => i32'),
+      Instruction('i32.or', 0x72, 'i32 i32 => i32'),
+      Instruction('i32.xor', 0x73, 'i32 i32 => i32'),
+      Instruction('i32.shl', 0x74, 'i32 i32 => i32'),
+      Instruction('i32.shr_s', 0x75, 'i32 i32 => i32'),
+      Instruction('i32.shr_u', 0x76, 'i32 i32 => i32'),
+      Instruction('i32.rotl', 0x77, 'i32 i32 => i32'),
+      Instruction('i32.rotr', 0x78, 'i32 i32 => i32'),
+      Instruction('i64.clz', 0x79, 'i64 => i64'),
+      Instruction('i64.ctz', 0x7A, 'i64 => i64'),
+      Instruction('i64.popcnt', 0x7B, 'i64 => i64'),
+      Instruction('i64.add', 0x7C, 'i64 i64 => i64'),
+      Instruction('i64.sub', 0x7D, 'i64 i64 => i64'),
+      Instruction('i64.mul', 0x7E, 'i64 i64 => i64'),
+      Instruction('i64.div_s', 0x7F, 'i64 i64 => i64'),
+      Instruction('i64.div_u', 0x80, 'i64 i64 => i64'),
+      Instruction('i64.rem_s', 0x81, 'i64 i64 => i64'),
+      Instruction('i64.rem_u', 0x82, 'i64 i64 => i64'),
+      Instruction('i64.and', 0x83, 'i64 i64 => i64'),
+      Instruction('i64.or', 0x84, 'i64 i64 => i64'),
+      Instruction('i64.xor', 0x85, 'i64 i64 => i64'),
+      Instruction('i64.shl', 0x86, 'i64 i64 => i64'),
+      Instruction('i64.shr_s', 0x87, 'i64 i64 => i64'),
+      Instruction('i64.shr_u', 0x88, 'i64 i64 => i64'),
+      Instruction('i64.rotl', 0x89, 'i64 i64 => i64'),
+      Instruction('i64.rotr', 0x8A, 'i64 i64 => i64'),
+      Instruction('f32.abs', 0x8B, 'f32 => f32'),
+      Instruction('f32.neg', 0x8C, 'f32 => f32'),
+      Instruction('f32.ceil', 0x8D, 'f32 => f32'),
+      Instruction('f32.floor', 0x8E, 'f32 => f32'),
+      Instruction('f32.trunc', 0x8F, 'f32 => f32'),
+      Instruction('f32.nearest', 0x90, 'f32 => f32'),
+      Instruction('f32.sqrt', 0x91, 'f32 => f32'),
+      Instruction('f32.add', 0x92, 'f32 f32 => f32'),
+      Instruction('f32.sub', 0x93, 'f32 f32 => f32'),
+      Instruction('f32.mul', 0x94, 'f32 f32 => f32'),
+      Instruction('f32.div', 0x95, 'f32 f32 => f32'),
+      Instruction('f32.min', 0x96, 'f32 f32 => f32'),
+      Instruction('f32.max', 0x97, 'f32 f32 => f32'),
+      Instruction('f32.copysign', 0x98, 'f32 f32 => f32'),
+      Instruction('f64.abs', 0x99, 'f64 => f64'),
+      Instruction('f64.neg', 0x9A, 'f64 => f64'),
+      Instruction('f64.ceil', 0x9B, 'f64 => f64'),
+      Instruction('f64.foor', 0x9C, 'f64 => f64'),
+      Instruction('f64.trunc', 0x9D, 'f64 => f64'),
+      Instruction('f64.nearest', 0x9E, 'f64 => f64'),
+      Instruction('f64.sqrt', 0x9F, 'f64 => f64'),
+      Instruction('f64.add', 0xA0, 'f64 f64 => f64'),
+      Instruction('f64.sub', 0xA1, 'f64 f64 => f64'),
+      Instruction('f64.mul', 0xA2, 'f64 f64 => f64'),
+      Instruction('f64.div', 0xA3, 'f64 f64 => f64'),
+      Instruction('f64.min', 0xA4, 'f64 f64 => f64'),
+      Instruction('f64.max', 0xA5, 'f64 f64 => f64'),
+      Instruction('f64.copysign', 0xA6, 'f64 f64 => f64'),
+      Instruction('i32.wrap_i64', 0xA7, 'i64 => i32'),
+      Instruction('i32.trunc_f32_s', 0xA8, 'f32 => i32'),
+      Instruction('i32.trunc_f32_u', 0xA9, 'f32 => i32'),
+      Instruction('i32.trunc_f64_s', 0xAA, 'f64 => i32'),
+      Instruction('i32.trunc_f64_u', 0xAB, 'f64 => i32'),
+      Instruction('i64.extend_i32_s', 0xAC, 'i32 => i64'),
+      Instruction('i64.extend_i32_u', 0xAD, 'i32 => i64'),
+      Instruction('i64.trunc_f32_s', 0xAE, 'f32 => i64'),
+      Instruction('i64.trunc_f32_u', 0xAF, 'f32 => i64'),
+      Instruction('i64.trunc_f64_s', 0xB0, 'f64 => i64'),
+      Instruction('i64.trunc_f64_u', 0xB1, 'f64 => i64'),
+      Instruction('f32.convert_i32_s', 0xB2, 'i32 => f32'),
+      Instruction('f32.convert_i32_u', 0xB3, 'i32 => f32'),
+      Instruction('f32.convert_i64_s', 0xB4, 'i64 => f32'),
+      Instruction('f32.convert_i64_u', 0xB5, 'i64 => f32'),
+      Instruction('f32.demote_f64', 0xB6, 'f64 => f32'),
+      Instruction('f64.convert_i32_s', 0xB7, 'i32 => f64'),
+      Instruction('f64.convert_i32_u', 0xB8, 'i32 => f64'),
+      Instruction('f64.convert_i64_s', 0xB9, 'i64 => f64'),
+      Instruction('f64.convert_i64_u', 0xBA, 'i64 => f64'),
+      Instruction('f64.promote_f32', 0xBB, 'f32 => f64'),
+      Instruction('i32.reinterpret_f32', 0xBC, 'f32 => i32'),
+      Instruction('i64.reinterpret_f64', 0xBD, 'f64 => i64'),
+      Instruction('f32.reinterpret_i32', 0xBE, 'i32 => f32'),
+      Instruction('f64.reinterpret_i64', 0xBF, 'i64 => f64'),
+      Instruction('i32.extend8_s', 0xC0, 'i32 => i32'),
+      Instruction('i32.extend16_s', 0xC1, 'i32 => i32'),
+      Instruction('i64.extend8_s', 0xC2, 'i64 => i64'),
+      Instruction('i64.extend16_s', 0xC3, 'i64 => i64'),
+      Instruction('i64.extend32_s', 0xC4, 'i64 => i64'),
       // reserved, 0xC5 - 0xCF
-      Instruction('ref.null', 0xD0, immediates: [ValueType.u32]),
-      Instruction('ref.is_null', 0xD1),
+      Instruction('ref.null', 0xD0, '(u32) => reftype'),
+      Instruction('ref.is_null', 0xD1, 'reftype => i32'),
       Instruction_RefFunc(), // ref.func, 0xD2
       // reserved, 0xD3 - 0xFB
       // 0xFC - overflow (below)
@@ -857,33 +899,28 @@ class Instruction {
     ];
   }
 
-  // TODO: look for table, memory instructions that can be converted into
-  // runtime methods (from generated code)
-
   static List<Instruction> _initOverflow() {
     // 0xFC 0xXX
 
     return [
-      Instruction('i32.trunc_sat_f32_s', 0x00),
-      Instruction('i32.trunc_sat_f32_u', 0x01),
-      Instruction('i32.trunc_sat_f64_s', 0x02),
-      Instruction('i32.trunc_sat_f64_u', 0x03),
-      Instruction('i64.trunc_sat_f32_s', 0x04),
-      Instruction('i64.trunc_sat_f32_u', 0x05),
-      Instruction('i64.trunc_sat_f64_s', 0x06),
-      Instruction('i64.trunc_sat_f64_u', 0x07),
+      Instruction('i32.trunc_sat_f32_s', 0x00, 'f32 => i32'),
+      Instruction('i32.trunc_sat_f32_u', 0x01, 'f32 => i32'),
+      Instruction('i32.trunc_sat_f64_s', 0x02, 'f64 => i32'),
+      Instruction('i32.trunc_sat_f64_u', 0x03, 'f64 => i32'),
+      Instruction('i64.trunc_sat_f32_s', 0x04, 'f32 => i64'),
+      Instruction('i64.trunc_sat_f32_u', 0x05, 'f32 => i64'),
+      Instruction('i64.trunc_sat_f64_s', 0x06, 'f64 => i64'),
+      Instruction('i64.trunc_sat_f64_u', 0x07, 'f64 => i64'),
       Instruction_MemoryInit(), // memory.init, 0x08
-      Instruction('data.drop', 0x09, immediates: [ValueType.u32]),
-      Instruction('memory.copy', 0x0A,
-          immediates: [ValueType.u32, ValueType.u32]),
-      Instruction('memory.fill', 0x0B, immediates: [ValueType.u32]),
+      Instruction('data.drop', 0x09, '(u32)'),
+      Instruction('memory.copy', 0x0A, '(u32 u32) i32 i32 i32'),
+      Instruction('memory.fill', 0x0B, '(u32) i32 i32 i32'),
       Instruction_TableInit(), // table.init, 0x0C
-      Instruction('elem.drop', 0x0D, immediates: [ValueType.u32]),
-      Instruction('table.copy', 0x0E,
-          immediates: [ValueType.u32, ValueType.u32]),
-      Instruction('table.grow', 0x0F, immediates: [ValueType.u32]),
-      Instruction('table.size', 0x10, immediates: [ValueType.u32]),
-      Instruction('table.fill', 0x11, immediates: [ValueType.u32]),
+      Instruction('elem.drop', 0x0D, '(u32)'),
+      Instruction('table.copy', 0x0E, '(u32 u32) i32 i32 i32'),
+      Instruction('table.grow', 0x0F, '(u32) reftype i32 => i32'),
+      Instruction('table.size', 0x10, '(u32) => i32'),
+      Instruction('table.fill', 0x11, '(u32) i32 reftype i32'),
     ];
   }
 }
