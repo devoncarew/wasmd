@@ -25,7 +25,7 @@ jobs:
           echo "File sizes in KB"
           echo ""
           ls -skS -1 -R test/spec/**/*.dart
-          ls -skS -1 -R samples/**/*.dart
+          ls -skS -1 -R samples/*.dart
 
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
