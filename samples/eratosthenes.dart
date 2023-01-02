@@ -330,6 +330,7 @@ class EratosthenesModule implements Module {
             frame.i32_const(3);
             frame.i32_add();
             local0 = frame.pop();
+            frame.unwindTo(6, 0);
             break block_label_2;
           }
           frame.push(arg0);
