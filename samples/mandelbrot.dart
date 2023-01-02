@@ -201,6 +201,7 @@ class MandelbrotModule implements Module {
                   frame.i32_ge_u();
                   if_label_7:
                   if (frame.pop() != 0) {
+                    frame.unwindTo(0, 0);
                     break block_label_4;
                   }
                   frame.push(iteration);
