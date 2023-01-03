@@ -7,6 +7,7 @@ spec/test/core/block.wast
 spec/test/core/br.wast
 spec/test/core/br_if.wast
 spec/test/core/br_table.wast
+  - large switch statement
 spec/test/core/bulk.wast
 spec/test/core/call.wast
 spec/test/core/call_indirect.wast

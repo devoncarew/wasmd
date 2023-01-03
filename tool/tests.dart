@@ -2,13 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
+import 'package:cli_util/cli_logging.dart' as cli;
 
 void main(List<String> args) async {
-  print('Running test suite...');
+  final verbose = args.contains('-v');
+
+  var logger = cli.Logger.standard();
+  var progress = logger.progress('Running test suite');
 
   var result = await Process.run(
       Platform.resolvedExecutable, ['test', '--reporter=json']);
 
+  progress.finish(showTiming: true);
   print('');
 
   var lines = (result.stdout as String).split('\n').where((l) => l.isNotEmpty);
@@ -61,6 +66,7 @@ void main(List<String> args) async {
       .where((l) => !l.startsWith('#'))
       .toList();
 
+// print timming
   var allTests = tests.values.where((t) => !(t.hidden ?? false)).toList();
   allTests.sort();
 
@@ -86,8 +92,12 @@ void main(List<String> args) async {
   }
 
   print('## Passed (${passed.length})');
-  for (var test in passed) {
-    print(test.describe);
+  if (verbose) {
+    for (var test in passed) {
+      print(test.describe);
+    }
+  } else {
+    print('  (hidding passing tests; use \'-v\' to show all tests)');
   }
   print('');
 
@@ -152,16 +162,17 @@ class Test implements Comparable<Test> {
     return url != null ? p.relative(Uri.parse(url!).toFilePath()) : null;
   }
 
+  String? _pathName;
+
+  String get pathAndName => _pathName ?? (_pathName = '$path $name');
+
   void addError(String error) => errors.add(error);
 
   void addMessage(String message) => messages.add(message);
 
   @override
   int compareTo(Test other) {
-    var a = '$path $name';
-    var b = '${other.path} ${other.name}';
-
-    return a.compareTo(b);
+    return pathAndName.compareTo(other.pathAndName);
   }
 }
 
