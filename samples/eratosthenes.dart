@@ -74,7 +74,7 @@ class EratosthenesModule implements Module {
         var t0 = frame.pop();
         envImports.abort(t0, t1, t2, t3);
       }
-      throw 'unreachable';
+      throw Trap('unreachable');
     }
     frame.push(local1);
     frame.i32_const(0x3fffffec);
@@ -92,7 +92,7 @@ class EratosthenesModule implements Module {
         var t0 = frame.pop();
         envImports.abort(t0, t1, t2, t3);
       }
-      throw 'unreachable';
+      throw Trap('unreachable');
     }
     frame.push(local1);
     frame.i32_const(16);
@@ -113,7 +113,7 @@ class EratosthenesModule implements Module {
         var t0 = frame.pop();
         envImports.abort(t0, t1, t2, t3);
       }
-      throw 'unreachable';
+      throw Trap('unreachable');
     }
     frame.push(globals.global0);
     local2 = frame.peek();
@@ -170,7 +170,7 @@ class EratosthenesModule implements Module {
         frame.i32_lt_s();
         if_label_2:
         if (frame.pop() != 0) {
-          throw 'unreachable';
+          throw Trap('unreachable');
         }
       }
     }
@@ -359,7 +359,7 @@ class EratosthenesModule implements Module {
       var t0 = frame.pop();
       envImports.abort(t0, t1, t2, t3);
     }
-    throw 'unreachable';
+    throw Trap('unreachable');
   }
 
   void _func2() {

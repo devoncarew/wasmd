@@ -85,7 +85,7 @@
 | unreachable.wast | xxx |
 | unreached-invalid.wast | xxx |
 | unreached-valid.wast | xxx |
-| unwind.wast | xxx |
+| unwind.wast | - |
 | utf8-custom-section-id.wast | xxx |
 | utf8-import-field.wast | xxx |
 | utf8-import-module.wast | xxx |

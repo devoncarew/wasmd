@@ -18,7 +18,7 @@ class Start8Module implements Module {
 
   void main() {
     final frame = Frame(this);
-    throw 'unreachable';
+    throw Trap('unreachable');
   }
 }
 

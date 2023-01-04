@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names, camel_case_types
+// ignore_for_file: constant_identifier_names
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:async';
@@ -28,7 +28,7 @@ class Compiler {
     var library = LibraryBuilder();
     library.comments.add('Generated from ${file.path}.');
     library.ignoreForFile.addAll([
-      'camel_case_types',
+      'camel_case_types', // todo: remove this
       'dead_code',
       'non_constant_identifier_names',
       'unused_element',
@@ -1202,14 +1202,20 @@ enum BlockType {
     DefinedFunction function,
     String? label,
     Scope scope, {
+    String? name,
     bool popCondition = false,
   }) {
+    var desc = ''; // name == null ? '' : ' /* $name */';
+
     if (returnType) {
+      var code = popCondition ? 'if (frame.pop() != 0) {\n' : '';
       if (function.returnsVoid) {
-        return Code('return;');
+        code += 'return;$desc\n';
       } else {
-        return Code('return frame.pop();');
+        code += 'return frame.pop();$desc\n';
       }
+      if (popCondition) code += '}';
+      return Code(code.trimRight());
     } else {
       var jumpKind = loopType ? 'continue' : 'break';
 
@@ -1219,10 +1225,8 @@ enum BlockType {
         code +=
             '  frame.unwindTo(${scope.entryDepth}, ${scope.blockArgCount});\n';
       }
-      code += '  $jumpKind $label;\n';
-      if (popCondition) {
-        code += '}';
-      }
+      code += '  $jumpKind $label;$desc\n';
+      if (popCondition) code += '}';
       return Code(code);
     }
   }
@@ -1526,7 +1530,9 @@ class DefinedFunction extends ModuleFunction {
 
   BlockType blockNestingFromIndex(int index) {
     // Special case asking for the outermost nesting - the function entrypoint.
-    if (index == nesting.length) return BlockType.$return;
+    if (index == nesting.length) {
+      return BlockType.$return;
+    }
 
     return nesting[nesting.length - 1 - index];
   }
