@@ -33,13 +33,13 @@
 | forward.wast | - |
 | func.wast | multiple return values not currently supported |
 | func_ptrs.wast | - |
-| global.wast | xxx |
+| global.wast | unimplemented import global |
 | i32.wast | - |
 | i64.wast | - |
-| if.wast | xxx |
-| imports.wast | xxx |
-| inline-module.wast | xxx |
-| int_exprs.wast | xxx |
+| if.wast | multiple return values not currently supported |
+| imports.wast | unimplemented import global |
+| inline-module.wast | no tests |
+| int_exprs.wast | - |
 | int_literals.wast | - |
 | labels.wast | xxx |
 | left-to-right.wast | - |
