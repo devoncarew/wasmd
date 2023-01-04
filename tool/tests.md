@@ -29,7 +29,7 @@
 | float_exprs.wast | - |
 | float_literals.wast | - |
 | float_memory.wast | - |
-| float_misc.wast | xxx |
+| float_misc.wast | - |
 | forward.wast | - |
 | func.wast | xxx |
 | func_ptrs.wast | xxx |
