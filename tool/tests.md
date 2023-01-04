@@ -18,7 +18,7 @@
 | data.wast | npe |
 | elem.wast | unimplemented import table |
 | endianness.wast | - |
-| exports.wast | xxx |
+| exports.wast | - |
 | f32.wast | - |
 | f32_bitwise.wast | - |
 | f32_cmp.wast | - |

@@ -478,6 +478,12 @@ class Compiler {
           _log("  export func '$name' (#$functionIndex)");
           module.exportFunction(patchUpName(name), functionIndex);
           break;
+        case 0x01:
+          // tableidx
+          var tableIndex = r.leb128();
+          _log("  export table '$name' (#$tableIndex)");
+          module.exportTable(patchUpName(name), tableIndex);
+          break;
         case 0x02:
           // memidx
           var memoryIndex = r.leb128();
@@ -491,7 +497,7 @@ class Compiler {
           module.globals.exportGlobal(name, globalIndex);
           break;
         default:
-          throw 'unhandled type: ${type.toRadixString(16)}';
+          throw 'export type not supported: ${type.toRadixString(16)}';
       }
     }
   }
@@ -761,6 +767,22 @@ void printModule(
               module.tables.map((t) => refer('table${tableIndex++}'))).code,
       ),
     );
+
+    // TODO: determine whether we need to export tables
+    // for (int i = 0; i < module.tables.length; i++) {
+    //   var table = module.tables[i];
+    //   if (table.exportName == null) continue;
+    //   classBuilder.methods.add(
+    //     Method(
+    //       (b) => b
+    //         ..name = table.exportName
+    //         ..returns = Reference('Table')
+    //         ..type = MethodType.getter
+    //         ..lambda = true
+    //         ..body = Code('table$i'),
+    //     ),
+    //   );
+    // }
   }
 
   // elementSegments reference
@@ -838,6 +860,11 @@ void printModule(
     }
     var method = func.generateToMethod();
     classBuilder.methods.add(method);
+
+    // handle the case where a function is exported multiple times
+    if (func.hasMultipleExports) {
+      func.generateAdditionalExports(classBuilder);
+    }
   }
 
   if (module.elementSegments.isNotEmpty) {
@@ -1315,6 +1342,10 @@ class Module {
     // we make the memory field visible by default
   }
 
+  void exportTable(String name, int tableIndex) {
+    tables[tableIndex].exportName = name;
+  }
+
   ModuleFunction? functionByIndex(int functionIndex) {
     return allFunctions[functionIndex];
   }
@@ -1429,7 +1460,6 @@ abstract class ModuleFunction {
 class DefinedFunction extends ModuleFunction {
   final int generatedIndex;
 
-  String? exportName;
   DebugInfo? debugInfo;
 
   List<ValueType> locals = [];
@@ -1440,6 +1470,8 @@ class DefinedFunction extends ModuleFunction {
   final List<BlockType> nesting = [];
   final List<Scope> scopes = [Scope()];
 
+  final List<String> exportedAs = [];
+
   DefinedFunction(super.module, super.typeIndex, this.generatedIndex);
 
   @override
@@ -1449,8 +1481,10 @@ class DefinedFunction extends ModuleFunction {
   String toString() => name;
 
   void exportAs(String name) {
-    exportName = name;
+    exportedAs.add(name);
   }
+
+  String? get exportName => exportedAs.firstOrNull;
 
   void setLocals(List<ValueType> locals) {
     this.locals = locals;
@@ -1496,6 +1530,8 @@ class DefinedFunction extends ModuleFunction {
 
     return nesting[nesting.length - 1 - index];
   }
+
+  bool get hasMultipleExports => exportedAs.length > 1;
 
   Method generateToMethod() {
     var method = MethodBuilder();
@@ -1563,6 +1599,34 @@ class DefinedFunction extends ModuleFunction {
 
     return method.build();
   }
+
+  /// This method is only used if a function is exported more than once.
+  void generateAdditionalExports(ClassBuilder classBuilder) {
+    for (var name in exportedAs.skip(1)) {
+      var method = MethodBuilder();
+      method.name = name;
+      method.returns = refer(functionType.resultTypeDisplayName);
+
+      var params = functionType.parameterTypes;
+      for (int paramIndex = 0; paramIndex < params.length; paramIndex++) {
+        method.requiredParameters.add(
+          Parameter(
+            (p) => p
+              ..name = 'arg$paramIndex'
+              ..type = refer(params[paramIndex].typeName),
+          ),
+        );
+      }
+
+      var index = 0;
+      var expr =
+          refer(exportName!).call(params.map((e) => refer('arg${index++}')));
+      method.lambda = true;
+      method.body = expr.code;
+
+      classBuilder.methods.add(method.build());
+    }
+  }
 }
 
 class Scope {
@@ -1624,6 +1688,8 @@ class Table {
   final TableType type;
   final int minSize;
   final int? maxSize;
+
+  String? exportName;
 
   Table(this.type, this.minSize, [this.maxSize]);
 }

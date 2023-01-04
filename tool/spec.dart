@@ -148,9 +148,13 @@ void generateDartForJson(File jsonFile, File dartFile) {
       statements.add(Code(''));
 
       var filename = command['filename'] as String;
-      var name = command['name'] as String?;
-      name ??= 'm$moduleCount';
+      var moduleName = command['name'] as String?;
+      var name = moduleName ?? 'm$moduleCount';
       lastModule = name;
+
+      if (moduleName != null && moduleName.startsWith(r'$')) {
+        moduleName = moduleName.substring(1);
+      }
 
       var shortName = p.withoutExtension(filename);
       var prefix = shortName.replaceAll('.', '_');
@@ -160,7 +164,9 @@ void generateDartForJson(File jsonFile, File dartFile) {
       var dartImport = '$shortName.dart';
       var importInterfaces =
           _readImportInterfaces(dartFile.parent, '$shortName.sidecar');
-      var className = titleCase(patchUpName('${shortName}Module'));
+      var className = moduleName != null
+          ? '${moduleName}Module'
+          : titleCase(patchUpName('${shortName}Module'));
       statements.add(Code('    // module $dartImport (line $line)'));
       statements.add(Code('var $name = $prefix.$className('));
       for (var import in importInterfaces) {
@@ -202,7 +208,7 @@ void generateDartForJson(File jsonFile, File dartFile) {
       var actionType = action['type']; // 'invoke' or 'get'
       var module = (action['module'] as String?) ?? lastModule;
       var field = action['field'] as String;
-      var args = (action['args'] as List).cast<Map<String, dynamic>>();
+      var args = (action['args'] as List? ?? []).cast<Map<String, dynamic>>();
 
       field = patchUpName(field);
 
