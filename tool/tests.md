@@ -27,7 +27,7 @@
 | f64_cmp.wast | - |
 | fac.wast | multiple return values not currently supported |
 | float_exprs.wast | - |
-| float_literals.wast | xxx |
+| float_literals.wast | - |
 | float_memory.wast | - |
 | float_misc.wast | xxx |
 | forward.wast | - |
