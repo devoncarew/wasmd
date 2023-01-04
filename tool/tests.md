@@ -31,8 +31,8 @@
 | float_memory.wast | - |
 | float_misc.wast | - |
 | forward.wast | - |
-| func.wast | xxx |
-| func_ptrs.wast | xxx |
+| func.wast | multiple return values not currently supported |
+| func_ptrs.wast | - |
 | global.wast | xxx |
 | i32.wast | - |
 | i64.wast | - |
