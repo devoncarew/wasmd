@@ -297,7 +297,9 @@ class BrIf0Module implements Module {
     for (;;) {
       dummy();
       frame.push(arg0);
-      return;
+      if (frame.pop() != 0) {
+        return;
+      }
       break;
     }
   }

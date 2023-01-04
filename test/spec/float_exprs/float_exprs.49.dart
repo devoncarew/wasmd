@@ -59,7 +59,7 @@ class FloatExprs49Module implements Module {
         frame.unwindTo(0, 0);
         break block_label_0;
       }
-      throw 'unreachable';
+      throw Trap('unreachable');
     }
     frame.push(z1);
     return frame.pop();

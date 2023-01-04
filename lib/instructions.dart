@@ -36,7 +36,10 @@ class Instruction_Unreachable extends Instruction {
       var error = instr.args[0] as String;
       return literalString('unreachable ($error)').thrown.statement;
     } else {
-      return literalString('unreachable').thrown.statement;
+      return refer('Trap')
+          .call([literalString('unreachable')])
+          .thrown
+          .statement;
     }
   }
 }
@@ -142,7 +145,7 @@ class Instruction_Br extends Instruction {
     var label = function.labelNameFromIndex(immediate);
     var scope = function.scopeForIndex(immediate);
     var blockKind = function.blockNestingFromIndex(immediate);
-    return blockKind.generateBranchFor(function, label, scope);
+    return blockKind.generateBranchFor(function, label, scope, name: 'br');
   }
 }
 
@@ -156,7 +159,7 @@ class Instruction_BrIf extends Instruction {
     var scope = function.scopeForIndex(immediate);
     var blockKind = function.blockNestingFromIndex(immediate);
     return blockKind.generateBranchFor(function, label, scope,
-        popCondition: true);
+        name: 'br_if', popCondition: true);
   }
 }
 
