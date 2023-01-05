@@ -1,9 +1,16 @@
 // Generated from samples/mandelbrot.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+
+/// A class representing the symbols imported from the 'env' module.
+abstract class EnvImports {
+  f64 Math_log(f64 arg0);
+  f64 Math_log2(f64 arg0);
+}
 
 class MandelbrotModule implements Module {
   MandelbrotModule({
@@ -32,17 +39,6 @@ class MandelbrotModule implements Module {
   late final ElementSegments segments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
-
-  f64 _func0(f64 value, f64 minValue, f64 maxValue) {
-    final frame = Frame(this);
-    frame.push(value);
-    frame.push(minValue);
-    frame.f64_max();
-    frame.push(maxValue);
-    frame.f64_min();
-    return frame.pop();
-    return frame.pop();
-  }
 
   void update(i32 width, i32 height, i32 limit) {
     f64 translateX = 0;
@@ -327,6 +323,17 @@ class MandelbrotModule implements Module {
     }
   }
 
+  f64 _func0(f64 value, f64 minValue, f64 maxValue) {
+    final frame = Frame(this);
+    frame.push(value);
+    frame.push(minValue);
+    frame.f64_max();
+    frame.push(maxValue);
+    frame.f64_min();
+    return frame.pop();
+    return frame.pop();
+  }
+
   List<Function> _initFunctionTable() {
     return [envImports.Math_log, envImports.Math_log2, _func0, update];
   }
@@ -338,15 +345,6 @@ typedef FunctionType2 = void Function(i32, i32, i32);
 
 class Globals {
   final i32 global0 = 216;
-}
-
-/// A class representing the symbols imported from the 'env' module.
-abstract class EnvImports {
-  /// The imported 'Math.log' symbol.
-  f64 Math_log(f64 arg0);
-
-  /// The imported 'Math.log2' symbol.
-  f64 Math_log2(f64 arg0);
 }
 
 class ElementSegments extends AbstractElementSegments {

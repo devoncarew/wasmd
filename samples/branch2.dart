@@ -1,9 +1,15 @@
 // Generated from samples/branch2.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+
+/// A class representing the symbols imported from the 'console' module.
+abstract class ConsoleImports {
+  void log(i32 arg0);
+}
 
 class Branch2Module implements Module {
   Branch2Module({required this.consoleImports}) {
@@ -50,10 +56,4 @@ typedef FunctionType1 = void Function();
 
 class Globals {
   i32 i = 0;
-}
-
-/// A class representing the symbols imported from the 'console' module.
-abstract class ConsoleImports {
-  /// The imported 'log' symbol.
-  void log(i32 arg0);
 }

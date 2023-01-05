@@ -1,7 +1,8 @@
 // Generated from samples/hello.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -24,14 +25,6 @@ class HelloWorldModule implements Module {
     return frame.pop();
   }
 
-  i32 sub(i32 lhs, i32 rhs) {
-    final frame = Frame(this);
-    frame.push(lhs);
-    frame.push(rhs);
-    frame.i32_sub();
-    return frame.pop();
-  }
-
   i32 complex(i32 lhs, i32 rhs) {
     i32 i = 0;
 
@@ -45,10 +38,18 @@ class HelloWorldModule implements Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(sub(t0, t1));
+      frame.push(_func1(t0, t1));
     }
     frame.push(i);
     frame.i32_mul();
+    return frame.pop();
+  }
+
+  i32 _func1(i32 lhs, i32 rhs) {
+    final frame = Frame(this);
+    frame.push(lhs);
+    frame.push(rhs);
+    frame.i32_sub();
     return frame.pop();
   }
 }

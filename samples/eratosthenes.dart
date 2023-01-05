@@ -1,15 +1,21 @@
 // Generated from samples/eratosthenes.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
+/// A class representing the symbols imported from the 'env' module.
+abstract class EnvImports {
+  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3);
+}
+
 class EratosthenesModule implements Module {
   EratosthenesModule({required this.envImports}) {
-    dataSegments.init(memory);
+    data.init(memory);
     _func2();
   }
 
@@ -20,10 +26,26 @@ class EratosthenesModule implements Module {
 
   final Globals globals = Globals();
 
-  final DataSegments dataSegments = DataSegments();
+  final DataSegments data = DataSegments();
 
   @override
   late final List<Table> tables = [];
+
+  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
+    final frame = Frame(this);
+    frame.i32_const(0x510);
+    frame.i32_const(0x540);
+    frame.i32_const(64);
+    frame.i32_const(5);
+    {
+      var t3 = frame.pop();
+      var t2 = frame.pop();
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      envImports.abort(t0, t1, t2, t3);
+    }
+    throw Trap('unreachable');
+  }
 
   i32 prime(i32 arg0) {
     i32 local0 = 0;
@@ -346,22 +368,6 @@ class EratosthenesModule implements Module {
     return frame.pop();
   }
 
-  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
-    final frame = Frame(this);
-    frame.i32_const(0x510);
-    frame.i32_const(0x540);
-    frame.i32_const(64);
-    frame.i32_const(5);
-    {
-      var t3 = frame.pop();
-      var t2 = frame.pop();
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      envImports.abort(t0, t1, t2, t3);
-    }
-    throw Trap('unreachable');
-  }
-
   void _func2() {
     final frame = Frame(this);
     frame.i32_const(0x55c);
@@ -377,75 +383,64 @@ class Globals {
   i32 global0 = 0;
 }
 
-/// A class representing the symbols imported from the 'env' module.
-abstract class EnvImports {
-  /// The imported 'abort' symbol.
-  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3);
-}
-
 class DataSegments {
-  Uint8List data0 = decodeDataLiteral(_hex0);
+  final Uint8List data0 = decodeDataLiteral(_hex0);
 
-  Uint8List data1 = decodeDataLiteral(_hex1);
+  final Uint8List data1 = decodeDataLiteral(_hex1);
 
-  Uint8List data2 = decodeDataLiteral(_hex2);
+  final Uint8List data2 = decodeDataLiteral(_hex2);
 
-  Uint8List data3 = decodeDataLiteral(_hex3);
+  final Uint8List data3 = decodeDataLiteral(_hex3);
 
-  Uint8List data4 = decodeDataLiteral(_hex4);
+  final Uint8List data4 = decodeDataLiteral(_hex4);
 
-  Uint8List data5 = decodeDataLiteral(_hex5);
+  final Uint8List data5 = decodeDataLiteral(_hex5);
 
-  Uint8List data6 = decodeDataLiteral(_hex6);
+  final Uint8List data6 = decodeDataLiteral(_hex6);
 
-  Uint8List data7 = decodeDataLiteral(_hex7);
+  final Uint8List data7 = decodeDataLiteral(_hex7);
 
-  Uint8List data8 = decodeDataLiteral(_hex8);
+  final Uint8List data8 = decodeDataLiteral(_hex8);
 
-  Uint8List data9 = decodeDataLiteral(_hex9);
+  final Uint8List data9 = decodeDataLiteral(_hex9);
 
-  Uint8List data10 = decodeDataLiteral(_hex10);
+  final Uint8List data10 = decodeDataLiteral(_hex10);
 
-  Uint8List data11 = decodeDataLiteral(_hex11);
+  final Uint8List data11 = decodeDataLiteral(_hex11);
 
   static const String _hex0 = '\x2C';
 
   static const String _hex1 =
-      '\x02\x00\x00\x00\x1C\x00\x00\x00\x49\x00\x6E\x00\x76\x00\x61\x00\x6C\x00'
-      '\x69\x00\x64\x00\x20\x00\x6C\x00\x65\x00\x6E\x00\x67\x00\x74\x00\x68';
+      '\x02\x00\x00\x00\x1C\x00\x00\x00\x49\x00\x6E\x00\x76\x00\x61\x00\x6C\x00\x69\x00\x64\x00\x20\x00\x6C\x00'
+      '\x65\x00\x6E\x00\x67\x00\x74\x00\x68';
 
   static const String _hex2 = '\x3C';
 
   static const String _hex3 =
-      '\x02\x00\x00\x00\x26\x00\x00\x00\x7E\x00\x6C\x00\x69\x00\x62\x00\x2F\x00'
-      '\x73\x00\x74\x00\x61\x00\x74\x00\x69\x00\x63\x00\x61\x00\x72\x00\x72\x00'
-      '\x61\x00\x79\x00\x2E\x00\x74\x00\x73';
+      '\x02\x00\x00\x00\x26\x00\x00\x00\x7E\x00\x6C\x00\x69\x00\x62\x00\x2F\x00\x73\x00\x74\x00\x61\x00\x74\x00'
+      '\x69\x00\x63\x00\x61\x00\x72\x00\x72\x00\x61\x00\x79\x00\x2E\x00\x74\x00\x73';
 
   static const String _hex4 = '\x3C';
 
   static const String _hex5 =
-      '\x02\x00\x00\x00\x28\x00\x00\x00\x41\x00\x6C\x00\x6C\x00\x6F\x00\x63\x00'
-      '\x61\x00\x74\x00\x69\x00\x6F\x00\x6E\x00\x20\x00\x74\x00\x6F\x00\x6F\x00'
-      '\x20\x00\x6C\x00\x61\x00\x72\x00\x67\x00\x65';
+      '\x02\x00\x00\x00\x28\x00\x00\x00\x41\x00\x6C\x00\x6C\x00\x6F\x00\x63\x00\x61\x00\x74\x00\x69\x00\x6F\x00'
+      '\x6E\x00\x20\x00\x74\x00\x6F\x00\x6F\x00\x20\x00\x6C\x00\x61\x00\x72\x00\x67\x00\x65';
 
   static const String _hex6 = '\x3C';
 
   static const String _hex7 =
-      '\x02\x00\x00\x00\x1E\x00\x00\x00\x7E\x00\x6C\x00\x69\x00\x62\x00\x2F\x00'
-      '\x72\x00\x74\x00\x2F\x00\x73\x00\x74\x00\x75\x00\x62\x00\x2E\x00\x74\x00'
-      '\x73';
+      '\x02\x00\x00\x00\x1E\x00\x00\x00\x7E\x00\x6C\x00\x69\x00\x62\x00\x2F\x00\x72\x00\x74\x00\x2F\x00\x73\x00'
+      '\x74\x00\x75\x00\x62\x00\x2E\x00\x74\x00\x73';
 
   static const String _hex8 = '\x2C';
 
   static const String _hex9 =
-      '\x02\x00\x00\x00\x0E\x00\x00\x00\x61\x00\x62\x00\x6F\x00\x72\x00\x74\x00'
-      '\x65\x00\x64';
+      '\x02\x00\x00\x00\x0E\x00\x00\x00\x61\x00\x62\x00\x6F\x00\x72\x00\x74\x00\x65\x00\x64';
 
   static const String _hex10 = '\x2C';
 
   static const String _hex11 =
-      '\x02\x00\x00\x00\x12\x00\x00\x00\x6D\x00\x6F\x00\x64\x00\x75\x00\x6C\x00'
-      '\x65\x00\x2E\x00\x74\x00\x73';
+      '\x02\x00\x00\x00\x12\x00\x00\x00\x6D\x00\x6F\x00\x64\x00\x75\x00\x6C\x00\x65\x00\x2E\x00\x74\x00\x73';
 
   void init(Memory memory) {
     memory.copyFrom(data0, 0, 1036, data0.length);
