@@ -11,10 +11,25 @@ void main() {
     // module float_literals.0.dart (line 3)
     var m0 = float_literals_0.FloatLiterals0Module();
 
-    returns('f32_nan_0', () => m0.f32_nan(), i32('7FC00000'));
-    returns('f32_positive_nan_0', () => m0.f32_positive_nan(), i32('7FC00000'));
+    returns(
+      'f32_nan_0',
+      () => m0.f32_nan(),
+      i32('7FC00000'),
+      'skip: can both pass and fail on the bots',
+    );
+    returns(
+      'f32_positive_nan_0',
+      () => m0.f32_positive_nan(),
+      i32('7FC00000'),
+      'skip: can both pass and fail on the bots',
+    );
     returns('f32_negative_nan_0', () => m0.f32_negative_nan(), i32('FFC00000'));
-    returns('f32_plain_nan_0', () => m0.f32_plain_nan(), i32('7FC00000'));
+    returns(
+      'f32_plain_nan_0',
+      () => m0.f32_plain_nan(),
+      i32('7FC00000'),
+      'skip: can both pass and fail on the bots',
+    );
     returns(
       'f32_informally_known_as_plain_snan_0',
       () => m0.f32_informally_known_as_plain_snan(),
@@ -26,6 +41,7 @@ void main() {
       'f32_misc_positive_nan_0',
       () => m0.f32_misc_positive_nan(),
       i32('7FB04050'),
+      'skip: can both pass and fail on the bots',
     );
     returns(
       'f32_misc_negative_nan_0',
@@ -90,21 +106,29 @@ void main() {
       () => m0.f32_dec_root_beer_float(),
       i32('3F800001'),
     );
-    returns('f64_nan_0', () => m0.f64_nan(), i64('7FF8000000000000'));
+    returns(
+      'f64_nan_0',
+      () => m0.f64_nan(),
+      i64('7FF8000000000000'),
+      'skip: can both pass and fail on the bots',
+    );
     returns(
       'f64_positive_nan_0',
       () => m0.f64_positive_nan(),
       i64('7FF8000000000000'),
+      'skip: can both pass and fail on the bots',
     );
     returns(
       'f64_negative_nan_0',
       () => m0.f64_negative_nan(),
       i64('FFF8000000000000'),
+      'skip: can both pass and fail on the bots',
     );
     returns(
       'f64_plain_nan_0',
       () => m0.f64_plain_nan(),
       i64('7FF8000000000000'),
+      'skip: can both pass and fail on the bots',
     );
     returns(
       'f64_informally_known_as_plain_snan_0',

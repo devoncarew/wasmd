@@ -12,27 +12,32 @@ void returns(
   String testName,
   Function() testClosure, [
   Object? expected,
+  String? skip,
 ]) {
   const floatEpsilon = 1 / 1000000;
 
-  test(testName, () {
-    final actual = testClosure();
-    if (expected != null) {
-      if (expected is double && expected.isNaN) {
-        expect(actual, isNaN);
-      } else if (expected is int && expected.isNaN) {
-        expect(actual, isNaN);
-      } else if (expected is double && expected.isFinite) {
-        // TODO: we only want to do this check for floats, not doubles (we did
-        // the intermediate calculations with more precision than an actual
-        // float, so can have some variance nine or ten places out).
-        final e = expected == 0.0 ? 1e-38 : (expected * floatEpsilon).abs();
-        expect(actual, closeTo(expected, e));
-      } else {
-        expect(actual, expected);
+  test(
+    testName,
+    () {
+      final actual = testClosure();
+      if (expected != null) {
+        if (expected is double && expected.isNaN) {
+          expect(actual, isNaN);
+        } else if (expected is int && expected.isNaN) {
+          expect(actual, isNaN);
+        } else if (expected is double && expected.isFinite) {
+          // TODO: we only want to do this check for floats, not doubles (we did
+          // the intermediate calculations with more precision than an actual
+          // float, so can have some variance nine or ten places out).
+          final e = expected == 0.0 ? 1e-38 : (expected * floatEpsilon).abs();
+          expect(actual, closeTo(expected, e));
+        } else {
+          expect(actual, expected);
+        }
       }
-    }
-  });
+    },
+    skip: skip,
+  );
 }
 
 /// Assert that the runtime fires a trap.
