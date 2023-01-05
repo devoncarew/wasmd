@@ -10,7 +10,7 @@ import 'package:wasmd/runtime.dart';
 
 class FloatMemory4Module implements Module {
   FloatMemory4Module() {
-    data.init(memory);
+    _data.init(memory);
   }
 
   @override
@@ -19,7 +19,7 @@ class FloatMemory4Module implements Module {
     1,
   );
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   @override
   late final List<Table> tables = [];

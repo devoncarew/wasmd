@@ -10,7 +10,7 @@ import 'package:wasmd/runtime.dart';
 
 class MemoryInit3Module implements Module {
   MemoryInit3Module() {
-    data.init(memory);
+    _data.init(memory);
   }
 
   @override
@@ -19,7 +19,7 @@ class MemoryInit3Module implements Module {
     1,
   );
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -38,9 +38,9 @@ class MemoryInit3Module implements Module {
     frame.i32_const(4);
     {
       i32 count = frame.pop() as i32;
-      i32 sourceOffset = frame.pop() as i32;
-      i32 destOffset = frame.pop() as i32;
-      memory.copyFrom(dataSegments.data1, sourceOffset, destOffset, count);
+      i32 srcOffset = frame.pop() as i32;
+      i32 dstOffset = frame.pop() as i32;
+      memory.copyFrom(_data.data1, srcOffset, dstOffset, count);
     }
     frame.data_drop(1);
     frame.i32_const(15);
@@ -48,9 +48,9 @@ class MemoryInit3Module implements Module {
     frame.i32_const(3);
     {
       i32 count = frame.pop() as i32;
-      i32 sourceOffset = frame.pop() as i32;
-      i32 destOffset = frame.pop() as i32;
-      memory.copyFrom(dataSegments.data3, sourceOffset, destOffset, count);
+      i32 srcOffset = frame.pop() as i32;
+      i32 dstOffset = frame.pop() as i32;
+      memory.copyFrom(_data.data3, srcOffset, dstOffset, count);
     }
     frame.data_drop(3);
     frame.i32_const(20);

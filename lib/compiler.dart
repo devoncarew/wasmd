@@ -747,7 +747,7 @@ void printModule(
     classBuilder.fields.add(
       Field(
         (b) => b
-          ..name = 'data'
+          ..name = '_data'
           ..type = Reference('DataSegments')
           ..modifier = FieldModifier.final$
           ..assignment = Code('DataSegments()'),
@@ -822,7 +822,7 @@ void printModule(
   var constructor = ConstructorBuilder();
   var constructorStatements = [
     if (module.dataSegments.isNotEmpty)
-      refer('data').property('init').call([refer('memory')]).statement,
+      refer('_data').property('init').call([refer('memory')]).statement,
   ];
 
   if (module.elementSegments.isNotEmpty) {

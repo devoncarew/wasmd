@@ -10,13 +10,13 @@ import 'package:wasmd/runtime.dart';
 
 class Address4Module implements Module {
   Address4Module() {
-    data.init(memory);
+    _data.init(memory);
   }
 
   @override
   final Memory memory = Memory(1);
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   @override
   late final List<Table> tables = [];

@@ -10,7 +10,7 @@ import 'package:wasmd/runtime.dart';
 
 class Memory8Module implements Module {
   Memory8Module() {
-    data.init(memory);
+    _data.init(memory);
   }
 
   @override
@@ -19,7 +19,7 @@ class Memory8Module implements Module {
     0,
   );
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   @override
   late final List<Table> tables = [];

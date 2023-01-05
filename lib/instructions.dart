@@ -450,10 +450,9 @@ class Instruction_MemoryInit extends Instruction {
     return Block.of([
       Code('{'),
       Code('i32 count = frame.pop() as i32;'),
-      Code('i32 sourceOffset = frame.pop() as i32;'),
-      Code('i32 destOffset = frame.pop() as i32;'),
-      Code('memory.copyFrom(dataSegments.$segmentName, '
-          'sourceOffset, destOffset, count);'),
+      Code('i32 srcOffset = frame.pop() as i32;'),
+      Code('i32 dstOffset = frame.pop() as i32;'),
+      Code('memory.copyFrom(_data.$segmentName, srcOffset, dstOffset, count);'),
       Code('}'),
     ]);
   }

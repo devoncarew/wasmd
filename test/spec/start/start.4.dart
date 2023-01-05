@@ -10,7 +10,7 @@ import 'package:wasmd/runtime.dart';
 
 class Start4Module implements Module {
   Start4Module() {
-    data.init(memory);
+    _data.init(memory);
     _func2();
   }
 
@@ -20,7 +20,7 @@ class Start4Module implements Module {
     1,
   );
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   @override
   late final List<Table> tables = [];

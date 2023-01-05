@@ -10,13 +10,13 @@ import 'package:wasmd/runtime.dart';
 
 class Bulk7Module implements Module {
   Bulk7Module() {
-    data.init(memory);
+    _data.init(memory);
   }
 
   @override
   final Memory memory = Memory(0);
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   @override
   late final List<Table> tables = [];
