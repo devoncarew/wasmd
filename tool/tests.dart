@@ -51,10 +51,14 @@ void main(List<String> args) async {
       var testID = json['testID'] as int;
       var result = json['result'] as String;
       var hidden = (json['hidden'] as bool?) ?? false;
+      var skipped = (json['skipped'] as bool?) ?? false;
 
       tests[testID]!.result = result;
       if (hidden) {
         tests[testID]!.hidden = true;
+      }
+      if (skipped) {
+        tests[testID]!.skipped = true;
       }
     }
   }
@@ -66,17 +70,20 @@ void main(List<String> args) async {
       .where((l) => !l.startsWith('#'))
       .toList();
 
-// print timming
-  var allTests = tests.values.where((t) => !(t.hidden ?? false)).toList();
+  // print timming
+  var allTests = tests.values.where((t) => !t.hidden).toList();
   allTests.sort();
 
   var passed = <Test>[];
   var expectedFailed = <Test>[];
   var unexpectedFailed = <Test>[];
   var unexpectedPassed = <Test>[];
+  var skipped = <Test>[];
 
   for (var test in allTests) {
-    if (test.passed) {
+    if (test.skipped) {
+      skipped.add(test);
+    } else if (test.passed) {
       if (expectedFailures.contains(test.name)) {
         unexpectedPassed.add(test);
       } else {
@@ -119,6 +126,14 @@ void main(List<String> args) async {
   }
   print('');
 
+  if (skipped.isNotEmpty) {
+    print('## Skipped (${skipped.length})');
+    for (var test in skipped) {
+      print(test.describe);
+    }
+    print('');
+  }
+
   print('total ${plural(allTests.length, 'test')}: ${allTests.length}');
   print('expected ${plural(expectedFailed.length, 'failure')}: '
       '${expectedFailed.length}');
@@ -140,7 +155,8 @@ class Test implements Comparable<Test> {
   final List<String> errors = [];
   // "success", "failure", "error"
   String? result;
-  bool? hidden;
+  bool hidden = false;
+  bool skipped = false;
 
   Test({
     required this.id,
