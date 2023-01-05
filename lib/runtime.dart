@@ -2,6 +2,7 @@
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: deprecated_member_use
 
+import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -19,6 +20,8 @@ typedef ExternRef = Function;
 
 // runtime support
 
+const int _mask32 = 0xFFFFFFFF;
+
 class Memory {
   static const defaultMaxSize = 64 * 1024;
   static const pageSize = 64 * 1024;
@@ -32,6 +35,17 @@ class Memory {
 
   Memory(this.initialPageSize, [this.maxPageSize])
       : data = ByteData(initialPageSize * pageSize);
+
+  // Utility methods.
+
+  Uint8List getBytes(int offset, int length) {
+    return data.buffer.asUint8List(offset, length);
+  }
+
+  String getUtf8(int offset, int length) {
+    var bytes = data.buffer.asUint8List(offset, length);
+    return utf8.decode(bytes);
+  }
 
   /// Return the current size of the memory, in pages.
   int get size => data.buffer.lengthInBytes ~/ pageSize;
@@ -166,7 +180,7 @@ class Table {
 
   bool grow(int growBy, Function? fillRef) {
     var newSize = funcRefs.length + growBy;
-    if (growBy < 0 || newSize > (maxSize ?? 0xFFFFFFFF)) {
+    if (growBy < 0 || newSize > (maxSize ?? _mask32)) {
       return false;
     }
 
@@ -553,8 +567,8 @@ class Frame {
   }
 
   void i32_lt_u() {
-    u32 arg1 = stack.removeLast() as u32;
-    u32 arg0 = stack.removeLast() as u32;
+    u32 arg1 = (stack.removeLast() as u32) & _mask32;
+    u32 arg0 = (stack.removeLast() as u32) & _mask32;
     var result = arg0 < arg1 ? 1 : 0;
     stack.add(result);
   }
@@ -567,8 +581,8 @@ class Frame {
   }
 
   void i32_gt_u() {
-    u32 arg1 = stack.removeLast() as u32;
-    u32 arg0 = stack.removeLast() as u32;
+    u32 arg1 = (stack.removeLast() as u32) & _mask32;
+    u32 arg0 = (stack.removeLast() as u32) & _mask32;
     var result = arg0 > arg1 ? 1 : 0;
     stack.add(result);
   }
@@ -581,8 +595,8 @@ class Frame {
   }
 
   void i32_le_u() {
-    u32 arg1 = stack.removeLast() as u32;
-    u32 arg0 = stack.removeLast() as u32;
+    u32 arg1 = (stack.removeLast() as u32) & _mask32;
+    u32 arg0 = (stack.removeLast() as u32) & _mask32;
     var result = arg0 <= arg1 ? 1 : 0;
     stack.add(result);
   }
@@ -595,8 +609,8 @@ class Frame {
   }
 
   void i32_ge_u() {
-    u32 arg1 = stack.removeLast() as u32;
-    u32 arg0 = stack.removeLast() as u32;
+    u32 arg1 = (stack.removeLast() as u32) & _mask32;
+    u32 arg0 = (stack.removeLast() as u32) & _mask32;
     var result = arg0 >= arg1 ? 1 : 0;
     stack.add(result);
   }
@@ -765,7 +779,7 @@ class Frame {
     // "Return the count of leading zero bits in i; all bits are considered
     // leading zeros if i is 0."
     u32 arg0 = stack.removeLast() as u32;
-    arg0 &= 0xFFFFFFFF;
+    arg0 &= _mask32;
     stack.add(32 - arg0.bitLength);
   }
 
@@ -819,7 +833,7 @@ class Frame {
   void i32_mul() {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
-    var result = (arg0 * arg1) & 0xFFFFFFFF;
+    var result = (arg0 * arg1) & _mask32;
     stack.add(result);
   }
 
@@ -892,7 +906,7 @@ class Frame {
     u32 arg1 = stack.removeLast() as u32;
     u32 arg0 = stack.removeLast() as u32;
     arg1 = arg1 & 0x1F; // shift left by arg1 bits modulo 32
-    var result = (arg0 << arg1) & 0xFFFFFFFF;
+    var result = (arg0 << arg1) & _mask32;
     stack.add(result);
   }
 
@@ -900,7 +914,7 @@ class Frame {
     i32 arg1 = stack.removeLast() as i32;
     u32 arg0 = stack.removeLast() as u32;
     arg1 = arg1 & 0x1F; // shift right by arg1 bits modulo 32
-    var result = (arg0 >> arg1) & 0xFFFFFFFF;
+    var result = (arg0 >> arg1) & _mask32;
     stack.add(result);
   }
 
@@ -908,7 +922,7 @@ class Frame {
     u32 arg1 = stack.removeLast() as u32;
     u32 arg0 = stack.removeLast() as u32;
     arg1 = arg1 & 0x1F; // shift right by arg1 bits modulo 32
-    var result = (arg0 >>> arg1) & 0xFFFFFFFF;
+    var result = (arg0 >>> arg1) & _mask32;
     stack.add(result);
   }
 
@@ -1306,7 +1320,7 @@ class Frame {
 
   void i32_wrap_i64() {
     i64 arg1 = stack.removeLast() as i64;
-    i32 result = arg1.remainder(0xFFFFFFFF);
+    i32 result = arg1.remainder(_mask32);
     stack.add(result);
   }
 
@@ -1594,7 +1608,7 @@ class Frame {
     // f32 => i32
     // TODO: verify this logic
     f32 arg0 = stack.removeLast() as f32;
-    i32 result = arg0.toInt() & 0xFFFFFFFF;
+    i32 result = arg0.toInt() & _mask32;
     stack.add(result);
   }
 
@@ -1602,7 +1616,7 @@ class Frame {
     // f32 => i32
     // TODO: verify this logic
     f32 arg0 = stack.removeLast() as f32;
-    i32 result = arg0.toInt() & 0xFFFFFFFF;
+    i32 result = arg0.toInt() & _mask32;
     stack.add(result);
   }
 
@@ -1610,7 +1624,7 @@ class Frame {
     // f64 => i32
     // TODO: verify this logic
     f64 arg0 = stack.removeLast() as f64;
-    i32 result = arg0.toInt() & 0xFFFFFFFF;
+    i32 result = arg0.toInt() & _mask32;
     stack.add(result);
   }
 
@@ -1618,7 +1632,7 @@ class Frame {
     // f64 => i32
     // TODO: verify this logic
     f64 arg0 = stack.removeLast() as f64;
-    i32 result = arg0.toInt() & 0xFFFFFFFF;
+    i32 result = arg0.toInt() & _mask32;
     stack.add(result);
   }
 
