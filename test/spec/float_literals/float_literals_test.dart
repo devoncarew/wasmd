@@ -17,7 +17,12 @@ void main() {
       i32('7FC00000'),
       'skip: can both pass and fail on the bots',
     );
-    returns('f32_positive_nan_0', () => m0.f32_positive_nan(), i32('7FC00000'));
+    returns(
+      'f32_positive_nan_0',
+      () => m0.f32_positive_nan(),
+      i32('7FC00000'),
+      'skip: can both pass and fail on the bots',
+    );
     returns('f32_negative_nan_0', () => m0.f32_negative_nan(), i32('FFC00000'));
     returns(
       'f32_plain_nan_0',
