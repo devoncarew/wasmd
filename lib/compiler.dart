@@ -480,13 +480,13 @@ class Compiler {
           // funcidx
           var functionIndex = r.leb128();
           _log("  export func '$name' (#$functionIndex)");
-          module.exportFunction(patchUpName(name), functionIndex);
+          module.exportFunction(ensurePublic(patchUpName(name)), functionIndex);
           break;
         case 0x01:
           // tableidx
           var tableIndex = r.leb128();
           _log("  export table '$name' (#$tableIndex)");
-          module.exportTable(patchUpName(name), tableIndex);
+          module.exportTable(ensurePublic(patchUpName(name)), tableIndex);
           break;
         case 0x02:
           // memidx
@@ -498,7 +498,8 @@ class Compiler {
           // globalidx
           var globalIndex = r.leb128();
           _log("  export global (#$globalIndex)");
-          module.globals.exportGlobal(name, globalIndex);
+          module.globals
+              .exportGlobal(ensurePublic(patchUpName(name)), globalIndex);
           break;
         default:
           throw 'export type not supported: ${type.toRadixString(16)}';

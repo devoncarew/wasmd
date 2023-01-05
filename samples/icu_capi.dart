@@ -41,8 +41,8 @@ class IcuCapiModule implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 get __data_end => globals.global1;
-  i32 get __heap_base => globals.global2;
+  i32 get $__data_end => globals.global1;
+  i32 get $__heap_base => globals.global2;
 
   void ICU4XDataProvider_create_from_byte_slice(i32 arg0, i32 arg1, i32 arg2) {
     i32 local0 = 0;
