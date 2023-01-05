@@ -1,7 +1,8 @@
 // Generated from test/spec/conversions/conversions.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -14,24 +15,94 @@ class Conversions0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i64 i64_extend_i32_s(i32 x) {
+  f32 f32_convert_i32_s(i32 x) {
     final frame = Frame(this);
     frame.push(x);
-    frame.i64_extend_i32_s();
+    frame.f32_convert_i32_s();
     return frame.pop();
   }
 
-  i64 i64_extend_i32_u(i32 x) {
+  f32 f32_convert_i32_u(i32 x) {
     final frame = Frame(this);
     frame.push(x);
-    frame.i64_extend_i32_u();
+    frame.f32_convert_i32_u();
     return frame.pop();
   }
 
-  i32 i32_wrap_i64(i64 x) {
+  f32 f32_convert_i64_s(i64 x) {
     final frame = Frame(this);
     frame.push(x);
-    frame.i32_wrap_i64();
+    frame.f32_convert_i64_s();
+    return frame.pop();
+  }
+
+  f32 f32_convert_i64_u(i64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_convert_i64_u();
+    return frame.pop();
+  }
+
+  f32 f32_demote_f64(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_demote_f64();
+    return frame.pop();
+  }
+
+  f32 f32_reinterpret_i32(i32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_reinterpret_i32();
+    return frame.pop();
+  }
+
+  f64 f64_convert_i32_s(i32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f64_convert_i32_s();
+    return frame.pop();
+  }
+
+  f64 f64_convert_i32_u(i32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f64_convert_i32_u();
+    return frame.pop();
+  }
+
+  f64 f64_convert_i64_s(i64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f64_convert_i64_s();
+    return frame.pop();
+  }
+
+  f64 f64_convert_i64_u(i64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f64_convert_i64_u();
+    return frame.pop();
+  }
+
+  f64 f64_promote_f32(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f64_promote_f32();
+    return frame.pop();
+  }
+
+  f64 f64_reinterpret_i64(i64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f64_reinterpret_i64();
+    return frame.pop();
+  }
+
+  i32 i32_reinterpret_f32(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i32_reinterpret_f32();
     return frame.pop();
   }
 
@@ -63,34 +134,6 @@ class Conversions0Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_trunc_f32_s(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f32_s();
-    return frame.pop();
-  }
-
-  i64 i64_trunc_f32_u(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f32_u();
-    return frame.pop();
-  }
-
-  i64 i64_trunc_f64_s(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f64_s();
-    return frame.pop();
-  }
-
-  i64 i64_trunc_f64_u(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f64_u();
-    return frame.pop();
-  }
-
   i32 i32_trunc_sat_f32_s(f32 x) {
     final frame = Frame(this);
     frame.push(x);
@@ -119,6 +162,62 @@ class Conversions0Module implements Module {
     return frame.pop();
   }
 
+  i32 i32_wrap_i64(i64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i32_wrap_i64();
+    return frame.pop();
+  }
+
+  i64 i64_extend_i32_s(i32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_extend_i32_s();
+    return frame.pop();
+  }
+
+  i64 i64_extend_i32_u(i32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_extend_i32_u();
+    return frame.pop();
+  }
+
+  i64 i64_reinterpret_f64(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_reinterpret_f64();
+    return frame.pop();
+  }
+
+  i64 i64_trunc_f32_s(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f32_s();
+    return frame.pop();
+  }
+
+  i64 i64_trunc_f32_u(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f32_u();
+    return frame.pop();
+  }
+
+  i64 i64_trunc_f64_s(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f64_s();
+    return frame.pop();
+  }
+
+  i64 i64_trunc_f64_u(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f64_u();
+    return frame.pop();
+  }
+
   i64 i64_trunc_sat_f32_s(f32 x) {
     final frame = Frame(this);
     frame.push(x);
@@ -144,104 +243,6 @@ class Conversions0Module implements Module {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_trunc_sat_f64_u();
-    return frame.pop();
-  }
-
-  f32 f32_convert_i32_s(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_convert_i32_s();
-    return frame.pop();
-  }
-
-  f32 f32_convert_i64_s(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_convert_i64_s();
-    return frame.pop();
-  }
-
-  f64 f64_convert_i32_s(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_convert_i32_s();
-    return frame.pop();
-  }
-
-  f64 f64_convert_i64_s(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_convert_i64_s();
-    return frame.pop();
-  }
-
-  f32 f32_convert_i32_u(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_convert_i32_u();
-    return frame.pop();
-  }
-
-  f32 f32_convert_i64_u(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_convert_i64_u();
-    return frame.pop();
-  }
-
-  f64 f64_convert_i32_u(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_convert_i32_u();
-    return frame.pop();
-  }
-
-  f64 f64_convert_i64_u(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_convert_i64_u();
-    return frame.pop();
-  }
-
-  f64 f64_promote_f32(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_promote_f32();
-    return frame.pop();
-  }
-
-  f32 f32_demote_f64(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_demote_f64();
-    return frame.pop();
-  }
-
-  f32 f32_reinterpret_i32(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    return frame.pop();
-  }
-
-  f64 f64_reinterpret_i64(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    return frame.pop();
-  }
-
-  i32 i32_reinterpret_f32(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
-  }
-
-  i64 i64_reinterpret_f64(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_reinterpret_f64();
     return frame.pop();
   }
 }

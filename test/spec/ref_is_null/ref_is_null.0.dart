@@ -1,7 +1,8 @@
 // Generated from test/spec/ref_is_null/ref_is_null.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -27,34 +28,6 @@ class RefIsNull0Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 funcref(FuncRef? x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.ref_is_null();
-    return frame.pop();
-  }
-
-  i32 externref(ExternRef? x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.ref_is_null();
-    return frame.pop();
-  }
-
-  void dummy() {
-    final frame = Frame(this);
-  }
-
-  void init(ExternRef? r) {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.push(r);
-    {
-      var ref = frame.pop();
-      table1[frame.pop() as int] = ref;
-    }
-  }
-
   void deinit() {
     final frame = Frame(this);
     frame.i32_const(1);
@@ -71,14 +44,10 @@ class RefIsNull0Module implements Module {
     }
   }
 
-  i32 funcref_elem(i32 x) {
+  i32 externref(ExternRef? x) {
     final frame = Frame(this);
     frame.push(x);
-    frame.push(table0[frame.pop()]);
-    {
-      var t0 = frame.pop();
-      frame.push(funcref(t0));
-    }
+    frame.ref_is_null();
     return frame.pop();
   }
 
@@ -93,16 +62,40 @@ class RefIsNull0Module implements Module {
     return frame.pop();
   }
 
+  i32 funcref(FuncRef? x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.ref_is_null();
+    return frame.pop();
+  }
+
+  i32 funcref_elem(i32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(table0[frame.pop()]);
+    {
+      var t0 = frame.pop();
+      frame.push(funcref(t0));
+    }
+    return frame.pop();
+  }
+
+  void init(ExternRef? r) {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    frame.push(r);
+    {
+      var ref = frame.pop();
+      table1[frame.pop() as int] = ref;
+    }
+  }
+
+  void _func2() {
+    final frame = Frame(this);
+  }
+
   List<Function> _initFunctionTable() {
-    return [
-      funcref,
-      externref,
-      dummy,
-      init,
-      deinit,
-      funcref_elem,
-      externref_elem
-    ];
+    return [funcref, externref, _func2, init, deinit, funcref_elem, externref_elem];
   }
 }
 

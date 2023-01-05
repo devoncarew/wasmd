@@ -1,7 +1,8 @@
 // Generated from test/spec/start/start.4.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'dart:typed_data';
 
@@ -9,8 +10,8 @@ import 'package:wasmd/runtime.dart';
 
 class Start4Module implements Module {
   Start4Module() {
-    dataSegments.init(memory);
-    main();
+    data.init(memory);
+    _func2();
   }
 
   @override
@@ -19,10 +20,18 @@ class Start4Module implements Module {
     1,
   );
 
-  final DataSegments dataSegments = DataSegments();
+  final DataSegments data = DataSegments();
 
   @override
   late final List<Table> tables = [];
+
+  i32 get() {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.i32_load8_u(0, 0);
+    return frame.pop();
+    return frame.pop();
+  }
 
   void inc() {
     final frame = Frame(this);
@@ -34,15 +43,7 @@ class Start4Module implements Module {
     frame.i32_store8(0, 0);
   }
 
-  i32 get() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
-    return frame.pop();
-  }
-
-  void main() {
+  void _func2() {
     final frame = Frame(this);
     inc();
     inc();
@@ -54,7 +55,7 @@ typedef FunctionType0 = void Function();
 typedef FunctionType1 = i32 Function();
 
 class DataSegments {
-  Uint8List data0 = decodeDataLiteral(_hex0);
+  final Uint8List data0 = decodeDataLiteral(_hex0);
 
   static const String _hex0 = '\x41';
 

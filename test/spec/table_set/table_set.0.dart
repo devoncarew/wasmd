@@ -1,7 +1,8 @@
 // Generated from test/spec/table_set/table_set.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -27,10 +28,6 @@ class TableSet0Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  void dummy() {
-    final frame = Frame(this);
-  }
-
   ExternRef? get_externref(i32 i) {
     final frame = Frame(this);
     frame.push(i);
@@ -42,6 +39,17 @@ class TableSet0Module implements Module {
     final frame = Frame(this);
     frame.push(i);
     frame.push(table1[frame.pop()]);
+    return frame.pop();
+  }
+
+  i32 is_null_funcref(i32 i) {
+    final frame = Frame(this);
+    frame.push(i);
+    {
+      var t0 = frame.pop();
+      frame.push(get_funcref(t0));
+    }
+    frame.ref_is_null();
     return frame.pop();
   }
 
@@ -76,20 +84,13 @@ class TableSet0Module implements Module {
     }
   }
 
-  i32 is_null_funcref(i32 i) {
+  void _func0() {
     final frame = Frame(this);
-    frame.push(i);
-    {
-      var t0 = frame.pop();
-      frame.push(get_funcref(t0));
-    }
-    frame.ref_is_null();
-    return frame.pop();
   }
 
   List<Function> _initFunctionTable() {
     return [
-      dummy,
+      _func0,
       get_externref,
       get_funcref,
       set_externref,

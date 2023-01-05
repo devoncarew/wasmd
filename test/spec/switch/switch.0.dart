@@ -1,7 +1,8 @@
 // Generated from test/spec/switch/switch.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -14,102 +15,67 @@ class Switch0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 stmt(i32 i) {
-    i32 j = 0;
-
+  i32 arg(i32 i) {
     final frame = Frame(this);
-    frame.i32_const(100);
-    j = frame.pop();
     block_label_0:
     {
+      frame.i32_const(10);
       block_label_1:
       {
+        frame.i32_const(100);
         block_label_2:
         {
+          frame.i32_const(1000);
           block_label_3:
           {
-            block_label_4:
-            {
-              block_label_5:
-              {
-                block_label_6:
-                {
-                  block_label_7:
-                  {
-                    block_label_8:
-                    {
-                      block_label_9:
-                      {
-                        frame.push(i);
-                        var t0 = frame.pop();
-                        switch (t0) {
-                          case 0:
-                            frame.unwindTo(0, 0);
-                            break block_label_9;
+            frame.i32_const(2);
+            frame.push(i);
+            frame.i32_mul();
+            frame.i32_const(3);
+            frame.push(i);
+            frame.i32_and();
+            var t0 = frame.pop();
+            switch (t0) {
+              case 0:
+                frame.unwindTo(2, 1);
+                break block_label_2;
 
-                          case 1:
-                            frame.unwindTo(0, 0);
-                            break block_label_8;
+              case 1:
+                frame.unwindTo(1, 1);
+                break block_label_1;
 
-                          case 2:
-                            frame.unwindTo(0, 0);
-                            break block_label_7;
-
-                          case 3:
-                            frame.unwindTo(0, 0);
-                            break block_label_6;
-
-                          case 4:
-                            frame.unwindTo(0, 0);
-                            break block_label_5;
-
-                          case 5:
-                            frame.unwindTo(0, 0);
-                            break block_label_4;
-
-                          case 6:
-                            frame.unwindTo(0, 0);
-                            break block_label_3;
-
-                          case 7:
-                            frame.unwindTo(0, 0);
-                            break block_label_1;
-
-                          default:
-                            frame.unwindTo(0, 0);
-                            break block_label_2;
-                        }
-                      }
-                      frame.push(i);
-                      return frame.pop();
-                    }
-                    /* nop */
-                  }
-                }
-                frame.i32_const(0);
-                frame.push(i);
-                frame.i32_sub();
-                j = frame.pop();
-                frame.unwindTo(0, 0);
+              case 2:
+                frame.unwindTo(0, 1);
                 break block_label_0;
-              }
-              frame.unwindTo(0, 0);
-              break block_label_0;
+
+              default:
+                frame.unwindTo(3, 1);
+                break block_label_3;
             }
-            frame.i32_const(101);
-            j = frame.pop();
-            frame.unwindTo(0, 0);
-            break block_label_0;
           }
-          frame.i32_const(101);
-          j = frame.pop();
+          frame.i32_add();
         }
-        frame.i32_const(102);
-        j = frame.pop();
+        frame.i32_add();
+      }
+      frame.i32_add();
+    }
+    return frame.pop();
+    return frame.pop();
+  }
+
+  i32 corner() {
+    final frame = Frame(this);
+    block_label_0:
+    {
+      frame.i32_const(0);
+      var t0 = frame.pop();
+      switch (t0) {
+        default:
+          frame.unwindTo(0, 0);
+          break block_label_0;
       }
     }
-    frame.push(j);
-    return frame.pop();
+    frame.i32_const(1);
     return frame.pop();
   }
 
@@ -207,67 +173,102 @@ class Switch0Module implements Module {
     return frame.pop();
   }
 
-  i32 arg(i32 i) {
+  i32 stmt(i32 i) {
+    i32 j = 0;
+
     final frame = Frame(this);
+    frame.i32_const(100);
+    j = frame.pop();
     block_label_0:
     {
-      frame.i32_const(10);
       block_label_1:
       {
-        frame.i32_const(100);
         block_label_2:
         {
-          frame.i32_const(1000);
           block_label_3:
           {
-            frame.i32_const(2);
-            frame.push(i);
-            frame.i32_mul();
-            frame.i32_const(3);
-            frame.push(i);
-            frame.i32_and();
-            var t0 = frame.pop();
-            switch (t0) {
-              case 0:
-                frame.unwindTo(2, 1);
-                break block_label_2;
+            block_label_4:
+            {
+              block_label_5:
+              {
+                block_label_6:
+                {
+                  block_label_7:
+                  {
+                    block_label_8:
+                    {
+                      block_label_9:
+                      {
+                        frame.push(i);
+                        var t0 = frame.pop();
+                        switch (t0) {
+                          case 0:
+                            frame.unwindTo(0, 0);
+                            break block_label_9;
 
-              case 1:
-                frame.unwindTo(1, 1);
-                break block_label_1;
+                          case 1:
+                            frame.unwindTo(0, 0);
+                            break block_label_8;
 
-              case 2:
-                frame.unwindTo(0, 1);
+                          case 2:
+                            frame.unwindTo(0, 0);
+                            break block_label_7;
+
+                          case 3:
+                            frame.unwindTo(0, 0);
+                            break block_label_6;
+
+                          case 4:
+                            frame.unwindTo(0, 0);
+                            break block_label_5;
+
+                          case 5:
+                            frame.unwindTo(0, 0);
+                            break block_label_4;
+
+                          case 6:
+                            frame.unwindTo(0, 0);
+                            break block_label_3;
+
+                          case 7:
+                            frame.unwindTo(0, 0);
+                            break block_label_1;
+
+                          default:
+                            frame.unwindTo(0, 0);
+                            break block_label_2;
+                        }
+                      }
+                      frame.push(i);
+                      return frame.pop();
+                    }
+                    /* nop */
+                  }
+                }
+                frame.i32_const(0);
+                frame.push(i);
+                frame.i32_sub();
+                j = frame.pop();
+                frame.unwindTo(0, 0);
                 break block_label_0;
-
-              default:
-                frame.unwindTo(3, 1);
-                break block_label_3;
+              }
+              frame.unwindTo(0, 0);
+              break block_label_0;
             }
+            frame.i32_const(101);
+            j = frame.pop();
+            frame.unwindTo(0, 0);
+            break block_label_0;
           }
-          frame.i32_add();
+          frame.i32_const(101);
+          j = frame.pop();
         }
-        frame.i32_add();
-      }
-      frame.i32_add();
-    }
-    return frame.pop();
-    return frame.pop();
-  }
-
-  i32 corner() {
-    final frame = Frame(this);
-    block_label_0:
-    {
-      frame.i32_const(0);
-      var t0 = frame.pop();
-      switch (t0) {
-        default:
-          frame.unwindTo(0, 0);
-          break block_label_0;
+        frame.i32_const(102);
+        j = frame.pop();
       }
     }
-    frame.i32_const(1);
+    frame.push(j);
+    return frame.pop();
     return frame.pop();
   }
 }

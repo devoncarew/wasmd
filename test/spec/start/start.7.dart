@@ -1,9 +1,20 @@
 // Generated from test/spec/start/start.7.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+
+/// A class representing the symbols imported from the 'spectest' module.
+abstract class SpectestImports {
+  void print();
+}
+
+class SpectestImportsImpl extends SpectestImports {
+  @override
+  void print() {}
+}
 
 class Start7Module implements Module {
   Start7Module({required this.spectestImports}) {
@@ -20,14 +31,3 @@ class Start7Module implements Module {
 }
 
 typedef FunctionType0 = void Function();
-
-/// A class representing the symbols imported from the 'spectest' module.
-abstract class SpectestImports {
-  /// The imported 'print' symbol.
-  void print();
-}
-
-class SpectestImportsImpl extends SpectestImports {
-  @override
-  void print() {}
-}

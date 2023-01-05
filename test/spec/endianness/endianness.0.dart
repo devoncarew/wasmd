@@ -1,7 +1,8 @@
 // Generated from test/spec/endianness/endianness.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -14,119 +15,75 @@ class Endianness0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void i16_store_little(i32 address, i32 value) {
+  f32 f32_load(f32 value) {
     final frame = Frame(this);
-    frame.push(address);
+    frame.i32_const(0);
     frame.push(value);
-    frame.i32_store8(0, 0);
-    frame.push(address);
-    frame.i32_const(1);
-    frame.i32_add();
-    frame.push(value);
-    frame.i32_const(8);
-    frame.i32_shr_u();
-    frame.i32_store8(0, 0);
-  }
-
-  void i32_store_little(i32 address, i32 value) {
-    final frame = Frame(this);
-    frame.push(address);
-    frame.push(value);
+    frame.i32_reinterpret_f32();
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      i16_store_little(t0, t1);
+      _func01(t0, t1);
     }
-    frame.push(address);
-    frame.i32_const(2);
-    frame.i32_add();
-    frame.push(value);
-    frame.i32_const(16);
-    frame.i32_shr_u();
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      i16_store_little(t0, t1);
-    }
-  }
-
-  void i64_store_little(i32 address, i64 value) {
-    final frame = Frame(this);
-    frame.push(address);
-    frame.push(value);
-    frame.i32_wrap_i64();
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      i32_store_little(t0, t1);
-    }
-    frame.push(address);
-    frame.i32_const(4);
-    frame.i32_add();
-    frame.push(value);
-    frame.i64_const(32);
-    frame.i64_shr_u();
-    frame.i32_wrap_i64();
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      i32_store_little(t0, t1);
-    }
-  }
-
-  i32 i16_load_little(i32 address) {
-    final frame = Frame(this);
-    frame.push(address);
-    frame.i32_load8_u(0, 0);
-    frame.push(address);
-    frame.i32_const(1);
-    frame.i32_add();
-    frame.i32_load8_u(0, 0);
-    frame.i32_const(8);
-    frame.i32_shl();
-    frame.i32_or();
+    frame.i32_const(0);
+    frame.f32_load(2, 0);
     return frame.pop();
   }
 
-  i32 i32_load_little(i32 address) {
+  f32 f32_store(f32 value) {
     final frame = Frame(this);
-    frame.push(address);
+    frame.i32_const(0);
+    frame.push(value);
+    frame.f32_store(2, 0);
+    frame.i32_const(0);
     {
       var t0 = frame.pop();
-      frame.push(i16_load_little(t0));
+      frame.push(_func04(t0));
     }
-    frame.push(address);
-    frame.i32_const(2);
-    frame.i32_add();
-    {
-      var t0 = frame.pop();
-      frame.push(i16_load_little(t0));
-    }
-    frame.i32_const(16);
-    frame.i32_shl();
-    frame.i32_or();
+    frame.f32_reinterpret_i32();
     return frame.pop();
   }
 
-  i64 i64_load_little(i32 address) {
+  f64 f64_load(f64 value) {
     final frame = Frame(this);
-    frame.push(address);
+    frame.i32_const(0);
+    frame.push(value);
+    frame.i64_reinterpret_f64();
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func02(t0, t1);
+    }
+    frame.i32_const(0);
+    frame.f64_load(3, 0);
+    return frame.pop();
+  }
+
+  f64 f64_store(f64 value) {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.push(value);
+    frame.f64_store(3, 0);
+    frame.i32_const(0);
     {
       var t0 = frame.pop();
-      frame.push(i32_load_little(t0));
+      frame.push(_func05(t0));
     }
-    frame.i64_extend_i32_u();
-    frame.push(address);
-    frame.i32_const(4);
-    frame.i32_add();
+    frame.f64_reinterpret_i64();
+    return frame.pop();
+  }
+
+  i32 i32_load(i32 value) {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.push(value);
     {
+      var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(i32_load_little(t0));
+      _func01(t0, t1);
     }
-    frame.i64_extend_i32_u();
-    frame.i64_const(32);
-    frame.i64_shl();
-    frame.i64_or();
+    frame.i32_const(0);
+    frame.i32_load(2, 0);
     return frame.pop();
   }
 
@@ -137,7 +94,7 @@ class Endianness0Module implements Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      i16_store_little(t0, t1);
+      _func00(t0, t1);
     }
     frame.i32_const(0);
     frame.i32_load16_s(1, 0);
@@ -151,24 +108,50 @@ class Endianness0Module implements Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      i16_store_little(t0, t1);
+      _func00(t0, t1);
     }
     frame.i32_const(0);
     frame.i32_load16_u(1, 0);
     return frame.pop();
   }
 
-  i32 i32_load(i32 value) {
+  i32 i32_store(i32 value) {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.push(value);
+    frame.i32_store(2, 0);
+    frame.i32_const(0);
+    {
+      var t0 = frame.pop();
+      frame.push(_func04(t0));
+    }
+    return frame.pop();
+  }
+
+  i32 i32_store16(i32 value) {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.push(value);
+    frame.i32_store16(1, 0);
+    frame.i32_const(0);
+    {
+      var t0 = frame.pop();
+      frame.push(_func03(t0));
+    }
+    return frame.pop();
+  }
+
+  i64 i64_load(i64 value) {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.push(value);
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      i32_store_little(t0, t1);
+      _func02(t0, t1);
     }
     frame.i32_const(0);
-    frame.i32_load(2, 0);
+    frame.i64_load(3, 0);
     return frame.pop();
   }
 
@@ -180,7 +163,7 @@ class Endianness0Module implements Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      i16_store_little(t0, t1);
+      _func00(t0, t1);
     }
     frame.i32_const(0);
     frame.i64_load16_s(1, 0);
@@ -195,7 +178,7 @@ class Endianness0Module implements Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      i16_store_little(t0, t1);
+      _func00(t0, t1);
     }
     frame.i32_const(0);
     frame.i64_load16_u(1, 0);
@@ -210,7 +193,7 @@ class Endianness0Module implements Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      i32_store_little(t0, t1);
+      _func01(t0, t1);
     }
     frame.i32_const(0);
     frame.i64_load32_s(2, 0);
@@ -225,79 +208,22 @@ class Endianness0Module implements Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      i32_store_little(t0, t1);
+      _func01(t0, t1);
     }
     frame.i32_const(0);
     frame.i64_load32_u(2, 0);
     return frame.pop();
   }
 
-  i64 i64_load(i64 value) {
+  i64 i64_store(i64 value) {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.push(value);
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      i64_store_little(t0, t1);
-    }
-    frame.i32_const(0);
-    frame.i64_load(3, 0);
-    return frame.pop();
-  }
-
-  f32 f32_load(f32 value) {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.push(value);
-    frame.i32_reinterpret_f32();
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      i32_store_little(t0, t1);
-    }
-    frame.i32_const(0);
-    frame.f32_load(2, 0);
-    return frame.pop();
-  }
-
-  f64 f64_load(f64 value) {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.push(value);
-    frame.i64_reinterpret_f64();
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      i64_store_little(t0, t1);
-    }
-    frame.i32_const(0);
-    frame.f64_load(3, 0);
-    return frame.pop();
-  }
-
-  i32 i32_store16(i32 value) {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.push(value);
-    frame.i32_store16(1, 0);
+    frame.i64_store(3, 0);
     frame.i32_const(0);
     {
       var t0 = frame.pop();
-      frame.push(i16_load_little(t0));
-    }
-    return frame.pop();
-  }
-
-  i32 i32_store(i32 value) {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.push(value);
-    frame.i32_store(2, 0);
-    frame.i32_const(0);
-    {
-      var t0 = frame.pop();
-      frame.push(i32_load_little(t0));
+      frame.push(_func05(t0));
     }
     return frame.pop();
   }
@@ -310,7 +236,7 @@ class Endianness0Module implements Module {
     frame.i32_const(0);
     {
       var t0 = frame.pop();
-      frame.push(i16_load_little(t0));
+      frame.push(_func03(t0));
     }
     frame.i64_extend_i32_u();
     return frame.pop();
@@ -324,50 +250,125 @@ class Endianness0Module implements Module {
     frame.i32_const(0);
     {
       var t0 = frame.pop();
-      frame.push(i32_load_little(t0));
+      frame.push(_func04(t0));
     }
     frame.i64_extend_i32_u();
     return frame.pop();
   }
 
-  i64 i64_store(i64 value) {
+  void _func00(i32 address, i32 value) {
     final frame = Frame(this);
-    frame.i32_const(0);
+    frame.push(address);
     frame.push(value);
-    frame.i64_store(3, 0);
-    frame.i32_const(0);
+    frame.i32_store8(0, 0);
+    frame.push(address);
+    frame.i32_const(1);
+    frame.i32_add();
+    frame.push(value);
+    frame.i32_const(8);
+    frame.i32_shr_u();
+    frame.i32_store8(0, 0);
+  }
+
+  void _func01(i32 address, i32 value) {
+    final frame = Frame(this);
+    frame.push(address);
+    frame.push(value);
     {
+      var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(i64_load_little(t0));
+      _func00(t0, t1);
     }
+    frame.push(address);
+    frame.i32_const(2);
+    frame.i32_add();
+    frame.push(value);
+    frame.i32_const(16);
+    frame.i32_shr_u();
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func00(t0, t1);
+    }
+  }
+
+  void _func02(i32 address, i64 value) {
+    final frame = Frame(this);
+    frame.push(address);
+    frame.push(value);
+    frame.i32_wrap_i64();
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func01(t0, t1);
+    }
+    frame.push(address);
+    frame.i32_const(4);
+    frame.i32_add();
+    frame.push(value);
+    frame.i64_const(32);
+    frame.i64_shr_u();
+    frame.i32_wrap_i64();
+    {
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      _func01(t0, t1);
+    }
+  }
+
+  i32 _func03(i32 address) {
+    final frame = Frame(this);
+    frame.push(address);
+    frame.i32_load8_u(0, 0);
+    frame.push(address);
+    frame.i32_const(1);
+    frame.i32_add();
+    frame.i32_load8_u(0, 0);
+    frame.i32_const(8);
+    frame.i32_shl();
+    frame.i32_or();
     return frame.pop();
   }
 
-  f32 f32_store(f32 value) {
+  i32 _func04(i32 address) {
     final frame = Frame(this);
-    frame.i32_const(0);
-    frame.push(value);
-    frame.f32_store(2, 0);
-    frame.i32_const(0);
+    frame.push(address);
     {
       var t0 = frame.pop();
-      frame.push(i32_load_little(t0));
+      frame.push(_func03(t0));
     }
-    frame.f32_reinterpret_i32();
+    frame.push(address);
+    frame.i32_const(2);
+    frame.i32_add();
+    {
+      var t0 = frame.pop();
+      frame.push(_func03(t0));
+    }
+    frame.i32_const(16);
+    frame.i32_shl();
+    frame.i32_or();
     return frame.pop();
   }
 
-  f64 f64_store(f64 value) {
+  i64 _func05(i32 address) {
     final frame = Frame(this);
-    frame.i32_const(0);
-    frame.push(value);
-    frame.f64_store(3, 0);
-    frame.i32_const(0);
+    frame.push(address);
     {
       var t0 = frame.pop();
-      frame.push(i64_load_little(t0));
+      frame.push(_func04(t0));
     }
-    frame.f64_reinterpret_i64();
+    frame.i64_extend_i32_u();
+    frame.push(address);
+    frame.i32_const(4);
+    frame.i32_add();
+    {
+      var t0 = frame.pop();
+      frame.push(_func04(t0));
+    }
+    frame.i64_extend_i32_u();
+    frame.i64_const(32);
+    frame.i64_shl();
+    frame.i64_or();
     return frame.pop();
   }
 }

@@ -1,7 +1,8 @@
 // Generated from test/spec/float_memory/float_memory.3.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'dart:typed_data';
 
@@ -9,7 +10,7 @@ import 'package:wasmd/runtime.dart';
 
 class FloatMemory3Module implements Module {
   FloatMemory3Module() {
-    dataSegments.init(memory);
+    data.init(memory);
   }
 
   @override
@@ -18,7 +19,7 @@ class FloatMemory3Module implements Module {
     1,
   );
 
-  final DataSegments dataSegments = DataSegments();
+  final DataSegments data = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -30,18 +31,18 @@ class FloatMemory3Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_load() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.i64_load(3, 0);
-    return frame.pop();
-  }
-
   void f64_store() {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.f64_const(double.nan);
     frame.f64_store(3, 0);
+  }
+
+  i64 i64_load() {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    frame.i64_load(3, 0);
+    return frame.pop();
   }
 
   void i64_store() {
@@ -64,7 +65,7 @@ typedef FunctionType1 = i64 Function();
 typedef FunctionType2 = void Function();
 
 class DataSegments {
-  Uint8List data0 = decodeDataLiteral(_hex0);
+  final Uint8List data0 = decodeDataLiteral(_hex0);
 
   static const String _hex0 = '\x00\x00\x00\x00\x00\x00\x00\xF4\x7F';
 

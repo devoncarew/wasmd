@@ -1,7 +1,8 @@
 // Generated from test/spec/float_exprs/float_exprs.88.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -14,8 +15,7 @@ class FloatExprs88Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 dot_product_example(
-      f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
+  f64 dot_product_example(f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
     final frame = Frame(this);
     frame.push(x0);
     frame.push(y0);
@@ -35,8 +35,7 @@ class FloatExprs88Module implements Module {
     return frame.pop();
   }
 
-  f64 with_binary_sum_collapse(
-      f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
+  f64 with_binary_sum_collapse(f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
     final frame = Frame(this);
     frame.push(x0);
     frame.push(y0);

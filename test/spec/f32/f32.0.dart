@@ -1,7 +1,8 @@
 // Generated from test/spec/f32/f32.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -22,19 +23,10 @@ class F320Module implements Module {
     return frame.pop();
   }
 
-  f32 sub(f32 x, f32 y) {
+  f32 ceil(f32 x) {
     final frame = Frame(this);
     frame.push(x);
-    frame.push(y);
-    frame.f32_sub();
-    return frame.pop();
-  }
-
-  f32 mul(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_mul();
+    frame.f32_ceil();
     return frame.pop();
   }
 
@@ -46,18 +38,10 @@ class F320Module implements Module {
     return frame.pop();
   }
 
-  f32 sqrt(f32 x) {
+  f32 floor(f32 x) {
     final frame = Frame(this);
     frame.push(x);
-    frame.f32_sqrt();
-    return frame.pop();
-  }
-
-  f32 min(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_min();
+    frame.f32_floor();
     return frame.pop();
   }
 
@@ -69,24 +53,19 @@ class F320Module implements Module {
     return frame.pop();
   }
 
-  f32 ceil(f32 x) {
+  f32 min(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
-    frame.f32_ceil();
+    frame.push(y);
+    frame.f32_min();
     return frame.pop();
   }
 
-  f32 floor(f32 x) {
+  f32 mul(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
-    frame.f32_floor();
-    return frame.pop();
-  }
-
-  f32 trunc(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_trunc();
+    frame.push(y);
+    frame.f32_mul();
     return frame.pop();
   }
 
@@ -94,6 +73,28 @@ class F320Module implements Module {
     final frame = Frame(this);
     frame.push(x);
     frame.f32_nearest();
+    return frame.pop();
+  }
+
+  f32 sqrt(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_sqrt();
+    return frame.pop();
+  }
+
+  f32 sub(f32 x, f32 y) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(y);
+    frame.f32_sub();
+    return frame.pop();
+  }
+
+  f32 trunc(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_trunc();
     return frame.pop();
   }
 }

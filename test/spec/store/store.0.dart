@@ -1,7 +1,8 @@
 // Generated from test/spec/store/store.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -21,30 +22,6 @@ class Store0Module implements Module {
       frame.i32_const(0);
       frame.i32_const(1);
       frame.i32_store(2, 0);
-    }
-  }
-
-  void as_loop_value() {
-    final frame = Frame(this);
-
-    loop_label_0:
-    for (;;) {
-      frame.i32_const(0);
-      frame.i32_const(1);
-      frame.i32_store(2, 0);
-      break;
-    }
-  }
-
-  void as_br_value() {
-    final frame = Frame(this);
-    block_label_0:
-    {
-      frame.i32_const(0);
-      frame.i32_const(1);
-      frame.i32_store(2, 0);
-      frame.unwindTo(0, 0);
-      break block_label_0;
     }
   }
 
@@ -95,21 +72,15 @@ class Store0Module implements Module {
     }
   }
 
-  void as_return_value() {
+  void as_br_value() {
     final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(1);
-    frame.i32_store(2, 0);
-  }
-
-  void as_if_then() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    if_label_0:
-    if (frame.pop() != 0) {
+    block_label_0:
+    {
       frame.i32_const(0);
       frame.i32_const(1);
       frame.i32_store(2, 0);
+      frame.unwindTo(0, 0);
+      break block_label_0;
     }
   }
 
@@ -123,6 +94,36 @@ class Store0Module implements Module {
       frame.i32_const(1);
       frame.i32_store(2, 0);
     }
+  }
+
+  void as_if_then() {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.i32_const(0);
+      frame.i32_const(1);
+      frame.i32_store(2, 0);
+    }
+  }
+
+  void as_loop_value() {
+    final frame = Frame(this);
+
+    loop_label_0:
+    for (;;) {
+      frame.i32_const(0);
+      frame.i32_const(1);
+      frame.i32_store(2, 0);
+      break;
+    }
+  }
+
+  void as_return_value() {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.i32_const(1);
+    frame.i32_store(2, 0);
   }
 }
 

@@ -1,7 +1,8 @@
 // Generated from test/spec/float_exprs/float_exprs.83.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -14,20 +15,11 @@ class FloatExprs83Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 f32_not_lt(f32 x, f32 y) {
+  i32 f32_not_ge(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f32_lt();
-    frame.i32_eqz();
-    return frame.pop();
-  }
-
-  i32 f32_not_le(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_le();
+    frame.f32_ge();
     frame.i32_eqz();
     return frame.pop();
   }
@@ -41,29 +33,29 @@ class FloatExprs83Module implements Module {
     return frame.pop();
   }
 
-  i32 f32_not_ge(f32 x, f32 y) {
+  i32 f32_not_le(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f32_ge();
+    frame.f32_le();
     frame.i32_eqz();
     return frame.pop();
   }
 
-  i32 f64_not_lt(f64 x, f64 y) {
+  i32 f32_not_lt(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f64_lt();
+    frame.f32_lt();
     frame.i32_eqz();
     return frame.pop();
   }
 
-  i32 f64_not_le(f64 x, f64 y) {
+  i32 f64_not_ge(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f64_le();
+    frame.f64_ge();
     frame.i32_eqz();
     return frame.pop();
   }
@@ -77,11 +69,20 @@ class FloatExprs83Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_not_ge(f64 x, f64 y) {
+  i32 f64_not_le(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f64_ge();
+    frame.f64_le();
+    frame.i32_eqz();
+    return frame.pop();
+  }
+
+  i32 f64_not_lt(f64 x, f64 y) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(y);
+    frame.f64_lt();
     frame.i32_eqz();
     return frame.pop();
   }

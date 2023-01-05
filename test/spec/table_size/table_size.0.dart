@@ -1,7 +1,8 @@
 // Generated from test/spec/table_size/table_size.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -33,30 +34,6 @@ class TableSize0Module implements Module {
     table3,
   ];
 
-  i32 size_t0() {
-    final frame = Frame(this);
-    frame.table_size(0);
-    return frame.pop();
-  }
-
-  i32 size_t1() {
-    final frame = Frame(this);
-    frame.table_size(1);
-    return frame.pop();
-  }
-
-  i32 size_t2() {
-    final frame = Frame(this);
-    frame.table_size(2);
-    return frame.pop();
-  }
-
-  i32 size_t3() {
-    final frame = Frame(this);
-    frame.table_size(3);
-    return frame.pop();
-  }
-
   void grow_t0(i32 sz) {
     final frame = Frame(this);
     frame.ref_null(111);
@@ -87,6 +64,30 @@ class TableSize0Module implements Module {
     frame.push(sz);
     frame.table_grow(3);
     frame.drop();
+  }
+
+  i32 size_t0() {
+    final frame = Frame(this);
+    frame.table_size(0);
+    return frame.pop();
+  }
+
+  i32 size_t1() {
+    final frame = Frame(this);
+    frame.table_size(1);
+    return frame.pop();
+  }
+
+  i32 size_t2() {
+    final frame = Frame(this);
+    frame.table_size(2);
+    return frame.pop();
+  }
+
+  i32 size_t3() {
+    final frame = Frame(this);
+    frame.table_size(3);
+    return frame.pop();
   }
 }
 

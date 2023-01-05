@@ -1,7 +1,8 @@
 // Generated from test/spec/memory_init/memory_init.3.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'dart:typed_data';
 
@@ -9,7 +10,7 @@ import 'package:wasmd/runtime.dart';
 
 class MemoryInit3Module implements Module {
   MemoryInit3Module() {
-    dataSegments.init(memory);
+    data.init(memory);
   }
 
   @override
@@ -18,10 +19,17 @@ class MemoryInit3Module implements Module {
     1,
   );
 
-  final DataSegments dataSegments = DataSegments();
+  final DataSegments data = DataSegments();
 
   @override
   late final List<Table> tables = [];
+
+  i32 load8_u(i32 arg0) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    frame.i32_load8_u(0, 0);
+    return frame.pop();
+  }
 
   void test() {
     final frame = Frame(this);
@@ -66,26 +74,19 @@ class MemoryInit3Module implements Module {
     frame.i32_const(5);
     frame.memory_copy(0, 0);
   }
-
-  i32 load8_u(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
-  }
 }
 
 typedef FunctionType0 = void Function();
 typedef FunctionType1 = i32 Function(i32);
 
 class DataSegments {
-  Uint8List data0 = decodeDataLiteral(_hex0);
+  final Uint8List data0 = decodeDataLiteral(_hex0);
 
-  Uint8List data1 = decodeDataLiteral(_hex1);
+  final Uint8List data1 = decodeDataLiteral(_hex1);
 
-  Uint8List data2 = decodeDataLiteral(_hex2);
+  final Uint8List data2 = decodeDataLiteral(_hex2);
 
-  Uint8List data3 = decodeDataLiteral(_hex3);
+  final Uint8List data3 = decodeDataLiteral(_hex3);
 
   static const String _hex0 = '\x03\x01\x04\x01';
 

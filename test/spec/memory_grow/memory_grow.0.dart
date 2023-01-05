@@ -1,7 +1,8 @@
 // Generated from test/spec/memory_grow/memory_grow.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -14,6 +15,20 @@ class MemoryGrow0Module implements Module {
   @override
   late final List<Table> tables = [];
 
+  i32 grow(i32 sz) {
+    final frame = Frame(this);
+    frame.push(sz);
+    frame.memory_grow(0);
+    return frame.pop();
+  }
+
+  i32 load_at_page_size() {
+    final frame = Frame(this);
+    frame.i32_const(0x10000);
+    frame.i32_load(2, 0);
+    return frame.pop();
+  }
+
   i32 load_at_zero() {
     final frame = Frame(this);
     frame.i32_const(0);
@@ -21,17 +36,9 @@ class MemoryGrow0Module implements Module {
     return frame.pop();
   }
 
-  void store_at_zero() {
+  i32 size() {
     final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(2);
-    frame.i32_store(2, 0);
-  }
-
-  i32 load_at_page_size() {
-    final frame = Frame(this);
-    frame.i32_const(0x10000);
-    frame.i32_load(2, 0);
+    frame.memory_size(0);
     return frame.pop();
   }
 
@@ -42,17 +49,11 @@ class MemoryGrow0Module implements Module {
     frame.i32_store(2, 0);
   }
 
-  i32 grow(i32 sz) {
+  void store_at_zero() {
     final frame = Frame(this);
-    frame.push(sz);
-    frame.memory_grow(0);
-    return frame.pop();
-  }
-
-  i32 size() {
-    final frame = Frame(this);
-    frame.memory_size(0);
-    return frame.pop();
+    frame.i32_const(0);
+    frame.i32_const(2);
+    frame.i32_store(2, 0);
   }
 }
 

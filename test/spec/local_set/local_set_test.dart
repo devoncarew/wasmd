@@ -33,8 +33,7 @@ void main() {
     returns('as_if_else_0', () => m0.as_if_else(0), null);
     returns(
       'type_mixed_0',
-      () => m0.type_mixed(
-          0x1, f32('400CCCCD'), f64('400A666666666666'), 0x4, 0x5),
+      () => m0.type_mixed(0x1, f32('400CCCCD'), f64('400A666666666666'), 0x4, 0x5),
       null,
     );
     returns(

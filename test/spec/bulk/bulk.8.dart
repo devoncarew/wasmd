@@ -1,7 +1,8 @@
 // Generated from test/spec/bulk/bulk.8.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -22,15 +23,14 @@ class Bulk8Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 zero() {
+  i32 call(i32 arg0) {
     final frame = Frame(this);
-    frame.i32_const(0);
-    return frame.pop();
-  }
-
-  i32 one() {
-    final frame = Frame(this);
-    frame.i32_const(1);
+    frame.push(arg0);
+    {
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
+      frame.push(func());
+    }
     return frame.pop();
   }
 
@@ -43,24 +43,24 @@ class Bulk8Module implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(
-          table0, sourceOffset, destOffset, count, segments.segment0);
+      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment0);
     }
   }
 
-  i32 call(i32 arg0) {
+  i32 _func0() {
     final frame = Frame(this);
-    frame.push(arg0);
-    {
-      var func = table0[frame.pop()] as FunctionType0?;
-      if (func == null) throw Trap('uninitialized element');
-      frame.push(func());
-    }
+    frame.i32_const(0);
+    return frame.pop();
+  }
+
+  i32 _func1() {
+    final frame = Frame(this);
+    frame.i32_const(1);
     return frame.pop();
   }
 
   List<Function> _initFunctionTable() {
-    return [zero, one, init, call];
+    return [_func0, _func1, init, call];
   }
 }
 

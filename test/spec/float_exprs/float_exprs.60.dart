@@ -1,7 +1,8 @@
 // Generated from test/spec/float_exprs/float_exprs.60.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'dart:typed_data';
 
@@ -9,7 +10,7 @@ import 'package:wasmd/runtime.dart';
 
 class FloatExprs60Module implements Module {
   FloatExprs60Module() {
-    dataSegments.init(memory);
+    data.init(memory);
   }
 
   @override
@@ -18,10 +19,17 @@ class FloatExprs60Module implements Module {
     1,
   );
 
-  final DataSegments dataSegments = DataSegments();
+  final DataSegments data = DataSegments();
 
   @override
   late final List<Table> tables = [];
+
+  f64 f64_load(i32 k) {
+    final frame = Frame(this);
+    frame.push(k);
+    frame.f64_load(3, 0);
+    return frame.pop();
+  }
 
   void f64_simple_x4_sum(i32 i, i32 j, i32 k) {
     f64 x0 = 0;
@@ -79,28 +87,19 @@ class FloatExprs60Module implements Module {
     frame.f64_add();
     frame.f64_store(3, 24);
   }
-
-  f64 f64_load(i32 k) {
-    final frame = Frame(this);
-    frame.push(k);
-    frame.f64_load(3, 0);
-    return frame.pop();
-  }
 }
 
 typedef FunctionType0 = void Function(i32, i32, i32);
 typedef FunctionType1 = f64 Function(i32);
 
 class DataSegments {
-  Uint8List data0 = decodeDataLiteral(_hex0);
+  final Uint8List data0 = decodeDataLiteral(_hex0);
 
   static const String _hex0 =
-      '\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x80\x01\x00'
-      '\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x80\x01\x00\x00\x00'
-      '\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-      '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-      '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-      '\x00\x00\x00\x00\x00\x00';
+      '\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x80\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00'
+      '\x00\x00\x00\x00\x00\x80\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+      '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+      '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00';
 
   void init(Memory memory) {
     memory.copyFrom(data0, 0, 0, data0.length);

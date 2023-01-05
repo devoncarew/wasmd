@@ -1,7 +1,8 @@
 // Generated from test/spec/float_exprs/float_exprs.79.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -18,6 +19,22 @@ class FloatExprs79Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.f32_sqrt();
+    return frame.pop();
+  }
+
+  f32 f32_xkcd_better_sqrt_5(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    frame.push(arg1);
+    frame.push(arg2);
+    frame.f32_mul();
+    frame.f32_add();
+    frame.push(arg3);
+    frame.push(arg1);
+    frame.push(arg2);
+    frame.f32_mul();
+    frame.f32_sub();
+    frame.f32_div();
     return frame.pop();
   }
 
@@ -57,26 +74,26 @@ class FloatExprs79Module implements Module {
     return frame.pop();
   }
 
-  f32 f32_xkcd_better_sqrt_5(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.f32_mul();
-    frame.f32_add();
-    frame.push(arg3);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.f32_mul();
-    frame.f32_sub();
-    frame.f32_div();
-    return frame.pop();
-  }
-
   f64 f64_sqrt(f64 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.f64_sqrt();
+    return frame.pop();
+  }
+
+  f64 f64_xkcd_better_sqrt_5(f64 arg0, f64 arg1, f64 arg2, f64 arg3) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    frame.push(arg1);
+    frame.push(arg2);
+    frame.f64_mul();
+    frame.f64_add();
+    frame.push(arg3);
+    frame.push(arg1);
+    frame.push(arg2);
+    frame.f64_mul();
+    frame.f64_sub();
+    frame.f64_div();
     return frame.pop();
   }
 
@@ -113,22 +130,6 @@ class FloatExprs79Module implements Module {
     frame.push(arg0);
     frame.f64_div();
     frame.f64_add();
-    return frame.pop();
-  }
-
-  f64 f64_xkcd_better_sqrt_5(f64 arg0, f64 arg1, f64 arg2, f64 arg3) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.f64_mul();
-    frame.f64_add();
-    frame.push(arg3);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.f64_mul();
-    frame.f64_sub();
-    frame.f64_div();
     return frame.pop();
   }
 }

@@ -1,7 +1,8 @@
 // Generated from test/spec/bulk/bulk.4.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'dart:typed_data';
 
@@ -9,13 +10,13 @@ import 'package:wasmd/runtime.dart';
 
 class Bulk4Module implements Module {
   Bulk4Module() {
-    dataSegments.init(memory);
+    data.init(memory);
   }
 
   @override
   final Memory memory = Memory(1);
 
-  final DataSegments dataSegments = DataSegments();
+  final DataSegments data = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -45,7 +46,7 @@ typedef FunctionType0 = void Function(i32, i32, i32);
 typedef FunctionType1 = i32 Function(i32);
 
 class DataSegments {
-  Uint8List data0 = decodeDataLiteral(_hex0);
+  final Uint8List data0 = decodeDataLiteral(_hex0);
 
   static const String _hex0 = '\xAA\xBB\xCC\xDD';
 

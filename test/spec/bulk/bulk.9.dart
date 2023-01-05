@@ -1,7 +1,8 @@
 // Generated from test/spec/bulk/bulk.9.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -22,13 +23,22 @@ class Bulk9Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  void f() {
+  void drop_active() {
     final frame = Frame(this);
+    frame.elem_drop(1);
   }
 
   void drop_passive() {
     final frame = Frame(this);
     frame.elem_drop(0);
+  }
+
+  void init_active(i32 len) {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    frame.push(len);
+    throw 'table.init does not support active element segments';
   }
 
   void init_passive(i32 len) {
@@ -40,26 +50,16 @@ class Bulk9Module implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(
-          table0, sourceOffset, destOffset, count, segments.segment0);
+      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment0);
     }
   }
 
-  void drop_active() {
+  void _func0() {
     final frame = Frame(this);
-    frame.elem_drop(1);
-  }
-
-  void init_active(i32 len) {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(0);
-    frame.push(len);
-    throw 'table.init does not support active element segments';
   }
 
   List<Function> _initFunctionTable() {
-    return [f, drop_passive, init_passive, drop_active, init_active];
+    return [_func0, drop_passive, init_passive, drop_active, init_active];
   }
 }
 

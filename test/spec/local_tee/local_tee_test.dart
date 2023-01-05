@@ -96,8 +96,7 @@ void main() {
     returns('as_memory_grow_size_0', () => m0.as_memory_grow_size(0), 0x1);
     returns(
       'type_mixed_0',
-      () => m0.type_mixed(
-          0x1, f32('400CCCCD'), f64('400A666666666666'), 0x4, 0x5),
+      () => m0.type_mixed(0x1, f32('400CCCCD'), f64('400A666666666666'), 0x4, 0x5),
       null,
     );
     returns(
@@ -107,8 +106,8 @@ void main() {
     );
     returns(
       'result_0',
-      () => m0.result(i64('FFFFFFFFFFFFFFFF'), f32('C0000000'),
-          f64('C00A666666666666'), i32('FFFFFFFC'), i32('FFFFFFFB')),
+      () => m0.result(i64('FFFFFFFFFFFFFFFF'), f32('C0000000'), f64('C00A666666666666'), i32('FFFFFFFC'),
+          i32('FFFFFFFB')),
       f64('4041666666666666'),
     );
   });

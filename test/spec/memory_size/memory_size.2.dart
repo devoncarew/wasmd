@@ -1,7 +1,8 @@
 // Generated from test/spec/memory_size/memory_size.2.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -17,17 +18,17 @@ class MemorySize2Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 size() {
-    final frame = Frame(this);
-    frame.memory_size(0);
-    return frame.pop();
-  }
-
   void grow(i32 sz) {
     final frame = Frame(this);
     frame.push(sz);
     frame.memory_grow(0);
     frame.drop();
+  }
+
+  i32 size() {
+    final frame = Frame(this);
+    frame.memory_size(0);
+    return frame.pop();
   }
 }
 

@@ -1,7 +1,8 @@
 // Generated from test/spec/stack/stack.0.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -17,84 +18,6 @@ class Stack0Module implements Module {
   late final List<Table> tables = [];
 
   i64 fac_expr(i64 n) {
-    i64 i = 0;
-    i64 res = 0;
-
-    final frame = Frame(this);
-    frame.push(n);
-    i = frame.pop();
-    frame.i64_const(1);
-    res = frame.pop();
-    block_label_0:
-    {
-      loop_label_1:
-      for (;;) {
-        frame.push(i);
-        frame.i64_const(0);
-        frame.i64_eq();
-        if_label_2:
-        if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
-          break block_label_0;
-        } else {
-          frame.push(i);
-          frame.push(res);
-          frame.i64_mul();
-          res = frame.pop();
-          frame.push(i);
-          frame.i64_const(1);
-          frame.i64_sub();
-          i = frame.pop();
-        }
-        continue loop_label_1;
-
-        break;
-      }
-    }
-    frame.push(res);
-    return frame.pop();
-  }
-
-  i64 fac_stack(i64 n) {
-    i64 i = 0;
-    i64 res = 0;
-
-    final frame = Frame(this);
-    frame.push(n);
-    i = frame.pop();
-    frame.i64_const(1);
-    res = frame.pop();
-    block_label_0:
-    {
-      loop_label_1:
-      for (;;) {
-        frame.push(i);
-        frame.i64_const(0);
-        frame.i64_eq();
-        if_label_2:
-        if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
-          break block_label_0;
-        } else {
-          frame.push(i);
-          frame.push(res);
-          frame.i64_mul();
-          res = frame.pop();
-          frame.push(i);
-          frame.i64_const(1);
-          frame.i64_sub();
-          i = frame.pop();
-        }
-        continue loop_label_1;
-
-        break;
-      }
-    }
-    frame.push(res);
-    return frame.pop();
-  }
-
-  i64 fac_stack_raw(i64 n) {
     i64 i = 0;
     i64 res = 0;
 
@@ -211,7 +134,94 @@ class Stack0Module implements Module {
     return frame.pop();
   }
 
-  i32 add_one_to_global() {
+  i64 fac_stack(i64 n) {
+    i64 i = 0;
+    i64 res = 0;
+
+    final frame = Frame(this);
+    frame.push(n);
+    i = frame.pop();
+    frame.i64_const(1);
+    res = frame.pop();
+    block_label_0:
+    {
+      loop_label_1:
+      for (;;) {
+        frame.push(i);
+        frame.i64_const(0);
+        frame.i64_eq();
+        if_label_2:
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        } else {
+          frame.push(i);
+          frame.push(res);
+          frame.i64_mul();
+          res = frame.pop();
+          frame.push(i);
+          frame.i64_const(1);
+          frame.i64_sub();
+          i = frame.pop();
+        }
+        continue loop_label_1;
+
+        break;
+      }
+    }
+    frame.push(res);
+    return frame.pop();
+  }
+
+  i64 fac_stack_raw(i64 n) {
+    i64 i = 0;
+    i64 res = 0;
+
+    final frame = Frame(this);
+    frame.push(n);
+    i = frame.pop();
+    frame.i64_const(1);
+    res = frame.pop();
+    block_label_0:
+    {
+      loop_label_1:
+      for (;;) {
+        frame.push(i);
+        frame.i64_const(0);
+        frame.i64_eq();
+        if_label_2:
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        } else {
+          frame.push(i);
+          frame.push(res);
+          frame.i64_mul();
+          res = frame.pop();
+          frame.push(i);
+          frame.i64_const(1);
+          frame.i64_sub();
+          i = frame.pop();
+        }
+        continue loop_label_1;
+
+        break;
+      }
+    }
+    frame.push(res);
+    return frame.pop();
+  }
+
+  i32 not_quite_a_tree() {
+    final frame = Frame(this);
+    frame.push(_func5());
+    frame.push(_func5());
+    _func6();
+    frame.i32_add();
+    return frame.pop();
+  }
+
+  i32 _func5() {
     i32 local0 = 0;
 
     final frame = Frame(this);
@@ -223,19 +233,10 @@ class Stack0Module implements Module {
     return frame.pop();
   }
 
-  void add_one_to_global_and_drop() {
+  void _func6() {
     final frame = Frame(this);
-    frame.push(add_one_to_global());
+    frame.push(_func5());
     frame.drop();
-  }
-
-  i32 not_quite_a_tree() {
-    final frame = Frame(this);
-    frame.push(add_one_to_global());
-    frame.push(add_one_to_global());
-    add_one_to_global_and_drop();
-    frame.i32_add();
-    return frame.pop();
   }
 }
 

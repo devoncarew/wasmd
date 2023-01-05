@@ -1,7 +1,8 @@
 // Generated from test/spec/float_exprs/float_exprs.46.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -14,32 +15,17 @@ class FloatExprs46Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_no_fold_lt_if_to_abs(f32 x) {
+  f32 f32_no_fold_ge_if_to_abs(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f32_const(0.0);
-    frame.f32_lt();
+    frame.f32_ge();
     if_label_0:
     if (frame.pop() != 0) {
       frame.push(x);
-      frame.f32_neg();
     } else {
       frame.push(x);
-    }
-    return frame.pop();
-  }
-
-  f32 f32_no_fold_le_if_to_abs(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_le();
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(x);
       frame.f32_neg();
-    } else {
-      frame.push(x);
     }
     return frame.pop();
   }
@@ -59,47 +45,47 @@ class FloatExprs46Module implements Module {
     return frame.pop();
   }
 
-  f32 f32_no_fold_ge_if_to_abs(f32 x) {
+  f32 f32_no_fold_le_if_to_abs(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_const(-0.0);
+    frame.f32_le();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.push(x);
+      frame.f32_neg();
+    } else {
+      frame.push(x);
+    }
+    return frame.pop();
+  }
+
+  f32 f32_no_fold_lt_if_to_abs(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f32_const(0.0);
-    frame.f32_ge();
+    frame.f32_lt();
     if_label_0:
     if (frame.pop() != 0) {
       frame.push(x);
+      frame.f32_neg();
     } else {
       frame.push(x);
-      frame.f32_neg();
     }
     return frame.pop();
   }
 
-  f64 f64_no_fold_lt_if_to_abs(f64 x) {
+  f64 f64_no_fold_ge_if_to_abs(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f64_const(0.0);
-    frame.f64_lt();
+    frame.f64_ge();
     if_label_0:
     if (frame.pop() != 0) {
       frame.push(x);
-      frame.f64_neg();
     } else {
       frame.push(x);
-    }
-    return frame.pop();
-  }
-
-  f64 f64_no_fold_le_if_to_abs(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_const(-0.0);
-    frame.f64_le();
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(x);
       frame.f64_neg();
-    } else {
-      frame.push(x);
     }
     return frame.pop();
   }
@@ -119,17 +105,32 @@ class FloatExprs46Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_no_fold_ge_if_to_abs(f64 x) {
+  f64 f64_no_fold_le_if_to_abs(f64 x) {
     final frame = Frame(this);
     frame.push(x);
-    frame.f64_const(0.0);
-    frame.f64_ge();
+    frame.f64_const(-0.0);
+    frame.f64_le();
     if_label_0:
     if (frame.pop() != 0) {
       frame.push(x);
+      frame.f64_neg();
     } else {
       frame.push(x);
+    }
+    return frame.pop();
+  }
+
+  f64 f64_no_fold_lt_if_to_abs(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f64_const(0.0);
+    frame.f64_lt();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.push(x);
       frame.f64_neg();
+    } else {
+      frame.push(x);
     }
     return frame.pop();
   }

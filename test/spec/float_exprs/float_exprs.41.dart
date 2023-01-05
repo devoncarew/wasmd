@@ -1,7 +1,8 @@
 // Generated from test/spec/float_exprs/float_exprs.41.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -16,6 +17,13 @@ class FloatExprs41Module implements Module {
 
   @override
   late final List<Table> tables = [];
+
+  f64 check(i32 i) {
+    final frame = Frame(this);
+    frame.push(i);
+    frame.f64_load(3, 0);
+    return frame.pop();
+  }
 
   void init(i32 i, f64 x) {
     final frame = Frame(this);
@@ -51,13 +59,6 @@ class FloatExprs41Module implements Module {
         break;
       }
     }
-  }
-
-  f64 check(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f64_load(3, 0);
-    return frame.pop();
   }
 }
 

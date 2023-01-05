@@ -1,7 +1,8 @@
 // Generated from test/spec/float_exprs/float_exprs.86.wasm.
 
-// ignore_for_file: camel_case_types, dead_code, non_constant_identifier_names
-// ignore_for_file: unused_element, unused_label, unused_local_variable
+// ignore_for_file: curly_braces_in_flow_control_structures, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_element, unused_label
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
@@ -14,26 +15,14 @@ class FloatExprs86Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 f32_no_trichotomy_lt(f32 x, f32 y) {
+  i32 f32_no_trichotomy_ge(f32 x, f32 y) {
     final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_lt();
     frame.push(x);
     frame.push(y);
     frame.f32_ge();
-    frame.i32_or();
-    return frame.pop();
-  }
-
-  i32 f32_no_trichotomy_le(f32 x, f32 y) {
-    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f32_le();
-    frame.push(x);
-    frame.push(y);
-    frame.f32_gt();
+    frame.f32_lt();
     frame.i32_or();
     return frame.pop();
   }
@@ -50,38 +39,38 @@ class FloatExprs86Module implements Module {
     return frame.pop();
   }
 
-  i32 f32_no_trichotomy_ge(f32 x, f32 y) {
+  i32 f32_no_trichotomy_le(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f32_ge();
+    frame.f32_le();
+    frame.push(x);
+    frame.push(y);
+    frame.f32_gt();
+    frame.i32_or();
+    return frame.pop();
+  }
+
+  i32 f32_no_trichotomy_lt(f32 x, f32 y) {
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.f32_lt();
+    frame.push(x);
+    frame.push(y);
+    frame.f32_ge();
     frame.i32_or();
     return frame.pop();
   }
 
-  i32 f64_no_trichotomy_lt(f64 x, f64 y) {
+  i32 f64_no_trichotomy_ge(f64 x, f64 y) {
     final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_lt();
     frame.push(x);
     frame.push(y);
     frame.f64_ge();
-    frame.i32_or();
-    return frame.pop();
-  }
-
-  i32 f64_no_trichotomy_le(f64 x, f64 y) {
-    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f64_le();
-    frame.push(x);
-    frame.push(y);
-    frame.f64_gt();
+    frame.f64_lt();
     frame.i32_or();
     return frame.pop();
   }
@@ -98,14 +87,26 @@ class FloatExprs86Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_no_trichotomy_ge(f64 x, f64 y) {
+  i32 f64_no_trichotomy_le(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f64_ge();
+    frame.f64_le();
+    frame.push(x);
+    frame.push(y);
+    frame.f64_gt();
+    frame.i32_or();
+    return frame.pop();
+  }
+
+  i32 f64_no_trichotomy_lt(f64 x, f64 y) {
+    final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.f64_lt();
+    frame.push(x);
+    frame.push(y);
+    frame.f64_ge();
     frame.i32_or();
     return frame.pop();
   }
