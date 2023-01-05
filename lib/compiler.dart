@@ -24,11 +24,14 @@ class Compiler {
     required this.logger,
   });
 
-  Library compile({bool compileForWastTest = false}) {
+  Library compile({
+    bool useDebugNames = false,
+    bool compileForWastTest = false,
+  }) {
     var library = LibraryBuilder();
     library.comments.add('Generated from ${file.path}.');
     library.ignoreForFile.addAll([
-      'camel_case_types', // todo: remove this
+      'curly_braces_in_flow_control_structures',
       'dead_code',
       'non_constant_identifier_names',
       'unused_element',
@@ -45,6 +48,7 @@ class Compiler {
       module,
       library,
       moduleName: path.basenameWithoutExtension(file.path),
+      useDebugNames: useDebugNames,
       compileForWastTest: compileForWastTest,
     );
 
@@ -630,12 +634,27 @@ class Compiler {
   void _log([String? message]) => logger.info(message ?? '');
 }
 
+// TODO: move this out into a separate library
+
 void printModule(
   Module module,
   LibraryBuilder library, {
   required String moduleName,
+  bool useDebugNames = false,
   bool compileForWastTest = false,
 }) {
+  // TODO: create a generation options class
+  module.useDebugNames = useDebugNames;
+
+  // Generate imports.
+  for (var import in module.importModules) {
+    library.body.add(import.createImportModuleClassDef());
+
+    if (compileForWastTest) {
+      library.body.add(import.createImportModuleClassDefTestImpl());
+    }
+  }
+
   var name = module.debugInfo?.name ?? moduleName;
   name = titleCase(patchUpName(name));
   module.className = '${name}Module';
@@ -722,13 +741,12 @@ void printModule(
     );
   }
 
-  // TODO: rename this to 'data'
-  // dataSegments reference
+  // data reference
   if (module.dataSegments.isNotEmpty) {
     classBuilder.fields.add(
       Field(
         (b) => b
-          ..name = 'dataSegments'
+          ..name = 'data'
           ..type = Reference('DataSegments')
           ..modifier = FieldModifier.final$
           ..assignment = Code('DataSegments()'),
@@ -803,7 +821,7 @@ void printModule(
   var constructor = ConstructorBuilder();
   var constructorStatements = [
     if (module.dataSegments.isNotEmpty)
-      refer('dataSegments').property('init').call([refer('memory')]).statement,
+      refer('data').property('init').call([refer('memory')]).statement,
   ];
 
   if (module.elementSegments.isNotEmpty) {
@@ -853,6 +871,13 @@ void printModule(
   }
   classBuilder.constructors.add(constructor.build());
 
+  // Resort the methods - sorting exported methods first.
+  module.definedFunctions.sort((a, b) {
+    var aVal = a.exportName == null ? 1 : 0;
+    var bVal = b.exportName == null ? 1 : 0;
+    return aVal == bVal ? a.name.compareTo(b.name) : aVal - bVal;
+  });
+
   for (var func in module.definedFunctions) {
     if (func.functionType.returnsTuple) {
       throw 'multiple return values not currently supported '
@@ -897,14 +922,6 @@ void printModule(
 
   if (module.globals.isNotEmpty) {
     library.body.add(Global.createGlobalsClassDef(module));
-  }
-
-  for (var import in module.importModules) {
-    library.body.add(import.createImportModuleClassDef());
-
-    if (compileForWastTest) {
-      library.body.add(import.createImportModuleClassDefTestImpl());
-    }
   }
 
   if (module.dataSegments.isNotEmpty) {
@@ -1312,6 +1329,8 @@ class Module {
   DebugInfo? debugInfo;
   String? className;
 
+  bool useDebugNames = false;
+
   void setMemoryInfo({
     required int min,
     int? max,
@@ -1403,8 +1422,7 @@ class ImportModule {
           ..returns = Reference(
             func.returnsVoid ? 'void' : func.returnType!.typeName,
           )
-          ..requiredParameters.addAll(parameters)
-          ..docs.add("/// The imported '${func.importName}' symbol."),
+          ..requiredParameters.addAll(parameters),
       ));
     }
 
@@ -1479,7 +1497,16 @@ class DefinedFunction extends ModuleFunction {
   DefinedFunction(super.module, super.typeIndex, this.generatedIndex);
 
   @override
-  String get name => exportName ?? debugInfo?.name ?? '_func$generatedIndex';
+  String get name {
+    var digits = module.definedFunctions.length.toString().length;
+    var genIndex = generatedIndex.toString().padLeft(digits, '0');
+
+    if (module.useDebugNames) {
+      return exportName ?? debugInfo?.name ?? '_func$genIndex';
+    } else {
+      return exportName ?? '_func$genIndex';
+    }
+  }
 
   @override
   String toString() => name;
@@ -1542,7 +1569,8 @@ class DefinedFunction extends ModuleFunction {
   Method generateToMethod() {
     var method = MethodBuilder();
     method.name = name;
-    method.returns = refer(functionType.resultTypeDisplayName);
+    // This newline is a hack to adjust the generated method spacing.
+    method.returns = refer('\n${functionType.resultTypeDisplayName}');
 
     variables = <Variable>[];
 
@@ -2036,6 +2064,7 @@ class DataSegment {
         (b) => b
           ..name = dataSegment.name
           ..type = Reference('Uint8List', 'dart:typed_data')
+          ..modifier = FieldModifier.final$
           ..assignment = Code('decodeDataLiteral(_hex$i)'),
       ));
     }
@@ -2130,7 +2159,7 @@ String buildDataLiteral(List<int> bytes) {
   for (var value in bytes) {
     var hex = value.toRadixString(16).padLeft(2, '0').toUpperCase();
     buf.write('\\x$hex');
-    if (buf.length >= 72) {
+    if (buf.length >= (formatLineLength - 8)) {
       lines.add("'${buf.toString()}'");
       buf.clear();
     }

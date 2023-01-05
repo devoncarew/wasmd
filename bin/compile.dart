@@ -10,11 +10,19 @@ import 'package:wasmd/src/utils.dart';
 
 void main(List<String> args) async {
   var argsParser = ArgParser();
+  // TODO: change this to emitting information about the module inputs and
+  // outputs.
   argsParser.addFlag(
     'verbose',
     abbr: 'v',
     negatable: false,
     help: 'Emit verbose output.',
+  );
+  argsParser.addFlag(
+    'use-debug-names',
+    abbr: 'd',
+    negatable: false,
+    help: 'Use module debug info for generated method names.',
   );
   argsParser.addOption(
     'output',
@@ -46,6 +54,7 @@ void main(List<String> args) async {
 
   var input = argsResult.rest.first;
   var verbose = argsResult['verbose'] as bool;
+  var useDebugNames = argsResult['use-debug-names'] as bool;
   var output = argsResult['output'] as String?;
 
   output ??= '${path.withoutExtension(input)}.dart';
@@ -58,7 +67,7 @@ void main(List<String> args) async {
   }
 
   var compiler = Compiler(file: File(input), logger: logger);
-  var library = compiler.compile();
+  var library = compiler.compile(useDebugNames: useDebugNames);
   var code = emitFormatLibrary(library);
 
   logger.info('\nEmitting $output.');

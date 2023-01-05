@@ -6,6 +6,8 @@ import 'package:charcode/ascii.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 
+const int formatLineLength = 110;
+
 class NoPrefixAllocator implements Allocator {
   final Set<String> _imports = SplayTreeSet();
 
@@ -81,7 +83,7 @@ bool isNumber(int char) {
 }
 
 String emitFormatLibrary(Library library) {
-  var formatter = DartFormatter();
+  var formatter = DartFormatter(pageWidth: formatLineLength);
   var emitter = WasmCustomEmitter();
 
   var code = library.accept(emitter).toString();

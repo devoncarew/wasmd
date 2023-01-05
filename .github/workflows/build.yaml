@@ -28,7 +28,7 @@ jobs:
           ls -skS -1 -R samples/*.dart
 
       - name: Verify formatting
-        run: dart format --output=none --set-exit-if-changed .
+        run: dart format --output=none --set-exit-if-changed bin/ lib/ tool/
 
       - name: Analyze project source
         # run: dart analyze --fatal-infos
