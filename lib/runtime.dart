@@ -778,8 +778,7 @@ class Frame {
   void i32_clz() {
     // "Return the count of leading zero bits in i; all bits are considered
     // leading zeros if i is 0."
-    u32 arg0 = stack.removeLast() as u32;
-    arg0 &= _mask32;
+    u32 arg0 = (stack.removeLast() as u32) & _mask32;
     stack.add(32 - arg0.bitLength);
   }
 
@@ -920,7 +919,7 @@ class Frame {
 
   void i32_shr_u() {
     u32 arg1 = stack.removeLast() as u32;
-    u32 arg0 = stack.removeLast() as u32;
+    u32 arg0 = (stack.removeLast() as u32) & _mask32;
     arg1 = arg1 & 0x1F; // shift right by arg1 bits modulo 32
     var result = (arg0 >>> arg1) & _mask32;
     stack.add(result);
@@ -1387,7 +1386,7 @@ class Frame {
   }
 
   void i64_extend_i32_u() {
-    u32 arg = stack.removeLast() as u32;
+    u32 arg = (stack.removeLast() as u32) & _mask32;
     u64 result = arg;
     stack.add(result);
   }
@@ -1455,7 +1454,7 @@ class Frame {
   }
 
   void f32_convert_i32_u() {
-    u32 arg = stack.removeLast() as u32;
+    u32 arg = (stack.removeLast() as u32) & _mask32;
     f32 result = arg.toDouble();
     stack.add(result);
   }
@@ -1489,7 +1488,7 @@ class Frame {
   }
 
   void f64_convert_i32_u() {
-    u32 arg = stack.removeLast() as u32;
+    u32 arg = (stack.removeLast() as u32) & _mask32;
     f64 result = arg.toDouble();
     stack.add(result);
   }
