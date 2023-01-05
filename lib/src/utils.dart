@@ -26,6 +26,7 @@ class NoPrefixAllocator implements Allocator {
       _imports.map((url) => Directive.import(url));
 }
 
+/// Ensure that the given name is a valid Dart identifier.
 String patchUpName(String name) {
   name = name.replaceAll('-', '_').replaceAll('.', '_');
   if (isNumber(name.codeUnits[0])) {
@@ -35,6 +36,11 @@ String patchUpName(String name) {
     return '\$$name';
   }
   return name;
+}
+
+/// Ensure that the given symbol name is public.
+String ensurePublic(String name) {
+  return name.startsWith('_') ? '\$$name' : name;
 }
 
 const Set<String> _keywords = {
