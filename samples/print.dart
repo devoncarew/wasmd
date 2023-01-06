@@ -18,7 +18,7 @@ class PrintModule implements Module {
     required this.consoleImports,
     required this.memory,
   }) {
-    data.init(memory);
+    _data.init(memory);
     writeHi();
   }
 
@@ -28,7 +28,7 @@ class PrintModule implements Module {
   @override
   final Memory memory;
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   @override
   late final List<Table> tables = [];
