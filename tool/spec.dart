@@ -93,7 +93,7 @@ List<File> wast2json(File wastFile, File jsonFile) {
 }
 
 void compileWasmToDart(Compiler compiler, File wasmFile, File dartFile) {
-  var library = compiler.compile(wasmFile, compileForWastTest: true);
+  var library = compiler.compile(wasmFile);
   var code = emitFormatLibrary(library);
 
   print('  emitting ${dartFile.path}');

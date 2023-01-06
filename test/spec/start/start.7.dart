@@ -11,11 +11,6 @@ abstract class SpectestImports {
   void print();
 }
 
-class SpectestImportsImpl extends SpectestImports {
-  @override
-  void print() {}
-}
-
 class Start7Module implements Module {
   Start7Module({required this.spectestImports}) {
     spectestImports.print();

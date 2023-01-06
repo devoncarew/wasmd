@@ -11,11 +11,6 @@ abstract class SpectestImports {
   void print_i32(i32 arg0);
 }
 
-class SpectestImportsImpl extends SpectestImports {
-  @override
-  void print_i32(i32 arg0) {}
-}
-
 class Start5Module implements Module {
   Start5Module({required this.spectestImports}) {
     _func0();
