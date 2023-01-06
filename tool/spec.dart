@@ -156,6 +156,7 @@ void generateDartForJson(
   var moduleCount = 0;
   late ModuleRef lastModule;
   var registeredModules = <String, ModuleRef>{};
+  registeredModules['spectest'] = ModuleRef(null, 'SpectestModule', 'spectest');
   var skips = readSkipFile(skipFile);
   var importsManager = ImportsManager();
 
@@ -195,7 +196,6 @@ void generateDartForJson(
       for (var moduleImport in referencedModule.importModules) {
         // "aImports: Wrapper0(m0),"
         var name = moduleImport.name;
-        // TODO: or, 'spectest'
         var ref = registeredModules[name]!;
 
         var wrapCtor = importsManager.createWrapper(
@@ -423,7 +423,7 @@ class ImportsManager {
   String createWrapper(
     String targetPrefix,
     ImportModule targetInterface,
-    String wrappedPrefix,
+    String? wrappedPrefix,
     String wrappedClass,
   ) {
     var result = ImportsData(imports.length, targetPrefix, targetInterface,
@@ -443,7 +443,7 @@ class ImportsData {
   final int index;
   final String targetPrefix;
   final ImportModule targetInterface;
-  final String wrappedPrefix;
+  final String? wrappedPrefix;
   final String wrappedClass;
 
   ImportsData(
@@ -459,12 +459,14 @@ class ImportsData {
   void generateWrapperClass(LibraryBuilder library) {
     var classBuilder = ClassBuilder()..name = className;
 
+    var delegatePrefix = wrappedPrefix == null ? '' : '.$wrappedPrefix';
+
     // final Foo delegate;
     classBuilder.fields.add(Field(
       (b) => b
         ..name = 'delegate'
         ..modifier = FieldModifier.final$
-        ..type = Reference('$wrappedPrefix.$wrappedClass'),
+        ..type = Reference('$delegatePrefix$wrappedClass'),
     ));
 
     // Foo(this.delegate);
@@ -517,7 +519,7 @@ class ImportsData {
 }
 
 class ModuleRef {
-  final String prefix;
+  final String? prefix;
   final String className;
   String refName;
 
