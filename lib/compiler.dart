@@ -16,15 +16,14 @@ import 'instructions.dart' as instructions show BlockType;
 import 'src/utils.dart';
 
 class Compiler {
-  final File file;
   final Logger logger;
 
   Compiler({
-    required this.file,
     required this.logger,
   });
 
-  Library compile({
+  Library compile(
+    File file, {
     bool useDebugNames = false,
     bool compileForWastTest = false,
   }) {
@@ -42,7 +41,7 @@ class Compiler {
       Directive.import('package:wasmd/runtime.dart'),
     ]);
 
-    var module = _parse(file);
+    var module = parse(file);
 
     printModule(
       module,
@@ -55,7 +54,7 @@ class Compiler {
     return library.build();
   }
 
-  Module _parse(File file) {
+  Module parse(File file) {
     _log('Parsing ${file.path}...');
     _log();
 
@@ -1455,7 +1454,9 @@ class ImportModule {
           )
           ..annotations.add(refer('override'))
           ..requiredParameters.addAll(parameters)
-          ..body = Block(),
+          ..body = func.returnsVoid
+              ? Block()
+              : Block((b) => b.statements.add(Code('return 0;'))),
       ));
     }
 

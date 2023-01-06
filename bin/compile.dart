@@ -66,8 +66,8 @@ void main(List<String> args) async {
     });
   }
 
-  var compiler = Compiler(file: File(input), logger: logger);
-  var library = compiler.compile(useDebugNames: useDebugNames);
+  var compiler = Compiler(logger: logger);
+  var library = compiler.compile(File(input), useDebugNames: useDebugNames);
   var code = emitFormatLibrary(library);
 
   logger.info('\nEmitting $output.');

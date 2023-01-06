@@ -28,6 +28,9 @@ class NoPrefixAllocator implements Allocator {
 
 /// Ensure that the given name is a valid Dart identifier.
 String patchUpName(String name) {
+  // This is only supported for testing.
+  if (name.isEmpty) return '\$';
+
   name = name.replaceAll('-', '_').replaceAll('.', '_');
   if (isNumber(name.codeUnits[0])) {
     return '\$$name';

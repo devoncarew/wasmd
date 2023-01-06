@@ -16,6 +16,27 @@ import 'package:wasmd/src/utils.dart';
 // TODO:? --disable-saturating-float-to-int --disable-sign-extension
 // --disable-multi-value --disable-simd
 
+// TODO: support the 'spectest' module:
+
+// (module
+//   (global (export "global_i32") i32)
+//   (global (export "global_i64") i64)
+//   (global (export "global_f32") f32)
+//   (global (export "global_f64") f64)
+
+//   (table (export "table") 10 20 funcref)
+
+//   (memory (export "memory") 1 2)
+
+//   (func (export "print"))
+//   (func (export "print_i32") (param i32))
+//   (func (export "print_i64") (param i64))
+//   (func (export "print_f32") (param f32))
+//   (func (export "print_f64") (param f64))
+//   (func (export "print_i32_f32") (param i32 f32))
+//   (func (export "print_f64_f64") (param f64 f64))
+// )
+
 void main(List<String> args) {
   if (args.isEmpty) {
     print('usage: dart tools/spec_2.dart <wast file>');
@@ -33,6 +54,9 @@ void main(List<String> args) {
       ..sort();
   }
 
+  var logger = Logger.detached('wasm2dart');
+  var compiler = Compiler(logger: logger);
+
   for (var arg in args) {
     var wastFile = File(arg);
 
@@ -46,14 +70,15 @@ void main(List<String> args) {
 
     // generate a dart file from the json testing file
     var dartFile = File('${p.withoutExtension(jsonFile.path)}_test.dart');
-    generateDartForJson(jsonFile, dartFile);
+    var skipFile = File('${p.withoutExtension(jsonFile.path)}_test.skip');
+    generateDartForJson(compiler, jsonFile, dartFile, skipFile);
 
     // compile wasm to dart
     for (var wasmFile in wasmFiles) {
       if (!wasmFile.existsSync()) continue;
 
       var dartFile = File('${p.withoutExtension(wasmFile.path)}.dart');
-      compileWasmToDart(wasmFile, dartFile);
+      compileWasmToDart(compiler, wasmFile, dartFile);
     }
   }
 }
@@ -88,23 +113,20 @@ List<File> wast2json(File wastFile, File jsonFile) {
       .toList();
 }
 
-void compileWasmToDart(File wasmFile, File dartFile) {
-  var logger = Logger.detached('wasm2dart');
-  // if (verbose) {
-  //   logger.onRecord.listen((record) {
-  //     stderr.writeln(record.message);
-  //   });
-  // }
-
-  var compiler = Compiler(file: wasmFile, logger: logger);
-  var library = compiler.compile(compileForWastTest: true);
+void compileWasmToDart(Compiler compiler, File wasmFile, File dartFile) {
+  var library = compiler.compile(wasmFile, compileForWastTest: true);
   var code = emitFormatLibrary(library);
 
   print('  emitting ${dartFile.path}');
   dartFile.writeAsStringSync(code);
 }
 
-void generateDartForJson(File jsonFile, File dartFile) {
+void generateDartForJson(
+  Compiler compiler,
+  File jsonFile,
+  File dartFile,
+  File skipFile,
+) {
   var base = p.basenameWithoutExtension(jsonFile.path);
   var json = jsonDecode(jsonFile.readAsStringSync()) as Map<String, dynamic>;
   var sourceFilename = json['source_filename'];
@@ -117,17 +139,14 @@ void generateDartForJson(File jsonFile, File dartFile) {
     'unused_local_variable',
   ]);
   library.directives.addAll([
-    Directive.import('../../src/infra.dart'),
+    Directive.import('package:wasmd/runtime.dart'),
+    Directive.import('../../src/infra.dart', hide: ['i32']),
   ]);
 
   // create a main() method
   var mainMethod = MethodBuilder()
-        ..name = 'main'
-        ..returns = Reference('void')
-      // ..requiredParameters.add(Parameter((b) => b
-      //   ..name = 'args'
-      //   ..type = Reference('List<String>')))
-      ;
+    ..name = 'main'
+    ..returns = Reference('void');
 
   var statements = <Code>[
     Code("group('$base', () {"),
@@ -135,7 +154,10 @@ void generateDartForJson(File jsonFile, File dartFile) {
 
   // create statements
   var moduleCount = 0;
-  late String lastModule;
+  late ModuleRef lastModule;
+  var registeredModules = <String, ModuleRef>{};
+  var skips = readSkipFile(skipFile);
+  var importsManager = ImportsManager();
 
   var testCount = <String, int>{};
   var constMap = <String, String>{};
@@ -150,29 +172,40 @@ void generateDartForJson(File jsonFile, File dartFile) {
       var filename = command['filename'] as String;
       var moduleName = command['name'] as String?;
       var name = moduleName ?? 'm$moduleCount';
-      lastModule = name;
+      var shortName = p.withoutExtension(filename);
+      var prefix = shortName.replaceAll('.', '_');
 
       if (moduleName != null && moduleName.startsWith(r'$')) {
         moduleName = moduleName.substring(1);
       }
+      var className = moduleName != null
+          ? '${moduleName}Module'
+          : titleCase(patchUpName('${shortName}Module'));
 
-      var shortName = p.withoutExtension(filename);
-      var prefix = shortName.replaceAll('.', '_');
+      lastModule = ModuleRef(prefix, className, name);
 
       moduleCount++;
 
       var dartImport = '$shortName.dart';
-      var importInterfaces =
-          _readImportInterfaces(dartFile.parent, '$shortName.sidecar');
-      var className = moduleName != null
-          ? '${moduleName}Module'
-          : titleCase(patchUpName('${shortName}Module'));
+      var moduleFile = File(p.join(dartFile.parent.path, filename));
+      var referencedModule = compiler.parse(moduleFile);
+
       statements.add(Code('    // module $dartImport (line $line)'));
       statements.add(Code('var $name = $prefix.$className('));
-      for (var import in importInterfaces) {
-        statements
-            .add(Code('${import.name}: $prefix.${import.implClassName}(),'));
+      for (var moduleImport in referencedModule.importModules) {
+        // "aImports: Wrapper0(m0),"
+        var name = moduleImport.name;
+        // TODO: or, 'spectest'
+        var ref = registeredModules[name]!;
+
+        var wrapCtor = importsManager.createWrapper(
+            prefix, moduleImport, ref.prefix, ref.className);
+
+        statements.add(
+          Code('${moduleImport.referenceName}: $wrapCtor(${ref.refName}),'),
+        );
       }
+
       statements.add(Code(');\n'));
       library.directives.add(Directive.import(dartImport, as: prefix));
     } else if (type == 'action') {
@@ -235,9 +268,12 @@ void generateDartForJson(File jsonFile, File dartFile) {
 
       var description = '${field}_${testCount[field]}';
       description = description.replaceAll(r'$', '');
+      var skip = skips[description];
+      var skipDesc =
+          skip == null ? '' : (skip.isEmpty ? ", 'skip'" : ", 'skip: $skip'");
 
       statements.add(Code(_addComma('returns(\'$description\', '
-          '() => $module.$field$invocation, $result);')));
+          '() => $module.$field$invocation, $result$skipDesc);')));
     } else if (type == 'assert_trap') {
       var action = command['action'] as Map<String, dynamic>;
       var text = command['text'] as String;
@@ -281,9 +317,19 @@ void generateDartForJson(File jsonFile, File dartFile) {
       // Remove this wat file - we don't try to compile or generate from it.
       var file = File(p.join(jsonFile.parent.path, filename));
       file.deleteSync();
+    } else if (type == 'assert_uninstantiable') {
+      // a wasm file
+      var filename = command['filename'] as String;
+
+      // Remove this file - we don't try to compile or generate from it.
+      var file = File(p.join(jsonFile.parent.path, filename));
+      file.deleteSync();
+    } else if (type == 'register') {
+      var asName = command['as'];
+
+      registeredModules[asName] = lastModule;
     } else {
-      // We ignore other command types.
-      // statements.add(Code('    // $type'));
+      throw "test directive not handled: '$type'";
     }
   }
 
@@ -305,17 +351,11 @@ void generateDartForJson(File jsonFile, File dartFile) {
 
   library.body.add(mainMethod.build());
 
+  importsManager.generateWrapperClasses(library);
+
   var code = emitFormatLibrary(library.build());
   dartFile.writeAsStringSync(code);
   print('Wrote ${dartFile.path}.');
-}
-
-List<ImportInterface> _readImportInterfaces(Directory dir, String sidecarName) {
-  var sidecarFile = File(p.join(dir.path, sidecarName));
-  if (!sidecarFile.existsSync()) return [];
-
-  var list = jsonDecode(sidecarFile.readAsStringSync()) as List;
-  return list.cast<String>().map((name) => ImportInterface(name)).toList();
 }
 
 class ImportInterface {
@@ -350,7 +390,139 @@ String encodeType(String type, String value) {
       return 'double.nan';
     } else {
       var val = BigInt.parse(value);
-      return "$type('${val.toRadixString(16).toUpperCase()}')";
+      return "\$$type('${val.toRadixString(16).toUpperCase()}')";
     }
   }
+}
+
+Map<String, String> readSkipFile(File file) {
+  if (!file.existsSync()) return {};
+
+  var skips = <String, String>{};
+
+  for (var line in file.readAsLinesSync()) {
+    line = line.trim();
+    if (line.isEmpty) continue;
+
+    if (line.contains(':')) {
+      // add the skip and the reason
+      var split = line.split(':');
+      skips[split.first.trim()] = split[1].trim();
+    } else {
+      // no reason given
+      skips[line] = '';
+    }
+  }
+
+  return skips;
+}
+
+class ImportsManager {
+  final List<ImportsData> imports = [];
+
+  String createWrapper(
+    String targetPrefix,
+    ImportModule targetInterface,
+    String wrappedPrefix,
+    String wrappedClass,
+  ) {
+    var result = ImportsData(imports.length, targetPrefix, targetInterface,
+        wrappedPrefix, wrappedClass);
+    imports.add(result);
+    return result.className;
+  }
+
+  void generateWrapperClasses(LibraryBuilder library) {
+    for (var element in imports) {
+      element.generateWrapperClass(library);
+    }
+  }
+}
+
+class ImportsData {
+  final int index;
+  final String targetPrefix;
+  final ImportModule targetInterface;
+  final String wrappedPrefix;
+  final String wrappedClass;
+
+  ImportsData(
+    this.index,
+    this.targetPrefix,
+    this.targetInterface,
+    this.wrappedPrefix,
+    this.wrappedClass,
+  );
+
+  String get className => 'Wrapper$index';
+
+  void generateWrapperClass(LibraryBuilder library) {
+    var classBuilder = ClassBuilder()..name = className;
+
+    // final Foo delegate;
+    classBuilder.fields.add(Field(
+      (b) => b
+        ..name = 'delegate'
+        ..modifier = FieldModifier.final$
+        ..type = Reference('$wrappedPrefix.$wrappedClass'),
+    ));
+
+    // Foo(this.delegate);
+    classBuilder.constructors.add(Constructor(
+      (b) => b
+        ..requiredParameters.add((Parameter(
+          (b) => b
+            ..name = 'delegate'
+            ..toThis = true,
+        ))),
+    ));
+
+    // implements Bar
+    classBuilder.implements
+        .add(Reference('$targetPrefix.${targetInterface.typeName}'));
+
+    // interface methods
+    for (var func in targetInterface.functions) {
+      var parameters = <Parameter>[];
+      for (int i = 0; i < func.parameterTypes.length; i++) {
+        var parameter = func.parameterTypes[i];
+        parameters.add(
+          Parameter(
+            (b) => b
+              ..type = Reference(parameter.typeName)
+              ..name = 'arg$i',
+          ),
+        );
+      }
+
+      var invocation = refer('delegate').property(func.referenceName).call([
+        for (int i = 0; i < func.parameterTypes.length; i++) refer('arg$i')
+      ]);
+
+      classBuilder.methods.add(Method(
+        (b) => b
+          ..name = func.referenceName
+          ..returns = Reference(
+            func.returnsVoid ? 'void' : func.returnType!.typeName,
+          )
+          ..annotations.add(refer('override'))
+          ..requiredParameters.addAll(parameters)
+          ..lambda = true
+          ..body = invocation.code,
+      ));
+    }
+
+    library.body.add(classBuilder.build());
+  }
+}
+
+class ModuleRef {
+  final String prefix;
+  final String className;
+  String refName;
+
+  ModuleRef(this.prefix, this.className, this.refName);
+
+  @override
+  String toString() => refName;
 }
