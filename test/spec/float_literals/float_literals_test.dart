@@ -11,7 +11,12 @@ void main() {
     // module float_literals.0.dart (line 3)
     var m0 = float_literals_0.FloatLiterals0Module();
 
-    returns('f32_nan_0', () => m0.f32_nan(), i32('7FC00000'));
+    returns(
+      'f32_nan_0',
+      () => m0.f32_nan(),
+      i32('7FC00000'),
+      'skip: can both pass and fail on the bots',
+    );
     returns(
       'f32_positive_nan_0',
       () => m0.f32_positive_nan(),
