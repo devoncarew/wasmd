@@ -122,7 +122,6 @@ void main() {
       'f64_negative_nan_0',
       () => m0.f64_negative_nan(),
       i64('FFF8000000000000'),
-      'skip: can both pass and fail on the bots',
     );
     returns(
       'f64_plain_nan_0',

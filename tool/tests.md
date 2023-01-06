@@ -41,22 +41,22 @@
 | inline-module.wast | no tests |
 | int_exprs.wast | - |
 | int_literals.wast | - |
-| labels.wast | xxx |
+| labels.wast | - |
 | left-to-right.wast | - |
-| linking.wast | xxx |
+| linking.wast | unimplemented import global |
 | load.wast | - |
 | local_get.wast | - |
 | local_set.wast | - |
 | local_tee.wast | - |
-| loop.wast | xxx |
+| loop.wast | multiple return values not currently supported |
 | memory.wast | - |
-| memory_copy.wast | xxx |
+| memory_copy.wast | - |
 | memory_fill.wast | - |
 | memory_grow.wast | - |
 | memory_init.wast | - |
-| memory_redundancy.wast | xxx |
+| memory_redundancy.wast | - |
 | memory_size.wast | - |
-| memory_trap.wast | xxx |
+| memory_trap.wast | - |
 | names.wast | xxx |
 | nop.wast | - |
 | ref_func.wast | xxx |
