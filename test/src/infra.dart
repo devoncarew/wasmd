@@ -4,7 +4,11 @@ import 'package:meta/meta.dart';
 import 'package:test/test.dart';
 import 'package:wasmd/runtime.dart' show Trap;
 
+import 'spectest.dart';
+
 export 'package:test/test.dart' show group;
+
+export 'spectest.dart' show SpectestModule;
 
 /// Assert that the result of the given closure matches the expected result.
 @isTest
@@ -103,6 +107,8 @@ int $i64(String value) => i64(value);
 double $f32(String value) => f32(value);
 double $f64(String value) => f64(value);
 Function $externref(String value) => externref(value);
+
+final SpectestModule spectest = SpectestModule();
 
 final List<Function> _testExterns = [
   extern0,

@@ -2,7 +2,9 @@
 
 // ignore_for_file: non_constant_identifier_names, unused_local_variable
 
-import '../../src/infra.dart';
+import 'package:wasmd/runtime.dart';
+
+import '../../src/infra.dart' hide i32;
 import 'start.3.dart' as start_3;
 import 'start.4.dart' as start_4;
 import 'start.5.dart' as start_5;
@@ -31,17 +33,44 @@ void main() {
 
     // module start.5.dart (line 80)
     var m2 = start_5.Start5Module(
-      spectestImports: start_5.SpectestImportsImpl(),
+      spectestImports: Wrapper0(spectest),
     );
 
     // module start.6.dart (line 86)
     var m3 = start_6.Start6Module(
-      spectestImports: start_6.SpectestImportsImpl(),
+      spectestImports: Wrapper1(spectest),
     );
 
     // module start.7.dart (line 92)
     var m4 = start_7.Start7Module(
-      spectestImports: start_7.SpectestImportsImpl(),
+      spectestImports: Wrapper2(spectest),
     );
   });
+}
+
+class Wrapper0 implements start_5.SpectestImports {
+  Wrapper0(this.delegate);
+
+  final SpectestModule delegate;
+
+  @override
+  void print_i32(i32 arg0) => delegate.print_i32(arg0);
+}
+
+class Wrapper1 implements start_6.SpectestImports {
+  Wrapper1(this.delegate);
+
+  final SpectestModule delegate;
+
+  @override
+  void print_i32(i32 arg0) => delegate.print_i32(arg0);
+}
+
+class Wrapper2 implements start_7.SpectestImports {
+  Wrapper2(this.delegate);
+
+  final SpectestModule delegate;
+
+  @override
+  void print() => delegate.print();
 }
