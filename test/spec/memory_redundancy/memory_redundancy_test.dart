@@ -1,6 +1,9 @@
 // Generated from spec/test/core/memory_redundancy.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'memory_redundancy.0.dart' as memory_redundancy_0;
@@ -14,7 +17,7 @@ void main() {
     invoke('zero_everything_0', () => m0.zero_everything());
     returns('test_redundant_load_0', () => m0.test_redundant_load(), 0x80);
     invoke('zero_everything_1', () => m0.zero_everything());
-    returns('test_dead_store_0', () => m0.test_dead_store(), f32('23'));
+    returns('test_dead_store_0', () => m0.test_dead_store(), $f32('23'));
     invoke('zero_everything_2', () => m0.zero_everything());
     returns('malloc_aliasing_0', () => m0.malloc_aliasing(), 0x2B);
   });

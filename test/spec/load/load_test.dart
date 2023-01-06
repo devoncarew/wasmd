@@ -1,6 +1,9 @@
 // Generated from spec/test/core/load.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'load.0.dart' as load_0;
@@ -28,28 +31,28 @@ void main() {
     returns('as_select_first_0', () => m0.as_select_first(0, 0x1), 0);
     returns('as_select_second_0', () => m0.as_select_second(0, 0), 0);
     returns('as_select_cond_0', () => m0.as_select_cond(), 0x1);
-    returns('as_call_first_0', () => m0.as_call_first(), i32('FFFFFFFF'));
-    returns('as_call_mid_0', () => m0.as_call_mid(), i32('FFFFFFFF'));
-    returns('as_call_last_0', () => m0.as_call_last(), i32('FFFFFFFF'));
+    returns('as_call_first_0', () => m0.as_call_first(), $i32('FFFFFFFF'));
+    returns('as_call_mid_0', () => m0.as_call_mid(), $i32('FFFFFFFF'));
+    returns('as_call_last_0', () => m0.as_call_last(), $i32('FFFFFFFF'));
     returns(
       'as_call_indirect_first_0',
       () => m0.as_call_indirect_first(),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'as_call_indirect_mid_0',
       () => m0.as_call_indirect_mid(),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'as_call_indirect_last_0',
       () => m0.as_call_indirect_last(),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'as_call_indirect_index_0',
       () => m0.as_call_indirect_index(),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns('as_local_set_value_0', () => m0.as_local_set_value(), null);
     returns('as_local_tee_value_0', () => m0.as_local_tee_value(), 0);

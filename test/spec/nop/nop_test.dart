@@ -1,6 +1,9 @@
 // Generated from spec/test/core/nop.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'nop.0.dart' as nop_0;
@@ -33,7 +36,7 @@ void main() {
     returns('as_if_condition_0', () => m0.as_if_condition(0), null);
     returns(
       'as_if_condition_1',
-      () => m0.as_if_condition(i32('FFFFFFFF')),
+      () => m0.as_if_condition($i32('FFFFFFFF')),
       null,
     );
     returns('as_if_then_0', () => m0.as_if_then(0), null);
@@ -63,13 +66,13 @@ void main() {
     returns('as_call_mid2_0', () => m0.as_call_mid2(0, 0x3, 0x1), 0x2);
     returns(
       'as_call_last_0',
-      () => m0.as_call_last(0xA, 0x9, i32('FFFFFFFF')),
+      () => m0.as_call_last(0xA, 0x9, $i32('FFFFFFFF')),
       0x14,
     );
     returns(
       'as_call_everywhere_0',
       () => m0.as_call_everywhere(0x2, 0x1, 0x5),
-      i32('FFFFFFFE'),
+      $i32('FFFFFFFE'),
     );
     returns('as_unary_first_0', () => m0.as_unary_first(0x1E), 0x1);
     returns('as_unary_last_0', () => m0.as_unary_last(0x1E), 0x1);

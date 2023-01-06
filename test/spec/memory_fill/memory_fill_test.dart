@@ -1,6 +1,9 @@
 // Generated from spec/test/core/memory_fill.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'memory_fill.0.dart' as memory_fill_0;
@@ -23,11 +26,15 @@ void main() {
     var m0 = memory_fill_0.MemoryFill0Module();
 
     invoke('test_0', () => m0.test());
-    returns('checkRange_0', () => m0.checkRange(0, 0xFF00, 0), i32('FFFFFFFF'));
+    returns(
+      'checkRange_0',
+      () => m0.checkRange(0, 0xFF00, 0),
+      $i32('FFFFFFFF'),
+    );
     returns(
       'checkRange_1',
       () => m0.checkRange(0xFF00, 0x10000, 0x55),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
 
     // module memory_fill.1.dart (line 28)
@@ -47,7 +54,7 @@ void main() {
     returns(
       'checkRange_2',
       () => m3.checkRange(0, 0x10000, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
 
     // module memory_fill.4.dart (line 84)
@@ -64,60 +71,60 @@ void main() {
     var m6 = memory_fill_6.MemoryFill6Module();
 
     invoke('test_6', () => m6.test());
-    returns('checkRange_3', () => m6.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    returns('checkRange_3', () => m6.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
     returns(
       'checkRange_4',
       () => m6.checkRange(0x1, 0xFFFF, 0xAA),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_5',
       () => m6.checkRange(0xFFFF, 0x10000, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
 
     // module memory_fill.7.dart (line 145)
     var m7 = memory_fill_7.MemoryFill7Module();
 
     invoke('test_7', () => m7.test());
-    returns('checkRange_6', () => m7.checkRange(0, 0x12, 0), i32('FFFFFFFF'));
+    returns('checkRange_6', () => m7.checkRange(0, 0x12, 0), $i32('FFFFFFFF'));
     returns(
       'checkRange_7',
       () => m7.checkRange(0x12, 0x15, 0x55),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_8',
       () => m7.checkRange(0x15, 0x19, 0xAA),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_9',
       () => m7.checkRange(0x19, 0x1C, 0x55),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_10',
       () => m7.checkRange(0x1C, 0x10000, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
 
     // module memory_fill.72.dart (line 621)
     var m8 = memory_fill_72.MemoryFill72Module();
 
     traps('run_0', () => m8.run(0xFF00, 0x25, 0x200), _oobma);
-    returns('checkRange_11', () => m8.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    returns('checkRange_11', () => m8.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
 
     // module memory_fill.73.dart (line 643)
     var m9 = memory_fill_73.MemoryFill73Module();
 
     traps('run_1', () => m9.run(0xFEFF, 0x25, 0x202), _oobma);
-    returns('checkRange_12', () => m9.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    returns('checkRange_12', () => m9.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
 
     // module memory_fill.74.dart (line 665)
     var m10 = memory_fill_74.MemoryFill74Module();
 
-    traps('run_2', () => m10.run(0xFEFF, 0x25, i32('FFFFFFFF')), _oobma);
-    returns('checkRange_13', () => m10.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    traps('run_2', () => m10.run(0xFEFF, 0x25, $i32('FFFFFFFF')), _oobma);
+    returns('checkRange_13', () => m10.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
   });
 }

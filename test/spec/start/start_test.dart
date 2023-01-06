@@ -1,10 +1,11 @@
 // Generated from spec/test/core/start.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
-import '../../src/infra.dart' hide i32;
+import '../../src/infra.dart';
 import 'start.3.dart' as start_3;
 import 'start.4.dart' as start_4;
 import 'start.5.dart' as start_5;

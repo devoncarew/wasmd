@@ -1,6 +1,9 @@
 // Generated from spec/test/core/ref_null.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'ref_null.0.dart' as ref_null_0;

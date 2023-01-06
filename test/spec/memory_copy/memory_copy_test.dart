@@ -1,6 +1,9 @@
 // Generated from spec/test/core/memory_copy.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'memory_copy.0.dart' as memory_copy_0;
@@ -3512,7 +3515,7 @@ void main() {
     // module memory_copy.17.dart (line 3593)
     var m17 = memory_copy_17.MemoryCopy17Module();
 
-    traps('run_9', () => m17.run(0, 0xFFEC, i32('FFFFF000')), _oobma);
+    traps('run_9', () => m17.run(0, 0xFFEC, $i32('FFFFF000')), _oobma);
     returns('load8_u_3383', () => m17.load8_u(0xC6), 0);
     returns('load8_u_3384', () => m17.load8_u(0x18D), 0);
     returns('load8_u_3385', () => m17.load8_u(0x254), 0);
@@ -3866,7 +3869,7 @@ void main() {
     // module memory_copy.18.dart (line 3954)
     var m18 = memory_copy_18.MemoryCopy18Module();
 
-    traps('run_10', () => m18.run(0xFFEC, 0xF000, i32('FFFFFF00')), _oobma);
+    traps('run_10', () => m18.run(0xFFEC, 0xF000, $i32('FFFFFF00')), _oobma);
     returns('load8_u_3732', () => m18.load8_u(0xC6), 0);
     returns('load8_u_3733', () => m18.load8_u(0x18D), 0);
     returns('load8_u_3734', () => m18.load8_u(0x254), 0);
@@ -4221,32 +4224,32 @@ void main() {
     var m19 = memory_copy_83.MemoryCopy83Module();
 
     invoke('test_8', () => m19.test());
-    returns('checkRange_0', () => m19.checkRange(0, 0x9, 0), i32('FFFFFFFF'));
+    returns('checkRange_0', () => m19.checkRange(0, 0x9, 0), $i32('FFFFFFFF'));
     returns(
       'checkRange_1',
       () => m19.checkRange(0x9, 0x14, 0x55),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_2',
       () => m19.checkRange(0x14, 0x10000, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
 
     // module memory_copy.84.dart (line 4789)
     var m20 = memory_copy_84.MemoryCopy84Module();
 
     invoke('test_9', () => m20.test());
-    returns('checkRange_3', () => m20.checkRange(0, 0xA, 0), i32('FFFFFFFF'));
+    returns('checkRange_3', () => m20.checkRange(0, 0xA, 0), $i32('FFFFFFFF'));
     returns(
       'checkRange_4',
       () => m20.checkRange(0xA, 0x15, 0x55),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_5',
       () => m20.checkRange(0x15, 0x10000, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
 
     // module memory_copy.85.dart (line 4815)
@@ -4276,12 +4279,12 @@ void main() {
     returns(
       'checkRange_6',
       () => m25.checkRange(0, 0x8000, 0x55),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_7',
       () => m25.checkRange(0x8000, 0x10000, 0xAA),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
 
     // module memory_copy.90.dart (line 4863)
@@ -4318,1156 +4321,1156 @@ void main() {
     var m32 = memory_copy_96.MemoryCopy96Module();
 
     invoke('test_21', () => m32.test());
-    returns('checkRange_8', () => m32.checkRange(0, 0x7C, 0), i32('FFFFFFFF'));
+    returns('checkRange_8', () => m32.checkRange(0, 0x7C, 0), $i32('FFFFFFFF'));
     returns(
       'checkRange_9',
       () => m32.checkRange(0x7C, 0x5ED, 0x9),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_10',
       () => m32.checkRange(0x5ED, 0x854, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_11',
       () => m32.checkRange(0x854, 0xB0B, 0xA),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_12',
       () => m32.checkRange(0xB0B, 0xB69, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_13',
       () => m32.checkRange(0xB69, 0xDD2, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_14',
       () => m32.checkRange(0xDD2, 0xECA, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_15',
       () => m32.checkRange(0xECA, 0xFCA, 0x61),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_16',
       () => m32.checkRange(0xFCA, 0x122B, 0x63),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_17',
       () => m32.checkRange(0x122B, 0x13C1, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_18',
       () => m32.checkRange(0x13C1, 0x13F5, 0x63),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_19',
       () => m32.checkRange(0x13F5, 0x14AB, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_20',
       () => m32.checkRange(0x14AB, 0x1594, 0x48),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_21',
       () => m32.checkRange(0x1594, 0x163B, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_22',
       () => m32.checkRange(0x163B, 0x1998, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_23',
       () => m32.checkRange(0x1998, 0x1BDD, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_24',
       () => m32.checkRange(0x1BDD, 0x1DF1, 0x63),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_25',
       () => m32.checkRange(0x1DF1, 0x207A, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_26',
       () => m32.checkRange(0x207A, 0x20A8, 0x3E),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_27',
       () => m32.checkRange(0x20A8, 0x2259, 0x56),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_28',
       () => m32.checkRange(0x2259, 0x2313, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_29',
       () => m32.checkRange(0x2313, 0x249D, 0x4F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_30',
       () => m32.checkRange(0x249D, 0x252E, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_31',
       () => m32.checkRange(0x252E, 0x26CE, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_32',
       () => m32.checkRange(0x26CE, 0x2767, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_33',
       () => m32.checkRange(0x2767, 0x27DE, 0x5),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_34',
       () => m32.checkRange(0x27DE, 0x27F6, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_35',
       () => m32.checkRange(0x27F6, 0x2809, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_36',
       () => m32.checkRange(0x2809, 0x2B8C, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_37',
       () => m32.checkRange(0x2B8C, 0x2C5C, 0x4A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_38',
       () => m32.checkRange(0x2C5C, 0x2C74, 0x5D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_39',
       () => m32.checkRange(0x2C74, 0x2EA3, 0x4A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_40',
       () => m32.checkRange(0x2EA3, 0x2F7F, 0x44),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_41',
       () => m32.checkRange(0x2F7F, 0x311F, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_42',
       () => m32.checkRange(0x311F, 0x32A9, 0x4F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_43',
       () => m32.checkRange(0x32A9, 0x333A, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_44',
       () => m32.checkRange(0x333A, 0x3735, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_45',
       () => m32.checkRange(0x3735, 0x3844, 0x4C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_46',
       () => m32.checkRange(0x3844, 0x385C, 0x39),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_47',
       () => m32.checkRange(0x385C, 0x387A, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_48',
       () => m32.checkRange(0x387A, 0x38F4, 0x20),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_49',
       () => m32.checkRange(0x38F4, 0x39B9, 0x59),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_50',
       () => m32.checkRange(0x39B9, 0x3B14, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_51',
       () => m32.checkRange(0x3B14, 0x3B16, 0x24),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_52',
       () => m32.checkRange(0x3B16, 0x3B58, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_53',
       () => m32.checkRange(0x3B58, 0x3DFF, 0x60),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_54',
       () => m32.checkRange(0x3DFF, 0x3E7E, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_55',
       () => m32.checkRange(0x3E7E, 0x4279, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_56',
       () => m32.checkRange(0x4279, 0x4388, 0x4C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_57',
       () => m32.checkRange(0x4388, 0x43A0, 0x39),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_58',
       () => m32.checkRange(0x43A0, 0x43BE, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_59',
       () => m32.checkRange(0x43BE, 0x4438, 0x20),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_60',
       () => m32.checkRange(0x4438, 0x44FD, 0x59),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_61',
       () => m32.checkRange(0x44FD, 0x453F, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_62',
       () => m32.checkRange(0x453F, 0x4545, 0x5),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_63',
       () => m32.checkRange(0x4545, 0x45E5, 0x60),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_64',
       () => m32.checkRange(0x45E5, 0x4879, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_65',
       () => m32.checkRange(0x4879, 0x4938, 0x2A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_66',
       () => m32.checkRange(0x4938, 0x4971, 0x4C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_67',
       () => m32.checkRange(0x4971, 0x4989, 0x39),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_68',
       () => m32.checkRange(0x4989, 0x49BC, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_69',
       () => m32.checkRange(0x49BC, 0x49C5, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_70',
       () => m32.checkRange(0x49C5, 0x49D8, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_71',
       () => m32.checkRange(0x49D8, 0x4C6F, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_72',
       () => m32.checkRange(0x4C6F, 0x4FB3, 0x60),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_73',
       () => m32.checkRange(0x4FB3, 0x531A, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_74',
       () => m32.checkRange(0x531A, 0x5374, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_75',
       () => m32.checkRange(0x5374, 0x53DC, 0x4A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_76',
       () => m32.checkRange(0x53DC, 0x53F4, 0x5D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_77',
       () => m32.checkRange(0x53F4, 0x5623, 0x4A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_78',
       () => m32.checkRange(0x5623, 0x57D0, 0x44),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_79',
       () => m32.checkRange(0x57D0, 0x589D, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_80',
       () => m32.checkRange(0x589D, 0x58A6, 0x44),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_81',
       () => m32.checkRange(0x58A6, 0x5925, 0xA),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_82',
       () => m32.checkRange(0x5925, 0x5955, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_83',
       () => m32.checkRange(0x5955, 0x5E2B, 0x61),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_84',
       () => m32.checkRange(0x5E2B, 0x5E2F, 0x25),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_85',
       () => m32.checkRange(0x5E2F, 0x5EAC, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_86',
       () => m32.checkRange(0x5EAC, 0x5F1C, 0x48),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_87',
       () => m32.checkRange(0x5F1C, 0x5FC3, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_88',
       () => m32.checkRange(0x5FC3, 0x6144, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_89',
       () => m32.checkRange(0x6144, 0x6230, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_90',
       () => m32.checkRange(0x6230, 0x625E, 0x55),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_91',
       () => m32.checkRange(0x625E, 0x6352, 0x44),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_92',
       () => m32.checkRange(0x6352, 0x640D, 0x59),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_93',
       () => m32.checkRange(0x640D, 0x64E6, 0x60),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_94',
       () => m32.checkRange(0x64E6, 0x674E, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_95',
       () => m32.checkRange(0x674E, 0x6795, 0xA),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_96',
       () => m32.checkRange(0x6795, 0x6B4C, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_97',
       () => m32.checkRange(0x6B4C, 0x6B6F, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_98',
       () => m32.checkRange(0x6B6F, 0x6BB5, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_99',
       () => m32.checkRange(0x6BB5, 0x6E55, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_100',
       () => m32.checkRange(0x6E55, 0x6E78, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_101',
       () => m32.checkRange(0x6E78, 0x733E, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_102',
       () => m32.checkRange(0x733E, 0x73BD, 0x2A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_103',
       () => m32.checkRange(0x73BD, 0x76B3, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_104',
       () => m32.checkRange(0x76B3, 0x77B6, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_105',
       () => m32.checkRange(0x77B6, 0x795A, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_106',
       () => m32.checkRange(0x795A, 0x799B, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_107',
       () => m32.checkRange(0x799B, 0x7A5A, 0x2A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_108',
       () => m32.checkRange(0x7A5A, 0x7A93, 0x4C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_109',
       () => m32.checkRange(0x7A93, 0x7AAB, 0x39),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_110',
       () => m32.checkRange(0x7AAB, 0x7ADE, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_111',
       () => m32.checkRange(0x7ADE, 0x7AE7, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_112',
       () => m32.checkRange(0x7AE7, 0x7AFA, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_113',
       () => m32.checkRange(0x7AFA, 0x7BA1, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_114',
       () => m32.checkRange(0x7BA1, 0x7CEA, 0x48),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_115',
       () => m32.checkRange(0x7CEA, 0x7D91, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_116',
       () => m32.checkRange(0x7D91, 0x7F12, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_117',
       () => m32.checkRange(0x7F12, 0x7FFE, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_118',
       () => m32.checkRange(0x7FFE, 0x802C, 0x55),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_119',
       () => m32.checkRange(0x802C, 0x8120, 0x44),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_120',
       () => m32.checkRange(0x8120, 0x837C, 0x59),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_121',
       () => m32.checkRange(0x837C, 0x83D8, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_122',
       () => m32.checkRange(0x83D8, 0x83EF, 0x24),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_123',
       () => m32.checkRange(0x83EF, 0x83F2, 0x20),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_124',
       () => m32.checkRange(0x83F2, 0x872B, 0x9),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_125',
       () => m32.checkRange(0x872B, 0x8992, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_126',
       () => m32.checkRange(0x8992, 0x8A2C, 0xA),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_127',
       () => m32.checkRange(0x8A2C, 0x8A9E, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_128',
       () => m32.checkRange(0x8A9E, 0x8B15, 0x5),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_129',
       () => m32.checkRange(0x8B15, 0x8B2D, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_130',
       () => m32.checkRange(0x8B2D, 0x8B40, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_131',
       () => m32.checkRange(0x8B40, 0x8EC3, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_132',
       () => m32.checkRange(0x8EC3, 0x8F93, 0x4A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_133',
       () => m32.checkRange(0x8F93, 0x8F9F, 0x5D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_134',
       () => m32.checkRange(0x8F9F, 0x8FCA, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_135',
       () => m32.checkRange(0x8FCA, 0x8FE7, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_136',
       () => m32.checkRange(0x8FE7, 0x9244, 0x60),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_137',
       () => m32.checkRange(0x9244, 0x94AC, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_138',
       () => m32.checkRange(0x94AC, 0x94F3, 0xA),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_139',
       () => m32.checkRange(0x94F3, 0x98AA, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_140',
       () => m32.checkRange(0x98AA, 0x98CD, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_141',
       () => m32.checkRange(0x98CD, 0x9913, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_142',
       () => m32.checkRange(0x9913, 0x9BB3, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_143',
       () => m32.checkRange(0x9BB3, 0x9BD6, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_144',
       () => m32.checkRange(0x9BD6, 0x9D41, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_145',
       () => m32.checkRange(0x9D41, 0x9D98, 0x59),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_146',
       () => m32.checkRange(0x9D98, 0x9DB3, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_147',
       () => m32.checkRange(0x9DB3, 0x9F64, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_148',
       () => m32.checkRange(0x9F64, 0x9FCD, 0x5),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_149',
       () => m32.checkRange(0x9FCD, 0xA513, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_150',
       () => m32.checkRange(0xA513, 0xA60F, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_151',
       () => m32.checkRange(0xA60F, 0xA7C1, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_152',
       () => m32.checkRange(0xA7C1, 0xA86B, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_153',
       () => m32.checkRange(0xA86B, 0xA92A, 0x2A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_154',
       () => m32.checkRange(0xA92A, 0xA963, 0x4C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_155',
       () => m32.checkRange(0xA963, 0xA97B, 0x39),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_156',
       () => m32.checkRange(0xA97B, 0xA9AE, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_157',
       () => m32.checkRange(0xA9AE, 0xA9B7, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_158',
       () => m32.checkRange(0xA9B7, 0xA9CA, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_159',
       () => m32.checkRange(0xA9CA, 0xAC61, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_160',
       () => m32.checkRange(0xAC61, 0xAF9E, 0x60),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_161',
       () => m32.checkRange(0xAF9E, 0xB202, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_162',
       () => m32.checkRange(0xB202, 0xB207, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_163',
       () => m32.checkRange(0xB207, 0xB248, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_164',
       () => m32.checkRange(0xB248, 0xB2AE, 0x2A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_165',
       () => m32.checkRange(0xB2AE, 0xB308, 0x48),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_166',
       () => m32.checkRange(0xB308, 0xB3AF, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_167',
       () => m32.checkRange(0xB3AF, 0xB530, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_168',
       () => m32.checkRange(0xB530, 0xB604, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_169',
       () => m32.checkRange(0xB604, 0xB63E, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_170',
       () => m32.checkRange(0xB63E, 0xB99B, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_171',
       () => m32.checkRange(0xB99B, 0xBA04, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_172',
       () => m32.checkRange(0xBA04, 0xBAC9, 0x4F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_173',
       () => m32.checkRange(0xBAC9, 0xBB4F, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_174',
       () => m32.checkRange(0xBB4F, 0xBDF8, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_175',
       () => m32.checkRange(0xBDF8, 0xBE3B, 0x61),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_176',
       () => m32.checkRange(0xBE3B, 0xBE3F, 0x25),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_177',
       () => m32.checkRange(0xBE3F, 0xC264, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_178',
       () => m32.checkRange(0xC264, 0xC323, 0x2A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_179',
       () => m32.checkRange(0xC323, 0xC35C, 0x4C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_180',
       () => m32.checkRange(0xC35C, 0xC374, 0x39),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_181',
       () => m32.checkRange(0xC374, 0xC3A7, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_182',
       () => m32.checkRange(0xC3A7, 0xC3B0, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_183',
       () => m32.checkRange(0xC3B0, 0xC3C3, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_184',
       () => m32.checkRange(0xC3C3, 0xC4C2, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_185',
       () => m32.checkRange(0xC4C2, 0xC89E, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_186',
       () => m32.checkRange(0xC89E, 0xC99A, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_187',
       () => m32.checkRange(0xC99A, 0xCA40, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_188',
       () => m32.checkRange(0xCA40, 0xCA79, 0x59),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_189',
       () => m32.checkRange(0xCA79, 0xCE9F, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_190',
       () => m32.checkRange(0xCE9F, 0xCF25, 0x61),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_191',
       () => m32.checkRange(0xCF25, 0xCFFC, 0x44),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_192',
       () => m32.checkRange(0xCFFC, 0xD332, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_193',
       () => m32.checkRange(0xD332, 0xD375, 0x61),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_194',
       () => m32.checkRange(0xD375, 0xD379, 0x25),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_195',
       () => m32.checkRange(0xD379, 0xD79E, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_196',
       () => m32.checkRange(0xD79E, 0xD85D, 0x2A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_197',
       () => m32.checkRange(0xD85D, 0xD896, 0x4C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_198',
       () => m32.checkRange(0xD896, 0xD8AE, 0x39),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_199',
       () => m32.checkRange(0xD8AE, 0xD8E1, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_200',
       () => m32.checkRange(0xD8E1, 0xD8EA, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_201',
       () => m32.checkRange(0xD8EA, 0xD8FD, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_202',
       () => m32.checkRange(0xD8FD, 0xDB94, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_203',
       () => m32.checkRange(0xDB94, 0xDED8, 0x60),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_204',
       () => m32.checkRange(0xDED8, 0xE347, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_205',
       () => m32.checkRange(0xE347, 0xE35A, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_206',
       () => m32.checkRange(0xE35A, 0xE494, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_207',
       () => m32.checkRange(0xE494, 0xE5D3, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_208',
       () => m32.checkRange(0xE5D3, 0xE5E7, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_209',
       () => m32.checkRange(0xE5E7, 0xE6D1, 0x5F),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_210',
       () => m32.checkRange(0xE6D1, 0xE709, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_211',
       () => m32.checkRange(0xE709, 0xE91D, 0x63),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_212',
       () => m32.checkRange(0xE91D, 0xEAE6, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_213',
       () => m32.checkRange(0xEAE6, 0xEC56, 0x59),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_214',
       () => m32.checkRange(0xEC56, 0xECB2, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_215',
       () => m32.checkRange(0xECB2, 0xECC9, 0x24),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_216',
       () => m32.checkRange(0xECC9, 0xECCA, 0x20),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_217',
       () => m32.checkRange(0xECCA, 0xED69, 0x2A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_218',
       () => m32.checkRange(0xED69, 0xEDA2, 0x4C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_219',
       () => m32.checkRange(0xEDA2, 0xEDBA, 0x39),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_220',
       () => m32.checkRange(0xEDBA, 0xEDED, 0x3B),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_221',
       () => m32.checkRange(0xEDED, 0xEDF6, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_222',
       () => m32.checkRange(0xEDF6, 0xEE09, 0x29),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_223',
       () => m32.checkRange(0xEE09, 0xF0A0, 0x53),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_224',
       () => m32.checkRange(0xF0A0, 0xF3E4, 0x60),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_225',
       () => m32.checkRange(0xF3E4, 0xF74B, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_226',
       () => m32.checkRange(0xF74B, 0xF7A5, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_227',
       () => m32.checkRange(0xF7A5, 0xF80D, 0x4A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_228',
       () => m32.checkRange(0xF80D, 0xF825, 0x5D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_229',
       () => m32.checkRange(0xF825, 0xF875, 0x4A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_230',
       () => m32.checkRange(0xF875, 0xF8D8, 0x64),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_231',
       () => m32.checkRange(0xF8D8, 0xF91B, 0x61),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_232',
       () => m32.checkRange(0xF91B, 0xF91F, 0x25),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_233',
       () => m32.checkRange(0xF91F, 0xFB37, 0x4D),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_234',
       () => m32.checkRange(0xFB37, 0xFB4B, 0x1A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_235',
       () => m32.checkRange(0xFB4B, 0xFC06, 0x5C),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_236',
       () => m32.checkRange(0xFC06, 0xFD3B, 0xB),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_237',
       () => m32.checkRange(0xFD3B, 0xFD42, 0x1A),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'checkRange_238',
       () => m32.checkRange(0xFD42, 0x10000, 0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
   });
 }

@@ -16,27 +16,6 @@ import 'package:wasmd/src/utils.dart';
 // TODO:? --disable-saturating-float-to-int --disable-sign-extension
 // --disable-multi-value --disable-simd
 
-// TODO: support the 'spectest' module:
-
-// (module
-//   (global (export "global_i32") i32)
-//   (global (export "global_i64") i64)
-//   (global (export "global_f32") f32)
-//   (global (export "global_f64") f64)
-
-//   (table (export "table") 10 20 funcref)
-
-//   (memory (export "memory") 1 2)
-
-//   (func (export "print"))
-//   (func (export "print_i32") (param i32))
-//   (func (export "print_i64") (param i64))
-//   (func (export "print_f32") (param f32))
-//   (func (export "print_f64") (param f64))
-//   (func (export "print_i32_f32") (param i32 f32))
-//   (func (export "print_f64_f64") (param f64 f64))
-// )
-
 void main(List<String> args) {
   if (args.isEmpty) {
     print('usage: dart tools/spec_2.dart <wast file>');
@@ -136,11 +115,12 @@ void generateDartForJson(
   library.comments.add('Generated from $sourceFilename.');
   library.ignoreForFile.addAll([
     'non_constant_identifier_names',
+    'unused_import',
     'unused_local_variable',
   ]);
   library.directives.addAll([
     Directive.import('package:wasmd/runtime.dart'),
-    Directive.import('../../src/infra.dart', hide: ['i32']),
+    Directive.import('../../src/infra.dart'),
   ]);
 
   // create a main() method
@@ -459,7 +439,7 @@ class ImportsData {
   void generateWrapperClass(LibraryBuilder library) {
     var classBuilder = ClassBuilder()..name = className;
 
-    var delegatePrefix = wrappedPrefix == null ? '' : '.$wrappedPrefix';
+    var delegatePrefix = wrappedPrefix == null ? '' : '$wrappedPrefix.';
 
     // final Foo delegate;
     classBuilder.fields.add(Field(

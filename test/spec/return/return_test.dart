@@ -1,6 +1,9 @@
 // Generated from spec/test/core/return.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'return.0.dart' as return_0;
@@ -16,14 +19,14 @@ void main() {
     returns('type_f64_0', () => m0.type_f64(), null);
     returns('type_i32_value_0', () => m0.type_i32_value(), 0x1);
     returns('type_i64_value_0', () => m0.type_i64_value(), 0x2);
-    returns('type_f32_value_0', () => m0.type_f32_value(), f32('40400000'));
+    returns('type_f32_value_0', () => m0.type_f32_value(), $f32('40400000'));
     returns(
       'type_f64_value_0',
       () => m0.type_f64_value(),
-      f64('4010000000000000'),
+      $f64('4010000000000000'),
     );
     returns('nullary_0', () => m0.nullary(), null);
-    returns('unary_0', () => m0.unary(), f64('4008000000000000'));
+    returns('unary_0', () => m0.unary(), $f64('4008000000000000'));
     returns('as_func_first_0', () => m0.as_func_first(), 0x1);
     returns('as_func_mid_0', () => m0.as_func_mid(), 0x2);
     returns('as_func_last_0', () => m0.as_func_last(), null);
@@ -71,13 +74,17 @@ void main() {
     returns('as_local_set_value_0', () => m0.as_local_set_value(), 0x11);
     returns('as_local_tee_value_0', () => m0.as_local_tee_value(), 0x1);
     returns('as_global_set_value_0', () => m0.as_global_set_value(), 0x1);
-    returns('as_load_address_0', () => m0.as_load_address(), f32('3FD9999A'));
+    returns('as_load_address_0', () => m0.as_load_address(), $f32('3FD9999A'));
     returns('as_loadN_address_0', () => m0.as_loadN_address(), 0x1E);
     returns('as_store_address_0', () => m0.as_store_address(), 0x1E);
     returns('as_store_value_0', () => m0.as_store_value(), 0x1F);
     returns('as_storeN_address_0', () => m0.as_storeN_address(), 0x20);
     returns('as_storeN_value_0', () => m0.as_storeN_value(), 0x21);
-    returns('as_unary_operand_0', () => m0.as_unary_operand(), f32('4059999A'));
+    returns(
+      'as_unary_operand_0',
+      () => m0.as_unary_operand(),
+      $f32('4059999A'),
+    );
     returns('as_binary_left_0', () => m0.as_binary_left(), 0x3);
     returns('as_binary_right_0', () => m0.as_binary_right(), 0x2D);
     returns('as_test_operand_0', () => m0.as_test_operand(), 0x2C);

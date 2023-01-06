@@ -1,6 +1,9 @@
 // Generated from spec/test/core/br_if.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'br_if.0.dart' as br_if_0;
@@ -16,11 +19,11 @@ void main() {
     returns('type_f64_0', () => m0.type_f64(), null);
     returns('type_i32_value_0', () => m0.type_i32_value(), 0x1);
     returns('type_i64_value_0', () => m0.type_i64_value(), 0x2);
-    returns('type_f32_value_0', () => m0.type_f32_value(), f32('40400000'));
+    returns('type_f32_value_0', () => m0.type_f32_value(), $f32('40400000'));
     returns(
       'type_f64_value_0',
       () => m0.type_f64_value(),
-      f64('4010000000000000'),
+      $f64('4010000000000000'),
     );
     returns('as_block_first_0', () => m0.as_block_first(0), 0x2);
     returns('as_block_first_1', () => m0.as_block_first(0x1), 0x3);
@@ -78,19 +81,19 @@ void main() {
     returns(
       'as_local_set_value_0',
       () => m0.as_local_set_value(0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns('as_local_set_value_1', () => m0.as_local_set_value(0x1), 0x11);
     returns(
       'as_local_tee_value_0',
       () => m0.as_local_tee_value(0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns('as_local_tee_value_1', () => m0.as_local_tee_value(0x1), 0x1);
     returns(
       'as_global_set_value_0',
       () => m0.as_global_set_value(0),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns('as_global_set_value_1', () => m0.as_global_set_value(0x1), 0x1);
     returns('as_load_address_0', () => m0.as_load_address(), 0x1);
@@ -102,7 +105,7 @@ void main() {
     returns(
       'as_unary_operand_0',
       () => m0.as_unary_operand(),
-      f64('3FF0000000000000'),
+      $f64('3FF0000000000000'),
     );
     returns('as_binary_left_0', () => m0.as_binary_left(), 0x1);
     returns('as_binary_right_0', () => m0.as_binary_right(), 0x1);
