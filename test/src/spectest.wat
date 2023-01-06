@@ -1,10 +1,8 @@
 (module
-
-  ;; TODO: fix the syntx here and add these back in
-  ;; (global (export "global_i32") i32)
-  ;; (global (export "global_i64") i64)
-  ;; (global (export "global_f32") f32)
-  ;; (global (export "global_f64") f64)
+  (global (export "global_i32") i32 (i32.const 0))
+  (global (export "global_i64") i64 (i64.const 0))
+  (global (export "global_f32") f32 (f32.const 0))
+  (global (export "global_f64") f64 (f64.const 0))
 
   (table (export "table") 10 20 funcref)
 

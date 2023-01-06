@@ -15,6 +15,8 @@ class SpectestModule implements Module {
     2,
   );
 
+  final Globals globals = Globals();
+
   final Table table0 = Table(
     10,
     20,
@@ -22,6 +24,11 @@ class SpectestModule implements Module {
 
   @override
   late final List<Table> tables = [table0];
+
+  i32 get global_i32 => globals.global0;
+  i64 get global_i64 => globals.global1;
+  f32 get global_f32 => globals.global2;
+  f64 get global_f64 => globals.global3;
 
   void print() {
     final frame = Frame(this);
@@ -59,3 +66,13 @@ typedef FunctionType3 = void Function(f32);
 typedef FunctionType4 = void Function(f64);
 typedef FunctionType5 = void Function(i32, f32);
 typedef FunctionType6 = void Function(f64, f64);
+
+class Globals {
+  final i32 global0 = 0;
+
+  final i64 global1 = 0;
+
+  final f32 global2 = 0.0;
+
+  final f64 global3 = 0.0;
+}

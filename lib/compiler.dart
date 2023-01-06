@@ -444,22 +444,25 @@ class Compiler {
     if (count > 1) {
       throw StateError('Only 1 memory item supported (found $count)');
     }
-    var limitKind = r.readUint8();
-    switch (limitKind) {
-      case 0x00:
-        var min = r.leb128();
-        _log('  min: $min pages');
-        module.setMemoryInfo(min: min);
-        break;
-      case 0x01:
-        var min = r.leb128();
-        var max = r.leb128();
-        _log('  min: $min pages');
-        _log('  max: $max pages');
-        module.setMemoryInfo(min: min, max: max);
-        break;
-      default:
-        throw StateError('unsupported memory kind: ${hex(limitKind)}');
+
+    for (int i = 0; i < count; i++) {
+      var limitKind = r.readUint8();
+      switch (limitKind) {
+        case 0x00:
+          var min = r.leb128();
+          _log('  min: $min pages');
+          module.setMemoryInfo(min: min);
+          break;
+        case 0x01:
+          var min = r.leb128();
+          var max = r.leb128();
+          _log('  min: $min pages');
+          _log('  max: $max pages');
+          module.setMemoryInfo(min: min, max: max);
+          break;
+        default:
+          throw StateError('unsupported memory kind: ${hex(limitKind)}');
+      }
     }
   }
 
