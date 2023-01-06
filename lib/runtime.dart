@@ -21,6 +21,8 @@ typedef ExternRef = Function;
 // runtime support
 
 const int _mask32 = 0xFFFFFFFF;
+const int _bit31 = 0x80000000;
+const int _maskTop32 = 0xFFFFFFFF00000000;
 
 class Memory {
   static const defaultMaxSize = 64 * 1024;
@@ -848,8 +850,8 @@ class Frame {
   }
 
   void i32_div_u() {
-    u32 arg1 = stack.removeLast() as u32;
-    u32 arg0 = stack.removeLast() as u32;
+    u32 arg1 = (stack.removeLast() as u32) & _mask32;
+    u32 arg0 = (stack.removeLast() as u32) & _mask32;
     try {
       var result = arg0 ~/ arg1;
       stack.add(result);
@@ -870,10 +872,12 @@ class Frame {
   }
 
   void i32_rem_u() {
-    u32 arg1 = stack.removeLast() as u32;
-    u32 arg0 = stack.removeLast() as u32;
+    u32 arg1 = (stack.removeLast() as u32) & _mask32;
+    u32 arg0 = (stack.removeLast() as u32) & _mask32;
     try {
       var result = arg0.remainder(arg1);
+      // sign extend result
+      if ((result & _bit31) != 0) result |= _maskTop32;
       stack.add(result);
     } on IntegerDivisionByZeroException {
       throw Trap('integer divide by zero');
@@ -905,7 +909,14 @@ class Frame {
     u32 arg1 = stack.removeLast() as u32;
     u32 arg0 = stack.removeLast() as u32;
     arg1 = arg1 & 0x1F; // shift left by arg1 bits modulo 32
-    var result = (arg0 << arg1) & _mask32;
+    var result = arg0 << arg1;
+    if ((result & _bit31) != 0) {
+      // sign extend result
+      result |= _maskTop32;
+    } else {
+      // remove anything shifted into the 64 bit portion
+      result &= _mask32;
+    }
     stack.add(result);
   }
 
@@ -913,7 +924,7 @@ class Frame {
     i32 arg1 = stack.removeLast() as i32;
     u32 arg0 = stack.removeLast() as u32;
     arg1 = arg1 & 0x1F; // shift right by arg1 bits modulo 32
-    var result = (arg0 >> arg1) & _mask32;
+    var result = arg0 >> arg1;
     stack.add(result);
   }
 
@@ -921,7 +932,9 @@ class Frame {
     u32 arg1 = stack.removeLast() as u32;
     u32 arg0 = (stack.removeLast() as u32) & _mask32;
     arg1 = arg1 & 0x1F; // shift right by arg1 bits modulo 32
-    var result = (arg0 >>> arg1) & _mask32;
+    var result = arg0 >>> arg1;
+    // sign extend result
+    if ((result & _bit31) != 0) result |= _maskTop32;
     stack.add(result);
   }
 
@@ -929,26 +942,37 @@ class Frame {
     const bitCount = 32;
 
     u32 count = stack.removeLast() as i32;
-    i32 value = stack.removeLast() as i32;
+    i32 value = (stack.removeLast() as i32) & _mask32;
 
-    count = count & 0x1F; // arg1 bits modulo 32
+    count = count & 0x1F; // modulo 32
 
-    i32 result =
-        count == 0 ? value : (value << count) | (value >>> (bitCount - count));
+    var result = (value << count) | (value >>> (bitCount - count));
+    if ((result & _bit31) != 0) {
+      // sign extend result
+      result |= _maskTop32;
+    } else {
+      // remove anything shifted into the 64 bit portion
+      result &= _mask32;
+    }
     stack.add(result);
   }
 
   void i32_rotr() {
-    const bitCount = 64;
+    const bitCount = 32;
 
     u32 count = stack.removeLast() as u32;
-    i32 value = stack.removeLast() as i32;
+    i32 value = (stack.removeLast() as i32) & _mask32;
 
-    count = count & 0x1F; // count bits modulo 32
+    count = count & 0x1F; //  modulo 32
 
-    i32 result =
-        count == 0 ? value : (value << (bitCount - count)) | (value >>> count);
-
+    i32 result = (value << (bitCount - count)) | (value >>> count);
+    if ((result & _bit31) != 0) {
+      // sign extend result
+      result |= _maskTop32;
+    } else {
+      // remove anything shifted into the 64 bit portion
+      result &= _mask32;
+    }
     stack.add(result);
   }
 
