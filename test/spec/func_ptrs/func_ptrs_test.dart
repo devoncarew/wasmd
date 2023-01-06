@@ -1,10 +1,11 @@
 // Generated from spec/test/core/func_ptrs.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
-import '../../src/infra.dart' hide i32;
+import '../../src/infra.dart';
 import 'func_ptrs.0.dart' as func_ptrs_0;
 import 'func_ptrs.8.dart' as func_ptrs_8;
 import 'func_ptrs.9.dart' as func_ptrs_9;

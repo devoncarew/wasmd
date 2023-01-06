@@ -1,6 +1,9 @@
 // Generated from spec/test/core/int_exprs.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'int_exprs.0.dart' as int_exprs_0;
@@ -33,22 +36,22 @@ void main() {
 
     returns(
       'i32_no_fold_cmp_s_offset_0',
-      () => m0.i32_no_fold_cmp_s_offset(i32('7FFFFFFF'), 0),
+      () => m0.i32_no_fold_cmp_s_offset($i32('7FFFFFFF'), 0),
       0x1,
     );
     returns(
       'i32_no_fold_cmp_u_offset_0',
-      () => m0.i32_no_fold_cmp_u_offset(i32('FFFFFFFF'), 0),
+      () => m0.i32_no_fold_cmp_u_offset($i32('FFFFFFFF'), 0),
       0x1,
     );
     returns(
       'i64_no_fold_cmp_s_offset_0',
-      () => m0.i64_no_fold_cmp_s_offset(i64('7FFFFFFFFFFFFFFF'), 0),
+      () => m0.i64_no_fold_cmp_s_offset($i64('7FFFFFFFFFFFFFFF'), 0),
       0x1,
     );
     returns(
       'i64_no_fold_cmp_u_offset_0',
-      () => m0.i64_no_fold_cmp_u_offset(i64('FFFFFFFFFFFFFFFF'), 0),
+      () => m0.i64_no_fold_cmp_u_offset($i64('FFFFFFFFFFFFFFFF'), 0),
       0x1,
     );
 
@@ -57,13 +60,13 @@ void main() {
 
     returns(
       'i64_no_fold_wrap_extend_s_0',
-      () => m1.i64_no_fold_wrap_extend_s(i64('10203040506070')),
-      i64('40506070'),
+      () => m1.i64_no_fold_wrap_extend_s($i64('10203040506070')),
+      $i64('40506070'),
     );
     returns(
       'i64_no_fold_wrap_extend_s_1',
-      () => m1.i64_no_fold_wrap_extend_s(i64('A0B0C0D0E0F0A0')),
-      i64('FFFFFFFFD0E0F0A0'),
+      () => m1.i64_no_fold_wrap_extend_s($i64('A0B0C0D0E0F0A0')),
+      $i64('FFFFFFFFD0E0F0A0'),
     );
 
     // module int_exprs.2.dart (line 35)
@@ -71,8 +74,8 @@ void main() {
 
     returns(
       'i64_no_fold_wrap_extend_u_0',
-      () => m2.i64_no_fold_wrap_extend_u(i64('10203040506070')),
-      i64('40506070'),
+      () => m2.i64_no_fold_wrap_extend_u($i64('10203040506070')),
+      $i64('40506070'),
     );
 
     // module int_exprs.3.dart (line 44)
@@ -80,22 +83,22 @@ void main() {
 
     returns(
       'i32_no_fold_shl_shr_s_0',
-      () => m3.i32_no_fold_shl_shr_s(i32('80000000')),
+      () => m3.i32_no_fold_shl_shr_s($i32('80000000')),
       0,
     );
     returns(
       'i32_no_fold_shl_shr_u_0',
-      () => m3.i32_no_fold_shl_shr_u(i32('80000000')),
+      () => m3.i32_no_fold_shl_shr_u($i32('80000000')),
       0,
     );
     returns(
       'i64_no_fold_shl_shr_s_0',
-      () => m3.i64_no_fold_shl_shr_s(i64('8000000000000000')),
+      () => m3.i64_no_fold_shl_shr_s($i64('8000000000000000')),
       0,
     );
     returns(
       'i64_no_fold_shl_shr_u_0',
-      () => m3.i64_no_fold_shl_shr_u(i64('8000000000000000')),
+      () => m3.i64_no_fold_shl_shr_u($i64('8000000000000000')),
       0,
     );
 
@@ -168,22 +171,22 @@ void main() {
 
     returns(
       'i32_no_fold_mul_div_s_0',
-      () => m8.i32_no_fold_mul_div_s(i32('80000000')),
+      () => m8.i32_no_fold_mul_div_s($i32('80000000')),
       0,
     );
     returns(
       'i32_no_fold_mul_div_u_0',
-      () => m8.i32_no_fold_mul_div_u(i32('80000000')),
+      () => m8.i32_no_fold_mul_div_u($i32('80000000')),
       0,
     );
     returns(
       'i64_no_fold_mul_div_s_0',
-      () => m8.i64_no_fold_mul_div_s(i64('8000000000000000')),
+      () => m8.i64_no_fold_mul_div_s($i64('8000000000000000')),
       0,
     );
     returns(
       'i64_no_fold_mul_div_u_0',
-      () => m8.i64_no_fold_mul_div_u(i64('8000000000000000')),
+      () => m8.i64_no_fold_mul_div_u($i64('8000000000000000')),
       0,
     );
 
@@ -192,13 +195,13 @@ void main() {
 
     returns(
       'i32_no_fold_div_s_2_0',
-      () => m9.i32_no_fold_div_s_2(i32('FFFFFFF5')),
-      i32('FFFFFFFB'),
+      () => m9.i32_no_fold_div_s_2($i32('FFFFFFF5')),
+      $i32('FFFFFFFB'),
     );
     returns(
       'i64_no_fold_div_s_2_0',
-      () => m9.i64_no_fold_div_s_2(i64('FFFFFFFFFFFFFFF5')),
-      i64('FFFFFFFFFFFFFFFB'),
+      () => m9.i64_no_fold_div_s_2($i64('FFFFFFFFFFFFFFF5')),
+      $i64('FFFFFFFFFFFFFFFB'),
     );
 
     // module int_exprs.10.dart (line 171)
@@ -206,13 +209,13 @@ void main() {
 
     returns(
       'i32_no_fold_rem_s_2_0',
-      () => m10.i32_no_fold_rem_s_2(i32('FFFFFFF5')),
-      i32('FFFFFFFF'),
+      () => m10.i32_no_fold_rem_s_2($i32('FFFFFFF5')),
+      $i32('FFFFFFFF'),
     );
     returns(
       'i64_no_fold_rem_s_2_0',
-      () => m10.i64_no_fold_rem_s_2(i64('FFFFFFFFFFFFFFF5')),
-      i64('FFFFFFFFFFFFFFFF'),
+      () => m10.i64_no_fold_rem_s_2($i64('FFFFFFFFFFFFFFF5')),
+      $i64('FFFFFFFFFFFFFFFF'),
     );
 
     // module int_exprs.11.dart (line 184)
@@ -229,26 +232,26 @@ void main() {
     returns('i32_div_s_3_0', () => m12.i32_div_s_3(0x47), 0x17);
     returns(
       'i32_div_s_3_1',
-      () => m12.i32_div_s_3(i32('60000000')),
-      i32('20000000'),
+      () => m12.i32_div_s_3($i32('60000000')),
+      $i32('20000000'),
     );
     returns('i32_div_u_3_0', () => m12.i32_div_u_3(0x47), 0x17);
     returns(
       'i32_div_u_3_1',
-      () => m12.i32_div_u_3(i32('C0000000')),
-      i32('40000000'),
+      () => m12.i32_div_u_3($i32('C0000000')),
+      $i32('40000000'),
     );
     returns('i64_div_s_3_0', () => m12.i64_div_s_3(0x47), 0x17);
     returns(
       'i64_div_s_3_1',
-      () => m12.i64_div_s_3(i64('3000000000000000')),
-      i64('1000000000000000'),
+      () => m12.i64_div_s_3($i64('3000000000000000')),
+      $i64('1000000000000000'),
     );
     returns('i64_div_u_3_0', () => m12.i64_div_u_3(0x47), 0x17);
     returns(
       'i64_div_u_3_1',
-      () => m12.i64_div_u_3(i64('C000000000000000')),
-      i64('4000000000000000'),
+      () => m12.i64_div_u_3($i64('C000000000000000')),
+      $i64('4000000000000000'),
     );
 
     // module int_exprs.13.dart (line 226)
@@ -257,26 +260,26 @@ void main() {
     returns('i32_div_s_5_0', () => m13.i32_div_s_5(0x47), 0xE);
     returns(
       'i32_div_s_5_1',
-      () => m13.i32_div_s_5(i32('50000000')),
-      i32('10000000'),
+      () => m13.i32_div_s_5($i32('50000000')),
+      $i32('10000000'),
     );
     returns('i32_div_u_5_0', () => m13.i32_div_u_5(0x47), 0xE);
     returns(
       'i32_div_u_5_1',
-      () => m13.i32_div_u_5(i32('A0000000')),
-      i32('20000000'),
+      () => m13.i32_div_u_5($i32('A0000000')),
+      $i32('20000000'),
     );
     returns('i64_div_s_5_0', () => m13.i64_div_s_5(0x47), 0xE);
     returns(
       'i64_div_s_5_1',
-      () => m13.i64_div_s_5(i64('5000000000000000')),
-      i64('1000000000000000'),
+      () => m13.i64_div_s_5($i64('5000000000000000')),
+      $i64('1000000000000000'),
     );
     returns('i64_div_u_5_0', () => m13.i64_div_u_5(0x47), 0xE);
     returns(
       'i64_div_u_5_1',
-      () => m13.i64_div_u_5(i64('A000000000000000')),
-      i64('2000000000000000'),
+      () => m13.i64_div_u_5($i64('A000000000000000')),
+      $i64('2000000000000000'),
     );
 
     // module int_exprs.14.dart (line 249)
@@ -285,75 +288,99 @@ void main() {
     returns('i32_div_s_7_0', () => m14.i32_div_s_7(0x47), 0xA);
     returns(
       'i32_div_s_7_1',
-      () => m14.i32_div_s_7(i32('70000000')),
-      i32('10000000'),
+      () => m14.i32_div_s_7($i32('70000000')),
+      $i32('10000000'),
     );
     returns('i32_div_u_7_0', () => m14.i32_div_u_7(0x47), 0xA);
     returns(
       'i32_div_u_7_1',
-      () => m14.i32_div_u_7(i32('E0000000')),
-      i32('20000000'),
+      () => m14.i32_div_u_7($i32('E0000000')),
+      $i32('20000000'),
     );
     returns('i64_div_s_7_0', () => m14.i64_div_s_7(0x47), 0xA);
     returns(
       'i64_div_s_7_1',
-      () => m14.i64_div_s_7(i64('7000000000000000')),
-      i64('1000000000000000'),
+      () => m14.i64_div_s_7($i64('7000000000000000')),
+      $i64('1000000000000000'),
     );
     returns('i64_div_u_7_0', () => m14.i64_div_u_7(0x47), 0xA);
     returns(
       'i64_div_u_7_1',
-      () => m14.i64_div_u_7(i64('E000000000000000')),
-      i64('2000000000000000'),
+      () => m14.i64_div_u_7($i64('E000000000000000')),
+      $i64('2000000000000000'),
     );
 
     // module int_exprs.15.dart (line 272)
     var m15 = int_exprs_15.IntExprs15Module();
 
     returns('i32_rem_s_3_0', () => m15.i32_rem_s_3(0x47), 0x2);
-    returns('i32_rem_s_3_1', () => m15.i32_rem_s_3(i32('60000000')), 0);
+    returns('i32_rem_s_3_1', () => m15.i32_rem_s_3($i32('60000000')), 0);
     returns('i32_rem_u_3_0', () => m15.i32_rem_u_3(0x47), 0x2);
-    returns('i32_rem_u_3_1', () => m15.i32_rem_u_3(i32('C0000000')), 0);
+    returns('i32_rem_u_3_1', () => m15.i32_rem_u_3($i32('C0000000')), 0);
     returns('i64_rem_s_3_0', () => m15.i64_rem_s_3(0x47), 0x2);
-    returns('i64_rem_s_3_1', () => m15.i64_rem_s_3(i64('3000000000000000')), 0);
+    returns(
+      'i64_rem_s_3_1',
+      () => m15.i64_rem_s_3($i64('3000000000000000')),
+      0,
+    );
     returns('i64_rem_u_3_0', () => m15.i64_rem_u_3(0x47), 0x2);
-    returns('i64_rem_u_3_1', () => m15.i64_rem_u_3(i64('C000000000000000')), 0);
+    returns(
+      'i64_rem_u_3_1',
+      () => m15.i64_rem_u_3($i64('C000000000000000')),
+      0,
+    );
 
     // module int_exprs.16.dart (line 295)
     var m16 = int_exprs_16.IntExprs16Module();
 
     returns('i32_rem_s_5_0', () => m16.i32_rem_s_5(0x47), 0x1);
-    returns('i32_rem_s_5_1', () => m16.i32_rem_s_5(i32('50000000')), 0);
+    returns('i32_rem_s_5_1', () => m16.i32_rem_s_5($i32('50000000')), 0);
     returns('i32_rem_u_5_0', () => m16.i32_rem_u_5(0x47), 0x1);
-    returns('i32_rem_u_5_1', () => m16.i32_rem_u_5(i32('A0000000')), 0);
+    returns('i32_rem_u_5_1', () => m16.i32_rem_u_5($i32('A0000000')), 0);
     returns('i64_rem_s_5_0', () => m16.i64_rem_s_5(0x47), 0x1);
-    returns('i64_rem_s_5_1', () => m16.i64_rem_s_5(i64('5000000000000000')), 0);
+    returns(
+      'i64_rem_s_5_1',
+      () => m16.i64_rem_s_5($i64('5000000000000000')),
+      0,
+    );
     returns('i64_rem_u_5_0', () => m16.i64_rem_u_5(0x47), 0x1);
-    returns('i64_rem_u_5_1', () => m16.i64_rem_u_5(i64('A000000000000000')), 0);
+    returns(
+      'i64_rem_u_5_1',
+      () => m16.i64_rem_u_5($i64('A000000000000000')),
+      0,
+    );
 
     // module int_exprs.17.dart (line 318)
     var m17 = int_exprs_17.IntExprs17Module();
 
     returns('i32_rem_s_7_0', () => m17.i32_rem_s_7(0x47), 0x1);
-    returns('i32_rem_s_7_1', () => m17.i32_rem_s_7(i32('70000000')), 0);
+    returns('i32_rem_s_7_1', () => m17.i32_rem_s_7($i32('70000000')), 0);
     returns('i32_rem_u_7_0', () => m17.i32_rem_u_7(0x47), 0x1);
-    returns('i32_rem_u_7_1', () => m17.i32_rem_u_7(i32('E0000000')), 0);
+    returns('i32_rem_u_7_1', () => m17.i32_rem_u_7($i32('E0000000')), 0);
     returns('i64_rem_s_7_0', () => m17.i64_rem_s_7(0x47), 0x1);
-    returns('i64_rem_s_7_1', () => m17.i64_rem_s_7(i64('7000000000000000')), 0);
+    returns(
+      'i64_rem_s_7_1',
+      () => m17.i64_rem_s_7($i64('7000000000000000')),
+      0,
+    );
     returns('i64_rem_u_7_0', () => m17.i64_rem_u_7(0x47), 0x1);
-    returns('i64_rem_u_7_1', () => m17.i64_rem_u_7(i64('E000000000000000')), 0);
+    returns(
+      'i64_rem_u_7_1',
+      () => m17.i64_rem_u_7($i64('E000000000000000')),
+      0,
+    );
 
     // module int_exprs.18.dart (line 341)
     var m18 = int_exprs_18.IntExprs18Module();
 
     traps(
       'i32_no_fold_div_neg1_0',
-      () => m18.i32_no_fold_div_neg1(i32('80000000')),
+      () => m18.i32_no_fold_div_neg1($i32('80000000')),
       _io,
     );
     traps(
       'i64_no_fold_div_neg1_0',
-      () => m18.i64_no_fold_div_neg1(i64('8000000000000000')),
+      () => m18.i64_no_fold_div_neg1($i64('8000000000000000')),
       _io,
     );
   });

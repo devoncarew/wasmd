@@ -1,6 +1,9 @@
 // Generated from spec/test/core/memory.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'memory.0.dart' as memory_0;
@@ -53,68 +56,68 @@ void main() {
     var m9 = memory_30.Memory30Module();
 
     returns('data_0', () => m9.data(), 0x1);
-    returns('cast_0', () => m9.cast(), f64('4045000000000000'));
+    returns('cast_0', () => m9.cast(), $f64('4045000000000000'));
     returns(
       'i32_load8_s_0',
-      () => m9.i32_load8_s(i32('FFFFFFFF')),
-      i32('FFFFFFFF'),
+      () => m9.i32_load8_s($i32('FFFFFFFF')),
+      $i32('FFFFFFFF'),
     );
-    returns('i32_load8_u_0', () => m9.i32_load8_u(i32('FFFFFFFF')), 0xFF);
+    returns('i32_load8_u_0', () => m9.i32_load8_u($i32('FFFFFFFF')), 0xFF);
     returns(
       'i32_load16_s_0',
-      () => m9.i32_load16_s(i32('FFFFFFFF')),
-      i32('FFFFFFFF'),
+      () => m9.i32_load16_s($i32('FFFFFFFF')),
+      $i32('FFFFFFFF'),
     );
-    returns('i32_load16_u_0', () => m9.i32_load16_u(i32('FFFFFFFF')), 0xFFFF);
+    returns('i32_load16_u_0', () => m9.i32_load16_u($i32('FFFFFFFF')), 0xFFFF);
     returns('i32_load8_s_1', () => m9.i32_load8_s(0x64), 0x64);
     returns('i32_load8_u_1', () => m9.i32_load8_u(0xC8), 0xC8);
     returns('i32_load16_s_1', () => m9.i32_load16_s(0x4E20), 0x4E20);
     returns('i32_load16_u_1', () => m9.i32_load16_u(0x9C40), 0x9C40);
-    returns('i32_load8_s_2', () => m9.i32_load8_s(i32('FEDC6543')), 0x43);
+    returns('i32_load8_s_2', () => m9.i32_load8_s($i32('FEDC6543')), 0x43);
     returns(
       'i32_load8_s_3',
-      () => m9.i32_load8_s(i32('3456CDEF')),
-      i32('FFFFFFEF'),
+      () => m9.i32_load8_s($i32('3456CDEF')),
+      $i32('FFFFFFEF'),
     );
-    returns('i32_load8_u_2', () => m9.i32_load8_u(i32('FEDC6543')), 0x43);
-    returns('i32_load8_u_3', () => m9.i32_load8_u(i32('3456CDEF')), 0xEF);
-    returns('i32_load16_s_2', () => m9.i32_load16_s(i32('FEDC6543')), 0x6543);
+    returns('i32_load8_u_2', () => m9.i32_load8_u($i32('FEDC6543')), 0x43);
+    returns('i32_load8_u_3', () => m9.i32_load8_u($i32('3456CDEF')), 0xEF);
+    returns('i32_load16_s_2', () => m9.i32_load16_s($i32('FEDC6543')), 0x6543);
     returns(
       'i32_load16_s_3',
-      () => m9.i32_load16_s(i32('3456CDEF')),
-      i32('FFFFCDEF'),
+      () => m9.i32_load16_s($i32('3456CDEF')),
+      $i32('FFFFCDEF'),
     );
-    returns('i32_load16_u_2', () => m9.i32_load16_u(i32('FEDC6543')), 0x6543);
-    returns('i32_load16_u_3', () => m9.i32_load16_u(i32('3456CDEF')), 0xCDEF);
+    returns('i32_load16_u_2', () => m9.i32_load16_u($i32('FEDC6543')), 0x6543);
+    returns('i32_load16_u_3', () => m9.i32_load16_u($i32('3456CDEF')), 0xCDEF);
     returns(
       'i64_load8_s_0',
-      () => m9.i64_load8_s(i64('FFFFFFFFFFFFFFFF')),
-      i64('FFFFFFFFFFFFFFFF'),
+      () => m9.i64_load8_s($i64('FFFFFFFFFFFFFFFF')),
+      $i64('FFFFFFFFFFFFFFFF'),
     );
     returns(
       'i64_load8_u_0',
-      () => m9.i64_load8_u(i64('FFFFFFFFFFFFFFFF')),
+      () => m9.i64_load8_u($i64('FFFFFFFFFFFFFFFF')),
       0xFF,
     );
     returns(
       'i64_load16_s_0',
-      () => m9.i64_load16_s(i64('FFFFFFFFFFFFFFFF')),
-      i64('FFFFFFFFFFFFFFFF'),
+      () => m9.i64_load16_s($i64('FFFFFFFFFFFFFFFF')),
+      $i64('FFFFFFFFFFFFFFFF'),
     );
     returns(
       'i64_load16_u_0',
-      () => m9.i64_load16_u(i64('FFFFFFFFFFFFFFFF')),
+      () => m9.i64_load16_u($i64('FFFFFFFFFFFFFFFF')),
       0xFFFF,
     );
     returns(
       'i64_load32_s_0',
-      () => m9.i64_load32_s(i64('FFFFFFFFFFFFFFFF')),
-      i64('FFFFFFFFFFFFFFFF'),
+      () => m9.i64_load32_s($i64('FFFFFFFFFFFFFFFF')),
+      $i64('FFFFFFFFFFFFFFFF'),
     );
     returns(
       'i64_load32_u_0',
-      () => m9.i64_load32_u(i64('FFFFFFFFFFFFFFFF')),
-      i64('FFFFFFFF'),
+      () => m9.i64_load32_u($i64('FFFFFFFFFFFFFFFF')),
+      $i64('FFFFFFFF'),
     );
     returns('i64_load8_s_1', () => m9.i64_load8_s(0x64), 0x64);
     returns('i64_load8_u_1', () => m9.i64_load8_u(0xC8), 0xC8);
@@ -124,63 +127,63 @@ void main() {
     returns('i64_load32_u_1', () => m9.i64_load32_u(0x9C40), 0x9C40);
     returns(
       'i64_load8_s_2',
-      () => m9.i64_load8_s(i64('FEDCBA9856346543')),
+      () => m9.i64_load8_s($i64('FEDCBA9856346543')),
       0x43,
     );
     returns(
       'i64_load8_s_3',
-      () => m9.i64_load8_s(i64('3456436598BACDEF')),
-      i64('FFFFFFFFFFFFFFEF'),
+      () => m9.i64_load8_s($i64('3456436598BACDEF')),
+      $i64('FFFFFFFFFFFFFFEF'),
     );
     returns(
       'i64_load8_u_2',
-      () => m9.i64_load8_u(i64('FEDCBA9856346543')),
+      () => m9.i64_load8_u($i64('FEDCBA9856346543')),
       0x43,
     );
     returns(
       'i64_load8_u_3',
-      () => m9.i64_load8_u(i64('3456436598BACDEF')),
+      () => m9.i64_load8_u($i64('3456436598BACDEF')),
       0xEF,
     );
     returns(
       'i64_load16_s_2',
-      () => m9.i64_load16_s(i64('FEDCBA9856346543')),
+      () => m9.i64_load16_s($i64('FEDCBA9856346543')),
       0x6543,
     );
     returns(
       'i64_load16_s_3',
-      () => m9.i64_load16_s(i64('3456436598BACDEF')),
-      i64('FFFFFFFFFFFFCDEF'),
+      () => m9.i64_load16_s($i64('3456436598BACDEF')),
+      $i64('FFFFFFFFFFFFCDEF'),
     );
     returns(
       'i64_load16_u_2',
-      () => m9.i64_load16_u(i64('FEDCBA9856346543')),
+      () => m9.i64_load16_u($i64('FEDCBA9856346543')),
       0x6543,
     );
     returns(
       'i64_load16_u_3',
-      () => m9.i64_load16_u(i64('3456436598BACDEF')),
+      () => m9.i64_load16_u($i64('3456436598BACDEF')),
       0xCDEF,
     );
     returns(
       'i64_load32_s_2',
-      () => m9.i64_load32_s(i64('FEDCBA9856346543')),
-      i64('56346543'),
+      () => m9.i64_load32_s($i64('FEDCBA9856346543')),
+      $i64('56346543'),
     );
     returns(
       'i64_load32_s_3',
-      () => m9.i64_load32_s(i64('3456436598BACDEF')),
-      i64('FFFFFFFF98BACDEF'),
+      () => m9.i64_load32_s($i64('3456436598BACDEF')),
+      $i64('FFFFFFFF98BACDEF'),
     );
     returns(
       'i64_load32_u_2',
-      () => m9.i64_load32_u(i64('FEDCBA9856346543')),
-      i64('56346543'),
+      () => m9.i64_load32_u($i64('FEDCBA9856346543')),
+      $i64('56346543'),
     );
     returns(
       'i64_load32_u_3',
-      () => m9.i64_load32_u(i64('3456436598BACDEF')),
-      i64('98BACDEF'),
+      () => m9.i64_load32_u($i64('3456436598BACDEF')),
+      $i64('98BACDEF'),
     );
   });
 }

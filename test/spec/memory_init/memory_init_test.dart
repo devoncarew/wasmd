@@ -1,6 +1,9 @@
 // Generated from spec/test/core/memory_init.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'memory_init.0.dart' as memory_init_0;
@@ -241,37 +244,37 @@ void main() {
     var m17 = memory_init_84.MemoryInit84Module();
 
     traps('run_0', () => m17.run(0xFFF8, 0x10), _oobma);
-    returns('checkRange_0', () => m17.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    returns('checkRange_0', () => m17.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
 
     // module memory_init.85.dart (line 838)
     var m18 = memory_init_85.MemoryInit85Module();
 
     traps('run_1', () => m18.run(0xFFF7, 0x10), _oobma);
-    returns('checkRange_1', () => m18.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    returns('checkRange_1', () => m18.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
 
     // module memory_init.86.dart (line 861)
     var m19 = memory_init_86.MemoryInit86Module();
 
     traps('run_2', () => m19.run(0xFFC0, 0x1E), _oobma);
-    returns('checkRange_2', () => m19.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    returns('checkRange_2', () => m19.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
 
     // module memory_init.87.dart (line 884)
     var m20 = memory_init_87.MemoryInit87Module();
 
     traps('run_3', () => m20.run(0xFFC1, 0x1F), _oobma);
-    returns('checkRange_3', () => m20.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    returns('checkRange_3', () => m20.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
 
     // module memory_init.88.dart (line 907)
     var m21 = memory_init_88.MemoryInit88Module();
 
-    traps('run_4', () => m21.run(0xFFF8, i32('FFFFFF00')), _oobma);
-    returns('checkRange_4', () => m21.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    traps('run_4', () => m21.run(0xFFF8, $i32('FFFFFF00')), _oobma);
+    returns('checkRange_4', () => m21.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
 
     // module memory_init.89.dart (line 930)
     var m22 = memory_init_89.MemoryInit89Module();
 
-    traps('run_5', () => m22.run(0, i32('FFFFFFFC')), _oobma);
-    returns('checkRange_5', () => m22.checkRange(0, 0x1, 0), i32('FFFFFFFF'));
+    traps('run_5', () => m22.run(0, $i32('FFFFFFFC')), _oobma);
+    returns('checkRange_5', () => m22.checkRange(0, 0x1, 0), $i32('FFFFFFFF'));
 
     // module memory_init.90.dart (line 954)
     var m23 = memory_init_90.MemoryInit90Module();

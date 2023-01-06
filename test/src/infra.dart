@@ -73,40 +73,34 @@ void invoke(String testName, Function() closure) {
   });
 }
 
-int i32(String value) {
+int $i32(String value) {
   var n = BigInt.parse(value, radix: 16);
   return n.toSigned(32).toInt();
 }
 
-int i64(String value) {
+int $i64(String value) {
   var n = BigInt.parse(value, radix: 16);
   return n.toSigned(64).toInt();
 }
 
 final ByteData _reinterpretData = ByteData(8);
 
-double f32(String value) {
-  var val = i32(value);
+double $f32(String value) {
+  var val = $i32(value);
   _reinterpretData.setInt32(0, val, Endian.little);
   return _reinterpretData.getFloat32(0, Endian.little);
 }
 
-double f64(String value) {
-  var val = i64(value);
+double $f64(String value) {
+  var val = $i64(value);
   _reinterpretData.setInt64(0, val, Endian.little);
   return _reinterpretData.getFloat64(0, Endian.little);
 }
 
-Function externref(String value) {
-  int val = i32(value);
+Function $externref(String value) {
+  int val = $i32(value);
   return _testExterns[val];
 }
-
-int $i32(String value) => i32(value);
-int $i64(String value) => i64(value);
-double $f32(String value) => f32(value);
-double $f64(String value) => f64(value);
-Function $externref(String value) => externref(value);
 
 final SpectestModule spectest = SpectestModule();
 

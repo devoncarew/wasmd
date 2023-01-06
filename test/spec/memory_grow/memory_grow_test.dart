@@ -1,6 +1,9 @@
 // Generated from spec/test/core/memory_grow.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'memory_grow.0.dart' as memory_grow_0;
@@ -46,8 +49,8 @@ void main() {
     returns('grow_4', () => m1.grow(0), 0x1);
     returns('grow_5', () => m1.grow(0x2), 0x1);
     returns('grow_6', () => m1.grow(0x320), 0x3);
-    returns('grow_7', () => m1.grow(0x10000), i32('FFFFFFFF'));
-    returns('grow_8', () => m1.grow(0xFCE0), i32('FFFFFFFF'));
+    returns('grow_7', () => m1.grow(0x10000), $i32('FFFFFFFF'));
+    returns('grow_8', () => m1.grow(0xFCE0), $i32('FFFFFFFF'));
     returns('grow_9', () => m1.grow(0x1), 0x323);
 
     // module memory_grow.2.dart (line 50)
@@ -59,8 +62,8 @@ void main() {
     returns('grow_13', () => m2.grow(0x2), 0x2);
     returns('grow_14', () => m2.grow(0x6), 0x4);
     returns('grow_15', () => m2.grow(0), 0xA);
-    returns('grow_16', () => m2.grow(0x1), i32('FFFFFFFF'));
-    returns('grow_17', () => m2.grow(0x10000), i32('FFFFFFFF'));
+    returns('grow_16', () => m2.grow(0x1), $i32('FFFFFFFF'));
+    returns('grow_17', () => m2.grow(0x10000), $i32('FFFFFFFF'));
 
     // module memory_grow.3.dart (line 66)
     var m3 = memory_grow_3.MemoryGrow3Module();
@@ -118,23 +121,23 @@ void main() {
     returns('as_select_first_0', () => m4.as_select_first(0, 0x1), 0x1);
     returns('as_select_second_0', () => m4.as_select_second(0, 0), 0x1);
     returns('as_select_cond_0', () => m4.as_select_cond(), 0);
-    returns('as_call_first_0', () => m4.as_call_first(), i32('FFFFFFFF'));
-    returns('as_call_mid_0', () => m4.as_call_mid(), i32('FFFFFFFF'));
-    returns('as_call_last_0', () => m4.as_call_last(), i32('FFFFFFFF'));
+    returns('as_call_first_0', () => m4.as_call_first(), $i32('FFFFFFFF'));
+    returns('as_call_mid_0', () => m4.as_call_mid(), $i32('FFFFFFFF'));
+    returns('as_call_last_0', () => m4.as_call_last(), $i32('FFFFFFFF'));
     returns(
       'as_call_indirect_first_0',
       () => m4.as_call_indirect_first(),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'as_call_indirect_mid_0',
       () => m4.as_call_indirect_mid(),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     returns(
       'as_call_indirect_last_0',
       () => m4.as_call_indirect_last(),
-      i32('FFFFFFFF'),
+      $i32('FFFFFFFF'),
     );
     traps('as_call_indirect_index_0', () => m4.as_call_indirect_index(), _ue);
     returns('as_local_set_value_0', () => m4.as_local_set_value(), null);

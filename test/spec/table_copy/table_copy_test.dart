@@ -1,10 +1,11 @@
 // Generated from spec/test/core/table_copy.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
 
-import '../../src/infra.dart' hide i32;
+import '../../src/infra.dart';
 import 'table_copy.0.dart' as table_copy_0;
 import 'table_copy.1.dart' as table_copy_1;
 import 'table_copy.10.dart' as table_copy_10;

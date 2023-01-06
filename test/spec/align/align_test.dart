@@ -1,6 +1,9 @@
 // Generated from spec/test/core/align.wast.
 
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: unused_local_variable
+
+import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 import 'align.0.dart' as align_0;
@@ -108,47 +111,47 @@ void main() {
     returns(
       'f32_align_switch_0',
       () => m23.f32_align_switch(0),
-      f32('41200000'),
+      $f32('41200000'),
     );
     returns(
       'f32_align_switch_1',
       () => m23.f32_align_switch(0x1),
-      f32('41200000'),
+      $f32('41200000'),
     );
     returns(
       'f32_align_switch_2',
       () => m23.f32_align_switch(0x2),
-      f32('41200000'),
+      $f32('41200000'),
     );
     returns(
       'f32_align_switch_3',
       () => m23.f32_align_switch(0x3),
-      f32('41200000'),
+      $f32('41200000'),
     );
     returns(
       'f64_align_switch_0',
       () => m23.f64_align_switch(0),
-      f64('4024000000000000'),
+      $f64('4024000000000000'),
     );
     returns(
       'f64_align_switch_1',
       () => m23.f64_align_switch(0x1),
-      f64('4024000000000000'),
+      $f64('4024000000000000'),
     );
     returns(
       'f64_align_switch_2',
       () => m23.f64_align_switch(0x2),
-      f64('4024000000000000'),
+      $f64('4024000000000000'),
     );
     returns(
       'f64_align_switch_3',
       () => m23.f64_align_switch(0x3),
-      f64('4024000000000000'),
+      $f64('4024000000000000'),
     );
     returns(
       'f64_align_switch_4',
       () => m23.f64_align_switch(0x4),
-      f64('4024000000000000'),
+      $f64('4024000000000000'),
     );
     returns('i32_align_switch_0', () => m23.i32_align_switch(0, 0), 0xA);
     returns('i32_align_switch_1', () => m23.i32_align_switch(0, 0x1), 0xA);
@@ -191,7 +194,7 @@ void main() {
     // module align.107.dart (line 854)
     var m24 = align_107.Align107Module();
 
-    traps('store_0', () => m24.store(0xFFFC, i64('FFFFFFFFFFFFFFFF')), _oobma);
+    traps('store_0', () => m24.store(0xFFFC, $i64('FFFFFFFFFFFFFFFF')), _oobma);
     returns('load_0', () => m24.load(0xFFFC), 0);
   });
 }
