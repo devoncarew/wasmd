@@ -25,7 +25,6 @@ class Compiler {
   Library compile(
     File file, {
     bool useDebugNames = false,
-    bool compileForWastTest = false,
   }) {
     var library = LibraryBuilder();
     library.comments.add('Generated from ${file.path}.');
@@ -48,7 +47,6 @@ class Compiler {
       library,
       moduleName: path.basenameWithoutExtension(file.path),
       useDebugNames: useDebugNames,
-      compileForWastTest: compileForWastTest,
     );
 
     return library.build();
@@ -641,7 +639,6 @@ void printModule(
   LibraryBuilder library, {
   required String moduleName,
   bool useDebugNames = false,
-  bool compileForWastTest = false,
 }) {
   // TODO: create a generation options class
   module.useDebugNames = useDebugNames;
@@ -649,10 +646,6 @@ void printModule(
   // Generate imports.
   for (var import in module.importModules) {
     library.body.add(import.createImportModuleClassDef());
-
-    if (compileForWastTest) {
-      library.body.add(import.createImportModuleClassDefTestImpl());
-    }
   }
 
   var name = module.debugInfo?.name ?? moduleName;
@@ -1423,40 +1416,6 @@ class ImportModule {
             func.returnsVoid ? 'void' : func.returnType!.typeName,
           )
           ..requiredParameters.addAll(parameters),
-      ));
-    }
-
-    return importClass.build();
-  }
-
-  Class createImportModuleClassDefTestImpl() {
-    ClassBuilder importClass = ClassBuilder()
-      ..name = '${typeName}Impl'
-      ..extend = Reference(typeName);
-
-    for (var func in functions) {
-      var parameters = <Parameter>[];
-      for (int i = 0; i < func.parameterTypes.length; i++) {
-        var parameter = func.parameterTypes[i];
-        parameters.add(
-          Parameter(
-            (b) => b
-              ..type = Reference(parameter.typeName)
-              ..name = 'arg$i',
-          ),
-        );
-      }
-      importClass.methods.add(Method(
-        (b) => b
-          ..name = func.referenceName
-          ..returns = Reference(
-            func.returnsVoid ? 'void' : func.returnType!.typeName,
-          )
-          ..annotations.add(refer('override'))
-          ..requiredParameters.addAll(parameters)
-          ..body = func.returnsVoid
-              ? Block()
-              : Block((b) => b.statements.add(Code('return 0;'))),
       ));
     }
 

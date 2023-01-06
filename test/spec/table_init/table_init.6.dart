@@ -15,33 +15,6 @@ abstract class AImports {
   i32 ef4();
 }
 
-class AImportsImpl extends AImports {
-  @override
-  i32 ef0() {
-    return 0;
-  }
-
-  @override
-  i32 ef1() {
-    return 0;
-  }
-
-  @override
-  i32 ef2() {
-    return 0;
-  }
-
-  @override
-  i32 ef3() {
-    return 0;
-  }
-
-  @override
-  i32 ef4() {
-    return 0;
-  }
-}
-
 class TableInit6Module implements Module {
   TableInit6Module({required this.aImports}) {
     segments.init();
