@@ -15,7 +15,7 @@ abstract class EnvImports {
 
 class EratosthenesModule implements Module {
   EratosthenesModule({required this.envImports}) {
-    data.init(memory);
+    _data.init(memory);
     _func2();
   }
 
@@ -26,7 +26,7 @@ class EratosthenesModule implements Module {
 
   final Globals globals = Globals();
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   @override
   late final List<Table> tables = [];

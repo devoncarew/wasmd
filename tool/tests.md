@@ -75,16 +75,16 @@
 | table_fill.wast | - |
 | table_get.wast | - |
 | table_grow.wast | - |
-| table_init.wast | xxx |
+| table_init.wast | - |
 | table_set.wast | - |
 | table_size.wast | - |
-| token.wast | xxx |
-| tokens.wast | xxx |
-| traps.wast | xxx |
+| token.wast | no tests |
+| tokens.wast | no tests |
+| traps.wast | - |
 | type.wast | - |
-| unreachable.wast | xxx |
-| unreached-invalid.wast | xxx |
-| unreached-valid.wast | xxx |
+| unreachable.wast | - |
+| unreached-invalid.wast | no tests |
+| unreached-valid.wast | - |
 | unwind.wast | - |
 | utf8-custom-section-id.wast | xxx |
 | utf8-import-field.wast | xxx |
