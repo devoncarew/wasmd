@@ -45,6 +45,9 @@ String ensurePublic(String name) {
 
 const Set<String> _keywords = {
   'for',
+  'if',
+  'return',
+  'switch',
   'while',
 };
 
