@@ -1,0 +1,8 @@
+f32_nan_0: can both pass and fail on the bots
+f32_positive_nan_0: can both pass and fail on the bots
+f32_plain_nan_0: can both pass and fail on the bots
+f32_misc_positive_nan_0: can both pass and fail on the bots
+f64_nan_0: can both pass and fail on the bots
+f64_positive_nan_0: can both pass and fail on the bots
+f64_negative_nan_0: can both pass and fail on the bots
+f64_plain_nan_0: can both pass and fail on the bots

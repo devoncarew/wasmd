@@ -76,8 +76,8 @@ void compileWasmToDart(File wasmFile, File dartFile, {bool verbose = false}) {
     });
   }
 
-  var compiler = Compiler(file: wasmFile, logger: logger);
-  var library = compiler.compile();
+  var compiler = Compiler(logger: logger);
+  var library = compiler.compile(wasmFile);
   var code = emitFormatLibrary(library);
 
   print('Emitting ${dartFile.path}.');

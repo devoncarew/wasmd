@@ -57,21 +57,21 @@
 | memory_redundancy.wast | - |
 | memory_size.wast | - |
 | memory_trap.wast | - |
-| names.wast | xxx |
+| names.wast | generated file is causing the analyzer to crash |
 | nop.wast | - |
-| ref_func.wast | xxx |
+| ref_func.wast | needs additional work on globals generation |
 | ref_is_null.wast | - |
 | ref_null.wast | - |
 | return.wast | - |
-| select.wast | xxx |
-| skip-stack-guard-page.wast | xxx |
+| select.wast | wast2json failed; unexpected token "result" |
+| skip-stack-guard-page.wast | no tests |
 | stack.wast | - |
 | start.wast | - |
 | store.wast | - |
 | switch.wast | - |
-| table-sub.wast | xxx |
-| table.wast | xxx |
-| table_copy.wast | xxx |
+| table-sub.wast | no tests |
+| table.wast | unimplemented import table |
+| table_copy.wast | - |
 | table_fill.wast | - |
 | table_get.wast | - |
 | table_grow.wast | - |

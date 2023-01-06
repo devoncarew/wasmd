@@ -98,6 +98,12 @@ Function externref(String value) {
   return _testExterns[val];
 }
 
+int $i32(String value) => i32(value);
+int $i64(String value) => i64(value);
+double $f32(String value) => f32(value);
+double $f64(String value) => f64(value);
+Function $externref(String value) => externref(value);
+
 final List<Function> _testExterns = [
   extern0,
   extern1,
