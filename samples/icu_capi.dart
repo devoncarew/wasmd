@@ -16,7 +16,7 @@ abstract class EnvImports {
 
 class IcuCapiModule implements Module {
   IcuCapiModule({required this.envImports}) {
-    data.init(memory);
+    _data.init(memory);
     segments.init();
   }
 
@@ -27,7 +27,7 @@ class IcuCapiModule implements Module {
 
   final Globals globals = Globals();
 
-  final DataSegments data = DataSegments();
+  final DataSegments _data = DataSegments();
 
   final Table table0 = Table(
     36,

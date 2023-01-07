@@ -3,7 +3,7 @@
 | address.wast                | -   |
 | align.wast                  | -   |
 | binary-leb128.wast          | RangeError from Reader.leb128_u |
-| binary.wast                 | RangeError from Compiler._parseMemorySection |
+| binary.wast                 | (no tests) |
 | block.wast                  | multiple return values not currently supported |
 | br.wast                     | multiple return values not currently supported |
 | br_if.wast                  | -   |
@@ -14,8 +14,8 @@
 | comments.wast               | -   |
 | const.wast                  | -   |
 | conversions.wast            | -   |
-| custom.wast                 | no tests |
-| data.wast                   | npe |
+| custom.wast                 | (no tests) |
+| data.wast                   | unimplemented import global |
 | elem.wast                   | unimplemented import table |
 | endianness.wast             | -   |
 | exports.wast                | -   |
@@ -38,7 +38,7 @@
 | i64.wast                    | -   |
 | if.wast                     | multiple return values not currently supported |
 | imports.wast                | unimplemented import global |
-| inline-module.wast          | no tests |
+| inline-module.wast          | (no tests) |
 | int_exprs.wast              | -   |
 | int_literals.wast           | -   |
 | labels.wast                 | -   |
@@ -64,12 +64,12 @@
 | ref_null.wast               | -   |
 | return.wast                 | -   |
 | select.wast                 | wast2json failed; unexpected token "result" |
-| skip-stack-guard-page.wast  | no tests |
+| skip-stack-guard-page.wast  | (no tests) |
 | stack.wast                  | -   |
 | start.wast                  | -   |
 | store.wast                  | -   |
 | switch.wast                 | -   |
-| table-sub.wast              | no tests |
+| table-sub.wast              | (no tests) |
 | table.wast                  | unimplemented import table |
 | table_copy.wast             | -   |
 | table_fill.wast             | -   |
@@ -78,15 +78,15 @@
 | table_init.wast             | -   |
 | table_set.wast              | -   |
 | table_size.wast             | -   |
-| token.wast                  | no tests |
-| tokens.wast                 | no tests |
+| token.wast                  | (no tests) |
+| tokens.wast                 | (no tests) |
 | traps.wast                  | -   |
 | type.wast                   | -   |
 | unreachable.wast            | -   |
-| unreached-invalid.wast      | no tests |
+| unreached-invalid.wast      | (no tests) |
 | unreached-valid.wast        | -   |
 | unwind.wast                 | -   |
-| utf8-custom-section-id.wast | no tests |
-| utf8-import-field.wast      | no tests |
-| utf8-import-module.wast     | no tests |
-| utf8-invalid-encoding.wast  | no tests |
+| utf8-custom-section-id.wast | (no tests) |
+| utf8-import-field.wast      | (no tests) |
+| utf8-import-module.wast     | (no tests) |
+| utf8-invalid-encoding.wast  | (no tests) |
