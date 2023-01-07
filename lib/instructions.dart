@@ -498,9 +498,6 @@ class Instruction_RefFunc extends Instruction {
   }
 }
 
-// TODO: write some code to determine what the stack looks like after each
-// operation
-
 /// valtype := numtype | vectype | reftype
 /// numtype := i32, i64, f32, f64
 /// reftype := functype | externref
