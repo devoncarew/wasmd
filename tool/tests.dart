@@ -68,6 +68,7 @@ void main(List<String> args) async {
       .map((l) => l.trim())
       .where((l) => l.isNotEmpty)
       .where((l) => !l.startsWith('#'))
+      .map((l) => l.contains('#') ? l.substring(0, l.indexOf('#')).trim() : l)
       .toList();
 
   // print timming

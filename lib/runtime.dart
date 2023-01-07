@@ -96,9 +96,14 @@ class Memory {
       throw Trap('out of bounds memory access');
     }
 
-    // TODO: find a faster copy method
-    for (int i = 0; i < count; i++) {
-      data.setUint8(destOffset + i, data.getUint8(sourceOffset + i));
+    if (sourceOffset > destOffset) {
+      for (int i = 0; i < count; i++) {
+        data.setUint8(destOffset + i, data.getUint8(sourceOffset + i));
+      }
+    } else {
+      for (int i = count - 1; i >= 0; i--) {
+        data.setUint8(destOffset + i, data.getUint8(sourceOffset + i));
+      }
     }
   }
 
@@ -160,13 +165,23 @@ class Table {
   }
 
   void copyTo(Table dest, int sourceOffset, int destOffset, int count) {
+    if (sourceOffset < 0 || destOffset < 0 || count < 0) {
+      throw Trap('out of bounds table access');
+    }
+
     if (sourceOffset + count > funcRefs.length ||
         destOffset + count > dest.funcRefs.length) {
       throw Trap('out of bounds table access');
     }
 
-    for (int i = 0; i < count; i++) {
-      dest.funcRefs[destOffset + i] = funcRefs[sourceOffset + i];
+    if (sourceOffset > destOffset) {
+      for (int i = 0; i < count; i++) {
+        dest.funcRefs[destOffset + i] = funcRefs[sourceOffset + i];
+      }
+    } else {
+      for (int i = count - 1; i >= 0; i--) {
+        dest.funcRefs[destOffset + i] = funcRefs[sourceOffset + i];
+      }
     }
   }
 
@@ -821,6 +836,11 @@ class Frame {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
     var result = arg0 + arg1;
+    if ((result & _bit31) != 0) {
+      result |= _maskTop32;
+    } else {
+      result &= _mask32;
+    }
     stack.add(result);
   }
 
@@ -828,6 +848,11 @@ class Frame {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
     var result = arg0 - arg1;
+    if ((result & _bit31) != 0) {
+      result |= _maskTop32;
+    } else {
+      result &= _mask32;
+    }
     stack.add(result);
   }
 
@@ -1343,7 +1368,9 @@ class Frame {
 
   void i32_wrap_i64() {
     i64 arg1 = stack.removeLast() as i64;
-    i32 result = arg1.remainder(_mask32);
+    i32 result = arg1 & _mask32;
+    // sign extend
+    if ((result & _bit31) != 0) result |= _maskTop32;
     stack.add(result);
   }
 
@@ -1568,20 +1595,20 @@ class Frame {
   void i32_extend8_s() {
     i32 arg = stack.removeLast() as i32;
     if ((arg & 0x80) != 0) {
-      i64 result = 0xFFFFFF00 | arg;
+      i64 result = 0xFFFFFFFFFFFFFF00 | arg;
       stack.add(result);
     } else {
-      stack.add(arg);
+      stack.add(arg & 0xFF);
     }
   }
 
   void i32_extend16_s() {
     i32 arg = stack.removeLast() as i32;
     if ((arg & 0x8000) != 0) {
-      i64 result = 0xFFFF0000 | arg;
+      i64 result = 0xFFFFFFFFFFFF0000 | arg;
       stack.add(result);
     } else {
-      stack.add(arg);
+      stack.add(arg & 0xFFFF);
     }
   }
 
@@ -1695,7 +1722,7 @@ class Frame {
     // nothing to do (optionally drop data segment 'index')
   }
 
-  void memory_copy(u32 srcMemoryIndex, u32 destMemoryIndex) {
+  void memory_copy(u32 destMemoryIndex, u32 srcMemoryIndex) {
     i32 count = stack.removeLast() as i32;
     i32 sourceOffset = stack.removeLast() as i32;
     i32 destOffset = stack.removeLast() as i32;
@@ -1713,7 +1740,7 @@ class Frame {
     // nothing to do (optionally, drop the given element segment)
   }
 
-  void table_copy(u32 srcTable, u32 destTable) {
+  void table_copy(u32 destTable, u32 srcTable) {
     i32 count = pop<i32>();
     i32 sourceOffset = pop<i32>();
     i32 destOffset = pop<i32>();
