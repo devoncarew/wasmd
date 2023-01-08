@@ -15,7 +15,10 @@ class FloatExprs84Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_epsilon() {
+  f32 f32_epsilon() => _func0();
+  f64 f64_epsilon() => _func1();
+
+  f32 _func0() {
     final frame = Frame(this);
     frame.f32_const(1.0);
     frame.f32_const(3.0);
@@ -29,7 +32,7 @@ class FloatExprs84Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_epsilon() {
+  f64 _func1() {
     final frame = Frame(this);
     frame.f64_const(1.0);
     frame.f64_const(3.0);

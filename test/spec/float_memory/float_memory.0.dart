@@ -24,35 +24,41 @@ class FloatMemory0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_load() {
+  f32 f32_load() => _func0();
+  i32 i32_load() => _func1();
+  void f32_store() => _func2();
+  void i32_store() => _func3();
+  void reset() => _func4();
+
+  f32 _func0() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.f32_load(2, 0);
     return frame.pop();
   }
 
-  void f32_store() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.f32_const(double.nan);
-    frame.f32_store(2, 0);
-  }
-
-  i32 i32_load() {
+  i32 _func1() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     return frame.pop();
   }
 
-  void i32_store() {
+  void _func2() {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.f32_const(double.nan);
+    frame.f32_store(2, 0);
+  }
+
+  void _func3() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(0x7fa00000);
     frame.i32_store(2, 0);
   }
 
-  void reset() {
+  void _func4() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(0);

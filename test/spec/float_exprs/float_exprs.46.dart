@@ -15,52 +15,16 @@ class FloatExprs46Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_no_fold_ge_if_to_abs(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_const(0.0);
-    frame.f32_ge();
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(x);
-    } else {
-      frame.push(x);
-      frame.f32_neg();
-    }
-    return frame.pop();
-  }
+  f32 f32_no_fold_lt_if_to_abs(f32 arg0) => _func0(arg0);
+  f32 f32_no_fold_le_if_to_abs(f32 arg0) => _func1(arg0);
+  f32 f32_no_fold_gt_if_to_abs(f32 arg0) => _func2(arg0);
+  f32 f32_no_fold_ge_if_to_abs(f32 arg0) => _func3(arg0);
+  f64 f64_no_fold_lt_if_to_abs(f64 arg0) => _func4(arg0);
+  f64 f64_no_fold_le_if_to_abs(f64 arg0) => _func5(arg0);
+  f64 f64_no_fold_gt_if_to_abs(f64 arg0) => _func6(arg0);
+  f64 f64_no_fold_ge_if_to_abs(f64 arg0) => _func7(arg0);
 
-  f32 f32_no_fold_gt_if_to_abs(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_gt();
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(x);
-    } else {
-      frame.push(x);
-      frame.f32_neg();
-    }
-    return frame.pop();
-  }
-
-  f32 f32_no_fold_le_if_to_abs(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_le();
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(x);
-      frame.f32_neg();
-    } else {
-      frame.push(x);
-    }
-    return frame.pop();
-  }
-
-  f32 f32_no_fold_lt_if_to_abs(f32 x) {
+  f32 _func0(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f32_const(0.0);
@@ -75,37 +39,67 @@ class FloatExprs46Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_no_fold_ge_if_to_abs(f64 x) {
+  f32 _func1(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_const(-0.0);
+    frame.f32_le();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.push(x);
+      frame.f32_neg();
+    } else {
+      frame.push(x);
+    }
+    return frame.pop();
+  }
+
+  f32 _func2(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_const(-0.0);
+    frame.f32_gt();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.push(x);
+    } else {
+      frame.push(x);
+      frame.f32_neg();
+    }
+    return frame.pop();
+  }
+
+  f32 _func3(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_const(0.0);
+    frame.f32_ge();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.push(x);
+    } else {
+      frame.push(x);
+      frame.f32_neg();
+    }
+    return frame.pop();
+  }
+
+  f64 _func4(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f64_const(0.0);
-    frame.f64_ge();
+    frame.f64_lt();
     if_label_0:
     if (frame.pop() != 0) {
       frame.push(x);
+      frame.f64_neg();
     } else {
       frame.push(x);
-      frame.f64_neg();
     }
     return frame.pop();
   }
 
-  f64 f64_no_fold_gt_if_to_abs(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_const(-0.0);
-    frame.f64_gt();
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(x);
-    } else {
-      frame.push(x);
-      frame.f64_neg();
-    }
-    return frame.pop();
-  }
-
-  f64 f64_no_fold_le_if_to_abs(f64 x) {
+  f64 _func5(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f64_const(-0.0);
@@ -120,17 +114,32 @@ class FloatExprs46Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_no_fold_lt_if_to_abs(f64 x) {
+  f64 _func6(f64 x) {
     final frame = Frame(this);
     frame.push(x);
-    frame.f64_const(0.0);
-    frame.f64_lt();
+    frame.f64_const(-0.0);
+    frame.f64_gt();
     if_label_0:
     if (frame.pop() != 0) {
       frame.push(x);
-      frame.f64_neg();
     } else {
       frame.push(x);
+      frame.f64_neg();
+    }
+    return frame.pop();
+  }
+
+  f64 _func7(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f64_const(0.0);
+    frame.f64_ge();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.push(x);
+    } else {
+      frame.push(x);
+      frame.f64_neg();
     }
     return frame.pop();
   }

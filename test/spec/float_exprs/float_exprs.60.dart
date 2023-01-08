@@ -24,14 +24,10 @@ class FloatExprs60Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 f64_load(i32 k) {
-    final frame = Frame(this);
-    frame.push(k);
-    frame.f64_load(3, 0);
-    return frame.pop();
-  }
+  void f64_simple_x4_sum(i32 arg0, i32 arg1, i32 arg2) => _func0(arg0, arg1, arg2);
+  f64 f64_load(i32 arg0) => _func1(arg0);
 
-  void f64_simple_x4_sum(i32 i, i32 j, i32 k) {
+  void _func0(i32 i, i32 j, i32 k) {
     f64 x0 = 0;
     f64 x1 = 0;
     f64 x2 = 0;
@@ -86,6 +82,13 @@ class FloatExprs60Module implements Module {
     frame.push(y3);
     frame.f64_add();
     frame.f64_store(3, 24);
+  }
+
+  f64 _func1(i32 k) {
+    final frame = Frame(this);
+    frame.push(k);
+    frame.f64_load(3, 0);
+    return frame.pop();
   }
 }
 

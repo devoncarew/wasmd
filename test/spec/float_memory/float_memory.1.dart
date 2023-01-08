@@ -24,35 +24,41 @@ class FloatMemory1Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 f64_load() {
+  f64 f64_load() => _func0();
+  i64 i64_load() => _func1();
+  void f64_store() => _func2();
+  void i64_store() => _func3();
+  void reset() => _func4();
+
+  f64 _func0() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.f64_load(3, 0);
     return frame.pop();
   }
 
-  void f64_store() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.f64_const(double.nan);
-    frame.f64_store(3, 0);
-  }
-
-  i64 i64_load() {
+  i64 _func1() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i64_load(3, 0);
     return frame.pop();
   }
 
-  void i64_store() {
+  void _func2() {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.f64_const(double.nan);
+    frame.f64_store(3, 0);
+  }
+
+  void _func3() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i64_const(0x7ff4000000000000);
     frame.i64_store(3, 0);
   }
 
-  void reset() {
+  void _func4() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i64_const(0);

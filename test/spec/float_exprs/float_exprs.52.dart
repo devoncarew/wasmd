@@ -15,7 +15,9 @@ class FloatExprs52Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 llvm_pr27036(i32 x, i32 y) {
+  f32 llvm_pr27036(i32 arg0, i32 arg1) => _func0(arg0, arg1);
+
+  f32 _func0(i32 x, i32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_const(-0x17e0035);

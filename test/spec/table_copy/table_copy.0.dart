@@ -15,31 +15,37 @@ class TableCopy0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 ef0() {
+  i32 ef0() => _func0();
+  i32 ef1() => _func1();
+  i32 ef2() => _func2();
+  i32 ef3() => _func3();
+  i32 ef4() => _func4();
+
+  i32 _func0() {
     final frame = Frame(this);
     frame.i32_const(0);
     return frame.pop();
   }
 
-  i32 ef1() {
+  i32 _func1() {
     final frame = Frame(this);
     frame.i32_const(1);
     return frame.pop();
   }
 
-  i32 ef2() {
+  i32 _func2() {
     final frame = Frame(this);
     frame.i32_const(2);
     return frame.pop();
   }
 
-  i32 ef3() {
+  i32 _func3() {
     final frame = Frame(this);
     frame.i32_const(3);
     return frame.pop();
   }
 
-  i32 ef4() {
+  i32 _func4() {
     final frame = Frame(this);
     frame.i32_const(4);
     return frame.pop();

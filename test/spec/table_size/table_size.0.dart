@@ -34,7 +34,40 @@ class TableSize0Module implements Module {
     table3,
   ];
 
-  void grow_t0(i32 sz) {
+  i32 size_t0() => _func0();
+  i32 size_t1() => _func1();
+  i32 size_t2() => _func2();
+  i32 size_t3() => _func3();
+  void grow_t0(i32 arg0) => _func4(arg0);
+  void grow_t1(i32 arg0) => _func5(arg0);
+  void grow_t2(i32 arg0) => _func6(arg0);
+  void grow_t3(i32 arg0) => _func7(arg0);
+
+  i32 _func0() {
+    final frame = Frame(this);
+    frame.table_size(0);
+    return frame.pop();
+  }
+
+  i32 _func1() {
+    final frame = Frame(this);
+    frame.table_size(1);
+    return frame.pop();
+  }
+
+  i32 _func2() {
+    final frame = Frame(this);
+    frame.table_size(2);
+    return frame.pop();
+  }
+
+  i32 _func3() {
+    final frame = Frame(this);
+    frame.table_size(3);
+    return frame.pop();
+  }
+
+  void _func4(i32 sz) {
     final frame = Frame(this);
     frame.ref_null(111);
     frame.push(sz);
@@ -42,7 +75,7 @@ class TableSize0Module implements Module {
     frame.drop();
   }
 
-  void grow_t1(i32 sz) {
+  void _func5(i32 sz) {
     final frame = Frame(this);
     frame.ref_null(111);
     frame.push(sz);
@@ -50,7 +83,7 @@ class TableSize0Module implements Module {
     frame.drop();
   }
 
-  void grow_t2(i32 sz) {
+  void _func6(i32 sz) {
     final frame = Frame(this);
     frame.ref_null(111);
     frame.push(sz);
@@ -58,36 +91,12 @@ class TableSize0Module implements Module {
     frame.drop();
   }
 
-  void grow_t3(i32 sz) {
+  void _func7(i32 sz) {
     final frame = Frame(this);
     frame.ref_null(111);
     frame.push(sz);
     frame.table_grow(3);
     frame.drop();
-  }
-
-  i32 size_t0() {
-    final frame = Frame(this);
-    frame.table_size(0);
-    return frame.pop();
-  }
-
-  i32 size_t1() {
-    final frame = Frame(this);
-    frame.table_size(1);
-    return frame.pop();
-  }
-
-  i32 size_t2() {
-    final frame = Frame(this);
-    frame.table_size(2);
-    return frame.pop();
-  }
-
-  i32 size_t3() {
-    final frame = Frame(this);
-    frame.table_size(3);
-    return frame.pop();
   }
 }
 

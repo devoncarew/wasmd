@@ -15,7 +15,10 @@ class FloatExprs55Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_sqrt_minus_2(f32 x) {
+  f32 f32_sqrt_minus_2(f32 arg0) => _func0(arg0);
+  f64 f64_sqrt_minus_2(f64 arg0) => _func1(arg0);
+
+  f32 _func0(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f32_sqrt();
@@ -24,7 +27,7 @@ class FloatExprs55Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_sqrt_minus_2(f64 x) {
+  f64 _func1(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f64_sqrt();

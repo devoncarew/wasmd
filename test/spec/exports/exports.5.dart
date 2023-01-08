@@ -15,11 +15,12 @@ class Exports5Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void a(i32 arg0) {
+  void a(i32 arg0) => _func0(arg0);
+  void b(i32 arg0) => _func0(arg0);
+
+  void _func0(i32 arg0) {
     final frame = Frame(this);
   }
-
-  void b(i32 arg0) => a(arg0);
 }
 
 typedef FunctionType0 = void Function(i32);

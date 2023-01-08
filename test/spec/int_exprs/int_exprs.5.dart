@@ -15,7 +15,12 @@ class IntExprs5Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 i32_no_fold_div_s_mul(i32 x) {
+  i32 i32_no_fold_div_s_mul(i32 arg0) => _func0(arg0);
+  i32 i32_no_fold_div_u_mul(i32 arg0) => _func1(arg0);
+  i64 i64_no_fold_div_s_mul(i64 arg0) => _func2(arg0);
+  i64 i64_no_fold_div_u_mul(i64 arg0) => _func3(arg0);
+
+  i32 _func0(i32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_const(6);
@@ -25,7 +30,7 @@ class IntExprs5Module implements Module {
     return frame.pop();
   }
 
-  i32 i32_no_fold_div_u_mul(i32 x) {
+  i32 _func1(i32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_const(6);
@@ -35,7 +40,7 @@ class IntExprs5Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_no_fold_div_s_mul(i64 x) {
+  i64 _func2(i64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_const(6);
@@ -45,7 +50,7 @@ class IntExprs5Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_no_fold_div_u_mul(i64 x) {
+  i64 _func3(i64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_const(6);

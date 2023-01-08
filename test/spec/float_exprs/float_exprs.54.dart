@@ -15,7 +15,9 @@ class FloatExprs54Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 inverse(f32 x) {
+  f32 inverse(f32 arg0) => _func0(arg0);
+
+  f32 _func0(f32 x) {
     final frame = Frame(this);
     frame.f32_const(1.0);
     frame.push(x);

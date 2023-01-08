@@ -45,29 +45,8 @@ class TableInit5Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 check(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    {
-      var func = table1[frame.pop()] as FunctionType0?;
-      if (func == null) throw Trap('uninitialized element');
-      frame.push(func());
-    }
-    return frame.pop();
-  }
-
-  void test() {
-    final frame = Frame(this);
-    frame.i32_const(15);
-    frame.i32_const(1);
-    frame.i32_const(3);
-    {
-      i32 count = frame.pop() as i32;
-      i32 sourceOffset = frame.pop() as i32;
-      i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table1, sourceOffset, destOffset, count, segments.segment3);
-    }
-  }
+  void test() => _func5();
+  i32 check(i32 arg0) => _func6(arg0);
 
   i32 _func0() {
     final frame = Frame(this);
@@ -99,6 +78,30 @@ class TableInit5Module implements Module {
     return frame.pop();
   }
 
+  void _func5() {
+    final frame = Frame(this);
+    frame.i32_const(15);
+    frame.i32_const(1);
+    frame.i32_const(3);
+    {
+      i32 count = frame.pop() as i32;
+      i32 sourceOffset = frame.pop() as i32;
+      i32 destOffset = frame.pop() as i32;
+      segments.copyTo(table1, sourceOffset, destOffset, count, segments.segment3);
+    }
+  }
+
+  i32 _func6(i32 arg0) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    {
+      var func = table1[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
+      frame.push(func());
+    }
+    return frame.pop();
+  }
+
   List<Function> _initFunctionTable() {
     return [
       aImports.ef0,
@@ -111,8 +114,8 @@ class TableInit5Module implements Module {
       _func2,
       _func3,
       _func4,
-      test,
-      check
+      _func5,
+      _func6
     ];
   }
 }

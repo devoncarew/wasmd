@@ -15,7 +15,9 @@ class FloatExprs36Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 no_fold_promote_demote(f32 x) {
+  f32 no_fold_promote_demote(f32 arg0) => _func0(arg0);
+
+  f32 _func0(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f64_promote_f32();

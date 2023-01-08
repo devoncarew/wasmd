@@ -15,7 +15,10 @@ class FloatExprs13Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 f32_no_fold_ne_self(f32 x) {
+  i32 f32_no_fold_ne_self(f32 arg0) => _func0(arg0);
+  i32 f64_no_fold_ne_self(f64 arg0) => _func1(arg0);
+
+  i32 _func0(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(x);
@@ -23,7 +26,7 @@ class FloatExprs13Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_no_fold_ne_self(f64 x) {
+  i32 _func1(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(x);

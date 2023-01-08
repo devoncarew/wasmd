@@ -15,7 +15,10 @@ class FloatExprs25Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_no_fold_to_hypot(f32 x, f32 y) {
+  f32 f32_no_fold_to_hypot(f32 arg0, f32 arg1) => _func0(arg0, arg1);
+  f64 f64_no_fold_to_hypot(f64 arg0, f64 arg1) => _func1(arg0, arg1);
+
+  f32 _func0(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(x);
@@ -28,7 +31,7 @@ class FloatExprs25Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_no_fold_to_hypot(f64 x, f64 y) {
+  f64 _func1(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(x);

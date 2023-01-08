@@ -31,23 +31,10 @@ class EratosthenesModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
-    final frame = Frame(this);
-    frame.i32_const(0x510);
-    frame.i32_const(0x540);
-    frame.i32_const(64);
-    frame.i32_const(5);
-    {
-      var t3 = frame.pop();
-      var t2 = frame.pop();
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      envImports.abort(t0, t1, t2, t3);
-    }
-    throw Trap('unreachable');
-  }
+  i32 prime(i32 arg0) => _func0(arg0);
+  void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3) => _func1(arg0, arg1, arg2, arg3);
 
-  i32 prime(i32 arg0) {
+  i32 _func0(i32 arg0) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;
@@ -366,6 +353,22 @@ class EratosthenesModule implements Module {
     }
     frame.push(local0);
     return frame.pop();
+  }
+
+  void _func1(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
+    final frame = Frame(this);
+    frame.i32_const(0x510);
+    frame.i32_const(0x540);
+    frame.i32_const(64);
+    frame.i32_const(5);
+    {
+      var t3 = frame.pop();
+      var t2 = frame.pop();
+      var t1 = frame.pop();
+      var t0 = frame.pop();
+      envImports.abort(t0, t1, t2, t3);
+    }
+    throw Trap('unreachable');
   }
 
   void _func2() {

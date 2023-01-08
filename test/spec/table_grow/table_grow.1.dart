@@ -23,16 +23,18 @@ class TableGrow1Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 grow() {
+  i32 grow() => _f();
+
+  i32 _f() {
     final frame = Frame(this);
-    frame.push(grow);
+    frame.push(_f);
     frame.i32_const(-16);
     frame.table_grow(0);
     return frame.pop();
   }
 
   List<Function> _initFunctionTable() {
-    return [grow];
+    return [_f];
   }
 }
 

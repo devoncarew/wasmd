@@ -24,7 +24,9 @@ class Memory9Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 memsize() {
+  i32 memsize() => _func0();
+
+  i32 _func0() {
     final frame = Frame(this);
     frame.memory_size(0);
     return frame.pop();

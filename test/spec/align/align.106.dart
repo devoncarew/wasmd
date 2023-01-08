@@ -15,7 +15,12 @@ class Align106Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_align_switch(i32 arg0) {
+  f32 f32_align_switch(i32 arg0) => _func0(arg0);
+  f64 f64_align_switch(i32 arg0) => _func1(arg0);
+  i32 i32_align_switch(i32 arg0, i32 arg1) => _func2(arg0, arg1);
+  i64 i64_align_switch(i32 arg0, i32 arg1) => _func3(arg0, arg1);
+
+  f32 _func0(i32 arg0) {
     f32 local0 = 0;
     f32 local1 = 0;
 
@@ -94,7 +99,7 @@ class Align106Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_align_switch(i32 arg0) {
+  f64 _func1(i32 arg0) {
     f64 local0 = 0;
     f64 local1 = 0;
 
@@ -188,7 +193,7 @@ class Align106Module implements Module {
     return frame.pop();
   }
 
-  i32 i32_align_switch(i32 arg0, i32 arg1) {
+  i32 _func2(i32 arg0, i32 arg1) {
     i32 local0 = 0;
     i32 local1 = 0;
 
@@ -420,7 +425,7 @@ class Align106Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_align_switch(i32 arg0, i32 arg1) {
+  i64 _func3(i32 arg0, i32 arg1) {
     i64 local0 = 0;
     i64 local1 = 0;
 

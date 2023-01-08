@@ -15,7 +15,10 @@ class Bulk2Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void fill(i32 arg0, i32 arg1, i32 arg2) {
+  void fill(i32 arg0, i32 arg1, i32 arg2) => _func0(arg0, arg1, arg2);
+  i32 load8_u(i32 arg0) => _func1(arg0);
+
+  void _func0(i32 arg0, i32 arg1, i32 arg2) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg1);
@@ -23,7 +26,7 @@ class Bulk2Module implements Module {
     frame.memory_fill(0);
   }
 
-  i32 load8_u(i32 arg0) {
+  i32 _func1(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i32_load8_u(0, 0);

@@ -28,7 +28,42 @@ class RefIsNull0Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  void deinit() {
+  i32 funcref(FuncRef? arg0) => _f1(arg0);
+  i32 externref(ExternRef? arg0) => _f2(arg0);
+  void init(ExternRef? arg0) => _func3(arg0);
+  void deinit() => _func4();
+  i32 funcref_elem(i32 arg0) => _func5(arg0);
+  i32 externref_elem(i32 arg0) => _func6(arg0);
+
+  i32 _f1(FuncRef? x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.ref_is_null();
+    return frame.pop();
+  }
+
+  i32 _f2(ExternRef? x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.ref_is_null();
+    return frame.pop();
+  }
+
+  void _dummy() {
+    final frame = Frame(this);
+  }
+
+  void _func3(ExternRef? r) {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    frame.push(r);
+    {
+      var ref = frame.pop();
+      table1[frame.pop() as int] = ref;
+    }
+  }
+
+  void _func4() {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.ref_null(112);
@@ -44,58 +79,30 @@ class RefIsNull0Module implements Module {
     }
   }
 
-  i32 externref(ExternRef? x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.ref_is_null();
-    return frame.pop();
-  }
-
-  i32 externref_elem(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(table1[frame.pop()]);
-    {
-      var t0 = frame.pop();
-      frame.push(externref(t0));
-    }
-    return frame.pop();
-  }
-
-  i32 funcref(FuncRef? x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.ref_is_null();
-    return frame.pop();
-  }
-
-  i32 funcref_elem(i32 x) {
+  i32 _func5(i32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(table0[frame.pop()]);
     {
       var t0 = frame.pop();
-      frame.push(funcref(t0));
+      frame.push(_f1(t0));
     }
     return frame.pop();
   }
 
-  void init(ExternRef? r) {
+  i32 _func6(i32 x) {
     final frame = Frame(this);
-    frame.i32_const(1);
-    frame.push(r);
+    frame.push(x);
+    frame.push(table1[frame.pop()]);
     {
-      var ref = frame.pop();
-      table1[frame.pop() as int] = ref;
+      var t0 = frame.pop();
+      frame.push(_f2(t0));
     }
-  }
-
-  void _func2() {
-    final frame = Frame(this);
+    return frame.pop();
   }
 
   List<Function> _initFunctionTable() {
-    return [funcref, externref, _func2, init, deinit, funcref_elem, externref_elem];
+    return [_f1, _f2, _dummy, _func3, _func4, _func5, _func6];
   }
 }
 

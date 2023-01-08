@@ -24,7 +24,10 @@ class FloatExprs62Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 f64_kahan_sum(i32 p, i32 n) {
+  f64 f64_kahan_sum(i32 arg0, i32 arg1) => _func0(arg0, arg1);
+  f64 f64_plain_sum(i32 arg0, i32 arg1) => _func1(arg0, arg1);
+
+  f64 _func0(i32 p, i32 n) {
     f64 sum = 0;
     f64 c = 0;
     f64 t = 0;
@@ -67,7 +70,7 @@ class FloatExprs62Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_plain_sum(i32 p, i32 n) {
+  f64 _func1(i32 p, i32 n) {
     f64 sum = 0;
 
     final frame = Frame(this);

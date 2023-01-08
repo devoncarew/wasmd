@@ -15,7 +15,10 @@ class FloatExprs69Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_no_fold_mul_divs(f32 x, f32 y, f32 z, f32 w) {
+  f32 f32_no_fold_mul_divs(f32 arg0, f32 arg1, f32 arg2, f32 arg3) => _func0(arg0, arg1, arg2, arg3);
+  f64 f64_no_fold_mul_divs(f64 arg0, f64 arg1, f64 arg2, f64 arg3) => _func1(arg0, arg1, arg2, arg3);
+
+  f32 _func0(f32 x, f32 y, f32 z, f32 w) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -27,7 +30,7 @@ class FloatExprs69Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_no_fold_mul_divs(f64 x, f64 y, f64 z, f64 w) {
+  f64 _func1(f64 x, f64 y, f64 z, f64 w) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);

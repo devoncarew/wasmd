@@ -40,7 +40,20 @@ class MandelbrotModule implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  void update(i32 width, i32 height, i32 limit) {
+  void update(i32 arg0, i32 arg1, i32 arg2) => _func1(arg0, arg1, arg2);
+
+  f64 _func0(f64 value, f64 minValue, f64 maxValue) {
+    final frame = Frame(this);
+    frame.push(value);
+    frame.push(minValue);
+    frame.f64_max();
+    frame.push(maxValue);
+    frame.f64_min();
+    return frame.pop();
+    return frame.pop();
+  }
+
+  void _func1(i32 width, i32 height, i32 limit) {
     f64 translateX = 0;
     f64 translateY = 0;
     i32 local2 = 0;
@@ -323,19 +336,8 @@ class MandelbrotModule implements Module {
     }
   }
 
-  f64 _func0(f64 value, f64 minValue, f64 maxValue) {
-    final frame = Frame(this);
-    frame.push(value);
-    frame.push(minValue);
-    frame.f64_max();
-    frame.push(maxValue);
-    frame.f64_min();
-    return frame.pop();
-    return frame.pop();
-  }
-
   List<Function> _initFunctionTable() {
-    return [envImports.Math_log, envImports.Math_log2, _func0, update];
+    return [envImports.Math_log, envImports.Math_log2, _func0, _func1];
   }
 }
 

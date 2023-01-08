@@ -28,21 +28,16 @@ class TableGet0Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  ExternRef? get_externref(i32 i) {
+  void init(ExternRef? arg0) => _func1(arg0);
+  ExternRef? get_externref(i32 arg0) => _func2(arg0);
+  FuncRef? get_funcref(i32 arg0) => _f3(arg0);
+  i32 is_null_funcref(i32 arg0) => _func4(arg0);
+
+  void _dummy() {
     final frame = Frame(this);
-    frame.push(i);
-    frame.push(table0[frame.pop()]);
-    return frame.pop();
   }
 
-  FuncRef? get_funcref(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.push(table1[frame.pop()]);
-    return frame.pop();
-  }
-
-  void init(ExternRef? r) {
+  void _func1(ExternRef? r) {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.push(r);
@@ -59,23 +54,33 @@ class TableGet0Module implements Module {
     }
   }
 
-  i32 is_null_funcref(i32 i) {
+  ExternRef? _func2(i32 i) {
+    final frame = Frame(this);
+    frame.push(i);
+    frame.push(table0[frame.pop()]);
+    return frame.pop();
+  }
+
+  FuncRef? _f3(i32 i) {
+    final frame = Frame(this);
+    frame.push(i);
+    frame.push(table1[frame.pop()]);
+    return frame.pop();
+  }
+
+  i32 _func4(i32 i) {
     final frame = Frame(this);
     frame.push(i);
     {
       var t0 = frame.pop();
-      frame.push(get_funcref(t0));
+      frame.push(_f3(t0));
     }
     frame.ref_is_null();
     return frame.pop();
   }
 
-  void _func0() {
-    final frame = Frame(this);
-  }
-
   List<Function> _initFunctionTable() {
-    return [_func0, init, get_externref, get_funcref, is_null_funcref];
+    return [_dummy, _func1, _func2, _f3, _func4];
   }
 }
 

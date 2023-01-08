@@ -34,11 +34,7 @@ class TableInit14Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  void test() {
-    final frame = Frame(this);
-    frame.elem_drop(1);
-    frame.elem_drop(1);
-  }
+  void test() => _func10();
 
   i32 _func00() {
     final frame = Frame(this);
@@ -100,8 +96,26 @@ class TableInit14Module implements Module {
     return frame.pop();
   }
 
+  void _func10() {
+    final frame = Frame(this);
+    frame.elem_drop(1);
+    frame.elem_drop(1);
+  }
+
   List<Function> _initFunctionTable() {
-    return [_func00, _func01, _func02, _func03, _func04, _func05, _func06, _func07, _func08, _func09, test];
+    return [
+      _func00,
+      _func01,
+      _func02,
+      _func03,
+      _func04,
+      _func05,
+      _func06,
+      _func07,
+      _func08,
+      _func09,
+      _func10
+    ];
   }
 }
 

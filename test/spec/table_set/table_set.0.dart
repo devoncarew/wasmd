@@ -28,32 +28,32 @@ class TableSet0Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  ExternRef? get_externref(i32 i) {
+  ExternRef? get_externref(i32 arg0) => _func1(arg0);
+  FuncRef? get_funcref(i32 arg0) => _f3(arg0);
+  void set_externref(i32 arg0, ExternRef? arg1) => _func3(arg0, arg1);
+  void set_funcref(i32 arg0, FuncRef? arg1) => _func4(arg0, arg1);
+  void set_funcref_from(i32 arg0, i32 arg1) => _func5(arg0, arg1);
+  i32 is_null_funcref(i32 arg0) => _func6(arg0);
+
+  void _dummy() {
+    final frame = Frame(this);
+  }
+
+  ExternRef? _func1(i32 i) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(table0[frame.pop()]);
     return frame.pop();
   }
 
-  FuncRef? get_funcref(i32 i) {
+  FuncRef? _f3(i32 i) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(table1[frame.pop()]);
     return frame.pop();
   }
 
-  i32 is_null_funcref(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    {
-      var t0 = frame.pop();
-      frame.push(get_funcref(t0));
-    }
-    frame.ref_is_null();
-    return frame.pop();
-  }
-
-  void set_externref(i32 i, ExternRef? r) {
+  void _func3(i32 i, ExternRef? r) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(r);
@@ -63,7 +63,7 @@ class TableSet0Module implements Module {
     }
   }
 
-  void set_funcref(i32 i, FuncRef? r) {
+  void _func4(i32 i, FuncRef? r) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(r);
@@ -73,7 +73,7 @@ class TableSet0Module implements Module {
     }
   }
 
-  void set_funcref_from(i32 i, i32 j) {
+  void _func5(i32 i, i32 j) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(j);
@@ -84,20 +84,19 @@ class TableSet0Module implements Module {
     }
   }
 
-  void _func0() {
+  i32 _func6(i32 i) {
     final frame = Frame(this);
+    frame.push(i);
+    {
+      var t0 = frame.pop();
+      frame.push(_f3(t0));
+    }
+    frame.ref_is_null();
+    return frame.pop();
   }
 
   List<Function> _initFunctionTable() {
-    return [
-      _func0,
-      get_externref,
-      get_funcref,
-      set_externref,
-      set_funcref,
-      set_funcref_from,
-      is_null_funcref
-    ];
+    return [_dummy, _func1, _f3, _func3, _func4, _func5, _func6];
   }
 }
 

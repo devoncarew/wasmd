@@ -23,7 +23,36 @@ class Bulk12Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 call(i32 arg0) {
+  void copy(i32 arg0, i32 arg1, i32 arg2) => _func3(arg0, arg1, arg2);
+  i32 call(i32 arg0) => _func4(arg0);
+
+  i32 _zero() {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    return frame.pop();
+  }
+
+  i32 _one() {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    return frame.pop();
+  }
+
+  i32 _two() {
+    final frame = Frame(this);
+    frame.i32_const(2);
+    return frame.pop();
+  }
+
+  void _func3(i32 arg0, i32 arg1, i32 arg2) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    frame.push(arg1);
+    frame.push(arg2);
+    frame.table_copy(0, 0);
+  }
+
+  i32 _func4(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     {
@@ -34,34 +63,8 @@ class Bulk12Module implements Module {
     return frame.pop();
   }
 
-  void copy(i32 arg0, i32 arg1, i32 arg2) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.table_copy(0, 0);
-  }
-
-  i32 _func0() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    return frame.pop();
-  }
-
-  i32 _func1() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    return frame.pop();
-  }
-
-  i32 _func2() {
-    final frame = Frame(this);
-    frame.i32_const(2);
-    return frame.pop();
-  }
-
   List<Function> _initFunctionTable() {
-    return [_func0, _func1, _func2, copy, call];
+    return [_zero, _one, _two, _func3, _func4];
   }
 }
 

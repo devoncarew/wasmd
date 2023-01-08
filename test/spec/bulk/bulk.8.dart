@@ -23,18 +23,22 @@ class Bulk8Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 call(i32 arg0) {
+  void init(i32 arg0, i32 arg1, i32 arg2) => _func2(arg0, arg1, arg2);
+  i32 call(i32 arg0) => _func3(arg0);
+
+  i32 _zero() {
     final frame = Frame(this);
-    frame.push(arg0);
-    {
-      var func = table0[frame.pop()] as FunctionType0?;
-      if (func == null) throw Trap('uninitialized element');
-      frame.push(func());
-    }
+    frame.i32_const(0);
     return frame.pop();
   }
 
-  void init(i32 arg0, i32 arg1, i32 arg2) {
+  i32 _one() {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    return frame.pop();
+  }
+
+  void _func2(i32 arg0, i32 arg1, i32 arg2) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.push(arg1);
@@ -47,20 +51,19 @@ class Bulk8Module implements Module {
     }
   }
 
-  i32 _func0() {
+  i32 _func3(i32 arg0) {
     final frame = Frame(this);
-    frame.i32_const(0);
-    return frame.pop();
-  }
-
-  i32 _func1() {
-    final frame = Frame(this);
-    frame.i32_const(1);
+    frame.push(arg0);
+    {
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
+      frame.push(func());
+    }
     return frame.pop();
   }
 
   List<Function> _initFunctionTable() {
-    return [_func0, _func1, init, call];
+    return [_zero, _one, _func2, _func3];
   }
 }
 

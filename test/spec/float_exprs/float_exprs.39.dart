@@ -15,7 +15,24 @@ class FloatExprs39Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_i32_no_fold_trunc_s_convert_s(f32 x) {
+  f32 f32_i32_no_fold_trunc_s_convert_s(f32 arg0) => _func00(arg0);
+  f32 f32_i32_no_fold_trunc_u_convert_s(f32 arg0) => _func01(arg0);
+  f32 f32_i32_no_fold_trunc_s_convert_u(f32 arg0) => _func02(arg0);
+  f32 f32_i32_no_fold_trunc_u_convert_u(f32 arg0) => _func03(arg0);
+  f64 f64_i32_no_fold_trunc_s_convert_s(f64 arg0) => _func04(arg0);
+  f64 f64_i32_no_fold_trunc_u_convert_s(f64 arg0) => _func05(arg0);
+  f64 f64_i32_no_fold_trunc_s_convert_u(f64 arg0) => _func06(arg0);
+  f64 f64_i32_no_fold_trunc_u_convert_u(f64 arg0) => _func07(arg0);
+  f32 f32_i64_no_fold_trunc_s_convert_s(f32 arg0) => _func08(arg0);
+  f32 f32_i64_no_fold_trunc_u_convert_s(f32 arg0) => _func09(arg0);
+  f32 f32_i64_no_fold_trunc_s_convert_u(f32 arg0) => _func10(arg0);
+  f32 f32_i64_no_fold_trunc_u_convert_u(f32 arg0) => _func11(arg0);
+  f64 f64_i64_no_fold_trunc_s_convert_s(f64 arg0) => _func12(arg0);
+  f64 f64_i64_no_fold_trunc_u_convert_s(f64 arg0) => _func13(arg0);
+  f64 f64_i64_no_fold_trunc_s_convert_u(f64 arg0) => _func14(arg0);
+  f64 f64_i64_no_fold_trunc_u_convert_u(f64 arg0) => _func15(arg0);
+
+  f32 _func00(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f32_s();
@@ -23,15 +40,7 @@ class FloatExprs39Module implements Module {
     return frame.pop();
   }
 
-  f32 f32_i32_no_fold_trunc_s_convert_u(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_trunc_f32_s();
-    frame.f32_convert_i32_u();
-    return frame.pop();
-  }
-
-  f32 f32_i32_no_fold_trunc_u_convert_s(f32 x) {
+  f32 _func01(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f32_u();
@@ -39,7 +48,15 @@ class FloatExprs39Module implements Module {
     return frame.pop();
   }
 
-  f32 f32_i32_no_fold_trunc_u_convert_u(f32 x) {
+  f32 _func02(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i32_trunc_f32_s();
+    frame.f32_convert_i32_u();
+    return frame.pop();
+  }
+
+  f32 _func03(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f32_u();
@@ -47,39 +64,7 @@ class FloatExprs39Module implements Module {
     return frame.pop();
   }
 
-  f32 f32_i64_no_fold_trunc_s_convert_s(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f32_s();
-    frame.f32_convert_i64_s();
-    return frame.pop();
-  }
-
-  f32 f32_i64_no_fold_trunc_s_convert_u(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f32_s();
-    frame.f32_convert_i64_u();
-    return frame.pop();
-  }
-
-  f32 f32_i64_no_fold_trunc_u_convert_s(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f32_u();
-    frame.f32_convert_i64_s();
-    return frame.pop();
-  }
-
-  f32 f32_i64_no_fold_trunc_u_convert_u(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f32_u();
-    frame.f32_convert_i64_u();
-    return frame.pop();
-  }
-
-  f64 f64_i32_no_fold_trunc_s_convert_s(f64 x) {
+  f64 _func04(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f64_s();
@@ -87,15 +72,7 @@ class FloatExprs39Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_i32_no_fold_trunc_s_convert_u(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_trunc_f64_s();
-    frame.f64_convert_i32_u();
-    return frame.pop();
-  }
-
-  f64 f64_i32_no_fold_trunc_u_convert_s(f64 x) {
+  f64 _func05(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f64_u();
@@ -103,7 +80,15 @@ class FloatExprs39Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_i32_no_fold_trunc_u_convert_u(f64 x) {
+  f64 _func06(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i32_trunc_f64_s();
+    frame.f64_convert_i32_u();
+    return frame.pop();
+  }
+
+  f64 _func07(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f64_u();
@@ -111,7 +96,39 @@ class FloatExprs39Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_i64_no_fold_trunc_s_convert_s(f64 x) {
+  f32 _func08(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f32_s();
+    frame.f32_convert_i64_s();
+    return frame.pop();
+  }
+
+  f32 _func09(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f32_u();
+    frame.f32_convert_i64_s();
+    return frame.pop();
+  }
+
+  f32 _func10(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f32_s();
+    frame.f32_convert_i64_u();
+    return frame.pop();
+  }
+
+  f32 _func11(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f32_u();
+    frame.f32_convert_i64_u();
+    return frame.pop();
+  }
+
+  f64 _func12(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_trunc_f64_s();
@@ -119,15 +136,7 @@ class FloatExprs39Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_i64_no_fold_trunc_s_convert_u(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_trunc_f64_s();
-    frame.f64_convert_i64_u();
-    return frame.pop();
-  }
-
-  f64 f64_i64_no_fold_trunc_u_convert_s(f64 x) {
+  f64 _func13(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_trunc_f64_u();
@@ -135,7 +144,15 @@ class FloatExprs39Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_i64_no_fold_trunc_u_convert_u(f64 x) {
+  f64 _func14(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.i64_trunc_f64_s();
+    frame.f64_convert_i64_u();
+    return frame.pop();
+  }
+
+  f64 _func15(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_trunc_f64_u();

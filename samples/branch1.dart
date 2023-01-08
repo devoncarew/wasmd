@@ -8,7 +8,7 @@ import 'package:wasmd/runtime.dart';
 
 class Branch1Module implements Module {
   Branch1Module() {
-    _func1();
+    _foo();
   }
 
   @override
@@ -19,7 +19,9 @@ class Branch1Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 sample() {
+  i32 sample() => _sample();
+
+  i32 _sample() {
     final frame = Frame(this);
 
     loop_label_0:
@@ -40,7 +42,7 @@ class Branch1Module implements Module {
     return frame.pop();
   }
 
-  void _func1() {
+  void _foo() {
     final frame = Frame(this);
     frame.i32_const(1);
     globals.i = frame.pop();

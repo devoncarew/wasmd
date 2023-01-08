@@ -15,7 +15,14 @@ class F32Cmp0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 eq(f32 x, f32 y) {
+  i32 eq(f32 arg0, f32 arg1) => _func0(arg0, arg1);
+  i32 ne(f32 arg0, f32 arg1) => _func1(arg0, arg1);
+  i32 lt(f32 arg0, f32 arg1) => _func2(arg0, arg1);
+  i32 le(f32 arg0, f32 arg1) => _func3(arg0, arg1);
+  i32 gt(f32 arg0, f32 arg1) => _func4(arg0, arg1);
+  i32 ge(f32 arg0, f32 arg1) => _func5(arg0, arg1);
+
+  i32 _func0(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -23,31 +30,15 @@ class F32Cmp0Module implements Module {
     return frame.pop();
   }
 
-  i32 ge(f32 x, f32 y) {
+  i32 _func1(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f32_ge();
+    frame.f32_ne();
     return frame.pop();
   }
 
-  i32 gt(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_gt();
-    return frame.pop();
-  }
-
-  i32 le(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_le();
-    return frame.pop();
-  }
-
-  i32 lt(f32 x, f32 y) {
+  i32 _func2(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -55,11 +46,27 @@ class F32Cmp0Module implements Module {
     return frame.pop();
   }
 
-  i32 ne(f32 x, f32 y) {
+  i32 _func3(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f32_ne();
+    frame.f32_le();
+    return frame.pop();
+  }
+
+  i32 _func4(f32 x, f32 y) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(y);
+    frame.f32_gt();
+    return frame.pop();
+  }
+
+  i32 _func5(f32 x, f32 y) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(y);
+    frame.f32_ge();
     return frame.pop();
   }
 }

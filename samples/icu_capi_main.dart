@@ -6,7 +6,7 @@ import 'package:wasmd/runtime.dart';
 
 import 'icu_capi.dart';
 
-const _diplomatSize = 20;
+const _diplomatSize = 100;
 
 void main(List<String> args) {
   var imports = EnvImportsImpl();
@@ -29,14 +29,12 @@ void main(List<String> args) {
   var receivePtr = icu.diplomat_alloc(_diplomatSize, 4);
   print('receive ptr  : $receivePtr');
 
+  // TODO: we get an 'out of bounds memory access' trap from here
   // diplomat_free(ptr, size, align)
-
-  // TODO: we get an 'out of bounds memory access' from here
   // icu.diplomat_free(receivePtr, _diplomatSize, 4);
 
   // ICU4XLocale_create_from_string(receiveBuffer, namePtr, nameLen);
-
-  // icu.ICU4XLocale_create_from_string(receivePtr, en_usStr, 'en_US'.length);
+  icu.ICU4XLocale_create_from_string(receivePtr, en_usStr, 'en_US'.length);
 
   // void ICU4XLocale_destroy(i32 arg0) {
 

@@ -15,7 +15,10 @@ class FloatExprs47Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_incorrect_correction() {
+  f32 f32_incorrect_correction() => _func0();
+  f64 f64_incorrect_correction() => _func1();
+
+  f32 _func0() {
     final frame = Frame(this);
     frame.f32_const(1.3329999446868896);
     frame.f32_const(1.225000023841858);
@@ -27,7 +30,7 @@ class FloatExprs47Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_incorrect_correction() {
+  f64 _func1() {
     final frame = Frame(this);
     frame.f64_const(1.333);
     frame.f64_const(1.225);

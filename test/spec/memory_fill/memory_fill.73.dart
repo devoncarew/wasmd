@@ -18,7 +18,10 @@ class MemoryFill73Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 checkRange(i32 from, i32 to, i32 expected) {
+  i32 checkRange(i32 arg0, i32 arg1, i32 arg2) => _func0(arg0, arg1, arg2);
+  void run(i32 arg0, i32 arg1, i32 arg2) => _func1(arg0, arg1, arg2);
+
+  i32 _func0(i32 from, i32 to, i32 expected) {
     final frame = Frame(this);
 
     loop_label_0:
@@ -50,7 +53,7 @@ class MemoryFill73Module implements Module {
     return frame.pop();
   }
 
-  void run(i32 offs, i32 val, i32 len) {
+  void _func1(i32 offs, i32 val, i32 len) {
     final frame = Frame(this);
     frame.push(offs);
     frame.push(val);

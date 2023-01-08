@@ -15,7 +15,10 @@ class Forward0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 even(i32 n) {
+  i32 even(i32 arg0) => _even(arg0);
+  i32 odd(i32 arg0) => _odd(arg0);
+
+  i32 _even(i32 n) {
     final frame = Frame(this);
     frame.push(n);
     frame.i32_const(0);
@@ -29,13 +32,13 @@ class Forward0Module implements Module {
       frame.i32_sub();
       {
         var t0 = frame.pop();
-        frame.push(odd(t0));
+        frame.push(_odd(t0));
       }
     }
     return frame.pop();
   }
 
-  i32 odd(i32 n) {
+  i32 _odd(i32 n) {
     final frame = Frame(this);
     frame.push(n);
     frame.i32_const(0);
@@ -49,7 +52,7 @@ class Forward0Module implements Module {
       frame.i32_sub();
       {
         var t0 = frame.pop();
-        frame.push(even(t0));
+        frame.push(_even(t0));
       }
     }
     return frame.pop();

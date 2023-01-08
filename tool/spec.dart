@@ -16,6 +16,8 @@ import 'package:wasmd/src/utils.dart';
 // TODO:? --disable-saturating-float-to-int --disable-sign-extension
 // --disable-multi-value --disable-simd
 
+// TODO: experiment with --disable-multi-value
+
 void main(List<String> args) {
   if (args.isEmpty) {
     print('usage: dart tools/spec_2.dart <wast file>');
@@ -93,7 +95,7 @@ List<File> wast2json(File wastFile, File jsonFile) {
 }
 
 void compileWasmToDart(Compiler compiler, File wasmFile, File dartFile) {
-  var library = compiler.compile(wasmFile);
+  var library = compiler.compile(wasmFile, useDebugNames: true);
   var code = emitFormatLibrary(library);
 
   print('  emitting ${dartFile.path}');
@@ -185,7 +187,15 @@ void generateDartForJson(
           Code('${moduleImport.referenceName}: $wrapCtor(${ref.refName}),'),
         );
       }
-
+      if (referencedModule.memoryImported) {
+        var m = referencedModule;
+        if (m.maxMemory != null) {
+          statements
+              .add(Code('memory: Memory(${m.minMemory}, ${m.maxMemory}),'));
+        } else {
+          statements.add(Code('memory: Memory(${m.minMemory}),'));
+        }
+      }
       statements.add(Code(');\n'));
       library.directives.add(Directive.import(dartImport, as: prefix));
     } else if (type == 'action') {
@@ -298,6 +308,13 @@ void generateDartForJson(
       var file = File(p.join(jsonFile.parent.path, filename));
       file.deleteSync();
     } else if (type == 'assert_uninstantiable') {
+      // a wasm file
+      var filename = command['filename'] as String;
+
+      // Remove this file - we don't try to compile or generate from it.
+      var file = File(p.join(jsonFile.parent.path, filename));
+      file.deleteSync();
+    } else if (type == 'assert_unlinkable') {
       // a wasm file
       var filename = command['filename'] as String;
 
@@ -462,6 +479,19 @@ class ImportsData {
     // implements Bar
     classBuilder.implements
         .add(Reference('$targetPrefix.${targetInterface.typeName}'));
+
+    // interface getters
+    for (var global in targetInterface.globals) {
+      classBuilder.methods.add(Method(
+        (b) => b
+          ..name = global.name
+          ..returns = Reference(global.type.typeName)
+          ..annotations.add(refer('override'))
+          ..type = MethodType.getter
+          ..lambda = true
+          ..body = Code('delegate.${global.name}'),
+      ));
+    }
 
     // interface methods
     for (var func in targetInterface.functions) {

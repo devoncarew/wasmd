@@ -15,7 +15,9 @@ class Const203Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f() {
+  f32 f() => _func0();
+
+  f32 _func0() {
     final frame = Frame(this);
     frame.f32_const(-8.88178631458362e-16);
     return frame.pop();

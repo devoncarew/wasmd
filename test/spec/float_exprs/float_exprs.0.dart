@@ -15,7 +15,9 @@ class FloatExprs0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 f64_no_contraction(f64 x, f64 y, f64 z) {
+  f64 f64_no_contraction(f64 arg0, f64 arg1, f64 arg2) => _func0(arg0, arg1, arg2);
+
+  f64 _func0(f64 x, f64 y, f64 z) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);

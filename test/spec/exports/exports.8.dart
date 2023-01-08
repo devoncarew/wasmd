@@ -15,7 +15,9 @@ class Exports8Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void a() {
+  void a() => _a();
+
+  void _a() {
     final frame = Frame(this);
   }
 }

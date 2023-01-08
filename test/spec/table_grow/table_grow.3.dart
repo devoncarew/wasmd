@@ -20,7 +20,9 @@ class TableGrow3Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  i32 grow(i32 arg0) {
+  i32 grow(i32 arg0) => _func0(arg0);
+
+  i32 _func0(i32 arg0) {
     final frame = Frame(this);
     frame.ref_null(111);
     frame.push(arg0);

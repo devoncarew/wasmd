@@ -24,19 +24,22 @@ class MemoryCopy12Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 load8_u(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
-  }
+  void run(i32 arg0, i32 arg1, i32 arg2) => _func0(arg0, arg1, arg2);
+  i32 load8_u(i32 arg0) => _func1(arg0);
 
-  void run(i32 targetOffs, i32 srcOffs, i32 len) {
+  void _func0(i32 targetOffs, i32 srcOffs, i32 len) {
     final frame = Frame(this);
     frame.push(targetOffs);
     frame.push(srcOffs);
     frame.push(len);
     frame.memory_copy(0, 0);
+  }
+
+  i32 _func1(i32 arg0) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    frame.i32_load8_u(0, 0);
+    return frame.pop();
   }
 }
 

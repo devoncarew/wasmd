@@ -23,25 +23,21 @@ class Bulk9Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  void drop_active() {
+  void drop_passive() => _func1();
+  void init_passive(i32 arg0) => _func2(arg0);
+  void drop_active() => _func3();
+  void init_active(i32 arg0) => _func4(arg0);
+
+  void _f() {
     final frame = Frame(this);
-    frame.elem_drop(1);
   }
 
-  void drop_passive() {
+  void _func1() {
     final frame = Frame(this);
     frame.elem_drop(0);
   }
 
-  void init_active(i32 len) {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(0);
-    frame.push(len);
-    throw 'table.init does not support active element segments';
-  }
-
-  void init_passive(i32 len) {
+  void _func2(i32 len) {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(0);
@@ -54,12 +50,21 @@ class Bulk9Module implements Module {
     }
   }
 
-  void _func0() {
+  void _func3() {
     final frame = Frame(this);
+    frame.elem_drop(1);
+  }
+
+  void _func4(i32 len) {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    frame.push(len);
+    throw 'table.init does not support active element segments';
   }
 
   List<Function> _initFunctionTable() {
-    return [_func0, drop_passive, init_passive, drop_active, init_active];
+    return [_f, _func1, _func2, _func3, _func4];
   }
 }
 

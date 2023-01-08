@@ -15,7 +15,9 @@ class FibModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 fib(i32 arg0) {
+  i32 fib(i32 arg0) => _func0(arg0);
+
+  i32 _func0(i32 arg0) {
     i32 local0 = 0;
     i32 local1 = 0;
     i32 local2 = 0;

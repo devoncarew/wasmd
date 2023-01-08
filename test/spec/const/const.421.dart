@@ -15,7 +15,9 @@ class Const421Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 f() {
+  f64 f() => _func0();
+
+  f64 _func0() {
     final frame = Frame(this);
     frame.f64_const(-1.584563250285287e+29);
     return frame.pop();

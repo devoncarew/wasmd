@@ -15,7 +15,10 @@ class FloatExprs90Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_division_by_small_number(f32 a, f32 b, f32 c) {
+  f32 f32_division_by_small_number(f32 arg0, f32 arg1, f32 arg2) => _func0(arg0, arg1, arg2);
+  f64 f64_division_by_small_number(f64 arg0, f64 arg1, f64 arg2) => _func1(arg0, arg1, arg2);
+
+  f32 _func0(f32 a, f32 b, f32 c) {
     final frame = Frame(this);
     frame.push(a);
     frame.push(b);
@@ -25,7 +28,7 @@ class FloatExprs90Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_division_by_small_number(f64 a, f64 b, f64 c) {
+  f64 _func1(f64 a, f64 b, f64 c) {
     final frame = Frame(this);
     frame.push(a);
     frame.push(b);

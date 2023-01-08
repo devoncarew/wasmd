@@ -11,7 +11,7 @@ import 'package:wasmd/runtime.dart';
 class Start3Module implements Module {
   Start3Module() {
     _data.init(memory);
-    _func2();
+    _main();
   }
 
   @override
@@ -25,15 +25,10 @@ class Start3Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 get() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
-    return frame.pop();
-  }
+  void inc() => _inc();
+  i32 get() => _get();
 
-  void inc() {
+  void _inc() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(0);
@@ -43,11 +38,19 @@ class Start3Module implements Module {
     frame.i32_store8(0, 0);
   }
 
-  void _func2() {
+  i32 _get() {
     final frame = Frame(this);
-    inc();
-    inc();
-    inc();
+    frame.i32_const(0);
+    frame.i32_load8_u(0, 0);
+    return frame.pop();
+    return frame.pop();
+  }
+
+  void _main() {
+    final frame = Frame(this);
+    _inc();
+    _inc();
+    _inc();
   }
 }
 

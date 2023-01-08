@@ -15,7 +15,9 @@ class FloatExprs93Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 point_four(f64 four, f64 ten) {
+  i32 point_four(f64 arg0, f64 arg1) => _func0(arg0, arg1);
+
+  i32 _func0(f64 four, f64 ten) {
     final frame = Frame(this);
     frame.push(four);
     frame.push(ten);

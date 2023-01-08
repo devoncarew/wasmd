@@ -21,33 +21,20 @@ class Memory30Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 cast() {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.i64_const(-0x3039);
-    frame.i64_store(3, 0);
-    frame.i32_const(8);
-    frame.f64_load(3, 0);
-    frame.i64_const(-0x3039);
-    frame.f64_reinterpret_i64();
-    frame.f64_eq();
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.f64_const(0.0);
-      return frame.pop();
-    }
-    frame.i32_const(9);
-    frame.i64_const(0);
-    frame.i64_store(0, 0);
-    frame.i32_const(15);
-    frame.i32_const(0x4045);
-    frame.i32_store16(0, 0);
-    frame.i32_const(9);
-    frame.f64_load(0, 0);
-    return frame.pop();
-  }
+  i32 data() => _func00();
+  f64 cast() => _func01();
+  i32 i32_load8_s(i32 arg0) => _func02(arg0);
+  i32 i32_load8_u(i32 arg0) => _func03(arg0);
+  i32 i32_load16_s(i32 arg0) => _func04(arg0);
+  i32 i32_load16_u(i32 arg0) => _func05(arg0);
+  i64 i64_load8_s(i64 arg0) => _func06(arg0);
+  i64 i64_load8_u(i64 arg0) => _func07(arg0);
+  i64 i64_load16_s(i64 arg0) => _func08(arg0);
+  i64 i64_load16_u(i64 arg0) => _func09(arg0);
+  i64 i64_load32_s(i64 arg0) => _func10(arg0);
+  i64 i64_load32_u(i64 arg0) => _func11(arg0);
 
-  i32 data() {
+  i32 _func00() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load8_u(0, 0);
@@ -91,27 +78,33 @@ class Memory30Module implements Module {
     return frame.pop();
   }
 
-  i32 i32_load16_s(i32 i) {
+  f64 _func01() {
     final frame = Frame(this);
     frame.i32_const(8);
-    frame.push(i);
-    frame.i32_store16(1, 0);
+    frame.i64_const(-0x3039);
+    frame.i64_store(3, 0);
     frame.i32_const(8);
-    frame.i32_load16_s(1, 0);
+    frame.f64_load(3, 0);
+    frame.i64_const(-0x3039);
+    frame.f64_reinterpret_i64();
+    frame.f64_eq();
+    if_label_0:
+    if (frame.pop() != 0) {
+      frame.f64_const(0.0);
+      return frame.pop();
+    }
+    frame.i32_const(9);
+    frame.i64_const(0);
+    frame.i64_store(0, 0);
+    frame.i32_const(15);
+    frame.i32_const(0x4045);
+    frame.i32_store16(0, 0);
+    frame.i32_const(9);
+    frame.f64_load(0, 0);
     return frame.pop();
   }
 
-  i32 i32_load16_u(i32 i) {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.push(i);
-    frame.i32_store16(1, 0);
-    frame.i32_const(8);
-    frame.i32_load16_u(1, 0);
-    return frame.pop();
-  }
-
-  i32 i32_load8_s(i32 i) {
+  i32 _func02(i32 i) {
     final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
@@ -121,7 +114,7 @@ class Memory30Module implements Module {
     return frame.pop();
   }
 
-  i32 i32_load8_u(i32 i) {
+  i32 _func03(i32 i) {
     final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
@@ -131,47 +124,27 @@ class Memory30Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_load16_s(i64 i) {
+  i32 _func04(i32 i) {
     final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
-    frame.i64_store16(1, 0);
+    frame.i32_store16(1, 0);
     frame.i32_const(8);
-    frame.i64_load16_s(1, 0);
+    frame.i32_load16_s(1, 0);
     return frame.pop();
   }
 
-  i64 i64_load16_u(i64 i) {
+  i32 _func05(i32 i) {
     final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
-    frame.i64_store16(1, 0);
+    frame.i32_store16(1, 0);
     frame.i32_const(8);
-    frame.i64_load16_u(1, 0);
+    frame.i32_load16_u(1, 0);
     return frame.pop();
   }
 
-  i64 i64_load32_s(i64 i) {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.push(i);
-    frame.i64_store32(2, 0);
-    frame.i32_const(8);
-    frame.i64_load32_s(2, 0);
-    return frame.pop();
-  }
-
-  i64 i64_load32_u(i64 i) {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.push(i);
-    frame.i64_store32(2, 0);
-    frame.i32_const(8);
-    frame.i64_load32_u(2, 0);
-    return frame.pop();
-  }
-
-  i64 i64_load8_s(i64 i) {
+  i64 _func06(i64 i) {
     final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
@@ -181,13 +154,53 @@ class Memory30Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_load8_u(i64 i) {
+  i64 _func07(i64 i) {
     final frame = Frame(this);
     frame.i32_const(8);
     frame.push(i);
     frame.i64_store8(0, 0);
     frame.i32_const(8);
     frame.i64_load8_u(0, 0);
+    return frame.pop();
+  }
+
+  i64 _func08(i64 i) {
+    final frame = Frame(this);
+    frame.i32_const(8);
+    frame.push(i);
+    frame.i64_store16(1, 0);
+    frame.i32_const(8);
+    frame.i64_load16_s(1, 0);
+    return frame.pop();
+  }
+
+  i64 _func09(i64 i) {
+    final frame = Frame(this);
+    frame.i32_const(8);
+    frame.push(i);
+    frame.i64_store16(1, 0);
+    frame.i32_const(8);
+    frame.i64_load16_u(1, 0);
+    return frame.pop();
+  }
+
+  i64 _func10(i64 i) {
+    final frame = Frame(this);
+    frame.i32_const(8);
+    frame.push(i);
+    frame.i64_store32(2, 0);
+    frame.i32_const(8);
+    frame.i64_load32_s(2, 0);
+    return frame.pop();
+  }
+
+  i64 _func11(i64 i) {
+    final frame = Frame(this);
+    frame.i32_const(8);
+    frame.push(i);
+    frame.i64_store32(2, 0);
+    frame.i32_const(8);
+    frame.i64_load32_u(2, 0);
     return frame.pop();
   }
 }

@@ -45,35 +45,9 @@ class TableCopy16Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 check_t0(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    {
-      var func = table1[frame.pop()] as FunctionType0?;
-      if (func == null) throw Trap('uninitialized element');
-      frame.push(func());
-    }
-    return frame.pop();
-  }
-
-  i32 check_t1(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    {
-      var func = table0[frame.pop()] as FunctionType0?;
-      if (func == null) throw Trap('uninitialized element');
-      frame.push(func());
-    }
-    return frame.pop();
-  }
-
-  void test() {
-    final frame = Frame(this);
-    frame.i32_const(10);
-    frame.i32_const(12);
-    frame.i32_const(7);
-    frame.table_copy(1, 1);
-  }
+  void test() => _func5();
+  i32 check_t0(i32 arg0) => _func6(arg0);
+  i32 check_t1(i32 arg0) => _func7(arg0);
 
   i32 _func0() {
     final frame = Frame(this);
@@ -105,6 +79,36 @@ class TableCopy16Module implements Module {
     return frame.pop();
   }
 
+  void _func5() {
+    final frame = Frame(this);
+    frame.i32_const(10);
+    frame.i32_const(12);
+    frame.i32_const(7);
+    frame.table_copy(1, 1);
+  }
+
+  i32 _func6(i32 arg0) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    {
+      var func = table1[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
+      frame.push(func());
+    }
+    return frame.pop();
+  }
+
+  i32 _func7(i32 arg0) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    {
+      var func = table0[frame.pop()] as FunctionType0?;
+      if (func == null) throw Trap('uninitialized element');
+      frame.push(func());
+    }
+    return frame.pop();
+  }
+
   List<Function> _initFunctionTable() {
     return [
       aImports.ef0,
@@ -117,9 +121,9 @@ class TableCopy16Module implements Module {
       _func2,
       _func3,
       _func4,
-      test,
-      check_t0,
-      check_t1
+      _func5,
+      _func6,
+      _func7
     ];
   }
 }

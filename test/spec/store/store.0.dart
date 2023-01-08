@@ -15,7 +15,17 @@ class Store0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void as_block_value() {
+  void as_block_value() => _func0();
+  void as_loop_value() => _func1();
+  void as_br_value() => _func2();
+  void as_br_if_value() => _func3();
+  void as_br_if_value_cond() => _func4();
+  void as_br_table_value() => _func5();
+  void as_return_value() => _func6();
+  void as_if_then() => _func7();
+  void as_if_else() => _func8();
+
+  void _func0() {
     final frame = Frame(this);
     block_label_0:
     {
@@ -25,7 +35,31 @@ class Store0Module implements Module {
     }
   }
 
-  void as_br_if_value() {
+  void _func1() {
+    final frame = Frame(this);
+
+    loop_label_0:
+    for (;;) {
+      frame.i32_const(0);
+      frame.i32_const(1);
+      frame.i32_store(2, 0);
+      break;
+    }
+  }
+
+  void _func2() {
+    final frame = Frame(this);
+    block_label_0:
+    {
+      frame.i32_const(0);
+      frame.i32_const(1);
+      frame.i32_store(2, 0);
+      frame.unwindTo(0, 0);
+      break block_label_0;
+    }
+  }
+
+  void _func3() {
     final frame = Frame(this);
     block_label_0:
     {
@@ -40,7 +74,7 @@ class Store0Module implements Module {
     }
   }
 
-  void as_br_if_value_cond() {
+  void _func4() {
     final frame = Frame(this);
     block_label_0:
     {
@@ -55,7 +89,7 @@ class Store0Module implements Module {
     }
   }
 
-  void as_br_table_value() {
+  void _func5() {
     final frame = Frame(this);
     block_label_0:
     {
@@ -72,19 +106,25 @@ class Store0Module implements Module {
     }
   }
 
-  void as_br_value() {
+  void _func6() {
     final frame = Frame(this);
-    block_label_0:
-    {
+    frame.i32_const(0);
+    frame.i32_const(1);
+    frame.i32_store(2, 0);
+  }
+
+  void _func7() {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    if_label_0:
+    if (frame.pop() != 0) {
       frame.i32_const(0);
       frame.i32_const(1);
       frame.i32_store(2, 0);
-      frame.unwindTo(0, 0);
-      break block_label_0;
     }
   }
 
-  void as_if_else() {
+  void _func8() {
     final frame = Frame(this);
     frame.i32_const(0);
     if_label_0:
@@ -94,36 +134,6 @@ class Store0Module implements Module {
       frame.i32_const(1);
       frame.i32_store(2, 0);
     }
-  }
-
-  void as_if_then() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(0);
-      frame.i32_const(1);
-      frame.i32_store(2, 0);
-    }
-  }
-
-  void as_loop_value() {
-    final frame = Frame(this);
-
-    loop_label_0:
-    for (;;) {
-      frame.i32_const(0);
-      frame.i32_const(1);
-      frame.i32_store(2, 0);
-      break;
-    }
-  }
-
-  void as_return_value() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(1);
-    frame.i32_store(2, 0);
   }
 }
 

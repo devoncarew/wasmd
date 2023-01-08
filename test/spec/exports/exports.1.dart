@@ -15,11 +15,12 @@ class Exports1Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void a() {
+  void a() => _func0();
+  void b() => _func0();
+
+  void _func0() {
     final frame = Frame(this);
   }
-
-  void b() => a();
 }
 
 typedef FunctionType0 = void Function();

@@ -15,7 +15,12 @@ class Traps0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void no_dce_i32_div_s(i32 x, i32 y) {
+  void no_dce_i32_div_s(i32 arg0, i32 arg1) => _func0(arg0, arg1);
+  void no_dce_i32_div_u(i32 arg0, i32 arg1) => _func1(arg0, arg1);
+  void no_dce_i64_div_s(i64 arg0, i64 arg1) => _func2(arg0, arg1);
+  void no_dce_i64_div_u(i64 arg0, i64 arg1) => _func3(arg0, arg1);
+
+  void _func0(i32 x, i32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -23,7 +28,7 @@ class Traps0Module implements Module {
     frame.drop();
   }
 
-  void no_dce_i32_div_u(i32 x, i32 y) {
+  void _func1(i32 x, i32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -31,7 +36,7 @@ class Traps0Module implements Module {
     frame.drop();
   }
 
-  void no_dce_i64_div_s(i64 x, i64 y) {
+  void _func2(i64 x, i64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -39,7 +44,7 @@ class Traps0Module implements Module {
     frame.drop();
   }
 
-  void no_dce_i64_div_u(i64 x, i64 y) {
+  void _func3(i64 x, i64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);

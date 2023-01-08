@@ -17,13 +17,16 @@ class RefNull0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  ExternRef? externref() {
+  ExternRef? externref() => _func0();
+  FuncRef? funcref() => _func1();
+
+  ExternRef? _func0() {
     final frame = Frame(this);
     frame.ref_null(111);
     return frame.pop();
   }
 
-  FuncRef? funcref() {
+  FuncRef? _func1() {
     final frame = Frame(this);
     frame.ref_null(112);
     return frame.pop();

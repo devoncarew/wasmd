@@ -15,7 +15,9 @@ class FloatExprs49Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 calculate() {
+  f64 calculate() => _func0();
+
+  f64 _func0() {
     f64 x = 0;
     f64 r = 0;
     f64 q = 0;

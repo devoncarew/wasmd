@@ -17,7 +17,10 @@ class TableFill0Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  void fill(i32 i, ExternRef? r, i32 n) {
+  void fill(i32 arg0, ExternRef? arg1, i32 arg2) => _func0(arg0, arg1, arg2);
+  ExternRef? get(i32 arg0) => _func1(arg0);
+
+  void _func0(i32 i, ExternRef? r, i32 n) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(r);
@@ -25,7 +28,7 @@ class TableFill0Module implements Module {
     frame.table_fill(0);
   }
 
-  ExternRef? get(i32 i) {
+  ExternRef? _func1(i32 i) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(table0[frame.pop()]);

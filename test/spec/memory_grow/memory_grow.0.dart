@@ -15,45 +15,52 @@ class MemoryGrow0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 grow(i32 sz) {
-    final frame = Frame(this);
-    frame.push(sz);
-    frame.memory_grow(0);
-    return frame.pop();
-  }
+  i32 load_at_zero() => _func0();
+  void store_at_zero() => _func1();
+  i32 load_at_page_size() => _func2();
+  void store_at_page_size() => _func3();
+  i32 grow(i32 arg0) => _func4(arg0);
+  i32 size() => _func5();
 
-  i32 load_at_page_size() {
-    final frame = Frame(this);
-    frame.i32_const(0x10000);
-    frame.i32_load(2, 0);
-    return frame.pop();
-  }
-
-  i32 load_at_zero() {
+  i32 _func0() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_load(2, 0);
     return frame.pop();
   }
 
-  i32 size() {
+  void _func1() {
     final frame = Frame(this);
-    frame.memory_size(0);
+    frame.i32_const(0);
+    frame.i32_const(2);
+    frame.i32_store(2, 0);
+  }
+
+  i32 _func2() {
+    final frame = Frame(this);
+    frame.i32_const(0x10000);
+    frame.i32_load(2, 0);
     return frame.pop();
   }
 
-  void store_at_page_size() {
+  void _func3() {
     final frame = Frame(this);
     frame.i32_const(0x10000);
     frame.i32_const(3);
     frame.i32_store(2, 0);
   }
 
-  void store_at_zero() {
+  i32 _func4(i32 sz) {
     final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(2);
-    frame.i32_store(2, 0);
+    frame.push(sz);
+    frame.memory_grow(0);
+    return frame.pop();
+  }
+
+  i32 _func5() {
+    final frame = Frame(this);
+    frame.memory_size(0);
+    return frame.pop();
   }
 }
 

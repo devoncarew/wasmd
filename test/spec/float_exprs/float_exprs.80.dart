@@ -15,7 +15,10 @@ class FloatExprs80Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_compute_radix(f32 arg0, f32 arg1) {
+  f32 f32_compute_radix(f32 arg0, f32 arg1) => _func0(arg0, arg1);
+  f64 f64_compute_radix(f64 arg0, f64 arg1) => _func1(arg0, arg1);
+
+  f32 _func0(f32 arg0, f32 arg1) {
     final frame = Frame(this);
 
     loop_label_0:
@@ -61,7 +64,7 @@ class FloatExprs80Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_compute_radix(f64 arg0, f64 arg1) {
+  f64 _func1(f64 arg0, f64 arg1) {
     final frame = Frame(this);
 
     loop_label_0:

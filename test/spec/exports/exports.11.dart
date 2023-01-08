@@ -15,7 +15,9 @@ class FuncModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 e(i32 n) {
+  i32 e(i32 arg0) => _f(arg0);
+
+  i32 _f(i32 n) {
     final frame = Frame(this);
     frame.push(n);
     frame.i32_const(1);

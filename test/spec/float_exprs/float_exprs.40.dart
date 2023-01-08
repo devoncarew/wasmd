@@ -18,21 +18,18 @@ class FloatExprs40Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 check(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f32_load(2, 0);
-    return frame.pop();
-  }
+  void init(i32 arg0, f32 arg1) => _func0(arg0, arg1);
+  void run(i32 arg0, f32 arg1) => _func1(arg0, arg1);
+  f32 check(i32 arg0) => _func2(arg0);
 
-  void init(i32 i, f32 x) {
+  void _func0(i32 i, f32 x) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(x);
     frame.f32_store(2, 0);
   }
 
-  void run(i32 n, f32 z) {
+  void _func1(i32 n, f32 z) {
     i32 i = 0;
 
     final frame = Frame(this);
@@ -59,6 +56,13 @@ class FloatExprs40Module implements Module {
         break;
       }
     }
+  }
+
+  f32 _func2(i32 i) {
+    final frame = Frame(this);
+    frame.push(i);
+    frame.f32_load(2, 0);
+    return frame.pop();
   }
 }
 

@@ -15,14 +15,15 @@ class Exports14Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 a() {
+  i32 a() => _func0();
+  i32 b() => _func0();
+  i32 c() => _func0();
+
+  i32 _func0() {
     final frame = Frame(this);
     frame.i32_const(42);
     return frame.pop();
   }
-
-  i32 b() => a();
-  i32 c() => a();
 }
 
 typedef FunctionType0 = i32 Function();

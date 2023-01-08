@@ -15,7 +15,10 @@ class IntExprs18Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 i32_no_fold_div_neg1(i32 x) {
+  i32 i32_no_fold_div_neg1(i32 arg0) => _func0(arg0);
+  i64 i64_no_fold_div_neg1(i64 arg0) => _func1(arg0);
+
+  i32 _func0(i32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_const(-1);
@@ -23,7 +26,7 @@ class IntExprs18Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_no_fold_div_neg1(i64 x) {
+  i64 _func1(i64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_const(-1);

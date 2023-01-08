@@ -15,7 +15,12 @@ class IntExprs16Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 i32_rem_s_5(i32 x) {
+  i32 i32_rem_s_5(i32 arg0) => _func0(arg0);
+  i32 i32_rem_u_5(i32 arg0) => _func1(arg0);
+  i64 i64_rem_s_5(i64 arg0) => _func2(arg0);
+  i64 i64_rem_u_5(i64 arg0) => _func3(arg0);
+
+  i32 _func0(i32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_const(5);
@@ -23,7 +28,7 @@ class IntExprs16Module implements Module {
     return frame.pop();
   }
 
-  i32 i32_rem_u_5(i32 x) {
+  i32 _func1(i32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_const(5);
@@ -31,7 +36,7 @@ class IntExprs16Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_rem_s_5(i64 x) {
+  i64 _func2(i64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_const(5);
@@ -39,7 +44,7 @@ class IntExprs16Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_rem_u_5(i64 x) {
+  i64 _func3(i64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_const(5);

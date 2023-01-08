@@ -17,22 +17,19 @@ class TableGrow0Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  ExternRef? get(i32 i) {
+  ExternRef? get(i32 arg0) => _func0(arg0);
+  void set(i32 arg0, ExternRef? arg1) => _func1(arg0, arg1);
+  i32 grow(i32 arg0, ExternRef? arg1) => _func2(arg0, arg1);
+  i32 size() => _func3();
+
+  ExternRef? _func0(i32 i) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(table0[frame.pop()]);
     return frame.pop();
   }
 
-  i32 grow(i32 sz, ExternRef? init) {
-    final frame = Frame(this);
-    frame.push(init);
-    frame.push(sz);
-    frame.table_grow(0);
-    return frame.pop();
-  }
-
-  void set(i32 i, ExternRef? r) {
+  void _func1(i32 i, ExternRef? r) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(r);
@@ -42,7 +39,15 @@ class TableGrow0Module implements Module {
     }
   }
 
-  i32 size() {
+  i32 _func2(i32 sz, ExternRef? init) {
+    final frame = Frame(this);
+    frame.push(init);
+    frame.push(sz);
+    frame.table_grow(0);
+    return frame.pop();
+  }
+
+  i32 _func3() {
     final frame = Frame(this);
     frame.table_size(0);
     return frame.pop();

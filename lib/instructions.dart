@@ -305,7 +305,7 @@ class Instruction_GlobalGet extends Instruction {
 
     return refer('frame')
         .property('push')
-        .call([refer('globals').property(global.name)]).statement;
+        .call([refer(global.containerName).property(global.name)]).statement;
   }
 }
 
@@ -317,7 +317,7 @@ class Instruction_GlobalSet extends Instruction {
     var immediate = instr.args[0] as int;
     var global = function.module.globals.globals[immediate];
 
-    return refer('globals')
+    return refer(global.containerName)
         .property(global.name)
         .assign(refer('frame').property('pop').call([]))
         .statement;

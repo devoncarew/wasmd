@@ -15,7 +15,9 @@ class FacModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 fac(i32 arg0) {
+  i32 fac(i32 arg0) => _func0(arg0);
+
+  i32 _func0(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i32_const(0);
@@ -30,7 +32,7 @@ class FacModule implements Module {
       frame.i32_sub();
       {
         var t0 = frame.pop();
-        frame.push(fac(t0));
+        frame.push(_func0(t0));
       }
       frame.i32_mul();
     }

@@ -18,7 +18,22 @@ class MemoryCopy83Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 checkRange(i32 from, i32 to, i32 expected) {
+  void test() => _func0();
+  i32 checkRange(i32 arg0, i32 arg1, i32 arg2) => _func1(arg0, arg1, arg2);
+
+  void _func0() {
+    final frame = Frame(this);
+    frame.i32_const(10);
+    frame.i32_const(85);
+    frame.i32_const(10);
+    frame.memory_fill(0);
+    frame.i32_const(9);
+    frame.i32_const(10);
+    frame.i32_const(5);
+    frame.memory_copy(0, 0);
+  }
+
+  i32 _func1(i32 from, i32 to, i32 expected) {
     final frame = Frame(this);
 
     loop_label_0:
@@ -48,18 +63,6 @@ class MemoryCopy83Module implements Module {
     frame.push(from);
     return frame.pop();
     return frame.pop();
-  }
-
-  void test() {
-    final frame = Frame(this);
-    frame.i32_const(10);
-    frame.i32_const(85);
-    frame.i32_const(10);
-    frame.memory_fill(0);
-    frame.i32_const(9);
-    frame.i32_const(10);
-    frame.i32_const(5);
-    frame.memory_copy(0, 0);
   }
 }
 

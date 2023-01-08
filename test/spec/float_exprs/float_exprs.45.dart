@@ -15,43 +15,16 @@ class FloatExprs45Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_no_fold_ge_select_to_abs(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f32_neg();
-    frame.push(x);
-    frame.f32_const(0.0);
-    frame.f32_ge();
-    frame.select();
-    return frame.pop();
-  }
+  f32 f32_no_fold_lt_select_to_abs(f32 arg0) => _func0(arg0);
+  f32 f32_no_fold_le_select_to_abs(f32 arg0) => _func1(arg0);
+  f32 f32_no_fold_gt_select_to_abs(f32 arg0) => _func2(arg0);
+  f32 f32_no_fold_ge_select_to_abs(f32 arg0) => _func3(arg0);
+  f64 f64_no_fold_lt_select_to_abs(f64 arg0) => _func4(arg0);
+  f64 f64_no_fold_le_select_to_abs(f64 arg0) => _func5(arg0);
+  f64 f64_no_fold_gt_select_to_abs(f64 arg0) => _func6(arg0);
+  f64 f64_no_fold_ge_select_to_abs(f64 arg0) => _func7(arg0);
 
-  f32 f32_no_fold_gt_select_to_abs(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f32_neg();
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_gt();
-    frame.select();
-    return frame.pop();
-  }
-
-  f32 f32_no_fold_le_select_to_abs(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_neg();
-    frame.push(x);
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_le();
-    frame.select();
-    return frame.pop();
-  }
-
-  f32 f32_no_fold_lt_select_to_abs(f32 x) {
+  f32 _func0(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f32_neg();
@@ -63,31 +36,55 @@ class FloatExprs45Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_no_fold_ge_select_to_abs(f64 x) {
+  f32 _func1(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_neg();
+    frame.push(x);
+    frame.push(x);
+    frame.f32_const(-0.0);
+    frame.f32_le();
+    frame.select();
+    return frame.pop();
+  }
+
+  f32 _func2(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(x);
+    frame.f32_neg();
+    frame.push(x);
+    frame.f32_const(-0.0);
+    frame.f32_gt();
+    frame.select();
+    return frame.pop();
+  }
+
+  f32 _func3(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(x);
+    frame.f32_neg();
+    frame.push(x);
+    frame.f32_const(0.0);
+    frame.f32_ge();
+    frame.select();
+    return frame.pop();
+  }
+
+  f64 _func4(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
     frame.f64_neg();
+    frame.push(x);
     frame.push(x);
     frame.f64_const(0.0);
-    frame.f64_ge();
+    frame.f64_lt();
     frame.select();
     return frame.pop();
   }
 
-  f64 f64_no_fold_gt_select_to_abs(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f64_neg();
-    frame.push(x);
-    frame.f64_const(-0.0);
-    frame.f64_gt();
-    frame.select();
-    return frame.pop();
-  }
-
-  f64 f64_no_fold_le_select_to_abs(f64 x) {
+  f64 _func5(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f64_neg();
@@ -99,14 +96,26 @@ class FloatExprs45Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_no_fold_lt_select_to_abs(f64 x) {
+  f64 _func6(f64 x) {
     final frame = Frame(this);
+    frame.push(x);
     frame.push(x);
     frame.f64_neg();
     frame.push(x);
+    frame.f64_const(-0.0);
+    frame.f64_gt();
+    frame.select();
+    return frame.pop();
+  }
+
+  f64 _func7(f64 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(x);
+    frame.f64_neg();
     frame.push(x);
     frame.f64_const(0.0);
-    frame.f64_lt();
+    frame.f64_ge();
     frame.select();
     return frame.pop();
   }

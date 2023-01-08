@@ -15,7 +15,9 @@ class FloatExprs94Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 tau(i32 arg0) {
+  f64 tau(i32 arg0) => _func0(arg0);
+
+  f64 _func0(i32 arg0) {
     f64 local0 = 0;
     f64 local1 = 0;
     f64 local2 = 0;

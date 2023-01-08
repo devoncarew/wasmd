@@ -15,7 +15,9 @@ class FloatExprs38Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 no_demote_mixed_sub(f64 x, f32 y) {
+  f32 no_demote_mixed_sub(f64 arg0, f32 arg1) => _func0(arg0, arg1);
+
+  f32 _func0(f64 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);

@@ -24,14 +24,10 @@ class MemoryInit3Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 load8_u(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
-  }
+  void test() => _func0();
+  i32 load8_u(i32 arg0) => _func1(arg0);
 
-  void test() {
+  void _func0() {
     final frame = Frame(this);
     frame.i32_const(7);
     frame.i32_const(0);
@@ -73,6 +69,13 @@ class MemoryInit3Module implements Module {
     frame.i32_const(20);
     frame.i32_const(5);
     frame.memory_copy(0, 0);
+  }
+
+  i32 _func1(i32 arg0) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    frame.i32_load8_u(0, 0);
+    return frame.pop();
   }
 }
 

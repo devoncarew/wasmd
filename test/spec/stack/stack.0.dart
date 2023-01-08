@@ -17,7 +17,14 @@ class Stack0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i64 fac_expr(i64 n) {
+  i64 fac_expr(i64 arg0) => _func0(arg0);
+  i64 fac_stack(i64 arg0) => _func1(arg0);
+  i64 fac_stack_raw(i64 arg0) => _func2(arg0);
+  i64 fac_mixed(i64 arg0) => _func3(arg0);
+  i64 fac_mixed_raw(i64 arg0) => _func4(arg0);
+  i32 not_quite_a_tree() => _func7();
+
+  i64 _func0(i64 n) {
     i64 i = 0;
     i64 res = 0;
 
@@ -56,7 +63,7 @@ class Stack0Module implements Module {
     return frame.pop();
   }
 
-  i64 fac_mixed(i64 n) {
+  i64 _func1(i64 n) {
     i64 i = 0;
     i64 res = 0;
 
@@ -95,7 +102,7 @@ class Stack0Module implements Module {
     return frame.pop();
   }
 
-  i64 fac_mixed_raw(i64 n) {
+  i64 _func2(i64 n) {
     i64 i = 0;
     i64 res = 0;
 
@@ -134,7 +141,7 @@ class Stack0Module implements Module {
     return frame.pop();
   }
 
-  i64 fac_stack(i64 n) {
+  i64 _func3(i64 n) {
     i64 i = 0;
     i64 res = 0;
 
@@ -173,7 +180,7 @@ class Stack0Module implements Module {
     return frame.pop();
   }
 
-  i64 fac_stack_raw(i64 n) {
+  i64 _func4(i64 n) {
     i64 i = 0;
     i64 res = 0;
 
@@ -212,16 +219,7 @@ class Stack0Module implements Module {
     return frame.pop();
   }
 
-  i32 not_quite_a_tree() {
-    final frame = Frame(this);
-    frame.push(_func5());
-    frame.push(_func5());
-    _func6();
-    frame.i32_add();
-    return frame.pop();
-  }
-
-  i32 _func5() {
+  i32 _add_one_to_global() {
     i32 local0 = 0;
 
     final frame = Frame(this);
@@ -233,10 +231,19 @@ class Stack0Module implements Module {
     return frame.pop();
   }
 
-  void _func6() {
+  void _add_one_to_global_and_drop() {
     final frame = Frame(this);
-    frame.push(_func5());
+    frame.push(_add_one_to_global());
     frame.drop();
+  }
+
+  i32 _func7() {
+    final frame = Frame(this);
+    frame.push(_add_one_to_global());
+    frame.push(_add_one_to_global());
+    _add_one_to_global_and_drop();
+    frame.i32_add();
+    return frame.pop();
   }
 }
 

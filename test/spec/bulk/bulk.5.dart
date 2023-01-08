@@ -21,30 +21,17 @@ class Bulk5Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void drop_active() {
-    final frame = Frame(this);
-    frame.data_drop(1);
-  }
+  void drop_passive() => _func0();
+  void init_passive(i32 arg0) => _func1(arg0);
+  void drop_active() => _func2();
+  void init_active(i32 arg0) => _func3(arg0);
 
-  void drop_passive() {
+  void _func0() {
     final frame = Frame(this);
     frame.data_drop(0);
   }
 
-  void init_active(i32 len) {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(0);
-    frame.push(len);
-    {
-      i32 count = frame.pop() as i32;
-      i32 srcOffset = frame.pop() as i32;
-      i32 dstOffset = frame.pop() as i32;
-      memory.copyFrom(_data.a, srcOffset, dstOffset, count);
-    }
-  }
-
-  void init_passive(i32 len) {
+  void _func1(i32 len) {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(0);
@@ -54,6 +41,24 @@ class Bulk5Module implements Module {
       i32 srcOffset = frame.pop() as i32;
       i32 dstOffset = frame.pop() as i32;
       memory.copyFrom(_data.p, srcOffset, dstOffset, count);
+    }
+  }
+
+  void _func2() {
+    final frame = Frame(this);
+    frame.data_drop(1);
+  }
+
+  void _func3(i32 len) {
+    final frame = Frame(this);
+    frame.i32_const(0);
+    frame.i32_const(0);
+    frame.push(len);
+    {
+      i32 count = frame.pop() as i32;
+      i32 srcOffset = frame.pop() as i32;
+      i32 dstOffset = frame.pop() as i32;
+      memory.copyFrom(_data.a, srcOffset, dstOffset, count);
     }
   }
 }

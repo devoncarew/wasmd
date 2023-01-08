@@ -15,7 +15,10 @@ class FloatExprs77Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 f32_no_extended_precision_div(f32 x, f32 y, f32 z) {
+  i32 f32_no_extended_precision_div(f32 arg0, f32 arg1, f32 arg2) => _func0(arg0, arg1, arg2);
+  i32 f64_no_extended_precision_div(f64 arg0, f64 arg1, f64 arg2) => _func1(arg0, arg1, arg2);
+
+  i32 _func0(f32 x, f32 y, f32 z) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -25,7 +28,7 @@ class FloatExprs77Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_no_extended_precision_div(f64 x, f64 y, f64 z) {
+  i32 _func1(f64 x, f64 y, f64 z) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);

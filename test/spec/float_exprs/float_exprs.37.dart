@@ -15,7 +15,10 @@ class FloatExprs37Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 no_demote_mixed_add(f64 x, f32 y) {
+  f32 no_demote_mixed_add(f64 arg0, f32 arg1) => _func0(arg0, arg1);
+  f32 no_demote_mixed_add_commuted(f32 arg0, f64 arg1) => _func1(arg0, arg1);
+
+  f32 _func0(f64 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -25,7 +28,7 @@ class FloatExprs37Module implements Module {
     return frame.pop();
   }
 
-  f32 no_demote_mixed_add_commuted(f32 y, f64 x) {
+  f32 _func1(f32 y, f64 x) {
     final frame = Frame(this);
     frame.push(y);
     frame.f64_promote_f32();

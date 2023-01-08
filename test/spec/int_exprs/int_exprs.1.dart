@@ -15,7 +15,9 @@ class IntExprs1Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i64 i64_no_fold_wrap_extend_s(i64 x) {
+  i64 i64_no_fold_wrap_extend_s(i64 arg0) => _func0(arg0);
+
+  i64 _func0(i64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_wrap_i64();

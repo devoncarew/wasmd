@@ -15,165 +15,12 @@ class Switch0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 arg(i32 i) {
-    final frame = Frame(this);
-    block_label_0:
-    {
-      frame.i32_const(10);
-      block_label_1:
-      {
-        frame.i32_const(100);
-        block_label_2:
-        {
-          frame.i32_const(1000);
-          block_label_3:
-          {
-            frame.i32_const(2);
-            frame.push(i);
-            frame.i32_mul();
-            frame.i32_const(3);
-            frame.push(i);
-            frame.i32_and();
-            var t0 = frame.pop();
-            switch (t0) {
-              case 0:
-                frame.unwindTo(2, 1);
-                break block_label_2;
+  i32 stmt(i32 arg0) => _func0(arg0);
+  i64 expr(i64 arg0) => _func1(arg0);
+  i32 arg(i32 arg0) => _func2(arg0);
+  i32 corner() => _func3();
 
-              case 1:
-                frame.unwindTo(1, 1);
-                break block_label_1;
-
-              case 2:
-                frame.unwindTo(0, 1);
-                break block_label_0;
-
-              default:
-                frame.unwindTo(3, 1);
-                break block_label_3;
-            }
-          }
-          frame.i32_add();
-        }
-        frame.i32_add();
-      }
-      frame.i32_add();
-    }
-    return frame.pop();
-    return frame.pop();
-  }
-
-  i32 corner() {
-    final frame = Frame(this);
-    block_label_0:
-    {
-      frame.i32_const(0);
-      var t0 = frame.pop();
-      switch (t0) {
-        default:
-          frame.unwindTo(0, 0);
-          break block_label_0;
-      }
-    }
-    frame.i32_const(1);
-    return frame.pop();
-  }
-
-  i64 expr(i64 i) {
-    i64 j = 0;
-
-    final frame = Frame(this);
-    frame.i64_const(100);
-    j = frame.pop();
-    block_label_0:
-    {
-      block_label_1:
-      {
-        block_label_2:
-        {
-          block_label_3:
-          {
-            block_label_4:
-            {
-              block_label_5:
-              {
-                block_label_6:
-                {
-                  block_label_7:
-                  {
-                    block_label_8:
-                    {
-                      block_label_9:
-                      {
-                        frame.push(i);
-                        frame.i32_wrap_i64();
-                        var t0 = frame.pop();
-                        switch (t0) {
-                          case 0:
-                            frame.unwindTo(0, 0);
-                            break block_label_9;
-
-                          case 1:
-                            frame.unwindTo(0, 0);
-                            break block_label_8;
-
-                          case 2:
-                            frame.unwindTo(0, 0);
-                            break block_label_7;
-
-                          case 3:
-                            frame.unwindTo(0, 0);
-                            break block_label_6;
-
-                          case 4:
-                            frame.unwindTo(0, 0);
-                            break block_label_3;
-
-                          case 5:
-                            frame.unwindTo(0, 0);
-                            break block_label_4;
-
-                          case 6:
-                            frame.unwindTo(0, 0);
-                            break block_label_5;
-
-                          case 7:
-                            frame.unwindTo(0, 0);
-                            break block_label_1;
-
-                          default:
-                            frame.unwindTo(0, 0);
-                            break block_label_2;
-                        }
-                      }
-                      frame.push(i);
-                      return frame.pop();
-                    }
-                    /* nop */
-                  }
-                }
-                frame.i64_const(0);
-                frame.push(i);
-                frame.i64_sub();
-                frame.unwindTo(0, 1);
-                break block_label_0;
-              }
-              frame.i64_const(101);
-              j = frame.pop();
-            }
-          }
-        }
-        frame.push(j);
-        frame.unwindTo(0, 1);
-        break block_label_0;
-      }
-      frame.i64_const(-5);
-    }
-    return frame.pop();
-    return frame.pop();
-  }
-
-  i32 stmt(i32 i) {
+  i32 _func0(i32 i) {
     i32 j = 0;
 
     final frame = Frame(this);
@@ -269,6 +116,164 @@ class Switch0Module implements Module {
     }
     frame.push(j);
     return frame.pop();
+    return frame.pop();
+  }
+
+  i64 _func1(i64 i) {
+    i64 j = 0;
+
+    final frame = Frame(this);
+    frame.i64_const(100);
+    j = frame.pop();
+    block_label_0:
+    {
+      block_label_1:
+      {
+        block_label_2:
+        {
+          block_label_3:
+          {
+            block_label_4:
+            {
+              block_label_5:
+              {
+                block_label_6:
+                {
+                  block_label_7:
+                  {
+                    block_label_8:
+                    {
+                      block_label_9:
+                      {
+                        frame.push(i);
+                        frame.i32_wrap_i64();
+                        var t0 = frame.pop();
+                        switch (t0) {
+                          case 0:
+                            frame.unwindTo(0, 0);
+                            break block_label_9;
+
+                          case 1:
+                            frame.unwindTo(0, 0);
+                            break block_label_8;
+
+                          case 2:
+                            frame.unwindTo(0, 0);
+                            break block_label_7;
+
+                          case 3:
+                            frame.unwindTo(0, 0);
+                            break block_label_6;
+
+                          case 4:
+                            frame.unwindTo(0, 0);
+                            break block_label_3;
+
+                          case 5:
+                            frame.unwindTo(0, 0);
+                            break block_label_4;
+
+                          case 6:
+                            frame.unwindTo(0, 0);
+                            break block_label_5;
+
+                          case 7:
+                            frame.unwindTo(0, 0);
+                            break block_label_1;
+
+                          default:
+                            frame.unwindTo(0, 0);
+                            break block_label_2;
+                        }
+                      }
+                      frame.push(i);
+                      return frame.pop();
+                    }
+                    /* nop */
+                  }
+                }
+                frame.i64_const(0);
+                frame.push(i);
+                frame.i64_sub();
+                frame.unwindTo(0, 1);
+                break block_label_0;
+              }
+              frame.i64_const(101);
+              j = frame.pop();
+            }
+          }
+        }
+        frame.push(j);
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
+      frame.i64_const(-5);
+    }
+    return frame.pop();
+    return frame.pop();
+  }
+
+  i32 _func2(i32 i) {
+    final frame = Frame(this);
+    block_label_0:
+    {
+      frame.i32_const(10);
+      block_label_1:
+      {
+        frame.i32_const(100);
+        block_label_2:
+        {
+          frame.i32_const(1000);
+          block_label_3:
+          {
+            frame.i32_const(2);
+            frame.push(i);
+            frame.i32_mul();
+            frame.i32_const(3);
+            frame.push(i);
+            frame.i32_and();
+            var t0 = frame.pop();
+            switch (t0) {
+              case 0:
+                frame.unwindTo(2, 1);
+                break block_label_2;
+
+              case 1:
+                frame.unwindTo(1, 1);
+                break block_label_1;
+
+              case 2:
+                frame.unwindTo(0, 1);
+                break block_label_0;
+
+              default:
+                frame.unwindTo(3, 1);
+                break block_label_3;
+            }
+          }
+          frame.i32_add();
+        }
+        frame.i32_add();
+      }
+      frame.i32_add();
+    }
+    return frame.pop();
+    return frame.pop();
+  }
+
+  i32 _func3() {
+    final frame = Frame(this);
+    block_label_0:
+    {
+      frame.i32_const(0);
+      var t0 = frame.pop();
+      switch (t0) {
+        default:
+          frame.unwindTo(0, 0);
+          break block_label_0;
+      }
+    }
+    frame.i32_const(1);
     return frame.pop();
   }
 }

@@ -9,7 +9,7 @@ import 'package:wasmd/runtime.dart';
 class ElementSegmentsModule implements Module {
   ElementSegmentsModule() {
     segments.init();
-    _func6();
+    _init();
   }
 
   @override
@@ -24,7 +24,29 @@ class ElementSegmentsModule implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 callByIndex(i32 i) {
+  i32 callByIndex(i32 arg0) => _func3(arg0);
+  FuncRef? table_get(i32 arg0) => _func4(arg0);
+  void table_set(i32 arg0, FuncRef? arg1) => _func5(arg0, arg1);
+
+  i32 _f1() {
+    final frame = Frame(this);
+    frame.i32_const(6);
+    return frame.pop();
+  }
+
+  i32 _f2() {
+    final frame = Frame(this);
+    frame.i32_const(7);
+    return frame.pop();
+  }
+
+  i32 _f3() {
+    final frame = Frame(this);
+    frame.i32_const(42);
+    return frame.pop();
+  }
+
+  i32 _func3(i32 i) {
     final frame = Frame(this);
     frame.push(i);
     {
@@ -35,14 +57,14 @@ class ElementSegmentsModule implements Module {
     return frame.pop();
   }
 
-  FuncRef? table_get(i32 i) {
+  FuncRef? _func4(i32 i) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(table0[frame.pop()]);
     return frame.pop();
   }
 
-  void table_set(i32 i, FuncRef? ref) {
+  void _func5(i32 i, FuncRef? ref) {
     final frame = Frame(this);
     frame.push(i);
     frame.push(ref);
@@ -52,25 +74,7 @@ class ElementSegmentsModule implements Module {
     }
   }
 
-  i32 _func0() {
-    final frame = Frame(this);
-    frame.i32_const(6);
-    return frame.pop();
-  }
-
-  i32 _func1() {
-    final frame = Frame(this);
-    frame.i32_const(7);
-    return frame.pop();
-  }
-
-  i32 _func2() {
-    final frame = Frame(this);
-    frame.i32_const(42);
-    return frame.pop();
-  }
-
-  void _func6() {
+  void _init() {
     final frame = Frame(this);
     frame.i32_const(3);
     frame.i32_const(0);
@@ -84,7 +88,7 @@ class ElementSegmentsModule implements Module {
   }
 
   List<Function> _initFunctionTable() {
-    return [_func0, _func1, _func2, callByIndex, table_get, table_set, _func6];
+    return [_f1, _f2, _f3, _func3, _func4, _func5, _init];
   }
 }
 

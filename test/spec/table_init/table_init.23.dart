@@ -34,18 +34,7 @@ class TableInit23Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  void test() {
-    final frame = Frame(this);
-    frame.i32_const(30);
-    frame.i32_const(4);
-    frame.i32_const(0);
-    {
-      i32 count = frame.pop() as i32;
-      i32 sourceOffset = frame.pop() as i32;
-      i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment1);
-    }
-  }
+  void test() => _func10();
 
   i32 _func00() {
     final frame = Frame(this);
@@ -107,8 +96,33 @@ class TableInit23Module implements Module {
     return frame.pop();
   }
 
+  void _func10() {
+    final frame = Frame(this);
+    frame.i32_const(30);
+    frame.i32_const(4);
+    frame.i32_const(0);
+    {
+      i32 count = frame.pop() as i32;
+      i32 sourceOffset = frame.pop() as i32;
+      i32 destOffset = frame.pop() as i32;
+      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment1);
+    }
+  }
+
   List<Function> _initFunctionTable() {
-    return [_func00, _func01, _func02, _func03, _func04, _func05, _func06, _func07, _func08, _func09, test];
+    return [
+      _func00,
+      _func01,
+      _func02,
+      _func03,
+      _func04,
+      _func05,
+      _func06,
+      _func07,
+      _func08,
+      _func09,
+      _func10
+    ];
   }
 }
 

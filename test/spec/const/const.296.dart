@@ -15,7 +15,9 @@ class Const296Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f() {
+  f32 f() => _func0();
+
+  f32 _func0() {
     final frame = Frame(this);
     frame.f32_const(1.401298464324817e-45);
     return frame.pop();

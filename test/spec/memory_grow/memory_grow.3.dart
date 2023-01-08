@@ -15,7 +15,17 @@ class MemoryGrow3Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 check_memory_zero(i32 arg0, i32 arg1) {
+  i32 grow(i32 arg0) => _func0(arg0);
+  i32 check_memory_zero(i32 arg0, i32 arg1) => _func1(arg0, arg1);
+
+  i32 _func0(i32 arg0) {
+    final frame = Frame(this);
+    frame.push(arg0);
+    frame.memory_grow(0);
+    return frame.pop();
+  }
+
+  i32 _func1(i32 arg0, i32 arg1) {
     i32 local0 = 0;
 
     final frame = Frame(this);
@@ -56,13 +66,6 @@ class MemoryGrow3Module implements Module {
       }
     }
     frame.push(local0);
-    return frame.pop();
-  }
-
-  i32 grow(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.memory_grow(0);
     return frame.pop();
   }
 }

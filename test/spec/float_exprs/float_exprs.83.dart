@@ -15,34 +15,16 @@ class FloatExprs83Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 f32_not_ge(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_ge();
-    frame.i32_eqz();
-    return frame.pop();
-  }
+  i32 f32_not_lt(f32 arg0, f32 arg1) => _func0(arg0, arg1);
+  i32 f32_not_le(f32 arg0, f32 arg1) => _func1(arg0, arg1);
+  i32 f32_not_gt(f32 arg0, f32 arg1) => _func2(arg0, arg1);
+  i32 f32_not_ge(f32 arg0, f32 arg1) => _func3(arg0, arg1);
+  i32 f64_not_lt(f64 arg0, f64 arg1) => _func4(arg0, arg1);
+  i32 f64_not_le(f64 arg0, f64 arg1) => _func5(arg0, arg1);
+  i32 f64_not_gt(f64 arg0, f64 arg1) => _func6(arg0, arg1);
+  i32 f64_not_ge(f64 arg0, f64 arg1) => _func7(arg0, arg1);
 
-  i32 f32_not_gt(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_gt();
-    frame.i32_eqz();
-    return frame.pop();
-  }
-
-  i32 f32_not_le(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_le();
-    frame.i32_eqz();
-    return frame.pop();
-  }
-
-  i32 f32_not_lt(f32 x, f32 y) {
+  i32 _func0(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -51,25 +33,43 @@ class FloatExprs83Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_not_ge(f64 x, f64 y) {
+  i32 _func1(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f64_ge();
+    frame.f32_le();
     frame.i32_eqz();
     return frame.pop();
   }
 
-  i32 f64_not_gt(f64 x, f64 y) {
+  i32 _func2(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f64_gt();
+    frame.f32_gt();
     frame.i32_eqz();
     return frame.pop();
   }
 
-  i32 f64_not_le(f64 x, f64 y) {
+  i32 _func3(f32 x, f32 y) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(y);
+    frame.f32_ge();
+    frame.i32_eqz();
+    return frame.pop();
+  }
+
+  i32 _func4(f64 x, f64 y) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(y);
+    frame.f64_lt();
+    frame.i32_eqz();
+    return frame.pop();
+  }
+
+  i32 _func5(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -78,11 +78,20 @@ class FloatExprs83Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_not_lt(f64 x, f64 y) {
+  i32 _func6(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
-    frame.f64_lt();
+    frame.f64_gt();
+    frame.i32_eqz();
+    return frame.pop();
+  }
+
+  i32 _func7(f64 x, f64 y) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(y);
+    frame.f64_ge();
     frame.i32_eqz();
     return frame.pop();
   }

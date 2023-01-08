@@ -26,111 +26,122 @@ class TableCopy51Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 f0() {
+  i32 f0() => _f0();
+  i32 f1() => _f1();
+  i32 f2() => _f2();
+  i32 f3() => _f3();
+  i32 f4() => _f4();
+  i32 f5() => _f5();
+  i32 f6() => _f6();
+  i32 f7() => _f7();
+  i32 f8() => _f8();
+  i32 f9() => _f9();
+  i32 f10() => _f10();
+  i32 f11() => _f11();
+  i32 f12() => _f12();
+  i32 f13() => _f13();
+  i32 f14() => _f14();
+  i32 f15() => _f15();
+  i32 test(i32 arg0) => _func16(arg0);
+  void run(i32 arg0, i32 arg1, i32 arg2) => _func17(arg0, arg1, arg2);
+
+  i32 _f0() {
     final frame = Frame(this);
     frame.i32_const(0);
     return frame.pop();
   }
 
-  i32 f1() {
+  i32 _f1() {
     final frame = Frame(this);
     frame.i32_const(1);
     return frame.pop();
   }
 
-  i32 f10() {
-    final frame = Frame(this);
-    frame.i32_const(10);
-    return frame.pop();
-  }
-
-  i32 f11() {
-    final frame = Frame(this);
-    frame.i32_const(11);
-    return frame.pop();
-  }
-
-  i32 f12() {
-    final frame = Frame(this);
-    frame.i32_const(12);
-    return frame.pop();
-  }
-
-  i32 f13() {
-    final frame = Frame(this);
-    frame.i32_const(13);
-    return frame.pop();
-  }
-
-  i32 f14() {
-    final frame = Frame(this);
-    frame.i32_const(14);
-    return frame.pop();
-  }
-
-  i32 f15() {
-    final frame = Frame(this);
-    frame.i32_const(15);
-    return frame.pop();
-  }
-
-  i32 f2() {
+  i32 _f2() {
     final frame = Frame(this);
     frame.i32_const(2);
     return frame.pop();
   }
 
-  i32 f3() {
+  i32 _f3() {
     final frame = Frame(this);
     frame.i32_const(3);
     return frame.pop();
   }
 
-  i32 f4() {
+  i32 _f4() {
     final frame = Frame(this);
     frame.i32_const(4);
     return frame.pop();
   }
 
-  i32 f5() {
+  i32 _f5() {
     final frame = Frame(this);
     frame.i32_const(5);
     return frame.pop();
   }
 
-  i32 f6() {
+  i32 _f6() {
     final frame = Frame(this);
     frame.i32_const(6);
     return frame.pop();
   }
 
-  i32 f7() {
+  i32 _f7() {
     final frame = Frame(this);
     frame.i32_const(7);
     return frame.pop();
   }
 
-  i32 f8() {
+  i32 _f8() {
     final frame = Frame(this);
     frame.i32_const(8);
     return frame.pop();
   }
 
-  i32 f9() {
+  i32 _f9() {
     final frame = Frame(this);
     frame.i32_const(9);
     return frame.pop();
   }
 
-  void run(i32 targetOffs, i32 srcOffs, i32 len) {
+  i32 _f10() {
     final frame = Frame(this);
-    frame.push(targetOffs);
-    frame.push(srcOffs);
-    frame.push(len);
-    frame.table_copy(0, 0);
+    frame.i32_const(10);
+    return frame.pop();
   }
 
-  i32 test(i32 n) {
+  i32 _f11() {
+    final frame = Frame(this);
+    frame.i32_const(11);
+    return frame.pop();
+  }
+
+  i32 _f12() {
+    final frame = Frame(this);
+    frame.i32_const(12);
+    return frame.pop();
+  }
+
+  i32 _f13() {
+    final frame = Frame(this);
+    frame.i32_const(13);
+    return frame.pop();
+  }
+
+  i32 _f14() {
+    final frame = Frame(this);
+    frame.i32_const(14);
+    return frame.pop();
+  }
+
+  i32 _f15() {
+    final frame = Frame(this);
+    frame.i32_const(15);
+    return frame.pop();
+  }
+
+  i32 _func16(i32 n) {
     final frame = Frame(this);
     frame.push(n);
     {
@@ -141,8 +152,35 @@ class TableCopy51Module implements Module {
     return frame.pop();
   }
 
+  void _func17(i32 targetOffs, i32 srcOffs, i32 len) {
+    final frame = Frame(this);
+    frame.push(targetOffs);
+    frame.push(srcOffs);
+    frame.push(len);
+    frame.table_copy(0, 0);
+  }
+
   List<Function> _initFunctionTable() {
-    return [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, test, run];
+    return [
+      _f0,
+      _f1,
+      _f2,
+      _f3,
+      _f4,
+      _f5,
+      _f6,
+      _f7,
+      _f8,
+      _f9,
+      _f10,
+      _f11,
+      _f12,
+      _f13,
+      _f14,
+      _f15,
+      _func16,
+      _func17
+    ];
   }
 }
 

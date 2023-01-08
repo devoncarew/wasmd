@@ -15,17 +15,20 @@ class MemorySize0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void grow(i32 sz) {
+  i32 size() => _func0();
+  void grow(i32 arg0) => _func1(arg0);
+
+  i32 _func0() {
+    final frame = Frame(this);
+    frame.memory_size(0);
+    return frame.pop();
+  }
+
+  void _func1(i32 sz) {
     final frame = Frame(this);
     frame.push(sz);
     frame.memory_grow(0);
     frame.drop();
-  }
-
-  i32 size() {
-    final frame = Frame(this);
-    frame.memory_size(0);
-    return frame.pop();
   }
 }
 

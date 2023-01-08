@@ -15,7 +15,13 @@ class FloatExprs88Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 dot_product_example(f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
+  f64 dot_product_example(f64 arg0, f64 arg1, f64 arg2, f64 arg3, f64 arg4, f64 arg5, f64 arg6, f64 arg7) =>
+      _func0(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+  f64 with_binary_sum_collapse(
+          f64 arg0, f64 arg1, f64 arg2, f64 arg3, f64 arg4, f64 arg5, f64 arg6, f64 arg7) =>
+      _func1(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+
+  f64 _func0(f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
     final frame = Frame(this);
     frame.push(x0);
     frame.push(y0);
@@ -35,7 +41,7 @@ class FloatExprs88Module implements Module {
     return frame.pop();
   }
 
-  f64 with_binary_sum_collapse(f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
+  f64 _func1(f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
     final frame = Frame(this);
     frame.push(x0);
     frame.push(y0);

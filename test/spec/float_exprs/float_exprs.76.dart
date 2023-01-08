@@ -15,7 +15,15 @@ class FloatExprs76Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 f32_recoding_eq(f32 x, f32 y) {
+  i32 f32_recoding_eq(f32 arg0, f32 arg1) => _func0(arg0, arg1);
+  i32 f32_recoding_le(f32 arg0, f32 arg1) => _func1(arg0, arg1);
+  i32 f32_recoding_lt(f32 arg0, f32 arg1) => _func2(arg0, arg1);
+  i32 f64_recoding_eq(f64 arg0, f64 arg1) => _func3(arg0, arg1);
+  i32 f64_recoding_le(f64 arg0, f64 arg1) => _func4(arg0, arg1);
+  i32 f64_recoding_lt(f64 arg0, f64 arg1) => _func5(arg0, arg1);
+  f32 recoding_demote(f64 arg0, f32 arg1) => _func6(arg0, arg1);
+
+  i32 _func0(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -25,7 +33,7 @@ class FloatExprs76Module implements Module {
     return frame.pop();
   }
 
-  i32 f32_recoding_le(f32 x, f32 y) {
+  i32 _func1(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -35,7 +43,7 @@ class FloatExprs76Module implements Module {
     return frame.pop();
   }
 
-  i32 f32_recoding_lt(f32 x, f32 y) {
+  i32 _func2(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -45,7 +53,7 @@ class FloatExprs76Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_recoding_eq(f64 x, f64 y) {
+  i32 _func3(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -55,7 +63,7 @@ class FloatExprs76Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_recoding_le(f64 x, f64 y) {
+  i32 _func4(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -65,7 +73,7 @@ class FloatExprs76Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_recoding_lt(f64 x, f64 y) {
+  i32 _func5(f64 x, f64 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
@@ -75,7 +83,7 @@ class FloatExprs76Module implements Module {
     return frame.pop();
   }
 
-  f32 recoding_demote(f64 x, f32 y) {
+  f32 _func6(f64 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.f32_demote_f64();

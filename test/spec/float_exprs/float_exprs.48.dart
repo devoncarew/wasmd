@@ -15,7 +15,9 @@ class FloatExprs48Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 calculate() {
+  f32 calculate() => _func0();
+
+  f32 _func0() {
     f32 x = 0;
     f32 r = 0;
     f32 q = 0;

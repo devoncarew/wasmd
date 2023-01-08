@@ -19,7 +19,7 @@ class PrintModule implements Module {
     required this.memory,
   }) {
     _data.init(memory);
-    writeHi();
+    _writeHi();
   }
 
   final ConsoleImports consoleImports;
@@ -33,7 +33,9 @@ class PrintModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  void writeHi() {
+  void writeHi() => _writeHi();
+
+  void _writeHi() {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.i32_const(16);

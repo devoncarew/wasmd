@@ -34,13 +34,7 @@ class TableCopy21Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  void test() {
-    final frame = Frame(this);
-    frame.i32_const(15);
-    frame.i32_const(25);
-    frame.i32_const(6);
-    frame.table_copy(0, 0);
-  }
+  void test() => _func10();
 
   i32 _func00() {
     final frame = Frame(this);
@@ -102,8 +96,28 @@ class TableCopy21Module implements Module {
     return frame.pop();
   }
 
+  void _func10() {
+    final frame = Frame(this);
+    frame.i32_const(15);
+    frame.i32_const(25);
+    frame.i32_const(6);
+    frame.table_copy(0, 0);
+  }
+
   List<Function> _initFunctionTable() {
-    return [_func00, _func01, _func02, _func03, _func04, _func05, _func06, _func07, _func08, _func09, test];
+    return [
+      _func00,
+      _func01,
+      _func02,
+      _func03,
+      _func04,
+      _func05,
+      _func06,
+      _func07,
+      _func08,
+      _func09,
+      _func10
+    ];
   }
 }
 

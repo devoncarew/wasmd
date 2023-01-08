@@ -15,25 +15,29 @@ class F32Bitwise0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 abs(f32 x) {
+  f32 abs(f32 arg0) => _func0(arg0);
+  f32 neg(f32 arg0) => _func1(arg0);
+  f32 copysign(f32 arg0, f32 arg1) => _func2(arg0, arg1);
+
+  f32 _func0(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.f32_abs();
     return frame.pop();
   }
 
-  f32 copysign(f32 x, f32 y) {
+  f32 _func1(f32 x) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.f32_neg();
+    return frame.pop();
+  }
+
+  f32 _func2(f32 x, f32 y) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(y);
     frame.f32_copysign();
-    return frame.pop();
-  }
-
-  f32 neg(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_neg();
     return frame.pop();
   }
 }

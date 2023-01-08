@@ -15,7 +15,10 @@ class FloatExprs92Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f32 f32_silver_means(f32 n) {
+  f32 f32_silver_means(f32 arg0) => _func0(arg0);
+  f64 f64_silver_means(f64 arg0) => _func1(arg0);
+
+  f32 _func0(f32 n) {
     final frame = Frame(this);
     frame.f32_const(0.5);
     frame.push(n);
@@ -30,7 +33,7 @@ class FloatExprs92Module implements Module {
     return frame.pop();
   }
 
-  f64 f64_silver_means(f64 n) {
+  f64 _func1(f64 n) {
     final frame = Frame(this);
     frame.f64_const(0.5);
     frame.push(n);

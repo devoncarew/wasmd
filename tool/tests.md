@@ -2,54 +2,35 @@
 | ---                         | --- |
 | address.wast                | -   |
 | align.wast                  | -   |
-| binary-leb128.wast          | RangeError from Reader.leb128_u |
-| binary.wast                 | (no tests) |
-| block.wast                  | multiple return values not currently supported |
-| br.wast                     | multiple return values not currently supported |
 | br_if.wast                  | -   |
-| br_table.wast               | large switch statement |
 | bulk.wast                   | -   |
-| call.wast                   | multiple return values not currently supported |
-| call_indirect.wast          | multiple return values not currently supported |
 | comments.wast               | -   |
 | const.wast                  | -   |
 | conversions.wast            | -   |
-| custom.wast                 | (no tests) |
-| data.wast                   | unimplemented import global |
-| elem.wast                   | unimplemented import table |
 | endianness.wast             | -   |
 | exports.wast                | -   |
-| f32.wast                    | -   |
 | f32_bitwise.wast            | -   |
 | f32_cmp.wast                | -   |
-| f64.wast                    | -   |
+| f32.wast                    | -   |
 | f64_bitwise.wast            | -   |
 | f64_cmp.wast                | -   |
-| fac.wast                    | multiple return values not currently supported |
+| f64.wast                    | -   |
 | float_exprs.wast            | -   |
 | float_literals.wast         | -   |
 | float_memory.wast           | -   |
 | float_misc.wast             | -   |
 | forward.wast                | -   |
-| func.wast                   | multiple return values not currently supported |
 | func_ptrs.wast              | -   |
-| global.wast                 | unimplemented import global |
 | i32.wast                    | -   |
 | i64.wast                    | -   |
-| if.wast                     | multiple return values not currently supported |
-| imports.wast                | unimplemented import global |
-| inline-module.wast          | (no tests) |
 | int_exprs.wast              | -   |
 | int_literals.wast           | -   |
 | labels.wast                 | -   |
 | left-to-right.wast          | -   |
-| linking.wast                | unimplemented import global |
 | load.wast                   | -   |
 | local_get.wast              | -   |
 | local_set.wast              | -   |
 | local_tee.wast              | -   |
-| loop.wast                   | multiple return values not currently supported |
-| memory.wast                 | -   |
 | memory_copy.wast            | -   |
 | memory_fill.wast            | -   |
 | memory_grow.wast            | -   |
@@ -57,20 +38,15 @@
 | memory_redundancy.wast      | -   |
 | memory_size.wast            | -   |
 | memory_trap.wast            | -   |
-| names.wast                  | generated file is causing the analyzer to crash |
+| memory.wast                 | -   |
 | nop.wast                    | -   |
-| ref_func.wast               | needs additional work on globals generation |
 | ref_is_null.wast            | -   |
 | ref_null.wast               | -   |
 | return.wast                 | -   |
-| select.wast                 | wast2json failed; unexpected token "result" |
-| skip-stack-guard-page.wast  | (no tests) |
 | stack.wast                  | -   |
 | start.wast                  | -   |
 | store.wast                  | -   |
 | switch.wast                 | -   |
-| table-sub.wast              | (no tests) |
-| table.wast                  | unimplemented import table |
 | table_copy.wast             | -   |
 | table_fill.wast             | -   |
 | table_get.wast              | -   |
@@ -78,14 +54,38 @@
 | table_init.wast             | -   |
 | table_set.wast              | -   |
 | table_size.wast             | -   |
-| token.wast                  | (no tests) |
-| tokens.wast                 | (no tests) |
 | traps.wast                  | -   |
 | type.wast                   | -   |
 | unreachable.wast            | -   |
-| unreached-invalid.wast      | (no tests) |
 | unreached-valid.wast        | -   |
 | unwind.wast                 | -   |
+| binary-leb128.wast          | RangeError from Reader.leb128_u |
+| block.wast                  | multiple return values not currently supported |
+| br_table.wast               | large switch statement |
+| br.wast                     | multiple return values not currently supported |
+| call_indirect.wast          | multiple return values not currently supported |
+| call.wast                   | multiple return values not currently supported |
+| data.wast                   | need to rework DataSegments initializers |
+| elem.wast                   | unimplemented import table |
+| fac.wast                    | multiple return values not currently supported |
+| func.wast                   | multiple return values not currently supported |
+| global.wast                 | needs more work on initializing globals |
+| if.wast                     | multiple return values not currently supported |
+| imports.wast                | unimplemented import table |
+| linking.wast                | unimplemented import table |
+| loop.wast                   | multiple return values not currently supported |
+| names.wast                  | generated file is causing the analyzer to crash |
+| ref_func.wast               | needs additional work on globals generation |
+| select.wast                 | wast2json failed; unexpected token "result" |
+| table.wast                  | unimplemented import table |
+| binary.wast                 | (no tests) |
+| custom.wast                 | (no tests) |
+| inline-module.wast          | (no tests) |
+| skip-stack-guard-page.wast  | (no tests) |
+| table-sub.wast              | (no tests) |
+| token.wast                  | (no tests) |
+| tokens.wast                 | (no tests) |
+| unreached-invalid.wast      | (no tests) |
 | utf8-custom-section-id.wast | (no tests) |
 | utf8-import-field.wast      | (no tests) |
 | utf8-import-module.wast     | (no tests) |

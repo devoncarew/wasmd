@@ -26,7 +26,21 @@ class FuncPtrs9Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  i32 callt(i32 i) {
+  i32 callt(i32 arg0) => _func2(arg0);
+
+  i32 _t1() {
+    final frame = Frame(this);
+    frame.i32_const(1);
+    return frame.pop();
+  }
+
+  i32 _t2() {
+    final frame = Frame(this);
+    frame.i32_const(2);
+    return frame.pop();
+  }
+
+  i32 _func2(i32 i) {
     final frame = Frame(this);
     frame.push(i);
     {
@@ -37,20 +51,8 @@ class FuncPtrs9Module implements Module {
     return frame.pop();
   }
 
-  i32 _func0() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    return frame.pop();
-  }
-
-  i32 _func1() {
-    final frame = Frame(this);
-    frame.i32_const(2);
-    return frame.pop();
-  }
-
   List<Function> _initFunctionTable() {
-    return [_func0, _func1, callt];
+    return [_t1, _t2, _func2];
   }
 }
 

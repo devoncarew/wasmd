@@ -15,7 +15,9 @@ class GcdModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 gcd(i32 arg0, i32 arg1) {
+  i32 gcd(i32 arg0, i32 arg1) => _gcd(arg0, arg1);
+
+  i32 _gcd(i32 arg0, i32 arg1) {
     i32 local0 = 0;
 
     final frame = Frame(this);

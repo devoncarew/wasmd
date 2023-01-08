@@ -15,7 +15,9 @@ class MemoryGrow1Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 grow(i32 arg0) {
+  i32 grow(i32 arg0) => _func0(arg0);
+
+  i32 _func0(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.memory_grow(0);

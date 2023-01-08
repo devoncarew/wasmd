@@ -15,7 +15,15 @@ class UnreachedValid0Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 select_trap_left(i32 cond) {
+  i32 select_trap_left(i32 arg0) => _func0(arg0);
+  i32 select_trap_right(i32 arg0) => _func1(arg0);
+  void select_unreached() => _func2();
+  i32 select_unreached_result_1() => _func3();
+  i64 select_unreached_result_2() => _func4();
+  void unreachable_num() => _func5();
+  void unreachable_ref() => _func6();
+
+  i32 _func0(i32 cond) {
     final frame = Frame(this);
     throw Trap('unreachable');
     frame.i32_const(0);
@@ -24,7 +32,7 @@ class UnreachedValid0Module implements Module {
     return frame.pop();
   }
 
-  i32 select_trap_right(i32 cond) {
+  i32 _func1(i32 cond) {
     final frame = Frame(this);
     frame.i32_const(0);
     throw Trap('unreachable');
@@ -33,7 +41,7 @@ class UnreachedValid0Module implements Module {
     return frame.pop();
   }
 
-  void select_unreached() {
+  void _func2() {
     final frame = Frame(this);
     throw Trap('unreachable');
     frame.select();
@@ -56,7 +64,7 @@ class UnreachedValid0Module implements Module {
     throw Trap('unreachable');
   }
 
-  i32 select_unreached_result_1() {
+  i32 _func3() {
     final frame = Frame(this);
     throw Trap('unreachable');
     frame.select();
@@ -64,7 +72,7 @@ class UnreachedValid0Module implements Module {
     return frame.pop();
   }
 
-  i64 select_unreached_result_2() {
+  i64 _func4() {
     final frame = Frame(this);
     throw Trap('unreachable');
     frame.i64_const(0);
@@ -74,7 +82,7 @@ class UnreachedValid0Module implements Module {
     return frame.pop();
   }
 
-  void unreachable_num() {
+  void _func5() {
     final frame = Frame(this);
     throw Trap('unreachable');
     frame.select();
@@ -82,7 +90,7 @@ class UnreachedValid0Module implements Module {
     frame.drop();
   }
 
-  void unreachable_ref() {
+  void _func6() {
     final frame = Frame(this);
     throw Trap('unreachable');
     frame.select();

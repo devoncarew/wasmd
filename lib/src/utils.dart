@@ -46,6 +46,11 @@ String ensurePublic(String name) {
   return name.startsWith('_') ? '\$$name' : name;
 }
 
+/// Ensure that the given symbol name is private.
+String ensurePrivate(String name) {
+  return name.startsWith('_') ? name : '_$name';
+}
+
 const Set<String> _keywords = {
   'for',
   'if',

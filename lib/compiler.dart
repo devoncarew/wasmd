@@ -533,10 +533,6 @@ class Compiler {
           throw 'unimplemented import table';
         case 0x02:
           // mem
-
-          // TODO: what does it mean to specify min. memory sizes when importing
-          // memory?
-
           var limitKind = r.readUint8();
           switch (limitKind) {
             case 0x00:
@@ -559,7 +555,12 @@ class Compiler {
           break;
         case 0x03:
           // global
-          throw 'unimplemented import global';
+          var type = r.readUint8();
+          var mutability = r.readUint8();
+          var importModule = module.getCreateImportModule(moduleName);
+          importModule.addImportedGlobal(itemName,
+              type: ValueType.fromCode(type), mutable: mutability == 0x01);
+          break;
         default:
           throw 'unknown import type: ${hex(importType)}';
       }
@@ -574,14 +575,14 @@ class Compiler {
       var mutability = r.readUint8();
       var instructions = r.readInstructionsEndTerminated();
 
-      var global = Global(
+      var global = DefinedGlobal(
         module: module,
-        index: module.globals.imports.length + i,
+        index: module.globals.globals.length,
         type: ValueType.fromCode(type),
         mutable: mutability == 0x01,
         initExpression: instructions,
       );
-      module.globals.add(global);
+      module.globals.addDefinedGlobal(global);
 
       _log('  global: ${global.type} ${global.name}');
     }
@@ -867,13 +868,33 @@ void printModule(
   }
   classBuilder.constructors.add(constructor.build());
 
-  // Resort the methods - sorting exported methods first.
-  module.definedFunctions.sort((a, b) {
-    var aVal = a.exportName == null ? 1 : 0;
-    var bVal = b.exportName == null ? 1 : 0;
-    return aVal == bVal ? a.name.compareTo(b.name) : aVal - bVal;
-  });
+  // Exported functions
+  for (var func in module.exportedFunctions) {
+    var method = MethodBuilder();
+    method.name = func.name;
+    method.returns = refer(func.functionType.resultTypeDisplayName);
 
+    var params = func.functionType.parameterTypes;
+    for (int paramIndex = 0; paramIndex < params.length; paramIndex++) {
+      method.requiredParameters.add(
+        Parameter(
+          (p) => p
+            ..name = 'arg$paramIndex'
+            ..type = refer(params[paramIndex].typeName),
+        ),
+      );
+    }
+
+    var index = 0;
+    var expr =
+        refer(func.func.name).call(params.map((e) => refer('arg${index++}')));
+    method.lambda = true;
+    method.body = expr.code;
+
+    classBuilder.methods.add(method.build());
+  }
+
+  // Defined functions
   for (var func in module.definedFunctions) {
     if (func.functionType.returnsTuple) {
       throw 'multiple return values not currently supported '
@@ -881,11 +902,6 @@ void printModule(
     }
     var method = func.generateToMethod();
     classBuilder.methods.add(method);
-
-    // handle the case where a function is exported multiple times
-    if (func.hasMultipleExports) {
-      func.generateAdditionalExports(classBuilder);
-    }
   }
 
   if (module.elementSegments.isNotEmpty) {
@@ -917,7 +933,7 @@ void printModule(
   }
 
   if (module.globals.isNotEmpty) {
-    library.body.add(Global.createGlobalsClassDef(module));
+    library.body.add(DefinedGlobal.createGlobalsClassDef(module));
   }
 
   if (module.dataSegments.isNotEmpty) {
@@ -1307,6 +1323,7 @@ class Module {
 
   List<DefinedFunction> definedFunctions = [];
   List<ModuleFunction> allFunctions = [];
+  List<ExportedFunction> exportedFunctions = [];
 
   final Globals globals = Globals();
 
@@ -1354,7 +1371,8 @@ class Module {
   }
 
   void exportFunction(String name, int functionIndex) {
-    (functionByIndex(functionIndex) as DefinedFunction).exportAs(name);
+    var func = ExportedFunction(name, functionByIndex(functionIndex)!);
+    exportedFunctions.add(func);
   }
 
   void exportMemory(String name, int memoryIndex) {
@@ -1378,6 +1396,7 @@ class ImportModule {
   final Module wasmModule;
 
   final List<ImportedFunction> functions = [];
+  final List<ImportedGlobal> globals = [];
 
   ImportModule(this.name, this.wasmModule);
 
@@ -1393,12 +1412,40 @@ class ImportModule {
     wasmModule.allFunctions.add(function);
   }
 
+  void addImportedGlobal(
+    String name, {
+    required ValueType type,
+    required bool mutable,
+  }) {
+    var global = ImportedGlobal(name, type, mutable, this);
+    wasmModule.globals.addImportedGlobal(global);
+    globals.add(global);
+  }
+
   Class createImportModuleClassDef() {
     ClassBuilder importClass = ClassBuilder()
       ..name = typeName
       ..abstract = true
       ..docs.add("/// A class representing the symbols imported from the "
           "'$name' module.");
+
+    for (var global in globals) {
+      importClass.methods.add(Method(
+        (b) => b
+          ..name = global.name
+          ..returns = Reference(global.type.typeName)
+          ..type = MethodType.getter,
+      ));
+
+      if (global.mutable) {
+        importClass.methods.add(Method(
+          (b) => b
+            ..name = global.name
+            ..returns = Reference(global.type.typeName)
+            ..type = MethodType.setter,
+        ));
+      }
+    }
 
     for (var func in functions) {
       var parameters = <Parameter>[];
@@ -1456,8 +1503,6 @@ class DefinedFunction extends ModuleFunction {
   final List<BlockType> nesting = [];
   final List<Scope> scopes = [Scope()];
 
-  final List<String> exportedAs = [];
-
   DefinedFunction(super.module, super.typeIndex, this.generatedIndex);
 
   @override
@@ -1466,20 +1511,16 @@ class DefinedFunction extends ModuleFunction {
     var genIndex = generatedIndex.toString().padLeft(digits, '0');
 
     if (module.useDebugNames) {
-      return exportName ?? debugInfo?.name ?? '_func$genIndex';
+      return debugInfo?.name == null
+          ? '_func$genIndex'
+          : ensurePrivate(debugInfo!.name!);
     } else {
-      return exportName ?? '_func$genIndex';
+      return '_func$genIndex';
     }
   }
 
   @override
   String toString() => name;
-
-  void exportAs(String name) {
-    exportedAs.add(name);
-  }
-
-  String? get exportName => exportedAs.firstOrNull;
 
   void setLocals(List<ValueType> locals) {
     this.locals = locals;
@@ -1527,8 +1568,6 @@ class DefinedFunction extends ModuleFunction {
 
     return nesting[nesting.length - 1 - index];
   }
-
-  bool get hasMultipleExports => exportedAs.length > 1;
 
   Method generateToMethod() {
     var method = MethodBuilder();
@@ -1597,34 +1636,15 @@ class DefinedFunction extends ModuleFunction {
 
     return method.build();
   }
+}
 
-  /// This method is only used if a function is exported more than once.
-  void generateAdditionalExports(ClassBuilder classBuilder) {
-    for (var name in exportedAs.skip(1)) {
-      var method = MethodBuilder();
-      method.name = name;
-      method.returns = refer(functionType.resultTypeDisplayName);
+class ExportedFunction {
+  final String name;
+  final ModuleFunction func;
 
-      var params = functionType.parameterTypes;
-      for (int paramIndex = 0; paramIndex < params.length; paramIndex++) {
-        method.requiredParameters.add(
-          Parameter(
-            (p) => p
-              ..name = 'arg$paramIndex'
-              ..type = refer(params[paramIndex].typeName),
-          ),
-        );
-      }
+  ExportedFunction(this.name, this.func);
 
-      var index = 0;
-      var expr =
-          refer(exportName!).call(params.map((e) => refer('arg${index++}')));
-      method.lambda = true;
-      method.body = expr.code;
-
-      classBuilder.methods.add(method.build());
-    }
-  }
+  FunctionType get functionType => func.functionType;
 }
 
 class Scope {
@@ -1851,8 +1871,6 @@ class ElementSegments {
 
 class Globals {
   final List<Global> globals = [];
-  // TODO: handle global imports
-  List<String> imports = [];
   List<GlobalExport> globalExports = [];
 
   DebugInfo? debugInfo;
@@ -1863,7 +1881,11 @@ class Globals {
 
   num get count => globals.length;
 
-  void add(Global global) {
+  void addDefinedGlobal(DefinedGlobal global) {
+    globals.add(global);
+  }
+
+  void addImportedGlobal(ImportedGlobal global) {
     globals.add(global);
   }
 
@@ -1876,16 +1898,37 @@ class Globals {
   }
 }
 
-class Global {
+abstract class Global {
+  final String name;
+  final ValueType type;
+  final bool mutable;
+
+  Global(this.name, this.type, this.mutable);
+
+  String get containerName;
+}
+
+class ImportedGlobal extends Global {
+  final ImportModule importModule;
+
+  ImportedGlobal(super.name, super.type, super.mutable, this.importModule);
+
+  @override
+  String get containerName => importModule.referenceName;
+}
+
+class DefinedGlobal implements Global {
   final Module module;
   final int index;
+  @override
   final ValueType type;
+  @override
   final bool mutable;
   final List<Instr> initExpression;
 
   late String _generatedName;
 
-  Global({
+  DefinedGlobal({
     required this.module,
     required this.index,
     required this.type,
@@ -1895,6 +1938,10 @@ class Global {
     _generatedName = 'global$index';
   }
 
+  @override
+  String get containerName => 'globals';
+
+  @override
   String get name {
     var debugInfo = module.globals.debugInfo;
     if (debugInfo == null) return _generatedName;
@@ -1911,8 +1958,14 @@ class Global {
   static Class createGlobalsClassDef(Module module) {
     var fields = <Field>[];
 
+    // TODO: switch to having an '_initGlobals' method on the modul class; we
+    // need to be able to reference module instance variables in the init
+    // methods of global fields
+
     for (int i = 0; i < module.globals.count; i++) {
       var global = module.globals.globals[i];
+
+      if (global is! DefinedGlobal) continue;
 
       Code assignment;
       var literalValue = global.calcLiteralValue;
@@ -1934,7 +1987,7 @@ class Global {
     }
 
     var initMethods = <Method>[];
-    for (var global in module.globals.globals) {
+    for (var global in module.globals.globals.whereType<DefinedGlobal>()) {
       var initFunction = DefinedFunction(module, 0, 0);
       var literalValue = global.calcLiteralValue;
 

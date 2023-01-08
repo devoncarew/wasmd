@@ -15,7 +15,9 @@ class FloatLiterals1Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  f64 $4294967249() {
+  f64 $4294967249() => _func0();
+
+  f64 _func0() {
     final frame = Frame(this);
     frame.f64_const(4294967249.0);
     return frame.pop();

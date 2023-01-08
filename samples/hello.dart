@@ -17,7 +17,10 @@ class HelloWorldModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 add(i32 lhs, i32 rhs) {
+  i32 add(i32 arg0, i32 arg1) => _add(arg0, arg1);
+  i32 complex(i32 arg0, i32 arg1) => _complex(arg0, arg1);
+
+  i32 _add(i32 lhs, i32 rhs) {
     final frame = Frame(this);
     frame.push(lhs);
     frame.push(rhs);
@@ -25,7 +28,15 @@ class HelloWorldModule implements Module {
     return frame.pop();
   }
 
-  i32 complex(i32 lhs, i32 rhs) {
+  i32 _sub(i32 lhs, i32 rhs) {
+    final frame = Frame(this);
+    frame.push(lhs);
+    frame.push(rhs);
+    frame.i32_sub();
+    return frame.pop();
+  }
+
+  i32 _complex(i32 lhs, i32 rhs) {
     i32 i = 0;
 
     final frame = Frame(this);
@@ -38,18 +49,10 @@ class HelloWorldModule implements Module {
     {
       var t1 = frame.pop();
       var t0 = frame.pop();
-      frame.push(_func1(t0, t1));
+      frame.push(_sub(t0, t1));
     }
     frame.push(i);
     frame.i32_mul();
-    return frame.pop();
-  }
-
-  i32 _func1(i32 lhs, i32 rhs) {
-    final frame = Frame(this);
-    frame.push(lhs);
-    frame.push(rhs);
-    frame.i32_sub();
     return frame.pop();
   }
 }

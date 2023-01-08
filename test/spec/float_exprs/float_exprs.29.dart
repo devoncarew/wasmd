@@ -15,7 +15,12 @@ class FloatExprs29Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 i32_no_fold_f32_s(i32 arg0) {
+  i32 i32_no_fold_f32_s(i32 arg0) => _func0(arg0);
+  i32 i32_no_fold_f32_u(i32 arg0) => _func1(arg0);
+  i64 i64_no_fold_f64_s(i64 arg0) => _func2(arg0);
+  i64 i64_no_fold_f64_u(i64 arg0) => _func3(arg0);
+
+  i32 _func0(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.f32_convert_i32_s();
@@ -23,7 +28,7 @@ class FloatExprs29Module implements Module {
     return frame.pop();
   }
 
-  i32 i32_no_fold_f32_u(i32 arg0) {
+  i32 _func1(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.f32_convert_i32_u();
@@ -31,7 +36,7 @@ class FloatExprs29Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_no_fold_f64_s(i64 arg0) {
+  i64 _func2(i64 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.f64_convert_i64_s();
@@ -39,7 +44,7 @@ class FloatExprs29Module implements Module {
     return frame.pop();
   }
 
-  i64 i64_no_fold_f64_u(i64 arg0) {
+  i64 _func3(i64 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
     frame.f64_convert_i64_u();

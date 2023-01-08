@@ -23,11 +23,22 @@ class TableGrow4Module implements Module {
 
   late final List<Function> functionTable = _initFunctionTable();
 
-  FuncRef? check_table_null(i32 arg0, i32 arg1) {
+  i32 grow(i32 arg0) => _func0(arg0);
+  FuncRef? check_table_null(i32 arg0, i32 arg1) => _func1(arg0, arg1);
+
+  i32 _func0(i32 arg0) {
+    final frame = Frame(this);
+    frame.ref_null(112);
+    frame.push(arg0);
+    frame.table_grow(0);
+    return frame.pop();
+  }
+
+  FuncRef? _func1(i32 arg0, i32 arg1) {
     FuncRef? local0;
 
     final frame = Frame(this);
-    frame.push(check_table_null);
+    frame.push(_func1);
     local0 = frame.pop();
     block_label_0:
     {
@@ -67,16 +78,8 @@ class TableGrow4Module implements Module {
     return frame.pop();
   }
 
-  i32 grow(i32 arg0) {
-    final frame = Frame(this);
-    frame.ref_null(112);
-    frame.push(arg0);
-    frame.table_grow(0);
-    return frame.pop();
-  }
-
   List<Function> _initFunctionTable() {
-    return [grow, check_table_null];
+    return [_func0, _func1];
   }
 }
 

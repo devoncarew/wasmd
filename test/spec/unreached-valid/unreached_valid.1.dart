@@ -15,7 +15,9 @@ class UnreachedValid1Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void meet_bottom() {
+  void meet_bottom() => _func0();
+
+  void _func0() {
     final frame = Frame(this);
     block_label_0:
     {

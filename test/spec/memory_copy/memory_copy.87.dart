@@ -18,7 +18,9 @@ class MemoryCopy87Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void test() {
+  void test() => _func0();
+
+  void _func0() {
     final frame = Frame(this);
     frame.i32_const(0x8000);
     frame.i32_const(0xff00);

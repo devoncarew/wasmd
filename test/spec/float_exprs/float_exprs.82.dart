@@ -15,19 +15,12 @@ class FloatExprs82Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 f32_no_fold_add_ge_monotonicity(f32 x, f32 y, f32 z) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(z);
-    frame.f32_add();
-    frame.push(y);
-    frame.push(z);
-    frame.f32_add();
-    frame.f32_ge();
-    return frame.pop();
-  }
+  i32 f32_no_fold_add_le_monotonicity(f32 arg0, f32 arg1, f32 arg2) => _func0(arg0, arg1, arg2);
+  i32 f32_no_fold_add_ge_monotonicity(f32 arg0, f32 arg1, f32 arg2) => _func1(arg0, arg1, arg2);
+  i32 f64_no_fold_add_le_monotonicity(f64 arg0, f64 arg1, f64 arg2) => _func2(arg0, arg1, arg2);
+  i32 f64_no_fold_add_ge_monotonicity(f64 arg0, f64 arg1, f64 arg2) => _func3(arg0, arg1, arg2);
 
-  i32 f32_no_fold_add_le_monotonicity(f32 x, f32 y, f32 z) {
+  i32 _func0(f32 x, f32 y, f32 z) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(z);
@@ -39,19 +32,19 @@ class FloatExprs82Module implements Module {
     return frame.pop();
   }
 
-  i32 f64_no_fold_add_ge_monotonicity(f64 x, f64 y, f64 z) {
+  i32 _func1(f32 x, f32 y, f32 z) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(z);
-    frame.f64_add();
+    frame.f32_add();
     frame.push(y);
     frame.push(z);
-    frame.f64_add();
-    frame.f64_ge();
+    frame.f32_add();
+    frame.f32_ge();
     return frame.pop();
   }
 
-  i32 f64_no_fold_add_le_monotonicity(f64 x, f64 y, f64 z) {
+  i32 _func2(f64 x, f64 y, f64 z) {
     final frame = Frame(this);
     frame.push(x);
     frame.push(z);
@@ -60,6 +53,18 @@ class FloatExprs82Module implements Module {
     frame.push(z);
     frame.f64_add();
     frame.f64_le();
+    return frame.pop();
+  }
+
+  i32 _func3(f64 x, f64 y, f64 z) {
+    final frame = Frame(this);
+    frame.push(x);
+    frame.push(z);
+    frame.f64_add();
+    frame.push(y);
+    frame.push(z);
+    frame.f64_add();
+    frame.f64_ge();
     return frame.pop();
   }
 }

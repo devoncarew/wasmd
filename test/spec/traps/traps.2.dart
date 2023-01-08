@@ -15,56 +15,65 @@ class Traps2Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void no_dce_i32_trunc_f32_s(f32 x) {
+  void no_dce_i32_trunc_f32_s(f32 arg0) => _func0(arg0);
+  void no_dce_i32_trunc_f32_u(f32 arg0) => _func1(arg0);
+  void no_dce_i32_trunc_f64_s(f64 arg0) => _func2(arg0);
+  void no_dce_i32_trunc_f64_u(f64 arg0) => _func3(arg0);
+  void no_dce_i64_trunc_f32_s(f32 arg0) => _func4(arg0);
+  void no_dce_i64_trunc_f32_u(f32 arg0) => _func5(arg0);
+  void no_dce_i64_trunc_f64_s(f64 arg0) => _func6(arg0);
+  void no_dce_i64_trunc_f64_u(f64 arg0) => _func7(arg0);
+
+  void _func0(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f32_s();
     frame.drop();
   }
 
-  void no_dce_i32_trunc_f32_u(f32 x) {
+  void _func1(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f32_u();
     frame.drop();
   }
 
-  void no_dce_i32_trunc_f64_s(f64 x) {
+  void _func2(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f64_s();
     frame.drop();
   }
 
-  void no_dce_i32_trunc_f64_u(f64 x) {
+  void _func3(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i32_trunc_f64_u();
     frame.drop();
   }
 
-  void no_dce_i64_trunc_f32_s(f32 x) {
+  void _func4(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_trunc_f32_s();
     frame.drop();
   }
 
-  void no_dce_i64_trunc_f32_u(f32 x) {
+  void _func5(f32 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_trunc_f32_u();
     frame.drop();
   }
 
-  void no_dce_i64_trunc_f64_s(f64 x) {
+  void _func6(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_trunc_f64_s();
     frame.drop();
   }
 
-  void no_dce_i64_trunc_f64_u(f64 x) {
+  void _func7(f64 x) {
     final frame = Frame(this);
     frame.push(x);
     frame.i64_trunc_f64_u();

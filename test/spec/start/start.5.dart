@@ -13,7 +13,7 @@ abstract class SpectestImports {
 
 class Start5Module implements Module {
   Start5Module({required this.spectestImports}) {
-    _func0();
+    _main();
   }
 
   final SpectestImports spectestImports;
@@ -24,7 +24,7 @@ class Start5Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void _func0() {
+  void _main() {
     final frame = Frame(this);
     frame.i32_const(1);
     {
