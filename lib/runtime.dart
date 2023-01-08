@@ -1777,7 +1777,6 @@ class Frame {
 
 // TODO: convert this over to use patterns
 
-// todo: equals method
 class Tuple2<T0, T1> {
   final T0 t0;
   final T1 t1;
@@ -1796,10 +1795,19 @@ class Tuple2<T0, T1> {
   }
 
   @override
+  bool operator ==(Object other) {
+    if (other is! Tuple2) return false;
+
+    return t0 == other.t0 && t1 == other.t1;
+  }
+
+  @override
+  int get hashCode => Object.hash(t0, t1);
+
+  @override
   String toString() => 'Tuple2($t0, $t1)';
 }
 
-// todo: equals method
 class Tuple3<T0, T1, T2> {
   final T0 t0;
   final T1 t1;
@@ -1819,6 +1827,16 @@ class Tuple3<T0, T1, T2> {
     stack.add(t1);
     stack.add(t2);
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! Tuple3) return false;
+
+    return t0 == other.t0 && t1 == other.t1 && t2 == other.t2;
+  }
+
+  @override
+  int get hashCode => Object.hash(t0, t1, t2);
 
   @override
   String toString() => 'Tuple3($t0, $t1, $t2)';
