@@ -170,7 +170,7 @@ class Stack1Module implements Module {
         func(t0);
       }
     }
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(0);
       {
@@ -408,7 +408,7 @@ class Stack1Module implements Module {
         func(t0);
       }
     }
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(0);
       {

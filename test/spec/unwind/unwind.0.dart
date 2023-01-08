@@ -166,7 +166,6 @@ class Unwind0Module implements Module {
     {
       frame.i32_const(3);
       frame.i64_const(1);
-      frame.unwindTo(0, 0);
       break block_label_0;
     }
     frame.i32_const(9);
@@ -175,12 +174,11 @@ class Unwind0Module implements Module {
 
   i32 _func10() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       frame.i64_const(1);
       frame.i32_const(9);
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -194,7 +192,6 @@ class Unwind0Module implements Module {
       frame.i64_const(1);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.drop();
@@ -206,14 +203,13 @@ class Unwind0Module implements Module {
 
   i32 _func12() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       frame.i64_const(1);
       frame.i32_const(9);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -232,7 +228,6 @@ class Unwind0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(0, 0);
           break block_label_0;
       }
     }
@@ -242,7 +237,7 @@ class Unwind0Module implements Module {
 
   i32 _func14() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       frame.i64_const(1);
@@ -251,7 +246,6 @@ class Unwind0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -260,7 +254,7 @@ class Unwind0Module implements Module {
 
   i32 _func15() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       frame.i64_const(1);
@@ -272,7 +266,7 @@ class Unwind0Module implements Module {
 
   i32 _func16() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       block_label_1:
@@ -292,7 +286,6 @@ class Unwind0Module implements Module {
       block_label_1:
       {
         frame.i64_const(1);
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.drop();
@@ -303,14 +296,13 @@ class Unwind0Module implements Module {
 
   i32 _func18() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       block_label_1:
       {
         frame.i64_const(1);
         frame.i32_const(9);
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -327,7 +319,6 @@ class Unwind0Module implements Module {
         frame.i64_const(1);
         frame.i32_const(1);
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.drop();
@@ -340,7 +331,7 @@ class Unwind0Module implements Module {
 
   i32 _func20() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       block_label_1:
@@ -349,7 +340,6 @@ class Unwind0Module implements Module {
         frame.i32_const(9);
         frame.i32_const(1);
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 1);
           break block_label_0;
         }
         frame.drop();
@@ -371,7 +361,6 @@ class Unwind0Module implements Module {
         var t0 = frame.pop();
         switch (t0) {
           default:
-            frame.unwindTo(0, 0);
             break block_label_0;
         }
       }
@@ -383,7 +372,7 @@ class Unwind0Module implements Module {
 
   i32 _func22() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       block_label_1:
@@ -394,7 +383,6 @@ class Unwind0Module implements Module {
         var t0 = frame.pop();
         switch (t0) {
           default:
-            frame.unwindTo(0, 1);
             break block_label_0;
         }
       }
@@ -404,7 +392,7 @@ class Unwind0Module implements Module {
 
   i32 _func23() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       block_label_1:
@@ -427,11 +415,10 @@ class Unwind0Module implements Module {
 
   i32 _func25() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.i32_const(9);
-      frame.unwindTo(0, 1);
       break block_label_0;
 
       frame.i64_eqz();
@@ -441,13 +428,12 @@ class Unwind0Module implements Module {
 
   i32 _func26() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i64_const(0);
       frame.i32_const(9);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -458,7 +444,7 @@ class Unwind0Module implements Module {
 
   i32 _func27() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.i32_const(9);
@@ -466,11 +452,9 @@ class Unwind0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -499,12 +483,11 @@ class Unwind0Module implements Module {
 
   i32 _func30() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.f64_const(1.0);
       frame.i32_const(9);
-      frame.unwindTo(0, 1);
       break block_label_0;
 
       frame.i64_eq();
@@ -514,14 +497,13 @@ class Unwind0Module implements Module {
 
   i32 _func31() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i64_const(0);
       frame.i64_const(1);
       frame.i32_const(9);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -532,7 +514,7 @@ class Unwind0Module implements Module {
 
   i32 _func32() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.f64_const(1.0);
@@ -541,7 +523,6 @@ class Unwind0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -572,13 +553,12 @@ class Unwind0Module implements Module {
 
   i32 _func35() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.f64_const(1.0);
       frame.i64_const(0);
       frame.i32_const(9);
-      frame.unwindTo(0, 1);
       break block_label_0;
 
       frame.select();
@@ -588,7 +568,7 @@ class Unwind0Module implements Module {
 
   i32 _func36() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(0);
       frame.i32_const(1);
@@ -596,7 +576,6 @@ class Unwind0Module implements Module {
       frame.i32_const(9);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -607,7 +586,7 @@ class Unwind0Module implements Module {
 
   i32 _func37() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.f64_const(1.0);
@@ -617,7 +596,6 @@ class Unwind0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -639,7 +617,7 @@ class Unwind0Module implements Module {
 
   i32 _func39() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       throw Trap('unreachable');
@@ -649,11 +627,10 @@ class Unwind0Module implements Module {
 
   i32 _func40() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.i32_const(9);
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -661,13 +638,12 @@ class Unwind0Module implements Module {
 
   i32 _func41() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(0);
       frame.i32_const(9);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -677,7 +653,7 @@ class Unwind0Module implements Module {
 
   i32 _func42() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.i32_const(9);
@@ -685,11 +661,9 @@ class Unwind0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -698,7 +672,7 @@ class Unwind0Module implements Module {
 
   i32 _func43() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.f32_const(0.0);
       frame.i32_const(9);
@@ -721,13 +695,12 @@ class Unwind0Module implements Module {
 
   i32 _func45() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       loop_label_1:
       for (;;) {
         frame.f32_const(0.0);
         frame.i32_const(9);
-        frame.unwindTo(0, 1);
         break block_label_0;
 
         break;
@@ -738,7 +711,7 @@ class Unwind0Module implements Module {
 
   i32 _func46() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       loop_label_1:
       for (;;) {
@@ -746,7 +719,6 @@ class Unwind0Module implements Module {
         frame.i32_const(9);
         frame.i32_const(1);
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 1);
           break block_label_0;
         }
         frame.drop();
@@ -758,7 +730,7 @@ class Unwind0Module implements Module {
 
   i32 _func47() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       loop_label_1:
       for (;;) {
@@ -768,11 +740,9 @@ class Unwind0Module implements Module {
         var t0 = frame.pop();
         switch (t0) {
           case 0:
-            frame.unwindTo(0, 1);
             break block_label_0;
 
           default:
-            frame.unwindTo(0, 1);
             break block_label_0;
         }
 

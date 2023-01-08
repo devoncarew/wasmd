@@ -19,24 +19,21 @@ class UnreachedValid1Module implements Module {
 
   void _func0() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => f64
     {
-      block_label_1:
+      block_label_1: // => f32
       {
         throw Trap('unreachable');
         frame.i32_const(1);
         var t0 = frame.pop();
         switch (t0) {
           case 0:
-            frame.unwindTo(0, 1);
             break block_label_1;
 
           case 1:
-            frame.unwindTo(0, 1);
             break block_label_0;
 
           default:
-            frame.unwindTo(0, 1);
             break block_label_0;
         }
       }

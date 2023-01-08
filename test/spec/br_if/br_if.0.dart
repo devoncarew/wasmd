@@ -100,7 +100,6 @@ class BrIf0Module implements Module {
       frame.i32_const(0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.i32_ctz();
@@ -115,7 +114,6 @@ class BrIf0Module implements Module {
       frame.i64_const(0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.i64_ctz();
@@ -130,7 +128,6 @@ class BrIf0Module implements Module {
       frame.f32_const(0.0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.f32_neg();
@@ -145,7 +142,6 @@ class BrIf0Module implements Module {
       frame.f64_const(0.0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.f64_neg();
@@ -155,12 +151,11 @@ class BrIf0Module implements Module {
 
   i32 _func05() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_ctz();
@@ -170,12 +165,11 @@ class BrIf0Module implements Module {
 
   i64 _func06() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i64
     {
       frame.i64_const(2);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i64_ctz();
@@ -185,12 +179,11 @@ class BrIf0Module implements Module {
 
   f32 _func07() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => f32
     {
       frame.f32_const(3.0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.f32_neg();
@@ -200,12 +193,11 @@ class BrIf0Module implements Module {
 
   f64 _func08() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => f64
     {
       frame.f64_const(4.0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.f64_neg();
@@ -219,7 +211,6 @@ class BrIf0Module implements Module {
     {
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.i32_const(2);
@@ -236,7 +227,6 @@ class BrIf0Module implements Module {
       _dummy();
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.i32_const(2);
@@ -254,7 +244,6 @@ class BrIf0Module implements Module {
       _dummy();
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
     }
@@ -262,12 +251,11 @@ class BrIf0Module implements Module {
 
   i32 _func12(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(10);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -279,13 +267,12 @@ class BrIf0Module implements Module {
 
   i32 _func13(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       frame.i32_const(20);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -297,14 +284,13 @@ class BrIf0Module implements Module {
 
   i32 _func14(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       _dummy();
       frame.i32_const(11);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -319,7 +305,6 @@ class BrIf0Module implements Module {
       for (;;) {
         frame.push(arg0);
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.i32_const(2);
@@ -340,7 +325,6 @@ class BrIf0Module implements Module {
         _dummy();
         frame.push(arg0);
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.i32_const(2);
@@ -368,15 +352,13 @@ class BrIf0Module implements Module {
 
   i32 _func18() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -389,11 +371,9 @@ class BrIf0Module implements Module {
       frame.i32_const(1);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
     }
@@ -401,17 +381,15 @@ class BrIf0Module implements Module {
 
   i32 _func20() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(3);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -422,17 +400,15 @@ class BrIf0Module implements Module {
 
   i32 _func21(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.i32_const(1);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -448,21 +424,17 @@ class BrIf0Module implements Module {
       frame.i32_const(1);
       frame.i32_const(2);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 0);
           break block_label_0;
 
         case 1:
-          frame.unwindTo(0, 0);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 0);
           break block_label_0;
       }
     }
@@ -470,27 +442,23 @@ class BrIf0Module implements Module {
 
   i32 _func23() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(3);
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         case 1:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -501,23 +469,20 @@ class BrIf0Module implements Module {
 
   i32 _func24() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.i32_const(1);
       frame.i32_const(3);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -528,12 +493,11 @@ class BrIf0Module implements Module {
 
   i64 _func25() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i64
     {
       frame.i64_const(1);
       frame.i32_const(2);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       return frame.pop();
@@ -543,12 +507,11 @@ class BrIf0Module implements Module {
 
   i32 _func26(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       if_label_1:
@@ -570,7 +533,6 @@ class BrIf0Module implements Module {
       if (frame.pop() != 0) {
         frame.push(arg1);
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
       } else {
@@ -590,7 +552,6 @@ class BrIf0Module implements Module {
       } else {
         frame.push(arg1);
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
       }
@@ -599,12 +560,11 @@ class BrIf0Module implements Module {
 
   i32 _func29(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(3);
       frame.i32_const(10);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(2);
@@ -616,13 +576,12 @@ class BrIf0Module implements Module {
 
   i32 _func30(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(3);
       frame.i32_const(10);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.push(arg0);
@@ -633,14 +592,13 @@ class BrIf0Module implements Module {
 
   i32 _func31() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
       frame.i32_const(3);
       frame.i32_const(10);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.select();
@@ -656,12 +614,11 @@ class BrIf0Module implements Module {
 
   i32 _func33() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(12);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(2);
@@ -678,13 +635,12 @@ class BrIf0Module implements Module {
 
   i32 _func34() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(13);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(3);
@@ -700,14 +656,13 @@ class BrIf0Module implements Module {
 
   i32 _func35() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
       frame.i32_const(14);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       {
@@ -728,12 +683,11 @@ class BrIf0Module implements Module {
 
   i32 _func37() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(4);
       frame.i32_const(10);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(1);
@@ -753,13 +707,12 @@ class BrIf0Module implements Module {
 
   i32 _func38() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(4);
       frame.i32_const(10);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(2);
@@ -778,14 +731,13 @@ class BrIf0Module implements Module {
 
   i32 _func39() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
       frame.i32_const(4);
       frame.i32_const(10);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(0);
@@ -803,7 +755,7 @@ class BrIf0Module implements Module {
 
   i32 _func40() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
@@ -811,7 +763,6 @@ class BrIf0Module implements Module {
       frame.i32_const(4);
       frame.i32_const(10);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       {
@@ -830,12 +781,11 @@ class BrIf0Module implements Module {
     i32 local0 = 0;
 
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(17);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       arg0 = frame.pop();
@@ -846,12 +796,11 @@ class BrIf0Module implements Module {
 
   i32 _func42(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       arg0 = frame.peek();
@@ -863,12 +812,11 @@ class BrIf0Module implements Module {
 
   i32 _func43(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       globals.a = frame.pop();
@@ -880,12 +828,11 @@ class BrIf0Module implements Module {
 
   i32 _func44() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_load(2, 0);
@@ -895,12 +842,11 @@ class BrIf0Module implements Module {
 
   i32 _func45() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(30);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_load8_s(0, 0);
@@ -910,12 +856,11 @@ class BrIf0Module implements Module {
 
   i32 _func46() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(30);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(7);
@@ -927,13 +872,12 @@ class BrIf0Module implements Module {
 
   i32 _func47() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.i32_const(31);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_store(2, 0);
@@ -944,12 +888,11 @@ class BrIf0Module implements Module {
 
   i32 _func48() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(32);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(7);
@@ -961,13 +904,12 @@ class BrIf0Module implements Module {
 
   i32 _func49() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.i32_const(33);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_store16(1, 0);
@@ -978,12 +920,11 @@ class BrIf0Module implements Module {
 
   f64 _func50() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => f64
     {
       frame.f64_const(1.0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.f64_neg();
@@ -993,12 +934,11 @@ class BrIf0Module implements Module {
 
   i32 _func51() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(10);
@@ -1009,13 +949,12 @@ class BrIf0Module implements Module {
 
   i32 _func52() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(10);
       frame.i32_const(1);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_sub();
@@ -1025,12 +964,11 @@ class BrIf0Module implements Module {
 
   i32 _func53() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_eqz();
@@ -1040,12 +978,11 @@ class BrIf0Module implements Module {
 
   i32 _func54() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_const(10);
@@ -1056,13 +993,12 @@ class BrIf0Module implements Module {
 
   i32 _func55() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(10);
       frame.i32_const(1);
       frame.i32_const(42);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.i32_ne();
@@ -1072,12 +1008,11 @@ class BrIf0Module implements Module {
 
   i32 _func56() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.memory_grow(0);
@@ -1088,17 +1023,16 @@ class BrIf0Module implements Module {
   i32 _func57(i32 arg0) {
     final frame = Frame(this);
     frame.i32_const(1);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.drop();
       frame.i32_const(4);
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(8);
         frame.push(arg0);
         if (frame.pop() != 0) {
-          frame.unwindTo(1, 1);
           break block_label_0;
         }
         frame.drop();
@@ -1113,22 +1047,20 @@ class BrIf0Module implements Module {
   i32 _func58(i32 arg0) {
     final frame = Frame(this);
     frame.i32_const(1);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.drop();
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(8);
         frame.push(arg0);
         if (frame.pop() != 0) {
-          frame.unwindTo(1, 1);
           break block_label_0;
         }
         frame.drop();
         frame.i32_const(4);
       }
-      frame.unwindTo(1, 1);
       break block_label_0;
 
       frame.i32_const(16);
@@ -1140,16 +1072,15 @@ class BrIf0Module implements Module {
   i32 _func59(i32 arg0) {
     final frame = Frame(this);
     frame.i32_const(1);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.drop();
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(8);
         frame.push(arg0);
         if (frame.pop() != 0) {
-          frame.unwindTo(1, 1);
           break block_label_0;
         }
         frame.drop();
@@ -1157,7 +1088,6 @@ class BrIf0Module implements Module {
       }
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(1, 1);
         break block_label_0;
       }
       frame.drop();
@@ -1170,24 +1100,22 @@ class BrIf0Module implements Module {
   i32 _func60(i32 arg0) {
     final frame = Frame(this);
     frame.i32_const(1);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.drop();
       frame.i32_const(4);
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(8);
         frame.push(arg0);
         if (frame.pop() != 0) {
-          frame.unwindTo(1, 1);
           break block_label_0;
         }
         frame.drop();
         frame.i32_const(1);
       }
       if (frame.pop() != 0) {
-        frame.unwindTo(1, 1);
         break block_label_0;
       }
       frame.drop();
@@ -1200,16 +1128,15 @@ class BrIf0Module implements Module {
   i32 _func61(i32 arg0) {
     final frame = Frame(this);
     frame.i32_const(1);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.drop();
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(8);
         frame.push(arg0);
         if (frame.pop() != 0) {
-          frame.unwindTo(1, 1);
           break block_label_0;
         }
         frame.drop();
@@ -1219,7 +1146,6 @@ class BrIf0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(1, 1);
           break block_label_0;
       }
 
@@ -1232,17 +1158,16 @@ class BrIf0Module implements Module {
   i32 _func62(i32 arg0) {
     final frame = Frame(this);
     frame.i32_const(1);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
       frame.drop();
       frame.i32_const(4);
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(8);
         frame.push(arg0);
         if (frame.pop() != 0) {
-          frame.unwindTo(1, 1);
           break block_label_0;
         }
         frame.drop();
@@ -1251,7 +1176,6 @@ class BrIf0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(1, 1);
           break block_label_0;
       }
 

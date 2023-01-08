@@ -128,15 +128,12 @@ class Sha3Module implements Module {
               var t0 = frame.pop();
               switch (t0) {
                 case 0:
-                  frame.unwindTo(0, 0);
                   break block_label_1;
 
                 case 1:
-                  frame.unwindTo(0, 0);
                   break block_label_2;
 
                 default:
-                  frame.unwindTo(0, 0);
                   break block_label_3;
               }
             }
@@ -144,19 +141,16 @@ class Sha3Module implements Module {
           frame.push(arg1);
           frame.i64_const(31);
           frame.i64_store8(0, 0);
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg1);
         frame.i64_const(1);
         frame.i64_store8(0, 0);
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.push(arg1);
       frame.i64_const(6);
       frame.i64_store8(0, 0);
-      frame.unwindTo(0, 0);
       break block_label_0;
     }
     block_label_0:
@@ -173,7 +167,6 @@ class Sha3Module implements Module {
         frame.i32_const(0);
         frame.i32_eq();
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg2);
@@ -256,7 +249,6 @@ class Sha3Module implements Module {
         frame.push(arg2);
         frame.i32_eq();
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         block_label_2:
@@ -267,7 +259,6 @@ class Sha3Module implements Module {
           frame.i32_const(8);
           frame.i32_lt_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(2, 0);
             break block_label_2;
           }
           frame.push(arg0);
@@ -371,7 +362,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -386,7 +376,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -401,7 +390,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -416,7 +404,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -431,7 +418,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -446,7 +432,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -461,7 +446,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -476,7 +460,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -491,7 +474,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -506,7 +488,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -521,7 +502,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -536,7 +516,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -551,7 +530,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -566,7 +544,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -581,7 +558,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -596,7 +572,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -611,7 +586,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -626,7 +600,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -641,7 +614,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -656,7 +628,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -671,7 +642,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -686,7 +656,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -701,7 +670,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -716,7 +684,6 @@ class Sha3Module implements Module {
           frame.push(local3);
           frame.i32_ge_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg1);
@@ -728,7 +695,6 @@ class Sha3Module implements Module {
         frame.push(arg2);
         frame.i32_ge_u();
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg1);

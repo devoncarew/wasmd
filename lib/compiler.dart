@@ -1248,11 +1248,13 @@ enum BlockType {
       var jumpKind = loopType ? 'continue' : 'break';
 
       var code = popCondition ? 'if (frame.pop() != 0) {\n' : '';
-      if (breakType) {
-        // adjust stack
-        code +=
-            '  frame.unwindTo(${scope.entryDepth}, ${scope.blockArgCount});\n';
-      }
+      // TODO: Our logic here needs to be re-worked.
+      // if (breakType) {
+      //   // adjust stack
+      //   var unwindTo = scope.entryDepth - scope.blockParamCount;
+      //   var retainTop = scope.blockReturnCount;
+      //   code += '  frame.unwindTo($unwindTo, $retainTop);\n';
+      // }
       code += '  $jumpKind $label;$desc\n';
       if (popCondition) code += '}';
       return Code(code);
@@ -1286,7 +1288,8 @@ class FunctionType {
   @override
   String toString() {
     var params = parameterTypes.map((e) => e.toString()).join(', ');
-    return '$resultTypeDisplayName func($params)';
+    var result = resultType.map((e) => e.toString()).join(', ');
+    return '$params => $result';
   }
 }
 
@@ -1659,6 +1662,8 @@ class Scope {
 
   int nextTempId = 0;
 
+  bool _unreachable = false;
+
   Scope({this.parent, this.blockType}) {
     // TODO: improve the temp allocation logic
     if (parent != null) {
@@ -1668,11 +1673,17 @@ class Scope {
 
   String get nextTempName => 't${nextTempId++}';
 
+  /// Call to indicate that validating the rest of the stack is not necessary.
+  void unreachable() {
+    _unreachable = true;
+  }
+
   void updateStackDepth(int adjust, String desc) {
     _stackDepth += adjust;
 
-    if (_stackDepth < 0) {
-      print('warning: calculated stack depth is $_stackDepth; $desc');
+    // Stack depth may not go below 0 - num block args.
+    if (_stackDepth < -blockParamCount && !_unreachable) {
+      print(' ** warning: calculated stack depth is $_stackDepth; $desc');
     }
   }
 
@@ -1681,7 +1692,11 @@ class Scope {
 
   int get entryDepth => parent?.stackDepth ?? 0;
 
-  int get blockArgCount => blockType?.returnItems ?? 0;
+  // todo: use thos when popping the stack
+
+  int get blockParamCount => blockType?.paramItems ?? 0;
+
+  int get blockReturnCount => blockType?.returnItems ?? 0;
 }
 
 class ImportedFunction extends ModuleFunction {

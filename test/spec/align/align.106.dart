@@ -41,23 +41,18 @@ class Align106Module implements Module {
               var t0 = frame.pop();
               switch (t0) {
                 case 0:
-                  frame.unwindTo(0, 0);
                   break block_label_4;
 
                 case 1:
-                  frame.unwindTo(0, 0);
                   break block_label_3;
 
                 case 2:
-                  frame.unwindTo(0, 0);
                   break block_label_2;
 
                 case 3:
-                  frame.unwindTo(0, 0);
                   break block_label_1;
 
                 default:
-                  frame.unwindTo(0, 0);
                   break block_label_0;
               }
             }
@@ -67,7 +62,6 @@ class Align106Module implements Module {
             frame.i32_const(0);
             frame.f32_load(2, 0);
             local1 = frame.pop();
-            frame.unwindTo(0, 0);
             break block_label_0;
           }
           frame.i32_const(0);
@@ -76,7 +70,6 @@ class Align106Module implements Module {
           frame.i32_const(0);
           frame.f32_load(0, 0);
           local1 = frame.pop();
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.i32_const(0);
@@ -85,7 +78,6 @@ class Align106Module implements Module {
         frame.i32_const(0);
         frame.f32_load(1, 0);
         local1 = frame.pop();
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.i32_const(0);
@@ -122,27 +114,21 @@ class Align106Module implements Module {
                 var t0 = frame.pop();
                 switch (t0) {
                   case 0:
-                    frame.unwindTo(0, 0);
                     break block_label_5;
 
                   case 1:
-                    frame.unwindTo(0, 0);
                     break block_label_4;
 
                   case 2:
-                    frame.unwindTo(0, 0);
                     break block_label_3;
 
                   case 3:
-                    frame.unwindTo(0, 0);
                     break block_label_2;
 
                   case 4:
-                    frame.unwindTo(0, 0);
                     break block_label_1;
 
                   default:
-                    frame.unwindTo(0, 0);
                     break block_label_0;
                 }
               }
@@ -152,7 +138,6 @@ class Align106Module implements Module {
               frame.i32_const(0);
               frame.f64_load(3, 0);
               local1 = frame.pop();
-              frame.unwindTo(0, 0);
               break block_label_0;
             }
             frame.i32_const(0);
@@ -161,7 +146,6 @@ class Align106Module implements Module {
             frame.i32_const(0);
             frame.f64_load(0, 0);
             local1 = frame.pop();
-            frame.unwindTo(0, 0);
             break block_label_0;
           }
           frame.i32_const(0);
@@ -170,7 +154,6 @@ class Align106Module implements Module {
           frame.i32_const(0);
           frame.f64_load(1, 0);
           local1 = frame.pop();
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.i32_const(0);
@@ -179,7 +162,6 @@ class Align106Module implements Module {
         frame.i32_const(0);
         frame.f64_load(2, 0);
         local1 = frame.pop();
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.i32_const(0);
@@ -216,27 +198,21 @@ class Align106Module implements Module {
                 var t0 = frame.pop();
                 switch (t0) {
                   case 0:
-                    frame.unwindTo(0, 0);
                     break block_label_5;
 
                   case 1:
-                    frame.unwindTo(0, 0);
                     break block_label_4;
 
                   case 2:
-                    frame.unwindTo(0, 0);
                     break block_label_3;
 
                   case 3:
-                    frame.unwindTo(0, 0);
                     break block_label_2;
 
                   case 4:
-                    frame.unwindTo(0, 0);
                     break block_label_1;
 
                   default:
-                    frame.unwindTo(0, 0);
                     break block_label_0;
                 }
               }
@@ -264,7 +240,6 @@ class Align106Module implements Module {
                 frame.i32_load8_s(0, 0);
                 local1 = frame.pop();
               }
-              frame.unwindTo(0, 0);
               break block_label_0;
             }
             frame.push(arg1);
@@ -291,7 +266,6 @@ class Align106Module implements Module {
               frame.i32_load8_u(0, 0);
               local1 = frame.pop();
             }
-            frame.unwindTo(0, 0);
             break block_label_0;
           }
           frame.push(arg1);
@@ -330,7 +304,6 @@ class Align106Module implements Module {
             frame.i32_load16_s(1, 0);
             local1 = frame.pop();
           }
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg1);
@@ -369,7 +342,6 @@ class Align106Module implements Module {
           frame.i32_load16_u(1, 0);
           local1 = frame.pop();
         }
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.push(arg1);
@@ -452,35 +424,27 @@ class Align106Module implements Module {
                     var t0 = frame.pop();
                     switch (t0) {
                       case 0:
-                        frame.unwindTo(0, 0);
                         break block_label_7;
 
                       case 1:
-                        frame.unwindTo(0, 0);
                         break block_label_6;
 
                       case 2:
-                        frame.unwindTo(0, 0);
                         break block_label_5;
 
                       case 3:
-                        frame.unwindTo(0, 0);
                         break block_label_4;
 
                       case 4:
-                        frame.unwindTo(0, 0);
                         break block_label_3;
 
                       case 5:
-                        frame.unwindTo(0, 0);
                         break block_label_2;
 
                       case 6:
-                        frame.unwindTo(0, 0);
                         break block_label_1;
 
                       default:
-                        frame.unwindTo(0, 0);
                         break block_label_0;
                     }
                   }
@@ -508,7 +472,6 @@ class Align106Module implements Module {
                     frame.i64_load8_s(0, 0);
                     local1 = frame.pop();
                   }
-                  frame.unwindTo(0, 0);
                   break block_label_0;
                 }
                 frame.push(arg1);
@@ -535,7 +498,6 @@ class Align106Module implements Module {
                   frame.i64_load8_u(0, 0);
                   local1 = frame.pop();
                 }
-                frame.unwindTo(0, 0);
                 break block_label_0;
               }
               frame.push(arg1);
@@ -574,7 +536,6 @@ class Align106Module implements Module {
                 frame.i64_load16_s(1, 0);
                 local1 = frame.pop();
               }
-              frame.unwindTo(0, 0);
               break block_label_0;
             }
             frame.push(arg1);
@@ -613,7 +574,6 @@ class Align106Module implements Module {
               frame.i64_load16_u(1, 0);
               local1 = frame.pop();
             }
-            frame.unwindTo(0, 0);
             break block_label_0;
           }
           frame.push(arg1);
@@ -664,7 +624,6 @@ class Align106Module implements Module {
             frame.i64_load32_s(2, 0);
             local1 = frame.pop();
           }
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg1);
@@ -715,7 +674,6 @@ class Align106Module implements Module {
           frame.i64_load32_u(2, 0);
           local1 = frame.pop();
         }
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.push(arg1);

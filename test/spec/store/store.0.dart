@@ -54,7 +54,6 @@ class Store0Module implements Module {
       frame.i32_const(0);
       frame.i32_const(1);
       frame.i32_store(2, 0);
-      frame.unwindTo(0, 0);
       break block_label_0;
     }
   }
@@ -68,7 +67,6 @@ class Store0Module implements Module {
       frame.i32_store(2, 0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
     }
@@ -83,7 +81,6 @@ class Store0Module implements Module {
       frame.i32_const(1);
       frame.i32_store(2, 0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
     }
@@ -100,7 +97,6 @@ class Store0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(0, 0);
           break block_label_0;
       }
     }

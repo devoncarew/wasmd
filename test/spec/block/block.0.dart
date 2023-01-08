@@ -99,7 +99,7 @@ class Block0Module implements Module {
     {
       /* nop */
     }
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(7);
     }
@@ -115,7 +115,7 @@ class Block0Module implements Module {
       _dummy();
       _dummy();
     }
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       _dummy();
@@ -124,7 +124,7 @@ class Block0Module implements Module {
       _dummy();
     }
     frame.drop();
-    block_label_0:
+    block_label_0: //  => i32, i64, i32
     {
       _dummy();
       _dummy();
@@ -149,7 +149,7 @@ class Block0Module implements Module {
 
   i32 _func04() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       block_label_1:
       {
@@ -158,7 +158,7 @@ class Block0Module implements Module {
         {}
         /* nop */
       }
-      block_label_1:
+      block_label_1: // => i32
       {
         _dummy();
         frame.i32_const(9);
@@ -169,81 +169,81 @@ class Block0Module implements Module {
 
   i32 _func05() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
-      block_label_1:
+      block_label_1: // => i32
       {
-        block_label_2:
+        block_label_2: // => i32
         {
-          block_label_3:
+          block_label_3: // => i32
           {
-            block_label_4:
+            block_label_4: // => i32
             {
-              block_label_5:
+              block_label_5: // => i32
               {
-                block_label_6:
+                block_label_6: // => i32
                 {
-                  block_label_7:
+                  block_label_7: // => i32
                   {
-                    block_label_8:
+                    block_label_8: // => i32
                     {
-                      block_label_9:
+                      block_label_9: // => i32
                       {
-                        block_label_10:
+                        block_label_10: // => i32
                         {
-                          block_label_11:
+                          block_label_11: // => i32
                           {
-                            block_label_12:
+                            block_label_12: // => i32
                             {
-                              block_label_13:
+                              block_label_13: // => i32
                               {
-                                block_label_14:
+                                block_label_14: // => i32
                                 {
-                                  block_label_15:
+                                  block_label_15: // => i32
                                   {
-                                    block_label_16:
+                                    block_label_16: // => i32
                                     {
-                                      block_label_17:
+                                      block_label_17: // => i32
                                       {
-                                        block_label_18:
+                                        block_label_18: // => i32
                                         {
-                                          block_label_19:
+                                          block_label_19: // => i32
                                           {
-                                            block_label_20:
+                                            block_label_20: // => i32
                                             {
-                                              block_label_21:
+                                              block_label_21: // => i32
                                               {
-                                                block_label_22:
+                                                block_label_22: // => i32
                                                 {
-                                                  block_label_23:
+                                                  block_label_23: // => i32
                                                   {
-                                                    block_label_24:
+                                                    block_label_24: // => i32
                                                     {
-                                                      block_label_25:
+                                                      block_label_25: // => i32
                                                       {
-                                                        block_label_26:
+                                                        block_label_26: // => i32
                                                         {
-                                                          block_label_27:
+                                                          block_label_27: // => i32
                                                           {
-                                                            block_label_28:
+                                                            block_label_28: // => i32
                                                             {
-                                                              block_label_29:
+                                                              block_label_29: // => i32
                                                               {
-                                                                block_label_30:
+                                                                block_label_30: // => i32
                                                                 {
-                                                                  block_label_31:
+                                                                  block_label_31: // => i32
                                                                   {
-                                                                    block_label_32:
+                                                                    block_label_32: // => i32
                                                                     {
-                                                                      block_label_33:
+                                                                      block_label_33: // => i32
                                                                       {
-                                                                        block_label_34:
+                                                                        block_label_34: // => i32
                                                                         {
-                                                                          block_label_35:
+                                                                          block_label_35: // => i32
                                                                           {
-                                                                            block_label_36:
+                                                                            block_label_36: // => i32
                                                                             {
-                                                                              block_label_37:
+                                                                              block_label_37: // => i32
                                                                               {
                                                                                 _dummy();
                                                                                 frame.i32_const(150);
@@ -290,7 +290,7 @@ class Block0Module implements Module {
 
   i32 _func06() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -303,7 +303,7 @@ class Block0Module implements Module {
   i32 _func07() {
     final frame = Frame(this);
     frame.i32_const(2);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -316,7 +316,7 @@ class Block0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(2);
     frame.i32_const(3);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -329,7 +329,7 @@ class Block0Module implements Module {
 
     loop_label_0:
     for (;;) {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
@@ -346,7 +346,7 @@ class Block0Module implements Module {
     loop_label_0:
     for (;;) {
       _dummy();
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
@@ -363,7 +363,7 @@ class Block0Module implements Module {
     for (;;) {
       _dummy();
       _dummy();
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
@@ -374,7 +374,7 @@ class Block0Module implements Module {
 
   void _func12() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -389,7 +389,7 @@ class Block0Module implements Module {
     frame.i32_const(1);
     if_label_0:
     if (frame.pop() != 0) {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
@@ -406,7 +406,7 @@ class Block0Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(2);
     } else {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
@@ -416,15 +416,14 @@ class Block0Module implements Module {
 
   i32 _func15() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
       frame.i32_const(2);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -433,15 +432,14 @@ class Block0Module implements Module {
 
   i32 _func16() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -450,9 +448,9 @@ class Block0Module implements Module {
 
   i32 _func17() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
@@ -460,11 +458,9 @@ class Block0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -473,21 +469,19 @@ class Block0Module implements Module {
 
   i32 _func18() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -502,9 +496,9 @@ class Block0Module implements Module {
 
   i32 _func20() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
@@ -523,10 +517,10 @@ class Block0Module implements Module {
 
   i32 _func21() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(2);
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
@@ -544,11 +538,11 @@ class Block0Module implements Module {
 
   i32 _func22() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(0);
       }
@@ -565,7 +559,7 @@ class Block0Module implements Module {
 
   void _func23() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -576,7 +570,7 @@ class Block0Module implements Module {
   void _func24() {
     final frame = Frame(this);
     frame.i32_const(10);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -585,7 +579,7 @@ class Block0Module implements Module {
 
   i32 _func25() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -601,7 +595,7 @@ class Block0Module implements Module {
 
   i32 _func27() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -614,7 +608,7 @@ class Block0Module implements Module {
 
   i32 _func28() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -624,7 +618,7 @@ class Block0Module implements Module {
 
   void _func29() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -633,13 +627,12 @@ class Block0Module implements Module {
 
   i32 _func30() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
       }
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -649,7 +642,7 @@ class Block0Module implements Module {
     i32 local0 = 0;
 
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -662,7 +655,7 @@ class Block0Module implements Module {
     i32 local0 = 0;
 
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -672,7 +665,7 @@ class Block0Module implements Module {
 
   i32 _func33() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -683,7 +676,7 @@ class Block0Module implements Module {
 
   i32 _func34() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
     }
@@ -693,7 +686,7 @@ class Block0Module implements Module {
 
   i32 _func35() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       frame.i32_const(13);
@@ -704,12 +697,12 @@ class Block0Module implements Module {
 
   i32 _func36() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       frame.i32_const(3);
     }
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       frame.i32_const(4);
@@ -720,7 +713,7 @@ class Block0Module implements Module {
 
   i32 _func37() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       frame.i32_const(13);
@@ -731,12 +724,12 @@ class Block0Module implements Module {
 
   i32 _func38() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => f32
     {
       _dummy();
       frame.f32_const(3.0);
     }
-    block_label_0:
+    block_label_0: // => f32
     {
       _dummy();
       frame.f32_const(3.0);
@@ -747,7 +740,7 @@ class Block0Module implements Module {
 
   i32 _func39() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: //  => i32, i32
     {
       _dummy();
       frame.i32_const(3);
@@ -760,7 +753,7 @@ class Block0Module implements Module {
 
   i32 _func40() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: //  => f32, f32
     {
       _dummy();
       frame.f32_const(3.0);
@@ -773,7 +766,7 @@ class Block0Module implements Module {
 
   i32 _func41() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: //  => i32, i32
     {
       _dummy();
       frame.i32_const(3);
@@ -790,7 +783,6 @@ class Block0Module implements Module {
     final frame = Frame(this);
     block_label_0:
     {
-      frame.unwindTo(0, 0);
       break block_label_0;
 
       throw Trap('unreachable');
@@ -799,7 +791,6 @@ class Block0Module implements Module {
     {
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       throw Trap('unreachable');
@@ -810,7 +801,6 @@ class Block0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(0, 0);
           break block_label_0;
       }
 
@@ -822,15 +812,12 @@ class Block0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 0);
           break block_label_0;
 
         case 1:
-          frame.unwindTo(0, 0);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 0);
           break block_label_0;
       }
 
@@ -842,10 +829,9 @@ class Block0Module implements Module {
 
   i32 _func43() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(18);
-      frame.unwindTo(0, 1);
       break block_label_0;
 
       frame.i32_const(19);
@@ -855,12 +841,11 @@ class Block0Module implements Module {
 
   Tuple3<i32, i32, i64> _func44() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: //  => i32, i32, i64
     {
       frame.i32_const(18);
       frame.i32_const(-18);
       frame.i64_const(18);
-      frame.unwindTo(0, 3);
       break block_label_0;
 
       frame.i32_const(19);
@@ -872,32 +857,27 @@ class Block0Module implements Module {
 
   i32 _func45() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(18);
-      frame.unwindTo(0, 1);
       break block_label_0;
 
       frame.i32_const(19);
-      frame.unwindTo(0, 1);
       break block_label_0;
 
       frame.i32_const(20);
       frame.i32_const(0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
       frame.i32_const(20);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
       frame.i32_const(21);
-      frame.unwindTo(0, 1);
       break block_label_0;
 
       frame.i32_const(22);
@@ -905,7 +885,6 @@ class Block0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -914,15 +893,12 @@ class Block0Module implements Module {
       var t1 = frame.pop();
       switch (t1) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         case 1:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -938,23 +914,21 @@ class Block0Module implements Module {
     frame.i32_const(0);
     local0 = frame.pop();
     frame.push(local0);
-    block_label_0:
+    block_label_0: // => i32
     {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(1);
-        frame.unwindTo(1, 1);
         break block_label_0;
       }
     }
     frame.i32_add();
     local0 = frame.pop();
     frame.push(local0);
-    block_label_0:
+    block_label_0: // => i32
     {
       block_label_1:
       {
-        frame.unwindTo(0, 0);
         break block_label_1;
       }
       frame.i32_const(2);
@@ -962,10 +936,9 @@ class Block0Module implements Module {
     frame.i32_add();
     local0 = frame.pop();
     frame.push(local0);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(4);
-      frame.unwindTo(-1, 1);
       break block_label_0;
 
       frame.i32_ctz();
@@ -973,12 +946,11 @@ class Block0Module implements Module {
     frame.i32_add();
     local0 = frame.pop();
     frame.push(local0);
-    block_label_0:
+    block_label_0: // => i32
     {
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.i32_const(8);
-        frame.unwindTo(-2, 1);
         break block_label_0;
       }
       frame.i32_ctz();
@@ -992,7 +964,7 @@ class Block0Module implements Module {
   i32 _func47() {
     final frame = Frame(this);
     frame.i32_const(1);
-    block_label_0:
+    block_label_0: // i32 => i32
     {
       frame.i32_const(2);
       frame.i32_add();
@@ -1004,7 +976,7 @@ class Block0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(2);
-    block_label_0:
+    block_label_0: // i32, i32 => i32
     {
       frame.i32_add();
     }
@@ -1015,7 +987,7 @@ class Block0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(2);
-    block_label_0:
+    block_label_0: // i32, i32 => i32, i32
     {}
     frame.i32_add();
     return frame.pop();
@@ -1024,11 +996,10 @@ class Block0Module implements Module {
   i32 _func50() {
     final frame = Frame(this);
     frame.i32_const(1);
-    block_label_0:
+    block_label_0: // i32 => i32
     {
       frame.i32_const(2);
       frame.i32_add();
-      frame.unwindTo(1, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -1038,10 +1009,9 @@ class Block0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(2);
-    block_label_0:
+    block_label_0: // i32, i32 => i32
     {
       frame.i32_add();
-      frame.unwindTo(2, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -1051,9 +1021,8 @@ class Block0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(2);
-    block_label_0:
+    block_label_0: // i32, i32 => i32, i32
     {
-      frame.unwindTo(2, 2);
       break block_label_0;
     }
     frame.i32_add();
@@ -1080,7 +1049,6 @@ class Block0Module implements Module {
       frame.i32_const(7);
       frame.i32_mul();
       local0 = frame.pop();
-      frame.unwindTo(0, 0);
       break block_label_0;
 
       frame.push(local0);
@@ -1098,34 +1066,34 @@ class Block0Module implements Module {
     final frame = Frame(this);
     block_label_0:
     {}
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(0);
     }
-    block_label_0:
+    block_label_0: // i32 =>
     {
       frame.drop();
     }
     frame.i32_const(0);
     frame.f64_const(0.0);
     frame.i32_const(0);
-    block_label_0:
+    block_label_0: // i32, f64, i32 => i32, f64, i32
     {}
     frame.drop();
     frame.drop();
     frame.drop();
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(0);
     }
-    block_label_0:
+    block_label_0: // i32 =>
     {
       frame.drop();
     }
     frame.i32_const(0);
     frame.f64_const(0.0);
     frame.i32_const(0);
-    block_label_0:
+    block_label_0: // i32, f64, i32 => i32, f64, i32
     {}
     frame.drop();
     frame.drop();

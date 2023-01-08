@@ -32,7 +32,6 @@ class FloatExprs94Module implements Module {
       frame.i32_const(1);
       frame.i32_lt_s();
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
       frame.f64_const(1.0);
