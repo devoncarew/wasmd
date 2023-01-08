@@ -1069,7 +1069,7 @@ class Loop0Module implements Module {
         loop_label_2:
         for (;;) {
           frame.i32_const(2);
-          frame.unwindTo(0, 1);
+          frame.unwindTo(1, 1);
           break block_label_0;
 
           break;
@@ -1089,7 +1089,7 @@ class Loop0Module implements Module {
           loop_label_3:
           for (;;) {
             frame.i32_const(4);
-            frame.unwindTo(-1, 1);
+            frame.unwindTo(1, 1);
             break block_label_2;
 
             break;
@@ -1106,7 +1106,7 @@ class Loop0Module implements Module {
       loop_label_1:
       for (;;) {
         frame.i32_const(8);
-        frame.unwindTo(-2, 1);
+        frame.unwindTo(1, 1);
         break block_label_0;
 
         frame.i32_ctz();
@@ -1123,7 +1123,7 @@ class Loop0Module implements Module {
         loop_label_2:
         for (;;) {
           frame.i32_const(16);
-          frame.unwindTo(-3, 1);
+          frame.unwindTo(1, 1);
           break block_label_0;
 
           break;
@@ -1434,7 +1434,7 @@ class Loop0Module implements Module {
             frame.f32_const(0.0);
             frame.f32_eq();
             if (frame.pop() != 0) {
-              frame.unwindTo(1, 0);
+              frame.unwindTo(0, 0);
               break block_label_2;
             }
             frame.push(local0);

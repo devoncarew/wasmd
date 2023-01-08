@@ -267,7 +267,7 @@ class Sha3Module implements Module {
           frame.i32_const(8);
           frame.i32_lt_u();
           if (frame.pop() != 0) {
-            frame.unwindTo(2, 0);
+            frame.unwindTo(0, 0);
             break block_label_2;
           }
           frame.push(arg0);

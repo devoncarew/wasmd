@@ -954,7 +954,7 @@ class Block0Module implements Module {
     {
       block_label_1:
       {
-        frame.unwindTo(0, 0);
+        frame.unwindTo(1, 0);
         break block_label_1;
       }
       frame.i32_const(2);
@@ -965,7 +965,7 @@ class Block0Module implements Module {
     block_label_0:
     {
       frame.i32_const(4);
-      frame.unwindTo(-1, 1);
+      frame.unwindTo(1, 1);
       break block_label_0;
 
       frame.i32_ctz();
@@ -978,7 +978,7 @@ class Block0Module implements Module {
       block_label_1:
       {
         frame.i32_const(8);
-        frame.unwindTo(-2, 1);
+        frame.unwindTo(1, 1);
         break block_label_0;
       }
       frame.i32_ctz();

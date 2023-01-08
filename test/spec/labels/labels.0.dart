@@ -220,7 +220,7 @@ class Labels0Module implements Module {
       frame.i32_const(1);
       if_label_1:
       if (frame.pop() != 0) {
-        frame.unwindTo(1, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -233,7 +233,7 @@ class Labels0Module implements Module {
       frame.i32_const(1);
       if_label_1:
       if (frame.pop() != 0) {
-        frame.unwindTo(2, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -249,7 +249,7 @@ class Labels0Module implements Module {
       frame.i32_const(1);
       if_label_1:
       if (frame.pop() != 0) {
-        frame.unwindTo(3, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -268,7 +268,7 @@ class Labels0Module implements Module {
         frame.i32_const(888);
         i = frame.pop();
       } else {
-        frame.unwindTo(4, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -284,7 +284,7 @@ class Labels0Module implements Module {
         frame.i32_const(888);
         i = frame.pop();
       } else {
-        frame.unwindTo(5, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -310,7 +310,7 @@ class Labels0Module implements Module {
       frame.i32_const(1);
       if_label_1:
       if (frame.pop() != 0) {
-        frame.unwindTo(1, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -323,7 +323,7 @@ class Labels0Module implements Module {
       frame.i32_const(1);
       if_label_1:
       if (frame.pop() != 0) {
-        frame.unwindTo(2, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -339,7 +339,7 @@ class Labels0Module implements Module {
       frame.i32_const(1);
       if_label_1:
       if (frame.pop() != 0) {
-        frame.unwindTo(3, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -358,7 +358,7 @@ class Labels0Module implements Module {
         frame.i32_const(888);
         i = frame.pop();
       } else {
-        frame.unwindTo(4, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -374,7 +374,7 @@ class Labels0Module implements Module {
         frame.i32_const(888);
         i = frame.pop();
       } else {
-        frame.unwindTo(5, 0);
+        frame.unwindTo(0, 0);
         break if_label_1;
 
         frame.i32_const(666);
@@ -647,7 +647,7 @@ class Labels0Module implements Module {
           block_label_3:
           {
             frame.i32_const(1);
-            frame.unwindTo(0, 1);
+            frame.unwindTo(1, 1);
             break block_label_3;
           }
           frame.drop();
@@ -683,7 +683,7 @@ class Labels0Module implements Module {
       block_label_1:
       {
         frame.i32_const(3);
-        frame.unwindTo(0, 1);
+        frame.unwindTo(1, 1);
         break block_label_1;
       }
       frame.i32_add();

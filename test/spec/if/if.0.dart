@@ -875,7 +875,7 @@ class If0Module implements Module {
     frame.i32_const(1);
     if_label_0:
     if (frame.pop() != 0) {
-      frame.unwindTo(1, 0);
+      frame.unwindTo(0, 0);
       break if_label_0;
 
       throw Trap('unreachable');
@@ -883,7 +883,7 @@ class If0Module implements Module {
     frame.i32_const(1);
     if_label_0:
     if (frame.pop() != 0) {
-      frame.unwindTo(2, 0);
+      frame.unwindTo(0, 0);
       break if_label_0;
 
       throw Trap('unreachable');
@@ -895,7 +895,7 @@ class If0Module implements Module {
     if (frame.pop() != 0) {
       throw Trap('unreachable');
     } else {
-      frame.unwindTo(3, 0);
+      frame.unwindTo(0, 0);
       break if_label_0;
 
       throw Trap('unreachable');
@@ -905,7 +905,7 @@ class If0Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(4, 0);
+        frame.unwindTo(0, 0);
         break if_label_0;
       }
       throw Trap('unreachable');
@@ -915,7 +915,7 @@ class If0Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(5, 0);
+        frame.unwindTo(0, 0);
         break if_label_0;
       }
       throw Trap('unreachable');
@@ -929,7 +929,7 @@ class If0Module implements Module {
     } else {
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(6, 0);
+        frame.unwindTo(0, 0);
         break if_label_0;
       }
       throw Trap('unreachable');
@@ -941,7 +941,7 @@ class If0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(7, 0);
+          frame.unwindTo(0, 0);
           break if_label_0;
       }
 
@@ -954,7 +954,7 @@ class If0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(8, 0);
+          frame.unwindTo(0, 0);
           break if_label_0;
       }
 
@@ -971,7 +971,7 @@ class If0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
-          frame.unwindTo(9, 0);
+          frame.unwindTo(0, 0);
           break if_label_0;
       }
 
@@ -987,13 +987,13 @@ class If0Module implements Module {
     if_label_0:
     if (frame.pop() != 0) {
       frame.i32_const(18);
-      frame.unwindTo(1, 1);
+      frame.unwindTo(0, 1);
       break if_label_0;
 
       frame.i32_const(19);
     } else {
       frame.i32_const(21);
-      frame.unwindTo(1, 1);
+      frame.unwindTo(0, 1);
       break if_label_0;
 
       frame.i32_const(20);
@@ -1009,7 +1009,7 @@ class If0Module implements Module {
       frame.i32_const(18);
       frame.i32_const(-18);
       frame.i64_const(18);
-      frame.unwindTo(1, 3);
+      frame.unwindTo(0, 3);
       break if_label_0;
 
       frame.i32_const(19);
@@ -1019,7 +1019,7 @@ class If0Module implements Module {
       frame.i32_const(-18);
       frame.i32_const(18);
       frame.i64_const(-18);
-      frame.unwindTo(1, 3);
+      frame.unwindTo(0, 3);
       break if_label_0;
 
       frame.i32_const(-19);
@@ -1077,12 +1077,12 @@ class If0Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(2);
       frame.i32_add();
-      frame.unwindTo(2, 1);
+      frame.unwindTo(1, 1);
       break if_label_0;
     } else {
       frame.i32_const(-2);
       frame.i32_add();
-      frame.unwindTo(2, 1);
+      frame.unwindTo(1, 1);
       break if_label_0;
     }
     return frame.pop();
@@ -1096,11 +1096,11 @@ class If0Module implements Module {
     if_label_0:
     if (frame.pop() != 0) {
       frame.i32_add();
-      frame.unwindTo(3, 1);
+      frame.unwindTo(2, 1);
       break if_label_0;
     } else {
       frame.i32_sub();
-      frame.unwindTo(3, 1);
+      frame.unwindTo(2, 1);
       break if_label_0;
     }
     return frame.pop();
@@ -1113,7 +1113,7 @@ class If0Module implements Module {
     frame.push(arg0);
     if_label_0:
     if (frame.pop() != 0) {
-      frame.unwindTo(3, 2);
+      frame.unwindTo(2, 2);
       break if_label_0;
     }
     frame.i32_add();
