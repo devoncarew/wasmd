@@ -6,6 +6,13 @@ import 'package:collection/collection.dart';
 import 'compiler.dart' hide ValueType;
 import 'compiler.dart' as compiler show BlockType, FunctionType, ValueType;
 
+// todo: fix stack depth for:
+// - test/spec/block/block_test.dart
+// - test/spec/br/br_test.dart
+// - test/spec/if/if_test.dart
+// - test/spec/loop/loop_test.dart
+// - test/spec/return/return_test.dart
+
 class Instr {
   final Instruction instruction;
   final List<Object> args;
@@ -16,9 +23,7 @@ class Instr {
   ]);
 
   Code generateToStatement(DefinedFunction function) {
-    var code = instruction.generateToStatement(this, function);
-    instruction.updateStackDepth(this, function);
-    return code;
+    return instruction.generateToStatement(this, function);
   }
 
   @override
@@ -32,6 +37,8 @@ class Instruction_Unreachable extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
+    function.scope.unreachable();
+
     if (instr.args.isNotEmpty) {
       var error = instr.args[0] as String;
       return literalString('unreachable ($error)').thrown.statement;
@@ -53,7 +60,6 @@ class Instruction_Nop extends Instruction {
   }
 }
 
-// todo: update stack depth
 class Instruction_Block extends Instruction {
   static const blockOpcode = 0x02;
 
@@ -66,12 +72,14 @@ class Instruction_Block extends Instruction {
 
     function.enterBlock(compiler.BlockType.$block, blocktype);
 
+    var description = blocktype.describe;
+    if (description.isNotEmpty) description = '// $description\n';
+
     var label = function.currentBlockLabel;
-    return Code('$label: {');
+    return Code('$label: $description{');
   }
 }
 
-// todo: update stack depth
 class Instruction_Loop extends Instruction {
   static const loopOpcode = 0x03;
 
@@ -88,7 +96,6 @@ class Instruction_Loop extends Instruction {
   }
 }
 
-// todo: update stack depth
 class Instruction_If extends Instruction {
   static const ifOpcode = 0x04;
 
@@ -98,6 +105,9 @@ class Instruction_If extends Instruction {
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var blocktype = BlockType.from(instr.args[0] as int, function);
 
+    // pop off the expr to eval
+    function.scope.updateStackDepth(-1, name);
+
     function.enterBlock(compiler.BlockType.$if, blocktype);
 
     var label = function.currentBlockLabel;
@@ -105,12 +115,20 @@ class Instruction_If extends Instruction {
   }
 }
 
-// todo: update stack depth
 class Instruction_Else extends Instruction {
   Instruction_Else() : super('else', 0x05, '');
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
+    // // Pop the if scope; push on a new scope using the blocktype of the matching
+    // // 'if' statement (if - else - end).
+
+    // var oldScope = function.scope;
+    // function.exitBlock();
+    // // update the stack - push on the block results
+    // function.scope.updateStackDepth(oldScope.blockArgCount, name);
+    // function.enterBlock(compiler.BlockType.$if, oldScope.blockType!);
+
     return Code('} else {\n');
   }
 }
@@ -124,7 +142,12 @@ class Instruction_End extends Instruction {
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var frame = refer('frame');
 
+    var oldScope = function.scope;
     var oldNesting = function.exitBlock();
+
+    // update the stack - push on the block results
+    function.scope.updateStackDepth(
+        oldScope.blockReturnCount - oldScope.blockParamCount, name);
 
     if (oldNesting != null && oldNesting.loopType) {
       return Code('break;\n}');
@@ -165,6 +188,9 @@ class Instruction_BrIf extends Instruction {
     var label = function.labelNameFromIndex(immediate);
     var scope = function.scopeForIndex(immediate);
     var blockKind = function.blockNestingFromIndex(immediate);
+
+    function.scope.updateStackDepth(-1, name);
+
     return blockKind.generateBranchFor(function, label, scope,
         name: 'br_if', popCondition: true);
   }
@@ -213,6 +239,8 @@ class Instruction_BrTable extends Instruction {
     }
     switchStatement.writeln('}');
 
+    function.scope.updateStackDepth(-1, name);
+
     return Block.of([
       declareVar(varName).assign(CodeExpression(Code('frame.pop()'))).statement,
       Code(switchStatement.toString()),
@@ -252,6 +280,12 @@ class BlockType {
     }
   }
 
+  int get paramItems {
+    if (valueType != null) return 1;
+    if (functionType != null) return functionType!.parameterTypes.length;
+    return 0;
+  }
+
   int get returnItems {
     if (valueType != null) return 1;
     if (functionType != null) return functionType!.resultType.length;
@@ -259,7 +293,7 @@ class BlockType {
   }
 
   String get describe {
-    if (valueType != null) return valueType!.name;
+    if (valueType != null) return '=> ${valueType!.name}';
     if (functionType != null) return functionType!.toString();
     return '';
   }
@@ -273,6 +307,8 @@ class Instruction_LocalGet extends Instruction {
     var immediate = instr.args[0] as int;
     var localName = function.variables[immediate].name;
 
+    function.scope.updateStackDepth(1, name);
+
     return refer('frame').property('push').call([refer(localName)]).statement;
   }
 }
@@ -284,6 +320,8 @@ class Instruction_LocalSet extends Instruction {
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
     var localName = function.variables[immediate].name;
+
+    function.scope.updateStackDepth(-1, name);
 
     return refer(localName)
         .assign(refer('frame').property('pop').call([]))
@@ -309,9 +347,11 @@ class Instruction_GlobalGet extends Instruction {
   Instruction_GlobalGet() : super('global.get', 0x23, '(u32) => any');
 
   @override
-  Code generateToStatement(Instr instr, ModuleFunction function) {
+  Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
     var global = function.module.globals.globals[immediate];
+
+    function.scope.updateStackDepth(1, name);
 
     return refer('frame')
         .property('push')
@@ -323,9 +363,11 @@ class Instruction_GlobalSet extends Instruction {
   Instruction_GlobalSet() : super('global.set', 0x24, '(u32) any');
 
   @override
-  Code generateToStatement(Instr instr, ModuleFunction function) {
+  Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
     var global = function.module.globals.globals[immediate];
+
+    function.scope.updateStackDepth(-1, name);
 
     return refer(global.containerName)
         .property(global.name)
@@ -338,7 +380,7 @@ class Instruction_TableGet extends Instruction {
   Instruction_TableGet() : super('table.get', 0x25, '(u32) i32 => any');
 
   @override
-  Code generateToStatement(Instr instr, ModuleFunction function) {
+  Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
     return refer('frame').property('push').call([
       refer('table$immediate').index(refer('frame').property('pop').call([]))
@@ -350,8 +392,10 @@ class Instruction_TableSet extends Instruction {
   Instruction_TableSet() : super('table.set', 0x26, '(u32) i32 => any');
 
   @override
-  Code generateToStatement(Instr instr, ModuleFunction function) {
+  Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
+
+    function.scope.updateStackDepth(-2, name);
 
     return Block.of([
       Code('{'),
@@ -368,20 +412,15 @@ class Instruction_Call extends Instruction {
   Instruction_Call() : super('call', 0x10, '(u32)');
 
   @override
-  void updateStackDepth(Instr instr, DefinedFunction function) {
-    var immediate = instr.args[0] as int;
-    var target = function.module.functionByIndex(immediate)!;
-
-    var paramCount = target.functionType.parameterTypes.length;
-    var resultCount = target.functionType.resultType.length;
-    function.scope.updateStackDepth(resultCount - paramCount, name);
-  }
-
-  @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
     var target = function.module.functionByIndex(immediate)!;
     var statements = <Code>[];
+
+    // update stack depth
+    var paramCount = target.functionType.parameterTypes.length;
+    var resultCount = target.functionType.resultType.length;
+    function.scope.updateStackDepth(resultCount - paramCount, name);
 
     var temps = List.generate(target.parameterTypes.length, (i) => 't$i');
     for (var temp in temps.reversed) {
@@ -421,22 +460,17 @@ class Instruction_CallIndirect extends Instruction {
   Instruction_CallIndirect() : super('call_indirect', 0x11, '(u32 u32)');
 
   @override
-  void updateStackDepth(Instr instr, DefinedFunction function) {
-    var sigIndex = instr.args[0] as int;
-    // var tableIndex = instr.args[1] as int;
-    var funcType = function.module.functionTypes[sigIndex];
-
-    var paramCount = funcType.parameterTypes.length;
-    var resultCount = funcType.resultType.length;
-    function.scope.updateStackDepth(resultCount - paramCount, name);
-  }
-
-  @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var sigIndex = instr.args[0] as int;
     var tableIndex = instr.args[1] as int;
 
     var funcType = function.module.functionTypes[sigIndex];
+
+    // update stack depth
+    var paramCount = funcType.parameterTypes.length;
+    var resultCount = funcType.resultType.length;
+    function.scope.updateStackDepth(resultCount - paramCount, name);
+
     var statements = <Code>[];
 
     statements.addAll([
@@ -483,6 +517,8 @@ class Instruction_MemoryInit extends Instruction {
     var module = function.module;
     var segmentName = module.dataSegments.segments[dataSegment].name;
 
+    function.scope.updateStackDepth(-3, name);
+
     return Block.of([
       Code('{'),
       Code('i32 count = frame.pop() as i32;'),
@@ -509,6 +545,8 @@ class Instruction_TableInit extends Instruction {
       return literalString(error).thrown.statement;
     }
 
+    function.scope.updateStackDepth(-3, name);
+
     return Block.of([
       Code('{'),
       Code('i32 count = frame.pop() as i32;'),
@@ -530,6 +568,9 @@ class Instruction_RefFunc extends Instruction {
     var func = function.module.allFunctions[funcIndex];
     var name =
         ElementSegments.inSegmentContext ? 'module.${func.name}' : func.name;
+
+    function.scope.updateStackDepth(1, name);
+
     return refer('frame.push').call([refer(name)]).statement;
   }
 }
@@ -612,7 +653,7 @@ class Instruction {
   final int opcode;
   late final List<ValueType> immediates;
   late final List<ValueType> params;
-  late final ValueType? returns;
+  late final List<ValueType> returns;
 
   Instruction(this.name, this.opcode, String shorthand) {
     _parseShorthand(shorthand);
@@ -631,10 +672,10 @@ class Instruction {
 
     if (shorthand.contains('=>')) {
       var ret = shorthand.substring(shorthand.indexOf('=>') + 2).trim();
-      returns = ValueType.fromString(ret);
+      returns = ret.split(' ').map(ValueType.fromString).toList();
       shorthand = shorthand.substring(0, shorthand.indexOf('=>')).trim();
     } else {
-      returns = null;
+      returns = const [];
     }
 
     if (shorthand.isNotEmpty) {
@@ -679,6 +720,8 @@ class Instruction {
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var frame = refer('frame');
 
+    defaultUpdateStackDepth(function.scope);
+
     if (immediates.isNotEmpty) {
       return frame
           .property(methodName)
@@ -689,9 +732,10 @@ class Instruction {
     }
   }
 
-  void updateStackDepth(Instr instr, DefinedFunction function) {
-    function.scope
-        .updateStackDepth((returns != null ? 1 : 0) - params.length, name);
+  void defaultUpdateStackDepth(Scope scope) {
+    var paramCount = params.length;
+    var resultCount = returns.length;
+    scope.updateStackDepth(resultCount - paramCount, name);
   }
 
   @override

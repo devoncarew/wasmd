@@ -240,7 +240,7 @@ class Nop0Module implements Module {
 
   i32 _func14() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       frame.i32_const(2);
@@ -250,7 +250,7 @@ class Nop0Module implements Module {
 
   i32 _func15() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       /* nop */
@@ -261,7 +261,7 @@ class Nop0Module implements Module {
 
   i32 _func16() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       _dummy();
@@ -273,7 +273,7 @@ class Nop0Module implements Module {
 
   i32 _func17() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       /* nop */
@@ -375,11 +375,10 @@ class Nop0Module implements Module {
 
   i32 _func25(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       frame.push(arg0);
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -387,11 +386,10 @@ class Nop0Module implements Module {
 
   i32 _func26(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
       /* nop */
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -399,14 +397,13 @@ class Nop0Module implements Module {
 
   i32 _func27(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       /* nop */
       frame.push(arg0);
       /* nop */
       /* nop */
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -414,13 +411,12 @@ class Nop0Module implements Module {
 
   i32 _func28(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       frame.push(arg0);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -429,13 +425,12 @@ class Nop0Module implements Module {
 
   i32 _func29(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
       /* nop */
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -444,13 +439,12 @@ class Nop0Module implements Module {
 
   i32 _func30(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
       frame.push(arg0);
       /* nop */
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -459,7 +453,7 @@ class Nop0Module implements Module {
 
   i32 _func31(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       /* nop */
@@ -470,7 +464,6 @@ class Nop0Module implements Module {
       /* nop */
       /* nop */
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -479,7 +472,7 @@ class Nop0Module implements Module {
 
   i32 _func32(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       frame.push(arg0);
@@ -487,11 +480,9 @@ class Nop0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -500,7 +491,7 @@ class Nop0Module implements Module {
 
   i32 _func33(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
       /* nop */
@@ -508,11 +499,9 @@ class Nop0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -521,7 +510,7 @@ class Nop0Module implements Module {
 
   i32 _func34(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
       frame.push(arg0);
@@ -529,11 +518,9 @@ class Nop0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -542,7 +529,7 @@ class Nop0Module implements Module {
 
   i32 _func35(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       /* nop */
@@ -555,11 +542,9 @@ class Nop0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -844,7 +829,7 @@ class Nop0Module implements Module {
 
   i32 _func62() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       frame.i32_const(1);
@@ -863,7 +848,7 @@ class Nop0Module implements Module {
 
   i32 _func63() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       /* nop */
@@ -882,7 +867,7 @@ class Nop0Module implements Module {
 
   i32 _func64() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
@@ -901,7 +886,7 @@ class Nop0Module implements Module {
 
   i32 _func65() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       frame.i32_const(2);
@@ -920,7 +905,7 @@ class Nop0Module implements Module {
 
   i32 _func66() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       /* nop */

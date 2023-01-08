@@ -92,7 +92,6 @@ class Rot13Module implements Module {
         frame.i32_ge_u();
         if_label_2:
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(i);

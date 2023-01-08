@@ -149,7 +149,7 @@ class Unreachable0Module implements Module {
 
   i32 _func10() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       throw Trap('unreachable');
       frame.i32_const(2);
@@ -159,7 +159,7 @@ class Unreachable0Module implements Module {
 
   i32 _func11() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       throw Trap('unreachable');
@@ -180,7 +180,7 @@ class Unreachable0Module implements Module {
 
   i32 _func13() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       _dummy();
@@ -191,11 +191,10 @@ class Unreachable0Module implements Module {
 
   i32 _func14() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _dummy();
       frame.i32_const(1);
-      frame.unwindTo(0, 1);
       break block_label_0;
 
       throw Trap('unreachable');
@@ -242,13 +241,12 @@ class Unreachable0Module implements Module {
 
   i32 _func18() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       loop_label_1:
       for (;;) {
         _dummy();
         frame.i32_const(1);
-        frame.unwindTo(0, 1);
         break block_label_0;
 
         throw Trap('unreachable');
@@ -260,10 +258,9 @@ class Unreachable0Module implements Module {
 
   i32 _func19() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       throw Trap('unreachable');
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -275,7 +272,6 @@ class Unreachable0Module implements Module {
     {
       throw Trap('unreachable');
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
     }
@@ -283,12 +279,11 @@ class Unreachable0Module implements Module {
 
   i32 _func21() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       throw Trap('unreachable');
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -299,12 +294,11 @@ class Unreachable0Module implements Module {
 
   i32 _func22() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(6);
       throw Trap('unreachable');
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -321,15 +315,12 @@ class Unreachable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 0);
           break block_label_0;
 
         case 1:
-          frame.unwindTo(0, 0);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 0);
           break block_label_0;
       }
     }
@@ -337,22 +328,19 @@ class Unreachable0Module implements Module {
 
   i32 _func24() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       throw Trap('unreachable');
       frame.i32_const(1);
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         case 1:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -363,20 +351,18 @@ class Unreachable0Module implements Module {
 
   i32 _func25() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
-      block_label_1:
+      block_label_1: // => i32
       {
         throw Trap('unreachable');
         frame.i32_const(1);
         var t0 = frame.pop();
         switch (t0) {
           case 0:
-            frame.unwindTo(0, 1);
             break block_label_1;
 
           default:
-            frame.unwindTo(0, 1);
             break block_label_0;
         }
       }
@@ -386,18 +372,16 @@ class Unreachable0Module implements Module {
 
   i32 _func26() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(6);
       throw Trap('unreachable');
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -408,17 +392,15 @@ class Unreachable0Module implements Module {
 
   i32 _func27() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       throw Trap('unreachable');
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 

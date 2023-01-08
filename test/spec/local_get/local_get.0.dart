@@ -169,7 +169,7 @@ class LocalGet0Module implements Module {
 
   i32 _func10(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
     }
@@ -189,10 +189,9 @@ class LocalGet0Module implements Module {
 
   i32 _func12(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -200,12 +199,11 @@ class LocalGet0Module implements Module {
 
   i32 _func13(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -214,12 +212,11 @@ class LocalGet0Module implements Module {
 
   i32 _func14(i32 arg0) {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.push(arg0);
       frame.push(arg0);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -238,15 +235,12 @@ class LocalGet0Module implements Module {
           var t0 = frame.pop();
           switch (t0) {
             case 0:
-              frame.unwindTo(0, 0);
               break block_label_2;
 
             case 1:
-              frame.unwindTo(0, 0);
               break block_label_1;
 
             default:
-              frame.unwindTo(0, 0);
               break block_label_0;
           }
 

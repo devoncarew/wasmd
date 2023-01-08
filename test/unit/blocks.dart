@@ -21,7 +21,7 @@ class BlocksModule implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.i32_const(2);
-    block_label_0:
+    block_label_0: // i32, i32 => i32
     {
       frame.i32_add();
     }

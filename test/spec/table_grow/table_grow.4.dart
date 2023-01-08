@@ -51,14 +51,12 @@ class TableGrow4Module implements Module {
         frame.ref_is_null();
         frame.i32_eqz();
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg0);
         frame.push(arg1);
         frame.i32_ge_u();
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg0);

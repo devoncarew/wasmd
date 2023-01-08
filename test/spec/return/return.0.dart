@@ -122,7 +122,7 @@ class Return0Module implements Module {
 
   i32 _func05() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(1);
       return frame.pop();
@@ -133,7 +133,7 @@ class Return0Module implements Module {
 
   i64 _func06() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i64
     {
       frame.i64_const(2);
       return frame.pop();
@@ -144,7 +144,7 @@ class Return0Module implements Module {
 
   f32 _func07() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => f32
     {
       frame.f32_const(3.0);
       return frame.pop();
@@ -155,7 +155,7 @@ class Return0Module implements Module {
 
   f64 _func08() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => f64
     {
       frame.f64_const(4.0);
       return frame.pop();
@@ -236,7 +236,7 @@ class Return0Module implements Module {
 
   i32 _func18() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       /* nop */
       _dummy();
@@ -289,11 +289,10 @@ class Return0Module implements Module {
 
   i32 _func22() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(9);
       return frame.pop();
-      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();
@@ -304,7 +303,6 @@ class Return0Module implements Module {
     block_label_0:
     {
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 0);
         break block_label_0;
       }
     }
@@ -312,13 +310,12 @@ class Return0Module implements Module {
 
   i32 _func24() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(8);
       return frame.pop();
       frame.i32_const(1);
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -329,13 +326,12 @@ class Return0Module implements Module {
 
   i32 _func25() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(6);
       frame.i32_const(9);
       return frame.pop();
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -353,15 +349,12 @@ class Return0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 0);
           break block_label_0;
 
         case 1:
-          frame.unwindTo(0, 0);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 0);
           break block_label_0;
       }
     }
@@ -371,7 +364,7 @@ class Return0Module implements Module {
 
   i32 _func27() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(10);
       return frame.pop();
@@ -379,15 +372,12 @@ class Return0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         case 1:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -398,7 +388,7 @@ class Return0Module implements Module {
 
   i32 _func28() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       frame.i32_const(6);
       frame.i32_const(11);
@@ -406,11 +396,9 @@ class Return0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
-          frame.unwindTo(0, 1);
           break block_label_0;
 
         default:
-          frame.unwindTo(0, 1);
           break block_label_0;
       }
 

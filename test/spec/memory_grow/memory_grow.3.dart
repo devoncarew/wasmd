@@ -42,14 +42,12 @@ class MemoryGrow3Module implements Module {
         frame.i32_const(0);
         frame.i32_ne();
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg0);
         frame.push(arg1);
         frame.i32_ge_u();
         if (frame.pop() != 0) {
-          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(arg0);

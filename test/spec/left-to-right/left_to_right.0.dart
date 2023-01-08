@@ -1479,7 +1479,7 @@ class LeftToRight0Module implements Module {
 
   i32 _func128() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _reset();
       frame.push(_i32_left());
@@ -1487,7 +1487,6 @@ class LeftToRight0Module implements Module {
       frame.i32_const(0);
       frame.i32_and();
       if (frame.pop() != 0) {
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
       frame.drop();
@@ -1498,21 +1497,19 @@ class LeftToRight0Module implements Module {
 
   i32 _func129() {
     final frame = Frame(this);
-    block_label_0:
+    block_label_0: // => i32
     {
       _reset();
-      block_label_1:
+      block_label_1: // => i32
       {
         frame.push(_i32_left());
         frame.push(_i32_right());
         var t0 = frame.pop();
         switch (t0) {
           case 0:
-            frame.unwindTo(0, 1);
             break block_label_0;
 
           default:
-            frame.unwindTo(0, 1);
             break block_label_1;
         }
       }
