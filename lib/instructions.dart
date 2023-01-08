@@ -17,7 +17,7 @@ class Instr {
 
   Code generateToStatement(DefinedFunction function) {
     var code = instruction.generateToStatement(this, function);
-    instruction.updateStackDepth(function);
+    instruction.updateStackDepth(this, function);
     return code;
   }
 
@@ -53,6 +53,7 @@ class Instruction_Nop extends Instruction {
   }
 }
 
+// todo: update stack depth
 class Instruction_Block extends Instruction {
   static const blockOpcode = 0x02;
 
@@ -70,6 +71,7 @@ class Instruction_Block extends Instruction {
   }
 }
 
+// todo: update stack depth
 class Instruction_Loop extends Instruction {
   static const loopOpcode = 0x03;
 
@@ -86,6 +88,7 @@ class Instruction_Loop extends Instruction {
   }
 }
 
+// todo: update stack depth
 class Instruction_If extends Instruction {
   static const ifOpcode = 0x04;
 
@@ -102,6 +105,7 @@ class Instruction_If extends Instruction {
   }
 }
 
+// todo: update stack depth
 class Instruction_Else extends Instruction {
   Instruction_Else() : super('else', 0x05, '');
 
@@ -129,6 +133,9 @@ class Instruction_End extends Instruction {
     } else {
       if (function.returnsVoid) {
         return Code('');
+      } else if (function.returnsTuple) {
+        var arity = function.functionType.resultType.length;
+        return Code('return Tuple$arity.from(frame.stack);');
       } else {
         return frame.property('pop').call([]).returned.statement;
       }
@@ -222,6 +229,9 @@ class Instruction_Return extends Instruction {
 
     if (function.returnsVoid) {
       return Code('');
+    } else if (function.returnsTuple) {
+      var arity = function.functionType.resultType.length;
+      return Code('return Tuple$arity.from(frame.stack);');
     } else {
       return frame.property('pop').call([]).returned.statement;
     }
@@ -358,6 +368,16 @@ class Instruction_Call extends Instruction {
   Instruction_Call() : super('call', 0x10, '(u32)');
 
   @override
+  void updateStackDepth(Instr instr, DefinedFunction function) {
+    var immediate = instr.args[0] as int;
+    var target = function.module.functionByIndex(immediate)!;
+
+    var paramCount = target.functionType.parameterTypes.length;
+    var resultCount = target.functionType.resultType.length;
+    function.scope.updateStackDepth(resultCount - paramCount, name);
+  }
+
+  @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var immediate = instr.args[0] as int;
     var target = function.module.functionByIndex(immediate)!;
@@ -374,7 +394,12 @@ class Instruction_Call extends Instruction {
       ...temps.map((t) => refer(t)),
     ]);
 
-    if (!target.returnsVoid) {
+    if (target.returnsVoid) {
+      // nothing to do
+    } else if (target.returnsTuple) {
+      // push the return tuples items to the stack
+      call = call.property('pushTo').call([refer('frame.stack')]);
+    } else {
       call = refer('frame.push').call([call]);
     }
 
@@ -394,6 +419,17 @@ class Instruction_Call extends Instruction {
 
 class Instruction_CallIndirect extends Instruction {
   Instruction_CallIndirect() : super('call_indirect', 0x11, '(u32 u32)');
+
+  @override
+  void updateStackDepth(Instr instr, DefinedFunction function) {
+    var sigIndex = instr.args[0] as int;
+    // var tableIndex = instr.args[1] as int;
+    var funcType = function.module.functionTypes[sigIndex];
+
+    var paramCount = funcType.parameterTypes.length;
+    var resultCount = funcType.resultType.length;
+    function.scope.updateStackDepth(resultCount - paramCount, name);
+  }
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
@@ -653,8 +689,9 @@ class Instruction {
     }
   }
 
-  void updateStackDepth(DefinedFunction function) {
-    function.scope.updateStackDepth((returns != null ? 1 : 0) - params.length);
+  void updateStackDepth(Instr instr, DefinedFunction function) {
+    function.scope
+        .updateStackDepth((returns != null ? 1 : 0) - params.length, name);
   }
 
   @override

@@ -1775,6 +1775,56 @@ class Frame {
   }
 }
 
+// TODO: convert this over to use patterns
+
+// todo: equals method
+class Tuple2<T0, T1> {
+  final T0 t0;
+  final T1 t1;
+
+  Tuple2(this.t0, this.t1);
+
+  factory Tuple2.from(List<Object?> stack) {
+    var t1 = stack.removeLast() as T1;
+    var t0 = stack.removeLast() as T0;
+    return Tuple2(t0, t1);
+  }
+
+  void pushTo(List<Object?> stack) {
+    stack.add(t0);
+    stack.add(t1);
+  }
+
+  @override
+  String toString() => 'Tuple2($t0, $t1)';
+}
+
+// todo: equals method
+class Tuple3<T0, T1, T2> {
+  final T0 t0;
+  final T1 t1;
+  final T2 t2;
+
+  Tuple3(this.t0, this.t1, this.t2);
+
+  factory Tuple3.from(List<Object?> stack) {
+    var t2 = stack.removeLast() as T2;
+    var t1 = stack.removeLast() as T1;
+    var t0 = stack.removeLast() as T0;
+    return Tuple3(t0, t1, t2);
+  }
+
+  void pushTo(List<Object?> stack) {
+    stack.add(t0);
+    stack.add(t1);
+    stack.add(t2);
+  }
+
+  @override
+  String toString() => 'Tuple3($t0, $t1, $t2)';
+}
+
+// TODO: Remove our use of a stub module.
 final Module stubModule = _StubModule();
 
 class _StubModule implements Module {

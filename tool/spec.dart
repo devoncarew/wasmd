@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:code_builder/code_builder.dart';
-import 'package:collection/collection.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
 import 'package:wasmd/compiler.dart';
@@ -15,8 +14,6 @@ import 'package:wasmd/src/utils.dart';
 
 // TODO:? --disable-saturating-float-to-int --disable-sign-extension
 // --disable-multi-value --disable-simd
-
-// TODO: experiment with --disable-multi-value
 
 void main(List<String> args) {
   if (args.isEmpty) {
@@ -235,12 +232,6 @@ void generateDartForJson(
 
       field = patchUpName(field);
 
-      if (expected.length > 1) {
-        // TODO:
-        print('multiple return expectations not yet supported ($type $field)');
-        continue;
-      }
-
       var invocation = '';
       if (actionType == 'invoke') {
         invocation = '(';
@@ -250,9 +241,17 @@ void generateDartForJson(
         invocation += ')';
       }
 
-      var result = expected.map((arg) {
-        return encodeType(arg['type'], arg['value']);
-      }).firstOrNull;
+      String? result;
+
+      if (expected.length == 1) {
+        var item = expected.first;
+        result = encodeType(item['type'], item['value']);
+      } else if (expected.length > 1) {
+        var items = expected
+            .map((item) => encodeType(item['type'], item['value']))
+            .join(', ');
+        result = 'Tuple${expected.length}($items)';
+      }
 
       testCount[field] = (testCount[field] ?? -1) + 1;
 
@@ -514,9 +513,7 @@ class ImportsData {
       classBuilder.methods.add(Method(
         (b) => b
           ..name = func.referenceName
-          ..returns = Reference(
-            func.returnsVoid ? 'void' : func.returnType!.typeName,
-          )
+          ..returns = Reference(func.functionType.resultTypeDisplayName)
           ..annotations.add(refer('override'))
           ..requiredParameters.addAll(parameters)
           ..lambda = true

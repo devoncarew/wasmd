@@ -896,10 +896,6 @@ void printModule(
 
   // Defined functions
   for (var func in module.definedFunctions) {
-    if (func.functionType.returnsTuple) {
-      throw 'multiple return values not currently supported '
-          '(${func.name}: ${func.functionType.resultTypeDisplayName})';
-    }
     var method = func.generateToMethod();
     classBuilder.methods.add(method);
   }
@@ -1240,6 +1236,9 @@ enum BlockType {
       var code = popCondition ? 'if (frame.pop() != 0) {\n' : '';
       if (function.returnsVoid) {
         code += 'return;$desc\n';
+      } else if (function.returnsTuple) {
+        var arity = function.functionType.resultType.length;
+        return Code('return Tuple$arity.from(frame.stack);');
       } else {
         code += 'return frame.pop();$desc\n';
       }
@@ -1268,9 +1267,16 @@ class FunctionType {
   FunctionType(this.parameterTypes, this.resultType);
 
   String get resultTypeDisplayName {
-    return resultType.isEmpty
-        ? 'void'
-        : resultType.map((t) => t.typeName).join(', ');
+    if (returnsVoid) {
+      return 'void';
+    }
+
+    if (returnsTuple) {
+      var types = resultType.map((t) => t.typeName).join(', ');
+      return 'Tuple${resultType.length}<$types>';
+    }
+
+    return resultType.first.typeName;
   }
 
   bool get returnsVoid => resultType.isEmpty;
@@ -1462,9 +1468,7 @@ class ImportModule {
       importClass.methods.add(Method(
         (b) => b
           ..name = func.referenceName
-          ..returns = Reference(
-            func.returnsVoid ? 'void' : func.returnType!.typeName,
-          )
+          ..returns = Reference(func.functionType.resultTypeDisplayName)
           ..requiredParameters.addAll(parameters),
       ));
     }
@@ -1485,9 +1489,9 @@ abstract class ModuleFunction {
 
   List<ValueType> get parameterTypes => functionType.parameterTypes;
 
-  ValueType? get returnType => functionType.resultType.firstOrNull;
+  bool get returnsVoid => functionType.returnsVoid;
 
-  bool get returnsVoid => functionType.resultType.isEmpty;
+  bool get returnsTuple => functionType.returnsTuple;
 }
 
 class DefinedFunction extends ModuleFunction {
@@ -1664,8 +1668,12 @@ class Scope {
 
   String get nextTempName => 't${nextTempId++}';
 
-  void updateStackDepth(int adjust) {
+  void updateStackDepth(int adjust, String desc) {
     _stackDepth += adjust;
+
+    if (_stackDepth < 0) {
+      print('warning: calculated stack depth is $_stackDepth; $desc');
+    }
   }
 
   int get stackDepth =>
