@@ -2,6 +2,8 @@
 | ---                         | --- |
 | address.wast                | -   |
 | align.wast                  | -   |
+| block.wast                  | -   |
+| br.wast                     | -   |
 | br_if.wast                  | -   |
 | bulk.wast                   | -   |
 | comments.wast               | -   |
@@ -23,6 +25,7 @@
 | func_ptrs.wast              | -   |
 | i32.wast                    | -   |
 | i64.wast                    | -   |
+| if.wast                     | -   |
 | int_exprs.wast              | -   |
 | int_literals.wast           | -   |
 | labels.wast                 | -   |
@@ -31,6 +34,7 @@
 | local_get.wast              | -   |
 | local_set.wast              | -   |
 | local_tee.wast              | -   |
+| loop.wast                   | -   |
 | memory_copy.wast            | -   |
 | memory_fill.wast            | -   |
 | memory_grow.wast            | -   |
@@ -60,20 +64,16 @@
 | unreached-valid.wast        | -   |
 | unwind.wast                 | -   |
 | binary-leb128.wast          | RangeError from Reader.leb128_u |
-| block.wast                  | multiple return values not currently supported |
 | br_table.wast               | large switch statement |
-| br.wast                     | multiple return values not currently supported |
-| call_indirect.wast          | multiple return values not currently supported |
-| call.wast                   | multiple return values not currently supported |
+| call_indirect.wast          | test directive not handled: 'assert_exhaustion' |
+| call.wast                   | test directive not handled: 'assert_exhaustion' |
 | data.wast                   | need to rework DataSegments initializers |
 | elem.wast                   | unimplemented import table |
 | fac.wast                    | multiple return values not currently supported |
 | func.wast                   | multiple return values not currently supported |
 | global.wast                 | needs more work on initializing globals |
-| if.wast                     | multiple return values not currently supported |
 | imports.wast                | unimplemented import table |
 | linking.wast                | unimplemented import table |
-| loop.wast                   | multiple return values not currently supported |
 | names.wast                  | generated file is causing the analyzer to crash |
 | ref_func.wast               | needs additional work on globals generation |
 | select.wast                 | wast2json failed; unexpected token "result" |
