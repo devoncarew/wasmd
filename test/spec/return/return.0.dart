@@ -307,9 +307,7 @@ class Return0Module implements Module {
     block_label_0:
     {
       return;
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
   }
 
@@ -320,9 +318,7 @@ class Return0Module implements Module {
       frame.i32_const(8);
       return frame.pop();
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(7);
     }
@@ -336,9 +332,7 @@ class Return0Module implements Module {
       frame.i32_const(6);
       frame.i32_const(9);
       return frame.pop();
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(7);
     }
@@ -355,10 +349,8 @@ class Return0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -378,10 +370,8 @@ class Return0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -402,7 +392,6 @@ class Return0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }

@@ -50,9 +50,7 @@ class FloatExprs41Module implements Module {
         frame.push(i);
         frame.push(n);
         frame.i32_lt_u();
-        if (frame.pop() != 0) {
-          continue loop_label_1;
-        }
+        if (frame.pop() != 0) continue loop_label_1;
         break;
       }
     }

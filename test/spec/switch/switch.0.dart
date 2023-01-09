@@ -51,28 +51,20 @@ class Switch0Module implements Module {
                         switch (t0) {
                           case 0:
                             break block_label_9;
-
                           case 1:
                             break block_label_8;
-
                           case 2:
                             break block_label_7;
-
                           case 3:
                             break block_label_6;
-
                           case 4:
                             break block_label_5;
-
                           case 5:
                             break block_label_4;
-
                           case 6:
                             break block_label_3;
-
                           case 7:
                             break block_label_1;
-
                           default:
                             break block_label_2;
                         }
@@ -139,28 +131,20 @@ class Switch0Module implements Module {
                         switch (t0) {
                           case 0:
                             break block_label_9;
-
                           case 1:
                             break block_label_8;
-
                           case 2:
                             break block_label_7;
-
                           case 3:
                             break block_label_6;
-
                           case 4:
                             break block_label_3;
-
                           case 5:
                             break block_label_4;
-
                           case 6:
                             break block_label_5;
-
                           case 7:
                             break block_label_1;
-
                           default:
                             break block_label_2;
                         }
@@ -213,13 +197,10 @@ class Switch0Module implements Module {
             switch (t0) {
               case 0:
                 break block_label_2;
-
               case 1:
                 break block_label_1;
-
               case 2:
                 break block_label_0;
-
               default:
                 break block_label_3;
             }

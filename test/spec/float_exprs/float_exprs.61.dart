@@ -60,9 +60,7 @@ class FloatExprs61Module implements Module {
         frame.i32_const(-1);
         frame.i32_add();
         n = frame.peek();
-        if (frame.pop() != 0) {
-          continue loop_label_1;
-        }
+        if (frame.pop() != 0) continue loop_label_1;
         break;
       }
     }
@@ -92,9 +90,7 @@ class FloatExprs61Module implements Module {
         frame.i32_add();
         n = frame.pop();
         frame.push(n);
-        if (frame.pop() != 0) {
-          continue loop_label_1;
-        }
+        if (frame.pop() != 0) continue loop_label_1;
         break;
       }
     }

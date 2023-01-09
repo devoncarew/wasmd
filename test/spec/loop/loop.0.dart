@@ -434,9 +434,7 @@ class Loop0Module implements Module {
         break;
       }
       frame.i32_const(2);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
     return frame.pop();
   }
@@ -452,9 +450,7 @@ class Loop0Module implements Module {
         frame.i32_const(1);
         break;
       }
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
     return frame.pop();
   }
@@ -473,7 +469,6 @@ class Loop0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -496,7 +491,6 @@ class Loop0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -849,9 +843,7 @@ class Loop0Module implements Module {
       loop_label_1:
       for (;;) {
         break block_label_0;
-
         continue loop_label_1;
-
         throw Trap('unreachable');
         break;
       }
@@ -861,9 +853,7 @@ class Loop0Module implements Module {
       loop_label_1:
       for (;;) {
         frame.i32_const(1);
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         throw Trap('unreachable');
         break;
       }
@@ -892,10 +882,8 @@ class Loop0Module implements Module {
         switch (t0) {
           case 0:
             break block_label_0;
-
           case 1:
             break block_label_0;
-
           default:
             break block_label_0;
         }
@@ -923,7 +911,6 @@ class Loop0Module implements Module {
         }
         frame.i32_const(20);
         continue loop_label_1;
-
         break;
       }
       frame.i32_const(19);
@@ -952,7 +939,6 @@ class Loop0Module implements Module {
         frame.i32_const(-20);
         frame.i64_const(20);
         continue loop_label_1;
-
         break;
       }
       frame.i32_const(19);
@@ -970,25 +956,18 @@ class Loop0Module implements Module {
       for (;;) {
         frame.i32_const(18);
         break block_label_0;
-
         frame.i32_const(19);
         break block_label_0;
-
         frame.i32_const(20);
         frame.i32_const(0);
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.drop();
         frame.i32_const(20);
         frame.i32_const(1);
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.drop();
         frame.i32_const(21);
         break block_label_0;
-
         frame.i32_const(22);
         frame.i32_const(0);
         var t0 = frame.pop();
@@ -1003,10 +982,8 @@ class Loop0Module implements Module {
         switch (t1) {
           case 0:
             break block_label_0;
-
           case 1:
             break block_label_0;
-
           default:
             break block_label_0;
         }
@@ -1048,7 +1025,6 @@ class Loop0Module implements Module {
         for (;;) {
           frame.i32_const(2);
           break block_label_0;
-
           break;
         }
         break;
@@ -1067,7 +1043,6 @@ class Loop0Module implements Module {
           for (;;) {
             frame.i32_const(4);
             break block_label_2;
-
             break;
           }
         }
@@ -1083,7 +1058,6 @@ class Loop0Module implements Module {
       for (;;) {
         frame.i32_const(8);
         break block_label_0;
-
         frame.i32_ctz();
         break;
       }
@@ -1099,7 +1073,6 @@ class Loop0Module implements Module {
         for (;;) {
           frame.i32_const(16);
           break block_label_0;
-
           break;
         }
         frame.i32_ctz();
@@ -1125,7 +1098,6 @@ class Loop0Module implements Module {
       loop_label_1:
       for (;;) {
         continue loop_label_0;
-
         break;
       }
       break;
@@ -1137,7 +1109,6 @@ class Loop0Module implements Module {
     loop_label_0:
     for (;;) {
       continue loop_label_0;
-
       frame.i32_ctz();
       break;
     }
@@ -1150,7 +1121,6 @@ class Loop0Module implements Module {
       loop_label_1:
       for (;;) {
         continue loop_label_0;
-
         break;
       }
       frame.i32_ctz();
@@ -1215,9 +1185,7 @@ class Loop0Module implements Module {
       frame.push(x);
       frame.i32_const(10);
       frame.i32_lt_u();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
     return frame.pop();
@@ -1238,9 +1206,7 @@ class Loop0Module implements Module {
       frame.push(x);
       frame.i32_const(10);
       frame.i32_lt_u();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       frame.drop();
       break;
     }
@@ -1265,9 +1231,7 @@ class Loop0Module implements Module {
       frame.push(x);
       frame.i32_const(10);
       frame.i32_lt_u();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
     frame.i32_add();
@@ -1297,7 +1261,6 @@ class Loop0Module implements Module {
         frame.i32_mul();
         local0 = frame.pop();
         break block_label_0;
-
         frame.push(local0);
         frame.i32_const(100);
         frame.i32_mul();
@@ -1323,9 +1286,7 @@ class Loop0Module implements Module {
       for (;;) {
         frame.push(arg0);
         frame.i64_eqz();
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.push(arg0);
         frame.push(local0);
         frame.i64_mul();
@@ -1335,7 +1296,6 @@ class Loop0Module implements Module {
         frame.i64_sub();
         arg0 = frame.pop();
         continue loop_label_1;
-
         break;
       }
     }
@@ -1359,9 +1319,7 @@ class Loop0Module implements Module {
         frame.push(local1);
         frame.push(arg0);
         frame.i64_gt_u();
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.push(local0);
         frame.push(local1);
         frame.i64_mul();
@@ -1371,7 +1329,6 @@ class Loop0Module implements Module {
         frame.i64_add();
         local1 = frame.pop();
         continue loop_label_1;
-
         break;
       }
     }
@@ -1391,9 +1348,7 @@ class Loop0Module implements Module {
         frame.push(arg0);
         frame.f32_const(0.0);
         frame.f32_eq();
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.push(arg1);
         local0 = frame.pop();
         block_label_2:
@@ -1403,15 +1358,11 @@ class Loop0Module implements Module {
             frame.push(local0);
             frame.f32_const(0.0);
             frame.f32_eq();
-            if (frame.pop() != 0) {
-              break block_label_2;
-            }
+            if (frame.pop() != 0) break block_label_2;
             frame.push(local0);
             frame.f32_const(0.0);
             frame.f32_lt();
-            if (frame.pop() != 0) {
-              break block_label_0;
-            }
+            if (frame.pop() != 0) break block_label_0;
             frame.push(local1);
             frame.push(local0);
             frame.f32_add();
@@ -1421,7 +1372,6 @@ class Loop0Module implements Module {
             frame.f32_sub();
             local0 = frame.pop();
             continue loop_label_3;
-
             break;
           }
         }
@@ -1434,7 +1384,6 @@ class Loop0Module implements Module {
         frame.f32_sub();
         arg0 = frame.pop();
         continue loop_label_1;
-
         break;
       }
     }

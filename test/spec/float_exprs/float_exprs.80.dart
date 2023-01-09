@@ -35,9 +35,7 @@ class FloatExprs80Module implements Module {
       frame.f32_add();
       frame.f32_const(0.0);
       frame.f32_eq();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
 
@@ -55,9 +53,7 @@ class FloatExprs80Module implements Module {
       frame.f32_sub();
       frame.f32_const(0.0);
       frame.f32_ne();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
     frame.push(arg1);
@@ -81,9 +77,7 @@ class FloatExprs80Module implements Module {
       frame.f64_add();
       frame.f64_const(0.0);
       frame.f64_eq();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
 
@@ -101,9 +95,7 @@ class FloatExprs80Module implements Module {
       frame.f64_sub();
       frame.f64_const(0.0);
       frame.f64_ne();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
     frame.push(arg1);

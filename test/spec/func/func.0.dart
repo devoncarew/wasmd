@@ -793,7 +793,6 @@ class Func0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           return;
         default:
@@ -812,7 +811,6 @@ class Func0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           return frame.pop();
         default:
@@ -837,7 +835,6 @@ class Func0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           return Tuple2.from(frame.stack);
         default:

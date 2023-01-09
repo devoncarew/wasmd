@@ -196,7 +196,6 @@ class Unreachable0Module implements Module {
       _dummy();
       frame.i32_const(1);
       break block_label_0;
-
       throw Trap('unreachable');
     }
     return frame.pop();
@@ -248,7 +247,6 @@ class Unreachable0Module implements Module {
         _dummy();
         frame.i32_const(1);
         break block_label_0;
-
         throw Trap('unreachable');
         break;
       }
@@ -271,9 +269,7 @@ class Unreachable0Module implements Module {
     block_label_0:
     {
       throw Trap('unreachable');
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
   }
 
@@ -283,9 +279,7 @@ class Unreachable0Module implements Module {
     {
       throw Trap('unreachable');
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(7);
     }
@@ -298,9 +292,7 @@ class Unreachable0Module implements Module {
     {
       frame.i32_const(6);
       throw Trap('unreachable');
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(7);
     }
@@ -316,10 +308,8 @@ class Unreachable0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -336,10 +326,8 @@ class Unreachable0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -361,7 +349,6 @@ class Unreachable0Module implements Module {
         switch (t0) {
           case 0:
             break block_label_1;
-
           default:
             break block_label_0;
         }
@@ -380,7 +367,6 @@ class Unreachable0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -399,7 +385,6 @@ class Unreachable0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }

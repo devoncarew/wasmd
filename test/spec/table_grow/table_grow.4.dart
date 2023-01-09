@@ -50,15 +50,11 @@ class TableGrow4Module implements Module {
         frame.push(local0);
         frame.ref_is_null();
         frame.i32_eqz();
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.push(arg0);
         frame.push(arg1);
         frame.i32_ge_u();
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.push(arg0);
         frame.i32_const(1);
         frame.i32_add();
@@ -66,9 +62,7 @@ class TableGrow4Module implements Module {
         frame.push(arg0);
         frame.push(arg1);
         frame.i32_le_u();
-        if (frame.pop() != 0) {
-          continue loop_label_1;
-        }
+        if (frame.pop() != 0) continue loop_label_1;
         break;
       }
     }

@@ -31,9 +31,7 @@ class FloatExprs94Module implements Module {
       frame.push(arg0);
       frame.i32_const(1);
       frame.i32_lt_s();
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.f64_const(1.0);
       local1 = frame.pop();
       frame.f64_const(0.0);
@@ -84,9 +82,7 @@ class FloatExprs94Module implements Module {
         frame.i32_const(-1);
         frame.i32_add();
         arg0 = frame.peek();
-        if (frame.pop() != 0) {
-          continue loop_label_1;
-        }
+        if (frame.pop() != 0) continue loop_label_1;
         break;
       }
     }

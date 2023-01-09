@@ -66,9 +66,7 @@ class Store0Module implements Module {
       frame.i32_const(1);
       frame.i32_store(2, 0);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
   }
 
@@ -80,9 +78,7 @@ class Store0Module implements Module {
       frame.i32_const(0);
       frame.i32_const(1);
       frame.i32_store(2, 0);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
   }
 
