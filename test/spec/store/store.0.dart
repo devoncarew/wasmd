@@ -107,6 +107,7 @@ class Store0Module implements Module {
     frame.i32_const(0);
     frame.i32_const(1);
     frame.i32_store(2, 0);
+    return;
   }
 
   void _func7() {

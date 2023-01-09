@@ -94,28 +94,28 @@ class Return0Module implements Module {
 
   void _func01() {
     final frame = Frame(this);
-
+    return;
     frame.i32_ctz();
     frame.drop();
   }
 
   void _func02() {
     final frame = Frame(this);
-
+    return;
     frame.i64_ctz();
     frame.drop();
   }
 
   void _func03() {
     final frame = Frame(this);
-
+    return;
     frame.f32_neg();
     frame.drop();
   }
 
   void _func04() {
     final frame = Frame(this);
-
+    return;
     frame.f64_neg();
     frame.drop();
   }
@@ -166,6 +166,7 @@ class Return0Module implements Module {
 
   void _func09() {
     final frame = Frame(this);
+    return;
   }
 
   f64 _func10() {
@@ -196,6 +197,7 @@ class Return0Module implements Module {
     final frame = Frame(this);
     /* nop */
     _dummy();
+    return;
   }
 
   i32 _func14() {
@@ -211,6 +213,7 @@ class Return0Module implements Module {
     final frame = Frame(this);
     block_label_0:
     {
+      return;
       _dummy();
     }
   }
@@ -220,7 +223,7 @@ class Return0Module implements Module {
     block_label_0:
     {
       _dummy();
-
+      return;
       _dummy();
     }
   }
@@ -231,6 +234,7 @@ class Return0Module implements Module {
     {
       /* nop */
       _dummy();
+      return;
     }
   }
 
@@ -302,6 +306,7 @@ class Return0Module implements Module {
     final frame = Frame(this);
     block_label_0:
     {
+      return;
       if (frame.pop() != 0) {
         break block_label_0;
       }

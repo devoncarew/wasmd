@@ -859,7 +859,12 @@ class Frame {
   void i32_mul() {
     i32 arg1 = stack.removeLast() as i32;
     i32 arg0 = stack.removeLast() as i32;
-    var result = (arg0 * arg1) & _mask32;
+    var result = arg0 * arg1;
+    if ((result & _bit31) != 0) {
+      result |= _maskTop32;
+    } else {
+      result &= _mask32;
+    }
     stack.add(result);
   }
 

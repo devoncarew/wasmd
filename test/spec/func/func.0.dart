@@ -559,6 +559,7 @@ class Func0Module implements Module {
 
   void _func65() {
     final frame = Frame(this);
+    return;
   }
 
   i32 _func66() {
