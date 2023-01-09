@@ -25,6 +25,7 @@ class Compiler {
   Library compile(
     File file, {
     bool useDebugNames = false,
+    bool generatingTest = false,
   }) {
     var library = LibraryBuilder();
     library.comments.add('Generated from ${file.path}.');
@@ -36,11 +37,14 @@ class Compiler {
       'unused_label',
       'unused_local_variable',
     ]);
-    library.directives.addAll([
-      Directive.import('package:wasmd/runtime.dart'),
-    ]);
 
     var module = parse(file);
+
+    library.directives.addAll([
+      Directive.import('package:wasmd/runtime.dart'),
+      if (generatingTest && module.usesLargeTuple)
+        Directive.import('../../src/infra.dart'),
+    ]);
 
     printModule(
       module,
@@ -919,13 +923,8 @@ void printModule(
     var functionType = module.functionTypes[i];
     var ret = functionType.resultTypeDisplayName;
     var params = functionType.parameterTypes.map((p) => p.typeName).join(', ');
-    if (functionType.returnsTuple) {
-      library.body.add(Code('// TODO: FunctionType$i - support multiple return '
-          'values ($ret)\n'));
-    } else {
-      library.body
-          .add(Code('typedef FunctionType$i = $ret Function($params);\n'));
-    }
+    library.body
+        .add(Code('typedef FunctionType$i = $ret Function($params);\n'));
   }
 
   if (module.globals.isNotEmpty) {
@@ -1361,6 +1360,16 @@ class Module {
     maxMemory = max;
   }
 
+  bool get usesLargeTuple {
+    for (var func in exportedFunctions) {
+      if (func.functionType.resultType.length >= 10) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   void addTable(TableType type, int minSize, [int? maxSize]) {
     tables.add(Table(type, minSize, maxSize));
   }
@@ -1588,8 +1597,9 @@ class DefinedFunction extends ModuleFunction {
 
     var params = functionType.parameterTypes;
     for (int paramIndex = 0; paramIndex < params.length; paramIndex++) {
+      var dbgName = debugLocalNames[variables.length];
       var variable = Variable(
-        name: debugLocalNames[variables.length] ?? 'arg$paramIndex',
+        name: dbgName == null ? 'arg$paramIndex' : patchUpName(dbgName),
         type: params[paramIndex],
       );
       variables.add(variable);
@@ -1606,8 +1616,9 @@ class DefinedFunction extends ModuleFunction {
 
     if (locals.isNotEmpty) {
       for (int index = 0; index < locals.length; index++) {
+        var dbgName = debugLocalNames[variables.length];
         var variable = Variable(
-          name: debugLocalNames[variables.length] ?? 'local$index',
+          name: dbgName == null ? 'local$index' : patchUpName(dbgName),
           type: locals[index],
         );
         var type = variable.type;

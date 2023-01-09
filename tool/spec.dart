@@ -92,7 +92,8 @@ List<File> wast2json(File wastFile, File jsonFile) {
 }
 
 void compileWasmToDart(Compiler compiler, File wasmFile, File dartFile) {
-  var library = compiler.compile(wasmFile, useDebugNames: true);
+  var library =
+      compiler.compile(wasmFile, useDebugNames: true, generatingTest: true);
   var code = emitFormatLibrary(library);
 
   print('  emitting ${dartFile.path}');
@@ -324,6 +325,8 @@ void generateDartForJson(
       var asName = command['as'];
 
       registeredModules[asName] = lastModule;
+    } else if (type == 'assert_exhaustion') {
+      print(" skipping '$type'");
     } else {
       throw "test directive not handled: '$type'";
     }

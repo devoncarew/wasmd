@@ -693,8 +693,9 @@ class Br0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(3);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         var t2 = frame.pop();
         var t1 = frame.pop();
         var t0 = frame.pop();
@@ -715,8 +716,9 @@ class Br0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(3);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         var t2 = frame.pop();
         var t1 = frame.pop();
         var t0 = frame.pop();
@@ -737,8 +739,9 @@ class Br0Module implements Module {
 
       frame.i32_const(3);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         var t2 = frame.pop();
         var t1 = frame.pop();
         var t0 = frame.pop();
@@ -759,8 +762,9 @@ class Br0Module implements Module {
       break block_label_0;
 
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         var t2 = frame.pop();
         var t1 = frame.pop();
         var t0 = frame.pop();
@@ -778,8 +782,9 @@ class Br0Module implements Module {
       break block_label_0;
 
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         var t2 = frame.pop();
         var t1 = frame.pop();
         var t0 = frame.pop();
@@ -1285,8 +1290,8 @@ typedef FunctionType2 = i32 Function();
 typedef FunctionType3 = i64 Function();
 typedef FunctionType4 = f32 Function();
 typedef FunctionType5 = f64 Function();
-// TODO: FunctionType6 - support multiple return values (Tuple2<f64, f64>)
-// TODO: FunctionType7 - support multiple return values (Tuple2<i32, i64>)
+typedef FunctionType6 = Tuple2<f64, f64> Function();
+typedef FunctionType7 = Tuple2<i32, i64> Function();
 typedef FunctionType8 = i32 Function(i32, i32);
 
 class Globals {

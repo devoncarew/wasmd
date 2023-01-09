@@ -3,9 +3,11 @@
 | address.wast                | -   |
 | align.wast                  | -   |
 | block.wast                  | -   |
-| br.wast                     | -   |
 | br_if.wast                  | -   |
+| br.wast                     | -   |
 | bulk.wast                   | -   |
+| call_indirect.wast          | -   |
+| call.wast                   | -   |
 | comments.wast               | -   |
 | const.wast                  | -   |
 | conversions.wast            | -   |
@@ -17,12 +19,14 @@
 | f64_bitwise.wast            | -   |
 | f64_cmp.wast                | -   |
 | f64.wast                    | -   |
+| fac.wast                    | -   |
 | float_exprs.wast            | -   |
 | float_literals.wast         | -   |
 | float_memory.wast           | -   |
 | float_misc.wast             | -   |
 | forward.wast                | -   |
 | func_ptrs.wast              | -   |
+| func.wast                   | -   |
 | i32.wast                    | -   |
 | i64.wast                    | -   |
 | if.wast                     | -   |
@@ -65,12 +69,8 @@
 | unwind.wast                 | -   |
 | binary-leb128.wast          | RangeError from Reader.leb128_u |
 | br_table.wast               | large switch statement |
-| call_indirect.wast          | test directive not handled: 'assert_exhaustion' |
-| call.wast                   | test directive not handled: 'assert_exhaustion' |
 | data.wast                   | need to rework DataSegments initializers |
 | elem.wast                   | unimplemented import table |
-| fac.wast                    | multiple return values not currently supported |
-| func.wast                   | multiple return values not currently supported |
 | global.wast                 | needs more work on initializing globals |
 | imports.wast                | unimplemented import table |
 | linking.wast                | unimplemented import table |

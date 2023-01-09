@@ -56,6 +56,7 @@ const Set<String> _keywords = {
   'if',
   'return',
   'switch',
+  'var',
   'while',
 };
 

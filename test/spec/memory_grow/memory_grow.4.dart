@@ -322,8 +322,9 @@ class MemoryGrow4Module implements Module {
     frame.i32_const(3);
     frame.i32_const(0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -340,8 +341,9 @@ class MemoryGrow4Module implements Module {
     frame.i32_const(3);
     frame.i32_const(0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -358,8 +360,9 @@ class MemoryGrow4Module implements Module {
     frame.memory_grow(0);
     frame.i32_const(0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -376,8 +379,9 @@ class MemoryGrow4Module implements Module {
     frame.i32_const(0);
     frame.memory_grow(0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
