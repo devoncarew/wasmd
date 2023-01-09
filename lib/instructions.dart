@@ -6,13 +6,6 @@ import 'package:collection/collection.dart';
 import 'compiler.dart' hide ValueType;
 import 'compiler.dart' as compiler show BlockType, FunctionType, ValueType;
 
-// todo: fix stack depth for:
-// - test/spec/block/block_test.dart
-// - test/spec/br/br_test.dart
-// - test/spec/if/if_test.dart
-// - test/spec/loop/loop_test.dart
-// - test/spec/return/return_test.dart
-
 class Instr {
   final Instruction instruction;
   final List<Object> args;

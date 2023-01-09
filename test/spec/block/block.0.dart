@@ -423,9 +423,7 @@ class Block0Module implements Module {
         frame.i32_const(1);
       }
       frame.i32_const(2);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
     return frame.pop();
   }
@@ -439,9 +437,7 @@ class Block0Module implements Module {
       {
         frame.i32_const(1);
       }
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
     return frame.pop();
   }
@@ -459,7 +455,6 @@ class Block0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -480,7 +475,6 @@ class Block0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -787,15 +781,12 @@ class Block0Module implements Module {
     block_label_0:
     {
       break block_label_0;
-
       throw Trap('unreachable');
     }
     block_label_0:
     {
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       throw Trap('unreachable');
     }
     block_label_0:
@@ -816,10 +807,8 @@ class Block0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -836,7 +825,6 @@ class Block0Module implements Module {
     {
       frame.i32_const(18);
       break block_label_0;
-
       frame.i32_const(19);
     }
     return frame.pop();
@@ -850,7 +838,6 @@ class Block0Module implements Module {
       frame.i32_const(-18);
       frame.i64_const(18);
       break block_label_0;
-
       frame.i32_const(19);
       frame.i32_const(-19);
       frame.i64_const(19);
@@ -864,25 +851,18 @@ class Block0Module implements Module {
     {
       frame.i32_const(18);
       break block_label_0;
-
       frame.i32_const(19);
       break block_label_0;
-
       frame.i32_const(20);
       frame.i32_const(0);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(20);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(21);
       break block_label_0;
-
       frame.i32_const(22);
       frame.i32_const(4);
       var t0 = frame.pop();
@@ -897,10 +877,8 @@ class Block0Module implements Module {
       switch (t1) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -943,7 +921,6 @@ class Block0Module implements Module {
     {
       frame.i32_const(4);
       break block_label_0;
-
       frame.i32_ctz();
     }
     frame.i32_add();
@@ -1053,7 +1030,6 @@ class Block0Module implements Module {
       frame.i32_mul();
       local0 = frame.pop();
       break block_label_0;
-
       frame.push(local0);
       frame.i32_const(100);
       frame.i32_mul();

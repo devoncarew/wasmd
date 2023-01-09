@@ -29,10 +29,8 @@ class UnreachedValid1Module implements Module {
         switch (t0) {
           case 0:
             break block_label_1;
-
           case 1:
             break block_label_0;
-
           default:
             break block_label_0;
         }

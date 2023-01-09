@@ -96,7 +96,6 @@ class Fac0Module implements Module {
           local0 = frame.pop();
         }
         continue loop_label_1;
-
         break;
       }
     }
@@ -134,7 +133,6 @@ class Fac0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
-
         break;
       }
     }
@@ -153,9 +151,7 @@ class Fac0Module implements Module {
       frame.push(arg0);
       frame.i64_const(2);
       frame.i64_lt_s();
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
 
       loop_label_1:
       for (;;) {
@@ -170,9 +166,7 @@ class Fac0Module implements Module {
         frame.push(arg0);
         frame.i64_const(1);
         frame.i64_gt_s();
-        if (frame.pop() != 0) {
-          continue loop_label_1;
-        }
+        if (frame.pop() != 0) continue loop_label_1;
         break;
       }
     }
@@ -226,9 +220,7 @@ class Fac0Module implements Module {
       }
       frame.i64_const(0);
       frame.i64_gt_u();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       frame.drop();
       return frame.pop();
       break;

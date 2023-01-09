@@ -40,7 +40,6 @@ class Labels0Module implements Module {
     {
       frame.i32_const(1);
       break block_label_0;
-
       frame.i32_const(0);
     }
     return frame.pop();
@@ -69,7 +68,6 @@ class Labels0Module implements Module {
           break block_label_0;
         }
         continue loop_label_1;
-
         break;
       }
     }
@@ -110,7 +108,6 @@ class Labels0Module implements Module {
         frame.i32_add();
         i = frame.pop();
         continue loop_label_1;
-
         break;
       }
     }
@@ -169,7 +166,6 @@ class Labels0Module implements Module {
           break block_label_0;
         }
         continue loop_label_1;
-
         break;
       }
     }
@@ -195,9 +191,7 @@ class Labels0Module implements Module {
     loop_label_0:
     for (;;) {
       frame.i32_const(0);
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       frame.i32_const(3);
       break;
     }
@@ -216,7 +210,6 @@ class Labels0Module implements Module {
       if_label_1:
       if (frame.pop() != 0) {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       }
@@ -228,7 +221,6 @@ class Labels0Module implements Module {
       if_label_1:
       if (frame.pop() != 0) {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       } else {
@@ -243,7 +235,6 @@ class Labels0Module implements Module {
       if_label_1:
       if (frame.pop() != 0) {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       } else {
@@ -261,7 +252,6 @@ class Labels0Module implements Module {
         i = frame.pop();
       } else {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       }
@@ -276,7 +266,6 @@ class Labels0Module implements Module {
         i = frame.pop();
       } else {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       }
@@ -301,7 +290,6 @@ class Labels0Module implements Module {
       if_label_1:
       if (frame.pop() != 0) {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       }
@@ -313,7 +301,6 @@ class Labels0Module implements Module {
       if_label_1:
       if (frame.pop() != 0) {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       } else {
@@ -328,7 +315,6 @@ class Labels0Module implements Module {
       if_label_1:
       if (frame.pop() != 0) {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       } else {
@@ -346,7 +332,6 @@ class Labels0Module implements Module {
         i = frame.pop();
       } else {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       }
@@ -361,7 +346,6 @@ class Labels0Module implements Module {
         i = frame.pop();
       } else {
         break if_label_1;
-
         frame.i32_const(666);
         i = frame.pop();
       }
@@ -396,16 +380,12 @@ class Labels0Module implements Module {
                   switch (t0) {
                     case 0:
                       break block_label_2;
-
                     case 1:
                       break block_label_6;
-
                     case 2:
                       break block_label_5;
-
                     case 3:
                       break block_label_4;
-
                     default:
                       break block_label_3;
                   }
@@ -438,7 +418,6 @@ class Labels0Module implements Module {
           switch (t0) {
             case 0:
               break block_label_2;
-
             default:
               break block_label_1;
           }
@@ -464,17 +443,13 @@ class Labels0Module implements Module {
       block_label_1:
       {
         frame.i32_const(0);
-        if (frame.pop() != 0) {
-          break block_label_1;
-        }
+        if (frame.pop() != 0) break block_label_1;
         frame.push(i);
         frame.i32_const(1);
         frame.i32_or();
         i = frame.pop();
         frame.i32_const(1);
-        if (frame.pop() != 0) {
-          break block_label_1;
-        }
+        if (frame.pop() != 0) break block_label_1;
         frame.push(i);
         frame.i32_const(2);
         frame.i32_or();
@@ -489,9 +464,7 @@ class Labels0Module implements Module {
         frame.push(i);
       }
       frame.i32_const(0);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.push(i);
       frame.i32_const(8);
@@ -506,9 +479,7 @@ class Labels0Module implements Module {
         frame.push(i);
       }
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.push(i);
       frame.i32_const(32);
@@ -529,9 +500,7 @@ class Labels0Module implements Module {
         break block_label_1;
       }
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(0);
     }
@@ -551,9 +520,7 @@ class Labels0Module implements Module {
           break block_label_2;
         }
         frame.i32_const(1);
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.drop();
       }
       frame.i32_const(0);
@@ -579,9 +546,7 @@ class Labels0Module implements Module {
         i1 = frame.pop();
         frame.push(i1);
       }
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(0);
     }
@@ -627,7 +592,6 @@ class Labels0Module implements Module {
     {
       frame.i32_const(1);
       break block_label_0;
-
       frame.i32_const(2);
       frame.i32_xor();
     }

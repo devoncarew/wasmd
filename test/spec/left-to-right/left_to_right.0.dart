@@ -1490,9 +1490,7 @@ class LeftToRight0Module implements Module {
       frame.push(_i32_right());
       frame.i32_const(0);
       frame.i32_and();
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.push(_get());
     }
@@ -1512,7 +1510,6 @@ class LeftToRight0Module implements Module {
         switch (t0) {
           case 0:
             break block_label_0;
-
           default:
             break block_label_1;
         }

@@ -396,9 +396,7 @@ class If0Module implements Module {
         frame.i32_const(0);
       }
       frame.i32_const(2);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.i32_const(3);
       return frame.pop();
     }
@@ -419,9 +417,7 @@ class If0Module implements Module {
         _dummy();
         frame.i32_const(0);
       }
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.i32_const(3);
       return frame.pop();
     }
@@ -446,7 +442,6 @@ class If0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -472,7 +467,6 @@ class If0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -872,14 +866,12 @@ class If0Module implements Module {
     if_label_0:
     if (frame.pop() != 0) {
       break if_label_0;
-
       throw Trap('unreachable');
     }
     frame.i32_const(1);
     if_label_0:
     if (frame.pop() != 0) {
       break if_label_0;
-
       throw Trap('unreachable');
     } else {
       throw Trap('unreachable');
@@ -890,25 +882,20 @@ class If0Module implements Module {
       throw Trap('unreachable');
     } else {
       break if_label_0;
-
       throw Trap('unreachable');
     }
     frame.i32_const(1);
     if_label_0:
     if (frame.pop() != 0) {
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break if_label_0;
-      }
+      if (frame.pop() != 0) break if_label_0;
       throw Trap('unreachable');
     }
     frame.i32_const(1);
     if_label_0:
     if (frame.pop() != 0) {
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break if_label_0;
-      }
+      if (frame.pop() != 0) break if_label_0;
       throw Trap('unreachable');
     } else {
       throw Trap('unreachable');
@@ -919,9 +906,7 @@ class If0Module implements Module {
       throw Trap('unreachable');
     } else {
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break if_label_0;
-      }
+      if (frame.pop() != 0) break if_label_0;
       throw Trap('unreachable');
     }
     frame.i32_const(1);
@@ -975,12 +960,10 @@ class If0Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(18);
       break if_label_0;
-
       frame.i32_const(19);
     } else {
       frame.i32_const(21);
       break if_label_0;
-
       frame.i32_const(20);
     }
     return frame.pop();
@@ -995,7 +978,6 @@ class If0Module implements Module {
       frame.i32_const(-18);
       frame.i64_const(18);
       break if_label_0;
-
       frame.i32_const(19);
       frame.i32_const(-19);
       frame.i64_const(19);
@@ -1004,7 +986,6 @@ class If0Module implements Module {
       frame.i32_const(18);
       frame.i64_const(-18);
       break if_label_0;
-
       frame.i32_const(-19);
       frame.i32_const(19);
       frame.i64_const(-19);
@@ -1123,7 +1104,6 @@ class If0Module implements Module {
       frame.i32_mul();
       local0 = frame.pop();
       break if_label_0;
-
       frame.push(local0);
       frame.i32_const(100);
       frame.i32_mul();
@@ -1142,7 +1122,6 @@ class If0Module implements Module {
       frame.i32_mul();
       local0 = frame.pop();
       break if_label_0;
-
       frame.push(local0);
       frame.i32_const(1000);
       frame.i32_mul();

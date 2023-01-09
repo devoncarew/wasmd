@@ -203,9 +203,7 @@ class LocalGet0Module implements Module {
     {
       frame.push(arg0);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
     return frame.pop();
   }
@@ -216,9 +214,7 @@ class LocalGet0Module implements Module {
     {
       frame.push(arg0);
       frame.push(arg0);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
     return frame.pop();
   }
@@ -236,10 +232,8 @@ class LocalGet0Module implements Module {
           switch (t0) {
             case 0:
               break block_label_2;
-
             case 1:
               break block_label_1;
-
             default:
               break block_label_0;
           }

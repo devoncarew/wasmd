@@ -202,9 +202,7 @@ class LocalSet0Module implements Module {
       frame.i32_const(8);
       arg0 = frame.pop();
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
   }
 
@@ -215,9 +213,7 @@ class LocalSet0Module implements Module {
       frame.i32_const(6);
       frame.i32_const(9);
       arg0 = frame.pop();
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
   }
 

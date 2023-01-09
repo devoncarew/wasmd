@@ -573,9 +573,7 @@ class Call0Module implements Module {
     {
       frame.push(_func00());
       frame.i32_const(2);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
     return frame.pop();
   }
@@ -586,9 +584,7 @@ class Call0Module implements Module {
     {
       frame.i32_const(2);
       frame.push(_func00());
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
     return frame.pop();
   }
@@ -603,7 +599,6 @@ class Call0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -621,7 +616,6 @@ class Call0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }

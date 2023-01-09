@@ -37,9 +37,7 @@ class FloatExprs85Module implements Module {
       frame.f32_add();
       frame.f32_const(1.0);
       frame.f32_gt();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
     frame.push(result);
@@ -65,9 +63,7 @@ class FloatExprs85Module implements Module {
       frame.f64_add();
       frame.f64_const(1.0);
       frame.f64_gt();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
     frame.push(result);

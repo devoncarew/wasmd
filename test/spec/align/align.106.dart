@@ -42,16 +42,12 @@ class Align106Module implements Module {
               switch (t0) {
                 case 0:
                   break block_label_4;
-
                 case 1:
                   break block_label_3;
-
                 case 2:
                   break block_label_2;
-
                 case 3:
                   break block_label_1;
-
                 default:
                   break block_label_0;
               }
@@ -115,19 +111,14 @@ class Align106Module implements Module {
                 switch (t0) {
                   case 0:
                     break block_label_5;
-
                   case 1:
                     break block_label_4;
-
                   case 2:
                     break block_label_3;
-
                   case 3:
                     break block_label_2;
-
                   case 4:
                     break block_label_1;
-
                   default:
                     break block_label_0;
                 }
@@ -199,19 +190,14 @@ class Align106Module implements Module {
                 switch (t0) {
                   case 0:
                     break block_label_5;
-
                   case 1:
                     break block_label_4;
-
                   case 2:
                     break block_label_3;
-
                   case 3:
                     break block_label_2;
-
                   case 4:
                     break block_label_1;
-
                   default:
                     break block_label_0;
                 }
@@ -425,25 +411,18 @@ class Align106Module implements Module {
                     switch (t0) {
                       case 0:
                         break block_label_7;
-
                       case 1:
                         break block_label_6;
-
                       case 2:
                         break block_label_5;
-
                       case 3:
                         break block_label_4;
-
                       case 4:
                         break block_label_3;
-
                       case 5:
                         break block_label_2;
-
                       case 6:
                         break block_label_1;
-
                       default:
                         break block_label_0;
                     }

@@ -386,9 +386,7 @@ class LocalTee0Module implements Module {
     {
       frame.i32_const(1);
       arg0 = frame.peek();
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
   }
 
@@ -399,9 +397,7 @@ class LocalTee0Module implements Module {
       frame.i32_const(8);
       arg0 = frame.peek();
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(7);
     }
@@ -415,9 +411,7 @@ class LocalTee0Module implements Module {
       frame.i32_const(6);
       frame.i32_const(9);
       arg0 = frame.peek();
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(7);
     }
@@ -434,10 +428,8 @@ class LocalTee0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -455,10 +447,8 @@ class LocalTee0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -479,7 +469,6 @@ class LocalTee0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }

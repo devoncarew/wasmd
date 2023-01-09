@@ -1229,24 +1229,22 @@ enum BlockType {
     String? name,
     bool popCondition = false,
   }) {
-    var desc = ''; // name == null ? '' : ' /* $name */';
-
     if (returnType) {
       var code = popCondition ? 'if (frame.pop() != 0) {\n' : '';
       if (function.returnsVoid) {
-        code += 'return;$desc\n';
+        code += 'return;';
       } else if (function.returnsTuple) {
         var arity = function.functionType.resultType.length;
         return Code('return Tuple$arity.from(frame.stack);');
       } else {
-        code += 'return frame.pop();$desc\n';
+        code += 'return frame.pop();';
       }
       if (popCondition) code += '}';
       return Code(code.trimRight());
     } else {
       var jumpKind = loopType ? 'continue' : 'break';
 
-      var code = popCondition ? 'if (frame.pop() != 0) {\n' : '';
+      var code = popCondition ? 'if (frame.pop() != 0) ' : '';
       // TODO: Our logic here needs to be re-worked.
       // if (breakType) {
       //   // adjust stack
@@ -1254,8 +1252,8 @@ enum BlockType {
       //   var retainTop = scope.blockReturnCount;
       //   code += '  frame.unwindTo($unwindTo, $retainTop);\n';
       // }
-      code += '  $jumpKind $label;$desc\n';
-      if (popCondition) code += '}';
+      code += '$jumpKind $label;';
+      // if (popCondition) code += '}';
       return Code(code);
     }
   }
@@ -1673,6 +1671,7 @@ class Scope {
 
   int nextTempId = 0;
 
+  // ignore: unused_field
   bool _unreachable = false;
 
   Scope({this.parent, this.blockType}) {
@@ -1692,18 +1691,16 @@ class Scope {
   void updateStackDepth(int adjust, String desc) {
     _stackDepth += adjust;
 
-    // Stack depth may not go below 0 - num block args.
-    if (_stackDepth < -blockParamCount && !_unreachable) {
-      print(' ** warning: calculated stack depth is $_stackDepth; $desc');
-    }
+    // // Stack depth may not go below 0 - num block args.
+    // if (_stackDepth < -blockParamCount && !_unreachable) {
+    //   print(' ** warning: calculated stack depth is $_stackDepth; $desc');
+    // }
   }
 
   int get stackDepth =>
       parent == null ? _stackDepth : parent!.stackDepth + _stackDepth;
 
   int get entryDepth => parent?.stackDepth ?? 0;
-
-  // todo: use thos when popping the stack
 
   int get blockParamCount => blockType?.paramItems ?? 0;
 
@@ -1992,7 +1989,7 @@ class DefinedGlobal implements Global {
   static Class createGlobalsClassDef(Module module) {
     var fields = <Field>[];
 
-    // TODO: switch to having an '_initGlobals' method on the modul class; we
+    // TODO: switch to having an '_initGlobals' method on the module class; we
     // need to be able to reference module instance variables in the init
     // methods of global fields
 

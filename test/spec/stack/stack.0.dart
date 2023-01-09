@@ -54,7 +54,6 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
-
         break;
       }
     }
@@ -92,7 +91,6 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
-
         break;
       }
     }
@@ -130,7 +128,6 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
-
         break;
       }
     }
@@ -168,7 +165,6 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
-
         break;
       }
     }
@@ -206,7 +202,6 @@ class Stack0Module implements Module {
           i = frame.pop();
         }
         continue loop_label_1;
-
         break;
       }
     }

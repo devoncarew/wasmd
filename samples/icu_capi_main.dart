@@ -8,6 +8,11 @@ import 'icu_capi.dart';
 
 const _diplomatSize = 100;
 
+// Some example API usage at
+// https://github.com/unicode-org/icu4x/blob/main/ffi/diplomat/js/include/ICU4XLocale.js.
+
+// Or, //ffi/tinywasm/tiny.mjs.
+
 void main(List<String> args) {
   var imports = EnvImportsImpl();
   var icu = IcuCapiModule(envImports: imports);
@@ -29,14 +34,13 @@ void main(List<String> args) {
   var receivePtr = icu.diplomat_alloc(_diplomatSize, 4);
   print('receive ptr  : $receivePtr');
 
-  // TODO: we get an 'out of bounds memory access' trap from here
-  // diplomat_free(ptr, size, align)
-  // icu.diplomat_free(receivePtr, _diplomatSize, 4);
-
   // ICU4XLocale_create_from_string(receiveBuffer, namePtr, nameLen);
   icu.ICU4XLocale_create_from_string(receivePtr, en_usStr, 'en_US'.length);
 
   // void ICU4XLocale_destroy(i32 arg0) {
+
+  // diplomat_free(ptr, size, align)
+  icu.diplomat_free(receivePtr, _diplomatSize, 4);
 
   print('${timer.elapsedMilliseconds}ms');
 }

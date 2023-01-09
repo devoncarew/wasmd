@@ -83,9 +83,7 @@ class Load0Module implements Module {
     {
       frame.i32_const(0);
       frame.i32_load(2, 0);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
     }
   }
 
@@ -96,9 +94,7 @@ class Load0Module implements Module {
       frame.i32_const(0);
       frame.i32_load(2, 0);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(7);
     }
@@ -112,9 +108,7 @@ class Load0Module implements Module {
       frame.i32_const(6);
       frame.i32_const(0);
       frame.i32_load(2, 0);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(7);
     }
@@ -131,10 +125,8 @@ class Load0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -152,10 +144,8 @@ class Load0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         case 1:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -176,7 +166,6 @@ class Load0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }

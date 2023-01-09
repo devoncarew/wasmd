@@ -26,9 +26,7 @@ class GcdModule implements Module {
       block_label_1:
       {
         frame.push(arg0);
-        if (frame.pop() != 0) {
-          break block_label_1;
-        }
+        if (frame.pop() != 0) break block_label_1;
         frame.push(arg1);
         local0 = frame.pop();
         break block_label_0;
@@ -44,9 +42,7 @@ class GcdModule implements Module {
         frame.push(local0);
         arg1 = frame.pop();
         frame.push(arg0);
-        if (frame.pop() != 0) {
-          continue loop_label_1;
-        }
+        if (frame.pop() != 0) continue loop_label_1;
         break;
       }
     }

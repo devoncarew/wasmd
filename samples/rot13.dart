@@ -107,7 +107,6 @@ class Rot13Module implements Module {
         frame.i32_add();
         i = frame.pop();
         continue loop_label_1;
-
         break;
       }
     }

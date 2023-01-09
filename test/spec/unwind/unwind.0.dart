@@ -191,9 +191,7 @@ class Unwind0Module implements Module {
       frame.i32_const(3);
       frame.i64_const(1);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.drop();
     }
@@ -209,9 +207,7 @@ class Unwind0Module implements Module {
       frame.i64_const(1);
       frame.i32_const(9);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.drop();
     }
@@ -318,9 +314,7 @@ class Unwind0Module implements Module {
       {
         frame.i64_const(1);
         frame.i32_const(1);
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.drop();
       }
       frame.drop();
@@ -339,9 +333,7 @@ class Unwind0Module implements Module {
         frame.i64_const(1);
         frame.i32_const(9);
         frame.i32_const(1);
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.drop();
         frame.drop();
       }
@@ -420,7 +412,6 @@ class Unwind0Module implements Module {
       frame.f32_const(0.0);
       frame.i32_const(9);
       break block_label_0;
-
       frame.i64_eqz();
     }
     return frame.pop();
@@ -433,9 +424,7 @@ class Unwind0Module implements Module {
       frame.i64_const(0);
       frame.i32_const(9);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i64_eqz();
     }
@@ -453,7 +442,6 @@ class Unwind0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -489,7 +477,6 @@ class Unwind0Module implements Module {
       frame.f64_const(1.0);
       frame.i32_const(9);
       break block_label_0;
-
       frame.i64_eq();
     }
     return frame.pop();
@@ -503,9 +490,7 @@ class Unwind0Module implements Module {
       frame.i64_const(1);
       frame.i32_const(9);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i64_eq();
     }
@@ -560,7 +545,6 @@ class Unwind0Module implements Module {
       frame.i64_const(0);
       frame.i32_const(9);
       break block_label_0;
-
       frame.select();
     }
     return frame.pop();
@@ -575,9 +559,7 @@ class Unwind0Module implements Module {
       frame.i32_const(0);
       frame.i32_const(9);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.select();
     }
@@ -643,9 +625,7 @@ class Unwind0Module implements Module {
       frame.i32_const(0);
       frame.i32_const(9);
       frame.i32_const(1);
-      if (frame.pop() != 0) {
-        break block_label_0;
-      }
+      if (frame.pop() != 0) break block_label_0;
       frame.drop();
     }
     return frame.pop();
@@ -662,7 +642,6 @@ class Unwind0Module implements Module {
       switch (t0) {
         case 0:
           break block_label_0;
-
         default:
           break block_label_0;
       }
@@ -702,7 +681,6 @@ class Unwind0Module implements Module {
         frame.f32_const(0.0);
         frame.i32_const(9);
         break block_label_0;
-
         break;
       }
     }
@@ -718,9 +696,7 @@ class Unwind0Module implements Module {
         frame.i32_const(0);
         frame.i32_const(9);
         frame.i32_const(1);
-        if (frame.pop() != 0) {
-          break block_label_0;
-        }
+        if (frame.pop() != 0) break block_label_0;
         frame.drop();
         break;
       }
@@ -741,7 +717,6 @@ class Unwind0Module implements Module {
         switch (t0) {
           case 0:
             break block_label_0;
-
           default:
             break block_label_0;
         }

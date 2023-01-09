@@ -33,9 +33,7 @@ class Branch1Module implements Module {
       frame.push(globals.i);
       frame.i32_const(10);
       frame.i32_lt_s();
-      if (frame.pop() != 0) {
-        continue loop_label_0;
-      }
+      if (frame.pop() != 0) continue loop_label_0;
       break;
     }
     frame.push(globals.i);
