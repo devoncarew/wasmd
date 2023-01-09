@@ -240,6 +240,7 @@ class LocalSet0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(7);
     arg0 = frame.pop();
+    return;
   }
 
   void _func17(i32 arg0) {

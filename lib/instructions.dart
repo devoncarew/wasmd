@@ -256,7 +256,7 @@ class Instruction_Return extends Instruction {
     var frame = refer('frame');
 
     if (function.returnsVoid) {
-      return Code('');
+      return Code('return;');
     } else if (function.returnsTuple) {
       var arity = function.functionType.resultType.length;
       return Code('return Tuple$arity.from(frame.stack);');
