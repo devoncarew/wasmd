@@ -1842,6 +1842,87 @@ class Tuple3<T0, T1, T2> {
   String toString() => 'Tuple3($t0, $t1, $t2)';
 }
 
+class Tuple4<T0, T1, T2, T3> {
+  final T0 t0;
+  final T1 t1;
+  final T2 t2;
+  final T3 t3;
+
+  Tuple4(this.t0, this.t1, this.t2, this.t3);
+
+  factory Tuple4.from(List<Object?> stack) {
+    var t3 = stack.removeLast() as T3;
+    var t2 = stack.removeLast() as T2;
+    var t1 = stack.removeLast() as T1;
+    var t0 = stack.removeLast() as T0;
+    return Tuple4(t0, t1, t2, t3);
+  }
+
+  void pushTo(List<Object?> stack) {
+    stack.add(t0);
+    stack.add(t1);
+    stack.add(t2);
+    stack.add(t3);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! Tuple4) return false;
+
+    return t0 == other.t0 && t1 == other.t1 && t2 == other.t2 && t3 == other.t3;
+  }
+
+  @override
+  int get hashCode => Object.hash(t0, t1, t2, t3);
+
+  @override
+  String toString() => 'Tuple4($t0, $t1, $t2, $t3)';
+}
+
+class Tuple5<T0, T1, T2, T3, T4> {
+  final T0 t0;
+  final T1 t1;
+  final T2 t2;
+  final T3 t3;
+  final T4 t4;
+
+  Tuple5(this.t0, this.t1, this.t2, this.t3, this.t4);
+
+  factory Tuple5.from(List<Object?> stack) {
+    var t4 = stack.removeLast() as T4;
+    var t3 = stack.removeLast() as T3;
+    var t2 = stack.removeLast() as T2;
+    var t1 = stack.removeLast() as T1;
+    var t0 = stack.removeLast() as T0;
+    return Tuple5(t0, t1, t2, t3, t4);
+  }
+
+  void pushTo(List<Object?> stack) {
+    stack.add(t0);
+    stack.add(t1);
+    stack.add(t2);
+    stack.add(t3);
+    stack.add(t4);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! Tuple5) return false;
+
+    return t0 == other.t0 &&
+        t1 == other.t1 &&
+        t2 == other.t2 &&
+        t3 == other.t3 &&
+        t4 == other.t4;
+  }
+
+  @override
+  int get hashCode => Object.hash(t0, t1, t2, t3, t4);
+
+  @override
+  String toString() => 'Tuple5($t0, $t1, $t2, $t3, $t4)';
+}
+
 // TODO: Remove our use of a stub module.
 final Module stubModule = _StubModule();
 

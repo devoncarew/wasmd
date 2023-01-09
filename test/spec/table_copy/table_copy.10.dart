@@ -88,8 +88,9 @@ class TableCopy10Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     {
-      var func = table1[frame.pop()] as FunctionType0?;
+      var func = table1[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       frame.push(func());
     }
     return frame.pop();
@@ -99,8 +100,9 @@ class TableCopy10Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       frame.push(func());
     }
     return frame.pop();

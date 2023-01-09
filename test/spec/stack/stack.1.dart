@@ -23,8 +23,9 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -33,8 +34,9 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
       break;
@@ -44,8 +46,9 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -54,15 +57,17 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -70,8 +75,9 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -80,8 +86,9 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
       break;
@@ -91,8 +98,9 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -101,15 +109,17 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -118,8 +128,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -130,8 +141,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -143,8 +155,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -155,8 +168,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -164,8 +178,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -174,8 +189,9 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType2?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType2) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
     }
@@ -185,8 +201,9 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType2?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType2) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
       break;
@@ -197,15 +214,17 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType2?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType2) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType2?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType2) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
     }
@@ -214,8 +233,9 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -224,8 +244,9 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
       break;
@@ -235,8 +256,9 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -245,15 +267,17 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -261,8 +285,9 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -271,8 +296,9 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
       break;
@@ -282,8 +308,9 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -292,15 +319,17 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -308,8 +337,9 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -318,8 +348,9 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
       break;
@@ -329,8 +360,9 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -339,15 +371,17 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -356,8 +390,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -368,8 +403,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -381,8 +417,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -393,8 +430,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -402,8 +440,9 @@ class Stack1Module implements Module {
       frame.i32_const(0);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType1?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         var t0 = frame.pop();
         func(t0);
       }
@@ -412,8 +451,9 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType2?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType2) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
     }
@@ -423,8 +463,9 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType2?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType2) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
       break;
@@ -435,15 +476,17 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType2?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType2) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType2?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType2) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
     }
@@ -452,8 +495,9 @@ class Stack1Module implements Module {
     {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -462,8 +506,9 @@ class Stack1Module implements Module {
     for (;;) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
       break;
@@ -473,8 +518,9 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
@@ -483,22 +529,25 @@ class Stack1Module implements Module {
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     } else {
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         func();
       }
     }
     frame.i32_const(0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       func();
     }
   }

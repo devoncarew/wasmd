@@ -536,8 +536,9 @@ class Unreachable0Module implements Module {
     frame.i32_const(2);
     frame.i32_const(3);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -552,8 +553,9 @@ class Unreachable0Module implements Module {
     frame.i32_const(2);
     frame.i32_const(3);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -568,8 +570,9 @@ class Unreachable0Module implements Module {
     throw Trap('unreachable');
     frame.i32_const(3);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -584,8 +587,9 @@ class Unreachable0Module implements Module {
     frame.i32_const(2);
     throw Trap('unreachable');
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();

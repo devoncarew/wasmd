@@ -436,7 +436,7 @@ class Instruction_Call extends Instruction {
     if (target.returnsVoid) {
       // nothing to do
     } else if (target.returnsTuple) {
-      // push the return tuples items to the stack
+      // push the return tuples item's to the stack
       call = call.property('pushTo').call([refer('frame.stack')]);
     } else {
       call = refer('frame.push').call([call]);
@@ -473,10 +473,13 @@ class Instruction_CallIndirect extends Instruction {
 
     var statements = <Code>[];
 
+    // TODO: Ensure that the runtime properly infers the type of func.
+
     statements.addAll([
-      Code(
-          'var func = table$tableIndex[frame.pop()] as FunctionType$sigIndex?;'),
+      Code('var func = table$tableIndex[frame.pop()];'),
       Code('if (func == null) throw Trap(\'uninitialized element\');'),
+      Code('if (func is! FunctionType$sigIndex) '
+          'throw Trap(\'indirect call type mismatch\');'),
     ]);
 
     var temps = List.generate(funcType.parameterTypes.length, (i) => 't$i');
@@ -490,7 +493,10 @@ class Instruction_CallIndirect extends Instruction {
       ...temps.map((t) => refer(t)),
     ]);
 
-    if (!funcType.returnsVoid) {
+    if (funcType.returnsTuple) {
+      // push the return tuples item's to the stack
+      call = call.property('pushTo').call([refer('frame.stack')]);
+    } else if (!funcType.returnsVoid) {
       call = refer('frame.push').call([call]);
     }
 

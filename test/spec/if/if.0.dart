@@ -502,8 +502,9 @@ class If0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         var t1 = frame.pop();
         var t0 = frame.pop();
         frame.push(func(t0, t1));
@@ -528,8 +529,9 @@ class If0Module implements Module {
       }
       frame.i32_const(0);
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         var t1 = frame.pop();
         var t0 = frame.pop();
         frame.push(func(t0, t1));
@@ -554,8 +556,9 @@ class If0Module implements Module {
         frame.i32_const(0);
       }
       {
-        var func = table0[frame.pop()] as FunctionType0?;
+        var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
+        if (func is! FunctionType0) throw Trap('indirect call type mismatch');
         var t1 = frame.pop();
         var t0 = frame.pop();
         frame.push(func(t0, t1));
@@ -1302,16 +1305,16 @@ typedef FunctionType0 = i32 Function(i32, i32);
 typedef FunctionType1 = void Function();
 typedef FunctionType2 = i32 Function();
 typedef FunctionType3 = void Function(i32);
-// TODO: FunctionType4 - support multiple return values (Tuple3<i32, f64, i32>)
+typedef FunctionType4 = Tuple3<i32, f64, i32> Function(i32, f64, i32);
 typedef FunctionType5 = i32 Function(i32);
-// TODO: FunctionType6 - support multiple return values (Tuple2<i32, i32>)
-// TODO: FunctionType7 - support multiple return values (Tuple3<i32, i64, i32>)
-// TODO: FunctionType8 - support multiple return values (Tuple2<i32, i32>)
-// TODO: FunctionType9 - support multiple return values (Tuple2<f32, f32>)
-// TODO: FunctionType10 - support multiple return values (Tuple3<i32, i32, i64>)
-// TODO: FunctionType11 - support multiple return values (Tuple3<i32, i32, i64>)
-// TODO: FunctionType12 - support multiple return values (Tuple2<i32, i32>)
-// TODO: FunctionType13 - support multiple return values (Tuple2<i64, i32>)
+typedef FunctionType6 = Tuple2<i32, i32> Function(i32);
+typedef FunctionType7 = Tuple3<i32, i64, i32> Function();
+typedef FunctionType8 = Tuple2<i32, i32> Function();
+typedef FunctionType9 = Tuple2<f32, f32> Function();
+typedef FunctionType10 = Tuple3<i32, i32, i64> Function(i32);
+typedef FunctionType11 = Tuple3<i32, i32, i64> Function();
+typedef FunctionType12 = Tuple2<i32, i32> Function(i32, i32);
+typedef FunctionType13 = Tuple2<i64, i32> Function(i64, i64, i32);
 typedef FunctionType14 = i64 Function(i64, i64);
 typedef FunctionType15 = i64 Function(i64);
 

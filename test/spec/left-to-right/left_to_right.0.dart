@@ -723,8 +723,9 @@ class LeftToRight0Module implements Module {
     frame.push(_i32_right());
     frame.push(_i32_callee());
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(func(t0, t1));
@@ -1060,8 +1061,9 @@ class LeftToRight0Module implements Module {
     frame.push(_i64_right());
     frame.push(_i64_callee());
     {
-      var func = table0[frame.pop()] as FunctionType1?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType1) throw Trap('indirect call type mismatch');
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(func(t0, t1));
@@ -1257,8 +1259,9 @@ class LeftToRight0Module implements Module {
     frame.push(_f32_right());
     frame.push(_f32_callee());
     {
-      var func = table0[frame.pop()] as FunctionType2?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType2) throw Trap('indirect call type mismatch');
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(func(t0, t1));
@@ -1454,8 +1457,9 @@ class LeftToRight0Module implements Module {
     frame.push(_f64_right());
     frame.push(_f64_callee());
     {
-      var func = table0[frame.pop()] as FunctionType3?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType3) throw Trap('indirect call type mismatch');
       var t1 = frame.pop();
       var t0 = frame.pop();
       frame.push(func(t0, t1));

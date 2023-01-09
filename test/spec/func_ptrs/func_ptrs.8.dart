@@ -63,8 +63,9 @@ class FuncPtrs8Module implements Module {
     final frame = Frame(this);
     frame.push(i);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       frame.push(func());
     }
     return frame.pop();
@@ -74,8 +75,9 @@ class FuncPtrs8Module implements Module {
     final frame = Frame(this);
     frame.push(i);
     {
-      var func = table0[frame.pop()] as FunctionType1?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType1) throw Trap('indirect call type mismatch');
       frame.push(func());
     }
     return frame.pop();

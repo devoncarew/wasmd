@@ -625,8 +625,9 @@ class LocalTee0Module implements Module {
     frame.i32_const(3);
     frame.i32_const(0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -643,8 +644,9 @@ class LocalTee0Module implements Module {
     frame.i32_const(3);
     frame.i32_const(0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -661,8 +663,9 @@ class LocalTee0Module implements Module {
     arg0 = frame.peek();
     frame.i32_const(0);
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
@@ -679,8 +682,9 @@ class LocalTee0Module implements Module {
     frame.i32_const(0);
     arg0 = frame.peek();
     {
-      var func = table0[frame.pop()] as FunctionType0?;
+      var func = table0[frame.pop()];
       if (func == null) throw Trap('uninitialized element');
+      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
       var t2 = frame.pop();
       var t1 = frame.pop();
       var t0 = frame.pop();
