@@ -231,7 +231,7 @@ void generateDartForJson(
       var field = action['field'] as String;
       var args = (action['args'] as List? ?? []).cast<Map<String, dynamic>>();
 
-      field = patchUpName(field);
+      field = ensurePublic(patchUpName(field));
 
       var invocation = '';
       if (actionType == 'invoke') {
@@ -257,12 +257,13 @@ void generateDartForJson(
       testCount[field] = (testCount[field] ?? -1) + 1;
 
       var description = '${field}_${testCount[field]}';
-      description = description.replaceAll(r'$', '');
       var skip = skips[description];
       var skipDesc =
           skip == null ? '' : (skip.isEmpty ? ", 'skip'" : ", 'skip: $skip'");
+      description =
+          description.contains(r'$') ? "r'$description'" : "'$description'";
 
-      statements.add(Code(_addComma('returns(\'$description\', '
+      statements.add(Code(_addComma('returns($description, '
           '() => $module.$field$invocation, $result$skipDesc);')));
     } else if (type == 'assert_trap') {
       var action = command['action'] as Map<String, dynamic>;

@@ -65,18 +65,18 @@ void main() {
     returns('params_break_0', () => m0.params_break(), 0xC);
     returns('params_id_break_0', () => m0.params_id_break(), 0x3);
     returns('effects_0', () => m0.effects(), 0x1);
-    returns('while_0', () => m0.$while(0), 0x1);
-    returns('while_1', () => m0.$while(0x1), 0x1);
-    returns('while_2', () => m0.$while(0x2), 0x2);
-    returns('while_3', () => m0.$while(0x3), 0x6);
-    returns('while_4', () => m0.$while(0x5), 0x78);
-    returns('while_5', () => m0.$while(0x14), $i64('21C3677C82B40000'));
-    returns('for_0', () => m0.$for(0), 0x1);
-    returns('for_1', () => m0.$for(0x1), 0x1);
-    returns('for_2', () => m0.$for(0x2), 0x2);
-    returns('for_3', () => m0.$for(0x3), 0x6);
-    returns('for_4', () => m0.$for(0x5), 0x78);
-    returns('for_5', () => m0.$for(0x14), $i64('21C3677C82B40000'));
+    returns(r'$while_0', () => m0.$while(0), 0x1);
+    returns(r'$while_1', () => m0.$while(0x1), 0x1);
+    returns(r'$while_2', () => m0.$while(0x2), 0x2);
+    returns(r'$while_3', () => m0.$while(0x3), 0x6);
+    returns(r'$while_4', () => m0.$while(0x5), 0x78);
+    returns(r'$while_5', () => m0.$while(0x14), $i64('21C3677C82B40000'));
+    returns(r'$for_0', () => m0.$for(0), 0x1);
+    returns(r'$for_1', () => m0.$for(0x1), 0x1);
+    returns(r'$for_2', () => m0.$for(0x2), 0x2);
+    returns(r'$for_3', () => m0.$for(0x3), 0x6);
+    returns(r'$for_4', () => m0.$for(0x5), 0x78);
+    returns(r'$for_5', () => m0.$for(0x14), $i64('21C3677C82B40000'));
     returns(
       'nesting_0',
       () => m0.nesting($f32('0'), $f32('40E00000')),
