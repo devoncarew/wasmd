@@ -639,13 +639,13 @@ class Instruction {
   static const i64ConstOpcode = 0x42;
   static const f32ConstOpcode = 0x43;
   static const f64ConstOpcode = 0x44;
-  static const overflowOpcode = 0xFC;
+  static const overflowOpcodeFC = 0xFC;
 
   static final List<Instruction> instructions = _init();
   static final Map<int, Instruction> opcodeMap = _initOpcodeMap(instructions);
 
-  static final List<Instruction> overflowInstructions = _initOverflow();
-  static final Map<int, Instruction> overflowOpcodeMap =
+  static final List<Instruction> overflowInstructions = _initOverflowFC();
+  static final Map<int, Instruction> opcodeMapOverflowFC =
       _initOpcodeMap(overflowInstructions);
 
   final String name;
@@ -753,8 +753,8 @@ class Instruction {
 
   static Instr? parse(int opcode, Reader r, {required int? opcode2}) {
     Instruction? instruction;
-    if (opcode == overflowOpcode) {
-      instruction = overflowOpcodeMap[opcode2];
+    if (opcode == overflowOpcodeFC) {
+      instruction = opcodeMapOverflowFC[opcode2];
     } else {
       instruction = opcodeMap[opcode];
     }
@@ -978,7 +978,7 @@ class Instruction {
     ];
   }
 
-  static List<Instruction> _initOverflow() {
+  static List<Instruction> _initOverflowFC() {
     // 0xFC 0xXX
 
     return [
