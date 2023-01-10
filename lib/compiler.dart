@@ -77,9 +77,8 @@ class Compiler {
 
     while (r.bytesRemaining() > 0) {
       var kind = r.readUint8();
-      var length = r.leb128();
-
       var sectionKind = SectionKind.from(kind);
+      var length = r.leb128();
       _log('[section ${sectionKind?.name}] (bytes: $length)');
 
       if (sectionKind == SectionKind.custom) {
@@ -382,8 +381,8 @@ class Compiler {
       while (reader.bytesRemaining() > 0) {
         int opcode = reader.readUint8();
         int? opcode2;
-        if (opcode == Instruction.overflowOpcode) {
-          opcode2 = reader.readUint8();
+        if (opcode == Instruction.overflowOpcodeFC) {
+          opcode2 = reader.leb128_u();
         }
         Instr? i = Instruction.parse(opcode, reader, opcode2: opcode2);
         if (i != null) {
@@ -527,7 +526,7 @@ class Compiler {
         case 0x00:
           // function
           var importModule = module.getCreateImportModule(moduleName);
-          var functionTypeIndex = r.readUint8();
+          var functionTypeIndex = r.leb128_u();
           importModule.addImportedFunction(
             ImportedFunction(module, functionTypeIndex, importModule, itemName),
           );
@@ -981,13 +980,6 @@ class Reader {
     do {
       int byte = data.getUint8(pos++);
 
-      // if (shift == 63 && byte != 0x00 && byte != 0x01) {
-      //   while (byte & CONTINUATION_BIT != 0) {
-      //     byte = data.getUint8(pos++);
-      //   }
-      //   throw 'leb128_u overflow';
-      // }
-
       var lowBits = byte & 0x7F;
       result |= lowBits << shift;
 
@@ -999,41 +991,16 @@ class Reader {
     } while (true);
   }
 
-  // int leb128_u() {
-  //   int result = 0;
-  //   int shift = 0;
-
-  //   // read unsigned LEB128
-  //   for (int i = 0; i < 7; i++) {
-  //     int byte = data.getUint8(pos++);
-  //     result |= (byte & 0x7F) << shift;
-  //     shift += 7;
-  //     if (byte & 0x80 == 0) {
-  //       break;
-  //     }
-  //   }
-
-  //   return result;
-  // }
-
   int leb128_s({int bits = 64}) {
     const CONTINUATION_BIT = 0x80;
     const SIGN_BIT = 1 << 6;
 
     int result = 0;
     int shift = 0;
-    // int size = 64;
     int byte;
 
     do {
       byte = data.getUint8(pos++);
-
-      // if (shift == 63 && byte != 0x00 && byte != 0x7f) {
-      //     while (byte & CONTINUATION_BIT != 0) {
-      //           byte = data.getUint8(pos++);
-      //     }
-      //       throw 'leb128_u overflow';
-      // }
 
       var lowBits = byte & 0x7F;
       result |= lowBits << shift;
@@ -1051,26 +1018,6 @@ class Reader {
 
     return result;
   }
-
-  // int leb128_s({int bits = 64}) {
-  //   int result = 0;
-  //   int shift = 0;
-
-  //   // read signed LEB128
-  //   for (int i = 0; i < 7; i++) {
-  //     int byte = data.getUint8(pos++);
-  //     result |= (byte & 0x7F) << shift;
-  //     shift += 7;
-  //     if (byte & 0x80 == 0) {
-  //       if (shift < bits && (byte & 0x40) != 0) {
-  //         result = result | (~0 << shift);
-  //       }
-  //       break;
-  //     }
-  //   }
-
-  //   return result;
-  // }
 
   double readF32() {
     var result = data.getFloat32(pos, Endian.little);
@@ -1125,7 +1072,7 @@ class Reader {
     while (opcode != Instruction_End.endOpcode) {
       opcode = readUint8();
       int? opcode2;
-      if (opcode == Instruction.overflowOpcode) {
+      if (opcode == Instruction.overflowOpcodeFC) {
         opcode2 = readUint8();
       }
       if (opcode != Instruction_End.endOpcode) {

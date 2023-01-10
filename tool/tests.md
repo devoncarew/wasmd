@@ -68,7 +68,6 @@
 | unreachable.wast            | -   |
 | unreached-valid.wast        | -   |
 | unwind.wast                 | -   |
-| binary-leb128.wast          | RangeError from Reader.leb128_u |
 | data.wast                   | need to rework DataSegments initializers |
 | elem.wast                   | unimplemented import table |
 | global.wast                 | needs more work on initializing globals |
@@ -79,6 +78,7 @@
 | select.wast                 | wast2json failed; unexpected token "result" |
 | table.wast                  | unimplemented import table |
 | binary.wast                 | (no tests) |
+| binary-leb128.wast          | (no tests) |
 | custom.wast                 | (no tests) |
 | inline-module.wast          | (no tests) |
 | skip-stack-guard-page.wast  | (no tests) |
