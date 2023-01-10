@@ -320,6 +320,6 @@ void main() {
     // module float_literals.1.dart (line 192)
     var m1 = float_literals_1.FloatLiterals1Module();
 
-    returns('4294967249_0', () => m1.$4294967249(), $f64('41EFFFFFFA200000'));
+    returns(r'$4294967249_0', () => m1.$4294967249(), $f64('41EFFFFFFA200000'));
   });
 }

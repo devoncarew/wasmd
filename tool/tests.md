@@ -74,7 +74,7 @@
 | global.wast                 | needs more work on initializing globals |
 | imports.wast                | unimplemented import table |
 | linking.wast                | unimplemented import table |
-| names.wast                  | generated file is causing the analyzer to crash |
+| names.wast                  | not completely working |
 | ref_func.wast               | needs additional work on globals generation |
 | table.wast                  | unimplemented import table |
 | binary.wast                 | (no tests) |

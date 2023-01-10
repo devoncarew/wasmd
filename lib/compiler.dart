@@ -184,7 +184,8 @@ class Compiler {
           var functions = r.leb128_u();
           for (int i = 0; i < functions; i++) {
             var index = r.leb128_u();
-            var name = patchUpName(r.readUtf8());
+            // TODO: We could also run this name through patchUpName()
+            var name = r.readUtf8();
             if (isValidIdentifier(name)) {
               _log('  [$name]');
               var localMap =
@@ -473,6 +474,7 @@ class Compiler {
     // "It decodes into a vector of exports that represent the component of a
     // module."
     var exportCount = r.leb128();
+    var exportScope = NameScope();
 
     for (int i = 0; i < exportCount; i++) {
       var name = r.readName();
@@ -483,7 +485,8 @@ class Compiler {
           // funcidx
           var functionIndex = r.leb128();
           _log("  export func '$name' (#$functionIndex)");
-          module.exportFunction(ensurePublic(patchUpName(name)), functionIndex);
+          name = exportScope.uniqueAdd(ensurePublic(patchUpName(name)));
+          module.exportFunction(name, functionIndex);
           break;
         case 0x01:
           // tableidx

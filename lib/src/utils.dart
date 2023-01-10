@@ -31,13 +31,22 @@ String patchUpName(String name) {
   // This is only supported for testing.
   if (name.isEmpty) return '\$';
 
+  if (_keywords.contains(name)) return '\$$name';
+
   name = name.replaceAll('-', '_').replaceAll('.', '_');
-  if (isNumber(name.codeUnits[0])) {
-    return '\$$name';
+
+  name = name.codeUnits.map((cu) {
+    if (_identifierChar(cu)) {
+      return String.fromCharCode(cu);
+    } else {
+      return '\$${cu.toRadixString(16).padLeft(2, '0').toUpperCase()}';
+    }
+  }).join();
+
+  if (!_identifierStartChar(name.codeUnits[0])) {
+    name = '\$$name';
   }
-  if (_keywords.contains(name)) {
-    return '\$$name';
-  }
+
   return name;
 }
 
@@ -71,33 +80,49 @@ bool isValidIdentifier(String str) {
 
   var chars = str.codeUnits;
 
-  if (!isLetter(chars[0])) return false;
+  if (!_identifierStartChar(chars[0])) return false;
 
   for (var char in chars.skip(1)) {
-    if (!isLetterNumber(char)) return false;
+    if (!_identifierChar(char)) return false;
   }
 
   return true;
 }
 
-bool isLetter(int char) {
-  if (char == $_) return true;
+bool _identifierStartChar(int char) {
+  if (char == $_ || char == $$) return true;
   if (char >= $a && char <= $z) return true;
   if (char >= $A && char <= $Z) return true;
   return false;
 }
 
-bool isLetterNumber(int char) {
-  if (char == $_) return true;
+bool _identifierChar(int char) {
+  if (char == $_ || char == $$) return true;
   if (char >= $a && char <= $z) return true;
   if (char >= $A && char <= $Z) return true;
   if (char >= $0 && char <= $9) return true;
   return false;
 }
 
-bool isNumber(int char) {
-  if (char >= $0 && char <= $9) return true;
-  return false;
+class NameScope {
+  final Set<String> _names = {};
+
+  String uniqueAdd(String name) {
+    if (!_names.contains(name)) {
+      _names.add(name);
+      return name;
+    }
+
+    int count = 1;
+
+    while (_names.contains('${name}_$count')) {
+      count++;
+    }
+
+    name = '${name}_$count';
+    _names.add(name);
+    return name;
+  }
 }
 
 String emitFormatLibrary(Library library) {
