@@ -146,8 +146,6 @@ class DiplomatReceiveBuffer {
 
   late final int ptr;
 
-  // todo: also support an error string
-
   DiplomatReceiveBuffer(this.icu) {
     // diplomat_alloc(size, align)
     ptr = icu.diplomat_alloc(_allocSize, 4);

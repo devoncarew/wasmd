@@ -18,7 +18,6 @@ void main(List<String> args) async {
 
   var lines = (result.stdout as String).split('\n').where((l) => l.isNotEmpty);
 
-  // var groups = <String, Group>{};
   var tests = <int, Test>{};
 
   for (var line in lines) {
@@ -71,7 +70,6 @@ void main(List<String> args) async {
       .map((l) => l.contains('#') ? l.substring(0, l.indexOf('#')).trim() : l)
       .toList();
 
-  // print timming
   var allTests = tests.values.where((t) => !t.hidden).toList();
   allTests.sort();
 
