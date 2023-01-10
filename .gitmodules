@@ -1,4 +1,4 @@
 [submodule "spec"]
 	path = spec
 	url = https://github.com/WebAssembly/spec.git
-	branch = 1782235239ddebaf2cb079b00fdaa2d2c4dedba3
+	# branch = 1782235239ddebaf2cb079b00fdaa2d2c4dedba3

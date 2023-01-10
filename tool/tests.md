@@ -4,6 +4,7 @@
 | align.wast                  | -   |
 | block.wast                  | -   |
 | br_if.wast                  | -   |
+| br_table.wast               | -   |
 | br.wast                     | -   |
 | bulk.wast                   | -   |
 | call_indirect.wast          | -   |
@@ -68,7 +69,6 @@
 | unreached-valid.wast        | -   |
 | unwind.wast                 | -   |
 | binary-leb128.wast          | RangeError from Reader.leb128_u |
-| br_table.wast               | large switch statement |
 | data.wast                   | need to rework DataSegments initializers |
 | elem.wast                   | unimplemented import table |
 | global.wast                 | needs more work on initializing globals |
