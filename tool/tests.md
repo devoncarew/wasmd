@@ -52,6 +52,7 @@
 | ref_is_null.wast            | -   |
 | ref_null.wast               | -   |
 | return.wast                 | -   |
+| select.wast                 | -   |
 | stack.wast                  | -   |
 | start.wast                  | -   |
 | store.wast                  | -   |
@@ -75,7 +76,6 @@
 | linking.wast                | unimplemented import table |
 | names.wast                  | generated file is causing the analyzer to crash |
 | ref_func.wast               | needs additional work on globals generation |
-| select.wast                 | wast2json failed; unexpected token "result" |
 | table.wast                  | unimplemented import table |
 | binary.wast                 | (no tests) |
 | binary-leb128.wast          | (no tests) |

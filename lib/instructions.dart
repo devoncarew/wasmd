@@ -292,6 +292,32 @@ class BlockType {
   }
 }
 
+class Instruction_SelectT extends Instruction {
+  // Note that the shorthand below is approximate; it should be
+  // '(u32 valtype*) any any i32 => any'.
+  Instruction_SelectT()
+      : super('select_t', 0x1C, '(u32 u32) any any i32 => any');
+
+  @override
+  Instr parsefromOpcodes(Reader r) {
+    var count = r.leb128_u();
+    if (count != 1) {
+      throw 'select_t currently only supports result types == 1 (count=$count)';
+    }
+
+    List<Object> args = [];
+    args.add(r.readUint8());
+
+    return Instr(this, args);
+  }
+
+  @override
+  Code generateToStatement(Instr instr, DefinedFunction function) {
+    var immediate = instr.args[0] as int;
+    return Code('frame.select_t(0x${immediate.toRadixString(16)});');
+  }
+}
+
 class Instruction_LocalGet extends Instruction {
   Instruction_LocalGet() : super('local.get', 0x20, '(u32) => any');
 
@@ -801,7 +827,7 @@ class Instruction {
       // reserved, 0x12 - 0x19
       Instruction('drop', 0x1A, 'any'),
       Instruction('select', 0x1B, 'any any i32 => any'),
-      Instruction('select_t', 0x1C, '(u32) any any i32 => any'),
+      Instruction_SelectT(), // select_t, 0x1C
       // reserved, 0x1D - 0x1F
       Instruction_LocalGet(), // local.get, 0x20
       Instruction_LocalSet(), // local.set, 0x21
