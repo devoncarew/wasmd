@@ -70,19 +70,19 @@
 | unreached-valid.wast        | -   |
 | unwind.wast                 | -   |
 | data.wast                   | need to rework DataSegments initializers |
-| elem.wast                   | unimplemented import table |
+| elem.wast                   | requires reworking ElementSegments initialization |
 | global.wast                 | needs more work on initializing globals |
-| imports.wast                | unimplemented import table |
-| linking.wast                | unimplemented import table |
+| imports.wast                | duplicate symbol imports |
+| linking.wast                | duplicate symbol imports |
 | names.wast                  | not completely working |
 | ref_func.wast               | needs additional work on globals generation |
-| table.wast                  | unimplemented import table |
-| binary.wast                 | (no tests) |
 | binary-leb128.wast          | (no tests) |
+| binary.wast                 | (no tests) |
 | custom.wast                 | (no tests) |
 | inline-module.wast          | (no tests) |
 | skip-stack-guard-page.wast  | (no tests) |
 | table-sub.wast              | (no tests) |
+| table.wast                  | (no tests) |
 | token.wast                  | (no tests) |
 | tokens.wast                 | (no tests) |
 | unreached-invalid.wast      | (no tests) |

@@ -267,10 +267,14 @@ class Compiler {
 
       ValueType? readType() {
         var elementKind = r.leb128_u();
-        if (elementKind != 0 && elementKind != ValueType.funcref.code) {
+        if (elementKind == 0) return null;
+
+        var valueType = ValueType.fromCode(elementKind);
+        if (!valueType.refType) {
           throw 'elementKind type not yet supported (${hex(elementKind)})';
         }
-        return elementKind == 0 ? null : ValueType.fromCode(elementKind);
+
+        return valueType;
       }
 
       // https://stackoverflow.com/questions/74218077/how-does-the-element-section-of-wasm-module-in-binary-format-looks
@@ -429,13 +433,13 @@ class Compiler {
         case 0x00:
           var min = r.leb128();
           _log('  table ${tableType.name}: [$min) elements');
-          module.addTable(tableType, min);
+          module.addDefinedTable(tableType, min);
           break;
         case 0x01:
           var min = r.leb128();
           var max = r.leb128();
           _log('  table ${tableType.name}: [$min $max] elements');
-          module.addTable(tableType, min, max);
+          module.addDefinedTable(tableType, min, max);
           break;
         default:
           throw StateError('unsupported table limit: ${hex(limitKind)}');
@@ -519,11 +523,18 @@ class Compiler {
   }
 
   void _parseImportSection(Reader r, Module module) {
+    // var nameScope = NameScope();
+
     var numImports = r.leb128();
     for (int i = 0; i < numImports; i++) {
       var moduleName = r.readUtf8();
       var itemName = r.readUtf8();
       var importType = r.readUint8();
+
+      // todo: use titleCase
+      moduleName = patchUpName(moduleName);
+      // todo: make the name unique?
+      itemName = patchUpName(itemName);
 
       switch (importType) {
         case 0x00:
@@ -536,7 +547,31 @@ class Compiler {
           break;
         case 0x01:
           // table
-          throw 'unimplemented import table';
+          var importModule = module.getCreateImportModule(moduleName);
+          // "Table get fooTable;"
+          var refType = r.readUint8();
+          var tableType = TableType.from(refType);
+          if (tableType == null) {
+            throw 'unknown table type: ${hex(refType)}';
+          }
+
+          var limitKind = r.readUint8();
+          switch (limitKind) {
+            case 0x00:
+              var min = r.leb128();
+              _log('  table ${tableType.name}: [$min) elements');
+              importModule.addImportedTable(itemName, tableType, min);
+              break;
+            case 0x01:
+              var min = r.leb128();
+              var max = r.leb128();
+              _log('  table ${tableType.name}: [$min $max] elements');
+              importModule.addImportedTable(itemName, tableType, min, max);
+              break;
+            default:
+              throw StateError('unsupported table limit: ${hex(limitKind)}');
+          }
+          break;
         case 0x02:
           // mem
           var limitKind = r.readUint8();
@@ -650,7 +685,7 @@ void printModule(
   required String moduleName,
   bool useDebugNames = false,
 }) {
-  // TODO: create a generation options class
+  // TODO: create a 'generation options' class
   module.useDebugNames = useDebugNames;
 
   // Generate imports.
@@ -759,8 +794,11 @@ void printModule(
 
   // tables
   {
+    // defined tables
     for (int i = 0; i < module.tables.length; i++) {
       var table = module.tables[i];
+      if (table is! DefinedTable) continue;
+
       classBuilder.fields.add(
         Field(
           (b) => b
@@ -771,6 +809,23 @@ void printModule(
               literalNum(table.minSize),
               if (table.maxSize != null) literalNum(table.maxSize!),
             ]).code,
+        ),
+      );
+    }
+
+    // imported tables
+    for (int i = 0; i < module.tables.length; i++) {
+      var table = module.tables[i];
+      if (table is! ImportedTable) continue;
+
+      classBuilder.methods.add(
+        Method(
+          (b) => b
+            ..name = 'table$i'
+            ..returns = Reference('Table')
+            ..type = MethodType.getter
+            ..lambda = true
+            ..body = Code(table.qualifiedReference),
         ),
       );
     }
@@ -920,7 +975,7 @@ void printModule(
 
   library.body.add(classBuilder.build());
 
-  // TODO: currently, we only need to generate these if tables are being used
+  // TODO: Currently, we only need to generate these if tables are being used.
   for (int i = 0; i < module.functionTypes.length; i++) {
     var functionType = module.functionTypes[i];
     var ret = functionType.resultTypeDisplayName;
@@ -1275,20 +1330,20 @@ enum ValueType {
 }
 
 class Module {
-  List<FunctionType> functionTypes = [];
+  final List<FunctionType> functionTypes = [];
 
-  List<DefinedFunction> definedFunctions = [];
-  List<ModuleFunction> allFunctions = [];
-  List<ExportedFunction> exportedFunctions = [];
+  final List<DefinedFunction> definedFunctions = [];
+  final List<ModuleFunction> allFunctions = [];
+  final List<ExportedFunction> exportedFunctions = [];
 
   final Globals globals = Globals();
 
-  List<ImportModule> importModules = [];
+  final List<ImportModule> importModules = [];
 
   final DataSegments dataSegments = DataSegments();
   final ElementSegments elementSegments = ElementSegments();
 
-  List<Table> tables = [];
+  final List<Table> tables = [];
 
   int minMemory = 0;
   int? maxMemory;
@@ -1318,8 +1373,8 @@ class Module {
     return false;
   }
 
-  void addTable(TableType type, int minSize, [int? maxSize]) {
-    tables.add(Table(type, minSize, maxSize));
+  void addDefinedTable(TableType type, int minSize, [int? maxSize]) {
+    tables.add(DefinedTable(type, minSize, maxSize));
   }
 
   ImportModule getCreateImportModule(String name) {
@@ -1363,6 +1418,7 @@ class ImportModule {
 
   final List<ImportedFunction> functions = [];
   final List<ImportedGlobal> globals = [];
+  final List<ImportedTable> tables = [];
 
   ImportModule(this.name, this.wasmModule);
 
@@ -1376,6 +1432,13 @@ class ImportModule {
     functions.add(function);
 
     wasmModule.allFunctions.add(function);
+  }
+
+  void addImportedTable(String name, TableType tableType, int min, [int? max]) {
+    var table = ImportedTable(this, name, tableType, min, max);
+    tables.add(table);
+
+    wasmModule.tables.add(table);
   }
 
   void addImportedGlobal(
@@ -1407,8 +1470,12 @@ class ImportModule {
         importClass.methods.add(Method(
           (b) => b
             ..name = global.name
-            ..returns = Reference(global.type.typeName)
-            ..type = MethodType.setter,
+            ..type = MethodType.setter
+            ..requiredParameters.add((Parameter(
+              (b) => b
+                ..name = 'value'
+                ..type = Reference(global.type.typeName),
+            ))),
         ));
       }
     }
@@ -1430,6 +1497,20 @@ class ImportModule {
           ..name = func.referenceName
           ..returns = Reference(func.functionType.resultTypeDisplayName)
           ..requiredParameters.addAll(parameters),
+      ));
+    }
+
+    for (var table in tables) {
+      var desc = '/// min size: ${table.minSize}';
+      if (table.maxSize != null) {
+        desc += ', max size: ${table.maxSize}';
+      }
+      importClass.methods.add(Method(
+        (b) => b
+          ..name = table.name
+          ..returns = Reference('Table')
+          ..type = MethodType.getter
+          ..docs.add(desc),
       ));
     }
 
@@ -1683,7 +1764,7 @@ class Variable {
   Variable({required this.name, required this.type});
 }
 
-class Table {
+abstract class Table {
   final TableType type;
   final int minSize;
   final int? maxSize;
@@ -1691,6 +1772,22 @@ class Table {
   String? exportName;
 
   Table(this.type, this.minSize, [this.maxSize]);
+}
+
+class DefinedTable extends Table {
+  DefinedTable(super.type, super.minSize, [super.maxSize]);
+}
+
+class ImportedTable extends Table {
+  final ImportModule parent;
+  final String name;
+
+  ImportedTable(this.parent, this.name, super.type, super.minSize,
+      [super.maxSize]);
+
+  String get qualifiedReference {
+    return '${parent.referenceName}.$name';
+  }
 }
 
 enum SegmentKind {
