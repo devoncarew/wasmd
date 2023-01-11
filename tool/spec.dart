@@ -496,6 +496,18 @@ class ImportsData {
       ));
     }
 
+    for (var table in targetInterface.tables) {
+      classBuilder.methods.add(Method(
+        (b) => b
+          ..name = table.name
+          ..returns = Reference('Table')
+          ..annotations.add(refer('override'))
+          ..type = MethodType.getter
+          ..lambda = true
+          ..body = Code('delegate.table0'),
+      ));
+    }
+
     // interface methods
     for (var func in targetInterface.functions) {
       var parameters = <Parameter>[];
