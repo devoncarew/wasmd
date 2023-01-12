@@ -20,9 +20,13 @@ void main(List<String> args) async {
   );
   argsParser.addFlag(
     'use-debug-names',
-    abbr: 'd',
     negatable: false,
     help: 'Use module debug info for generated method names.',
+  );
+  argsParser.addFlag(
+    'vm',
+    negatable: false,
+    help: "Generate a 'vm' backend.",
   );
   argsParser.addOption(
     'output',
@@ -55,6 +59,7 @@ void main(List<String> args) async {
   var input = argsResult.rest.first;
   var verbose = argsResult['verbose'] as bool;
   var useDebugNames = argsResult['use-debug-names'] as bool;
+  var vmBackend = argsResult['vm'] as bool;
   var output = argsResult['output'] as String?;
 
   output ??= '${path.withoutExtension(input)}.dart';
@@ -67,7 +72,11 @@ void main(List<String> args) async {
   }
 
   var compiler = Compiler(logger: logger);
-  var library = compiler.compile(File(input), useDebugNames: useDebugNames);
+  var library = compiler.compile(
+    File(input),
+    vmBackend: vmBackend,
+    useDebugNames: useDebugNames,
+  );
   var code = emitFormatLibrary(library);
 
   logger.info('\nEmitting $output.');
