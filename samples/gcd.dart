@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class GcdModule implements Module {
-  GcdModule();
+  GcdModule() {
+    _vm = VM(this);
+  }
+
+  late final VM _vm;
 
   @override
   final Memory memory = Memory(0);
@@ -15,12 +20,13 @@ class GcdModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 gcd(i32 arg0, i32 arg1) => _gcd(arg0, arg1);
+  i32 gcd(i32 arg0, i32 arg1) => _func0(arg0, arg1);
 
-  i32 _gcd(i32 arg0, i32 arg1) {
+  i32 _func0(i32 arg0, i32 arg1) {
     i32 local0 = 0;
 
     final frame = Frame(this);
+    _vm.nop();
     block_label_0:
     {
       block_label_1:

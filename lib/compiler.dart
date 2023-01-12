@@ -24,6 +24,7 @@ class Compiler {
 
   Library compile(
     File file, {
+    bool vmBackend = false,
     bool useDebugNames = false,
     bool generatingTest = false,
   }) {
@@ -42,6 +43,7 @@ class Compiler {
 
     library.directives.addAll([
       Directive.import('package:wasmd/runtime.dart'),
+      if (vmBackend) Directive.import('package:wasmd/runtime_vm.dart'),
       if (generatingTest && module.usesLargeTuple)
         Directive.import('../../src/infra.dart'),
     ]);
@@ -50,6 +52,7 @@ class Compiler {
       module,
       library,
       moduleName: path.basenameWithoutExtension(file.path),
+      vmBackend: vmBackend,
       useDebugNames: useDebugNames,
     );
 
@@ -683,6 +686,7 @@ void printModule(
   Module module,
   LibraryBuilder library, {
   required String moduleName,
+  bool vmBackend = false,
   bool useDebugNames = false,
 }) {
   // TODO: create a 'generation options' class
@@ -709,6 +713,17 @@ void printModule(
         ..modifier = FieldModifier.final$),
     );
   }
+
+  // late VM _vm;
+  classBuilder.fields.add(
+    Field(
+      (b) => b
+        ..name = '_vm'
+        ..type = Reference('VM')
+        ..modifier = FieldModifier.final$
+        ..late = true,
+    ),
+  );
 
   // memory reference
   if (module.memoryImported) {
@@ -905,6 +920,10 @@ void printModule(
         .add(refer(module.startFunction!.name).call([]).statement);
   }
 
+  if (vmBackend) {
+    constructorStatements.add((Code('_vm = VM(this);')));
+  }
+
   if (constructorStatements.isNotEmpty) {
     constructor.body = Block.of(constructorStatements);
   }
@@ -957,7 +976,7 @@ void printModule(
 
   // Defined functions
   for (var func in module.definedFunctions) {
-    var method = func.generateToMethod();
+    var method = func.generateToMethod(vmBackend: vmBackend);
     classBuilder.methods.add(method);
   }
 
@@ -1614,7 +1633,7 @@ class DefinedFunction extends ModuleFunction {
     return nesting[nesting.length - 1 - index];
   }
 
-  Method generateToMethod() {
+  Method generateToMethod({bool vmBackend = false}) {
     var method = MethodBuilder();
     method.name = name;
     // This newline is a hack to adjust the generated method spacing.
@@ -1675,6 +1694,12 @@ class DefinedFunction extends ModuleFunction {
           .assign(refer('Frame').call([refer('this')]))
           .statement,
     );
+    if (vmBackend) {
+      // TODO:
+      statements.add(refer('_vm').property('nop').call([]).statement);
+    }
+
+    // TODO: split off the generation here for vmBackend
 
     for (var instr in instrs) {
       statements.add(instr.generateToStatement(this));
