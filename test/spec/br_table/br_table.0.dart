@@ -49782,7 +49782,7 @@ class BrTable0Module implements Module {
   i32 _func20() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(3);
       frame.i32_const(0);
@@ -49803,7 +49803,7 @@ class BrTable0Module implements Module {
   i32 _func21() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(4);
@@ -49827,7 +49827,7 @@ class BrTable0Module implements Module {
   i32 _func22() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       /* nop */
       _dummy();
@@ -49880,7 +49880,10 @@ class BrTable0Module implements Module {
           break block_label_0;
       }
 
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
     }
   }
 
@@ -49914,8 +49917,10 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
+          frame.unwindTo(0, 1);
           break block_label_0;
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -49940,10 +49945,13 @@ class BrTable0Module implements Module {
       var t1 = frame.pop();
       switch (t1) {
         case 0:
+          frame.unwindTo(0, 0);
           break block_label_0;
         case 1:
+          frame.unwindTo(0, 0);
           break block_label_0;
         default:
+          frame.unwindTo(0, 0);
           break block_label_0;
       }
     }
@@ -49987,6 +49995,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50032,7 +50041,7 @@ class BrTable0Module implements Module {
           break block_label_0;
       }
 
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.i32_const(0);
       } else {
@@ -50047,7 +50056,7 @@ class BrTable0Module implements Module {
     block_label_0: // => i32
     {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.i32_const(3);
         frame.i32_const(0);
@@ -50068,7 +50077,7 @@ class BrTable0Module implements Module {
     block_label_0: // => i32
     {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.push(arg1);
       } else {
@@ -50077,8 +50086,10 @@ class BrTable0Module implements Module {
         var t0 = frame.pop();
         switch (t0) {
           case 0:
+            frame.unwindTo(0, 1);
             break block_label_0;
           default:
+            frame.unwindTo(0, 1);
             break if_label_1;
         }
       }
@@ -50115,6 +50126,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50135,6 +50147,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50183,6 +50196,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50208,6 +50222,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50259,6 +50274,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50288,6 +50304,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50317,6 +50334,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50454,6 +50472,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50492,6 +50511,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50548,6 +50568,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50603,6 +50624,7 @@ class BrTable0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -50665,10 +50687,13 @@ class BrTable0Module implements Module {
           var t0 = frame.pop();
           switch (t0) {
             case 0:
+              frame.unwindTo(2, 1);
               break block_label_2;
             case 1:
+              frame.unwindTo(1, 1);
               break block_label_1;
             default:
+              frame.unwindTo(0, 1);
               break block_label_0;
           }
 
@@ -50699,6 +50724,7 @@ class BrTable0Module implements Module {
           var t0 = frame.pop();
           switch (t0) {
             case 0:
+              frame.unwindTo(0, 1);
               break block_label_0;
             case 1:
               break block_label_1;
@@ -50738,6 +50764,7 @@ class BrTable0Module implements Module {
             case 1:
               break block_label_1;
             default:
+              frame.unwindTo(0, 1);
               break block_label_0;
           }
 
@@ -50769,10 +50796,13 @@ class BrTable0Module implements Module {
         var t0 = frame.pop();
         switch (t0) {
           case 0:
+            frame.unwindTo(1, 1);
             break block_label_1;
           case 1:
+            frame.unwindTo(0, 1);
             break block_label_0;
           default:
+            frame.unwindTo(1, 1);
             break block_label_1;
         }
 
@@ -50807,6 +50837,7 @@ class BrTable0Module implements Module {
             case 1:
               break block_label_1;
             default:
+              frame.unwindTo(0, 1);
               break block_label_0;
           }
 
@@ -50842,10 +50873,13 @@ class BrTable0Module implements Module {
         var t0 = frame.pop();
         switch (t0) {
           case 0:
+            frame.unwindTo(1, 1);
             break block_label_1;
           case 1:
+            frame.unwindTo(0, 1);
             break block_label_0;
           default:
+            frame.unwindTo(1, 1);
             break block_label_1;
         }
 
@@ -50865,7 +50899,7 @@ class BrTable0Module implements Module {
   i32 _func68(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       block_label_1:
       {
@@ -50885,7 +50919,7 @@ class BrTable0Module implements Module {
     }
     arg0 = frame.pop();
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       block_label_1:
       {

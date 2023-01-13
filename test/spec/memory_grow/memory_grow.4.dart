@@ -187,7 +187,7 @@ class MemoryGrow4Module implements Module {
     final frame = Frame(this);
     frame.i32_const(0);
     frame.memory_grow(0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
     } else {
@@ -199,7 +199,7 @@ class MemoryGrow4Module implements Module {
   i32 _func09() {
     final frame = Frame(this);
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
       frame.memory_grow(0);
@@ -212,7 +212,7 @@ class MemoryGrow4Module implements Module {
   i32 _func10() {
     final frame = Frame(this);
     frame.i32_const(0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
     } else {

@@ -407,7 +407,7 @@ class Call0Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i64_eqz();
-    if_label_0:
+    if_label_0: // => i64
     if (frame.pop() != 0) {
       frame.i64_const(1);
     } else {
@@ -428,7 +428,7 @@ class Call0Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i64_eqz();
-    if_label_0:
+    if_label_0: // => i64
     if (frame.pop() != 0) {
       frame.push(arg1);
     } else {
@@ -452,7 +452,7 @@ class Call0Module implements Module {
     frame.push(arg0);
     frame.i64_const(1);
     frame.i64_le_u();
-    if_label_0:
+    if_label_0: // => i64
     if (frame.pop() != 0) {
       frame.i64_const(1);
     } else {
@@ -479,7 +479,7 @@ class Call0Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i64_eqz();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(44);
     } else {
@@ -498,7 +498,7 @@ class Call0Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i64_eqz();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(99);
     } else {
@@ -558,7 +558,7 @@ class Call0Module implements Module {
   i32 _func48() {
     final frame = Frame(this);
     frame.push(_func00());
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {

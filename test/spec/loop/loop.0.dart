@@ -109,7 +109,7 @@ class Loop0Module implements Module {
       break;
     }
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(7);
       break;
@@ -129,7 +129,7 @@ class Loop0Module implements Module {
       break;
     }
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       _dummy();
@@ -139,7 +139,7 @@ class Loop0Module implements Module {
     }
     frame.drop();
 
-    loop_label_0:
+    loop_label_0: //  => i32, i64, i32
     for (;;) {
       _dummy();
       _dummy();
@@ -166,7 +166,7 @@ class Loop0Module implements Module {
   i32 _func04() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       loop_label_1:
       for (;;) {
@@ -177,7 +177,7 @@ class Loop0Module implements Module {
         break;
       }
 
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         _dummy();
         frame.i32_const(9);
@@ -191,83 +191,83 @@ class Loop0Module implements Module {
   i32 _func05() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       block_label_1: // => i32
       {
-        loop_label_2:
+        loop_label_2: // => i32
         for (;;) {
           block_label_3: // => i32
           {
-            loop_label_4:
+            loop_label_4: // => i32
             for (;;) {
               block_label_5: // => i32
               {
-                loop_label_6:
+                loop_label_6: // => i32
                 for (;;) {
                   block_label_7: // => i32
                   {
-                    loop_label_8:
+                    loop_label_8: // => i32
                     for (;;) {
                       block_label_9: // => i32
                       {
-                        loop_label_10:
+                        loop_label_10: // => i32
                         for (;;) {
                           block_label_11: // => i32
                           {
-                            loop_label_12:
+                            loop_label_12: // => i32
                             for (;;) {
                               block_label_13: // => i32
                               {
-                                loop_label_14:
+                                loop_label_14: // => i32
                                 for (;;) {
                                   block_label_15: // => i32
                                   {
-                                    loop_label_16:
+                                    loop_label_16: // => i32
                                     for (;;) {
                                       block_label_17: // => i32
                                       {
-                                        loop_label_18:
+                                        loop_label_18: // => i32
                                         for (;;) {
                                           block_label_19: // => i32
                                           {
-                                            loop_label_20:
+                                            loop_label_20: // => i32
                                             for (;;) {
                                               block_label_21: // => i32
                                               {
-                                                loop_label_22:
+                                                loop_label_22: // => i32
                                                 for (;;) {
                                                   block_label_23: // => i32
                                                   {
-                                                    loop_label_24:
+                                                    loop_label_24: // => i32
                                                     for (;;) {
                                                       block_label_25: // => i32
                                                       {
-                                                        loop_label_26:
+                                                        loop_label_26: // => i32
                                                         for (;;) {
                                                           block_label_27: // => i32
                                                           {
-                                                            loop_label_28:
+                                                            loop_label_28: // => i32
                                                             for (;;) {
                                                               block_label_29: // => i32
                                                               {
-                                                                loop_label_30:
+                                                                loop_label_30: // => i32
                                                                 for (;;) {
                                                                   block_label_31: // => i32
                                                                   {
-                                                                    loop_label_32:
+                                                                    loop_label_32: // => i32
                                                                     for (;;) {
                                                                       block_label_33: // => i32
                                                                       {
-                                                                        loop_label_34:
+                                                                        loop_label_34: // => i32
                                                                         for (;;) {
                                                                           block_label_35: // => i32
                                                                           {
-                                                                            loop_label_36:
+                                                                            loop_label_36: // => i32
                                                                             for (;;) {
                                                                               block_label_37: // => i32
                                                                               {
-                                                                                loop_label_38:
+                                                                                loop_label_38: // => i32
                                                                                 for (;;) {
                                                                                   block_label_39: // => i32
                                                                                   {
@@ -339,7 +339,7 @@ class Loop0Module implements Module {
   i32 _func06() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -354,7 +354,7 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(2);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -369,7 +369,7 @@ class Loop0Module implements Module {
     frame.i32_const(2);
     frame.i32_const(3);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -381,7 +381,7 @@ class Loop0Module implements Module {
   void _func09() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -395,9 +395,9 @@ class Loop0Module implements Module {
   i32 _func10() {
     final frame = Frame(this);
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -411,11 +411,11 @@ class Loop0Module implements Module {
   i32 _func11() {
     final frame = Frame(this);
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(2);
     } else {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -428,7 +428,7 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -445,7 +445,7 @@ class Loop0Module implements Module {
     {
       frame.i32_const(2);
 
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -459,7 +459,7 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -482,7 +482,7 @@ class Loop0Module implements Module {
     {
       frame.i32_const(2);
 
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -508,7 +508,7 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -533,7 +533,7 @@ class Loop0Module implements Module {
     {
       frame.i32_const(2);
 
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -558,7 +558,7 @@ class Loop0Module implements Module {
       frame.i32_const(1);
       frame.i32_const(2);
 
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(0);
         break;
@@ -578,7 +578,7 @@ class Loop0Module implements Module {
   void _func20() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -591,7 +591,7 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(10);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -602,7 +602,7 @@ class Loop0Module implements Module {
   i32 _func22() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -620,7 +620,7 @@ class Loop0Module implements Module {
   i32 _func24() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -635,7 +635,7 @@ class Loop0Module implements Module {
   i32 _func25() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -647,7 +647,7 @@ class Loop0Module implements Module {
   void _func26() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -659,7 +659,7 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(1);
         break;
@@ -674,7 +674,7 @@ class Loop0Module implements Module {
 
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -689,7 +689,7 @@ class Loop0Module implements Module {
 
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -701,7 +701,7 @@ class Loop0Module implements Module {
   i32 _func30() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -714,7 +714,7 @@ class Loop0Module implements Module {
   i32 _func31() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -726,7 +726,7 @@ class Loop0Module implements Module {
   i32 _func32() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(13);
@@ -739,14 +739,14 @@ class Loop0Module implements Module {
   i32 _func33() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(3);
       break;
     }
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(4);
@@ -759,7 +759,7 @@ class Loop0Module implements Module {
   i32 _func34() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(13);
@@ -772,14 +772,14 @@ class Loop0Module implements Module {
   i32 _func35() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => f32
     for (;;) {
       _dummy();
       frame.f32_const(3.0);
       break;
     }
 
-    loop_label_0:
+    loop_label_0: // => f32
     for (;;) {
       _dummy();
       frame.f32_const(3.0);
@@ -792,7 +792,7 @@ class Loop0Module implements Module {
   i32 _func36() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: //  => i32, i32
     for (;;) {
       _dummy();
       frame.i32_const(3);
@@ -807,7 +807,7 @@ class Loop0Module implements Module {
   i32 _func37() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: //  => f32, f32
     for (;;) {
       _dummy();
       frame.f32_const(3.0);
@@ -822,7 +822,7 @@ class Loop0Module implements Module {
   i32 _func38() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: //  => i32, i32
     for (;;) {
       _dummy();
       frame.i32_const(3);
@@ -902,11 +902,12 @@ class Loop0Module implements Module {
     {
       frame.i32_const(0);
 
-      loop_label_1:
+      loop_label_1: // i32 =>
       for (;;) {
         block_label_2:
         {
           frame.i32_const(18);
+          frame.unwindTo(0, 1);
           break block_label_0;
         }
         frame.i32_const(20);
@@ -926,13 +927,14 @@ class Loop0Module implements Module {
       frame.i32_const(0);
       frame.i64_const(0);
 
-      loop_label_1:
+      loop_label_1: // i32, i32, i64 =>
       for (;;) {
         block_label_2:
         {
           frame.i32_const(18);
           frame.i32_const(-18);
           frame.i64_const(18);
+          frame.unwindTo(0, 3);
           break block_label_0;
         }
         frame.i32_const(20);
@@ -952,27 +954,36 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(18);
         break block_label_0;
         frame.i32_const(19);
+        frame.unwindTo(0, 1);
         break block_label_0;
         frame.i32_const(20);
         frame.i32_const(0);
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 1);
+          break block_label_0;
+        }
         frame.drop();
         frame.i32_const(20);
         frame.i32_const(1);
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 1);
+          break block_label_0;
+        }
         frame.drop();
         frame.i32_const(21);
+        frame.unwindTo(0, 1);
         break block_label_0;
         frame.i32_const(22);
         frame.i32_const(0);
         var t0 = frame.pop();
         switch (t0) {
           default:
+            frame.unwindTo(0, 1);
             break block_label_0;
         }
 
@@ -981,10 +992,13 @@ class Loop0Module implements Module {
         var t1 = frame.pop();
         switch (t1) {
           case 0:
+            frame.unwindTo(0, 1);
             break block_label_0;
           case 1:
+            frame.unwindTo(0, 1);
             break block_label_0;
           default:
+            frame.unwindTo(0, 1);
             break block_label_0;
         }
 
@@ -1004,7 +1018,7 @@ class Loop0Module implements Module {
     frame.push(local0);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         block_label_2: // => i32
         {
@@ -1019,9 +1033,9 @@ class Loop0Module implements Module {
     frame.push(local0);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
-        loop_label_2:
+        loop_label_2: // => i32
         for (;;) {
           frame.i32_const(2);
           break block_label_0;
@@ -1035,11 +1049,11 @@ class Loop0Module implements Module {
     frame.push(local0);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         block_label_2: // => i32
         {
-          loop_label_3:
+          loop_label_3: // => i32
           for (;;) {
             frame.i32_const(4);
             break block_label_2;
@@ -1054,7 +1068,7 @@ class Loop0Module implements Module {
     frame.push(local0);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(8);
         break block_label_0;
@@ -1067,9 +1081,9 @@ class Loop0Module implements Module {
     frame.push(local0);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
-        loop_label_2:
+        loop_label_2: // => i32
         for (;;) {
           frame.i32_const(16);
           break block_label_0;
@@ -1093,9 +1107,9 @@ class Loop0Module implements Module {
     local0 = frame.pop();
     frame.push(local0);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         continue loop_label_0;
         break;
@@ -1106,7 +1120,7 @@ class Loop0Module implements Module {
     local0 = frame.pop();
     frame.push(local0);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       continue loop_label_0;
       frame.i32_ctz();
@@ -1116,9 +1130,9 @@ class Loop0Module implements Module {
     local0 = frame.pop();
     frame.push(local0);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         continue loop_label_0;
         break;
@@ -1136,7 +1150,7 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
 
-    loop_label_0:
+    loop_label_0: // i32 => i32
     for (;;) {
       frame.i32_const(2);
       frame.i32_add();
@@ -1150,7 +1164,7 @@ class Loop0Module implements Module {
     frame.i32_const(1);
     frame.i32_const(2);
 
-    loop_label_0:
+    loop_label_0: // i32, i32 => i32
     for (;;) {
       frame.i32_add();
       break;
@@ -1163,7 +1177,7 @@ class Loop0Module implements Module {
     frame.i32_const(1);
     frame.i32_const(2);
 
-    loop_label_0:
+    loop_label_0: // i32, i32 => i32, i32
     for (;;) {
       break;
     }
@@ -1177,7 +1191,7 @@ class Loop0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
 
-    loop_label_0:
+    loop_label_0: // i32 => i32
     for (;;) {
       frame.i32_const(4);
       frame.i32_add();
@@ -1198,7 +1212,7 @@ class Loop0Module implements Module {
     frame.i32_const(1);
     frame.i32_const(2);
 
-    loop_label_0:
+    loop_label_0: // i32, i32 => i32
     for (;;) {
       frame.i32_add();
       x = frame.peek();
@@ -1222,7 +1236,7 @@ class Loop0Module implements Module {
     frame.i32_const(1);
     frame.i32_const(2);
 
-    loop_label_0:
+    loop_label_0: // i32, i32 => i32, i32
     for (;;) {
       frame.push(x);
       frame.i32_const(1);
@@ -1399,13 +1413,13 @@ class Loop0Module implements Module {
       break;
     }
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(0);
       break;
     }
 
-    loop_label_0:
+    loop_label_0: // i32 =>
     for (;;) {
       frame.drop();
       break;
@@ -1414,7 +1428,7 @@ class Loop0Module implements Module {
     frame.f64_const(0.0);
     frame.i32_const(0);
 
-    loop_label_0:
+    loop_label_0: // i32, f64, i32 => i32, f64, i32
     for (;;) {
       break;
     }
@@ -1422,13 +1436,13 @@ class Loop0Module implements Module {
     frame.drop();
     frame.drop();
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(0);
       break;
     }
 
-    loop_label_0:
+    loop_label_0: // i32 =>
     for (;;) {
       frame.drop();
       break;
@@ -1437,7 +1451,7 @@ class Loop0Module implements Module {
     frame.f64_const(0.0);
     frame.i32_const(0);
 
-    loop_label_0:
+    loop_label_0: // i32, f64, i32 => i32, f64, i32
     for (;;) {
       break;
     }

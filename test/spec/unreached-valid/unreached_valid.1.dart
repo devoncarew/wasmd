@@ -28,10 +28,13 @@ class UnreachedValid1Module implements Module {
         var t0 = frame.pop();
         switch (t0) {
           case 0:
+            frame.unwindTo(0, 1);
             break block_label_1;
           case 1:
+            frame.unwindTo(0, 1);
             break block_label_0;
           default:
+            frame.unwindTo(0, 1);
             break block_label_0;
         }
       }

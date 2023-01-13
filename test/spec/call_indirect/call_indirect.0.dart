@@ -616,7 +616,7 @@ class CallIndirect0Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i64_eqz();
-    if_label_0:
+    if_label_0: // => i64
     if (frame.pop() != 0) {
       frame.i64_const(1);
     } else {
@@ -642,7 +642,7 @@ class CallIndirect0Module implements Module {
     frame.push(arg0);
     frame.i64_const(1);
     frame.i64_le_u();
-    if_label_0:
+    if_label_0: // => i64
     if (frame.pop() != 0) {
       frame.i64_const(1);
     } else {
@@ -677,7 +677,7 @@ class CallIndirect0Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i32_eqz();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -703,7 +703,7 @@ class CallIndirect0Module implements Module {
     frame.push(arg0);
     frame.f32_const(0.0);
     frame.f32_eq();
-    if_label_0:
+    if_label_0: // => f32
     if (frame.pop() != 0) {
       frame.f32_const(1.0);
     } else {
@@ -729,7 +729,7 @@ class CallIndirect0Module implements Module {
     frame.push(arg0);
     frame.f64_const(0.0);
     frame.f64_eq();
-    if_label_0:
+    if_label_0: // => f64
     if (frame.pop() != 0) {
       frame.f64_const(1.0);
     } else {
@@ -755,7 +755,7 @@ class CallIndirect0Module implements Module {
     frame.push(arg0);
     frame.i32_const(1);
     frame.i32_le_u();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -791,7 +791,7 @@ class CallIndirect0Module implements Module {
     frame.push(arg0);
     frame.f32_const(1.0);
     frame.f32_le();
-    if_label_0:
+    if_label_0: // => f32
     if (frame.pop() != 0) {
       frame.f32_const(1.0);
     } else {
@@ -827,7 +827,7 @@ class CallIndirect0Module implements Module {
     frame.push(arg0);
     frame.f64_const(1.0);
     frame.f64_le();
-    if_label_0:
+    if_label_0: // => f64
     if (frame.pop() != 0) {
       frame.f64_const(1.0);
     } else {
@@ -862,7 +862,7 @@ class CallIndirect0Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i32_eqz();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(44);
     } else {
@@ -885,7 +885,7 @@ class CallIndirect0Module implements Module {
     final frame = Frame(this);
     frame.push(arg0);
     frame.i32_eqz();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(99);
     } else {
@@ -991,7 +991,7 @@ class CallIndirect0Module implements Module {
       if (func is! FunctionType1) throw Trap('indirect call type mismatch');
       frame.push(func());
     }
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -1012,7 +1012,10 @@ class CallIndirect0Module implements Module {
         frame.push(func());
       }
       frame.i32_const(2);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
     }
     return frame.pop();
   }
@@ -1029,7 +1032,10 @@ class CallIndirect0Module implements Module {
         if (func is! FunctionType1) throw Trap('indirect call type mismatch');
         frame.push(func());
       }
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
     }
     return frame.pop();
   }
@@ -1049,8 +1055,10 @@ class CallIndirect0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
+          frame.unwindTo(0, 1);
           break block_label_0;
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -1072,8 +1080,10 @@ class CallIndirect0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
+          frame.unwindTo(0, 1);
           break block_label_0;
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
     }
@@ -1161,6 +1171,7 @@ class CallIndirect0Module implements Module {
         var t0 = frame.pop();
         frame.push(func(t0));
       }
+      frame.unwindTo(0, 1);
       break block_label_0;
     }
     return frame.pop();

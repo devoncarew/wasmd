@@ -29,7 +29,7 @@ class FloatExprs44Module implements Module {
     frame.push(x);
     frame.push(y);
     frame.f32_lt();
-    if_label_0:
+    if_label_0: // => f32
     if (frame.pop() != 0) {
       frame.push(x);
     } else {
@@ -43,7 +43,7 @@ class FloatExprs44Module implements Module {
     frame.push(x);
     frame.push(y);
     frame.f32_le();
-    if_label_0:
+    if_label_0: // => f32
     if (frame.pop() != 0) {
       frame.push(x);
     } else {
@@ -57,7 +57,7 @@ class FloatExprs44Module implements Module {
     frame.push(x);
     frame.push(y);
     frame.f32_gt();
-    if_label_0:
+    if_label_0: // => f32
     if (frame.pop() != 0) {
       frame.push(x);
     } else {
@@ -71,7 +71,7 @@ class FloatExprs44Module implements Module {
     frame.push(x);
     frame.push(y);
     frame.f32_ge();
-    if_label_0:
+    if_label_0: // => f32
     if (frame.pop() != 0) {
       frame.push(x);
     } else {
@@ -85,7 +85,7 @@ class FloatExprs44Module implements Module {
     frame.push(x);
     frame.push(y);
     frame.f64_lt();
-    if_label_0:
+    if_label_0: // => f64
     if (frame.pop() != 0) {
       frame.push(x);
     } else {
@@ -99,7 +99,7 @@ class FloatExprs44Module implements Module {
     frame.push(x);
     frame.push(y);
     frame.f64_le();
-    if_label_0:
+    if_label_0: // => f64
     if (frame.pop() != 0) {
       frame.push(x);
     } else {
@@ -113,7 +113,7 @@ class FloatExprs44Module implements Module {
     frame.push(x);
     frame.push(y);
     frame.f64_gt();
-    if_label_0:
+    if_label_0: // => f64
     if (frame.pop() != 0) {
       frame.push(x);
     } else {
@@ -127,7 +127,7 @@ class FloatExprs44Module implements Module {
     frame.push(x);
     frame.push(y);
     frame.f64_ge();
-    if_label_0:
+    if_label_0: // => f64
     if (frame.pop() != 0) {
       frame.push(x);
     } else {

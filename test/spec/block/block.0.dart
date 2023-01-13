@@ -327,7 +327,7 @@ class Block0Module implements Module {
   i32 _func09() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       block_label_1: // => i32
       {
@@ -343,7 +343,7 @@ class Block0Module implements Module {
   i32 _func10() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       block_label_1: // => i32
@@ -359,7 +359,7 @@ class Block0Module implements Module {
   i32 _func11() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       _dummy();
@@ -387,7 +387,7 @@ class Block0Module implements Module {
   i32 _func13() {
     final frame = Frame(this);
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       block_label_1: // => i32
       {
@@ -402,7 +402,7 @@ class Block0Module implements Module {
   i32 _func14() {
     final frame = Frame(this);
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(2);
     } else {
@@ -852,22 +852,31 @@ class Block0Module implements Module {
       frame.i32_const(18);
       break block_label_0;
       frame.i32_const(19);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.i32_const(20);
       frame.i32_const(0);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.drop();
       frame.i32_const(20);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.drop();
       frame.i32_const(21);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.i32_const(22);
       frame.i32_const(4);
       var t0 = frame.pop();
       switch (t0) {
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 
@@ -876,10 +885,13 @@ class Block0Module implements Module {
       var t1 = frame.pop();
       switch (t1) {
         case 0:
+          frame.unwindTo(0, 1);
           break block_label_0;
         case 1:
+          frame.unwindTo(0, 1);
           break block_label_0;
         default:
+          frame.unwindTo(0, 1);
           break block_label_0;
       }
 

@@ -113,7 +113,7 @@ class If0Module implements Module {
       /* nop */
     }
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(7);
     } else {
@@ -140,7 +140,7 @@ class If0Module implements Module {
       _dummy();
     }
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       _dummy();
@@ -153,7 +153,7 @@ class If0Module implements Module {
       _dummy();
     }
     frame.push(arg0);
-    if_label_0:
+    if_label_0: //  => i32, i64, i32
     if (frame.pop() != 0) {
       _dummy();
       _dummy();
@@ -189,7 +189,7 @@ class If0Module implements Module {
   i32 _func04(i32 arg0, i32 arg1) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.push(arg1);
       if_label_1:
@@ -209,7 +209,7 @@ class If0Module implements Module {
         /* nop */
       }
       frame.push(arg1);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(9);
@@ -236,7 +236,7 @@ class If0Module implements Module {
         /* nop */
       }
       frame.push(arg1);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(10);
@@ -251,7 +251,7 @@ class If0Module implements Module {
   i32 _func05(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(1);
@@ -269,7 +269,7 @@ class If0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(2);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(1);
@@ -287,7 +287,7 @@ class If0Module implements Module {
     frame.i32_const(2);
     frame.i32_const(3);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(1);
@@ -302,10 +302,10 @@ class If0Module implements Module {
   i32 _func08(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -323,11 +323,11 @@ class If0Module implements Module {
   i32 _func09(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -344,12 +344,12 @@ class If0Module implements Module {
   i32 _func10(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       _dummy();
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -365,13 +365,13 @@ class If0Module implements Module {
   i32 _func11(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
       frame.i32_const(0);
     }
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(2);
@@ -387,7 +387,7 @@ class If0Module implements Module {
     block_label_0: // => i32
     {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -409,7 +409,7 @@ class If0Module implements Module {
     {
       frame.i32_const(2);
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -429,7 +429,7 @@ class If0Module implements Module {
     block_label_0: // => i32
     {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -455,7 +455,7 @@ class If0Module implements Module {
     {
       frame.i32_const(2);
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -485,7 +485,7 @@ class If0Module implements Module {
     block_label_0: // => i32
     {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -513,7 +513,7 @@ class If0Module implements Module {
     {
       frame.i32_const(2);
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -541,7 +541,7 @@ class If0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(0);
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         _dummy();
         frame.i32_const(1);
@@ -564,7 +564,7 @@ class If0Module implements Module {
   void _func20(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(1);
@@ -580,7 +580,7 @@ class If0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(2);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(1);
@@ -594,7 +594,7 @@ class If0Module implements Module {
   i32 _func22(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -613,7 +613,7 @@ class If0Module implements Module {
   i32 _func24(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -629,7 +629,7 @@ class If0Module implements Module {
   i32 _func25(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -642,7 +642,7 @@ class If0Module implements Module {
   void _func26(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -656,7 +656,7 @@ class If0Module implements Module {
     block_label_0: // => i32
     {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.i32_const(1);
       } else {
@@ -672,7 +672,7 @@ class If0Module implements Module {
 
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -686,7 +686,7 @@ class If0Module implements Module {
   i32 _func29(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -699,7 +699,7 @@ class If0Module implements Module {
   i32 _func30(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -713,7 +713,7 @@ class If0Module implements Module {
   i32 _func31(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(11);
     } else {
@@ -726,7 +726,7 @@ class If0Module implements Module {
   i32 _func32(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(13);
@@ -741,7 +741,7 @@ class If0Module implements Module {
   i32 _func33(i32 arg0, i32 arg1) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(3);
@@ -750,7 +750,7 @@ class If0Module implements Module {
       frame.i32_const(-3);
     }
     frame.push(arg1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(4);
@@ -765,7 +765,7 @@ class If0Module implements Module {
   i32 _func34(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(13);
@@ -780,7 +780,7 @@ class If0Module implements Module {
   i32 _func35(i32 arg0, i32 arg1) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => f32
     if (frame.pop() != 0) {
       _dummy();
       frame.f32_const(3.0);
@@ -789,7 +789,7 @@ class If0Module implements Module {
       frame.f32_const(-3.0);
     }
     frame.push(arg1);
-    if_label_0:
+    if_label_0: // => f32
     if (frame.pop() != 0) {
       _dummy();
       frame.f32_const(4.0);
@@ -804,7 +804,7 @@ class If0Module implements Module {
   i32 _func36(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: //  => i32, i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(3);
@@ -823,7 +823,7 @@ class If0Module implements Module {
   i32 _func37(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: //  => f32, f32
     if (frame.pop() != 0) {
       _dummy();
       frame.f32_const(3.0);
@@ -842,7 +842,7 @@ class If0Module implements Module {
   i32 _func38(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: //  => i32, i32
     if (frame.pop() != 0) {
       _dummy();
       frame.i32_const(3);
@@ -956,13 +956,14 @@ class If0Module implements Module {
   i32 _func40(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(18);
       break if_label_0;
       frame.i32_const(19);
     } else {
       frame.i32_const(21);
+      frame.unwindTo(0, 1);
       break if_label_0;
       frame.i32_const(20);
     }
@@ -972,7 +973,7 @@ class If0Module implements Module {
   Tuple3<i32, i32, i64> _func41(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: //  => i32, i32, i64
     if (frame.pop() != 0) {
       frame.i32_const(18);
       frame.i32_const(-18);
@@ -985,6 +986,7 @@ class If0Module implements Module {
       frame.i32_const(-18);
       frame.i32_const(18);
       frame.i64_const(-18);
+      frame.unwindTo(0, 3);
       break if_label_0;
       frame.i32_const(-19);
       frame.i32_const(19);
@@ -997,7 +999,7 @@ class If0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // i32 => i32
     if (frame.pop() != 0) {
       frame.i32_const(2);
       frame.i32_add();
@@ -1013,7 +1015,7 @@ class If0Module implements Module {
     frame.i32_const(1);
     frame.i32_const(2);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // i32, i32 => i32
     if (frame.pop() != 0) {
       frame.i32_add();
     } else {
@@ -1027,7 +1029,7 @@ class If0Module implements Module {
     frame.i32_const(1);
     frame.i32_const(2);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // i32, i32 => i32, i32
     if (frame.pop() != 0) {}
     frame.i32_add();
     return frame.pop();
@@ -1037,7 +1039,7 @@ class If0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(1);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // i32 => i32
     if (frame.pop() != 0) {
       frame.i32_const(2);
       frame.i32_add();
@@ -1055,12 +1057,13 @@ class If0Module implements Module {
     frame.i32_const(1);
     frame.i32_const(2);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // i32, i32 => i32
     if (frame.pop() != 0) {
       frame.i32_add();
       break if_label_0;
     } else {
       frame.i32_sub();
+      frame.unwindTo(0, 1);
       break if_label_0;
     }
     return frame.pop();
@@ -1071,7 +1074,7 @@ class If0Module implements Module {
     frame.i32_const(1);
     frame.i32_const(2);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // i32, i32 => i32, i32
     if (frame.pop() != 0) {
       break if_label_0;
     }
@@ -1161,7 +1164,7 @@ class If0Module implements Module {
       var t0 = frame.pop();
       _add64_u_with_carry(t0, t1, t2).pushTo(frame.stack);
     }
-    if_label_0:
+    if_label_0: // i64 => i64
     if (frame.pop() != 0) {
       frame.drop();
       frame.i64_const(-1);
@@ -1175,14 +1178,14 @@ class If0Module implements Module {
     if_label_0:
     if (frame.pop() != 0) {}
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
     } else {
       frame.i32_const(2);
     }
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // i32 =>
     if (frame.pop() != 0) {
       frame.drop();
     } else {
@@ -1192,20 +1195,20 @@ class If0Module implements Module {
     frame.f64_const(0.0);
     frame.i32_const(0);
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // i32, f64, i32 => i32, f64, i32
     if (frame.pop() != 0) {}
     frame.drop();
     frame.drop();
     frame.drop();
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
     } else {
       frame.i32_const(2);
     }
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // i32 =>
     if (frame.pop() != 0) {
       frame.drop();
     } else {
@@ -1215,7 +1218,7 @@ class If0Module implements Module {
     frame.f64_const(0.0);
     frame.i32_const(0);
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // i32, f64, i32 => i32, f64, i32
     if (frame.pop() != 0) {}
     frame.drop();
     frame.drop();

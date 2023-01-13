@@ -23,7 +23,7 @@ class Forward0Module implements Module {
     frame.push(n);
     frame.i32_const(0);
     frame.i32_eq();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(1);
     } else {
@@ -43,7 +43,7 @@ class Forward0Module implements Module {
     frame.push(n);
     frame.i32_const(0);
     frame.i32_eq();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
     } else {

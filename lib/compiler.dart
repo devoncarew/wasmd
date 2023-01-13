@@ -24,6 +24,7 @@ class Compiler {
 
   Library compile(
     File file, {
+    bool vmBackend = false,
     bool useDebugNames = false,
     bool generatingTest = false,
   }) {
@@ -42,6 +43,7 @@ class Compiler {
 
     library.directives.addAll([
       Directive.import('package:wasmd/runtime.dart'),
+      if (vmBackend) Directive.import('package:wasmd/runtime_vm.dart'),
       if (generatingTest && module.usesLargeTuple)
         Directive.import('../../src/infra.dart'),
     ]);
@@ -50,6 +52,7 @@ class Compiler {
       module,
       library,
       moduleName: path.basenameWithoutExtension(file.path),
+      vmBackend: vmBackend,
       useDebugNames: useDebugNames,
     );
 
@@ -683,6 +686,7 @@ void printModule(
   Module module,
   LibraryBuilder library, {
   required String moduleName,
+  bool vmBackend = false,
   bool useDebugNames = false,
 }) {
   // TODO: create a 'generation options' class
@@ -707,6 +711,19 @@ void printModule(
         ..name = import.referenceName
         ..type = Reference(import.typeName)
         ..modifier = FieldModifier.final$),
+    );
+  }
+
+  if (vmBackend) {
+    // late VM _vm;
+    classBuilder.fields.add(
+      Field(
+        (b) => b
+          ..name = '_vm'
+          ..type = Reference('VM')
+          ..modifier = FieldModifier.final$
+          ..late = true,
+      ),
     );
   }
 
@@ -905,6 +922,10 @@ void printModule(
         .add(refer(module.startFunction!.name).call([]).statement);
   }
 
+  if (vmBackend) {
+    constructorStatements.add((Code('_vm = VM(this);')));
+  }
+
   if (constructorStatements.isNotEmpty) {
     constructor.body = Block.of(constructorStatements);
   }
@@ -957,7 +978,7 @@ void printModule(
 
   // Defined functions
   for (var func in module.definedFunctions) {
-    var method = func.generateToMethod();
+    var method = func.generateToMethod(vmBackend: vmBackend);
     classBuilder.methods.add(method);
   }
 
@@ -1249,17 +1270,28 @@ enum BlockType {
     } else {
       var jumpKind = loopType ? 'continue' : 'break';
 
-      var code = popCondition ? 'if (frame.pop() != 0) ' : '';
-      // TODO: Our logic here needs to be re-worked.
-      // if (breakType) {
-      //   // adjust stack
-      //   var unwindTo = scope.entryDepth - scope.blockParamCount;
-      //   var retainTop = scope.blockReturnCount;
-      //   code += '  frame.unwindTo($unwindTo, $retainTop);\n';
-      // }
-      code += '$jumpKind $label;';
-      // if (popCondition) code += '}';
-      return Code(code);
+      var statements = <String>[];
+
+      if (breakType) {
+        // adjust stack
+        if (scope.stackNeedsAdjust(function.scope)) {
+          var unwindTo = scope.entryDepth - scope.blockParamCount;
+          var retainTop = scope.blockReturnCount;
+
+          statements.add('frame.unwindTo($unwindTo, $retainTop);');
+        }
+      }
+      statements.add('$jumpKind $label;');
+
+      if (popCondition) {
+        if (statements.length == 1) {
+          return Code('if (frame.pop() != 0)\n${statements.first}');
+        } else {
+          return Code('if (frame.pop() != 0) {\n${statements.join('\n')}\n}');
+        }
+      } else {
+        return Code(statements.join('\n'));
+      }
     }
   }
 }
@@ -1614,7 +1646,7 @@ class DefinedFunction extends ModuleFunction {
     return nesting[nesting.length - 1 - index];
   }
 
-  Method generateToMethod() {
+  Method generateToMethod({bool vmBackend = false}) {
     var method = MethodBuilder();
     method.name = name;
     // This newline is a hack to adjust the generated method spacing.
@@ -1675,6 +1707,12 @@ class DefinedFunction extends ModuleFunction {
           .assign(refer('Frame').call([refer('this')]))
           .statement,
     );
+    if (vmBackend) {
+      // TODO:
+      statements.add(refer('_vm').property('nop').call([]).statement);
+    }
+
+    // TODO: split off the generation here for vmBackend
 
     for (var instr in instrs) {
       statements.add(instr.generateToStatement(this));
@@ -1732,6 +1770,11 @@ class Scope {
       parent == null ? _stackDepth : parent!.stackDepth + _stackDepth;
 
   int get entryDepth => parent?.stackDepth ?? 0;
+
+  bool stackNeedsAdjust(Scope innerScope) {
+    var targetDepth = entryDepth - blockParamCount + blockReturnCount;
+    return targetDepth != innerScope.stackDepth;
+  }
 
   int get blockParamCount => blockType?.paramItems ?? 0;
 

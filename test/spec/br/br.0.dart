@@ -287,7 +287,7 @@ class Br0Module implements Module {
     final frame = Frame(this);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.i32_const(3);
         break block_label_0;
@@ -302,7 +302,7 @@ class Br0Module implements Module {
     final frame = Frame(this);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         _dummy();
         frame.i32_const(4);
@@ -318,7 +318,7 @@ class Br0Module implements Module {
     final frame = Frame(this);
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         /* nop */
         _dummy();
@@ -346,7 +346,10 @@ class Br0Module implements Module {
     block_label_0:
     {
       break block_label_0;
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
     }
   }
 
@@ -370,6 +373,7 @@ class Br0Module implements Module {
     {
       frame.i32_const(6);
       frame.i32_const(9);
+      frame.unwindTo(0, 1);
       break block_label_0;
       if (frame.pop() != 0) break block_label_0;
       frame.drop();
@@ -386,10 +390,13 @@ class Br0Module implements Module {
       var t0 = frame.pop();
       switch (t0) {
         case 0:
+          frame.unwindTo(0, 0);
           break block_label_0;
         case 1:
+          frame.unwindTo(0, 0);
           break block_label_0;
         default:
+          frame.unwindTo(0, 0);
           break block_label_0;
       }
     }
@@ -423,6 +430,7 @@ class Br0Module implements Module {
     {
       frame.i32_const(6);
       frame.i32_const(11);
+      frame.unwindTo(0, 1);
       break block_label_0;
       var t0 = frame.pop();
       switch (t0) {
@@ -455,6 +463,7 @@ class Br0Module implements Module {
     {
       frame.i32_const(1);
       frame.i64_const(7);
+      frame.unwindTo(1, 1);
       break block_label_0;
       return Tuple2.from(frame.stack);
     }
@@ -467,7 +476,7 @@ class Br0Module implements Module {
     {
       frame.i32_const(2);
       break block_label_0;
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.i32_const(0);
       } else {
@@ -482,7 +491,7 @@ class Br0Module implements Module {
     block_label_0: // => i32
     {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.i32_const(3);
         break block_label_0;
@@ -498,11 +507,12 @@ class Br0Module implements Module {
     block_label_0: // => i32
     {
       frame.push(arg0);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.push(arg1);
       } else {
         frame.i32_const(4);
+        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }
@@ -528,6 +538,7 @@ class Br0Module implements Module {
     {
       frame.push(arg0);
       frame.i32_const(6);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.push(arg1);
       frame.select();
@@ -542,6 +553,7 @@ class Br0Module implements Module {
       frame.i32_const(0);
       frame.i32_const(1);
       frame.i32_const(7);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.select();
     }
@@ -589,6 +601,7 @@ class Br0Module implements Module {
     {
       frame.i32_const(1);
       frame.i32_const(13);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.i32_const(3);
       {
@@ -608,6 +621,7 @@ class Br0Module implements Module {
       frame.i32_const(1);
       frame.i32_const(2);
       frame.i32_const(14);
+      frame.unwindTo(0, 1);
       break block_label_0;
       {
         var t2 = frame.pop();
@@ -663,6 +677,7 @@ class Br0Module implements Module {
     {
       frame.i32_const(0);
       frame.i32_const(21);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.i32_const(2);
       frame.i32_const(3);
@@ -686,6 +701,7 @@ class Br0Module implements Module {
       frame.i32_const(0);
       frame.i32_const(1);
       frame.i32_const(22);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.i32_const(3);
       {
@@ -709,6 +725,7 @@ class Br0Module implements Module {
       frame.i32_const(1);
       frame.i32_const(2);
       frame.i32_const(23);
+      frame.unwindTo(0, 1);
       break block_label_0;
       {
         var func = table0[frame.pop()];
@@ -821,6 +838,7 @@ class Br0Module implements Module {
     {
       frame.i32_const(2);
       frame.i32_const(31);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.i64_store(3, 0);
       frame.i32_const(-1);
@@ -859,6 +877,7 @@ class Br0Module implements Module {
     {
       frame.i32_const(2);
       frame.i32_const(33);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.i64_store16(1, 0);
       frame.i32_const(-1);
@@ -907,6 +926,7 @@ class Br0Module implements Module {
     {
       frame.i64_const(10);
       frame.i64_const(45);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.i64_sub();
     }
@@ -953,6 +973,7 @@ class Br0Module implements Module {
     {
       frame.f32_const(10.0);
       frame.i32_const(42);
+      frame.unwindTo(0, 1);
       break block_label_0;
       frame.f32_ne();
     }
@@ -1000,6 +1021,7 @@ class Br0Module implements Module {
       _dummy();
       frame.i32_const(4);
       frame.i32_const(8);
+      frame.unwindTo(1, 1);
       break block_label_0;
       frame.i32_add();
     }
@@ -1063,6 +1085,7 @@ class Br0Module implements Module {
       frame.drop();
       frame.i32_const(4);
       frame.i32_const(8);
+      frame.unwindTo(1, 1);
       break block_label_0;
       if (frame.pop() != 0) break block_label_0;
       frame.drop();
@@ -1108,6 +1131,7 @@ class Br0Module implements Module {
       frame.drop();
       frame.i32_const(4);
       frame.i32_const(8);
+      frame.unwindTo(1, 1);
       break block_label_0;
       var t0 = frame.pop();
       switch (t0) {
