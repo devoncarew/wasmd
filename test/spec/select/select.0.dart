@@ -213,7 +213,7 @@ class Select0Module implements Module {
   i32 _func14(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(2);
       frame.i32_const(3);
@@ -229,7 +229,7 @@ class Select0Module implements Module {
   i32 _func15(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(2);
@@ -245,7 +245,7 @@ class Select0Module implements Module {
   i32 _func16(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       _dummy();
@@ -273,7 +273,7 @@ class Select0Module implements Module {
   i32 _func18(i32 arg0) {
     final frame = Frame(this);
     frame.i32_const(1);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(2);
       frame.i32_const(3);
@@ -288,7 +288,7 @@ class Select0Module implements Module {
   i32 _func19(i32 arg0) {
     final frame = Frame(this);
     frame.i32_const(0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(2);
     } else {

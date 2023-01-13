@@ -84,8 +84,11 @@ class Instruction_Loop extends Instruction {
 
     function.enterBlock(compiler.BlockType.$loop, blocktype);
 
+    var description = blocktype.describe;
+    if (description.isNotEmpty) description = '// $description\n';
+
     var label = function.currentBlockLabel;
-    return Code('\n$label: for (;;) {');
+    return Code('\n$label: ${description}for (;;) {');
   }
 }
 
@@ -103,8 +106,11 @@ class Instruction_If extends Instruction {
 
     function.enterBlock(compiler.BlockType.$if, blocktype);
 
+    var description = blocktype.describe;
+    if (description.isNotEmpty) description = '// $description\n';
+
     var label = function.currentBlockLabel;
-    return Code('$label: if (frame.pop() != 0) {');
+    return Code('$label: ${description}if (frame.pop() != 0) {');
   }
 }
 
@@ -210,6 +216,8 @@ class Instruction_BrTable extends Instruction {
 
     var varName = function.scope.nextTempName;
 
+    function.scope.updateStackDepth(-1, name);
+
     var switchStatement = StringBuffer('switch ($varName) {');
     for (int i = 0; i < labelIndexes.length; i++) {
       var labelIndex = labelIndexes[i];
@@ -231,8 +239,6 @@ class Instruction_BrTable extends Instruction {
       switchStatement.writeln(code.toString());
     }
     switchStatement.writeln('}');
-
-    function.scope.updateStackDepth(-1, name);
 
     return Block.of([
       declareVar(varName).assign(CodeExpression(Code('frame.pop()'))).statement,
@@ -274,7 +280,7 @@ class BlockType {
   }
 
   int get paramItems {
-    if (valueType != null) return 1;
+    if (valueType != null) return 0;
     if (functionType != null) return functionType!.parameterTypes.length;
     return 0;
   }

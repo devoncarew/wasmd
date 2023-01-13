@@ -253,7 +253,7 @@ class Return0Module implements Module {
   i32 _func19() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(3);
       return frame.pop();
@@ -266,7 +266,7 @@ class Return0Module implements Module {
   i32 _func20() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(4);
@@ -280,7 +280,7 @@ class Return0Module implements Module {
   i32 _func21() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       /* nop */
       _dummy();
@@ -307,7 +307,10 @@ class Return0Module implements Module {
     block_label_0:
     {
       return;
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
     }
   }
 
@@ -413,7 +416,7 @@ class Return0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(2);
     return frame.pop();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
     } else {
@@ -425,7 +428,7 @@ class Return0Module implements Module {
   i32 _func31(i32 arg0, i32 arg1) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(3);
       return frame.pop();
@@ -438,7 +441,7 @@ class Return0Module implements Module {
   i32 _func32(i32 arg0, i32 arg1) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.push(arg1);
     } else {

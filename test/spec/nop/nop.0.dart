@@ -289,7 +289,7 @@ class Nop0Module implements Module {
   i32 _func18() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       /* nop */
       frame.i32_const(2);
@@ -301,7 +301,7 @@ class Nop0Module implements Module {
   i32 _func19() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       /* nop */
@@ -314,7 +314,7 @@ class Nop0Module implements Module {
   i32 _func20() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(3);
@@ -327,7 +327,7 @@ class Nop0Module implements Module {
   i32 _func21() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       /* nop */
       /* nop */

@@ -197,7 +197,7 @@ class Stack1Module implements Module {
     }
     frame.drop();
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(0);
       {
@@ -210,7 +210,7 @@ class Stack1Module implements Module {
     }
     frame.drop();
     frame.i32_const(0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {
@@ -459,7 +459,7 @@ class Stack1Module implements Module {
     }
     frame.drop();
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(0);
       {
@@ -472,7 +472,7 @@ class Stack1Module implements Module {
     }
     frame.drop();
     frame.i32_const(0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
       {

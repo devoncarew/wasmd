@@ -331,7 +331,7 @@ class LocalTee0Module implements Module {
   i32 _func15(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(3);
       arg0 = frame.peek();
@@ -344,7 +344,7 @@ class LocalTee0Module implements Module {
   i32 _func16(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       frame.i32_const(4);
@@ -358,7 +358,7 @@ class LocalTee0Module implements Module {
   i32 _func17(i32 arg0) {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       _dummy();
       _dummy();
@@ -490,7 +490,7 @@ class LocalTee0Module implements Module {
     final frame = Frame(this);
     frame.i32_const(2);
     arg0 = frame.peek();
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(0);
     } else {
@@ -502,7 +502,7 @@ class LocalTee0Module implements Module {
   i32 _func27(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.i32_const(3);
       arg0 = frame.peek();
@@ -515,7 +515,7 @@ class LocalTee0Module implements Module {
   i32 _func28(i32 arg0) {
     final frame = Frame(this);
     frame.push(arg0);
-    if_label_0:
+    if_label_0: // => i32
     if (frame.pop() != 0) {
       frame.push(arg0);
     } else {

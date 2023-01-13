@@ -53,7 +53,7 @@ class Labels0Module implements Module {
     i = frame.pop();
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.push(i);
         frame.i32_const(1);
@@ -82,7 +82,7 @@ class Labels0Module implements Module {
     i = frame.pop();
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.push(i);
         frame.i32_const(1);
@@ -122,7 +122,7 @@ class Labels0Module implements Module {
     i = frame.pop();
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.push(i);
         frame.i32_const(1);
@@ -151,7 +151,7 @@ class Labels0Module implements Module {
     i = frame.pop();
     block_label_0: // => i32
     {
-      loop_label_1:
+      loop_label_1: // => i32
       for (;;) {
         frame.push(i);
         frame.push(i);
@@ -175,7 +175,7 @@ class Labels0Module implements Module {
   i32 _func05() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(1);
       break;
@@ -188,7 +188,7 @@ class Labels0Module implements Module {
   i32 _func06() {
     final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
       frame.i32_const(0);
       if (frame.pop() != 0) continue loop_label_0;
@@ -395,6 +395,7 @@ class Labels0Module implements Module {
               break block_label_1;
             }
             frame.i32_const(3);
+            frame.unwindTo(0, 1);
             break block_label_0;
           }
         }

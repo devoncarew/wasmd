@@ -196,10 +196,13 @@ class Switch0Module implements Module {
             var t0 = frame.pop();
             switch (t0) {
               case 0:
+                frame.unwindTo(2, 1);
                 break block_label_2;
               case 1:
+                frame.unwindTo(1, 1);
                 break block_label_1;
               case 2:
+                frame.unwindTo(0, 1);
                 break block_label_0;
               default:
                 break block_label_3;

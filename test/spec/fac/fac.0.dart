@@ -27,7 +27,7 @@ class Fac0Module implements Module {
     frame.push(arg0);
     frame.i64_const(0);
     frame.i64_eq();
-    if_label_0:
+    if_label_0: // => i64
     if (frame.pop() != 0) {
       frame.i64_const(1);
     } else {
@@ -49,7 +49,7 @@ class Fac0Module implements Module {
     frame.push(n);
     frame.i64_const(0);
     frame.i64_eq();
-    if_label_0:
+    if_label_0: // => i64
     if (frame.pop() != 0) {
       frame.i64_const(1);
     } else {
@@ -194,7 +194,7 @@ class Fac0Module implements Module {
     frame.i64_const(1);
     frame.push(arg0);
 
-    loop_label_0:
+    loop_label_0: // i64, i64 => i64
     for (;;) {
       {
         var t1 = frame.pop();

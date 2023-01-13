@@ -99,7 +99,10 @@ class BrIf0Module implements Module {
     {
       frame.i32_const(0);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       frame.i32_ctz();
       frame.drop();
     }
@@ -111,7 +114,10 @@ class BrIf0Module implements Module {
     {
       frame.i64_const(0);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       frame.i64_ctz();
       frame.drop();
     }
@@ -123,7 +129,10 @@ class BrIf0Module implements Module {
     {
       frame.f32_const(0.0);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       frame.f32_neg();
       frame.drop();
     }
@@ -135,7 +144,10 @@ class BrIf0Module implements Module {
     {
       frame.f64_const(0.0);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       frame.f64_neg();
       frame.drop();
     }
@@ -336,7 +348,10 @@ class BrIf0Module implements Module {
     {
       frame.i32_const(1);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       if (frame.pop() != 0) break block_label_0;
     }
   }
@@ -363,7 +378,10 @@ class BrIf0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(1);
       frame.push(arg0);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       if (frame.pop() != 0) break block_label_0;
       frame.drop();
       frame.i32_const(4);
@@ -377,7 +395,10 @@ class BrIf0Module implements Module {
     {
       frame.i32_const(1);
       frame.i32_const(2);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       var t0 = frame.pop();
       switch (t0) {
         case 0:
@@ -420,7 +441,10 @@ class BrIf0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(1);
       frame.i32_const(3);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       var t0 = frame.pop();
       switch (t0) {
         case 0:
@@ -453,7 +477,7 @@ class BrIf0Module implements Module {
       frame.i32_const(1);
       frame.push(arg0);
       if (frame.pop() != 0) break block_label_0;
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.i32_const(2);
       } else {
@@ -514,7 +538,10 @@ class BrIf0Module implements Module {
       frame.i32_const(1);
       frame.i32_const(3);
       frame.i32_const(10);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.push(arg0);
       frame.select();
     }
@@ -529,7 +556,10 @@ class BrIf0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(3);
       frame.i32_const(10);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.select();
     }
     return frame.pop();
@@ -567,7 +597,10 @@ class BrIf0Module implements Module {
       frame.i32_const(1);
       frame.i32_const(13);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.i32_const(3);
       {
         var t2 = frame.pop();
@@ -587,7 +620,10 @@ class BrIf0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(14);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       {
         var t2 = frame.pop();
         var t1 = frame.pop();
@@ -634,7 +670,10 @@ class BrIf0Module implements Module {
       frame.i32_const(1);
       frame.i32_const(4);
       frame.i32_const(10);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.i32_const(2);
       frame.i32_const(0);
       {
@@ -658,7 +697,10 @@ class BrIf0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(4);
       frame.i32_const(10);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.i32_const(0);
       {
         var func = table0[frame.pop()];
@@ -682,7 +724,10 @@ class BrIf0Module implements Module {
       frame.i32_const(3);
       frame.i32_const(4);
       frame.i32_const(10);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       {
         var func = table0[frame.pop()];
         if (func == null) throw Trap('uninitialized element');
@@ -784,7 +829,10 @@ class BrIf0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(31);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.i32_store(2, 0);
       frame.i32_const(-1);
     }
@@ -812,7 +860,10 @@ class BrIf0Module implements Module {
       frame.i32_const(2);
       frame.i32_const(33);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.i32_store16(1, 0);
       frame.i32_const(-1);
     }
@@ -851,7 +902,10 @@ class BrIf0Module implements Module {
       frame.i32_const(10);
       frame.i32_const(1);
       frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.i32_sub();
     }
     return frame.pop();
@@ -889,7 +943,10 @@ class BrIf0Module implements Module {
       frame.i32_const(10);
       frame.i32_const(1);
       frame.i32_const(42);
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 1);
+        break block_label_0;
+      }
       frame.i32_ne();
     }
     return frame.pop();
@@ -919,7 +976,10 @@ class BrIf0Module implements Module {
       {
         frame.i32_const(8);
         frame.push(arg0);
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(1, 1);
+          break block_label_0;
+        }
         frame.drop();
         frame.i32_const(16);
       }
@@ -987,7 +1047,10 @@ class BrIf0Module implements Module {
       {
         frame.i32_const(8);
         frame.push(arg0);
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(1, 1);
+          break block_label_0;
+        }
         frame.drop();
         frame.i32_const(1);
       }
@@ -1039,7 +1102,10 @@ class BrIf0Module implements Module {
       {
         frame.i32_const(8);
         frame.push(arg0);
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(1, 1);
+          break block_label_0;
+        }
         frame.drop();
         frame.i32_const(1);
       }

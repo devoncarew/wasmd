@@ -714,16 +714,18 @@ void printModule(
     );
   }
 
-  // late VM _vm;
-  classBuilder.fields.add(
-    Field(
-      (b) => b
-        ..name = '_vm'
-        ..type = Reference('VM')
-        ..modifier = FieldModifier.final$
-        ..late = true,
-    ),
-  );
+  if (vmBackend) {
+    // late VM _vm;
+    classBuilder.fields.add(
+      Field(
+        (b) => b
+          ..name = '_vm'
+          ..type = Reference('VM')
+          ..modifier = FieldModifier.final$
+          ..late = true,
+      ),
+    );
+  }
 
   // memory reference
   if (module.memoryImported) {
@@ -1268,17 +1270,28 @@ enum BlockType {
     } else {
       var jumpKind = loopType ? 'continue' : 'break';
 
-      var code = popCondition ? 'if (frame.pop() != 0) ' : '';
-      // TODO: Our logic here needs to be re-worked.
-      // if (breakType) {
-      //   // adjust stack
-      //   var unwindTo = scope.entryDepth - scope.blockParamCount;
-      //   var retainTop = scope.blockReturnCount;
-      //   code += '  frame.unwindTo($unwindTo, $retainTop);\n';
-      // }
-      code += '$jumpKind $label;';
-      // if (popCondition) code += '}';
-      return Code(code);
+      var statements = <String>[];
+
+      if (breakType) {
+        // adjust stack
+        if (scope.stackNeedsAdjust(function.scope)) {
+          var unwindTo = scope.entryDepth - scope.blockParamCount;
+          var retainTop = scope.blockReturnCount;
+
+          statements.add('frame.unwindTo($unwindTo, $retainTop);');
+        }
+      }
+      statements.add('$jumpKind $label;');
+
+      if (popCondition) {
+        if (statements.length == 1) {
+          return Code('if (frame.pop() != 0)\n${statements.first}');
+        } else {
+          return Code('if (frame.pop() != 0) {\n${statements.join('\n')}\n}');
+        }
+      } else {
+        return Code(statements.join('\n'));
+      }
     }
   }
 }
@@ -1757,6 +1770,11 @@ class Scope {
       parent == null ? _stackDepth : parent!.stackDepth + _stackDepth;
 
   int get entryDepth => parent?.stackDepth ?? 0;
+
+  bool stackNeedsAdjust(Scope innerScope) {
+    var targetDepth = entryDepth - blockParamCount + blockReturnCount;
+    return targetDepth != innerScope.stackDepth;
+  }
 
   int get blockParamCount => blockType?.paramItems ?? 0;
 
