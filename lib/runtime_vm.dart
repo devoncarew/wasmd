@@ -525,14 +525,12 @@ class VM {
         : (value << (bitCount - count)) | (value >>> count);
   }
 
-  // f32 f32_abs(f32 arg0) { }
-  // f32 f32_neg(f32 arg0) { }
-  // f32 f32_ceil(f32 arg0) { }
-
+  f32 f32_abs(f32 arg0) => arg0.abs();
+  f32 f32_neg(f32 arg0) => -arg0;
+  f32 f32_ceil(f32 arg0) => arg0.ceilToDouble();
   f32 f32_floor(f32 arg0) => arg0.floorToDouble();
-
-  // f32 f32_trunc(f32 arg0) { }
-  // f32 f32_nearest(f32 arg0) { }
+  f32 f32_trunc(f32 arg0) => arg0.truncateToDouble();
+  f32 f32_nearest(f32 arg0) => arg0.roundToDouble();
 
   f32 f32_sqrt(f32 arg0) => sqrt(arg0);
   f32 f32_add(f32 arg0, f32 arg1) => arg0 + arg1;
@@ -547,14 +545,13 @@ class VM {
     return arg0.isNegative == arg1.isNegative ? arg0 : -arg0;
   }
 
-  // f64 f64_abs(f64 arg0) { }
-  // f64 f64_neg(f64 arg0) { }
-  // f64 f64_ceil(f64 arg0) { }
-  // f64 f64_foor(f64 arg0) { }
-  // f64 f64_trunc(f64 arg0) { }
-  // f64 f64_nearest(f64 arg0) { }
-  // f64 f64_sqrt(f64 arg0) { }
-
+  f64 f64_abs(f64 arg0) => arg0.abs();
+  f64 f64_neg(f64 arg0) => -arg0;
+  f64 f64_ceil(f64 arg0) => arg0.ceilToDouble();
+  f64 f64_foor(f64 arg0) => arg0.floorToDouble();
+  f64 f64_trunc(f64 arg0) => arg0.truncateToDouble();
+  f64 f64_nearest(f64 arg0) => arg0.roundToDouble();
+  f64 f64_sqrt(f64 arg0) => sqrt(arg0);
   f64 f64_add(f64 arg0, f64 arg1) => arg0 + arg1;
   f64 f64_sub(f64 arg0, f64 arg1) => arg0 - arg1;
   f64 f64_mul(f64 arg0, f64 arg1) => arg0 * arg1;

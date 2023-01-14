@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class F64Bitwise0Module implements Module {
-  F64Bitwise0Module();
+  F64Bitwise0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -20,25 +25,18 @@ class F64Bitwise0Module implements Module {
   f64 copysign(f64 arg0, f64 arg1) => _func2(arg0, arg1);
 
   f64 _func0(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_abs();
-    return frame.pop();
+    var t0 = vm.f64_abs(x);
+    return t0;
   }
 
   f64 _func1(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_neg();
-    return frame.pop();
+    var t0 = vm.f64_neg(x);
+    return t0;
   }
 
   f64 _func2(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_copysign();
-    return frame.pop();
+    var t0 = vm.f64_copysign(x, y);
+    return t0;
   }
 }
 

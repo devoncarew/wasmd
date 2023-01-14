@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class F64Cmp0Module implements Module {
-  F64Cmp0Module();
+  F64Cmp0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -23,51 +28,33 @@ class F64Cmp0Module implements Module {
   i32 ge(f64 arg0, f64 arg1) => _func5(arg0, arg1);
 
   i32 _func0(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_eq();
-    return frame.pop();
+    var t0 = vm.f64_eq(x, y);
+    return t0;
   }
 
   i32 _func1(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_ne();
-    return frame.pop();
+    var t0 = vm.f64_ne(x, y);
+    return t0;
   }
 
   i32 _func2(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_lt();
-    return frame.pop();
+    var t0 = vm.f64_lt(x, y);
+    return t0;
   }
 
   i32 _func3(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_le();
-    return frame.pop();
+    var t0 = vm.f64_le(x, y);
+    return t0;
   }
 
   i32 _func4(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_gt();
-    return frame.pop();
+    var t0 = vm.f64_gt(x, y);
+    return t0;
   }
 
   i32 _func5(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_ge();
-    return frame.pop();
+    var t0 = vm.f64_ge(x, y);
+    return t0;
   }
 }
 

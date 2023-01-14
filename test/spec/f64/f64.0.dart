@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class F640Module implements Module {
-  F640Module();
+  F640Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -28,86 +33,58 @@ class F640Module implements Module {
   f64 nearest(f64 arg0) => _func10(arg0);
 
   f64 _func00(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_add();
-    return frame.pop();
+    var t0 = vm.f64_add(x, y);
+    return t0;
   }
 
   f64 _func01(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_sub();
-    return frame.pop();
+    var t0 = vm.f64_sub(x, y);
+    return t0;
   }
 
   f64 _func02(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_mul();
-    return frame.pop();
+    var t0 = vm.f64_mul(x, y);
+    return t0;
   }
 
   f64 _func03(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_div();
-    return frame.pop();
+    var t0 = vm.f64_div(x, y);
+    return t0;
   }
 
   f64 _func04(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_sqrt();
-    return frame.pop();
+    var t0 = vm.f64_sqrt(x);
+    return t0;
   }
 
   f64 _func05(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_min();
-    return frame.pop();
+    var t0 = vm.f64_min(x, y);
+    return t0;
   }
 
   f64 _func06(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_max();
-    return frame.pop();
+    var t0 = vm.f64_max(x, y);
+    return t0;
   }
 
   f64 _func07(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_ceil();
-    return frame.pop();
+    var t0 = vm.f64_ceil(x);
+    return t0;
   }
 
   f64 _func08(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_foor();
-    return frame.pop();
+    var t0 = vm.f64_foor(x);
+    return t0;
   }
 
   f64 _func09(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_trunc();
-    return frame.pop();
+    var t0 = vm.f64_trunc(x);
+    return t0;
   }
 
   f64 _func10(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_nearest();
-    return frame.pop();
+    var t0 = vm.f64_nearest(x);
+    return t0;
   }
 }
 
