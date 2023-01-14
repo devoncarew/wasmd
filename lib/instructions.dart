@@ -2,9 +2,11 @@
 
 import 'package:code_builder/code_builder.dart';
 import 'package:collection/collection.dart';
+import 'package:wasmd/ast.dart';
 
 import 'compiler.dart' hide ValueType;
 import 'compiler.dart' as compiler show BlockType, FunctionType, ValueType;
+import 'src/utils.dart';
 
 class Instr {
   final Instruction instruction;
@@ -61,7 +63,7 @@ class Instruction_Block extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    var blocktype = BlockType.from(instr.args[0] as int, function);
+    var blocktype = BlockFunctionType.from(instr.args[0] as int, function);
 
     function.enterBlock(compiler.BlockType.$block, blocktype);
 
@@ -70,6 +72,20 @@ class Instruction_Block extends Instruction {
 
     var label = function.currentBlockLabel;
     return Code('$label: $description{');
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var blocktype = BlockFunctionType.from(
+        instr.args[0] as int, functionBuilder.definedFunction);
+
+    functionBuilder.enterBlock(compiler.BlockType.$block, blocktype);
+
+    var description = blocktype.describe;
+    if (description.isNotEmpty) description = '// $description\n';
+
+    var label = functionBuilder.currentBlockLabel;
+    functionBuilder.addStatement(Code('$label: $description{'));
   }
 }
 
@@ -80,7 +96,7 @@ class Instruction_Loop extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    var blocktype = BlockType.from(instr.args[0] as int, function);
+    var blocktype = BlockFunctionType.from(instr.args[0] as int, function);
 
     function.enterBlock(compiler.BlockType.$loop, blocktype);
 
@@ -89,6 +105,20 @@ class Instruction_Loop extends Instruction {
 
     var label = function.currentBlockLabel;
     return Code('\n$label: ${description}for (;;) {');
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var blocktype = BlockFunctionType.from(
+        instr.args[0] as int, functionBuilder.definedFunction);
+
+    functionBuilder.enterBlock(compiler.BlockType.$loop, blocktype);
+
+    var description = blocktype.describe;
+    if (description.isNotEmpty) description = '// $description\n';
+
+    var label = functionBuilder.currentBlockLabel;
+    functionBuilder.addStatement(Code('\n$label: ${description}for (;;) {'));
   }
 }
 
@@ -99,7 +129,7 @@ class Instruction_If extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    var blocktype = BlockType.from(instr.args[0] as int, function);
+    var blocktype = BlockFunctionType.from(instr.args[0] as int, function);
 
     // pop off the expr to eval
     function.scope.updateStackDepth(-1, name);
@@ -112,6 +142,25 @@ class Instruction_If extends Instruction {
     var label = function.currentBlockLabel;
     return Code('$label: ${description}if (frame.pop() != 0) {');
   }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var blocktype = BlockFunctionType.from(
+        instr.args[0] as int, functionBuilder.definedFunction);
+
+    // pop off the expr to eval
+    functionBuilder.scope.updateStackDepth(-1, name);
+
+    functionBuilder.enterBlock(compiler.BlockType.$if, blocktype);
+
+    var description = blocktype.describe;
+    if (description.isNotEmpty) description = '// $description\n';
+
+    var label = functionBuilder.currentBlockLabel;
+    var ref = functionBuilder.popRef();
+    functionBuilder
+        .addStatement(Code('$label: ${description}if (${ref.expr} != 0) {'));
+  }
 }
 
 class Instruction_Else extends Instruction {
@@ -119,16 +168,12 @@ class Instruction_Else extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    // // Pop the if scope; push on a new scope using the blocktype of the matching
-    // // 'if' statement (if - else - end).
-
-    // var oldScope = function.scope;
-    // function.exitBlock();
-    // // update the stack - push on the block results
-    // function.scope.updateStackDepth(oldScope.blockArgCount, name);
-    // function.enterBlock(compiler.BlockType.$if, oldScope.blockType!);
-
     return Code('} else {\n');
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.addStatement(Code('} else {\n'));
   }
 }
 
@@ -163,6 +208,39 @@ class Instruction_End extends Instruction {
       }
     }
   }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var oldScope = functionBuilder.scope;
+    var oldNesting = functionBuilder.exitBlock();
+
+    // update the stack - push on the block results
+    functionBuilder.scope.updateStackDepth(
+        oldScope.blockReturnCount - oldScope.blockParamCount, name);
+
+    var function = functionBuilder.definedFunction;
+
+    if (oldNesting != null && oldNesting.loopType) {
+      functionBuilder.addStatement(Code('break;\n}'));
+    } else if (oldNesting != null) {
+      functionBuilder.addStatement(Code('}'));
+    } else {
+      // TODO: functionBuilder.stack.isEmpty likely cooresponds to the function
+      // already having returned in this block, but we should better encode this
+      if (function.returnsVoid || functionBuilder.stack.isEmpty) {
+        return functionBuilder.addStatement(Code(''));
+      } else if (function.returnsTuple) {
+        // todo:
+        throw 'todo:';
+        // var arity = function.functionType.resultType.length;
+        // return functionBuilder
+        //     .addStatement(Code('return Tuple$arity.from(frame.stack);'));
+      } else {
+        return functionBuilder.addStatement(
+            refer(functionBuilder.popRef().expr).returned.statement);
+      }
+    }
+  }
 }
 
 class Instruction_Br extends Instruction {
@@ -174,7 +252,21 @@ class Instruction_Br extends Instruction {
     var label = function.labelNameFromIndex(immediate);
     var scope = function.scopeForIndex(immediate);
     var blockKind = function.blockNestingFromIndex(immediate);
-    return blockKind.generateBranchFor(function, label, scope, name: 'br');
+    return blockKind.generateBranchFor(
+        function.functionType, label, scope, function.scope,
+        name: 'br');
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var function = functionBuilder.definedFunction;
+    var immediate = instr.args[0] as int;
+    var label = functionBuilder.labelNameFromIndex(immediate);
+    var scope = functionBuilder.scopeForIndex(immediate);
+    var blockKind = functionBuilder.blockNestingFromIndex(immediate);
+    functionBuilder.addStatement(blockKind.generateBranchForVm(
+        functionBuilder, label, scope, function.scope,
+        name: 'br'));
   }
 }
 
@@ -190,8 +282,23 @@ class Instruction_BrIf extends Instruction {
 
     function.scope.updateStackDepth(-1, name);
 
-    return blockKind.generateBranchFor(function, label, scope,
+    return blockKind.generateBranchFor(
+        function.functionType, label, scope, function.scope,
         name: 'br_if', popCondition: true);
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+    var label = functionBuilder.labelNameFromIndex(immediate);
+    var scope = functionBuilder.scopeForIndex(immediate);
+    var blockKind = functionBuilder.blockNestingFromIndex(immediate);
+
+    functionBuilder.scope.updateStackDepth(-1, name);
+
+    functionBuilder.addStatement(blockKind.generateBranchForVm(
+        functionBuilder, label, scope, functionBuilder.scope,
+        name: 'br_if', popCondition: true));
   }
 }
 
@@ -224,7 +331,8 @@ class Instruction_BrTable extends Instruction {
       var label = function.labelNameFromIndex(labelIndex);
       var scope = function.scopeForIndex(labelIndex);
       var blockKind = function.blockNestingFromIndex(labelIndex);
-      var code = blockKind.generateBranchFor(function, label, scope);
+      var code = blockKind.generateBranchFor(
+          function.functionType, label, scope, function.scope);
 
       switchStatement.writeln('case $i:');
       switchStatement.writeln(code.toString());
@@ -233,7 +341,8 @@ class Instruction_BrTable extends Instruction {
       var label = function.labelNameFromIndex(defaultIndex);
       var scope = function.scopeForIndex(defaultIndex);
       var blockKind = function.blockNestingFromIndex(defaultIndex);
-      var code = blockKind.generateBranchFor(function, label, scope);
+      var code = blockKind.generateBranchFor(
+          function.functionType, label, scope, function.scope);
 
       switchStatement.writeln('default:');
       switchStatement.writeln(code.toString());
@@ -244,6 +353,43 @@ class Instruction_BrTable extends Instruction {
       declareVar(varName).assign(CodeExpression(Code('frame.pop()'))).statement,
       Code(switchStatement.toString()),
     ]);
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var labelIndexes = instr.args[0] as List<int>;
+    var defaultIndex = instr.args[1] as int;
+
+    var ref = functionBuilder.popRef();
+
+    functionBuilder.scope.updateStackDepth(-1, name);
+
+    var switchStatement = StringBuffer('switch ($ref) {');
+    for (int i = 0; i < labelIndexes.length; i++) {
+      var labelIndex = labelIndexes[i];
+      var label = functionBuilder.labelNameFromIndex(labelIndex);
+      var scope = functionBuilder.scopeForIndex(labelIndex);
+      var blockKind = functionBuilder.blockNestingFromIndex(labelIndex);
+      var code = blockKind.generateBranchForVm(
+          functionBuilder, label, scope, functionBuilder.scope);
+
+      switchStatement.writeln('case $i:');
+      switchStatement.writeln(code.toString());
+    }
+    {
+      var label = functionBuilder.labelNameFromIndex(defaultIndex);
+      var scope = functionBuilder.scopeForIndex(defaultIndex);
+      var blockKind = functionBuilder.blockNestingFromIndex(defaultIndex);
+      var code = blockKind.generateBranchForVm(
+          functionBuilder, label, scope, functionBuilder.scope);
+
+      switchStatement.writeln('default:');
+      switchStatement.writeln(code.toString());
+    }
+    switchStatement.writeln('}');
+
+    // todo: Block.of()?
+    functionBuilder.addStatement(Code(switchStatement.toString()));
   }
 }
 
@@ -263,13 +409,29 @@ class Instruction_Return extends Instruction {
       return frame.property('pop').call([]).returned.statement;
     }
   }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var functype = functionBuilder.definedFunction.functionType;
+
+    if (functype.returnsVoid) {
+      functionBuilder.addStatement(Code('return;'));
+    } else if (functype.returnsTuple) {
+      // var arity = functype.resultType.length;
+      throw 'todo:';
+      // return Code('return Tuple$arity.from(frame.stack);');
+    } else {
+      var ref = functionBuilder.popRef();
+      functionBuilder.addStatement(refer(ref.expr).returned.statement);
+    }
+  }
 }
 
-class BlockType {
+class BlockFunctionType {
   compiler.ValueType? valueType;
   compiler.FunctionType? functionType;
 
-  BlockType.from(int code, DefinedFunction function) {
+  BlockFunctionType.from(int code, DefinedFunction function) {
     if (code == -0x40) {
       // no block type
     } else if (code < 0) {
@@ -336,6 +498,16 @@ class Instruction_LocalGet extends Instruction {
 
     return refer('frame').property('push').call([refer(localName)]).statement;
   }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+    var localName = functionBuilder.variableFromIndex(immediate).name;
+
+    functionBuilder.scope.updateStackDepth(1, name);
+
+    functionBuilder.pushRef(Ref(localName));
+  }
 }
 
 class Instruction_LocalSet extends Instruction {
@@ -352,6 +524,16 @@ class Instruction_LocalSet extends Instruction {
         .assign(refer('frame').property('pop').call([]))
         .statement;
   }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+    var localName = functionBuilder.variableFromIndex(immediate).name;
+
+    functionBuilder.scope.updateStackDepth(-1, name);
+
+    functionBuilder.generateAssign(Ref(localName), functionBuilder.popRef());
+  }
 }
 
 class Instruction_LocalTee extends Instruction {
@@ -365,6 +547,14 @@ class Instruction_LocalTee extends Instruction {
     return refer(localName)
         .assign(refer('frame').property('peek').call([]))
         .statement;
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+    var localName = functionBuilder.variableFromIndex(immediate).name;
+
+    functionBuilder.generateAssign(Ref(localName), functionBuilder.peekRef());
   }
 }
 
@@ -382,6 +572,16 @@ class Instruction_GlobalGet extends Instruction {
         .property('push')
         .call([refer(global.containerName).property(global.name)]).statement;
   }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+    var global = functionBuilder.module.globals.globals[immediate];
+
+    functionBuilder.scope.updateStackDepth(1, name);
+
+    functionBuilder.pushRef(Ref('${global.containerName}.${global.name}'));
+  }
 }
 
 class Instruction_GlobalSet extends Instruction {
@@ -398,6 +598,18 @@ class Instruction_GlobalSet extends Instruction {
         .property(global.name)
         .assign(refer('frame').property('pop').call([]))
         .statement;
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+    var global = functionBuilder.module.globals.globals[immediate];
+
+    functionBuilder.scope.updateStackDepth(-1, name);
+
+    functionBuilder.generateAssign(
+        Ref('${global.containerName}.${global.name}'),
+        functionBuilder.popRef());
   }
 }
 
@@ -430,6 +642,19 @@ class Instruction_TableSet extends Instruction {
       Code('table$immediate[frame.pop() as int] = ref;'),
       Code('}'),
     ]);
+  }
+}
+
+class Instruction_Const extends Instruction {
+  Instruction_Const(super.name, super.opcode, super.shorthand);
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.scope.updateStackDepth(1, name);
+
+    var arg = instr.args.first;
+    var literal = printLiteral(arg as num);
+    functionBuilder.pushRef(Ref(printExpression(literal)));
   }
 }
 
@@ -477,6 +702,35 @@ class Instruction_Call extends Instruction {
         ...statements,
         Code('}'),
       ]);
+    }
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+    var target = functionBuilder.functionByIndex(immediate)!;
+
+    // update stack depth
+    var paramCount = target.functionType.parameterTypes.length;
+    var resultCount = target.functionType.resultType.length;
+    functionBuilder.scope.updateStackDepth(resultCount - paramCount, name);
+
+    var args = <Ref>[];
+    for (var _ in target.parameterTypes) {
+      args.add(functionBuilder.popRef());
+    }
+
+    var call = VmCall(target.name, [], args.reversed.toList());
+
+    if (target.returnsVoid) {
+      functionBuilder.performCall(call);
+    } else if (target.returnsTuple) {
+      // todo:
+      throw 'todo:';
+      // push the return tuples item's to the stack
+      // call = call.property('pushTo').call([refer('frame.stack')]);
+    } else {
+      functionBuilder.pushAssignTemp(call);
     }
   }
 }
@@ -532,6 +786,17 @@ class Instruction_CallIndirect extends Instruction {
       ...statements,
       Code('}'),
     ]);
+  }
+}
+
+class Instruction_Drop extends Instruction {
+  Instruction_Drop() : super('drop', 0x1A, 'any');
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.scope.updateStackDepth(-1, name);
+
+    functionBuilder.popRef();
   }
 }
 
@@ -751,7 +1016,9 @@ class Instruction {
   Code generateToStatement(Instr instr, DefinedFunction function) {
     var frame = refer('frame');
 
-    defaultUpdateStackDepth(function.scope);
+    var paramCount = params.length;
+    var resultCount = returns.length;
+    function.scope.updateStackDepth(resultCount - paramCount, name);
 
     if (immediates.isNotEmpty) {
       return frame
@@ -763,10 +1030,23 @@ class Instruction {
     }
   }
 
-  void defaultUpdateStackDepth(Scope scope) {
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
     var paramCount = params.length;
     var resultCount = returns.length;
-    scope.updateStackDepth(resultCount - paramCount, name);
+    functionBuilder.scope.updateStackDepth(resultCount - paramCount, name);
+
+    var instruction = instr.instruction;
+
+    var args = <Ref>[];
+    for (var _ in instruction.params) {
+      args.add(functionBuilder.popRef());
+    }
+
+    functionBuilder.pushAssignTemp(VmCall(
+      'vm.${instruction.methodName}',
+      instr.args.cast<num>(),
+      args.reversed.toList(),
+    ));
   }
 
   @override
@@ -831,7 +1111,7 @@ class Instruction {
       Instruction_Call(), // call, 0x10
       Instruction_CallIndirect(), // call_indirect, 0x11
       // reserved, 0x12 - 0x19
-      Instruction('drop', 0x1A, 'any'),
+      Instruction_Drop(), // drop, 0x1A
       Instruction('select', 0x1B, 'any any i32 => any'),
       Instruction_SelectT(), // select_t, 0x1C
       // reserved, 0x1D - 0x1F
@@ -868,10 +1148,10 @@ class Instruction {
       Instruction('i64.store32', 0x3E, '(u32 u32) i32 i64'),
       Instruction('memory.size', 0x3F, '(u32) => i32'),
       Instruction('memory.grow', 0x40, '(u32) i32 => i32'),
-      Instruction('i32.const', i32ConstOpcode, '(i32) => i32'),
-      Instruction('i64.const', i64ConstOpcode, '(i64) => i64'),
-      Instruction('f32.const', f32ConstOpcode, '(f32) => f32'),
-      Instruction('f64.const', f64ConstOpcode, '(f64) => f64'),
+      Instruction_Const('i32.const', i32ConstOpcode, '(i32) => i32'),
+      Instruction_Const('i64.const', i64ConstOpcode, '(i64) => i64'),
+      Instruction_Const('f32.const', f32ConstOpcode, '(f32) => f32'),
+      Instruction_Const('f64.const', f64ConstOpcode, '(f64) => f64'),
       Instruction('i32.eqz', 0x45, 'i32 => i32'),
       Instruction('i32.eq', 0x46, 'i32 i32 => i32'),
       Instruction('i32.ne', 0x47, 'i32 i32 => i32'),

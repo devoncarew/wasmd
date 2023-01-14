@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 export 'runtime_frame.dart' show Frame;
-// export 'runtime_vm.dart' show VM;
 
 // typedefs
 

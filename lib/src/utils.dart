@@ -104,6 +104,11 @@ bool _identifierChar(int char) {
   return false;
 }
 
+String printExpression(Expression expr) {
+  final emitter = DartEmitter();
+  return expr.accept(emitter).toString();
+}
+
 class NameScope {
   final Set<String> _names = {};
 

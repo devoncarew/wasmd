@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FibModule implements Module {
-  FibModule();
+  FibModule() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -22,39 +27,27 @@ class FibModule implements Module {
     i32 local1 = 0;
     i32 local2 = 0;
 
-    final frame = Frame(this);
-    frame.i32_const(1);
-    local0 = frame.pop();
-    frame.push(arg0);
-    frame.i32_const(0);
-    frame.i32_gt_s();
+    local0 = 1;
+    var t0 = vm.i32_gt_s(arg0, 0);
     if_label_0:
-    if (frame.pop() != 0) {
+    if (t0 != 0) {
       loop_label_1:
       for (;;) {
-        frame.push(arg0);
-        frame.i32_const(1);
-        frame.i32_sub();
-        arg0 = frame.peek();
+        var t1 = vm.i32_sub(arg0, 1);
+        arg0 = t1;
         if_label_2:
-        if (frame.pop() != 0) {
-          frame.push(local0);
-          frame.push(local1);
-          frame.i32_add();
-          local2 = frame.pop();
-          frame.push(local0);
-          local1 = frame.pop();
-          frame.push(local2);
-          local0 = frame.pop();
+        if (t1 != 0) {
+          var t2 = vm.i32_add(local0, local1);
+          local2 = t2;
+          local1 = local0;
+          local0 = local2;
           continue loop_label_1;
         }
         break;
       }
-      frame.push(local0);
-      return frame.pop();
+      return local0;
     }
-    frame.i32_const(0);
-    return frame.pop();
+    return 0;
   }
 }
 

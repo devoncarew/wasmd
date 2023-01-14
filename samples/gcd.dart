@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class GcdModule implements Module {
-  GcdModule();
+  GcdModule() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -15,39 +20,31 @@ class GcdModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 gcd(i32 arg0, i32 arg1) => _gcd(arg0, arg1);
+  i32 gcd(i32 arg0, i32 arg1) => _func0(arg0, arg1);
 
-  i32 _gcd(i32 arg0, i32 arg1) {
+  i32 _func0(i32 arg0, i32 arg1) {
     i32 local0 = 0;
 
-    final frame = Frame(this);
     block_label_0:
     {
       block_label_1:
       {
-        frame.push(arg0);
-        if (frame.pop() != 0) break block_label_1;
-        frame.push(arg1);
-        local0 = frame.pop();
+        if (arg0 != 0) break block_label_1;
+        local0 = arg1;
         break block_label_0;
       }
 
       loop_label_1:
       for (;;) {
-        frame.push(arg1);
-        frame.push(arg0);
-        local0 = frame.peek();
-        frame.i32_rem_u();
-        arg0 = frame.pop();
-        frame.push(local0);
-        arg1 = frame.pop();
-        frame.push(arg0);
-        if (frame.pop() != 0) continue loop_label_1;
+        local0 = arg0;
+        var t0 = vm.i32_rem_u(arg1, arg0);
+        arg0 = t0;
+        arg1 = local0;
+        if (arg0 != 0) continue loop_label_1;
         break;
       }
     }
-    frame.push(local0);
-    return frame.pop();
+    return local0;
   }
 }
 
