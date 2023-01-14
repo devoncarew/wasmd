@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class F32Cmp0Module implements Module {
-  F32Cmp0Module();
+  F32Cmp0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -23,51 +28,33 @@ class F32Cmp0Module implements Module {
   i32 ge(f32 arg0, f32 arg1) => _func5(arg0, arg1);
 
   i32 _func0(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_eq();
-    return frame.pop();
+    var t0 = vm.f32_eq(x, y);
+    return t0;
   }
 
   i32 _func1(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_ne();
-    return frame.pop();
+    var t0 = vm.f32_ne(x, y);
+    return t0;
   }
 
   i32 _func2(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_lt();
-    return frame.pop();
+    var t0 = vm.f32_lt(x, y);
+    return t0;
   }
 
   i32 _func3(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_le();
-    return frame.pop();
+    var t0 = vm.f32_le(x, y);
+    return t0;
   }
 
   i32 _func4(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_gt();
-    return frame.pop();
+    var t0 = vm.f32_gt(x, y);
+    return t0;
   }
 
   i32 _func5(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_ge();
-    return frame.pop();
+    var t0 = vm.f32_ge(x, y);
+    return t0;
   }
 }
 
