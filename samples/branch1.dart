@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Branch1Module implements Module {
   Branch1Module() {
     _foo();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -22,28 +26,19 @@ class Branch1Module implements Module {
   i32 sample() => _sample();
 
   i32 _sample() {
-    final frame = Frame(this);
-
     loop_label_0:
     for (;;) {
-      frame.push(globals.i);
-      frame.i32_const(1);
-      frame.i32_add();
-      globals.i = frame.pop();
-      frame.push(globals.i);
-      frame.i32_const(10);
-      frame.i32_lt_s();
-      if (frame.pop() != 0) continue loop_label_0;
+      var t0 = vm.i32_add(globals.i, 1);
+      globals.i = t0;
+      var t1 = vm.i32_lt_s(globals.i, 10);
+      if (t1 != 0) continue loop_label_0;
       break;
     }
-    frame.push(globals.i);
-    return frame.pop();
+    return globals.i;
   }
 
   void _foo() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    globals.i = frame.pop();
+    globals.i = 1;
   }
 }
 

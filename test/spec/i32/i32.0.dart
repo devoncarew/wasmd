@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class I320Module implements Module {
-  I320Module();
+  I320Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -48,245 +53,158 @@ class I320Module implements Module {
   i32 ge_u(i32 arg0, i32 arg1) => _func30(arg0, arg1);
 
   i32 _func00(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_add();
-    return frame.pop();
+    var t0 = vm.i32_add(x, y);
+    return t0;
   }
 
   i32 _func01(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_sub();
-    return frame.pop();
+    var t0 = vm.i32_sub(x, y);
+    return t0;
   }
 
   i32 _func02(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_mul();
-    return frame.pop();
+    var t0 = vm.i32_mul(x, y);
+    return t0;
   }
 
   i32 _func03(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_div_s();
-    return frame.pop();
+    var t0 = vm.i32_div_s(x, y);
+    return t0;
   }
 
   i32 _func04(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_div_u();
-    return frame.pop();
+    var t0 = vm.i32_div_u(x, y);
+    return t0;
   }
 
   i32 _func05(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_rem_s();
-    return frame.pop();
+    var t0 = vm.i32_rem_s(x, y);
+    return t0;
   }
 
   i32 _func06(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_rem_u();
-    return frame.pop();
+    var t0 = vm.i32_rem_u(x, y);
+    return t0;
   }
 
   i32 _func07(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.i32_and(x, y);
+    return t0;
   }
 
   i32 _func08(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_or();
-    return frame.pop();
+    var t0 = vm.i32_or(x, y);
+    return t0;
   }
 
   i32 _func09(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_xor();
-    return frame.pop();
+    var t0 = vm.i32_xor(x, y);
+    return t0;
   }
 
   i32 _func10(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_shl();
-    return frame.pop();
+    var t0 = vm.i32_shl(x, y);
+    return t0;
   }
 
   i32 _func11(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_shr_s();
-    return frame.pop();
+    var t0 = vm.i32_shr_s(x, y);
+    return t0;
   }
 
   i32 _func12(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_shr_u();
-    return frame.pop();
+    var t0 = vm.i32_shr_u(x, y);
+    return t0;
   }
 
   i32 _func13(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_rotl();
-    return frame.pop();
+    var t0 = vm.i32_rotl(x, y);
+    return t0;
   }
 
   i32 _func14(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_rotr();
-    return frame.pop();
+    var t0 = vm.i32_rotr(x, y);
+    return t0;
   }
 
   i32 _func15(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_clz();
-    return frame.pop();
+    var t0 = vm.i32_clz(x);
+    return t0;
   }
 
   i32 _func16(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_ctz();
-    return frame.pop();
+    var t0 = vm.i32_ctz(x);
+    return t0;
   }
 
   i32 _func17(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_popcnt();
-    return frame.pop();
+    var t0 = vm.i32_popcnt(x);
+    return t0;
   }
 
   i32 _func18(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_extend8_s();
-    return frame.pop();
+    var t0 = vm.i32_extend8_s(x);
+    return t0;
   }
 
   i32 _func19(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_extend16_s();
-    return frame.pop();
+    var t0 = vm.i32_extend16_s(x);
+    return t0;
   }
 
   i32 _func20(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.i32_eqz(x);
+    return t0;
   }
 
   i32 _func21(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_eq();
-    return frame.pop();
+    var t0 = vm.i32_eq(x, y);
+    return t0;
   }
 
   i32 _func22(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_ne();
-    return frame.pop();
+    var t0 = vm.i32_ne(x, y);
+    return t0;
   }
 
   i32 _func23(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_lt_s();
-    return frame.pop();
+    var t0 = vm.i32_lt_s(x, y);
+    return t0;
   }
 
   i32 _func24(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_lt_u();
-    return frame.pop();
+    var t0 = vm.i32_lt_u(x, y);
+    return t0;
   }
 
   i32 _func25(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_le_s();
-    return frame.pop();
+    var t0 = vm.i32_le_s(x, y);
+    return t0;
   }
 
   i32 _func26(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_le_u();
-    return frame.pop();
+    var t0 = vm.i32_le_u(x, y);
+    return t0;
   }
 
   i32 _func27(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_gt_s();
-    return frame.pop();
+    var t0 = vm.i32_gt_s(x, y);
+    return t0;
   }
 
   i32 _func28(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_gt_u();
-    return frame.pop();
+    var t0 = vm.i32_gt_u(x, y);
+    return t0;
   }
 
   i32 _func29(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_ge_s();
-    return frame.pop();
+    var t0 = vm.i32_ge_s(x, y);
+    return t0;
   }
 
   i32 _func30(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.i32_ge_u();
-    return frame.pop();
+    var t0 = vm.i32_ge_u(x, y);
+    return t0;
   }
 }
 

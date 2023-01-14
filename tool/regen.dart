@@ -12,10 +12,16 @@ void main(List<String> args) {
   }
 
   var verbose = false;
+  var vmBackend = false;
 
   for (var arg in args) {
     if (arg == '-v') {
       verbose = true;
+      continue;
+    }
+
+    if (arg == '--vm') {
+      vmBackend = true;
       continue;
     }
 
@@ -26,7 +32,8 @@ void main(List<String> args) {
 
     // compile the wasm file to dart
     var dartFile = File('${p.withoutExtension(watFile.path)}.dart');
-    compileWasmToDart(wasmFile, dartFile, verbose: verbose);
+    compileWasmToDart(wasmFile, dartFile,
+        vmBackend: vmBackend, verbose: verbose);
   }
 }
 
@@ -66,7 +73,12 @@ File compileWatToWasm(File watFile) {
   return wasmFile;
 }
 
-void compileWasmToDart(File wasmFile, File dartFile, {bool verbose = false}) {
+void compileWasmToDart(
+  File wasmFile,
+  File dartFile, {
+  bool vmBackend = false,
+  bool verbose = false,
+}) {
   print('Reading ${wasmFile.path}.');
 
   var logger = Logger.detached('wasm2dart');
@@ -77,7 +89,8 @@ void compileWasmToDart(File wasmFile, File dartFile, {bool verbose = false}) {
   }
 
   var compiler = Compiler(logger: logger);
-  var library = compiler.compile(wasmFile, useDebugNames: true);
+  var library =
+      compiler.compile(wasmFile, vmBackend: vmBackend, useDebugNames: true);
   var code = emitFormatLibrary(library);
 
   print('Emitting ${dartFile.path}.');
