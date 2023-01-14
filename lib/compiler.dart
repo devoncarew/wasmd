@@ -10,9 +10,9 @@ import 'package:code_builder/code_builder.dart' hide FunctionType;
 import 'package:collection/collection.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
+import 'package:wasmd/ast.dart';
 
-import 'instructions.dart' hide BlockType;
-import 'instructions.dart' as instructions show BlockType;
+import 'instructions.dart';
 import 'src/utils.dart';
 
 class Compiler {
@@ -715,11 +715,11 @@ void printModule(
   }
 
   if (vmBackend) {
-    // late VM _vm;
+    // late VM vm;
     classBuilder.fields.add(
       Field(
         (b) => b
-          ..name = '_vm'
+          ..name = 'vm'
           ..type = Reference('VM')
           ..modifier = FieldModifier.final$
           ..late = true,
@@ -923,7 +923,7 @@ void printModule(
   }
 
   if (vmBackend) {
-    constructorStatements.add((Code('_vm = VM(this);')));
+    constructorStatements.add((Code('vm = VM(this);')));
   }
 
   if (constructorStatements.isNotEmpty) {
@@ -1249,18 +1249,19 @@ enum BlockType {
   bool get breakType => this == BlockType.$block || this == BlockType.$if;
 
   Code generateBranchFor(
-    DefinedFunction function,
+    FunctionType functionType,
     String? label,
-    Scope scope, {
+    Scope targetScope,
+    Scope currentScope, {
     String? name,
     bool popCondition = false,
   }) {
     if (returnType) {
       var code = popCondition ? 'if (frame.pop() != 0) {\n' : '';
-      if (function.returnsVoid) {
+      if (functionType.returnsVoid) {
         code += 'return;';
-      } else if (function.returnsTuple) {
-        var arity = function.functionType.resultType.length;
+      } else if (functionType.returnsTuple) {
+        var arity = functionType.resultType.length;
         return Code('return Tuple$arity.from(frame.stack);');
       } else {
         code += 'return frame.pop();';
@@ -1274,9 +1275,9 @@ enum BlockType {
 
       if (breakType) {
         // adjust stack
-        if (scope.stackNeedsAdjust(function.scope)) {
-          var unwindTo = scope.entryDepth - scope.blockParamCount;
-          var retainTop = scope.blockReturnCount;
+        if (targetScope.stackNeedsAdjust(currentScope)) {
+          var unwindTo = targetScope.entryDepth - targetScope.blockParamCount;
+          var retainTop = targetScope.blockReturnCount;
 
           statements.add('frame.unwindTo($unwindTo, $retainTop);');
         }
@@ -1288,6 +1289,58 @@ enum BlockType {
           return Code('if (frame.pop() != 0)\n${statements.first}');
         } else {
           return Code('if (frame.pop() != 0) {\n${statements.join('\n')}\n}');
+        }
+      } else {
+        return Code(statements.join('\n'));
+      }
+    }
+  }
+
+  Code generateBranchForVm(
+    FunctionBuilder functionBuilder,
+    String? label,
+    Scope targetScope,
+    Scope currentScope, {
+    String? name,
+    bool popCondition = false,
+  }) {
+    var ref = popCondition ? functionBuilder.popRef() : null;
+    var functionType = functionBuilder.definedFunction.functionType;
+
+    if (returnType) {
+      var code = popCondition ? 'if ($ref != 0) {\n' : '';
+      if (functionType.returnsVoid) {
+        code += 'return;';
+      } else if (functionType.returnsTuple) {
+        var arity = functionType.resultType.length;
+        return Code('return Tuple$arity.from(frame.stack);');
+      } else {
+        code += 'return $ref;';
+      }
+      if (popCondition) code += '}';
+      return Code(code.trimRight());
+    } else {
+      var jumpKind = loopType ? 'continue' : 'break';
+
+      var statements = <String>[];
+
+      if (breakType) {
+        // adjust stack
+        if (targetScope.stackNeedsAdjust(currentScope)) {
+          var unwindTo = targetScope.entryDepth - targetScope.blockParamCount;
+          var retainTop = targetScope.blockReturnCount;
+
+          // todo:
+          statements.add('frame.unwindTo($unwindTo, $retainTop);');
+        }
+      }
+      statements.add('$jumpKind $label;');
+
+      if (popCondition) {
+        if (statements.length == 1) {
+          return Code('if ($ref != 0)\n${statements.first}');
+        } else {
+          return Code('if ($ref != 0) {\n${statements.join('\n')}\n}');
         }
       } else {
         return Code(statements.join('\n'));
@@ -1607,7 +1660,7 @@ class DefinedFunction extends ModuleFunction {
     this.instrs = instrs;
   }
 
-  void enterBlock(BlockType blockType, instructions.BlockType blockType2) {
+  void enterBlock(BlockType blockType, BlockFunctionType blockType2) {
     nesting.add(blockType);
     scopes.add(Scope(parent: scope, blockType: blockType2));
   }
@@ -1696,27 +1749,27 @@ class DefinedFunction extends ModuleFunction {
       statements.add(Code('\n'));
     }
 
-    var paramNames = <String>[];
-    for (int paramIndex = 0; paramIndex < params.length; paramIndex++) {
-      paramNames.add('arg$paramIndex');
-    }
-    paramNames.addAll(locals.map((local) => 'null'));
+    // var paramNames = <String>[];
+    // for (int paramIndex = 0; paramIndex < params.length; paramIndex++) {
+    //   paramNames.add('arg$paramIndex');
+    // }
+    // paramNames.addAll(locals.map((local) => 'null'));
 
-    statements.add(
-      declareFinal('frame')
-          .assign(refer('Frame').call([refer('this')]))
-          .statement,
-    );
-    if (vmBackend) {
-      // TODO:
-      statements.add(refer('_vm').property('nop').call([]).statement);
+    if (!vmBackend) {
+      statements.add(
+        declareFinal('frame')
+            .assign(refer('Frame').call([refer('this')]))
+            .statement,
+      );
+      for (var instr in instrs) {
+        statements.add(instr.generateToStatement(this));
+      }
+    } else {
+      var functionBuilder = FunctionBuilder(module, this);
+      functionBuilder.build(instrs);
+      statements.addAll(functionBuilder.emit());
     }
 
-    // TODO: split off the generation here for vmBackend
-
-    for (var instr in instrs) {
-      statements.add(instr.generateToStatement(this));
-    }
     method.body = Block.of(statements);
 
     return method.build();
@@ -1734,7 +1787,7 @@ class ExportedFunction {
 
 class Scope {
   final Scope? parent;
-  final instructions.BlockType? blockType;
+  final BlockFunctionType? blockType;
 
   int _stackDepth = 0;
 

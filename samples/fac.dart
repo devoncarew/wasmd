@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FacModule implements Module {
-  FacModule();
+  FacModule() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -18,25 +23,18 @@ class FacModule implements Module {
   i32 fac(i32 arg0) => _func0(arg0);
 
   i32 _func0(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_const(0);
-    frame.i32_eq();
+    var t0 = vm.i32_eq(arg0, 0);
+    int label_0_result = 0;
     if_label_0: // => i32
-    if (frame.pop() != 0) {
-      frame.i32_const(1);
+    if (t0 != 0) {
+      label_0_result = 1;
     } else {
-      frame.push(arg0);
-      frame.push(arg0);
-      frame.i32_const(1);
-      frame.i32_sub();
-      {
-        var t0 = frame.pop();
-        frame.push(_func0(t0));
-      }
-      frame.i32_mul();
+      var t1 = vm.i32_sub(arg0, 1);
+      var t2 = _func0(t1);
+      var t3 = vm.i32_mul(arg0, t2);
+      label_0_result = t3;
     }
-    return frame.pop();
+    return label_0_result;
   }
 }
 

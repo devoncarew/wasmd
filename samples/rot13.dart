@@ -5,6 +5,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 /// A class representing the symbols imported from the 'host' module.
 abstract class HostImports {
@@ -16,9 +17,13 @@ class Rot13Module implements Module {
   Rot13Module({
     required this.hostImports,
     required this.memory,
-  });
+  }) {
+    vm = VM(this);
+  }
 
   final HostImports hostImports;
+
+  late final VM vm;
 
   /// min pages: 1
   @override
@@ -29,94 +34,56 @@ class Rot13Module implements Module {
 
   void rot13() => _func1();
 
-  i32 _rot13c(i32 c) {
+  i32 _func0(i32 c) {
     i32 uc = 0;
 
-    final frame = Frame(this);
-    frame.push(c);
-    frame.i32_const(65);
-    frame.i32_lt_u();
+    var t0 = vm.i32_lt_u(c, 65);
     if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(c);
-      return frame.pop();
+    if (t0 != 0) {
+      return c;
     }
-    frame.push(c);
-    frame.i32_const(223);
-    frame.i32_and();
-    uc = frame.pop();
-    frame.push(uc);
-    frame.i32_const(77);
-    frame.i32_le_u();
+    var t1 = vm.i32_and(c, 223);
+    uc = t1;
+    var t2 = vm.i32_le_u(uc, 77);
     if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(c);
-      frame.i32_const(13);
-      frame.i32_add();
-      return frame.pop();
+    if (t2 != 0) {
+      var t3 = vm.i32_add(c, 13);
+      return t3;
     }
-    frame.push(uc);
-    frame.i32_const(90);
-    frame.i32_le_u();
+    var t4 = vm.i32_le_u(uc, 90);
     if_label_0:
-    if (frame.pop() != 0) {
-      frame.push(c);
-      frame.i32_const(13);
-      frame.i32_sub();
-      return frame.pop();
+    if (t4 != 0) {
+      var t5 = vm.i32_sub(c, 13);
+      return t5;
     }
-    frame.push(c);
-    return frame.pop();
-    return frame.pop();
+    return c;
   }
 
   void _func1() {
     i32 size = 0;
     i32 i = 0;
 
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(0x400);
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      frame.push(hostImports.fill_buf(t0, t1));
-    }
-    size = frame.pop();
+    var t0 = hostImports.fill_buf(0, 0x400);
+    size = t0;
     block_label_0:
     {
       loop_label_1:
       for (;;) {
-        frame.push(i);
-        frame.push(size);
-        frame.i32_ge_u();
+        var t1 = vm.i32_ge_u(i, size);
         if_label_2:
-        if (frame.pop() != 0) {
+        if (t1 != 0) {
           break block_label_0;
         }
-        frame.push(i);
-        frame.push(i);
-        frame.i32_load8_u(0, 0);
-        {
-          var t0 = frame.pop();
-          frame.push(_rot13c(t0));
-        }
-        frame.i32_store8(0, 0);
-        frame.push(i);
-        frame.i32_const(1);
-        frame.i32_add();
-        i = frame.pop();
+        var t2 = vm.i32_load8_u(0, 0, i);
+        var t3 = _func0(t2);
+        var t4 = vm.i32_store8(0, 0, i, t3);
+        var t5 = vm.i32_add(i, 1);
+        i = t5;
         continue loop_label_1;
         break;
       }
     }
-    frame.i32_const(0);
-    frame.push(size);
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      hostImports.buf_done(t0, t1);
-    }
+    hostImports.buf_done(0, size);
   }
 }
 

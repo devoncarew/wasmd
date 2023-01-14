@@ -7,6 +7,7 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 /// A class representing the symbols imported from the 'console' module.
 abstract class ConsoleImports {
@@ -19,10 +20,13 @@ class PrintModule implements Module {
     required this.memory,
   }) {
     _data.init(memory);
-    _writeHi();
+    _func0();
+    vm = VM(this);
   }
 
   final ConsoleImports consoleImports;
+
+  late final VM vm;
 
   /// min pages: 1
   @override
@@ -33,17 +37,10 @@ class PrintModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  void writeHi() => _writeHi();
+  void writeHi() => _func0();
 
-  void _writeHi() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(16);
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      consoleImports.log(t0, t1);
-    }
+  void _func0() {
+    consoleImports.log(0, 16);
   }
 }
 
