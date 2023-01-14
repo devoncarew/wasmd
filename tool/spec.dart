@@ -21,7 +21,15 @@ void main(List<String> args) {
     return;
   }
 
-  if (args.first == '--all') {
+  args = args.toList();
+
+  var vmBackend = false;
+  if (args.contains('--vm')) {
+    args.remove('--vm');
+    vmBackend = true;
+  }
+
+  if (args.contains('--all')) {
     var specDir = Directory(p.join('test', 'spec'));
     args = specDir
         .listSync()
@@ -56,7 +64,7 @@ void main(List<String> args) {
       if (!wasmFile.existsSync()) continue;
 
       var dartFile = File('${p.withoutExtension(wasmFile.path)}.dart');
-      compileWasmToDart(compiler, wasmFile, dartFile);
+      compileWasmToDart(compiler, wasmFile, dartFile, vmBackend: vmBackend);
     }
   }
 }
@@ -91,9 +99,10 @@ List<File> wast2json(File wastFile, File jsonFile) {
       .toList();
 }
 
-void compileWasmToDart(Compiler compiler, File wasmFile, File dartFile) {
-  var library =
-      compiler.compile(wasmFile, useDebugNames: true, generatingTest: true);
+void compileWasmToDart(Compiler compiler, File wasmFile, File dartFile,
+    {bool vmBackend = false}) {
+  var library = compiler.compile(wasmFile,
+      vmBackend: vmBackend, useDebugNames: true, generatingTest: true);
   var code = emitFormatLibrary(library);
 
   print('  emitting ${dartFile.path}');

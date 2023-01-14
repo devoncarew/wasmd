@@ -22,25 +22,25 @@ class HelloWorldModule implements Module {
   @override
   late final List<Table> tables = [];
 
-  i32 add(i32 arg0, i32 arg1) => _func0(arg0, arg1);
-  i32 complex(i32 arg0, i32 arg1) => _func2(arg0, arg1);
+  i32 add(i32 arg0, i32 arg1) => _add(arg0, arg1);
+  i32 complex(i32 arg0, i32 arg1) => _complex(arg0, arg1);
 
-  i32 _func0(i32 lhs, i32 rhs) {
+  i32 _add(i32 lhs, i32 rhs) {
     var t0 = vm.i32_add(lhs, rhs);
     return t0;
   }
 
-  i32 _func1(i32 lhs, i32 rhs) {
+  i32 _sub(i32 lhs, i32 rhs) {
     var t0 = vm.i32_sub(lhs, rhs);
     return t0;
   }
 
-  i32 _func2(i32 lhs, i32 rhs) {
+  i32 _complex(i32 lhs, i32 rhs) {
     i32 i = 0;
 
     i = -1;
     i = -0x80000000;
-    var t0 = _func1(lhs, rhs);
+    var t0 = _sub(lhs, rhs);
     var t1 = vm.i32_mul(t0, i);
     return t1;
   }

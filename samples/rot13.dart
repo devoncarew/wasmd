@@ -34,7 +34,7 @@ class Rot13Module implements Module {
 
   void rot13() => _func1();
 
-  i32 _func0(i32 c) {
+  i32 _rot13c(i32 c) {
     i32 uc = 0;
 
     var t0 = vm.i32_lt_u(c, 65);
@@ -75,7 +75,7 @@ class Rot13Module implements Module {
           break block_label_0;
         }
         var t2 = vm.i32_load8_u(0, 0, i);
-        var t3 = _func0(t2);
+        var t3 = _rot13c(t2);
         var t4 = vm.i32_store8(0, 0, i, t3);
         var t5 = vm.i32_add(i, 1);
         i = t5;

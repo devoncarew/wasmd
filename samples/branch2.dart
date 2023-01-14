@@ -5,6 +5,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 /// A class representing the symbols imported from the 'console' module.
 abstract class ConsoleImports {
@@ -14,9 +15,12 @@ abstract class ConsoleImports {
 class Branch2Module implements Module {
   Branch2Module({required this.consoleImports}) {
     _func0();
+    vm = VM(this);
   }
 
   final ConsoleImports consoleImports;
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -27,23 +31,13 @@ class Branch2Module implements Module {
   late final List<Table> tables = [];
 
   void _func0() {
-    final frame = Frame(this);
-
     loop_label_0:
     for (;;) {
-      frame.push(globals.i);
-      frame.i32_const(1);
-      frame.i32_add();
-      globals.i = frame.pop();
-      frame.push(globals.i);
-      {
-        var t0 = frame.pop();
-        consoleImports.log(t0);
-      }
-      frame.push(globals.i);
-      frame.i32_const(10);
-      frame.i32_lt_s();
-      if (frame.pop() != 0) continue loop_label_0;
+      var t0 = vm.i32_add(globals.i, 1);
+      globals.i = t0;
+      consoleImports.log(globals.i);
+      var t1 = vm.i32_lt_s(globals.i, 10);
+      if (t1 != 0) continue loop_label_0;
       break;
     }
   }

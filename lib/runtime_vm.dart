@@ -131,8 +131,21 @@ class VM {
     }
   }
 
-  // void f32_store(u32 align, u32 offset, i32 index, i32 value) { }
-  // void f64_store(u32 align, u32 offset, i32 index, i32 value) { }
+  void f32_store(u32 align, u32 offset, i32 index, f32 value) {
+    try {
+      memory.data.setFloat32(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
+
+  void f64_store(u32 align, u32 offset, i32 index, f64 value) {
+    try {
+      memory.data.setFloat64(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
 
   void i32_store8(u32 align, u32 offset, i32 index, i32 value) {
     try {
@@ -158,8 +171,21 @@ class VM {
     }
   }
 
-  // void i64_store16(u32 align, u32 offset, i32 index, i32 value) { }
-  // void i64_store32(u32 align, u32 offset, i32 index, i32 value) { }
+  void i64_store16(u32 align, u32 offset, i32 index, i32 value) {
+    try {
+      memory.data.setInt16(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
+
+  void i64_store32(u32 align, u32 offset, i32 index, i32 value) {
+    try {
+      memory.data.setInt32(index + offset, value, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
 
   i32 memory_size(u32 immediate0) {
     return memory.size;
@@ -174,59 +200,98 @@ class VM {
   // f32 f32_const(f32 immediate0) { }
   // f64 f64_const(f64 immediate0) { }
 
-  i32 i32_eqz(i32 arg0) => arg0 == 0 ? 1 : 0;
-
   // TODO: encode this such that the result can be used directly in an if
   // statement.
+  i32 i32_eqz(i32 arg0) => arg0 == 0 ? 1 : 0;
   i32 i32_eq(i32 arg0, i32 arg1) => arg0 == arg1 ? 1 : 0;
-
   i32 i32_ne(i32 arg0, i32 arg1) => arg0 != arg1 ? 1 : 0;
 
   i32 i32_lt_s(i32 arg0, i32 arg1) => arg0 < arg1 ? 1 : 0;
-
-  i32 i32_lt_u(i32 arg0, i32 arg1) => arg0 < arg1 ? 1 : 0;
+  i32 i32_lt_u(i32 arg0, i32 arg1) {
+    arg0 &= _mask32;
+    arg1 &= _mask32;
+    return arg0 < arg1 ? 1 : 0;
+  }
 
   i32 i32_gt_s(i32 arg0, i32 arg1) => arg0 > arg1 ? 1 : 0;
-
-  i32 i32_gt_u(i32 arg0, i32 arg1) => arg0 > arg1 ? 1 : 0;
+  i32 i32_gt_u(i32 arg0, i32 arg1) {
+    arg0 &= _mask32;
+    arg1 &= _mask32;
+    return arg0 > arg1 ? 1 : 0;
+  }
 
   i32 i32_le_s(i32 arg0, i32 arg1) => arg0 <= arg1 ? 1 : 0;
-
-  i32 i32_le_u(i32 arg0, i32 arg1) => arg0 <= arg1 ? 1 : 0;
+  i32 i32_le_u(i32 arg0, i32 arg1) {
+    arg0 &= _mask32;
+    arg1 &= _mask32;
+    return arg0 <= arg1 ? 1 : 0;
+  }
 
   i32 i32_ge_s(i32 arg0, i32 arg1) => arg0 >= arg1 ? 1 : 0;
+  i32 i32_ge_u(i32 arg0, i32 arg1) {
+    arg0 &= _mask32;
+    arg1 &= _mask32;
+    return arg0 >= arg1 ? 1 : 0;
+  }
 
-  i32 i32_ge_u(i32 arg0, i32 arg1) => arg0 >= arg1 ? 1 : 0;
-
-  // i32 i64_eqz(i64 arg0) { }
-  // i32 i64_eq(i64 arg0, i64 arg1) { }
-  // i32 i64_ne(i64 arg0, i64 arg1) { }
-  // i32 i64_lt_s(i64 arg0, i64 arg1) { }
-  // i32 i64_lt_u(i64 arg0, i64 arg1) { }
-  // i32 i64_gt_s(i64 arg0, i64 arg1) { }
-  // i32 i64_gt_u(i64 arg0, i64 arg1) { }
-  // i32 i64_le_s(i64 arg0, i64 arg1) { }
-  // i32 i64_le_u(i64 arg0, i64 arg1) { }
-  // i32 i64_ge_s(i64 arg0, i64 arg1) { }
-  // i32 i64_ge_u(i64 arg0, i64 arg1) { }
-  // i32 f32_eq(f32 arg0, f32 arg1) { }
-  // i32 f32_ne(f32 arg0, f32 arg1) { }
-  // i32 f32_lt(f32 arg0, f32 arg1) { }
-  // i32 f32_gt(f32 arg0, f32 arg1) { }
-  // i32 f32_le(f32 arg0, f32 arg1) { }
-  // i32 f32_ge(f32 arg0, f32 arg1) { }
-  // i32 f64_eq(f64 arg0, f64 arg1) { }
-  // i32 f64_ne(f64 arg0, f64 arg1) { }
-  // i32 f64_lt(f64 arg0, f64 arg1) { }
-
+  i32 i64_eqz(i64 arg0) => arg0 == 0 ? 1 : 0;
+  i32 i64_eq(i64 arg0, i64 arg1) => arg0 == arg1 ? 1 : 0;
+  i32 i64_ne(i64 arg0, i64 arg1) => arg0 != arg1 ? 1 : 0;
+  i32 i64_lt_s(i64 arg0, i64 arg1) => arg0 < arg1 ? 1 : 0;
+  i32 i64_lt_u(i64 arg0, i64 arg1) => arg0 < arg1 ? 1 : 0;
+  i32 i64_gt_s(i64 arg0, i64 arg1) => arg0 > arg1 ? 1 : 0;
+  i32 i64_gt_u(i64 arg0, i64 arg1) => arg0 > arg1 ? 1 : 0;
+  i32 i64_le_s(i64 arg0, i64 arg1) => arg0 <= arg1 ? 1 : 0;
+  i32 i64_le_u(i64 arg0, i64 arg1) => arg0 <= arg1 ? 1 : 0;
+  i32 i64_ge_s(i64 arg0, i64 arg1) => arg0 >= arg1 ? 1 : 0;
+  i32 i64_ge_u(i64 arg0, i64 arg1) => arg0 >= arg1 ? 1 : 0;
+  i32 f32_eq(f32 arg0, f32 arg1) => arg0 == arg1 ? 1 : 0;
+  i32 f32_ne(f32 arg0, f32 arg1) => arg0 != arg1 ? 1 : 0;
+  i32 f32_lt(f32 arg0, f32 arg1) => arg0 < arg1 ? 1 : 0;
+  i32 f32_gt(f32 arg0, f32 arg1) => arg0 > arg1 ? 1 : 0;
+  i32 f32_le(f32 arg0, f32 arg1) => arg0 <= arg1 ? 1 : 0;
+  i32 f32_ge(f32 arg0, f32 arg1) => arg0 >= arg1 ? 1 : 0;
+  i32 f64_eq(f64 arg0, f64 arg1) => arg0 == arg1 ? 1 : 0;
+  i32 f64_ne(f64 arg0, f64 arg1) => arg0 != arg1 ? 1 : 0;
+  i32 f64_lt(f64 arg0, f64 arg1) => arg0 < arg1 ? 1 : 0;
   i32 f64_gt(f64 arg0, f64 arg1) => arg0 > arg1 ? 1 : 0;
-
   i32 f64_le(f64 arg0, f64 arg1) => arg0 <= arg1 ? 1 : 0;
+  i32 f64_ge(f64 arg0, f64 arg1) => arg0 >= arg1 ? 1 : 0;
 
-  // i32 f64_ge(f64 arg0, f64 arg1) { }
-  // i32 i32_clz(i32 arg0) { }
-  // i32 i32_ctz(i32 arg0) { }
-  // i32 i32_popcnt(i32 arg0) { }
+  i32 i32_clz(i32 arg0) {
+    // "Return the count of leading zero bits in i; all bits are considered
+    // leading zeros if i is 0."
+    arg0 &= _mask32;
+    return 32 - arg0.bitLength;
+  }
+
+  i32 i32_ctz(i32 arg0) {
+    // "Return the count of trailing zero bits in i; all bits are considered
+    // trailing zeros if i is 0."
+
+    if (arg0 == 0) {
+      return 32;
+    } else {
+      arg0 |= 0xFFFFFFFF00000000;
+      arg0 &= -arg0;
+      int clz;
+      if (arg0 & 0x8000000000000000 != 0) {
+        clz = 0;
+      } else {
+        clz = 32 - arg0.bitLength;
+      }
+      return 32 - (clz + 1);
+    }
+  }
+
+  i32 i32_popcnt(i32 arg0) {
+    // "Return the count of non-zero bits in i."
+    var result = popcntTable[arg0 & 0xFF];
+    result += popcntTable[(arg0 >> 8) & 0xFF];
+    result += popcntTable[(arg0 >> 16) & 0xFF];
+    result += popcntTable[(arg0 >> 24) & 0xFF];
+    return result;
+  }
 
   i32 i32_add(i32 arg0, i32 arg1) {
     var result = arg0 + arg1;
@@ -261,7 +326,13 @@ class VM {
     }
   }
 
-  // i32 i32_rem_s(i32 arg0, i32 arg1) { }
+  i32 i32_rem_s(i32 arg0, i32 arg1) {
+    try {
+      return arg0.remainder(arg1);
+    } on UnsupportedError {
+      throw Trap('integer divide by zero');
+    }
+  }
 
   u32 i32_rem_u(u32 arg0, u32 arg1) {
     try {
@@ -285,7 +356,10 @@ class VM {
     return (result & _bit31) != 0 ? result | _maskTop32 : result & _mask32;
   }
 
-  // i32 i32_shr_s(i32 arg0, i32 arg1) { }
+  i32 i32_shr_s(i32 arg0, i32 arg1) {
+    arg1 = arg1 & 0x1F; // shift right by arg1 bits modulo 32
+    return arg0 >> arg1;
+  }
 
   i32 i32_shr_u(i32 arg0, i32 arg1) {
     arg0 &= _mask32;
@@ -296,18 +370,119 @@ class VM {
     return result;
   }
 
-  // i32 i32_rotl(i32 arg0, i32 arg1) { }
-  // i32 i32_rotr(i32 arg0, i32 arg1) { }
-  // i64 i64_clz(i64 arg0) { }
-  // i64 i64_ctz(i64 arg0) { }
-  // i64 i64_popcnt(i64 arg0) { }
-  // i64 i64_add(i64 arg0, i64 arg1) { }
-  // i64 i64_sub(i64 arg0, i64 arg1) { }
-  // i64 i64_mul(i64 arg0, i64 arg1) { }
-  // i64 i64_div_s(i64 arg0, i64 arg1) { }
-  // i64 i64_div_u(i64 arg0, i64 arg1) { }
-  // i64 i64_rem_s(i64 arg0, i64 arg1) { }
-  // i64 i64_rem_u(i64 arg0, i64 arg1) { }
+  i32 i32_rotl(i32 value, i32 count) {
+    const bitCount = 32;
+
+    value &= _mask32;
+
+    count = count & 0x1F; // modulo 32
+
+    var result = (value << count) | (value >>> (bitCount - count));
+    if ((result & _bit31) != 0) {
+      // sign extend result
+      result |= _maskTop32;
+    } else {
+      // remove anything shifted into the 64 bit portion
+      result &= _mask32;
+    }
+    return result;
+  }
+
+  i32 i32_rotr(i32 value, i32 count) {
+    const bitCount = 32;
+
+    value &= _mask32;
+
+    count = count & 0x1F; //  modulo 32
+
+    i32 result = (value << (bitCount - count)) | (value >>> count);
+    if ((result & _bit31) != 0) {
+      // sign extend result
+      result |= _maskTop32;
+    } else {
+      // remove anything shifted into the 64 bit portion
+      result &= _mask32;
+    }
+    return result;
+  }
+
+  i64 i64_clz(i64 arg0) {
+    // "Return the count of leading zero bits in i; all bits are considered
+    // leading zeros if i is 0."
+    if (arg0 & 0x8000000000000000 != 0) {
+      return 0;
+    } else {
+      return 64 - arg0.bitLength;
+    }
+  }
+
+  i64 i64_ctz(i64 arg0) {
+    // "Return the count of trailing zero bits in i; all bits are considered
+    // trailing zeros if i is 0."
+    if (arg0 == 0) {
+      return 64;
+    } else {
+      arg0 &= -arg0;
+      int clz;
+      if (arg0 & 0x8000000000000000 != 0) {
+        clz = 0;
+      } else {
+        clz = 64 - arg0.bitLength;
+      }
+      return 64 - (clz + 1);
+    }
+  }
+
+  i64 i64_popcnt(i64 arg0) {
+    // "Return the count of non-zero bits in i."
+    var result = popcntTable[arg0 & 0xFF];
+    result += popcntTable[(arg0 >> 8) & 0xFF];
+    result += popcntTable[(arg0 >> 16) & 0xFF];
+    result += popcntTable[(arg0 >> 24) & 0xFF];
+    result += popcntTable[(arg0 >> 32) & 0xFF];
+    result += popcntTable[(arg0 >> 40) & 0xFF];
+    result += popcntTable[(arg0 >> 48) & 0xFF];
+    result += popcntTable[(arg0 >> 56) & 0xFF];
+    return result;
+  }
+
+  i64 i64_add(i64 arg0, i64 arg1) => arg0 + arg1;
+
+  i64 i64_sub(i64 arg0, i64 arg1) => arg0 - arg1;
+
+  i64 i64_mul(i64 arg0, i64 arg1) => arg0 * arg1;
+
+  i64 i64_div_s(i64 arg0, i64 arg1) {
+    try {
+      return arg0 ~/ arg1;
+    } on UnsupportedError {
+      throw Trap('integer divide by zero');
+    }
+  }
+
+  i64 i64_div_u(i64 arg0, i64 arg1) {
+    try {
+      return arg0 ~/ arg1;
+    } on UnsupportedError {
+      throw Trap('integer divide by zero');
+    }
+  }
+
+  i64 i64_rem_s(i64 arg0, i64 arg1) {
+    try {
+      return arg0.remainder(arg1);
+    } on UnsupportedError {
+      throw Trap('integer divide by zero');
+    }
+  }
+
+  i64 i64_rem_u(i64 arg0, i64 arg1) {
+    try {
+      return arg0.remainder(arg1);
+    } on UnsupportedError {
+      throw Trap('integer divide by zero');
+    }
+  }
 
   i64 i64_and(i64 arg0, i64 arg1) => arg0 & arg1;
 
@@ -315,9 +490,20 @@ class VM {
 
   i64 i64_xor(i64 arg0, i64 arg1) => arg0 ^ arg1;
 
-  // i64 i64_shl(i64 arg0, i64 arg1) { }
-  // i64 i64_shr_s(i64 arg0, i64 arg1) { }
-  // i64 i64_shr_u(i64 arg0, i64 arg1) { }
+  i64 i64_shl(i64 arg0, i64 arg1) {
+    arg1 = arg1 & 0x3F; // shift left by arg1 bits modulo 64
+    return arg0 << arg1;
+  }
+
+  i64 i64_shr_s(i64 arg0, i64 arg1) {
+    arg1 = arg1 & 0x3F; // shift right by arg1 bits modulo 64
+    return arg0 >> arg1;
+  }
+
+  i64 i64_shr_u(i64 arg0, i64 arg1) {
+    arg1 = arg1 & 0x3F; // shift right by arg1 bits modulo 64
+    return arg0 >>> arg1;
+  }
 
   i64 i64_rotl(i64 value, i64 count) {
     const bitCount = 64;
@@ -349,14 +535,18 @@ class VM {
   // f32 f32_nearest(f32 arg0) { }
 
   f32 f32_sqrt(f32 arg0) => sqrt(arg0);
+  f32 f32_add(f32 arg0, f32 arg1) => arg0 + arg1;
+  f32 f32_sub(f32 arg0, f32 arg1) => arg0 - arg1;
+  f32 f32_mul(f32 arg0, f32 arg1) => arg0 * arg1;
 
-  // f32 f32_add(f32 arg0, f32 arg1) { }
-  // f32 f32_sub(f32 arg0, f32 arg1) { }
-  // f32 f32_mul(f32 arg0, f32 arg1) { }
-  // f32 f32_div(f32 arg0, f32 arg1) { }
-  // f32 f32_min(f32 arg0, f32 arg1) { }
-  // f32 f32_max(f32 arg0, f32 arg1) { }
-  // f32 f32_copysign(f32 arg0, f32 arg1) { }
+  f32 f32_div(f32 arg0, f32 arg1) => arg0 / arg1;
+
+  f32 f32_min(f32 arg0, f32 arg1) => min(arg0, arg1);
+  f32 f32_max(f32 arg0, f32 arg1) => max(arg0, arg1);
+  f32 f32_copysign(f32 arg0, f32 arg1) {
+    return arg0.isNegative == arg1.isNegative ? arg0 : -arg0;
+  }
+
   // f64 f64_abs(f64 arg0) { }
   // f64 f64_neg(f64 arg0) { }
   // f64 f64_ceil(f64 arg0) { }
@@ -366,17 +556,16 @@ class VM {
   // f64 f64_sqrt(f64 arg0) { }
 
   f64 f64_add(f64 arg0, f64 arg1) => arg0 + arg1;
-
   f64 f64_sub(f64 arg0, f64 arg1) => arg0 - arg1;
-
   f64 f64_mul(f64 arg0, f64 arg1) => arg0 * arg1;
-
   f64 f64_div(f64 arg0, f64 arg1) => arg0 / arg1;
-
   f64 f64_min(f64 arg0, f64 arg1) => min(arg0, arg1);
   f64 f64_max(f64 arg0, f64 arg1) => max(arg0, arg1);
 
-  // f64 f64_copysign(f64 arg0, f64 arg1) { }
+  f64 f64_copysign(f64 arg0, f64 arg1) {
+    return arg0.isNegative == arg1.isNegative ? arg0 : -arg0;
+  }
+
   // i32 i32_wrap_i64(i64 arg0) { }
   // i32 i32_trunc_f32_s(f32 arg0) { }
   // i32 i32_trunc_f32_u(f32 arg0) { }
@@ -415,10 +604,34 @@ class VM {
     return (arg0 & 0x80) != 0 ? 0xFFFFFFFFFFFFFF00 | arg0 : arg0 & 0xFF;
   }
 
-  // i32 i32_extend16_s(i32 arg0) { }
-  // i64 i64_extend8_s(i64 arg0) { }
-  // i64 i64_extend16_s(i64 arg0) { }
-  // i64 i64_extend32_s(i64 arg0) { }
+  i32 i32_extend16_s(i32 arg0) {
+    return (arg0 & 0x8000) != 0 ? 0xFFFFFFFFFFFF0000 | arg0 : arg0 & 0xFFFF;
+  }
+
+  i64 i64_extend8_s(i64 arg0) {
+    if ((arg0 & 0x80) != 0) {
+      return 0xFFFFFFFFFFFFFF00 | arg0;
+    } else {
+      return 0x00000000000000FF & arg0;
+    }
+  }
+
+  i64 i64_extend16_s(i64 arg0) {
+    if ((arg0 & 0x8000) != 0) {
+      return 0xFFFFFFFFFFFF0000 | arg0;
+    } else {
+      return 0x000000000000FFFF & arg0;
+    }
+  }
+
+  i64 i64_extend32_s(i64 arg0) {
+    if ((arg0 & 0x80000000) != 0) {
+      return 0xFFFFFFFF00000000 | arg0;
+    } else {
+      return 0x00000000FFFFFFFF & arg0;
+    }
+  }
+
   // reftype ref_null(u32 immediate0) { }
   // i32 ref_is_null(reftype arg0) { }
   // funcref ref_func(u32 immediate0) { }
