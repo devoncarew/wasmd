@@ -7,11 +7,15 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Memory9Module implements Module {
   Memory9Module() {
     _data.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -27,9 +31,8 @@ class Memory9Module implements Module {
   i32 memsize() => _func0();
 
   i32 _func0() {
-    final frame = Frame(this);
-    frame.memory_size(0);
-    return frame.pop();
+    var t0 = vm.memory_size(0);
+    return t0;
   }
 }
 

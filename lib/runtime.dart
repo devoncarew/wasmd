@@ -126,6 +126,12 @@ class Trap implements Exception {
   String toString() => message;
 }
 
+T assertCallable<T>(Function? func) {
+  if (func == null) throw Trap('uninitialized element');
+  if (func is! T) throw Trap('indirect call type mismatch');
+  return func as T;
+}
+
 class Table {
   final int minSize;
   final int? maxSize;

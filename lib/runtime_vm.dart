@@ -68,7 +68,14 @@ class VM {
   }
 
   // f32 f32_load(u32 align, u32 offset, i32 index) { }
-  // f64 f64_load(u32 align, u32 offset, i32 index) { }
+  f64 f64_load(u32 align, u32 offset, i32 index) {
+    if (index < 0) throw Trap('out of bounds memory access');
+    try {
+      return memory.data.getFloat64(index + offset, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
 
   i32 i32_load8_s(u32 align, u32 offset, i32 index) {
     if (index < 0) throw Trap('out of bounds memory access');
@@ -88,7 +95,14 @@ class VM {
     }
   }
 
-  // i32 i32_load16_s(u32 align, u32 offset, i32 index) { }
+  i32 i32_load16_s(u32 align, u32 offset, i32 index) {
+    if (index < 0) throw Trap('out of bounds memory access');
+    try {
+      return memory.data.getInt16(index + offset, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
 
   i32 i32_load16_u(u32 align, u32 offset, i32 index) {
     if (index < 0) throw Trap('out of bounds memory access');
@@ -99,7 +113,14 @@ class VM {
     }
   }
 
-  // i64 i64_load8_s(u32 align, u32 offset, i32 index) { }
+  i64 i64_load8_s(u32 align, u32 offset, i32 index) {
+    if (index < 0) throw Trap('out of bounds memory access');
+    try {
+      return memory.data.getInt8(index + offset);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
 
   i64 i64_load8_u(u32 align, u32 offset, i32 index) {
     if (index < 0) throw Trap('out of bounds memory access');
@@ -110,10 +131,41 @@ class VM {
     }
   }
 
-  // i64 i64_load16_s(u32 align, u32 offset, i32 index) { }
-  // i64 i64_load16_u(u32 align, u32 offset, i32 index) { }
-  // i64 i64_load32_s(u32 align, u32 offset, i32 index) { }
-  // i64 i64_load32_u(u32 align, u32 offset, i32 index) { }
+  i64 i64_load16_s(u32 align, u32 offset, i32 index) {
+    if (index < 0) throw Trap('out of bounds memory access');
+    try {
+      return memory.data.getInt16(index + offset, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
+
+  i64 i64_load16_u(u32 align, u32 offset, i32 index) {
+    if (index < 0) throw Trap('out of bounds memory access');
+    try {
+      return memory.data.getUint16(index + offset, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
+
+  i64 i64_load32_s(u32 align, u32 offset, i32 index) {
+    if (index < 0) throw Trap('out of bounds memory access');
+    try {
+      return memory.data.getInt32(index + offset, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
+
+  i64 i64_load32_u(u32 align, u32 offset, i32 index) {
+    if (index < 0) throw Trap('out of bounds memory access');
+    try {
+      return memory.data.getUint32(index + offset, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
 
   void i32_store(u32 align, u32 offset, i32 index, i32 value) {
     try {
@@ -592,10 +644,17 @@ class VM {
   // f64 f64_convert_i64_s(i64 arg0) { }
   // f64 f64_convert_i64_u(i64 arg0) { }
   // f64 f64_promote_f32(f32 arg0) { }
+
+  final ByteData _reinterpretData = ByteData(8);
+
   // i32 i32_reinterpret_f32(f32 arg0) { }
   // i64 i64_reinterpret_f64(f64 arg0) { }
   // f32 f32_reinterpret_i32(i32 arg0) { }
-  // f64 f64_reinterpret_i64(i64 arg0) { }
+
+  f64 f64_reinterpret_i64(i64 arg0) {
+    _reinterpretData.setUint64(0, arg0, Endian.little);
+    return _reinterpretData.getFloat64(0, Endian.little);
+  }
 
   i32 i32_extend8_s(i32 arg0) {
     return (arg0 & 0x80) != 0 ? 0xFFFFFFFFFFFFFF00 | arg0 : arg0 & 0xFF;
@@ -630,7 +689,9 @@ class VM {
   }
 
   // reftype ref_null(u32 immediate0) { }
-  // i32 ref_is_null(reftype arg0) { }
+
+  i32 ref_is_null(FuncRef? arg0) => arg0 == null ? 1 : 0;
+
   // funcref ref_func(u32 immediate0) { }
   // i32 i32_trunc_sat_f32_s(f32 arg0) { }
 

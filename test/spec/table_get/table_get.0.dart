@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableGet0Module implements Module {
   TableGet0Module() {
     segments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -33,50 +37,25 @@ class TableGet0Module implements Module {
   FuncRef? get_funcref(i32 arg0) => _f3(arg0);
   i32 is_null_funcref(i32 arg0) => _func4(arg0);
 
-  void _dummy() {
-    final frame = Frame(this);
-  }
+  void _dummy() {}
 
   void _func1(ExternRef? r) {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.push(r);
-    {
-      var ref = frame.pop();
-      table0[frame.pop() as int] = ref;
-    }
-    frame.i32_const(2);
-    frame.i32_const(1);
-    frame.push(table1[frame.pop()]);
-    {
-      var ref = frame.pop();
-      table1[frame.pop() as int] = ref;
-    }
+    table0[1] = r;
+    table1[2] = table1[1];
   }
 
   ExternRef? _func2(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.push(table0[frame.pop()]);
-    return frame.pop();
+    return table0[i];
   }
 
   FuncRef? _f3(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.push(table1[frame.pop()]);
-    return frame.pop();
+    return table1[i];
   }
 
   i32 _func4(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    {
-      var t0 = frame.pop();
-      frame.push(_f3(t0));
-    }
-    frame.ref_is_null();
-    return frame.pop();
+    var t0 = _f3(i);
+    var t1 = vm.ref_is_null(t0);
+    return t1;
   }
 
   List<Function> _initFunctionTable() {
