@@ -18,8 +18,6 @@ class FunctionBuilder {
   final RefStack stack = RefStack();
   final List<Code> statements = [];
 
-  int _nextTemp = 0;
-
   final List<BlockType> nesting = [];
   final List<Scope> scopes = [Scope()];
 
@@ -99,10 +97,8 @@ class FunctionBuilder {
   }
 
   void pushAssignTemp(VmCall call) {
-    // TODO: We need a general name allocator.
-
     // create temp
-    var temp = 't${_nextTemp++}';
+    var temp = generateName('t');
 
     // assign to temp
     statements.add(declareVar(temp).assign(call.toExpression()).statement);
@@ -111,23 +107,18 @@ class FunctionBuilder {
     stack.push(Ref(temp));
   }
 
-  // void startBlock() {
-  //   // todo: ...
-  // }
-
-  // void endBlock() {
-  //   // todo: lots to do here
-  //   // todo: this is not really a return statement...
-
-  //   if (definedFunction.returnsVoid) {
-  //     statements.add(Code(''));
-  //   } else {
-  //     statements.add(refer(popRef().expr).returned.statement);
-  //   }
-  // }
-
   ModuleFunction? functionByIndex(int index) {
     return definedFunction.module.functionByIndex(index);
+  }
+
+  final Map<String, int> _names = {};
+
+  String generateName(String baseName) {
+    // TODO: We need a general name allocator.
+    var val = _names[baseName] ?? 0;
+    var name = '$baseName$val';
+    _names[baseName] = val + 1;
+    return name;
   }
 }
 

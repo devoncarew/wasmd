@@ -5,6 +5,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 /// A class representing the symbols imported from the 'spectest' module.
 abstract class SpectestImports {
@@ -13,9 +14,13 @@ abstract class SpectestImports {
 }
 
 class Table8Module implements Module {
-  Table8Module({required this.spectestImports});
+  Table8Module({required this.spectestImports}) {
+    vm = VM(this);
+  }
 
   final SpectestImports spectestImports;
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);

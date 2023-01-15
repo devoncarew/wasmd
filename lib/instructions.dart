@@ -623,6 +623,14 @@ class Instruction_TableGet extends Instruction {
       refer('table$immediate').index(refer('frame').property('pop').call([]))
     ]).statement;
   }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+
+    var ref = functionBuilder.popRef();
+    functionBuilder.pushRef(Ref('table$immediate[$ref]'));
+  }
 }
 
 class Instruction_TableSet extends Instruction {
@@ -642,6 +650,17 @@ class Instruction_TableSet extends Instruction {
       Code('table$immediate[frame.pop() as int] = ref;'),
       Code('}'),
     ]);
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var immediate = instr.args[0] as int;
+
+    functionBuilder.scope.updateStackDepth(-2, name);
+
+    var ref = functionBuilder.popRef();
+    var index = functionBuilder.popRef();
+    functionBuilder.addStatement(Code('table$immediate[$index] = $ref;'));
   }
 }
 
@@ -786,6 +805,45 @@ class Instruction_CallIndirect extends Instruction {
       ...statements,
       Code('}'),
     ]);
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var sigIndex = instr.args[0] as int;
+    var tableIndex = instr.args[1] as int;
+
+    var funcType = functionBuilder.module.functionTypes[sigIndex];
+
+    // update stack depth
+    var paramCount = funcType.parameterTypes.length;
+    var resultCount = funcType.resultType.length;
+    functionBuilder.scope.updateStackDepth(resultCount - paramCount, this.name);
+
+    var name = functionBuilder.generateName('func');
+
+    var ref = functionBuilder.popRef();
+
+    functionBuilder.addStatement(Code(
+      'var $name = assertCallable<FunctionType$sigIndex>(table$tableIndex[$ref]);',
+    ));
+
+    var args = <Ref>[];
+    for (var _ in funcType.parameterTypes) {
+      args.add(functionBuilder.popRef());
+    }
+
+    var call = VmCall(name, [], args.reversed.toList());
+
+    if (funcType.returnsVoid) {
+      functionBuilder.performCall(call);
+    } else if (funcType.returnsTuple) {
+      // todo:
+      throw 'todo:';
+      // push the return tuples item's to the stack
+      // call = call.property('pushTo').call([refer('frame.stack')]);
+    } else {
+      functionBuilder.pushAssignTemp(call);
+    }
   }
 }
 
