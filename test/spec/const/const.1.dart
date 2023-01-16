@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class Const1Module implements Module {
+class Const1Module extends Module {
   Const1Module() {
     vm = VM(this);
   }

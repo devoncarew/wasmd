@@ -9,9 +9,9 @@ import 'dart:typed_data';
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class MemoryCopy17Module implements Module {
+class MemoryCopy17Module extends Module {
   MemoryCopy17Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
     vm = VM(this);
   }
 
@@ -20,7 +20,8 @@ class MemoryCopy17Module implements Module {
   @override
   final Memory memory = Memory(1);
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -41,8 +42,11 @@ class MemoryCopy17Module implements Module {
 typedef FunctionType0 = void Function(i32, i32, i32);
 typedef FunctionType1 = i32 Function(i32);
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
+
+  @override
+  late final List<Uint8List> data = [data0];
 
   static const String _hex0 =
       '\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F\x10\x11\x12\x13';

@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Traps1Module implements Module {
+class Traps1Module extends Module {
   Traps1Module();
 
   @override

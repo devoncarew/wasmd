@@ -11,7 +11,7 @@ abstract class SpectestImports {
   void print();
 }
 
-class Start7Module implements Module {
+class Start7Module extends Module {
   Start7Module({required this.spectestImports}) {
     spectestImports.print();
   }

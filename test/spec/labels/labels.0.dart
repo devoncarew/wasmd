@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Labels0Module implements Module {
+class Labels0Module extends Module {
   Labels0Module();
 
   @override

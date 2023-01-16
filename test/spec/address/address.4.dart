@@ -9,9 +9,9 @@ import 'dart:typed_data';
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class Address4Module implements Module {
+class Address4Module extends Module {
   Address4Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
     vm = VM(this);
   }
 
@@ -20,7 +20,8 @@ class Address4Module implements Module {
   @override
   final Memory memory = Memory(1);
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -65,8 +66,11 @@ class Address4Module implements Module {
 typedef FunctionType0 = f64 Function(i32);
 typedef FunctionType1 = void Function(i32);
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
+
+  @override
+  late final List<Uint8List> data = [data0];
 
   static const String _hex0 =
       '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xF4\x7F\x01\x00\x00\x00\x00\x00\xFC\x7F';

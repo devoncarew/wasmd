@@ -8,22 +8,26 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class BinaryLeb1284Module implements Module {
+class BinaryLeb1284Module extends Module {
   BinaryLeb1284Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
   }
 
   @override
   final Memory memory = Memory(0);
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
 }
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
+
+  @override
+  late final List<Uint8List> data = [data0];
 
   static const String _hex0 = '';
 

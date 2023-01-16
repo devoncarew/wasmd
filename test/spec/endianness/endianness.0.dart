@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class Endianness0Module implements Module {
+class Endianness0Module extends Module {
   Endianness0Module() {
     vm = VM(this);
   }

@@ -7,9 +7,9 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class TableCopy50Module implements Module {
+class TableCopy50Module extends Module {
   TableCopy50Module() {
-    segments.init();
+    elementSegments.init();
     vm = VM(this);
   }
 
@@ -26,7 +26,8 @@ class TableCopy50Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -155,6 +156,9 @@ class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final TableCopy50Module module;
+
+  @override
+  late final List<List<int>?> segments = [null];
 
   @override
   List<Function> get functionTable => module.functionTable;

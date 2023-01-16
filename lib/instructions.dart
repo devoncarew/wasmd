@@ -916,7 +916,8 @@ class Instruction_MemoryInit extends Instruction {
       Code('i32 count = frame.pop() as i32;'),
       Code('i32 srcOffset = frame.pop() as i32;'),
       Code('i32 dstOffset = frame.pop() as i32;'),
-      Code('memory.copyFrom(_data.$segmentName, srcOffset, dstOffset, count);'),
+      Code(
+          'memory.copyFrom(dataSegments.$segmentName, srcOffset, dstOffset, count);'),
       Code('}'),
     ]);
   }
@@ -944,8 +945,8 @@ class Instruction_TableInit extends Instruction {
       Code('i32 count = frame.pop() as i32;'),
       Code('i32 sourceOffset = frame.pop() as i32;'),
       Code('i32 destOffset = frame.pop() as i32;'),
-      Code('segments.copyTo(table$table, sourceOffset, destOffset, count, '
-          'segments.segment$segment);'),
+      Code('elementSegments.copyTo(table$table, sourceOffset, destOffset, '
+          'count, elementSegments.segment$segment);'),
       Code('}'),
     ]);
   }

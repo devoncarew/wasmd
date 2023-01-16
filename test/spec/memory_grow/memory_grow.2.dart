@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class MemoryGrow2Module implements Module {
+class MemoryGrow2Module extends Module {
   MemoryGrow2Module();
 
   @override

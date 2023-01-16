@@ -11,7 +11,7 @@ abstract class SpectestImports {
   void print_i32(i32 arg0);
 }
 
-class BinaryLeb12810Module implements Module {
+class BinaryLeb12810Module extends Module {
   BinaryLeb12810Module({required this.spectestImports});
 
   final SpectestImports spectestImports;

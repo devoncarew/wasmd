@@ -13,7 +13,7 @@ abstract class HostImports {
   void buf_done(i32 arg0, i32 arg1);
 }
 
-class Rot13Module implements Module {
+class Rot13Module extends Module {
   Rot13Module({
     required this.hostImports,
     required this.memory,
@@ -76,9 +76,9 @@ class Rot13Module implements Module {
         }
         var t2 = vm.i32_load8_u(0, 0, i);
         var t3 = _rot13c(t2);
-        var t4 = vm.i32_store8(0, 0, i, t3);
-        var t5 = vm.i32_add(i, 1);
-        i = t5;
+        vm.i32_store8(0, 0, i, t3);
+        var t4 = vm.i32_add(i, 1);
+        i = t4;
         continue loop_label_1;
         break;
       }

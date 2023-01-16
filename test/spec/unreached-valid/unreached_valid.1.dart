@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class UnreachedValid1Module implements Module {
+class UnreachedValid1Module extends Module {
   UnreachedValid1Module();
 
   @override

@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class Comments3Module implements Module {
+class Comments3Module extends Module {
   Comments3Module() {
     vm = VM(this);
   }

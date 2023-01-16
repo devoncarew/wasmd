@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class HelloWorldModule implements Module {
+class HelloWorldModule extends Module {
   HelloWorldModule() {
     vm = VM(this);
   }

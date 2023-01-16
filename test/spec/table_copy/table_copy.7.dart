@@ -16,9 +16,9 @@ abstract class AImports {
   i32 ef4();
 }
 
-class TableCopy7Module implements Module {
+class TableCopy7Module extends Module {
   TableCopy7Module({required this.aImports}) {
-    segments.init();
+    elementSegments.init();
     vm = VM(this);
   }
 
@@ -45,7 +45,8 @@ class TableCopy7Module implements Module {
     table1,
   ];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -120,6 +121,9 @@ class ElementSegments extends AbstractElementSegments {
   late final List<int> segment1;
 
   late final List<int> segment3;
+
+  @override
+  late final List<List<int>?> segments = [null, segment1, null, segment3, null, null];
 
   @override
   List<Function> get functionTable => module.functionTable;

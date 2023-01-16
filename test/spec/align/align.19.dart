@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class Align19Module implements Module {
+class Align19Module extends Module {
   Align19Module() {
     vm = VM(this);
   }

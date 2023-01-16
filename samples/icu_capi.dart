@@ -14,10 +14,10 @@ abstract class EnvImports {
   void log_js(i32 arg0, i32 arg1);
 }
 
-class IcuCapiModule implements Module {
+class IcuCapiModule extends Module {
   IcuCapiModule({required this.envImports}) {
-    _data.init(memory);
-    segments.init();
+    dataSegments.init(memory);
+    elementSegments.init();
   }
 
   final EnvImports envImports;
@@ -27,7 +27,8 @@ class IcuCapiModule implements Module {
 
   final Globals globals = Globals();
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   final Table table0 = Table(
     36,
@@ -37,7 +38,8 @@ class IcuCapiModule implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -1736,7 +1738,7 @@ class IcuCapiModule implements Module {
               frame.i32_const(0xf5310);
               frame.i32_load(2, 0);
               arg0 = frame.peek();
-              if_label_5:
+              if_label_5: // => i32
               if (frame.pop() != 0) {
                 frame.i32_const(0);
                 local0 = frame.pop();
@@ -2421,7 +2423,7 @@ class IcuCapiModule implements Module {
               frame.push(arg0);
               frame.i32_load(2, 16);
               local0 = frame.peek();
-              if_label_5:
+              if_label_5: // => i32
               if (frame.pop() != 0) {
                 frame.push(local0);
               } else {
@@ -4767,7 +4769,10 @@ class IcuCapiModule implements Module {
                   var t0 = frame.pop();
                   frame.push(func(t0, t1, t2));
                 }
-                if (frame.pop() != 0) break block_label_1;
+                if (frame.pop() != 0) {
+                  frame.unwindTo(0, 0);
+                  break block_label_1;
+                }
               }
               frame.push(arg1);
               frame.i32_load(2, 0);
@@ -4786,7 +4791,10 @@ class IcuCapiModule implements Module {
                 var t0 = frame.pop();
                 frame.push(func(t0, t1));
               }
-              if (frame.pop() != 0) break block_label_1;
+              if (frame.pop() != 0) {
+                frame.unwindTo(0, 0);
+                break block_label_1;
+              }
               frame.push(arg1);
               frame.i32_const(8);
               frame.i32_add();
@@ -4853,7 +4861,10 @@ class IcuCapiModule implements Module {
                 var t0 = frame.pop();
                 frame.push(func(t0, t1, t2));
               }
-              if (frame.pop() != 0) break block_label_1;
+              if (frame.pop() != 0) {
+                frame.unwindTo(0, 0);
+                break block_label_1;
+              }
             }
             frame.push(local0);
             frame.push(local1);
@@ -4929,7 +4940,10 @@ class IcuCapiModule implements Module {
               var t0 = frame.pop();
               frame.push(func(t0, t1));
             }
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg0);
             frame.i32_const(8);
             frame.i32_add();
@@ -4974,7 +4988,10 @@ class IcuCapiModule implements Module {
             var t0 = frame.pop();
             frame.push(func(t0, t1, t2));
           }
-          if (frame.pop() != 0) break block_label_1;
+          if (frame.pop() != 0) {
+            frame.unwindTo(0, 0);
+            break block_label_1;
+          }
         }
         frame.i32_const(0);
         break block_label_0;
@@ -5124,6 +5141,7 @@ class IcuCapiModule implements Module {
                 frame.push(func(t0, t1, t2));
               }
               local0 = frame.pop();
+              frame.unwindTo(0, 0);
               break block_label_1;
             }
             frame.push(arg1);
@@ -5813,7 +5831,10 @@ class IcuCapiModule implements Module {
             var t0 = frame.pop();
             frame.push(func(t0, t1, t2));
           }
-          if (frame.pop() != 0) break block_label_1;
+          if (frame.pop() != 0) {
+            frame.unwindTo(0, 0);
+            break block_label_1;
+          }
           frame.i32_const(0);
           local0 = frame.pop();
           block_label_3: // => i32
@@ -6573,7 +6594,7 @@ class IcuCapiModule implements Module {
     {
       frame.push(arg1);
       frame.i32_load8_u(0, 16);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.i32_const(0);
       } else {
@@ -6598,7 +6619,7 @@ class IcuCapiModule implements Module {
         local6 = frame.peek();
         frame.push(local0);
         frame.i32_gt_u();
-        if_label_2:
+        if_label_2: // => i32
         if (frame.pop() != 0) {
           frame.push(local1);
           frame.i32_const(8);
@@ -6637,7 +6658,10 @@ class IcuCapiModule implements Module {
         frame.push(local6);
         frame.i32_gt_u();
         frame.i32_or();
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        }
         frame.push(local0);
         frame.push(local2);
         frame.i32_sub();
@@ -8687,7 +8711,7 @@ class IcuCapiModule implements Module {
       frame.push(arg1);
       frame.i32_load(2, 4);
       frame.i32_eq();
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.push(arg1);
         frame.push(local2);
@@ -10068,7 +10092,7 @@ class IcuCapiModule implements Module {
     {
       frame.push(arg1);
       frame.i32_load8_u(0, 16);
-      if_label_1:
+      if_label_1: // => i32
       if (frame.pop() != 0) {
         frame.i32_const(0);
       } else {
@@ -10081,12 +10105,18 @@ class IcuCapiModule implements Module {
         frame.i32_load(2, 8);
         local1 = frame.peek();
         frame.i32_lt_u();
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        }
         frame.push(local0);
         frame.push(arg1);
         frame.i32_load(2, 4);
         frame.i32_gt_u();
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        }
         frame.push(local0);
         frame.push(local1);
         frame.i32_sub();
@@ -10332,6 +10362,7 @@ class IcuCapiModule implements Module {
             frame.push(arg0);
             frame.i32_const(257);
             frame.i32_store16(0, 0);
+            frame.unwindTo(0, 0);
             break block_label_0;
           }
           frame.push(local0);
@@ -11688,7 +11719,11 @@ class IcuCapiModule implements Module {
             frame.push(func(t0, t1));
           }
           frame.i32_eqz();
-          if (frame.pop() != 0) break block_label_1;
+          if (frame.pop() != 0) {
+            frame.unwindTo(0, 0);
+            break block_label_1;
+          }
+          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.push(local4);
@@ -11729,7 +11764,10 @@ class IcuCapiModule implements Module {
         var t0 = frame.pop();
         frame.push(func(t0, t1, t2));
       }
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       frame.push(local1);
       frame.i32_load8_u(0, 19);
       frame.i32_const(128);
@@ -11763,7 +11801,11 @@ class IcuCapiModule implements Module {
               var t0 = frame.pop();
               frame.push(func(t0, t1));
             }
-            if (frame.pop() != 0) break block_label_0;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_0;
+            }
+            frame.unwindTo(1, 0);
             break block_label_2;
           }
           frame.push(local4);
@@ -11791,7 +11833,10 @@ class IcuCapiModule implements Module {
           var t0 = frame.pop();
           frame.push(func(t0, t1, t2));
         }
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        }
       }
       frame.push(local1);
       frame.i32_load8_u(0, 23);
@@ -11831,7 +11876,11 @@ class IcuCapiModule implements Module {
               var t0 = frame.pop();
               frame.push(func(t0, t1));
             }
-            if (frame.pop() != 0) break block_label_0;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_0;
+            }
+            frame.unwindTo(1, 0);
             break block_label_2;
           }
           frame.push(local4);
@@ -11863,7 +11912,10 @@ class IcuCapiModule implements Module {
           var t0 = frame.pop();
           frame.push(func(t0, t1, t2));
         }
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        }
       }
       frame.i32_const(0xf4388);
       local0 = frame.pop();
@@ -11944,7 +11996,11 @@ class IcuCapiModule implements Module {
                 var t0 = frame.pop();
                 frame.push(func(t0, t1));
               }
-              if (frame.pop() != 0) break block_label_2;
+              if (frame.pop() != 0) {
+                frame.unwindTo(1, 0);
+                break block_label_2;
+              }
+              frame.unwindTo(1, 0);
               break block_label_3;
             }
             frame.push(local4);
@@ -12022,7 +12078,10 @@ class IcuCapiModule implements Module {
         var t0 = frame.pop();
         frame.push(func(t0, t1, t2));
       }
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       frame.i32_const(0);
       local7 = frame.pop();
       block_label_1: // => i32
@@ -12042,6 +12101,7 @@ class IcuCapiModule implements Module {
               case 1:
                 break block_label_2;
               default:
+                frame.unwindTo(0, 0);
                 break block_label_0;
             }
           }
@@ -12060,7 +12120,10 @@ class IcuCapiModule implements Module {
         frame.i32_load(2, 0);
         arg0 = frame.peek();
         frame.i32_eqz();
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        }
         frame.push(local1);
         frame.i32_const(32);
         frame.i32_add();
@@ -12090,7 +12153,10 @@ class IcuCapiModule implements Module {
         frame.i32_load(2, 8);
         local2 = frame.peek();
         frame.i32_eqz();
-        if (frame.pop() != 0) break block_label_0;
+        if (frame.pop() != 0) {
+          frame.unwindTo(0, 0);
+          break block_label_0;
+        }
         frame.push(local6);
         frame.i32_load(2, 12);
         local5 = frame.pop();
@@ -12120,7 +12186,10 @@ class IcuCapiModule implements Module {
                 var t0 = frame.pop();
                 frame.push(func(t0, t1));
               }
-              if (frame.pop() != 0) break block_label_3;
+              if (frame.pop() != 0) {
+                frame.unwindTo(1, 0);
+                break block_label_3;
+              }
             }
             frame.push(arg1);
             frame.i32_load(2, 24);
@@ -12143,7 +12212,10 @@ class IcuCapiModule implements Module {
               var t0 = frame.pop();
               frame.push(func(t0, t1, t2));
             }
-            if (frame.pop() != 0) break block_label_3;
+            if (frame.pop() != 0) {
+              frame.unwindTo(1, 0);
+              break block_label_3;
+            }
             frame.i32_const(0xf4714);
             arg0 = frame.pop();
             block_label_4:
@@ -12199,7 +12271,10 @@ class IcuCapiModule implements Module {
             for (;;) {
               frame.push(local0);
               frame.i32_eqz();
-              if (frame.pop() != 0) break block_label_2;
+              if (frame.pop() != 0) {
+                frame.unwindTo(1, 0);
+                break block_label_2;
+              }
               frame.push(arg0);
               frame.i64_load(0, 0);
               local8 = frame.pop();
@@ -12217,7 +12292,10 @@ class IcuCapiModule implements Module {
                 var t0 = frame.pop();
                 frame.push(func(t0, t1));
               }
-              if (frame.pop() != 0) break block_label_3;
+              if (frame.pop() != 0) {
+                frame.unwindTo(1, 0);
+                break block_label_3;
+              }
               frame.push(local0);
               frame.i32_const(8);
               frame.i32_sub();
@@ -12255,6 +12333,7 @@ class IcuCapiModule implements Module {
           }
           frame.i32_const(1);
           local7 = frame.pop();
+          frame.unwindTo(0, 0);
           break block_label_0;
         }
         frame.i32_const(1);
@@ -12550,7 +12629,7 @@ class IcuCapiModule implements Module {
             block_label_4:
             {
               frame.push(local1);
-              if_label_5:
+              if_label_5: // => i32
               if (frame.pop() != 0) {
                 frame.push(local1);
                 frame.i32_const(1);
@@ -13757,7 +13836,7 @@ class IcuCapiModule implements Module {
                     frame.i32_const(-1);
                     frame.i32_const(0);
                     frame.push(local6);
-                    if_label_8:
+                    if_label_8: // => i32
                     if (frame.pop() != 0) {
                       frame.i32_const(0);
                     } else {
@@ -14809,7 +14888,10 @@ class IcuCapiModule implements Module {
               frame.push(local2);
               frame.i32_load(2, 0);
               frame.i32_eqz();
-              if (frame.pop() != 0) break block_label_1;
+              if (frame.pop() != 0) {
+                frame.unwindTo(1, 0);
+                break block_label_1;
+              }
               frame.i32_const(8);
               break block_label_2;
             }
@@ -18174,6 +18256,7 @@ class IcuCapiModule implements Module {
                                         frame.push(local0);
                                         frame.i32_const(1);
                                         frame.i32_store(2, 424);
+                                        frame.unwindTo(0, 0);
                                         break block_label_2;
                                       }
                                       frame.push(local0);
@@ -18758,13 +18841,19 @@ class IcuCapiModule implements Module {
                                                       frame.push(local7);
                                                       frame.push(local8);
                                                       frame.i32_gt_u();
-                                                      if (frame.pop() != 0) break block_label_11;
+                                                      if (frame.pop() != 0) {
+                                                        frame.unwindTo(1, 0);
+                                                        break block_label_11;
+                                                      }
                                                       frame.i32_const(4);
                                                       arg1 = frame.pop();
                                                       frame.push(local1);
                                                       frame.i32_const(4);
                                                       frame.i32_gt_u();
-                                                      if (frame.pop() != 0) break block_label_12;
+                                                      if (frame.pop() != 0) {
+                                                        frame.unwindTo(1, 0);
+                                                        break block_label_12;
+                                                      }
                                                       frame.push(local12);
                                                       frame.push(local3);
                                                       frame.i32_sub();
@@ -18774,7 +18863,10 @@ class IcuCapiModule implements Module {
                                                       frame.i32_sub();
                                                       frame.push(local1);
                                                       frame.i32_lt_u();
-                                                      if (frame.pop() != 0) break block_label_8;
+                                                      if (frame.pop() != 0) {
+                                                        frame.unwindTo(1, 0);
+                                                        break block_label_8;
+                                                      }
                                                       frame.push(local0);
                                                       frame.push(local23);
                                                       frame.push(local1);
@@ -18804,13 +18896,19 @@ class IcuCapiModule implements Module {
                                                       }
                                                       frame.push(local0);
                                                       frame.i32_load(2, 0x708);
-                                                      if (frame.pop() != 0) break block_label_12;
+                                                      if (frame.pop() != 0) {
+                                                        frame.unwindTo(1, 0);
+                                                        break block_label_12;
+                                                      }
                                                       frame.push(local0);
                                                       frame.i32_const(0x710);
                                                       frame.i32_add();
                                                       frame.i32_load(2, 0);
                                                       frame.i32_eqz();
-                                                      if (frame.pop() != 0) break block_label_12;
+                                                      if (frame.pop() != 0) {
+                                                        frame.unwindTo(1, 0);
+                                                        break block_label_12;
+                                                      }
                                                       frame.push(local0);
                                                       frame.i32_load(2, 0x70c);
                                                       local6 = frame.peek();
@@ -18833,6 +18931,7 @@ class IcuCapiModule implements Module {
                                                     arg1 = frame.pop();
                                                     frame.push(local9);
                                                     local4 = frame.pop();
+                                                    frame.unwindTo(1, 0);
                                                     break block_label_9;
                                                   }
                                                   frame.push(local6);
@@ -18898,12 +18997,18 @@ class IcuCapiModule implements Module {
                                                   local40 = frame.peek();
                                                   frame.i32_const(0x110000);
                                                   frame.i32_eq();
-                                                  if (frame.pop() != 0) break block_label_8;
+                                                  if (frame.pop() != 0) {
+                                                    frame.unwindTo(1, 0);
+                                                    break block_label_8;
+                                                  }
                                                 }
                                                 frame.push(local4);
                                                 frame.push(local7);
                                                 frame.i32_eq();
-                                                if (frame.pop() != 0) break block_label_10;
+                                                if (frame.pop() != 0) {
+                                                  frame.unwindTo(1, 0);
+                                                  break block_label_10;
+                                                }
                                                 frame.i32_const(0);
                                                 frame.push(local1);
                                                 frame.i32_sub();
@@ -18972,13 +19077,19 @@ class IcuCapiModule implements Module {
                                                           frame.push(local7);
                                                           frame.push(local8);
                                                           frame.i32_gt_u();
-                                                          if (frame.pop() != 0) break block_label_11;
+                                                          if (frame.pop() != 0) {
+                                                            frame.unwindTo(1, 0);
+                                                            break block_label_11;
+                                                          }
                                                           frame.i32_const(4);
                                                           arg1 = frame.pop();
                                                           frame.push(local12);
                                                           frame.i32_const(4);
                                                           frame.i32_gt_u();
-                                                          if (frame.pop() != 0) break block_label_12;
+                                                          if (frame.pop() != 0) {
+                                                            frame.unwindTo(1, 0);
+                                                            break block_label_12;
+                                                          }
                                                           frame.push(local16);
                                                           frame.push(local1);
                                                           frame.i32_sub();
@@ -18986,7 +19097,10 @@ class IcuCapiModule implements Module {
                                                           frame.i32_sub();
                                                           frame.push(local12);
                                                           frame.i32_lt_u();
-                                                          if (frame.pop() != 0) break block_label_8;
+                                                          if (frame.pop() != 0) {
+                                                            frame.unwindTo(1, 0);
+                                                            break block_label_8;
+                                                          }
                                                           frame.push(local0);
                                                           frame.push(local23);
                                                           frame.push(local2);
@@ -19024,13 +19138,19 @@ class IcuCapiModule implements Module {
                                                           }
                                                           frame.push(local0);
                                                           frame.i32_load(2, 0x708);
-                                                          if (frame.pop() != 0) break block_label_12;
+                                                          if (frame.pop() != 0) {
+                                                            frame.unwindTo(1, 0);
+                                                            break block_label_12;
+                                                          }
                                                           frame.push(local0);
                                                           frame.i32_const(0x710);
                                                           frame.i32_add();
                                                           frame.i32_load(2, 0);
                                                           frame.i32_eqz();
-                                                          if (frame.pop() != 0) break block_label_12;
+                                                          if (frame.pop() != 0) {
+                                                            frame.unwindTo(1, 0);
+                                                            break block_label_12;
+                                                          }
                                                           frame.push(local0);
                                                           frame.i32_load(2, 0x70c);
                                                           local9 = frame.peek();
@@ -19053,6 +19173,7 @@ class IcuCapiModule implements Module {
                                                         arg1 = frame.pop();
                                                         frame.push(local9);
                                                         local4 = frame.pop();
+                                                        frame.unwindTo(1, 0);
                                                         break block_label_9;
                                                       }
                                                       frame.push(local9);
@@ -19118,12 +19239,18 @@ class IcuCapiModule implements Module {
                                                       local41 = frame.peek();
                                                       frame.i32_const(0x110000);
                                                       frame.i32_eq();
-                                                      if (frame.pop() != 0) break block_label_8;
+                                                      if (frame.pop() != 0) {
+                                                        frame.unwindTo(1, 0);
+                                                        break block_label_8;
+                                                      }
                                                     }
                                                     frame.push(local4);
                                                     frame.push(local7);
                                                     frame.i32_eq();
-                                                    if (frame.pop() != 0) break block_label_10;
+                                                    if (frame.pop() != 0) {
+                                                      frame.unwindTo(1, 0);
+                                                      break block_label_10;
+                                                    }
                                                     frame.push(local12);
                                                     frame.push(local14);
                                                     frame.i32_add();
@@ -19202,11 +19329,17 @@ class IcuCapiModule implements Module {
                                                               frame.push(local7);
                                                               frame.push(local19);
                                                               frame.i32_gt_u();
-                                                              if (frame.pop() != 0) break block_label_8;
+                                                              if (frame.pop() != 0) {
+                                                                frame.unwindTo(1, 0);
+                                                                break block_label_8;
+                                                              }
                                                               frame.push(local8);
                                                               frame.i32_const(4);
                                                               frame.i32_gt_u();
-                                                              if (frame.pop() != 0) break block_label_12;
+                                                              if (frame.pop() != 0) {
+                                                                frame.unwindTo(1, 0);
+                                                                break block_label_12;
+                                                              }
                                                               frame.i32_const(4);
                                                               arg1 = frame.pop();
                                                               frame.push(local22);
@@ -19216,7 +19349,10 @@ class IcuCapiModule implements Module {
                                                               frame.i32_sub();
                                                               frame.push(local8);
                                                               frame.i32_lt_u();
-                                                              if (frame.pop() != 0) break block_label_8;
+                                                              if (frame.pop() != 0) {
+                                                                frame.unwindTo(1, 0);
+                                                                break block_label_8;
+                                                              }
                                                               frame.push(local0);
                                                               frame.push(local23);
                                                               frame.push(local8);
@@ -19254,13 +19390,19 @@ class IcuCapiModule implements Module {
                                                               }
                                                               frame.push(local0);
                                                               frame.i32_load(2, 0x708);
-                                                              if (frame.pop() != 0) break block_label_12;
+                                                              if (frame.pop() != 0) {
+                                                                frame.unwindTo(1, 0);
+                                                                break block_label_12;
+                                                              }
                                                               frame.push(local0);
                                                               frame.i32_const(0x710);
                                                               frame.i32_add();
                                                               frame.i32_load(2, 0);
                                                               frame.i32_eqz();
-                                                              if (frame.pop() != 0) break block_label_12;
+                                                              if (frame.pop() != 0) {
+                                                                frame.unwindTo(1, 0);
+                                                                break block_label_12;
+                                                              }
                                                               frame.push(local0);
                                                               frame.i32_load(2, 0x70c);
                                                               local9 = frame.peek();
@@ -19283,6 +19425,7 @@ class IcuCapiModule implements Module {
                                                             arg1 = frame.pop();
                                                             frame.push(local9);
                                                             local4 = frame.pop();
+                                                            frame.unwindTo(1, 0);
                                                             break block_label_9;
                                                           }
                                                           frame.push(local9);
@@ -19348,12 +19491,18 @@ class IcuCapiModule implements Module {
                                                           local42 = frame.peek();
                                                           frame.i32_const(0x110000);
                                                           frame.i32_eq();
-                                                          if (frame.pop() != 0) break block_label_8;
+                                                          if (frame.pop() != 0) {
+                                                            frame.unwindTo(1, 0);
+                                                            break block_label_8;
+                                                          }
                                                         }
                                                         frame.push(local4);
                                                         frame.push(local7);
                                                         frame.i32_eq();
-                                                        if (frame.pop() != 0) break block_label_10;
+                                                        if (frame.pop() != 0) {
+                                                          frame.unwindTo(1, 0);
+                                                          break block_label_10;
+                                                        }
                                                         frame.push(local8);
                                                         frame.push(local16);
                                                         frame.i32_add();
@@ -19438,13 +19587,19 @@ class IcuCapiModule implements Module {
                                                                   frame.push(local7);
                                                                   frame.push(local19);
                                                                   frame.i32_gt_u();
-                                                                  if (frame.pop() != 0) break block_label_11;
+                                                                  if (frame.pop() != 0) {
+                                                                    frame.unwindTo(1, 0);
+                                                                    break block_label_11;
+                                                                  }
                                                                   frame.i32_const(4);
                                                                   arg1 = frame.pop();
                                                                   frame.push(local2);
                                                                   frame.i32_const(4);
                                                                   frame.i32_gt_u();
-                                                                  if (frame.pop() != 0) break block_label_12;
+                                                                  if (frame.pop() != 0) {
+                                                                    frame.unwindTo(1, 0);
+                                                                    break block_label_12;
+                                                                  }
                                                                   frame.push(local24);
                                                                   frame.push(local8);
                                                                   frame.i32_sub();
@@ -19452,7 +19607,10 @@ class IcuCapiModule implements Module {
                                                                   frame.i32_sub();
                                                                   frame.push(local2);
                                                                   frame.i32_lt_u();
-                                                                  if (frame.pop() != 0) break block_label_8;
+                                                                  if (frame.pop() != 0) {
+                                                                    frame.unwindTo(1, 0);
+                                                                    break block_label_8;
+                                                                  }
                                                                   frame.push(local0);
                                                                   frame.push(local23);
                                                                   frame.push(local1);
@@ -19490,13 +19648,19 @@ class IcuCapiModule implements Module {
                                                                   }
                                                                   frame.push(local0);
                                                                   frame.i32_load(2, 0x708);
-                                                                  if (frame.pop() != 0) break block_label_12;
+                                                                  if (frame.pop() != 0) {
+                                                                    frame.unwindTo(1, 0);
+                                                                    break block_label_12;
+                                                                  }
                                                                   frame.push(local0);
                                                                   frame.i32_const(0x710);
                                                                   frame.i32_add();
                                                                   frame.i32_load(2, 0);
                                                                   frame.i32_eqz();
-                                                                  if (frame.pop() != 0) break block_label_12;
+                                                                  if (frame.pop() != 0) {
+                                                                    frame.unwindTo(1, 0);
+                                                                    break block_label_12;
+                                                                  }
                                                                   frame.push(local0);
                                                                   frame.i32_load(2, 0x70c);
                                                                   local6 = frame.peek();
@@ -19519,6 +19683,7 @@ class IcuCapiModule implements Module {
                                                                 arg1 = frame.pop();
                                                                 frame.push(local9);
                                                                 local4 = frame.pop();
+                                                                frame.unwindTo(1, 0);
                                                                 break block_label_9;
                                                               }
                                                               frame.push(local6);
@@ -19584,12 +19749,18 @@ class IcuCapiModule implements Module {
                                                               local43 = frame.peek();
                                                               frame.i32_const(0x110000);
                                                               frame.i32_eq();
-                                                              if (frame.pop() != 0) break block_label_8;
+                                                              if (frame.pop() != 0) {
+                                                                frame.unwindTo(1, 0);
+                                                                break block_label_8;
+                                                              }
                                                             }
                                                             frame.push(local4);
                                                             frame.push(local7);
                                                             frame.i32_eq();
-                                                            if (frame.pop() != 0) break block_label_10;
+                                                            if (frame.pop() != 0) {
+                                                              frame.unwindTo(1, 0);
+                                                              break block_label_10;
+                                                            }
                                                             frame.push(local2);
                                                             frame.push(local16);
                                                             frame.i32_add();
@@ -19682,15 +19853,19 @@ class IcuCapiModule implements Module {
                                                                       frame.push(local7);
                                                                       frame.push(local19);
                                                                       frame.i32_gt_u();
-                                                                      if (frame.pop() != 0)
+                                                                      if (frame.pop() != 0) {
+                                                                        frame.unwindTo(1, 0);
                                                                         break block_label_11;
+                                                                      }
                                                                       frame.i32_const(4);
                                                                       arg1 = frame.pop();
                                                                       frame.push(local13);
                                                                       frame.i32_const(4);
                                                                       frame.i32_gt_u();
-                                                                      if (frame.pop() != 0)
+                                                                      if (frame.pop() != 0) {
+                                                                        frame.unwindTo(1, 0);
                                                                         break block_label_12;
+                                                                      }
                                                                       frame.push(local25);
                                                                       frame.push(local2);
                                                                       frame.i32_sub();
@@ -19698,8 +19873,10 @@ class IcuCapiModule implements Module {
                                                                       frame.i32_sub();
                                                                       frame.push(local13);
                                                                       frame.i32_lt_u();
-                                                                      if (frame.pop() != 0)
+                                                                      if (frame.pop() != 0) {
+                                                                        frame.unwindTo(1, 0);
                                                                         break block_label_8;
+                                                                      }
                                                                       frame.push(local0);
                                                                       frame.push(local23);
                                                                       frame.push(local12);
@@ -19737,15 +19914,19 @@ class IcuCapiModule implements Module {
                                                                       }
                                                                       frame.push(local0);
                                                                       frame.i32_load(2, 0x708);
-                                                                      if (frame.pop() != 0)
+                                                                      if (frame.pop() != 0) {
+                                                                        frame.unwindTo(1, 0);
                                                                         break block_label_12;
+                                                                      }
                                                                       frame.push(local0);
                                                                       frame.i32_const(0x710);
                                                                       frame.i32_add();
                                                                       frame.i32_load(2, 0);
                                                                       frame.i32_eqz();
-                                                                      if (frame.pop() != 0)
+                                                                      if (frame.pop() != 0) {
+                                                                        frame.unwindTo(1, 0);
                                                                         break block_label_12;
+                                                                      }
                                                                       frame.push(local0);
                                                                       frame.i32_load(2, 0x70c);
                                                                       local2 = frame.peek();
@@ -19770,6 +19951,7 @@ class IcuCapiModule implements Module {
                                                                     arg1 = frame.pop();
                                                                     frame.push(local9);
                                                                     local4 = frame.pop();
+                                                                    frame.unwindTo(1, 0);
                                                                     break block_label_9;
                                                                   }
                                                                   frame.push(local2);
@@ -19835,12 +20017,18 @@ class IcuCapiModule implements Module {
                                                                   local44 = frame.peek();
                                                                   frame.i32_const(0x110000);
                                                                   frame.i32_eq();
-                                                                  if (frame.pop() != 0) break block_label_8;
+                                                                  if (frame.pop() != 0) {
+                                                                    frame.unwindTo(1, 0);
+                                                                    break block_label_8;
+                                                                  }
                                                                 }
                                                                 frame.push(local4);
                                                                 frame.push(local9);
                                                                 frame.i32_eq();
-                                                                if (frame.pop() != 0) break block_label_10;
+                                                                if (frame.pop() != 0) {
+                                                                  frame.unwindTo(1, 0);
+                                                                  break block_label_10;
+                                                                }
                                                                 frame.push(local13);
                                                                 frame.push(local16);
                                                                 frame.i32_add();
@@ -19941,15 +20129,19 @@ class IcuCapiModule implements Module {
                                                                           frame.push(local1);
                                                                           frame.push(local6);
                                                                           frame.i32_lt_u();
-                                                                          if (frame.pop() != 0)
+                                                                          if (frame.pop() != 0) {
+                                                                            frame.unwindTo(1, 0);
                                                                             break block_label_11;
+                                                                          }
                                                                           frame.i32_const(4);
                                                                           arg1 = frame.pop();
                                                                           frame.push(local2);
                                                                           frame.i32_const(4);
                                                                           frame.i32_gt_u();
-                                                                          if (frame.pop() != 0)
+                                                                          if (frame.pop() != 0) {
+                                                                            frame.unwindTo(1, 0);
                                                                             break block_label_12;
+                                                                          }
                                                                           frame.push(local32);
                                                                           frame.push(local13);
                                                                           frame.i32_sub();
@@ -19957,8 +20149,10 @@ class IcuCapiModule implements Module {
                                                                           frame.i32_sub();
                                                                           frame.push(local2);
                                                                           frame.i32_lt_u();
-                                                                          if (frame.pop() != 0)
+                                                                          if (frame.pop() != 0) {
+                                                                            frame.unwindTo(1, 0);
                                                                             break block_label_8;
+                                                                          }
                                                                           frame.i32_const(7);
                                                                           arg1 = frame.pop();
                                                                           frame.push(local0);
@@ -19998,15 +20192,19 @@ class IcuCapiModule implements Module {
                                                                           }
                                                                           frame.push(local0);
                                                                           frame.i32_load(2, 0x708);
-                                                                          if (frame.pop() != 0)
+                                                                          if (frame.pop() != 0) {
+                                                                            frame.unwindTo(1, 0);
                                                                             break block_label_8;
+                                                                          }
                                                                           frame.push(local0);
                                                                           frame.i32_const(0x710);
                                                                           frame.i32_add();
                                                                           frame.i32_load(2, 0);
                                                                           frame.i32_eqz();
-                                                                          if (frame.pop() != 0)
+                                                                          if (frame.pop() != 0) {
+                                                                            frame.unwindTo(1, 0);
                                                                             break block_label_8;
+                                                                          }
                                                                           frame.push(local0);
                                                                           frame.i32_load(2, 0x70c);
                                                                           local6 = frame.peek();
@@ -20031,6 +20229,7 @@ class IcuCapiModule implements Module {
                                                                         arg1 = frame.pop();
                                                                         frame.push(local7);
                                                                         local4 = frame.pop();
+                                                                        frame.unwindTo(1, 0);
                                                                         break block_label_9;
                                                                       }
                                                                       frame.push(local6);
@@ -20094,14 +20293,18 @@ class IcuCapiModule implements Module {
                                                                       local45 = frame.peek();
                                                                       frame.i32_const(0x110000);
                                                                       frame.i32_eq();
-                                                                      if (frame.pop() != 0)
+                                                                      if (frame.pop() != 0) {
+                                                                        frame.unwindTo(1, 0);
                                                                         break block_label_8;
+                                                                      }
                                                                     }
                                                                     frame.push(local4);
                                                                     frame.push(local9);
                                                                     frame.i32_eq();
-                                                                    if (frame.pop() != 0)
+                                                                    if (frame.pop() != 0) {
+                                                                      frame.unwindTo(1, 0);
                                                                       break block_label_10;
+                                                                    }
                                                                     frame.push(local2);
                                                                     frame.push(local16);
                                                                     frame.i32_add();
@@ -20210,15 +20413,19 @@ class IcuCapiModule implements Module {
                                                                               frame.push(local6);
                                                                               frame.push(local34);
                                                                               frame.i32_gt_u();
-                                                                              if (frame.pop() != 0)
+                                                                              if (frame.pop() != 0) {
+                                                                                frame.unwindTo(1, 0);
                                                                                 break block_label_11;
+                                                                              }
                                                                               frame.i32_const(4);
                                                                               arg1 = frame.pop();
                                                                               frame.push(local1);
                                                                               frame.i32_const(4);
                                                                               frame.i32_gt_u();
-                                                                              if (frame.pop() != 0)
+                                                                              if (frame.pop() != 0) {
+                                                                                frame.unwindTo(1, 0);
                                                                                 break block_label_12;
+                                                                              }
                                                                               frame.push(local33);
                                                                               frame.push(local2);
                                                                               frame.i32_sub();
@@ -20226,8 +20433,10 @@ class IcuCapiModule implements Module {
                                                                               frame.i32_sub();
                                                                               frame.push(local1);
                                                                               frame.i32_lt_u();
-                                                                              if (frame.pop() != 0)
+                                                                              if (frame.pop() != 0) {
+                                                                                frame.unwindTo(1, 0);
                                                                                 break block_label_8;
+                                                                              }
                                                                               frame.push(local0);
                                                                               frame.push(local23);
                                                                               frame.push(local1);
@@ -20265,15 +20474,19 @@ class IcuCapiModule implements Module {
                                                                               }
                                                                               frame.push(local0);
                                                                               frame.i32_load(2, 0x708);
-                                                                              if (frame.pop() != 0)
+                                                                              if (frame.pop() != 0) {
+                                                                                frame.unwindTo(1, 0);
                                                                                 break block_label_12;
+                                                                              }
                                                                               frame.push(local0);
                                                                               frame.i32_const(0x710);
                                                                               frame.i32_add();
                                                                               frame.i32_load(2, 0);
                                                                               frame.i32_eqz();
-                                                                              if (frame.pop() != 0)
+                                                                              if (frame.pop() != 0) {
+                                                                                frame.unwindTo(1, 0);
                                                                                 break block_label_12;
+                                                                              }
                                                                               frame.push(local0);
                                                                               frame.i32_load(2, 0x70c);
                                                                               local6 = frame.peek();
@@ -20298,6 +20511,7 @@ class IcuCapiModule implements Module {
                                                                             arg1 = frame.pop();
                                                                             frame.push(local7);
                                                                             local4 = frame.pop();
+                                                                            frame.unwindTo(1, 0);
                                                                             break block_label_9;
                                                                           }
                                                                           frame.push(local6);
@@ -20363,14 +20577,18 @@ class IcuCapiModule implements Module {
                                                                           local46 = frame.peek();
                                                                           frame.i32_const(0x110000);
                                                                           frame.i32_eq();
-                                                                          if (frame.pop() != 0)
+                                                                          if (frame.pop() != 0) {
+                                                                            frame.unwindTo(1, 0);
                                                                             break block_label_8;
+                                                                          }
                                                                         }
                                                                         frame.push(local4);
                                                                         frame.push(local9);
                                                                         frame.i32_eq();
-                                                                        if (frame.pop() != 0)
+                                                                        if (frame.pop() != 0) {
+                                                                          frame.unwindTo(1, 0);
                                                                           break block_label_10;
+                                                                        }
                                                                         frame.push(local1);
                                                                         frame.push(local12);
                                                                         frame.i32_add();
@@ -20487,15 +20705,19 @@ class IcuCapiModule implements Module {
                                                                                   frame.push(local8);
                                                                                   frame.push(local26);
                                                                                   frame.i32_lt_u();
-                                                                                  if (frame.pop() != 0)
+                                                                                  if (frame.pop() != 0) {
+                                                                                    frame.unwindTo(1, 0);
                                                                                     break block_label_11;
+                                                                                  }
                                                                                   frame.i32_const(4);
                                                                                   arg1 = frame.pop();
                                                                                   frame.push(local2);
                                                                                   frame.i32_const(4);
                                                                                   frame.i32_gt_u();
-                                                                                  if (frame.pop() != 0)
+                                                                                  if (frame.pop() != 0) {
+                                                                                    frame.unwindTo(1, 0);
                                                                                     break block_label_12;
+                                                                                  }
                                                                                   frame.push(local32);
                                                                                   frame.push(local1);
                                                                                   frame.i32_sub();
@@ -20503,8 +20725,10 @@ class IcuCapiModule implements Module {
                                                                                   frame.i32_sub();
                                                                                   frame.push(local2);
                                                                                   frame.i32_lt_u();
-                                                                                  if (frame.pop() != 0)
+                                                                                  if (frame.pop() != 0) {
+                                                                                    frame.unwindTo(1, 0);
                                                                                     break block_label_8;
+                                                                                  }
                                                                                   frame.push(local0);
                                                                                   frame.push(local23);
                                                                                   frame.push(local2);
@@ -20541,15 +20765,19 @@ class IcuCapiModule implements Module {
                                                                                   }
                                                                                   frame.push(local0);
                                                                                   frame.i32_load(2, 0x708);
-                                                                                  if (frame.pop() != 0)
+                                                                                  if (frame.pop() != 0) {
+                                                                                    frame.unwindTo(1, 0);
                                                                                     break block_label_12;
+                                                                                  }
                                                                                   frame.push(local0);
                                                                                   frame.i32_const(0x710);
                                                                                   frame.i32_add();
                                                                                   frame.i32_load(2, 0);
                                                                                   frame.i32_eqz();
-                                                                                  if (frame.pop() != 0)
+                                                                                  if (frame.pop() != 0) {
+                                                                                    frame.unwindTo(1, 0);
                                                                                     break block_label_12;
+                                                                                  }
                                                                                   frame.push(local0);
                                                                                   frame.i32_load(2, 0x70c);
                                                                                   local7 = frame.peek();
@@ -20574,6 +20802,7 @@ class IcuCapiModule implements Module {
                                                                                 arg1 = frame.pop();
                                                                                 frame.push(local7);
                                                                                 local4 = frame.pop();
+                                                                                frame.unwindTo(1, 0);
                                                                                 break block_label_9;
                                                                               }
                                                                               frame.push(local7);
@@ -20639,14 +20868,18 @@ class IcuCapiModule implements Module {
                                                                               local15 = frame.peek();
                                                                               frame.i32_const(0x110000);
                                                                               frame.i32_eq();
-                                                                              if (frame.pop() != 0)
+                                                                              if (frame.pop() != 0) {
+                                                                                frame.unwindTo(1, 0);
                                                                                 break block_label_8;
+                                                                              }
                                                                             }
                                                                             frame.push(local4);
                                                                             frame.push(local9);
                                                                             frame.i32_eq();
-                                                                            if (frame.pop() != 0)
+                                                                            if (frame.pop() != 0) {
+                                                                              frame.unwindTo(1, 0);
                                                                               break block_label_10;
+                                                                            }
                                                                             frame.push(local11);
                                                                             frame.i32_const(14);
                                                                             frame.i32_add();
@@ -20703,15 +20936,19 @@ class IcuCapiModule implements Module {
                                                                                     frame.push(local3);
                                                                                     frame.push(local9);
                                                                                     frame.i32_lt_u();
-                                                                                    if (frame.pop() != 0)
+                                                                                    if (frame.pop() != 0) {
+                                                                                      frame.unwindTo(1, 0);
                                                                                       break block_label_8;
+                                                                                    }
                                                                                     frame.i32_const(4);
                                                                                     arg1 = frame.pop();
                                                                                     frame.push(local8);
                                                                                     frame.i32_const(4);
                                                                                     frame.i32_gt_u();
-                                                                                    if (frame.pop() != 0)
+                                                                                    if (frame.pop() != 0) {
+                                                                                      frame.unwindTo(1, 0);
                                                                                       break block_label_12;
+                                                                                    }
                                                                                     frame.push(local13);
                                                                                     frame.push(local2);
                                                                                     frame.i32_sub();
@@ -20719,8 +20956,10 @@ class IcuCapiModule implements Module {
                                                                                     frame.i32_sub();
                                                                                     frame.push(local8);
                                                                                     frame.i32_lt_u();
-                                                                                    if (frame.pop() != 0)
+                                                                                    if (frame.pop() != 0) {
+                                                                                      frame.unwindTo(1, 0);
                                                                                       break block_label_8;
+                                                                                    }
                                                                                     frame.push(local0);
                                                                                     frame.i32_const(0x708);
                                                                                     frame.i32_add();
@@ -20736,14 +20975,17 @@ class IcuCapiModule implements Module {
                                                                                     }
                                                                                     frame.push(local0);
                                                                                     frame.i32_load(2, 0x708);
-                                                                                    if (frame.pop() != 0)
+                                                                                    if (frame.pop() != 0) {
+                                                                                      frame.unwindTo(1, 0);
                                                                                       break block_label_12;
+                                                                                    }
                                                                                     frame.push(local0);
                                                                                     frame.i32_const(0x710);
                                                                                     frame.i32_add();
                                                                                     frame.i32_load(2, 0);
                                                                                     if (frame.pop() != 0)
                                                                                       break block_label_38;
+                                                                                    frame.unwindTo(1, 0);
                                                                                     break block_label_12;
                                                                                   }
                                                                                   frame.push(local10);
@@ -20755,6 +20997,7 @@ class IcuCapiModule implements Module {
                                                                                   arg1 = frame.pop();
                                                                                   frame.push(local1);
                                                                                   local4 = frame.pop();
+                                                                                  frame.unwindTo(1, 0);
                                                                                   break block_label_9;
                                                                                 }
                                                                                 block_label_38:
@@ -20837,16 +21080,20 @@ class IcuCapiModule implements Module {
                                                                                   local10 = frame.peek();
                                                                                   frame.i32_const(0x110000);
                                                                                   frame.i32_eq();
-                                                                                  if (frame.pop() != 0)
+                                                                                  if (frame.pop() != 0) {
+                                                                                    frame.unwindTo(1, 0);
                                                                                     break block_label_8;
+                                                                                  }
                                                                                 }
                                                                                 frame.i32_const(13);
                                                                                 arg1 = frame.pop();
                                                                                 frame.push(local37);
                                                                                 frame.i32_const(0x110000);
                                                                                 frame.i32_eq();
-                                                                                if (frame.pop() != 0)
+                                                                                if (frame.pop() != 0) {
+                                                                                  frame.unwindTo(1, 0);
                                                                                   break block_label_8;
+                                                                                }
                                                                                 frame.push(local0);
                                                                                 frame.i32_const(0x6fc);
                                                                                 frame.i32_add();
@@ -21093,6 +21340,7 @@ class IcuCapiModule implements Module {
                                                                                       _func000(t0, t1, t2));
                                                                                 }
                                                                                 frame.drop();
+                                                                                frame.unwindTo(1, 0);
                                                                                 break block_label_16;
                                                                               }
                                                                               frame.push(local10);
@@ -21119,6 +21367,7 @@ class IcuCapiModule implements Module {
                                                                             frame.i32_const(4);
                                                                             arg1 = frame.pop();
                                                                             local4 = frame.pop();
+                                                                            frame.unwindTo(1, 0);
                                                                             break block_label_9;
                                                                           }
                                                                           frame.push(local33);
@@ -21213,6 +21462,7 @@ class IcuCapiModule implements Module {
                                                                         frame.i32_const(4);
                                                                         arg1 = frame.pop();
                                                                         local4 = frame.pop();
+                                                                        frame.unwindTo(1, 0);
                                                                         break block_label_9;
                                                                       }
                                                                       frame.push(local19);
@@ -21299,6 +21549,7 @@ class IcuCapiModule implements Module {
                                                                     frame.i32_const(4);
                                                                     arg1 = frame.pop();
                                                                     local4 = frame.pop();
+                                                                    frame.unwindTo(1, 0);
                                                                     break block_label_9;
                                                                   }
                                                                   frame.push(local8);
@@ -21377,6 +21628,7 @@ class IcuCapiModule implements Module {
                                                                 frame.i32_const(4);
                                                                 arg1 = frame.pop();
                                                                 local4 = frame.pop();
+                                                                frame.unwindTo(1, 0);
                                                                 break block_label_9;
                                                               }
                                                               frame.push(local12);
@@ -21446,6 +21698,7 @@ class IcuCapiModule implements Module {
                                                             frame.i32_const(4);
                                                             arg1 = frame.pop();
                                                             local4 = frame.pop();
+                                                            frame.unwindTo(1, 0);
                                                             break block_label_9;
                                                           }
                                                           frame.push(local1);
@@ -21507,6 +21760,7 @@ class IcuCapiModule implements Module {
                                                         frame.i32_const(4);
                                                         arg1 = frame.pop();
                                                         local4 = frame.pop();
+                                                        frame.unwindTo(1, 0);
                                                         break block_label_9;
                                                       }
                                                       frame.push(local13);
@@ -21560,6 +21814,7 @@ class IcuCapiModule implements Module {
                                                       break;
                                                     }
                                                     local4 = frame.pop();
+                                                    frame.unwindTo(1, 0);
                                                     break block_label_9;
                                                   }
                                                   frame.push(local2);
@@ -21605,6 +21860,7 @@ class IcuCapiModule implements Module {
                                                 frame.i32_const(4);
                                                 arg1 = frame.pop();
                                                 local4 = frame.pop();
+                                                frame.unwindTo(1, 0);
                                                 break block_label_9;
                                               }
                                               frame.push(local19);
@@ -21941,6 +22197,7 @@ class IcuCapiModule implements Module {
                                       frame.i32_const(6);
                                       local36 = frame.pop();
                                       frame.i32_const(0xf4ad2);
+                                      frame.unwindTo(0, 1);
                                       break block_label_1;
                                     }
                                     frame.push(local0);
@@ -22157,6 +22414,7 @@ class IcuCapiModule implements Module {
                                       frame.i32_store8(0, 0);
                                       frame.i32_const(1);
                                       arg2 = frame.pop();
+                                      frame.unwindTo(0, 0);
                                       break block_label_0;
                                     }
                                     throw Trap('unreachable');
@@ -22190,19 +22448,26 @@ class IcuCapiModule implements Module {
                                   frame.push(local0);
                                   frame.i32_load(2, 688);
                                   frame.i32_eqz();
-                                  if (frame.pop() != 0) break block_label_2;
+                                  if (frame.pop() != 0) {
+                                    frame.unwindTo(0, 0);
+                                    break block_label_2;
+                                  }
                                   frame.push(local0);
                                   frame.i32_const(696);
                                   frame.i32_add();
                                   arg1 = frame.peek();
                                   frame.i32_load(2, 0);
                                   frame.i32_eqz();
-                                  if (frame.pop() != 0) break block_label_2;
+                                  if (frame.pop() != 0) {
+                                    frame.unwindTo(0, 0);
+                                    break block_label_2;
+                                  }
                                   frame.push(arg1);
                                   {
                                     var t0 = frame.pop();
                                     _func065(t0);
                                   }
+                                  frame.unwindTo(0, 0);
                                   break block_label_2;
                                 }
                                 frame.push(local0);
@@ -22817,7 +23082,7 @@ class IcuCapiModule implements Module {
           frame.push(arg3);
           frame.i32_load(2, 12);
           frame.i32_gt_u();
-          if_label_3:
+          if_label_3: // => i32
           if (frame.pop() != 0) {
             frame.push(arg3);
             frame.push(local6);
@@ -22832,7 +23097,10 @@ class IcuCapiModule implements Module {
               frame.push(func(t0, t1));
             }
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg3);
             frame.i32_load(2, 8);
           } else {
@@ -22929,7 +23197,7 @@ class IcuCapiModule implements Module {
               frame.push(arg3);
               frame.i32_load(2, 12);
               frame.i32_gt_u();
-              if_label_5:
+              if_label_5: // => i32
               if (frame.pop() != 0) {
                 frame.push(arg3);
                 frame.push(local0);
@@ -22944,7 +23212,10 @@ class IcuCapiModule implements Module {
                   frame.push(func(t0, t1));
                 }
                 frame.i32_eqz();
-                if (frame.pop() != 0) break block_label_1;
+                if (frame.pop() != 0) {
+                  frame.unwindTo(0, 0);
+                  break block_label_1;
+                }
                 frame.push(arg3);
                 frame.i32_load(2, 8);
               } else {
@@ -23137,7 +23408,7 @@ class IcuCapiModule implements Module {
             frame.push(arg3);
             frame.i32_load(2, 12);
             frame.i32_gt_u();
-            if_label_4:
+            if_label_4: // => i32
             if (frame.pop() != 0) {
               frame.push(arg3);
               frame.push(local0);
@@ -23152,7 +23423,10 @@ class IcuCapiModule implements Module {
                 frame.push(func(t0, t1));
               }
               frame.i32_eqz();
-              if (frame.pop() != 0) break block_label_1;
+              if (frame.pop() != 0) {
+                frame.unwindTo(0, 0);
+                break block_label_1;
+              }
               frame.push(arg3);
               frame.i32_load(2, 8);
             } else {
@@ -23205,6 +23479,7 @@ class IcuCapiModule implements Module {
                     var t0 = frame.pop();
                     switch (t0) {
                       case 0:
+                        frame.unwindTo(0, 0);
                         break block_label_4;
                       case 1:
                         break block_label_7;
@@ -23261,7 +23536,7 @@ class IcuCapiModule implements Module {
               frame.push(arg3);
               frame.i32_load(2, 12);
               frame.i32_gt_u();
-              if_label_5:
+              if_label_5: // => i32
               if (frame.pop() != 0) {
                 frame.push(arg3);
                 frame.push(local2);
@@ -23276,7 +23551,10 @@ class IcuCapiModule implements Module {
                   frame.push(func(t0, t1));
                 }
                 frame.i32_eqz();
-                if (frame.pop() != 0) break block_label_1;
+                if (frame.pop() != 0) {
+                  frame.unwindTo(0, 0);
+                  break block_label_1;
+                }
                 frame.push(arg3);
                 frame.i32_load(2, 8);
               } else {
@@ -23340,7 +23618,7 @@ class IcuCapiModule implements Module {
         frame.push(arg3);
         frame.i32_load(2, 12);
         frame.i32_gt_u();
-        if_label_2:
+        if_label_2: // => i32
         if (frame.pop() != 0) {
           frame.push(arg3);
           frame.push(arg1);
@@ -23355,7 +23633,10 @@ class IcuCapiModule implements Module {
             frame.push(func(t0, t1));
           }
           frame.i32_eqz();
-          if (frame.pop() != 0) break block_label_1;
+          if (frame.pop() != 0) {
+            frame.unwindTo(0, 0);
+            break block_label_1;
+          }
           frame.push(arg3);
           frame.i32_load(2, 8);
         } else {
@@ -27152,7 +27433,7 @@ class IcuCapiModule implements Module {
                                             frame.push(local0);
                                             frame.i32_load(2, 276);
                                             frame.i32_eq();
-                                            if_label_20:
+                                            if_label_20: // => i32
                                             if (frame.pop() != 0) {
                                               frame.push(local0);
                                               frame.i32_const(272);
@@ -27436,7 +27717,7 @@ class IcuCapiModule implements Module {
                                                     {
                                                       frame.push(local0);
                                                       frame.i32_load8_u(0, 424);
-                                                      if_label_25:
+                                                      if_label_25: // => i64
                                                       if (frame.pop() != 0) {
                                                         frame.i64_const(1);
                                                       } else {
@@ -27474,7 +27755,10 @@ class IcuCapiModule implements Module {
                                                           frame.push(local0);
                                                           frame.i32_load8_u(0, 432);
                                                           frame.i32_eqz();
-                                                          if (frame.pop() != 0) break block_label_24;
+                                                          if (frame.pop() != 0) {
+                                                            frame.unwindTo(0, 0);
+                                                            break block_label_24;
+                                                          }
                                                         }
                                                         frame.push(local0);
                                                         frame.i64_load(0, 425);
@@ -27503,7 +27787,10 @@ class IcuCapiModule implements Module {
                                                         frame.i64_const(-0x7f7f7f7f7f7f7f80);
                                                         frame.i64_and();
                                                         frame.i64_eqz();
-                                                        if (frame.pop() != 0) break block_label_22;
+                                                        if (frame.pop() != 0) {
+                                                          frame.unwindTo(0, 0);
+                                                          break block_label_22;
+                                                        }
                                                         frame.i64_const(2);
                                                       }
                                                       frame.push(local45);
@@ -28617,7 +28904,7 @@ class IcuCapiModule implements Module {
         frame.push(arg2);
         frame.i32_load(2, 12);
         frame.i32_gt_u();
-        if_label_2:
+        if_label_2: // => i32
         if (frame.pop() != 0) {
           frame.push(arg2);
           frame.push(local1);
@@ -28632,7 +28919,10 @@ class IcuCapiModule implements Module {
             frame.push(func(t0, t1));
           }
           frame.i32_eqz();
-          if (frame.pop() != 0) break block_label_1;
+          if (frame.pop() != 0) {
+            frame.unwindTo(0, 0);
+            break block_label_1;
+          }
           frame.push(arg2);
           frame.i32_load(2, 8);
         } else {
@@ -28674,7 +28964,7 @@ class IcuCapiModule implements Module {
           frame.push(arg2);
           frame.i32_load(2, 12);
           frame.i32_gt_u();
-          if_label_3:
+          if_label_3: // => i32
           if (frame.pop() != 0) {
             frame.push(arg2);
             frame.push(local0);
@@ -28689,7 +28979,10 @@ class IcuCapiModule implements Module {
               frame.push(func(t0, t1));
             }
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg2);
             frame.i32_load(2, 8);
           } else {
@@ -28716,7 +29009,7 @@ class IcuCapiModule implements Module {
           frame.push(arg2);
           frame.i32_load(2, 12);
           frame.i32_gt_u();
-          if_label_3:
+          if_label_3: // => i32
           if (frame.pop() != 0) {
             frame.push(arg2);
             frame.push(local1);
@@ -28731,7 +29024,10 @@ class IcuCapiModule implements Module {
               frame.push(func(t0, t1));
             }
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg2);
             frame.i32_load(2, 8);
           } else {
@@ -28777,7 +29073,7 @@ class IcuCapiModule implements Module {
           frame.push(arg2);
           frame.i32_load(2, 12);
           frame.i32_gt_u();
-          if_label_3:
+          if_label_3: // => i32
           if (frame.pop() != 0) {
             frame.push(arg2);
             frame.push(local0);
@@ -28792,7 +29088,10 @@ class IcuCapiModule implements Module {
               frame.push(func(t0, t1));
             }
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg2);
             frame.i32_load(2, 8);
           } else {
@@ -28823,7 +29122,7 @@ class IcuCapiModule implements Module {
           frame.push(arg2);
           frame.i32_load(2, 12);
           frame.i32_gt_u();
-          if_label_3:
+          if_label_3: // => i32
           if (frame.pop() != 0) {
             frame.push(arg2);
             frame.push(local1);
@@ -28838,7 +29137,10 @@ class IcuCapiModule implements Module {
               frame.push(func(t0, t1));
             }
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg2);
             frame.i32_load(2, 8);
           } else {
@@ -28922,7 +29224,7 @@ class IcuCapiModule implements Module {
           frame.push(arg2);
           frame.i32_load(2, 12);
           frame.i32_gt_u();
-          if_label_3:
+          if_label_3: // => i32
           if (frame.pop() != 0) {
             frame.push(arg2);
             frame.push(arg1);
@@ -28937,7 +29239,10 @@ class IcuCapiModule implements Module {
               frame.push(func(t0, t1));
             }
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg2);
             frame.i32_load(2, 8);
           } else {
@@ -28965,7 +29270,7 @@ class IcuCapiModule implements Module {
           frame.push(arg2);
           frame.i32_load(2, 12);
           frame.i32_gt_u();
-          if_label_3:
+          if_label_3: // => i32
           if (frame.pop() != 0) {
             frame.push(arg2);
             frame.push(local1);
@@ -28980,7 +29285,10 @@ class IcuCapiModule implements Module {
               frame.push(func(t0, t1));
             }
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg2);
             frame.i32_load(2, 8);
           } else {
@@ -29529,6 +29837,7 @@ class IcuCapiModule implements Module {
                         if (frame.pop() != 0) continue loop_label_9;
                         break;
                       }
+                      frame.unwindTo(0, 0);
                       break block_label_3;
                     }
                     frame.push(local1);
@@ -29617,10 +29926,14 @@ class IcuCapiModule implements Module {
                             frame.push(local1);
                             frame.push(local12);
                             frame.i32_ge_u();
-                            if (frame.pop() != 0) break block_label_8;
+                            if (frame.pop() != 0) {
+                              frame.unwindTo(1, 0);
+                              break block_label_8;
+                            }
                             frame.push(local0);
                             frame.i32_const(4);
                             frame.i32_store8(0, 1);
+                            frame.unwindTo(1, 0);
                             break block_label_7;
                           }
                           frame.push(local1);
@@ -29835,7 +30148,10 @@ class IcuCapiModule implements Module {
                           frame.push(local5);
                           frame.i32_const(0x3fffffff);
                           frame.i32_gt_u();
-                          if (frame.pop() != 0) break block_label_3;
+                          if (frame.pop() != 0) {
+                            frame.unwindTo(0, 0);
+                            break block_label_3;
+                          }
                           frame.push(local5);
                           frame.i32_eqz();
                           if_label_11:
@@ -30046,7 +30362,7 @@ class IcuCapiModule implements Module {
                               frame.i32_ne();
                               if (frame.pop() != 0) break block_label_8;
                               frame.push(local1);
-                              if_label_13:
+                              if_label_13: // => i32
                               if (frame.pop() != 0) {
                                 frame.push(local20);
                                 frame.i32_load(0, 0);
@@ -30106,7 +30422,7 @@ class IcuCapiModule implements Module {
                                 frame.i32_load(0, 0);
                                 arg1 = frame.pop();
                                 frame.push(local1);
-                                if_label_14:
+                                if_label_14: // => i32
                                 if (frame.pop() != 0) {
                                   frame.push(local20);
                                   frame.i32_load(0, 0);
@@ -30362,7 +30678,10 @@ class IcuCapiModule implements Module {
                                   frame.push(local0);
                                   frame.i32_const(0x3fffffff);
                                   frame.i32_gt_u();
-                                  if (frame.pop() != 0) break block_label_3;
+                                  if (frame.pop() != 0) {
+                                    frame.unwindTo(0, 0);
+                                    break block_label_3;
+                                  }
                                   frame.push(local0);
                                   frame.i32_eqz();
                                   if_label_15:
@@ -30735,7 +31054,10 @@ class IcuCapiModule implements Module {
             }
             arg1 = frame.peek();
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_1;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_1;
+            }
             frame.push(arg1);
             frame.push(arg2);
             frame.i32_store(2, 0);
@@ -30758,7 +31080,10 @@ class IcuCapiModule implements Module {
             }
             arg2 = frame.peek();
             frame.i32_eqz();
-            if (frame.pop() != 0) break block_label_0;
+            if (frame.pop() != 0) {
+              frame.unwindTo(0, 0);
+              break block_label_0;
+            }
             frame.push(arg2);
             frame.i32_const(0xf4be4);
             frame.i32_store(2, 4);
@@ -30835,7 +31160,10 @@ class IcuCapiModule implements Module {
       frame.push(local1);
       frame.i32_load(2, 4);
       frame.i32_eqz();
-      if (frame.pop() != 0) break block_label_0;
+      if (frame.pop() != 0) {
+        frame.unwindTo(0, 0);
+        break block_label_0;
+      }
       frame.push(local0);
       {
         var t0 = frame.pop();
@@ -30984,7 +31312,7 @@ class Globals {
   final i32 global2 = 0xf5330;
 }
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
 
   final Uint8List data1 = decodeDataLiteral(_hex1);
@@ -30994,6 +31322,9 @@ class DataSegments {
   final Uint8List data3 = decodeDataLiteral(_hex3);
 
   final Uint8List data4 = decodeDataLiteral(_hex4);
+
+  @override
+  late final List<Uint8List> data = [data0, data1, data2, data3, data4];
 
   static const String _hex0 =
       '\x01\x00\x00\x00\x04\x00\x00\x00\x04\x00\x00\x00\x02\x00\x00\x00\x03\x00\x00\x00\x04\x00\x00\x00\x61\x6E'
@@ -31164,6 +31495,9 @@ class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final IcuCapiModule module;
+
+  @override
+  late final List<List<int>?> segments = [null];
 
   @override
   List<Function> get functionTable => module.functionTable;

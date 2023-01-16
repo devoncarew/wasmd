@@ -13,12 +13,12 @@ abstract class EnvImports {
   f64 Math_log2(f64 arg0);
 }
 
-class MandelbrotModule implements Module {
+class MandelbrotModule extends Module {
   MandelbrotModule({
     required this.envImports,
     required this.memory,
   }) {
-    segments.init();
+    elementSegments.init();
     vm = VM(this);
   }
 
@@ -40,7 +40,8 @@ class MandelbrotModule implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -212,15 +213,15 @@ class MandelbrotModule implements Module {
             }
             var t64 = vm.i32_shl(x, 1);
             var t65 = vm.i32_add(yOffset, t64);
-            var t66 = vm.i32_store16(1, 0, t65, colorIndex);
-            var t67 = vm.i32_add(x, 1);
-            x = t67;
+            vm.i32_store16(1, 0, t65, colorIndex);
+            var t66 = vm.i32_add(x, 1);
+            x = t66;
             continue loop_label_2;
           }
           break;
         }
-        var t68 = vm.i32_add(y, 1);
-        y = t68;
+        var t67 = vm.i32_add(y, 1);
+        y = t67;
         continue loop_label_0;
       }
       break;
@@ -244,6 +245,9 @@ class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final MandelbrotModule module;
+
+  @override
+  late final List<List<int>?> segments = [null];
 
   @override
   List<Function> get functionTable => module.functionTable;

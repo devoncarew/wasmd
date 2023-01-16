@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class FloatExprs4Module implements Module {
+class FloatExprs4Module extends Module {
   FloatExprs4Module() {
     vm = VM(this);
   }

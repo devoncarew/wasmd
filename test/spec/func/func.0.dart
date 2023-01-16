@@ -8,7 +8,7 @@ import 'package:wasmd/runtime.dart';
 
 import '../../src/infra.dart';
 
-class Func0Module implements Module {
+class Func0Module extends Module {
   Func0Module();
 
   @override

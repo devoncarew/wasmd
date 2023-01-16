@@ -7,37 +7,33 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
-class MemoryInit90Module implements Module {
+class MemoryInit90Module extends Module {
   MemoryInit90Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(1);
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
 
   void _func0() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(0);
-    frame.i32_const(0);
-    {
-      i32 count = frame.pop() as i32;
-      i32 srcOffset = frame.pop() as i32;
-      i32 dstOffset = frame.pop() as i32;
-      memory.copyFrom(_data.data64, srcOffset, dstOffset, count);
-    }
+    vm.memory_init(64, 0, 0, 0, 0);
   }
 }
 
 typedef FunctionType0 = void Function();
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
 
   final Uint8List data1 = decodeDataLiteral(_hex1);
@@ -167,6 +163,75 @@ class DataSegments {
   final Uint8List data63 = decodeDataLiteral(_hex63);
 
   final Uint8List data64 = decodeDataLiteral(_hex64);
+
+  @override
+  late final List<Uint8List> data = [
+    data0,
+    data1,
+    data2,
+    data3,
+    data4,
+    data5,
+    data6,
+    data7,
+    data8,
+    data9,
+    data10,
+    data11,
+    data12,
+    data13,
+    data14,
+    data15,
+    data16,
+    data17,
+    data18,
+    data19,
+    data20,
+    data21,
+    data22,
+    data23,
+    data24,
+    data25,
+    data26,
+    data27,
+    data28,
+    data29,
+    data30,
+    data31,
+    data32,
+    data33,
+    data34,
+    data35,
+    data36,
+    data37,
+    data38,
+    data39,
+    data40,
+    data41,
+    data42,
+    data43,
+    data44,
+    data45,
+    data46,
+    data47,
+    data48,
+    data49,
+    data50,
+    data51,
+    data52,
+    data53,
+    data54,
+    data55,
+    data56,
+    data57,
+    data58,
+    data59,
+    data60,
+    data61,
+    data62,
+    data63,
+    data64
+  ];
 
   static const String _hex0 = '';
 

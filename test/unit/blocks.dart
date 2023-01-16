@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class BlocksModule implements Module {
+class BlocksModule extends Module {
   BlocksModule();
 
   @override

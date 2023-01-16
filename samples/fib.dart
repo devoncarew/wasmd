@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class FibModule implements Module {
+class FibModule extends Module {
   FibModule() {
     vm = VM(this);
   }

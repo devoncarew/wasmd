@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class BinaryLeb1287Module implements Module {
+class BinaryLeb1287Module extends Module {
   BinaryLeb1287Module();
 
   @override

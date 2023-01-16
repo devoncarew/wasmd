@@ -7,11 +7,15 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
-class MemoryInit1Module implements Module {
+class MemoryInit1Module extends Module {
   MemoryInit1Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -19,7 +23,8 @@ class MemoryInit1Module implements Module {
     1,
   );
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -28,30 +33,19 @@ class MemoryInit1Module implements Module {
   i32 load8_u(i32 arg0) => _func1(arg0);
 
   void _func0() {
-    final frame = Frame(this);
-    frame.i32_const(7);
-    frame.i32_const(0);
-    frame.i32_const(4);
-    {
-      i32 count = frame.pop() as i32;
-      i32 srcOffset = frame.pop() as i32;
-      i32 dstOffset = frame.pop() as i32;
-      memory.copyFrom(_data.data1, srcOffset, dstOffset, count);
-    }
+    vm.memory_init(1, 0, 7, 0, 4);
   }
 
   i32 _func1(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load8_u(0, 0, arg0);
+    return t0;
   }
 }
 
 typedef FunctionType0 = void Function();
 typedef FunctionType1 = i32 Function(i32);
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
 
   final Uint8List data1 = decodeDataLiteral(_hex1);
@@ -59,6 +53,9 @@ class DataSegments {
   final Uint8List data2 = decodeDataLiteral(_hex2);
 
   final Uint8List data3 = decodeDataLiteral(_hex3);
+
+  @override
+  late final List<Uint8List> data = [data0, data1, data2, data3];
 
   static const String _hex0 = '\x03\x01\x04\x01';
 

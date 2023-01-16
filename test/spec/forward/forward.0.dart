@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Forward0Module implements Module {
+class Forward0Module extends Module {
   Forward0Module();
 
   @override

@@ -13,7 +13,7 @@ abstract class SpectestImports {
   Table get table;
 }
 
-class Table8Module implements Module {
+class Table8Module extends Module {
   Table8Module({required this.spectestImports}) {
     vm = VM(this);
   }

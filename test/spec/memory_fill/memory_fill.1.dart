@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class MemoryFill1Module implements Module {
+class MemoryFill1Module extends Module {
   MemoryFill1Module() {
     vm = VM(this);
   }

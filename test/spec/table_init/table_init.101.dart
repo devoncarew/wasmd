@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class TableInit101Module implements Module {
+class TableInit101Module extends Module {
   TableInit101Module() {
-    segments.init();
+    elementSegments.init();
   }
 
   @override
@@ -19,7 +19,8 @@ class TableInit101Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -32,7 +33,7 @@ class TableInit101Module implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment64);
+      elementSegments.copyTo(table0, sourceOffset, destOffset, count, elementSegments.segment64);
     }
   }
 
@@ -177,6 +178,75 @@ class ElementSegments extends AbstractElementSegments {
   late final List<int> segment63;
 
   late final List<int> segment64;
+
+  @override
+  late final List<List<int>?> segments = [
+    segment0,
+    segment1,
+    segment2,
+    segment3,
+    segment4,
+    segment5,
+    segment6,
+    segment7,
+    segment8,
+    segment9,
+    segment10,
+    segment11,
+    segment12,
+    segment13,
+    segment14,
+    segment15,
+    segment16,
+    segment17,
+    segment18,
+    segment19,
+    segment20,
+    segment21,
+    segment22,
+    segment23,
+    segment24,
+    segment25,
+    segment26,
+    segment27,
+    segment28,
+    segment29,
+    segment30,
+    segment31,
+    segment32,
+    segment33,
+    segment34,
+    segment35,
+    segment36,
+    segment37,
+    segment38,
+    segment39,
+    segment40,
+    segment41,
+    segment42,
+    segment43,
+    segment44,
+    segment45,
+    segment46,
+    segment47,
+    segment48,
+    segment49,
+    segment50,
+    segment51,
+    segment52,
+    segment53,
+    segment54,
+    segment55,
+    segment56,
+    segment57,
+    segment58,
+    segment59,
+    segment60,
+    segment61,
+    segment62,
+    segment63,
+    segment64
+  ];
 
   @override
   List<Function> get functionTable => module.functionTable;

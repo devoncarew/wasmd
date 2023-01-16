@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class Const264Module implements Module {
+class Const264Module extends Module {
   Const264Module() {
     vm = VM(this);
   }

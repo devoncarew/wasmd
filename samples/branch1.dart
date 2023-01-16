@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class Branch1Module implements Module {
+class Branch1Module extends Module {
   Branch1Module() {
     _foo();
     vm = VM(this);

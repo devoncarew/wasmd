@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class MemoryCopy83Module implements Module {
+class MemoryCopy83Module extends Module {
   MemoryCopy83Module() {
     vm = VM(this);
   }

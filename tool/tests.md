@@ -6,7 +6,6 @@
 | br_if.wast                  | -   |
 | br_table.wast               | -   |
 | br.wast                     | -   |
-| bulk.wast                   | -   |
 | call_indirect.wast          | -   |
 | call.wast                   | -   |
 | comments.wast               | +   |
@@ -43,7 +42,7 @@
 | memory_copy.wast            | +   |
 | memory_fill.wast            | +   |
 | memory_grow.wast            | -   |
-| memory_init.wast            | -   |
+| memory_init.wast            | +   |
 | memory_redundancy.wast      | +   |
 | memory_size.wast            | +   |
 | memory_trap.wast            | +   |
@@ -69,6 +68,7 @@
 | unreachable.wast            | -   |
 | unreached-valid.wast        | -   |
 | unwind.wast                 | -   |
+| bulk.wast                   | properly support FuncRef instruction initializers |
 | data.wast                   | need to rework DataSegments initializers |
 | elem.wast                   | requires reworking ElementSegments initialization |
 | global.wast                 | needs more work on initializing globals |

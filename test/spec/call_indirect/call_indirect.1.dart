@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class CallIndirect1Module implements Module {
+class CallIndirect1Module extends Module {
   CallIndirect1Module() {
-    segments.init();
+    elementSegments.init();
   }
 
   @override
@@ -33,7 +33,8 @@ class CallIndirect1Module implements Module {
     table2,
   ];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -146,6 +147,9 @@ class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final CallIndirect1Module module;
+
+  @override
+  late final List<List<int>?> segments = [null, null, null, null];
 
   @override
   List<Function> get functionTable => module.functionTable;

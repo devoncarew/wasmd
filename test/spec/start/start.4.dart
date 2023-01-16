@@ -8,9 +8,9 @@ import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
 
-class Start4Module implements Module {
+class Start4Module extends Module {
   Start4Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
     _main();
   }
 
@@ -20,7 +20,8 @@ class Start4Module implements Module {
     1,
   );
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -57,8 +58,11 @@ class Start4Module implements Module {
 typedef FunctionType0 = void Function();
 typedef FunctionType1 = i32 Function();
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
+
+  @override
+  late final List<Uint8List> data = [data0];
 
   static const String _hex0 = '\x41';
 

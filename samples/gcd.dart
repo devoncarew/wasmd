@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class GcdModule implements Module {
+class GcdModule extends Module {
   GcdModule() {
     vm = VM(this);
   }

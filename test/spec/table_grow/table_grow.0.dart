@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class TableGrow0Module implements Module {
+class TableGrow0Module extends Module {
   TableGrow0Module() {
     vm = VM(this);
   }

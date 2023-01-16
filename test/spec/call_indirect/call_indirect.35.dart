@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class CallIndirect35Module implements Module {
+class CallIndirect35Module extends Module {
   CallIndirect35Module();
 
   @override

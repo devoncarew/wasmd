@@ -219,10 +219,14 @@ class Table {
 abstract class Module {
   Memory get memory;
   List<Table> get tables;
+  AbstractDataSegments get dataSegments => _EmptyDataSegments();
+  AbstractElementSegments get elementSegments => _EmptyElementSegments();
 }
 
 abstract class AbstractElementSegments {
   List<Function> get functionTable;
+
+  List<List<int>?> get segments;
 
   void copyTo(
     Table table,
@@ -240,6 +244,23 @@ abstract class AbstractElementSegments {
     var functions = functionIndexes.map((i) => functionTable[i]).toList();
     table.copyFrom(functions, destOffset, count);
   }
+}
+
+class _EmptyElementSegments extends AbstractElementSegments {
+  @override
+  final List<Function> functionTable = [];
+
+  @override
+  final List<List<int>?> segments = [];
+}
+
+abstract class AbstractDataSegments {
+  List<Uint8List> get data;
+}
+
+class _EmptyDataSegments extends AbstractDataSegments {
+  @override
+  final List<Uint8List> data = [];
 }
 
 // TODO: convert this over to use patterns
@@ -399,6 +420,12 @@ class _StubModule implements Module {
 
   @override
   final List<Table> tables = [];
+
+  @override
+  final AbstractDataSegments dataSegments = _EmptyDataSegments();
+
+  @override
+  final AbstractElementSegments elementSegments = _EmptyElementSegments();
 }
 
 Uint8List decodeDataLiteral(String value) {

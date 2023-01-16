@@ -9,9 +9,9 @@ import 'dart:typed_data';
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class FloatExprs59Module implements Module {
+class FloatExprs59Module extends Module {
   FloatExprs59Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
     vm = VM(this);
   }
 
@@ -23,7 +23,8 @@ class FloatExprs59Module implements Module {
     1,
   );
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -76,8 +77,11 @@ class FloatExprs59Module implements Module {
 typedef FunctionType0 = void Function(i32, i32, i32);
 typedef FunctionType1 = f32 Function(i32);
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
+
+  @override
+  late final List<Uint8List> data = [data0];
 
   static const String _hex0 =
       '\x01\x00\x00\x00\x01\x00\x00\x80\x01\x00\x00\x00\x01\x00\x00\x80\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00'

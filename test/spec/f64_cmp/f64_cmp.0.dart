@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class F64Cmp0Module implements Module {
+class F64Cmp0Module extends Module {
   F64Cmp0Module() {
     vm = VM(this);
   }

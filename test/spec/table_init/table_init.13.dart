@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class TableInit13Module implements Module {
+class TableInit13Module extends Module {
   TableInit13Module() {
-    segments.init();
+    elementSegments.init();
   }
 
   @override
@@ -30,7 +30,8 @@ class TableInit13Module implements Module {
     table1,
   ];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -105,7 +106,7 @@ class TableInit13Module implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment1);
+      elementSegments.copyTo(table0, sourceOffset, destOffset, count, elementSegments.segment1);
     }
     frame.i32_const(21);
     frame.i32_const(1);
@@ -114,7 +115,7 @@ class TableInit13Module implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment1);
+      elementSegments.copyTo(table0, sourceOffset, destOffset, count, elementSegments.segment1);
     }
   }
 
@@ -146,6 +147,9 @@ class ElementSegments extends AbstractElementSegments {
   late final List<int> segment1;
 
   late final List<int> segment3;
+
+  @override
+  late final List<List<int>?> segments = [null, segment1, null, segment3];
 
   @override
   List<Function> get functionTable => module.functionTable;

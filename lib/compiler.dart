@@ -703,7 +703,7 @@ void printModule(
 
   final classBuilder = ClassBuilder()
     ..name = module.className
-    ..implements.add(Reference('Module'));
+    ..extend = Reference('Module');
 
   for (var import in module.importModules) {
     classBuilder.fields.add(
@@ -801,8 +801,9 @@ void printModule(
     classBuilder.fields.add(
       Field(
         (b) => b
-          ..name = '_data'
+          ..name = 'dataSegments'
           ..type = Reference('DataSegments')
+          ..annotations.add(refer('override'))
           ..modifier = FieldModifier.final$
           ..assignment = Code('DataSegments()'),
       ),
@@ -883,10 +884,11 @@ void printModule(
     classBuilder.fields.add(
       Field(
         (b) => b
-          ..name = 'segments'
+          ..name = 'elementSegments'
           ..type = Reference('ElementSegments')
           ..modifier = FieldModifier.final$
           ..late = true
+          ..annotations.add(refer('override'))
           ..assignment = Code('ElementSegments(this)'),
       ),
     );
@@ -896,12 +898,12 @@ void printModule(
   var constructor = ConstructorBuilder();
   var constructorStatements = [
     if (module.dataSegments.isNotEmpty)
-      refer('_data').property('init').call([refer('memory')]).statement,
+      refer('dataSegments').property('init').call([refer('memory')]).statement,
   ];
 
   if (module.elementSegments.isNotEmpty) {
     constructorStatements.add(
-      refer('segments').property('init').call([]).statement,
+      refer('elementSegments').property('init').call([]).statement,
     );
   }
 
@@ -1959,6 +1961,23 @@ class ElementSegments {
       ));
     }
 
+    // late final List<List<int>?> segments = [segments0, segments1];
+    var names = List.generate(segments.length, (index) {
+      var segment = segments[index];
+      return segment.segmentKind == SegmentKind.passive
+          ? 'segment$index'
+          : 'null';
+    });
+    fields.add(Field(
+      (b) => b
+        ..name = 'segments'
+        ..type = Reference('List<List<int>?>')
+        ..late = true
+        ..modifier = FieldModifier.final$
+        ..annotations.add(refer('override'))
+        ..assignment = Code('[${names.join(', ')}]'),
+    ));
+
     // ElementSegments(this.module);
     var constructor = Constructor(
       (b) => b
@@ -1983,6 +2002,7 @@ class ElementSegments {
       var segment = segments[i];
       if (segment.segmentKind == SegmentKind.declaritive) continue;
 
+      // TODO: remove indexesText, use segment$i
       String indexesText;
       int itemCount;
       if (segment.functionIndexs != null) {
@@ -2251,7 +2271,9 @@ class DataSegment {
   }
 
   static Class createDataSegmentClassDef(Module module) {
-    ClassBuilder builder = ClassBuilder()..name = 'DataSegments';
+    ClassBuilder builder = ClassBuilder()
+      ..name = 'DataSegments'
+      ..extend = Reference('AbstractDataSegments');
 
     // TODO: we likely don't need to create fields for active data segments.
     var segments = module.dataSegments.segments;
@@ -2265,6 +2287,17 @@ class DataSegment {
           ..assignment = Code('decodeDataLiteral(_hex$i)'),
       ));
     }
+
+    // late final List<Uint8List> data = [helloString, otherString];
+    builder.fields.add(Field(
+      (b) => b
+        ..name = 'data'
+        ..type = Reference('List<Uint8List>')
+        ..late = true
+        ..modifier = FieldModifier.final$
+        ..annotations.add(refer('override'))
+        ..assignment = Code('[${segments.map((s) => s.name).join(', ')}]'),
+    ));
 
     var initMethod = MethodBuilder()
       ..name = 'init'

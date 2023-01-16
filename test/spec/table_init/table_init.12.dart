@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class TableInit12Module implements Module {
+class TableInit12Module extends Module {
   TableInit12Module() {
-    segments.init();
+    elementSegments.init();
   }
 
   @override
@@ -30,7 +30,8 @@ class TableInit12Module implements Module {
     table1,
   ];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -132,6 +133,9 @@ class ElementSegments extends AbstractElementSegments {
   late final List<int> segment1;
 
   late final List<int> segment3;
+
+  @override
+  late final List<List<int>?> segments = [null, segment1, null, segment3];
 
   @override
   List<Function> get functionTable => module.functionTable;

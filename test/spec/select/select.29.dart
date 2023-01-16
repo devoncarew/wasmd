@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Select29Module implements Module {
+class Select29Module extends Module {
   Select29Module();
 
   @override

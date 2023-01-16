@@ -15,9 +15,9 @@ abstract class AImports {
   i32 ef4();
 }
 
-class TableInit6Module implements Module {
+class TableInit6Module extends Module {
   TableInit6Module({required this.aImports}) {
-    segments.init();
+    elementSegments.init();
   }
 
   final AImports aImports;
@@ -41,7 +41,8 @@ class TableInit6Module implements Module {
     table1,
   ];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -87,7 +88,7 @@ class TableInit6Module implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table1, sourceOffset, destOffset, count, segments.segment1);
+      elementSegments.copyTo(table1, sourceOffset, destOffset, count, elementSegments.segment1);
     }
     frame.elem_drop(1);
     frame.i32_const(15);
@@ -97,7 +98,7 @@ class TableInit6Module implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table1, sourceOffset, destOffset, count, segments.segment3);
+      elementSegments.copyTo(table1, sourceOffset, destOffset, count, elementSegments.segment3);
     }
     frame.elem_drop(3);
     frame.i32_const(20);
@@ -164,6 +165,9 @@ class ElementSegments extends AbstractElementSegments {
   late final List<int> segment1;
 
   late final List<int> segment3;
+
+  @override
+  late final List<List<int>?> segments = [null, segment1, null, segment3];
 
   @override
   List<Function> get functionTable => module.functionTable;

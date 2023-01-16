@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class MemoryGrow4Module implements Module {
+class MemoryGrow4Module extends Module {
   MemoryGrow4Module() {
-    segments.init();
+    elementSegments.init();
   }
 
   @override
@@ -24,7 +24,8 @@ class MemoryGrow4Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -572,6 +573,9 @@ class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final MemoryGrow4Module module;
+
+  @override
+  late final List<List<int>?> segments = [null];
 
   @override
   List<Function> get functionTable => module.functionTable;

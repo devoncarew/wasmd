@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Switch0Module implements Module {
+class Switch0Module extends Module {
   Switch0Module();
 
   @override

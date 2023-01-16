@@ -9,9 +9,9 @@ import 'dart:typed_data';
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class FloatMemory5Module implements Module {
+class FloatMemory5Module extends Module {
   FloatMemory5Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
     vm = VM(this);
   }
 
@@ -23,7 +23,8 @@ class FloatMemory5Module implements Module {
     1,
   );
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -61,8 +62,11 @@ typedef FunctionType0 = f64 Function();
 typedef FunctionType1 = i64 Function();
 typedef FunctionType2 = void Function();
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
+
+  @override
+  late final List<Uint8List> data = [data0];
 
   static const String _hex0 = '\x01\x00\x00\x00\x00\x00\xFC\x7F';
 

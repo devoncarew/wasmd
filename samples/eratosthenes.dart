@@ -14,9 +14,9 @@ abstract class EnvImports {
   void abort(i32 arg0, i32 arg1, i32 arg2, i32 arg3);
 }
 
-class EratosthenesModule implements Module {
+class EratosthenesModule extends Module {
   EratosthenesModule({required this.envImports}) {
-    _data.init(memory);
+    dataSegments.init(memory);
     _func2();
     vm = VM(this);
   }
@@ -30,7 +30,8 @@ class EratosthenesModule implements Module {
 
   final Globals globals = Globals();
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -66,158 +67,158 @@ class EratosthenesModule implements Module {
     if_label_0:
     if (t4 != 0) {
       envImports.abort(0x420, 0x450, 51, 60);
-      var t5 = vm.unreachable();
+      vm.unreachable();
     }
-    var t6 = vm.i32_gt_u(local1, 0x3fffffec);
+    var t5 = vm.i32_gt_u(local1, 0x3fffffec);
     if_label_0:
-    if (t6 != 0) {
+    if (t5 != 0) {
       envImports.abort(0x490, 0x4d0, 86, 30);
-      var t7 = vm.unreachable();
+      vm.unreachable();
     }
-    var t8 = vm.i32_add(local1, 16);
-    local3 = t8;
-    var t9 = vm.i32_gt_u(t8, 0x3ffffffc);
+    var t6 = vm.i32_add(local1, 16);
+    local3 = t6;
+    var t7 = vm.i32_gt_u(t6, 0x3ffffffc);
     if_label_0:
-    if (t9 != 0) {
+    if (t7 != 0) {
       envImports.abort(0x490, 0x4d0, 33, 29);
-      var t10 = vm.unreachable();
+      vm.unreachable();
     }
     local2 = globals.global0;
     local4 = globals.global0;
-    var t11 = vm.i32_add(local2, 4);
-    local2 = t11;
-    var t12 = vm.i32_add(local3, 19);
-    var t13 = vm.i32_and(t12, -16);
-    var t14 = vm.i32_sub(t13, 4);
-    local5 = t14;
-    var t15 = vm.i32_add(t11, t14);
-    local3 = t15;
-    var t16 = vm.memory_size(0);
-    local6 = t16;
-    var t17 = vm.i32_shl(t16, 16);
-    var t18 = vm.i32_add(t17, 15);
-    var t19 = vm.i32_and(t18, -16);
-    local7 = t19;
-    var t20 = vm.i32_gt_u(t15, t19);
+    var t8 = vm.i32_add(local2, 4);
+    local2 = t8;
+    var t9 = vm.i32_add(local3, 19);
+    var t10 = vm.i32_and(t9, -16);
+    var t11 = vm.i32_sub(t10, 4);
+    local5 = t11;
+    var t12 = vm.i32_add(t8, t11);
+    local3 = t12;
+    var t13 = vm.memory_size(0);
+    local6 = t13;
+    var t14 = vm.i32_shl(t13, 16);
+    var t15 = vm.i32_add(t14, 15);
+    var t16 = vm.i32_and(t15, -16);
+    local7 = t16;
+    var t17 = vm.i32_gt_u(t12, t16);
     if_label_0:
-    if (t20 != 0) {
-      var t21 = vm.i32_sub(local3, local7);
-      var t22 = vm.i32_add(t21, 0xffff);
-      var t23 = vm.i32_and(t22, -0x10000);
-      var t24 = vm.i32_shr_u(t23, 16);
-      local7 = t24;
-      var t25 = vm.i32_gt_s(local6, local7);
-      var t26 = vm.select(local6, t24, t25);
-      var t27 = vm.memory_grow(0, t26);
-      var t28 = vm.i32_lt_s(t27, 0);
+    if (t17 != 0) {
+      var t18 = vm.i32_sub(local3, local7);
+      var t19 = vm.i32_add(t18, 0xffff);
+      var t20 = vm.i32_and(t19, -0x10000);
+      var t21 = vm.i32_shr_u(t20, 16);
+      local7 = t21;
+      var t22 = vm.i32_gt_s(local6, local7);
+      var t23 = vm.select(local6, t21, t22);
+      var t24 = vm.memory_grow(0, t23);
+      var t25 = vm.i32_lt_s(t24, 0);
       if_label_1:
-      if (t28 != 0) {
-        var t29 = vm.memory_grow(0, local7);
-        var t30 = vm.i32_lt_s(t29, 0);
+      if (t25 != 0) {
+        var t26 = vm.memory_grow(0, local7);
+        var t27 = vm.i32_lt_s(t26, 0);
         if_label_2:
-        if (t30 != 0) {
-          var t31 = vm.unreachable();
+        if (t27 != 0) {
+          vm.unreachable();
         }
       }
     }
     globals.global0 = local3;
-    var t32 = vm.i32_store(2, 0, local4, local5);
-    var t33 = vm.i32_sub(local2, 4);
-    local3 = t33;
-    var t34 = vm.i32_store(2, 4, t33, 0);
-    var t35 = vm.i32_store(2, 8, local3, 0);
-    var t36 = vm.i32_store(2, 12, local3, 4);
-    var t37 = vm.i32_store(2, 16, local3, local1);
-    var t38 = vm.i32_add(local2, 16);
-    local2 = t38;
-    var t39 = vm.memory_fill(0, t38, 0, local1);
-    var t40 = vm.i32_sub(local2, 20);
-    var t41 = vm.i32_load(2, 16, t40);
-    local3 = t41;
-    var t42 = vm.i32_le_s(local3, 0);
-    var t43 = vm.select(t41, 0, t42);
-    local4 = t43;
-    var t44 = vm.i32_gt_s(local3, local4);
+    vm.i32_store(2, 0, local4, local5);
+    var t28 = vm.i32_sub(local2, 4);
+    local3 = t28;
+    vm.i32_store(2, 4, t28, 0);
+    vm.i32_store(2, 8, local3, 0);
+    vm.i32_store(2, 12, local3, 4);
+    vm.i32_store(2, 16, local3, local1);
+    var t29 = vm.i32_add(local2, 16);
+    local2 = t29;
+    vm.memory_fill(0, t29, 0, local1);
+    var t30 = vm.i32_sub(local2, 20);
+    var t31 = vm.i32_load(2, 16, t30);
+    local3 = t31;
+    var t32 = vm.i32_le_s(local3, 0);
+    var t33 = vm.select(t31, 0, t32);
+    local4 = t33;
+    var t34 = vm.i32_gt_s(local3, local4);
     if_label_0:
-    if (t44 != 0) {
-      var t45 = vm.i32_add(local2, local4);
-      var t46 = vm.i32_sub(local3, local4);
-      var t47 = vm.memory_fill(0, t45, 1, t46);
+    if (t34 != 0) {
+      var t35 = vm.i32_add(local2, local4);
+      var t36 = vm.i32_sub(local3, local4);
+      vm.memory_fill(0, t35, 1, t36);
     }
-    var t48 = vm.f32_convert_i32_s(arg0);
-    var t49 = vm.f32_sqrt(t48);
-    var t50 = vm.f32_floor(t49);
-    var t51 = vm.i32_trunc_sat_f32_u(t50);
-    local3 = t51;
+    var t37 = vm.f32_convert_i32_s(arg0);
+    var t38 = vm.f32_sqrt(t37);
+    var t39 = vm.f32_floor(t38);
+    var t40 = vm.i32_trunc_sat_f32_u(t39);
+    local3 = t40;
 
     loop_label_0:
     for (;;) {
-      var t52 = vm.i32_lt_s(local0, local1);
+      var t41 = vm.i32_lt_s(local0, local1);
       if_label_1:
-      if (t52 != 0) {
-        var t53 = vm.i32_shl(local0, 1);
-        var t54 = vm.i32_add(t53, 3);
-        local4 = t54;
-        var t55 = vm.i32_ge_u(local3, t54);
+      if (t41 != 0) {
+        var t42 = vm.i32_shl(local0, 1);
+        var t43 = vm.i32_add(t42, 3);
+        local4 = t43;
+        var t44 = vm.i32_ge_u(local3, t43);
         if_label_2:
-        if (t55 != 0) {
-          var t56 = vm.i32_add(local0, 1);
-          arg0 = t56;
+        if (t44 != 0) {
+          var t45 = vm.i32_add(local0, 1);
+          arg0 = t45;
 
           loop_label_3:
           for (;;) {
-            var t57 = vm.i32_lt_s(arg0, local1);
+            var t46 = vm.i32_lt_s(arg0, local1);
             if_label_4:
-            if (t57 != 0) {
-              var t58 = vm.i32_add(arg0, local2);
-              var t59 = vm.i32_load8_u(0, 0, t58);
+            if (t46 != 0) {
+              var t47 = vm.i32_add(arg0, local2);
+              var t48 = vm.i32_load8_u(0, 0, t47);
               if_label_5:
-              if (t59 != 0) {
-                var t60 = vm.i32_shl(arg0, 1);
-                var t61 = vm.i32_add(t60, 3);
-                var t62 = vm.i32_rem_u(t61, local4);
-                var t63 = vm.i32_eqz(t62);
+              if (t48 != 0) {
+                var t49 = vm.i32_shl(arg0, 1);
+                var t50 = vm.i32_add(t49, 3);
+                var t51 = vm.i32_rem_u(t50, local4);
+                var t52 = vm.i32_eqz(t51);
                 if_label_6:
-                if (t63 != 0) {
-                  var t64 = vm.i32_add(arg0, local2);
-                  var t65 = vm.i32_store8(0, 0, t64, 0);
+                if (t52 != 0) {
+                  var t53 = vm.i32_add(arg0, local2);
+                  vm.i32_store8(0, 0, t53, 0);
                 }
               }
-              var t66 = vm.i32_add(arg0, 1);
-              arg0 = t66;
+              var t54 = vm.i32_add(arg0, 1);
+              arg0 = t54;
               continue loop_label_3;
             }
             break;
           }
-          var t67 = vm.i32_add(local0, 1);
-          local0 = t67;
+          var t55 = vm.i32_add(local0, 1);
+          local0 = t55;
           continue loop_label_0;
         }
       }
       break;
     }
     local0 = 2;
-    var t68 = vm.i32_sub(local1, 1);
-    arg0 = t68;
+    var t56 = vm.i32_sub(local1, 1);
+    arg0 = t56;
 
     loop_label_0:
     for (;;) {
-      var t69 = vm.i32_ge_s(arg0, 0);
+      var t57 = vm.i32_ge_s(arg0, 0);
       if_label_1:
-      if (t69 != 0) {
+      if (t57 != 0) {
         block_label_2:
         {
-          var t70 = vm.i32_add(arg0, local2);
-          var t71 = vm.i32_load8_u(0, 0, t70);
+          var t58 = vm.i32_add(arg0, local2);
+          var t59 = vm.i32_load8_u(0, 0, t58);
           if_label_3:
-          if (t71 != 0) {
-            var t72 = vm.i32_shl(arg0, 1);
-            var t73 = vm.i32_add(t72, 3);
-            local0 = t73;
+          if (t59 != 0) {
+            var t60 = vm.i32_shl(arg0, 1);
+            var t61 = vm.i32_add(t60, 3);
+            local0 = t61;
             break block_label_2;
           }
-          var t74 = vm.i32_sub(arg0, 1);
-          arg0 = t74;
+          var t62 = vm.i32_sub(arg0, 1);
+          arg0 = t62;
           continue loop_label_0;
         }
       }
@@ -228,7 +229,7 @@ class EratosthenesModule implements Module {
 
   void _func1(i32 arg0, i32 arg1, i32 arg2, i32 arg3) {
     envImports.abort(0x510, 0x540, 64, 5);
-    var t0 = vm.unreachable();
+    vm.unreachable();
   }
 
   void _func2() {
@@ -244,7 +245,7 @@ class Globals {
   i32 global0 = 0;
 }
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
 
   final Uint8List data1 = decodeDataLiteral(_hex1);
@@ -268,6 +269,22 @@ class DataSegments {
   final Uint8List data10 = decodeDataLiteral(_hex10);
 
   final Uint8List data11 = decodeDataLiteral(_hex11);
+
+  @override
+  late final List<Uint8List> data = [
+    data0,
+    data1,
+    data2,
+    data3,
+    data4,
+    data5,
+    data6,
+    data7,
+    data8,
+    data9,
+    data10,
+    data11
+  ];
 
   static const String _hex0 = '\x2C';
 

@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class TableInit96Module implements Module {
+class TableInit96Module extends Module {
   TableInit96Module() {
-    segments.init();
+    elementSegments.init();
   }
 
   @override
@@ -22,7 +22,8 @@ class TableInit96Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -162,7 +163,7 @@ class TableInit96Module implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment0);
+      elementSegments.copyTo(table0, sourceOffset, destOffset, count, elementSegments.segment0);
     }
   }
 
@@ -200,6 +201,9 @@ class ElementSegments extends AbstractElementSegments {
   final TableInit96Module module;
 
   late final List<int> segment0;
+
+  @override
+  late final List<List<int>?> segments = [segment0];
 
   @override
   List<Function> get functionTable => module.functionTable;

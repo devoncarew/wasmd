@@ -11,7 +11,7 @@ abstract class SpectestImports {
   void print_i32(i32 arg0);
 }
 
-class Start5Module implements Module {
+class Start5Module extends Module {
   Start5Module({required this.spectestImports}) {
     _main();
   }

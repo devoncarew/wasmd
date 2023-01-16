@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class RefNull0Module implements Module {
+class RefNull0Module extends Module {
   RefNull0Module() {
     vm = VM(this);
   }

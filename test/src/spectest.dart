@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class SpectestModule implements Module {
+class SpectestModule extends Module {
   SpectestModule();
 
   @override

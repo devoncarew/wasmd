@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class LocalGet0Module implements Module {
+class LocalGet0Module extends Module {
   LocalGet0Module();
 
   @override

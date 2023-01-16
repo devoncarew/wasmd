@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class FuncModule implements Module {
+class FuncModule extends Module {
   FuncModule() {
     vm = VM(this);
   }

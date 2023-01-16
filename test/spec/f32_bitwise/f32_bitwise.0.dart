@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class F32Bitwise0Module implements Module {
+class F32Bitwise0Module extends Module {
   F32Bitwise0Module() {
     vm = VM(this);
   }

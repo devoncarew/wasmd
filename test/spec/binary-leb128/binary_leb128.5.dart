@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class BinaryLeb1285Module implements Module {
+class BinaryLeb1285Module extends Module {
   BinaryLeb1285Module() {
-    segments.init();
+    elementSegments.init();
   }
 
   @override
@@ -19,7 +19,8 @@ class BinaryLeb1285Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -32,6 +33,9 @@ class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final BinaryLeb1285Module module;
+
+  @override
+  late final List<List<int>?> segments = [null];
 
   @override
   List<Function> get functionTable => module.functionTable;

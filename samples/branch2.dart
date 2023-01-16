@@ -12,7 +12,7 @@ abstract class ConsoleImports {
   void log(i32 arg0);
 }
 
-class Branch2Module implements Module {
+class Branch2Module extends Module {
   Branch2Module({required this.consoleImports}) {
     _func0();
     vm = VM(this);

@@ -12,10 +12,14 @@ const int _maskTop32 = 0xFFFFFFFF00000000;
 class VM {
   final Memory memory;
   final List<Table> tables;
+  final AbstractDataSegments dataSegments;
+  final AbstractElementSegments elementSegments;
 
   VM(Module module)
       : memory = module.memory,
-        tables = module.tables;
+        tables = module.tables,
+        dataSegments = module.dataSegments,
+        elementSegments = module.elementSegments;
 
   void unreachable([String? message]) {
     throw Trap(message == null ? 'unreachable' : 'unreachable: $message');
@@ -40,7 +44,9 @@ class VM {
     return c != 0 ? val1 : val2;
   }
 
+  // todo:
   // any select_t(u32 immediate0, u32 immediate1, any arg0, any arg1, i32 arg2) { }
+
   // any local_get(u32 immediate0) { }
   // void local_set(u32 immediate0, any arg0) { }
   // any local_tee(u32 immediate0, any arg0) { }
@@ -405,11 +411,8 @@ class VM {
   }
 
   i32 i32_and(i32 arg0, i32 arg1) => arg0 & arg1;
-
   i32 i32_or(i32 arg0, i32 arg1) => arg0 | arg1;
-
   i32 i32_xor(i32 arg0, i32 arg1) => arg0 ^ arg1;
-
   i32 i32_shl(i32 arg0, i32 arg1) {
     arg1 = arg1 & 0x1F; // shift left by arg1 bits modulo 32
     var result = arg0 << arg1;
@@ -507,11 +510,8 @@ class VM {
   }
 
   i64 i64_add(i64 arg0, i64 arg1) => arg0 + arg1;
-
   i64 i64_sub(i64 arg0, i64 arg1) => arg0 - arg1;
-
   i64 i64_mul(i64 arg0, i64 arg1) => arg0 * arg1;
-
   i64 i64_div_s(i64 arg0, i64 arg1) {
     try {
       return arg0 ~/ arg1;
@@ -545,11 +545,8 @@ class VM {
   }
 
   i64 i64_and(i64 arg0, i64 arg1) => arg0 & arg1;
-
   i64 i64_or(i64 arg0, i64 arg1) => arg0 | arg1;
-
   i64 i64_xor(i64 arg0, i64 arg1) => arg0 ^ arg1;
-
   i64 i64_shl(i64 arg0, i64 arg1) {
     arg1 = arg1 & 0x3F; // shift left by arg1 bits modulo 64
     return arg0 << arg1;
@@ -591,14 +588,11 @@ class VM {
   f32 f32_floor(f32 arg0) => arg0.floorToDouble();
   f32 f32_trunc(f32 arg0) => arg0.truncateToDouble();
   f32 f32_nearest(f32 arg0) => arg0.roundToDouble();
-
   f32 f32_sqrt(f32 arg0) => sqrt(arg0);
   f32 f32_add(f32 arg0, f32 arg1) => arg0 + arg1;
   f32 f32_sub(f32 arg0, f32 arg1) => arg0 - arg1;
   f32 f32_mul(f32 arg0, f32 arg1) => arg0 * arg1;
-
   f32 f32_div(f32 arg0, f32 arg1) => arg0 / arg1;
-
   f32 f32_min(f32 arg0, f32 arg1) => min(arg0, arg1);
   f32 f32_max(f32 arg0, f32 arg1) => max(arg0, arg1);
   f32 f32_copysign(f32 arg0, f32 arg1) {
@@ -618,7 +612,6 @@ class VM {
   f64 f64_div(f64 arg0, f64 arg1) => arg0 / arg1;
   f64 f64_min(f64 arg0, f64 arg1) => min(arg0, arg1);
   f64 f64_max(f64 arg0, f64 arg1) => max(arg0, arg1);
-
   f64 f64_copysign(f64 arg0, f64 arg1) {
     return arg0.isNegative == arg1.isNegative ? arg0 : -arg0;
   }
@@ -830,16 +823,15 @@ class VM {
     return arg0.toInt();
   }
 
-  // void memory_init(
-  //     u32 dataSegment, u32 memIndex, i32 dstOffset, i32 srcOffset, i32 count) {
-  //   // var module = function.module;
-  //   // var segmentName = module.dataSegments.segments[dataSegment].name;
+  void memory_init(u32 segmentIndex, u32 memoryIndex, i32 destOffset,
+      i32 sourceOffset, i32 count) {
+    memory.copyFrom(
+        dataSegments.data[segmentIndex], sourceOffset, destOffset, count);
+  }
 
-  //   memory.copyFrom(segment, srcOffset, dstOffset, count);
-  //   // memory.copyFrom(_data.$segmentName, srcOffset, dstOffset, count);
-  // }
-
-  // void data_drop(u32 immediate0) { }
+  void data_drop(u32 index) {
+    // nothing to do (optionally drop data segment 'index')
+  }
 
   void memory_copy(u32 destMemoryIndex, u32 srcMemoryIndex, i32 destOffset,
       i32 sourceOffset, i32 count) {
@@ -850,8 +842,15 @@ class VM {
     memory.fill(value, offset, count);
   }
 
-  // void table_init(u32 immediate0, u32 immediate1, i32 arg0, i32 arg1, i32 arg2) { }
-  // void elem_drop(u32 immediate0) { }
+  void table_init(u32 segmentIndex, u32 tableIndex, i32 destOffset,
+      i32 sourceOffset, i32 count) {
+    elementSegments.copyTo(tables[tableIndex], sourceOffset, destOffset, count,
+        elementSegments.segments[segmentIndex]!);
+  }
+
+  void elem_drop(u32 segment) {
+    // nothing to do (optionally, drop the given element segment)
+  }
 
   void table_copy(u32 destTable, u32 srcTable, i32 destOffset, i32 sourceOffset,
       i32 count) {

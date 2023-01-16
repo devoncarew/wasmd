@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class Exports78Module implements Module {
+class Exports78Module extends Module {
   Exports78Module() {
     vm = VM(this);
   }

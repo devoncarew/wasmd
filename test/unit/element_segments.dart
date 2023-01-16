@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class ElementSegmentsModule implements Module {
+class ElementSegmentsModule extends Module {
   ElementSegmentsModule() {
-    segments.init();
+    elementSegments.init();
     _init();
   }
 
@@ -20,7 +20,8 @@ class ElementSegmentsModule implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -84,7 +85,7 @@ class ElementSegmentsModule implements Module {
       i32 count = frame.pop() as i32;
       i32 sourceOffset = frame.pop() as i32;
       i32 destOffset = frame.pop() as i32;
-      segments.copyTo(table0, sourceOffset, destOffset, count, segments.segment1);
+      elementSegments.copyTo(table0, sourceOffset, destOffset, count, elementSegments.segment1);
     }
   }
 
@@ -105,6 +106,9 @@ class ElementSegments extends AbstractElementSegments {
   final ElementSegmentsModule module;
 
   late final List<int> segment1;
+
+  @override
+  late final List<List<int>?> segments = [null, segment1];
 
   @override
   List<Function> get functionTable => module.functionTable;

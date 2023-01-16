@@ -7,9 +7,9 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class LeftToRight0Module implements Module {
+class LeftToRight0Module extends Module {
   LeftToRight0Module() {
-    segments.init();
+    elementSegments.init();
     vm = VM(this);
   }
 
@@ -26,7 +26,8 @@ class LeftToRight0Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -1349,6 +1350,9 @@ class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final LeftToRight0Module module;
+
+  @override
+  late final List<List<int>?> segments = [null];
 
   @override
   List<Function> get functionTable => module.functionTable;

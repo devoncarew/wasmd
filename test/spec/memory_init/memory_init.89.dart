@@ -7,16 +7,21 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
-class MemoryInit89Module implements Module {
+class MemoryInit89Module extends Module {
   MemoryInit89Module() {
-    _data.init(memory);
+    dataSegments.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(1);
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -25,56 +30,39 @@ class MemoryInit89Module implements Module {
   void run(i32 arg0, i32 arg1) => _func1(arg0, arg1);
 
   i32 _func0(i32 from, i32 to, i32 expected) {
-    final frame = Frame(this);
-
     loop_label_0:
     for (;;) {
-      frame.push(from);
-      frame.push(to);
-      frame.i32_eq();
+      var t0 = vm.i32_eq(from, to);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(-1);
-        return frame.pop();
+      if (t0 != 0) {
+        return -1;
       }
-      frame.push(from);
-      frame.i32_load8_u(0, 0);
-      frame.push(expected);
-      frame.i32_eq();
+      var t1 = vm.i32_load8_u(0, 0, from);
+      var t2 = vm.i32_eq(t1, expected);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.push(from);
-        frame.i32_const(1);
-        frame.i32_add();
-        from = frame.pop();
+      if (t2 != 0) {
+        var t3 = vm.i32_add(from, 1);
+        from = t3;
         continue loop_label_0;
       }
       break;
     }
-    frame.push(from);
-    return frame.pop();
-    return frame.pop();
+    return from;
   }
 
   void _func1(i32 offs, i32 len) {
-    final frame = Frame(this);
-    frame.push(offs);
-    frame.i32_const(0);
-    frame.push(len);
-    {
-      i32 count = frame.pop() as i32;
-      i32 srcOffset = frame.pop() as i32;
-      i32 dstOffset = frame.pop() as i32;
-      memory.copyFrom(_data.data0, srcOffset, dstOffset, count);
-    }
+    vm.memory_init(0, 0, offs, 0, len);
   }
 }
 
 typedef FunctionType0 = i32 Function(i32, i32, i32);
 typedef FunctionType1 = void Function(i32, i32);
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List data0 = decodeDataLiteral(_hex0);
+
+  @override
+  late final List<Uint8List> data = [data0];
 
   static const String _hex0 = '\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42\x42';
 

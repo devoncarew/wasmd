@@ -7,7 +7,7 @@
 import 'package:wasmd/runtime.dart';
 import 'package:wasmd/runtime_vm.dart';
 
-class GlobalModule implements Module {
+class GlobalModule extends Module {
   GlobalModule() {
     vm = VM(this);
   }

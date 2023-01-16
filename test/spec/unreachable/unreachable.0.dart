@@ -6,9 +6,9 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Unreachable0Module implements Module {
+class Unreachable0Module extends Module {
   Unreachable0Module() {
-    segments.init();
+    elementSegments.init();
   }
 
   @override
@@ -24,7 +24,8 @@ class Unreachable0Module implements Module {
   @override
   late final List<Table> tables = [table0];
 
-  late final ElementSegments segments = ElementSegments(this);
+  @override
+  late final ElementSegments elementSegments = ElementSegments(this);
 
   late final List<Function> functionTable = _initFunctionTable();
 
@@ -812,6 +813,9 @@ class ElementSegments extends AbstractElementSegments {
   ElementSegments(this.module);
 
   final Unreachable0Module module;
+
+  @override
+  late final List<List<int>?> segments = [null];
 
   @override
   List<Function> get functionTable => module.functionTable;

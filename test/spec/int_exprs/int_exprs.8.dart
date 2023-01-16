@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class IntExprs8Module implements Module {
+class IntExprs8Module extends Module {
   IntExprs8Module();
 
   @override

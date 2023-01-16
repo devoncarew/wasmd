@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class Unwind0Module implements Module {
+class Unwind0Module extends Module {
   Unwind0Module();
 
   @override

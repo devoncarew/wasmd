@@ -14,12 +14,12 @@ abstract class ConsoleImports {
   void log(i32 arg0, i32 arg1);
 }
 
-class PrintModule implements Module {
+class PrintModule extends Module {
   PrintModule({
     required this.consoleImports,
     required this.memory,
   }) {
-    _data.init(memory);
+    dataSegments.init(memory);
     _writeHi();
     vm = VM(this);
   }
@@ -32,7 +32,8 @@ class PrintModule implements Module {
   @override
   final Memory memory;
 
-  final DataSegments _data = DataSegments();
+  @override
+  final DataSegments dataSegments = DataSegments();
 
   @override
   late final List<Table> tables = [];
@@ -47,10 +48,13 @@ class PrintModule implements Module {
 typedef FunctionType0 = void Function(i32, i32);
 typedef FunctionType1 = void Function();
 
-class DataSegments {
+class DataSegments extends AbstractDataSegments {
   final Uint8List helloString = decodeDataLiteral(_hex0);
 
   final Uint8List otherString = decodeDataLiteral(_hex1);
+
+  @override
+  late final List<Uint8List> data = [helloString, otherString];
 
   static const String _hex0 = '\x48\x65\x6C\x6C\x6F\x20\x66\x72\x6F\x6D\x20\x77\x61\x73\x6D\x21\x00';
 

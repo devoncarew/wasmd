@@ -6,7 +6,7 @@
 
 import 'package:wasmd/runtime.dart';
 
-class TableInit0Module implements Module {
+class TableInit0Module extends Module {
   TableInit0Module();
 
   @override
