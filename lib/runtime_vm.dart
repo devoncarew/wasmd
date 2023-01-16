@@ -615,41 +615,121 @@ class VM {
     return arg0.isNegative == arg1.isNegative ? arg0 : -arg0;
   }
 
-  // i32 i32_wrap_i64(i64 arg0) { }
-  // i32 i32_trunc_f32_s(f32 arg0) { }
-  // i32 i32_trunc_f32_u(f32 arg0) { }
-  // i32 i32_trunc_f64_s(f64 arg0) { }
-  // i32 i32_trunc_f64_u(f64 arg0) { }
-  // i64 i64_extend_i32_s(i32 arg0) { }
-  // i64 i64_extend_i32_u(i32 arg0) { }
-  // i64 i64_trunc_f32_s(f32 arg0) { }
-  // i64 i64_trunc_f32_u(f32 arg0) { }
-  // i64 i64_trunc_f64_s(f64 arg0) { }
-  // i64 i64_trunc_f64_u(f64 arg0) { }
+  i32 i32_wrap_i64(i64 arg0) {
+    i32 result = arg0 & _mask32;
+    // sign extend
+    return (result & _bit31) != 0 ? result | _maskTop32 : result;
+  }
+
+  i32 i32_trunc_f32_s(f32 arg0) {
+    try {
+      return arg0.truncate();
+    } on UnsupportedError {
+      _handleTruncateError(arg0);
+    }
+  }
+
+  i32 i32_trunc_f32_u(f32 arg0) {
+    try {
+      return arg0.truncate();
+    } on UnsupportedError {
+      _handleTruncateError(arg0);
+    }
+  }
+
+  i32 i32_trunc_f64_s(f64 arg0) {
+    try {
+      return arg0.truncate();
+    } on UnsupportedError {
+      _handleTruncateError(arg0);
+    }
+  }
+
+  i32 i32_trunc_f64_u(f64 arg0) {
+    try {
+      return arg0.truncate();
+    } on UnsupportedError {
+      _handleTruncateError(arg0);
+    }
+  }
+
+  i64 i64_extend_i32_s(i32 arg0) => arg0;
+  i64 i64_extend_i32_u(i32 arg0) => arg0 & _mask32;
+
+  i64 i64_trunc_f32_s(f32 arg0) {
+    try {
+      return arg0.truncate();
+    } on UnsupportedError {
+      _handleTruncateError(arg0);
+    }
+  }
+
+  i64 i64_trunc_f32_u(f32 arg0) {
+    try {
+      return arg0.truncate();
+    } on UnsupportedError {
+      _handleTruncateError(arg0);
+    }
+  }
+
+  i64 i64_trunc_f64_s(f64 arg0) {
+    try {
+      return arg0.truncate();
+    } on UnsupportedError {
+      _handleTruncateError(arg0);
+    }
+  }
+
+  i64 i64_trunc_f64_u(f64 arg0) {
+    try {
+      return arg0.truncate();
+    } on UnsupportedError {
+      _handleTruncateError(arg0);
+    }
+  }
 
   f32 f32_convert_i32_s(i32 arg) => arg.toDouble();
+  f32 f32_convert_i32_u(i32 arg0) {
+    return (arg0 & _mask32).toDouble();
+  }
 
-  // f32 f32_convert_i32_u(i32 arg0) { }
-  // f32 f32_convert_i64_s(i64 arg0) { }
-  // f32 f32_convert_i64_u(i64 arg0) { }
-  // f32 f32_demote_f64(f64 arg0) { }
+  f32 f32_convert_i64_s(i64 arg0) => arg0.toDouble();
+  f32 f32_convert_i64_u(i64 arg0) => arg0.toDouble();
+  f32 f32_demote_f64(f64 arg0) {
+    // TODO: verify this implementation
+    return arg0.clamp(
+      -3.4028234663852885981170418348451692544e+38,
+      3.4028235e38,
+    );
+  }
 
   f64 f64_convert_i32_s(i32 arg0) => arg0.toDouble();
-
   f64 f64_convert_i32_u(i32 arg0) {
     arg0 &= _mask32;
     return arg0.toDouble();
   }
 
-  // f64 f64_convert_i64_s(i64 arg0) { }
-  // f64 f64_convert_i64_u(i64 arg0) { }
-  // f64 f64_promote_f32(f32 arg0) { }
+  f64 f64_convert_i64_s(i64 arg0) => arg0.toDouble();
+  f64 f64_convert_i64_u(i64 arg0) => arg0.toDouble();
+
+  f64 f64_promote_f32(f32 arg0) => arg0;
 
   final ByteData _reinterpretData = ByteData(8);
 
-  // i32 i32_reinterpret_f32(f32 arg0) { }
-  // i64 i64_reinterpret_f64(f64 arg0) { }
-  // f32 f32_reinterpret_i32(i32 arg0) { }
+  i32 i32_reinterpret_f32(f32 arg0) {
+    _reinterpretData.setFloat32(0, arg0, Endian.little);
+    return _reinterpretData.getUint32(0, Endian.little);
+  }
+
+  i64 i64_reinterpret_f64(f64 arg0) {
+    _reinterpretData.setFloat64(0, arg0, Endian.little);
+    return _reinterpretData.getUint64(0, Endian.little);
+  }
+
+  f32 f32_reinterpret_i32(i32 arg0) {
+    _reinterpretData.setUint32(0, arg0, Endian.little);
+    return _reinterpretData.getFloat32(0, Endian.little);
+  }
 
   f64 f64_reinterpret_i64(i64 arg0) {
     _reinterpretData.setUint64(0, arg0, Endian.little);
@@ -690,10 +770,15 @@ class VM {
 
   // reftype ref_null(u32 immediate0) { }
 
-  i32 ref_is_null(FuncRef? arg0) => arg0 == null ? 1 : 0;
+  i32 ref_is_null(RefType? arg0) => arg0 == null ? 1 : 0;
 
   // funcref ref_func(u32 immediate0) { }
-  // i32 i32_trunc_sat_f32_s(f32 arg0) { }
+
+  i32 i32_trunc_sat_f32_s(f32 arg0) {
+    // f32 => i32
+    // TODO: verify this logic
+    return arg0.toInt() & _mask32;
+  }
 
   i32 i32_trunc_sat_f32_u(f32 arg0) {
     // f32 => i32
@@ -701,7 +786,11 @@ class VM {
     return arg0.toInt() & _mask32;
   }
 
-  // i32 i32_trunc_sat_f64_s(f64 arg0) { }
+  i32 i32_trunc_sat_f64_s(f64 arg0) {
+    // f64 => i32
+    // TODO: verify this logic
+    return arg0.toInt() & _mask32;
+  }
 
   i32 i32_trunc_sat_f64_u(f64 arg0) {
     // f64 => i32
@@ -709,10 +798,30 @@ class VM {
     return arg0.toInt() & _mask32;
   }
 
-  // i64 i64_trunc_sat_f32_s(f32 arg0) { }
-  // i64 i64_trunc_sat_f32_u(f32 arg0) { }
-  // i64 i64_trunc_sat_f64_s(f64 arg0) { }
-  // i64 i64_trunc_sat_f64_u(f64 arg0) { }
+  i64 i64_trunc_sat_f32_s(f32 arg0) {
+    // f32 => i64
+    // TODO: verify this logic
+    return arg0.toInt();
+  }
+
+  i64 i64_trunc_sat_f32_u(f32 arg0) {
+    // f32 => i64
+    // TODO: verify this logic
+    return arg0.toInt();
+  }
+
+  i64 i64_trunc_sat_f64_s(f64 arg0) {
+    // f64 => i64
+    // TODO: verify this logic
+    return arg0.toInt();
+  }
+
+  i64 i64_trunc_sat_f64_u(f64 arg0) {
+    // f64 => i64
+    // TODO: verify this logic
+    return arg0.toInt();
+  }
+
   // void memory_init(u32 immediate0, u32 immediate1, i32 arg0, i32 arg1, i32 arg2) { }
   // void data_drop(u32 immediate0) { }
   // void memory_copy(u32 immediate0, u32 immediate1, i32 arg0, i32 arg1, i32 arg2) { }
@@ -727,4 +836,12 @@ class VM {
   // i32 table_grow(u32 immediate0, reftype arg0, i32 arg1) { }
   // i32 table_size(u32 immediate0) { }
   // void table_fill(u32 immediate0, i32 arg0, reftype arg1, i32 arg2) { }
+}
+
+Never _handleTruncateError(double arg0) {
+  if (arg0.isInfinite) {
+    throw Trap('integer overflow');
+  } else {
+    throw Trap('invalid conversion to integer');
+  }
 }
