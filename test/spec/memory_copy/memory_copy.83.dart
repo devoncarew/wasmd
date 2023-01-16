@@ -27,8 +27,8 @@ class MemoryCopy83Module implements Module {
   i32 checkRange(i32 arg0, i32 arg1, i32 arg2) => _func1(arg0, arg1, arg2);
 
   void _func0() {
-    var t0 = vm.memory_fill(0, 10, 85, 10);
-    var t1 = vm.memory_copy(0, 0, 9, 10, 5);
+    vm.memory_fill(0, 10, 85, 10);
+    vm.memory_copy(0, 0, 9, 10, 5);
   }
 
   i32 _func1(i32 from, i32 to, i32 expected) {

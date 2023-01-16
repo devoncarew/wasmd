@@ -45,15 +45,15 @@ class FloatMemory4Module implements Module {
   }
 
   void _func2() {
-    var t0 = vm.f32_store(2, 0, 0, double.nan);
+    vm.f32_store(2, 0, 0, double.nan);
   }
 
   void _func3() {
-    var t0 = vm.i32_store(2, 0, 0, 0x7fd00001);
+    vm.i32_store(2, 0, 0, 0x7fd00001);
   }
 
   void _func4() {
-    var t0 = vm.i32_store(2, 0, 0, 0);
+    vm.i32_store(2, 0, 0, 0);
   }
 }
 

@@ -28,7 +28,7 @@ class FloatExprs41Module implements Module {
   f64 check(i32 arg0) => _func2(arg0);
 
   void _func0(i32 i, f64 x) {
-    var t0 = vm.f64_store(3, 0, i, x);
+    vm.f64_store(3, 0, i, x);
   }
 
   void _func1(i32 n, f64 z) {
@@ -40,11 +40,11 @@ class FloatExprs41Module implements Module {
       for (;;) {
         var t0 = vm.f64_load(3, 0, i);
         var t1 = vm.f64_div(t0, z);
-        var t2 = vm.f64_store(3, 0, i, t1);
-        var t3 = vm.i32_add(i, 8);
-        i = t3;
-        var t4 = vm.i32_lt_u(i, n);
-        if (t4 != 0) continue loop_label_1;
+        vm.f64_store(3, 0, i, t1);
+        var t2 = vm.i32_add(i, 8);
+        i = t2;
+        var t3 = vm.i32_lt_u(i, n);
+        if (t3 != 0) continue loop_label_1;
         break;
       }
     }

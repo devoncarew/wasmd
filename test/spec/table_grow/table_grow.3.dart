@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableGrow3Module implements Module {
-  TableGrow3Module();
+  TableGrow3Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -23,11 +28,8 @@ class TableGrow3Module implements Module {
   i32 grow(i32 arg0) => _func0(arg0);
 
   i32 _func0(i32 arg0) {
-    final frame = Frame(this);
-    frame.ref_null(111);
-    frame.push(arg0);
-    frame.table_grow(0);
-    return frame.pop();
+    var t0 = vm.table_grow(0, null, arg0);
+    return t0;
   }
 }
 

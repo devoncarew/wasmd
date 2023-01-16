@@ -58,13 +58,13 @@ class FloatExprs60Module implements Module {
     var t7 = vm.f64_load(3, 24, j);
     y3 = t7;
     var t8 = vm.f64_add(x0, y0);
-    var t9 = vm.f64_store(3, 0, k, t8);
-    var t10 = vm.f64_add(x1, y1);
-    var t11 = vm.f64_store(3, 8, k, t10);
-    var t12 = vm.f64_add(x2, y2);
-    var t13 = vm.f64_store(3, 16, k, t12);
-    var t14 = vm.f64_add(x3, y3);
-    var t15 = vm.f64_store(3, 24, k, t14);
+    vm.f64_store(3, 0, k, t8);
+    var t9 = vm.f64_add(x1, y1);
+    vm.f64_store(3, 8, k, t9);
+    var t10 = vm.f64_add(x2, y2);
+    vm.f64_store(3, 16, k, t10);
+    var t11 = vm.f64_add(x3, y3);
+    vm.f64_store(3, 24, k, t11);
   }
 
   f64 _func1(i32 k) {

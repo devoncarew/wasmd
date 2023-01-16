@@ -32,7 +32,7 @@ class MemoryCopy6Module implements Module {
   i32 load8_u(i32 arg0) => _func1(arg0);
 
   void _func0() {
-    var t0 = vm.memory_copy(0, 0, 10, 12, 7);
+    vm.memory_copy(0, 0, 10, 12, 7);
   }
 
   i32 _func1(i32 arg0) {

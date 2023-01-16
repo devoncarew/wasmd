@@ -885,6 +885,17 @@ class Instruction_Drop extends Instruction {
   }
 }
 
+class Instruction_RefNull extends Instruction {
+  Instruction_RefNull() : super('ref.null', 0xD0, '(u32) => reftype');
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.scope.updateStackDepth(1, name);
+
+    functionBuilder.pushRef(Ref('null'));
+  }
+}
+
 class Instruction_MemoryInit extends Instruction {
   Instruction_MemoryInit()
       : super('memory.init', 0x08, '(u32 u32) i32 i32 i32');
@@ -953,6 +964,18 @@ class Instruction_RefFunc extends Instruction {
     function.scope.updateStackDepth(1, name);
 
     return refer('frame.push').call([refer(name)]).statement;
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    var funcIndex = instr.args[0] as int;
+    var func = functionBuilder.module.allFunctions[funcIndex];
+    var name =
+        ElementSegments.inSegmentContext ? 'module.${func.name}' : func.name;
+
+    functionBuilder.scope.updateStackDepth(1, name);
+
+    return functionBuilder.pushRef(Ref(name));
   }
 }
 
@@ -1127,11 +1150,19 @@ class Instruction {
       args.add(functionBuilder.popRef());
     }
 
-    functionBuilder.pushAssignTemp(VmCall(
-      'vm.${instruction.methodName}',
-      instr.args.cast<num>(),
-      args.reversed.toList(),
-    ));
+    if (resultCount == 0) {
+      functionBuilder.performCall(VmCall(
+        'vm.${instruction.methodName}',
+        instr.args.cast<num>(),
+        args.reversed.toList(),
+      ));
+    } else {
+      functionBuilder.pushAssignTemp(VmCall(
+        'vm.${instruction.methodName}',
+        instr.args.cast<num>(),
+        args.reversed.toList(),
+      ));
+    }
   }
 
   @override
@@ -1366,7 +1397,7 @@ class Instruction {
       Instruction('i64.extend16_s', 0xC3, 'i64 => i64'),
       Instruction('i64.extend32_s', 0xC4, 'i64 => i64'),
       // reserved, 0xC5 - 0xCF
-      Instruction('ref.null', 0xD0, '(u32) => reftype'),
+      Instruction_RefNull(), // ref.null, 0xD0
       Instruction('ref.is_null', 0xD1, 'reftype => i32'),
       Instruction_RefFunc(), // ref.func, 0xD2
       // reserved, 0xD3 - 0xFB

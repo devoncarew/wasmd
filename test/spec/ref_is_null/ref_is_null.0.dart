@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class RefIsNull0Module implements Module {
   RefIsNull0Module() {
     segments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -36,69 +40,34 @@ class RefIsNull0Module implements Module {
   i32 externref_elem(i32 arg0) => _func6(arg0);
 
   i32 _f1(FuncRef? x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.ref_is_null();
-    return frame.pop();
+    var t0 = vm.ref_is_null(x);
+    return t0;
   }
 
   i32 _f2(ExternRef? x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.ref_is_null();
-    return frame.pop();
+    var t0 = vm.ref_is_null(x);
+    return t0;
   }
 
-  void _dummy() {
-    final frame = Frame(this);
-  }
+  void _dummy() {}
 
   void _func3(ExternRef? r) {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.push(r);
-    {
-      var ref = frame.pop();
-      table1[frame.pop() as int] = ref;
-    }
+    table1[1] = r;
   }
 
   void _func4() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.ref_null(112);
-    {
-      var ref = frame.pop();
-      table0[frame.pop() as int] = ref;
-    }
-    frame.i32_const(1);
-    frame.ref_null(111);
-    {
-      var ref = frame.pop();
-      table1[frame.pop() as int] = ref;
-    }
+    table0[1] = null;
+    table1[1] = null;
   }
 
   i32 _func5(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(table0[frame.pop()]);
-    {
-      var t0 = frame.pop();
-      frame.push(_f1(t0));
-    }
-    return frame.pop();
+    var t0 = _f1(table0[x]);
+    return t0;
   }
 
   i32 _func6(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(table1[frame.pop()]);
-    {
-      var t0 = frame.pop();
-      frame.push(_f2(t0));
-    }
-    return frame.pop();
+    var t0 = _f2(table1[x]);
+    return t0;
   }
 
   List<Function> _initFunctionTable() {

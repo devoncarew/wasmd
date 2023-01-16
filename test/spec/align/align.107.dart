@@ -24,7 +24,7 @@ class Align107Module implements Module {
   i32 load(i32 arg0) => _func1(arg0);
 
   void _func0(i32 arg0, i64 arg1) {
-    var t0 = vm.i64_store(2, 0, arg0, arg1);
+    vm.i64_store(2, 0, arg0, arg1);
   }
 
   i32 _func1(i32 arg0) {

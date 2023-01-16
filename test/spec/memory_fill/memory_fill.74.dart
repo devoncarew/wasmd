@@ -48,7 +48,7 @@ class MemoryFill74Module implements Module {
   }
 
   void _func1(i32 offs, i32 val, i32 len) {
-    var t0 = vm.memory_fill(0, offs, val, len);
+    vm.memory_fill(0, offs, val, len);
   }
 }
 

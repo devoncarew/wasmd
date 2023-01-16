@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableCopy0Module implements Module {
-  TableCopy0Module();
+  TableCopy0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -22,33 +27,23 @@ class TableCopy0Module implements Module {
   i32 ef4() => _func4();
 
   i32 _func0() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    return frame.pop();
+    return 0;
   }
 
   i32 _func1() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    return frame.pop();
+    return 1;
   }
 
   i32 _func2() {
-    final frame = Frame(this);
-    frame.i32_const(2);
-    return frame.pop();
+    return 2;
   }
 
   i32 _func3() {
-    final frame = Frame(this);
-    frame.i32_const(3);
-    return frame.pop();
+    return 3;
   }
 
   i32 _func4() {
-    final frame = Frame(this);
-    frame.i32_const(4);
-    return frame.pop();
+    return 4;
   }
 }
 

@@ -5,6 +5,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 /// A class representing the symbols imported from the 'a' module.
 abstract class AImports {
@@ -18,9 +19,12 @@ abstract class AImports {
 class TableCopy17Module implements Module {
   TableCopy17Module({required this.aImports}) {
     segments.init();
+    vm = VM(this);
   }
 
   final AImports aImports;
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -50,65 +54,39 @@ class TableCopy17Module implements Module {
   i32 check_t1(i32 arg0) => _func7(arg0);
 
   i32 _func0() {
-    final frame = Frame(this);
-    frame.i32_const(5);
-    return frame.pop();
+    return 5;
   }
 
   i32 _func1() {
-    final frame = Frame(this);
-    frame.i32_const(6);
-    return frame.pop();
+    return 6;
   }
 
   i32 _func2() {
-    final frame = Frame(this);
-    frame.i32_const(7);
-    return frame.pop();
+    return 7;
   }
 
   i32 _func3() {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    return frame.pop();
+    return 8;
   }
 
   i32 _func4() {
-    final frame = Frame(this);
-    frame.i32_const(9);
-    return frame.pop();
+    return 9;
   }
 
   void _func5() {
-    final frame = Frame(this);
-    frame.i32_const(12);
-    frame.i32_const(10);
-    frame.i32_const(7);
-    frame.table_copy(1, 1);
+    vm.table_copy(1, 1, 12, 10, 7);
   }
 
   i32 _func6(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    {
-      var func = table1[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
-      frame.push(func());
-    }
-    return frame.pop();
+    var func0 = assertCallable<FunctionType0>(table1[arg0]);
+    var t0 = func0();
+    return t0;
   }
 
   i32 _func7(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
-      frame.push(func());
-    }
-    return frame.pop();
+    var func0 = assertCallable<FunctionType0>(table0[arg0]);
+    var t0 = func0();
+    return t0;
   }
 
   List<Function> _initFunctionTable() {

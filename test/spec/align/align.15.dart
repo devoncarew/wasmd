@@ -21,7 +21,7 @@ class Align15Module implements Module {
   late final List<Table> tables = [];
 
   void _func0() {
-    var t0 = vm.i32_store16(1, 0, 0, 1);
+    vm.i32_store16(1, 0, 0, 1);
   }
 }
 

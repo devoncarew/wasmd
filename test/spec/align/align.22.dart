@@ -21,7 +21,7 @@ class Align22Module implements Module {
   late final List<Table> tables = [];
 
   void _func0() {
-    var t0 = vm.f64_store(3, 0, 0, 1.0);
+    vm.f64_store(3, 0, 0, 1.0);
   }
 }
 

@@ -66,78 +66,78 @@ class Memory30Module implements Module {
   }
 
   f64 _func01() {
-    var t0 = vm.i64_store(3, 0, 8, -0x3039);
-    var t1 = vm.f64_load(3, 0, 8);
-    var t2 = vm.f64_reinterpret_i64(-0x3039);
-    var t3 = vm.f64_eq(t1, t2);
+    vm.i64_store(3, 0, 8, -0x3039);
+    var t0 = vm.f64_load(3, 0, 8);
+    var t1 = vm.f64_reinterpret_i64(-0x3039);
+    var t2 = vm.f64_eq(t0, t1);
     if_label_0:
-    if (t3 != 0) {
+    if (t2 != 0) {
       return 0.0;
     }
-    var t4 = vm.i64_store(0, 0, 9, 0);
-    var t5 = vm.i32_store16(0, 0, 15, 0x4045);
-    var t6 = vm.f64_load(0, 0, 9);
-    return t6;
+    vm.i64_store(0, 0, 9, 0);
+    vm.i32_store16(0, 0, 15, 0x4045);
+    var t3 = vm.f64_load(0, 0, 9);
+    return t3;
   }
 
   i32 _func02(i32 i) {
-    var t0 = vm.i32_store8(0, 0, 8, i);
-    var t1 = vm.i32_load8_s(0, 0, 8);
-    return t1;
+    vm.i32_store8(0, 0, 8, i);
+    var t0 = vm.i32_load8_s(0, 0, 8);
+    return t0;
   }
 
   i32 _func03(i32 i) {
-    var t0 = vm.i32_store8(0, 0, 8, i);
-    var t1 = vm.i32_load8_u(0, 0, 8);
-    return t1;
+    vm.i32_store8(0, 0, 8, i);
+    var t0 = vm.i32_load8_u(0, 0, 8);
+    return t0;
   }
 
   i32 _func04(i32 i) {
-    var t0 = vm.i32_store16(1, 0, 8, i);
-    var t1 = vm.i32_load16_s(1, 0, 8);
-    return t1;
+    vm.i32_store16(1, 0, 8, i);
+    var t0 = vm.i32_load16_s(1, 0, 8);
+    return t0;
   }
 
   i32 _func05(i32 i) {
-    var t0 = vm.i32_store16(1, 0, 8, i);
-    var t1 = vm.i32_load16_u(1, 0, 8);
-    return t1;
+    vm.i32_store16(1, 0, 8, i);
+    var t0 = vm.i32_load16_u(1, 0, 8);
+    return t0;
   }
 
   i64 _func06(i64 i) {
-    var t0 = vm.i64_store8(0, 0, 8, i);
-    var t1 = vm.i64_load8_s(0, 0, 8);
-    return t1;
+    vm.i64_store8(0, 0, 8, i);
+    var t0 = vm.i64_load8_s(0, 0, 8);
+    return t0;
   }
 
   i64 _func07(i64 i) {
-    var t0 = vm.i64_store8(0, 0, 8, i);
-    var t1 = vm.i64_load8_u(0, 0, 8);
-    return t1;
+    vm.i64_store8(0, 0, 8, i);
+    var t0 = vm.i64_load8_u(0, 0, 8);
+    return t0;
   }
 
   i64 _func08(i64 i) {
-    var t0 = vm.i64_store16(1, 0, 8, i);
-    var t1 = vm.i64_load16_s(1, 0, 8);
-    return t1;
+    vm.i64_store16(1, 0, 8, i);
+    var t0 = vm.i64_load16_s(1, 0, 8);
+    return t0;
   }
 
   i64 _func09(i64 i) {
-    var t0 = vm.i64_store16(1, 0, 8, i);
-    var t1 = vm.i64_load16_u(1, 0, 8);
-    return t1;
+    vm.i64_store16(1, 0, 8, i);
+    var t0 = vm.i64_load16_u(1, 0, 8);
+    return t0;
   }
 
   i64 _func10(i64 i) {
-    var t0 = vm.i64_store32(2, 0, 8, i);
-    var t1 = vm.i64_load32_s(2, 0, 8);
-    return t1;
+    vm.i64_store32(2, 0, 8, i);
+    var t0 = vm.i64_load32_s(2, 0, 8);
+    return t0;
   }
 
   i64 _func11(i64 i) {
-    var t0 = vm.i64_store32(2, 0, 8, i);
-    var t1 = vm.i64_load32_u(2, 0, 8);
-    return t1;
+    vm.i64_store32(2, 0, 8, i);
+    var t0 = vm.i64_load32_u(2, 0, 8);
+    return t0;
   }
 }
 

@@ -39,10 +39,10 @@ class Endianness0Module implements Module {
   f64 f64_store(f64 arg0) => _func22(arg0);
 
   void _i16_store_little(i32 address, i32 value) {
-    var t0 = vm.i32_store8(0, 0, address, value);
-    var t1 = vm.i32_add(address, 1);
-    var t2 = vm.i32_shr_u(value, 8);
-    var t3 = vm.i32_store8(0, 0, t1, t2);
+    vm.i32_store8(0, 0, address, value);
+    var t0 = vm.i32_add(address, 1);
+    var t1 = vm.i32_shr_u(value, 8);
+    vm.i32_store8(0, 0, t0, t1);
   }
 
   void _i32_store_little(i32 address, i32 value) {
@@ -157,49 +157,49 @@ class Endianness0Module implements Module {
   }
 
   i32 _func16(i32 value) {
-    var t0 = vm.i32_store16(1, 0, 0, value);
-    var t1 = _i16_load_little(0);
-    return t1;
+    vm.i32_store16(1, 0, 0, value);
+    var t0 = _i16_load_little(0);
+    return t0;
   }
 
   i32 _func17(i32 value) {
-    var t0 = vm.i32_store(2, 0, 0, value);
-    var t1 = _i32_load_little(0);
-    return t1;
+    vm.i32_store(2, 0, 0, value);
+    var t0 = _i32_load_little(0);
+    return t0;
   }
 
   i64 _func18(i64 value) {
-    var t0 = vm.i64_store16(1, 0, 0, value);
-    var t1 = _i16_load_little(0);
-    var t2 = vm.i64_extend_i32_u(t1);
-    return t2;
-  }
-
-  i64 _func19(i64 value) {
-    var t0 = vm.i64_store32(2, 0, 0, value);
-    var t1 = _i32_load_little(0);
-    var t2 = vm.i64_extend_i32_u(t1);
-    return t2;
-  }
-
-  i64 _func20(i64 value) {
-    var t0 = vm.i64_store(3, 0, 0, value);
-    var t1 = _i64_load_little(0);
+    vm.i64_store16(1, 0, 0, value);
+    var t0 = _i16_load_little(0);
+    var t1 = vm.i64_extend_i32_u(t0);
     return t1;
   }
 
+  i64 _func19(i64 value) {
+    vm.i64_store32(2, 0, 0, value);
+    var t0 = _i32_load_little(0);
+    var t1 = vm.i64_extend_i32_u(t0);
+    return t1;
+  }
+
+  i64 _func20(i64 value) {
+    vm.i64_store(3, 0, 0, value);
+    var t0 = _i64_load_little(0);
+    return t0;
+  }
+
   f32 _func21(f32 value) {
-    var t0 = vm.f32_store(2, 0, 0, value);
-    var t1 = _i32_load_little(0);
-    var t2 = vm.f32_reinterpret_i32(t1);
-    return t2;
+    vm.f32_store(2, 0, 0, value);
+    var t0 = _i32_load_little(0);
+    var t1 = vm.f32_reinterpret_i32(t0);
+    return t1;
   }
 
   f64 _func22(f64 value) {
-    var t0 = vm.f64_store(3, 0, 0, value);
-    var t1 = _i64_load_little(0);
-    var t2 = vm.f64_reinterpret_i64(t1);
-    return t2;
+    vm.f64_store(3, 0, 0, value);
+    var t0 = _i64_load_little(0);
+    var t1 = vm.f64_reinterpret_i64(t0);
+    return t1;
   }
 }
 

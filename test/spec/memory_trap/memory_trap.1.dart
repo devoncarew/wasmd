@@ -120,39 +120,39 @@ class MemoryTrap1Module implements Module {
   }
 
   void _func14(i32 a, i32 v) {
-    var t0 = vm.i32_store(2, 0, a, v);
+    vm.i32_store(2, 0, a, v);
   }
 
   void _func15(i32 a, i64 v) {
-    var t0 = vm.i64_store(3, 0, a, v);
+    vm.i64_store(3, 0, a, v);
   }
 
   void _func16(i32 a, f32 v) {
-    var t0 = vm.f32_store(2, 0, a, v);
+    vm.f32_store(2, 0, a, v);
   }
 
   void _func17(i32 a, f64 v) {
-    var t0 = vm.f64_store(3, 0, a, v);
+    vm.f64_store(3, 0, a, v);
   }
 
   void _func18(i32 a, i32 v) {
-    var t0 = vm.i32_store8(0, 0, a, v);
+    vm.i32_store8(0, 0, a, v);
   }
 
   void _func19(i32 a, i32 v) {
-    var t0 = vm.i32_store16(1, 0, a, v);
+    vm.i32_store16(1, 0, a, v);
   }
 
   void _func20(i32 a, i64 v) {
-    var t0 = vm.i64_store8(0, 0, a, v);
+    vm.i64_store8(0, 0, a, v);
   }
 
   void _func21(i32 a, i64 v) {
-    var t0 = vm.i64_store16(1, 0, a, v);
+    vm.i64_store16(1, 0, a, v);
   }
 
   void _func22(i32 a, i64 v) {
-    var t0 = vm.i64_store32(2, 0, a, v);
+    vm.i64_store32(2, 0, a, v);
   }
 }
 

@@ -58,13 +58,13 @@ class FloatExprs59Module implements Module {
     var t7 = vm.f32_load(2, 12, j);
     y3 = t7;
     var t8 = vm.f32_add(x0, y0);
-    var t9 = vm.f32_store(2, 0, k, t8);
-    var t10 = vm.f32_add(x1, y1);
-    var t11 = vm.f32_store(2, 4, k, t10);
-    var t12 = vm.f32_add(x2, y2);
-    var t13 = vm.f32_store(2, 8, k, t12);
-    var t14 = vm.f32_add(x3, y3);
-    var t15 = vm.f32_store(2, 12, k, t14);
+    vm.f32_store(2, 0, k, t8);
+    var t9 = vm.f32_add(x1, y1);
+    vm.f32_store(2, 4, k, t9);
+    var t10 = vm.f32_add(x2, y2);
+    vm.f32_store(2, 8, k, t10);
+    var t11 = vm.f32_add(x3, y3);
+    vm.f32_store(2, 12, k, t11);
   }
 
   f32 _func1(i32 k) {

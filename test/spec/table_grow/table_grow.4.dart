@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableGrow4Module implements Module {
   TableGrow4Module() {
     segments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -27,47 +31,32 @@ class TableGrow4Module implements Module {
   FuncRef? check_table_null(i32 arg0, i32 arg1) => _func1(arg0, arg1);
 
   i32 _func0(i32 arg0) {
-    final frame = Frame(this);
-    frame.ref_null(112);
-    frame.push(arg0);
-    frame.table_grow(0);
-    return frame.pop();
+    var t0 = vm.table_grow(0, null, arg0);
+    return t0;
   }
 
   FuncRef? _func1(i32 arg0, i32 arg1) {
     FuncRef? local0;
 
-    final frame = Frame(this);
-    frame.push(_func1);
-    local0 = frame.pop();
+    local0 = _func1;
     block_label_0:
     {
       loop_label_1:
       for (;;) {
-        frame.push(arg0);
-        frame.push(table0[frame.pop()]);
-        local0 = frame.pop();
-        frame.push(local0);
-        frame.ref_is_null();
-        frame.i32_eqz();
-        if (frame.pop() != 0) break block_label_0;
-        frame.push(arg0);
-        frame.push(arg1);
-        frame.i32_ge_u();
-        if (frame.pop() != 0) break block_label_0;
-        frame.push(arg0);
-        frame.i32_const(1);
-        frame.i32_add();
-        arg0 = frame.pop();
-        frame.push(arg0);
-        frame.push(arg1);
-        frame.i32_le_u();
-        if (frame.pop() != 0) continue loop_label_1;
+        local0 = table0[arg0];
+        var t0 = vm.ref_is_null(local0);
+        var t1 = vm.i32_eqz(t0);
+        if (t1 != 0) break block_label_0;
+        var t2 = vm.i32_ge_u(arg0, arg1);
+        if (t2 != 0) break block_label_0;
+        var t3 = vm.i32_add(arg0, 1);
+        arg0 = t3;
+        var t4 = vm.i32_le_u(arg0, arg1);
+        if (t4 != 0) continue loop_label_1;
         break;
       }
     }
-    frame.push(local0);
-    return frame.pop();
+    return local0;
   }
 
   List<Function> _initFunctionTable() {

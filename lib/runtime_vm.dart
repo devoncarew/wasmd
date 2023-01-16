@@ -852,10 +852,30 @@ class VM {
 
   // void table_init(u32 immediate0, u32 immediate1, i32 arg0, i32 arg1, i32 arg2) { }
   // void elem_drop(u32 immediate0) { }
-  // void table_copy(u32 immediate0, u32 immediate1, i32 arg0, i32 arg1, i32 arg2) { }
-  // i32 table_grow(u32 immediate0, reftype arg0, i32 arg1) { }
-  // i32 table_size(u32 immediate0) { }
-  // void table_fill(u32 immediate0, i32 arg0, reftype arg1, i32 arg2) { }
+
+  void table_copy(u32 destTable, u32 srcTable, i32 destOffset, i32 sourceOffset,
+      i32 count) {
+    tables[srcTable].copyTo(tables[destTable], sourceOffset, destOffset, count);
+  }
+
+  i32 table_grow(u32 index, RefType? ref, i32 growBy) {
+    var table = tables[index];
+    var oldSize = table.size;
+    if (table.grow(growBy, ref)) {
+      return oldSize;
+    } else {
+      return -1;
+    }
+  }
+
+  i32 table_size(u32 index) {
+    return tables[index].size;
+  }
+
+  void table_fill(u32 index, i32 offset, RefType? val, i32 n) {
+    var table = tables[index];
+    table.fill(val, offset, n);
+  }
 }
 
 Never _handleTruncateError(double arg0) {

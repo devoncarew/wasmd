@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableSize0Module implements Module {
-  TableSize0Module();
+  TableSize0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -44,59 +49,39 @@ class TableSize0Module implements Module {
   void grow_t3(i32 arg0) => _func7(arg0);
 
   i32 _func0() {
-    final frame = Frame(this);
-    frame.table_size(0);
-    return frame.pop();
+    var t0 = vm.table_size(0);
+    return t0;
   }
 
   i32 _func1() {
-    final frame = Frame(this);
-    frame.table_size(1);
-    return frame.pop();
+    var t0 = vm.table_size(1);
+    return t0;
   }
 
   i32 _func2() {
-    final frame = Frame(this);
-    frame.table_size(2);
-    return frame.pop();
+    var t0 = vm.table_size(2);
+    return t0;
   }
 
   i32 _func3() {
-    final frame = Frame(this);
-    frame.table_size(3);
-    return frame.pop();
+    var t0 = vm.table_size(3);
+    return t0;
   }
 
   void _func4(i32 sz) {
-    final frame = Frame(this);
-    frame.ref_null(111);
-    frame.push(sz);
-    frame.table_grow(0);
-    frame.drop();
+    var t0 = vm.table_grow(0, null, sz);
   }
 
   void _func5(i32 sz) {
-    final frame = Frame(this);
-    frame.ref_null(111);
-    frame.push(sz);
-    frame.table_grow(1);
-    frame.drop();
+    var t0 = vm.table_grow(1, null, sz);
   }
 
   void _func6(i32 sz) {
-    final frame = Frame(this);
-    frame.ref_null(111);
-    frame.push(sz);
-    frame.table_grow(2);
-    frame.drop();
+    var t0 = vm.table_grow(2, null, sz);
   }
 
   void _func7(i32 sz) {
-    final frame = Frame(this);
-    frame.ref_null(111);
-    frame.push(sz);
-    frame.table_grow(3);
-    frame.drop();
+    var t0 = vm.table_grow(3, null, sz);
   }
 }
 

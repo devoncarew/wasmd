@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableFill0Module implements Module {
-  TableFill0Module();
+  TableFill0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -21,18 +26,11 @@ class TableFill0Module implements Module {
   ExternRef? get(i32 arg0) => _func1(arg0);
 
   void _func0(i32 i, ExternRef? r, i32 n) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.push(r);
-    frame.push(n);
-    frame.table_fill(0);
+    vm.table_fill(0, i, r, n);
   }
 
   ExternRef? _func1(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.push(table0[frame.pop()]);
-    return frame.pop();
+    return table0[i];
   }
 }
 

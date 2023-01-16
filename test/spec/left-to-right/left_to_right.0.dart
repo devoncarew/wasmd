@@ -159,17 +159,17 @@ class LeftToRight0Module implements Module {
   }
 
   void _reset() {
-    var t0 = vm.i32_store(2, 0, 8, 0);
+    vm.i32_store(2, 0, 8, 0);
   }
 
   void _bump() {
     var t0 = vm.i32_load8_u(0, 0, 10);
-    var t1 = vm.i32_store8(0, 0, 11, t0);
-    var t2 = vm.i32_load8_u(0, 0, 9);
-    var t3 = vm.i32_store8(0, 0, 10, t2);
-    var t4 = vm.i32_load8_u(0, 0, 8);
-    var t5 = vm.i32_store8(0, 0, 9, t4);
-    var t6 = vm.i32_store8(0, 0, 8, -3);
+    vm.i32_store8(0, 0, 11, t0);
+    var t1 = vm.i32_load8_u(0, 0, 9);
+    vm.i32_store8(0, 0, 10, t1);
+    var t2 = vm.i32_load8_u(0, 0, 8);
+    vm.i32_store8(0, 0, 9, t2);
+    vm.i32_store8(0, 0, 8, -3);
   }
 
   i32 _get() {
@@ -179,121 +179,121 @@ class LeftToRight0Module implements Module {
 
   i32 _i32_left() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 1);
+    vm.i32_store8(0, 0, 8, 1);
     return 0;
   }
 
   i32 _i32_right() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 2);
+    vm.i32_store8(0, 0, 8, 2);
     return 1;
   }
 
   i32 _i32_another() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 3);
+    vm.i32_store8(0, 0, 8, 3);
     return 1;
   }
 
   i32 _i32_callee() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 4);
+    vm.i32_store8(0, 0, 8, 4);
     return 0;
   }
 
   i32 _i32_bool() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 5);
+    vm.i32_store8(0, 0, 8, 5);
     return 0;
   }
 
   i64 _i64_left() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 1);
+    vm.i32_store8(0, 0, 8, 1);
     return 0;
   }
 
   i64 _i64_right() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 2);
+    vm.i32_store8(0, 0, 8, 2);
     return 1;
   }
 
   i64 _i64_another() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 3);
+    vm.i32_store8(0, 0, 8, 3);
     return 1;
   }
 
   i32 _i64_callee() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 4);
+    vm.i32_store8(0, 0, 8, 4);
     return 2;
   }
 
   i32 _i64_bool() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 5);
+    vm.i32_store8(0, 0, 8, 5);
     return 0;
   }
 
   f32 _f32_left() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 1);
+    vm.i32_store8(0, 0, 8, 1);
     return 0.0;
   }
 
   f32 _f32_right() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 2);
+    vm.i32_store8(0, 0, 8, 2);
     return 1.0;
   }
 
   f32 _f32_another() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 3);
+    vm.i32_store8(0, 0, 8, 3);
     return 1.0;
   }
 
   i32 _f32_callee() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 4);
+    vm.i32_store8(0, 0, 8, 4);
     return 4;
   }
 
   i32 _f32_bool() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 5);
+    vm.i32_store8(0, 0, 8, 5);
     return 0;
   }
 
   f64 _f64_left() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 1);
+    vm.i32_store8(0, 0, 8, 1);
     return 0.0;
   }
 
   f64 _f64_right() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 2);
+    vm.i32_store8(0, 0, 8, 2);
     return 1.0;
   }
 
   f64 _f64_another() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 3);
+    vm.i32_store8(0, 0, 8, 3);
     return 1.0;
   }
 
   i32 _f64_callee() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 4);
+    vm.i32_store8(0, 0, 8, 4);
     return 6;
   }
 
   i32 _f64_bool() {
     _bump();
-    var t0 = vm.i32_store8(0, 0, 8, 5);
+    vm.i32_store8(0, 0, 8, 5);
     return 0;
   }
 
@@ -516,27 +516,27 @@ class LeftToRight0Module implements Module {
     _reset();
     var t0 = _i32_left();
     var t1 = _i32_right();
-    var t2 = vm.i32_store(2, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.i32_store(2, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func059() {
     _reset();
     var t0 = _i32_left();
     var t1 = _i32_right();
-    var t2 = vm.i32_store8(0, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.i32_store8(0, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func060() {
     _reset();
     var t0 = _i32_left();
     var t1 = _i32_right();
-    var t2 = vm.i32_store16(1, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.i32_store16(1, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func061() {
@@ -780,36 +780,36 @@ class LeftToRight0Module implements Module {
     _reset();
     var t0 = _i32_left();
     var t1 = _i64_right();
-    var t2 = vm.i64_store(3, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.i64_store(3, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func088() {
     _reset();
     var t0 = _i32_left();
     var t1 = _i64_right();
-    var t2 = vm.i64_store8(0, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.i64_store8(0, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func089() {
     _reset();
     var t0 = _i32_left();
     var t1 = _i64_right();
-    var t2 = vm.i64_store16(1, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.i64_store16(1, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func090() {
     _reset();
     var t0 = _i32_left();
     var t1 = _i64_right();
-    var t2 = vm.i64_store32(2, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.i64_store32(2, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func091() {
@@ -963,9 +963,9 @@ class LeftToRight0Module implements Module {
     _reset();
     var t0 = _i32_left();
     var t1 = _f32_right();
-    var t2 = vm.f32_store(2, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.f32_store(2, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func108() {
@@ -1119,9 +1119,9 @@ class LeftToRight0Module implements Module {
     _reset();
     var t0 = _i32_left();
     var t1 = _f64_right();
-    var t2 = vm.f64_store(3, 0, t0, t1);
-    var t3 = _get();
-    return t3;
+    vm.f64_store(3, 0, t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func125() {

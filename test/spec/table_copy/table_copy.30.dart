@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableCopy30Module implements Module {
   TableCopy30Module() {
     segments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -37,71 +41,47 @@ class TableCopy30Module implements Module {
   void test() => _func10();
 
   i32 _func00() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    return frame.pop();
+    return 0;
   }
 
   i32 _func01() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    return frame.pop();
+    return 1;
   }
 
   i32 _func02() {
-    final frame = Frame(this);
-    frame.i32_const(2);
-    return frame.pop();
+    return 2;
   }
 
   i32 _func03() {
-    final frame = Frame(this);
-    frame.i32_const(3);
-    return frame.pop();
+    return 3;
   }
 
   i32 _func04() {
-    final frame = Frame(this);
-    frame.i32_const(4);
-    return frame.pop();
+    return 4;
   }
 
   i32 _func05() {
-    final frame = Frame(this);
-    frame.i32_const(5);
-    return frame.pop();
+    return 5;
   }
 
   i32 _func06() {
-    final frame = Frame(this);
-    frame.i32_const(6);
-    return frame.pop();
+    return 6;
   }
 
   i32 _func07() {
-    final frame = Frame(this);
-    frame.i32_const(7);
-    return frame.pop();
+    return 7;
   }
 
   i32 _func08() {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    return frame.pop();
+    return 8;
   }
 
   i32 _func09() {
-    final frame = Frame(this);
-    frame.i32_const(9);
-    return frame.pop();
+    return 9;
   }
 
   void _func10() {
-    final frame = Frame(this);
-    frame.i32_const(28);
-    frame.i32_const(1);
-    frame.i32_const(3);
-    frame.table_copy(1, 0);
+    vm.table_copy(1, 0, 28, 1, 3);
   }
 
   List<Function> _initFunctionTable() {

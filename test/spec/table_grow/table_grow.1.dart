@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableGrow1Module implements Module {
   TableGrow1Module() {
     segments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -26,11 +30,8 @@ class TableGrow1Module implements Module {
   i32 grow() => _f();
 
   i32 _f() {
-    final frame = Frame(this);
-    frame.push(_f);
-    frame.i32_const(-16);
-    frame.table_grow(0);
-    return frame.pop();
+    var t0 = vm.table_grow(0, _f, -16);
+    return t0;
   }
 
   List<Function> _initFunctionTable() {

@@ -33,7 +33,7 @@ class MemoryTrap0Module implements Module {
   void _func1(i32 i, i32 v) {
     var t0 = _addr_limit();
     var t1 = vm.i32_add(t0, i);
-    var t2 = vm.i32_store(2, 0, t1, v);
+    vm.i32_store(2, 0, t1, v);
   }
 
   i32 _func2(i32 i) {

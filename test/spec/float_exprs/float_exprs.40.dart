@@ -28,7 +28,7 @@ class FloatExprs40Module implements Module {
   f32 check(i32 arg0) => _func2(arg0);
 
   void _func0(i32 i, f32 x) {
-    var t0 = vm.f32_store(2, 0, i, x);
+    vm.f32_store(2, 0, i, x);
   }
 
   void _func1(i32 n, f32 z) {
@@ -40,11 +40,11 @@ class FloatExprs40Module implements Module {
       for (;;) {
         var t0 = vm.f32_load(2, 0, i);
         var t1 = vm.f32_div(t0, z);
-        var t2 = vm.f32_store(2, 0, i, t1);
-        var t3 = vm.i32_add(i, 4);
-        i = t3;
-        var t4 = vm.i32_lt_u(i, n);
-        if (t4 != 0) continue loop_label_1;
+        vm.f32_store(2, 0, i, t1);
+        var t2 = vm.i32_add(i, 4);
+        i = t2;
+        var t3 = vm.i32_lt_u(i, n);
+        if (t3 != 0) continue loop_label_1;
         break;
       }
     }

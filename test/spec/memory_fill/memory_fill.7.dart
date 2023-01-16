@@ -48,8 +48,8 @@ class MemoryFill7Module implements Module {
   }
 
   void _func1() {
-    var t0 = vm.memory_fill(0, 18, 85, 10);
-    var t1 = vm.memory_fill(0, 21, 170, 4);
+    vm.memory_fill(0, 18, 85, 10);
+    vm.memory_fill(0, 21, 170, 4);
   }
 }
 

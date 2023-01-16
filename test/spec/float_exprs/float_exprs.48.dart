@@ -48,7 +48,7 @@ class FloatExprs48Module implements Module {
     {
       var t10 = vm.f32_eq(z0, z1);
       if (t10 != 0) break block_label_0;
-      var t11 = vm.unreachable();
+      vm.unreachable();
     }
     return z1;
   }

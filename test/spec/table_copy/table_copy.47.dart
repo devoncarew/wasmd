@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class TableCopy47Module implements Module {
   TableCopy47Module() {
     segments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -46,119 +50,77 @@ class TableCopy47Module implements Module {
   void run(i32 arg0, i32 arg1, i32 arg2) => _func17(arg0, arg1, arg2);
 
   i32 _f0() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    return frame.pop();
+    return 0;
   }
 
   i32 _f1() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    return frame.pop();
+    return 1;
   }
 
   i32 _f2() {
-    final frame = Frame(this);
-    frame.i32_const(2);
-    return frame.pop();
+    return 2;
   }
 
   i32 _f3() {
-    final frame = Frame(this);
-    frame.i32_const(3);
-    return frame.pop();
+    return 3;
   }
 
   i32 _f4() {
-    final frame = Frame(this);
-    frame.i32_const(4);
-    return frame.pop();
+    return 4;
   }
 
   i32 _f5() {
-    final frame = Frame(this);
-    frame.i32_const(5);
-    return frame.pop();
+    return 5;
   }
 
   i32 _f6() {
-    final frame = Frame(this);
-    frame.i32_const(6);
-    return frame.pop();
+    return 6;
   }
 
   i32 _f7() {
-    final frame = Frame(this);
-    frame.i32_const(7);
-    return frame.pop();
+    return 7;
   }
 
   i32 _f8() {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    return frame.pop();
+    return 8;
   }
 
   i32 _f9() {
-    final frame = Frame(this);
-    frame.i32_const(9);
-    return frame.pop();
+    return 9;
   }
 
   i32 _f10() {
-    final frame = Frame(this);
-    frame.i32_const(10);
-    return frame.pop();
+    return 10;
   }
 
   i32 _f11() {
-    final frame = Frame(this);
-    frame.i32_const(11);
-    return frame.pop();
+    return 11;
   }
 
   i32 _f12() {
-    final frame = Frame(this);
-    frame.i32_const(12);
-    return frame.pop();
+    return 12;
   }
 
   i32 _f13() {
-    final frame = Frame(this);
-    frame.i32_const(13);
-    return frame.pop();
+    return 13;
   }
 
   i32 _f14() {
-    final frame = Frame(this);
-    frame.i32_const(14);
-    return frame.pop();
+    return 14;
   }
 
   i32 _f15() {
-    final frame = Frame(this);
-    frame.i32_const(15);
-    return frame.pop();
+    return 15;
   }
 
   i32 _func16(i32 n) {
-    final frame = Frame(this);
-    frame.push(n);
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
-      frame.push(func());
-    }
-    return frame.pop();
+    var func0 = assertCallable<FunctionType0>(table0[n]);
+    var t0 = func0();
+    return t0;
   }
 
   void _func17(i32 targetOffs, i32 srcOffs, i32 len) {
-    final frame = Frame(this);
-    frame.push(targetOffs);
-    frame.push(srcOffs);
-    frame.push(len);
-    frame.table_copy(0, 0);
+    vm.table_copy(0, 0, targetOffs, srcOffs, len);
   }
 
   List<Function> _initFunctionTable() {

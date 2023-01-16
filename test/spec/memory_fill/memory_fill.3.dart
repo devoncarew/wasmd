@@ -48,7 +48,7 @@ class MemoryFill3Module implements Module {
   }
 
   void _func1() {
-    var t0 = vm.memory_fill(0, 18, 85, 0);
+    vm.memory_fill(0, 18, 85, 0);
   }
 }
 

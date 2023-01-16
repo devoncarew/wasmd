@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class RefNull0Module implements Module {
-  RefNull0Module();
+  RefNull0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -21,15 +26,11 @@ class RefNull0Module implements Module {
   FuncRef? funcref() => _func1();
 
   ExternRef? _func0() {
-    final frame = Frame(this);
-    frame.ref_null(111);
-    return frame.pop();
+    return null;
   }
 
   FuncRef? _func1() {
-    final frame = Frame(this);
-    frame.ref_null(112);
-    return frame.pop();
+    return null;
   }
 }
 

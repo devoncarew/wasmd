@@ -26,7 +26,7 @@ class MemoryCopy87Module implements Module {
   void test() => _func0();
 
   void _func0() {
-    var t0 = vm.memory_copy(0, 0, 0x8000, 0xff00, 257);
+    vm.memory_copy(0, 0, 0x8000, 0xff00, 257);
   }
 }
 

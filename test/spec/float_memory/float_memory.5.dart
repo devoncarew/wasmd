@@ -45,15 +45,15 @@ class FloatMemory5Module implements Module {
   }
 
   void _func2() {
-    var t0 = vm.f64_store(3, 0, 0, double.nan);
+    vm.f64_store(3, 0, 0, double.nan);
   }
 
   void _func3() {
-    var t0 = vm.i64_store(3, 0, 0, 0x7ffc000000000001);
+    vm.i64_store(3, 0, 0, 0x7ffc000000000001);
   }
 
   void _func4() {
-    var t0 = vm.i64_store(3, 0, 0, 0);
+    vm.i64_store(3, 0, 0, 0);
   }
 }
 

@@ -31,17 +31,17 @@ class MemoryRedundancy0Module implements Module {
   i32 malloc_aliasing() => _func5();
 
   void _func0() {
-    var t0 = vm.i32_store(2, 0, 0, 0);
-    var t1 = vm.i32_store(2, 0, 4, 0);
-    var t2 = vm.i32_store(2, 0, 8, 0);
-    var t3 = vm.i32_store(2, 0, 12, 0);
+    vm.i32_store(2, 0, 0, 0);
+    vm.i32_store(2, 0, 4, 0);
+    vm.i32_store(2, 0, 8, 0);
+    vm.i32_store(2, 0, 12, 0);
   }
 
   i32 _func1() {
-    var t0 = vm.i32_store(2, 0, 8, 0);
-    var t1 = vm.f32_store(2, 0, 5, -0.0);
-    var t2 = vm.i32_load(2, 0, 8);
-    return t2;
+    vm.i32_store(2, 0, 8, 0);
+    vm.f32_store(2, 0, 5, -0.0);
+    var t0 = vm.i32_load(2, 0, 8);
+    return t0;
   }
 
   i32 _func2() {
@@ -50,20 +50,20 @@ class MemoryRedundancy0Module implements Module {
 
     var t0 = vm.i32_load(2, 0, 8);
     t = t0;
-    var t1 = vm.i32_store(2, 0, 5, -0x80000000);
-    var t2 = vm.i32_load(2, 0, 8);
-    s = t2;
-    var t3 = vm.i32_add(t, s);
-    return t3;
+    vm.i32_store(2, 0, 5, -0x80000000);
+    var t1 = vm.i32_load(2, 0, 8);
+    s = t1;
+    var t2 = vm.i32_add(t, s);
+    return t2;
   }
 
   f32 _func3() {
     f32 t = 0;
 
-    var t0 = vm.i32_store(2, 0, 8, 0x23232323);
-    var t1 = vm.f32_load(2, 0, 11);
-    t = t1;
-    var t2 = vm.i32_store(2, 0, 8, 0);
+    vm.i32_store(2, 0, 8, 0x23232323);
+    var t0 = vm.f32_load(2, 0, 11);
+    t = t0;
+    vm.i32_store(2, 0, 8, 0);
     return t;
   }
 
@@ -79,10 +79,10 @@ class MemoryRedundancy0Module implements Module {
     x = t0;
     var t1 = _malloc(4);
     y = t1;
-    var t2 = vm.i32_store(2, 0, x, 42);
-    var t3 = vm.i32_store(2, 0, y, 43);
-    var t4 = vm.i32_load(2, 0, x);
-    return t4;
+    vm.i32_store(2, 0, x, 42);
+    vm.i32_store(2, 0, y, 43);
+    var t2 = vm.i32_load(2, 0, x);
+    return t2;
   }
 }
 

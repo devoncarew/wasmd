@@ -32,7 +32,7 @@ class MemoryCopy13Module implements Module {
   i32 load8_u(i32 arg0) => _func1(arg0);
 
   void _func0(i32 targetOffs, i32 srcOffs, i32 len) {
-    var t0 = vm.memory_copy(0, 0, targetOffs, srcOffs, len);
+    vm.memory_copy(0, 0, targetOffs, srcOffs, len);
   }
 
   i32 _func1(i32 arg0) {

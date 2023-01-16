@@ -48,7 +48,7 @@ class MemoryFill1Module implements Module {
   }
 
   void _func1() {
-    var t0 = vm.memory_fill(0, 0xff00, 85, 257);
+    vm.memory_fill(0, 0xff00, 85, 257);
   }
 }
 
