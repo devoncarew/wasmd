@@ -7,11 +7,15 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatMemory3Module implements Module {
   FloatMemory3Module() {
     _data.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -31,38 +35,25 @@ class FloatMemory3Module implements Module {
   void reset() => _func4();
 
   f64 _func0() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.f64_load(3, 0);
-    return frame.pop();
+    var t0 = vm.f64_load(3, 0, 1);
+    return t0;
   }
 
   i64 _func1() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.i64_load(3, 0);
-    return frame.pop();
+    var t0 = vm.i64_load(3, 0, 1);
+    return t0;
   }
 
   void _func2() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.f64_const(double.nan);
-    frame.f64_store(3, 0);
+    var t0 = vm.f64_store(3, 0, 1, double.nan);
   }
 
   void _func3() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.i64_const(0x7ff4000000000000);
-    frame.i64_store(3, 0);
+    var t0 = vm.i64_store(3, 0, 1, 0x7ff4000000000000);
   }
 
   void _func4() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    frame.i64_const(0);
-    frame.i64_store(3, 0);
+    var t0 = vm.i64_store(3, 0, 1, 0);
   }
 }
 

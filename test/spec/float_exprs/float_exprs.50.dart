@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs50Module implements Module {
-  FloatExprs50Module();
+  FloatExprs50Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -18,13 +23,9 @@ class FloatExprs50Module implements Module {
   f32 llvm_pr26746(f32 arg0) => _func0(arg0);
 
   f32 _func0(f32 x) {
-    final frame = Frame(this);
-    frame.f32_const(0.0);
-    frame.f32_const(-0.0);
-    frame.push(x);
-    frame.f32_sub();
-    frame.f32_sub();
-    return frame.pop();
+    var t0 = vm.f32_sub(-0.0, x);
+    var t1 = vm.f32_sub(0.0, t0);
+    return t1;
   }
 }
 

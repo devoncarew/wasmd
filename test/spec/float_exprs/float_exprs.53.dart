@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs53Module implements Module {
-  FloatExprs53Module();
+  FloatExprs53Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -20,35 +25,22 @@ class FloatExprs53Module implements Module {
   f32 thepast2(f32 arg0, f32 arg1, f32 arg2) => _func2(arg0, arg1, arg2);
 
   f64 _func0(f64 a, f64 b, f64 c, f64 d) {
-    final frame = Frame(this);
-    frame.push(a);
-    frame.push(b);
-    frame.f64_mul();
-    frame.push(c);
-    frame.push(d);
-    frame.f64_mul();
-    frame.f64_div();
-    return frame.pop();
+    var t0 = vm.f64_mul(a, b);
+    var t1 = vm.f64_mul(c, d);
+    var t2 = vm.f64_div(t0, t1);
+    return t2;
   }
 
   f64 _func1(f64 a, f64 b, f64 c) {
-    final frame = Frame(this);
-    frame.push(a);
-    frame.push(b);
-    frame.f64_mul();
-    frame.push(c);
-    frame.f64_sub();
-    return frame.pop();
+    var t0 = vm.f64_mul(a, b);
+    var t1 = vm.f64_sub(t0, c);
+    return t1;
   }
 
   f32 _func2(f32 a, f32 b, f32 c) {
-    final frame = Frame(this);
-    frame.push(a);
-    frame.push(b);
-    frame.f32_mul();
-    frame.push(c);
-    frame.f32_mul();
-    return frame.pop();
+    var t0 = vm.f32_mul(a, b);
+    var t1 = vm.f32_mul(t0, c);
+    return t1;
   }
 }
 

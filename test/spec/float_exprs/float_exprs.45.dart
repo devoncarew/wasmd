@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs45Module implements Module {
-  FloatExprs45Module();
+  FloatExprs45Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -25,99 +30,59 @@ class FloatExprs45Module implements Module {
   f64 f64_no_fold_ge_select_to_abs(f64 arg0) => _func7(arg0);
 
   f32 _func0(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_neg();
-    frame.push(x);
-    frame.push(x);
-    frame.f32_const(0.0);
-    frame.f32_lt();
-    frame.select();
-    return frame.pop();
+    var t0 = vm.f32_neg(x);
+    var t1 = vm.f32_lt(x, 0.0);
+    var t2 = vm.select(t0, x, t1);
+    return t2;
   }
 
   f32 _func1(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_neg();
-    frame.push(x);
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_le();
-    frame.select();
-    return frame.pop();
+    var t0 = vm.f32_neg(x);
+    var t1 = vm.f32_le(x, -0.0);
+    var t2 = vm.select(t0, x, t1);
+    return t2;
   }
 
   f32 _func2(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f32_neg();
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_gt();
-    frame.select();
-    return frame.pop();
+    var t0 = vm.f32_neg(x);
+    var t1 = vm.f32_gt(x, -0.0);
+    var t2 = vm.select(x, t0, t1);
+    return t2;
   }
 
   f32 _func3(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f32_neg();
-    frame.push(x);
-    frame.f32_const(0.0);
-    frame.f32_ge();
-    frame.select();
-    return frame.pop();
+    var t0 = vm.f32_neg(x);
+    var t1 = vm.f32_ge(x, 0.0);
+    var t2 = vm.select(x, t0, t1);
+    return t2;
   }
 
   f64 _func4(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_neg();
-    frame.push(x);
-    frame.push(x);
-    frame.f64_const(0.0);
-    frame.f64_lt();
-    frame.select();
-    return frame.pop();
+    var t0 = vm.f64_neg(x);
+    var t1 = vm.f64_lt(x, 0.0);
+    var t2 = vm.select(t0, x, t1);
+    return t2;
   }
 
   f64 _func5(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_neg();
-    frame.push(x);
-    frame.push(x);
-    frame.f64_const(-0.0);
-    frame.f64_le();
-    frame.select();
-    return frame.pop();
+    var t0 = vm.f64_neg(x);
+    var t1 = vm.f64_le(x, -0.0);
+    var t2 = vm.select(t0, x, t1);
+    return t2;
   }
 
   f64 _func6(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f64_neg();
-    frame.push(x);
-    frame.f64_const(-0.0);
-    frame.f64_gt();
-    frame.select();
-    return frame.pop();
+    var t0 = vm.f64_neg(x);
+    var t1 = vm.f64_gt(x, -0.0);
+    var t2 = vm.select(x, t0, t1);
+    return t2;
   }
 
   f64 _func7(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f64_neg();
-    frame.push(x);
-    frame.f64_const(0.0);
-    frame.f64_ge();
-    frame.select();
-    return frame.pop();
+    var t0 = vm.f64_neg(x);
+    var t1 = vm.f64_ge(x, 0.0);
+    var t2 = vm.select(x, t0, t1);
+    return t2;
   }
 }
 

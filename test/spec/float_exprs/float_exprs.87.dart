@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs87Module implements Module {
-  FloatExprs87Module();
+  FloatExprs87Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -36,229 +41,158 @@ class FloatExprs87Module implements Module {
   i32 no_fold_promote_demote(i32 arg0) => _func18(arg0);
 
   i32 _func00(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.push(y);
-    frame.f32_reinterpret_i32();
-    frame.f32_div();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fc00000);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_reinterpret_i32(y);
+    var t2 = vm.f32_div(t0, t1);
+    var t3 = vm.i32_reinterpret_f32(t2);
+    var t4 = vm.i32_and(t3, 0x7fc00000);
+    return t4;
   }
 
   i32 _func01(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.push(y);
-    frame.f32_reinterpret_i32();
-    frame.f32_div();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fffffff);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_reinterpret_i32(y);
+    var t2 = vm.f32_div(t0, t1);
+    var t3 = vm.i32_reinterpret_f32(t2);
+    var t4 = vm.i32_and(t3, 0x7fffffff);
+    return t4;
   }
 
   i32 _func02(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.f32_neg();
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_neg(t0);
+    var t2 = vm.i32_reinterpret_f32(t1);
+    return t2;
   }
 
   i64 _func03(i64 x, i64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.push(y);
-    frame.f64_reinterpret_i64();
-    frame.f64_div();
-    frame.i64_reinterpret_f64();
-    frame.i64_const(0x7ff8000000000000);
-    frame.i64_and();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_reinterpret_i64(y);
+    var t2 = vm.f64_div(t0, t1);
+    var t3 = vm.i64_reinterpret_f64(t2);
+    var t4 = vm.i64_and(t3, 0x7ff8000000000000);
+    return t4;
   }
 
   i64 _func04(i64 x, i64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.push(y);
-    frame.f64_reinterpret_i64();
-    frame.f64_div();
-    frame.i64_reinterpret_f64();
-    frame.i64_const(0x7fffffffffffffff);
-    frame.i64_and();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_reinterpret_i64(y);
+    var t2 = vm.f64_div(t0, t1);
+    var t3 = vm.i64_reinterpret_f64(t2);
+    var t4 = vm.i64_and(t3, 0x7fffffffffffffff);
+    return t4;
   }
 
   i64 _func05(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.f64_neg();
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_neg(t0);
+    var t2 = vm.i64_reinterpret_f64(t1);
+    return t2;
   }
 
   i32 _func06(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.f32_const(0.0);
-    frame.f32_sub();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fc00000);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_sub(t0, 0.0);
+    var t2 = vm.i32_reinterpret_f32(t1);
+    var t3 = vm.i32_and(t2, 0x7fc00000);
+    return t3;
   }
 
   i32 _func07(i32 x) {
-    final frame = Frame(this);
-    frame.f32_const(-0.0);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.f32_sub();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fc00000);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_sub(-0.0, t0);
+    var t2 = vm.i32_reinterpret_f32(t1);
+    var t3 = vm.i32_and(t2, 0x7fc00000);
+    return t3;
   }
 
   i32 _func08(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.f32_const(1.0);
-    frame.f32_mul();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fc00000);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_mul(t0, 1.0);
+    var t2 = vm.i32_reinterpret_f32(t1);
+    var t3 = vm.i32_and(t2, 0x7fc00000);
+    return t3;
   }
 
   i32 _func09(i32 x) {
-    final frame = Frame(this);
-    frame.f32_const(-1.0);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.f32_mul();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fc00000);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_mul(-1.0, t0);
+    var t2 = vm.i32_reinterpret_f32(t1);
+    var t3 = vm.i32_and(t2, 0x7fc00000);
+    return t3;
   }
 
   i32 _func10(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.f32_const(1.0);
-    frame.f32_div();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fc00000);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_div(t0, 1.0);
+    var t2 = vm.i32_reinterpret_f32(t1);
+    var t3 = vm.i32_and(t2, 0x7fc00000);
+    return t3;
   }
 
   i32 _func11(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.f32_const(-1.0);
-    frame.f32_div();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fc00000);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f32_div(t0, -1.0);
+    var t2 = vm.i32_reinterpret_f32(t1);
+    var t3 = vm.i32_and(t2, 0x7fc00000);
+    return t3;
   }
 
   i64 _func12(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.f64_const(0.0);
-    frame.f64_sub();
-    frame.i64_reinterpret_f64();
-    frame.i64_const(0x7ff8000000000000);
-    frame.i64_and();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_sub(t0, 0.0);
+    var t2 = vm.i64_reinterpret_f64(t1);
+    var t3 = vm.i64_and(t2, 0x7ff8000000000000);
+    return t3;
   }
 
   i64 _func13(i64 x) {
-    final frame = Frame(this);
-    frame.f64_const(-0.0);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.f64_sub();
-    frame.i64_reinterpret_f64();
-    frame.i64_const(0x7ff8000000000000);
-    frame.i64_and();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_sub(-0.0, t0);
+    var t2 = vm.i64_reinterpret_f64(t1);
+    var t3 = vm.i64_and(t2, 0x7ff8000000000000);
+    return t3;
   }
 
   i64 _func14(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.f64_const(1.0);
-    frame.f64_mul();
-    frame.i64_reinterpret_f64();
-    frame.i64_const(0x7ff8000000000000);
-    frame.i64_and();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_mul(t0, 1.0);
+    var t2 = vm.i64_reinterpret_f64(t1);
+    var t3 = vm.i64_and(t2, 0x7ff8000000000000);
+    return t3;
   }
 
   i64 _func15(i64 x) {
-    final frame = Frame(this);
-    frame.f64_const(-1.0);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.f64_mul();
-    frame.i64_reinterpret_f64();
-    frame.i64_const(0x7ff8000000000000);
-    frame.i64_and();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_mul(-1.0, t0);
+    var t2 = vm.i64_reinterpret_f64(t1);
+    var t3 = vm.i64_and(t2, 0x7ff8000000000000);
+    return t3;
   }
 
   i64 _func16(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.f64_const(1.0);
-    frame.f64_div();
-    frame.i64_reinterpret_f64();
-    frame.i64_const(0x7ff8000000000000);
-    frame.i64_and();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_div(t0, 1.0);
+    var t2 = vm.i64_reinterpret_f64(t1);
+    var t3 = vm.i64_and(t2, 0x7ff8000000000000);
+    return t3;
   }
 
   i64 _func17(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_reinterpret_i64();
-    frame.f64_const(-1.0);
-    frame.f64_div();
-    frame.i64_reinterpret_f64();
-    frame.i64_const(0x7ff8000000000000);
-    frame.i64_and();
-    return frame.pop();
+    var t0 = vm.f64_reinterpret_i64(x);
+    var t1 = vm.f64_div(t0, -1.0);
+    var t2 = vm.i64_reinterpret_f64(t1);
+    var t3 = vm.i64_and(t2, 0x7ff8000000000000);
+    return t3;
   }
 
   i32 _func18(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_reinterpret_i32();
-    frame.f64_promote_f32();
-    frame.f32_demote_f64();
-    frame.i32_reinterpret_f32();
-    frame.i32_const(0x7fc00000);
-    frame.i32_and();
-    return frame.pop();
+    var t0 = vm.f32_reinterpret_i32(x);
+    var t1 = vm.f64_promote_f32(t0);
+    var t2 = vm.f32_demote_f64(t1);
+    var t3 = vm.i32_reinterpret_f32(t2);
+    var t4 = vm.i32_and(t3, 0x7fc00000);
+    return t4;
   }
 }
 

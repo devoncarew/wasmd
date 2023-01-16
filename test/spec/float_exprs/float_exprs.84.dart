@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs84Module implements Module {
-  FloatExprs84Module();
+  FloatExprs84Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -19,31 +24,19 @@ class FloatExprs84Module implements Module {
   f64 f64_epsilon() => _func1();
 
   f32 _func0() {
-    final frame = Frame(this);
-    frame.f32_const(1.0);
-    frame.f32_const(3.0);
-    frame.f32_const(4.0);
-    frame.f32_const(3.0);
-    frame.f32_div();
-    frame.f32_const(1.0);
-    frame.f32_sub();
-    frame.f32_mul();
-    frame.f32_sub();
-    return frame.pop();
+    var t0 = vm.f32_div(4.0, 3.0);
+    var t1 = vm.f32_sub(t0, 1.0);
+    var t2 = vm.f32_mul(3.0, t1);
+    var t3 = vm.f32_sub(1.0, t2);
+    return t3;
   }
 
   f64 _func1() {
-    final frame = Frame(this);
-    frame.f64_const(1.0);
-    frame.f64_const(3.0);
-    frame.f64_const(4.0);
-    frame.f64_const(3.0);
-    frame.f64_div();
-    frame.f64_const(1.0);
-    frame.f64_sub();
-    frame.f64_mul();
-    frame.f64_sub();
-    return frame.pop();
+    var t0 = vm.f64_div(4.0, 3.0);
+    var t1 = vm.f64_sub(t0, 1.0);
+    var t2 = vm.f64_mul(3.0, t1);
+    var t3 = vm.f64_sub(1.0, t2);
+    return t3;
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs80Module implements Module {
-  FloatExprs80Module();
+  FloatExprs80Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -19,87 +24,57 @@ class FloatExprs80Module implements Module {
   f64 f64_compute_radix(f64 arg0, f64 arg1) => _func1(arg0, arg1);
 
   f32 _func0(f32 arg0, f32 arg1) {
-    final frame = Frame(this);
-
     loop_label_0:
     for (;;) {
-      frame.push(arg0);
-      frame.push(arg0);
-      frame.f32_add();
-      arg0 = frame.peek();
-      frame.f32_const(1.0);
-      frame.f32_add();
-      frame.push(arg0);
-      frame.f32_sub();
-      frame.f32_const(-1.0);
-      frame.f32_add();
-      frame.f32_const(0.0);
-      frame.f32_eq();
-      if (frame.pop() != 0) continue loop_label_0;
+      var t0 = vm.f32_add(arg0, arg0);
+      arg0 = t0;
+      var t1 = vm.f32_add(t0, 1.0);
+      var t2 = vm.f32_sub(t1, arg0);
+      var t3 = vm.f32_add(t2, -1.0);
+      var t4 = vm.f32_eq(t3, 0.0);
+      if (t4 != 0) continue loop_label_0;
       break;
     }
 
     loop_label_0:
     for (;;) {
-      frame.push(arg0);
-      frame.push(arg1);
-      frame.f32_const(1.0);
-      frame.f32_add();
-      arg1 = frame.peek();
-      frame.f32_add();
-      frame.push(arg0);
-      frame.f32_sub();
-      frame.push(arg1);
-      frame.f32_sub();
-      frame.f32_const(0.0);
-      frame.f32_ne();
-      if (frame.pop() != 0) continue loop_label_0;
+      var t5 = vm.f32_add(arg1, 1.0);
+      arg1 = t5;
+      var t6 = vm.f32_add(arg0, t5);
+      var t7 = vm.f32_sub(t6, arg0);
+      var t8 = vm.f32_sub(t7, arg1);
+      var t9 = vm.f32_ne(t8, 0.0);
+      if (t9 != 0) continue loop_label_0;
       break;
     }
-    frame.push(arg1);
-    return frame.pop();
+    return arg1;
   }
 
   f64 _func1(f64 arg0, f64 arg1) {
-    final frame = Frame(this);
-
     loop_label_0:
     for (;;) {
-      frame.push(arg0);
-      frame.push(arg0);
-      frame.f64_add();
-      arg0 = frame.peek();
-      frame.f64_const(1.0);
-      frame.f64_add();
-      frame.push(arg0);
-      frame.f64_sub();
-      frame.f64_const(-1.0);
-      frame.f64_add();
-      frame.f64_const(0.0);
-      frame.f64_eq();
-      if (frame.pop() != 0) continue loop_label_0;
+      var t0 = vm.f64_add(arg0, arg0);
+      arg0 = t0;
+      var t1 = vm.f64_add(t0, 1.0);
+      var t2 = vm.f64_sub(t1, arg0);
+      var t3 = vm.f64_add(t2, -1.0);
+      var t4 = vm.f64_eq(t3, 0.0);
+      if (t4 != 0) continue loop_label_0;
       break;
     }
 
     loop_label_0:
     for (;;) {
-      frame.push(arg0);
-      frame.push(arg1);
-      frame.f64_const(1.0);
-      frame.f64_add();
-      arg1 = frame.peek();
-      frame.f64_add();
-      frame.push(arg0);
-      frame.f64_sub();
-      frame.push(arg1);
-      frame.f64_sub();
-      frame.f64_const(0.0);
-      frame.f64_ne();
-      if (frame.pop() != 0) continue loop_label_0;
+      var t5 = vm.f64_add(arg1, 1.0);
+      arg1 = t5;
+      var t6 = vm.f64_add(arg0, t5);
+      var t7 = vm.f64_sub(t6, arg0);
+      var t8 = vm.f64_sub(t7, arg1);
+      var t9 = vm.f64_ne(t8, 0.0);
+      if (t9 != 0) continue loop_label_0;
       break;
     }
-    frame.push(arg1);
-    return frame.pop();
+    return arg1;
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs19Module implements Module {
-  FloatExprs19Module();
+  FloatExprs19Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -19,23 +24,15 @@ class FloatExprs19Module implements Module {
   f64 f64_no_regroup_div_mul(f64 arg0, f64 arg1, f64 arg2) => _func1(arg0, arg1, arg2);
 
   f32 _func0(f32 x, f32 y, f32 z) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.push(z);
-    frame.f32_div();
-    frame.f32_mul();
-    return frame.pop();
+    var t0 = vm.f32_div(y, z);
+    var t1 = vm.f32_mul(x, t0);
+    return t1;
   }
 
   f64 _func1(f64 x, f64 y, f64 z) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.push(z);
-    frame.f64_div();
-    frame.f64_mul();
-    return frame.pop();
+    var t0 = vm.f64_div(y, z);
+    var t1 = vm.f64_mul(x, t0);
+    return t1;
   }
 }
 

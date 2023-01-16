@@ -7,11 +7,15 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs60Module implements Module {
   FloatExprs60Module() {
     _data.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -37,58 +41,35 @@ class FloatExprs60Module implements Module {
     f64 y2 = 0;
     f64 y3 = 0;
 
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f64_load(3, 0);
-    x0 = frame.pop();
-    frame.push(i);
-    frame.f64_load(3, 8);
-    x1 = frame.pop();
-    frame.push(i);
-    frame.f64_load(3, 16);
-    x2 = frame.pop();
-    frame.push(i);
-    frame.f64_load(3, 24);
-    x3 = frame.pop();
-    frame.push(j);
-    frame.f64_load(3, 0);
-    y0 = frame.pop();
-    frame.push(j);
-    frame.f64_load(3, 8);
-    y1 = frame.pop();
-    frame.push(j);
-    frame.f64_load(3, 16);
-    y2 = frame.pop();
-    frame.push(j);
-    frame.f64_load(3, 24);
-    y3 = frame.pop();
-    frame.push(k);
-    frame.push(x0);
-    frame.push(y0);
-    frame.f64_add();
-    frame.f64_store(3, 0);
-    frame.push(k);
-    frame.push(x1);
-    frame.push(y1);
-    frame.f64_add();
-    frame.f64_store(3, 8);
-    frame.push(k);
-    frame.push(x2);
-    frame.push(y2);
-    frame.f64_add();
-    frame.f64_store(3, 16);
-    frame.push(k);
-    frame.push(x3);
-    frame.push(y3);
-    frame.f64_add();
-    frame.f64_store(3, 24);
+    var t0 = vm.f64_load(3, 0, i);
+    x0 = t0;
+    var t1 = vm.f64_load(3, 8, i);
+    x1 = t1;
+    var t2 = vm.f64_load(3, 16, i);
+    x2 = t2;
+    var t3 = vm.f64_load(3, 24, i);
+    x3 = t3;
+    var t4 = vm.f64_load(3, 0, j);
+    y0 = t4;
+    var t5 = vm.f64_load(3, 8, j);
+    y1 = t5;
+    var t6 = vm.f64_load(3, 16, j);
+    y2 = t6;
+    var t7 = vm.f64_load(3, 24, j);
+    y3 = t7;
+    var t8 = vm.f64_add(x0, y0);
+    var t9 = vm.f64_store(3, 0, k, t8);
+    var t10 = vm.f64_add(x1, y1);
+    var t11 = vm.f64_store(3, 8, k, t10);
+    var t12 = vm.f64_add(x2, y2);
+    var t13 = vm.f64_store(3, 16, k, t12);
+    var t14 = vm.f64_add(x3, y3);
+    var t15 = vm.f64_store(3, 24, k, t14);
   }
 
   f64 _func1(i32 k) {
-    final frame = Frame(this);
-    frame.push(k);
-    frame.f64_load(3, 0);
-    return frame.pop();
+    var t0 = vm.f64_load(3, 0, k);
+    return t0;
   }
 }
 

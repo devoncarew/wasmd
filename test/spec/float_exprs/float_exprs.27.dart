@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs27Module implements Module {
-  FloatExprs27Module();
+  FloatExprs27Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -19,21 +24,15 @@ class FloatExprs27Module implements Module {
   f64 f64_no_fuse_reciprocal_sqrt(f64 arg0) => _func1(arg0);
 
   f32 _func0(f32 x) {
-    final frame = Frame(this);
-    frame.f32_const(1.0);
-    frame.push(x);
-    frame.f32_sqrt();
-    frame.f32_div();
-    return frame.pop();
+    var t0 = vm.f32_sqrt(x);
+    var t1 = vm.f32_div(1.0, t0);
+    return t1;
   }
 
   f64 _func1(f64 x) {
-    final frame = Frame(this);
-    frame.f64_const(1.0);
-    frame.push(x);
-    frame.f64_sqrt();
-    frame.f64_div();
-    return frame.pop();
+    var t0 = vm.f64_sqrt(x);
+    var t1 = vm.f64_div(1.0, t0);
+    return t1;
   }
 }
 

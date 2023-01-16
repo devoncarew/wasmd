@@ -7,11 +7,15 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs61Module implements Module {
   FloatExprs61Module() {
     _data.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -32,70 +36,49 @@ class FloatExprs61Module implements Module {
     f32 c = 0;
     f32 t = 0;
 
-    final frame = Frame(this);
     block_label_0:
     {
       loop_label_1:
       for (;;) {
-        frame.push(c);
-        frame.push(p);
-        frame.f32_load(2, 0);
-        frame.push(t);
-        frame.f32_sub();
-        t = frame.peek();
-        frame.f32_add();
-        sum = frame.peek();
-        frame.push(c);
-        frame.f32_sub();
-        frame.push(t);
-        frame.f32_sub();
-        t = frame.pop();
-        frame.push(p);
-        frame.i32_const(4);
-        frame.i32_add();
-        p = frame.pop();
-        frame.push(sum);
-        c = frame.pop();
-        frame.push(n);
-        frame.i32_const(-1);
-        frame.i32_add();
-        n = frame.peek();
-        if (frame.pop() != 0) continue loop_label_1;
+        var t0 = vm.f32_load(2, 0, p);
+        var t1 = vm.f32_sub(t0, t);
+        t = t1;
+        var t2 = vm.f32_add(c, t1);
+        sum = t2;
+        var t3 = vm.f32_sub(t2, c);
+        var t4 = vm.f32_sub(t3, t);
+        t = t4;
+        var t5 = vm.i32_add(p, 4);
+        p = t5;
+        c = sum;
+        var t6 = vm.i32_add(n, -1);
+        n = t6;
+        if (t6 != 0) continue loop_label_1;
         break;
       }
     }
-    frame.push(sum);
-    return frame.pop();
+    return sum;
   }
 
   f32 _func1(i32 p, i32 n) {
     f32 sum = 0;
 
-    final frame = Frame(this);
     block_label_0:
     {
       loop_label_1:
       for (;;) {
-        frame.push(sum);
-        frame.push(p);
-        frame.f32_load(2, 0);
-        frame.f32_add();
-        sum = frame.pop();
-        frame.push(p);
-        frame.i32_const(4);
-        frame.i32_add();
-        p = frame.pop();
-        frame.push(n);
-        frame.i32_const(-1);
-        frame.i32_add();
-        n = frame.pop();
-        frame.push(n);
-        if (frame.pop() != 0) continue loop_label_1;
+        var t0 = vm.f32_load(2, 0, p);
+        var t1 = vm.f32_add(sum, t0);
+        sum = t1;
+        var t2 = vm.i32_add(p, 4);
+        p = t2;
+        var t3 = vm.i32_add(n, -1);
+        n = t3;
+        if (n != 0) continue loop_label_1;
         break;
       }
     }
-    frame.push(sum);
-    return frame.pop();
+    return sum;
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs82Module implements Module {
-  FloatExprs82Module();
+  FloatExprs82Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -21,51 +26,31 @@ class FloatExprs82Module implements Module {
   i32 f64_no_fold_add_ge_monotonicity(f64 arg0, f64 arg1, f64 arg2) => _func3(arg0, arg1, arg2);
 
   i32 _func0(f32 x, f32 y, f32 z) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(z);
-    frame.f32_add();
-    frame.push(y);
-    frame.push(z);
-    frame.f32_add();
-    frame.f32_le();
-    return frame.pop();
+    var t0 = vm.f32_add(x, z);
+    var t1 = vm.f32_add(y, z);
+    var t2 = vm.f32_le(t0, t1);
+    return t2;
   }
 
   i32 _func1(f32 x, f32 y, f32 z) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(z);
-    frame.f32_add();
-    frame.push(y);
-    frame.push(z);
-    frame.f32_add();
-    frame.f32_ge();
-    return frame.pop();
+    var t0 = vm.f32_add(x, z);
+    var t1 = vm.f32_add(y, z);
+    var t2 = vm.f32_ge(t0, t1);
+    return t2;
   }
 
   i32 _func2(f64 x, f64 y, f64 z) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(z);
-    frame.f64_add();
-    frame.push(y);
-    frame.push(z);
-    frame.f64_add();
-    frame.f64_le();
-    return frame.pop();
+    var t0 = vm.f64_add(x, z);
+    var t1 = vm.f64_add(y, z);
+    var t2 = vm.f64_le(t0, t1);
+    return t2;
   }
 
   i32 _func3(f64 x, f64 y, f64 z) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(z);
-    frame.f64_add();
-    frame.push(y);
-    frame.push(z);
-    frame.f64_add();
-    frame.f64_ge();
-    return frame.pop();
+    var t0 = vm.f64_add(x, z);
+    var t1 = vm.f64_add(y, z);
+    var t2 = vm.f64_ge(t0, t1);
+    return t2;
   }
 }
 

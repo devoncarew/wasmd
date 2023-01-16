@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs21Module implements Module {
-  FloatExprs21Module();
+  FloatExprs21Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -19,27 +24,17 @@ class FloatExprs21Module implements Module {
   f64 f64_no_reassociate_add(f64 arg0, f64 arg1, f64 arg2, f64 arg3) => _func1(arg0, arg1, arg2, arg3);
 
   f32 _func0(f32 x, f32 y, f32 z, f32 w) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_add();
-    frame.push(z);
-    frame.f32_add();
-    frame.push(w);
-    frame.f32_add();
-    return frame.pop();
+    var t0 = vm.f32_add(x, y);
+    var t1 = vm.f32_add(t0, z);
+    var t2 = vm.f32_add(t1, w);
+    return t2;
   }
 
   f64 _func1(f64 x, f64 y, f64 z, f64 w) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_add();
-    frame.push(z);
-    frame.f64_add();
-    frame.push(w);
-    frame.f64_add();
-    return frame.pop();
+    var t0 = vm.f64_add(x, y);
+    var t1 = vm.f64_add(t0, z);
+    var t2 = vm.f64_add(t1, w);
+    return t2;
   }
 }
 

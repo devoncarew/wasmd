@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatLiterals1Module implements Module {
-  FloatLiterals1Module();
+  FloatLiterals1Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -18,9 +23,7 @@ class FloatLiterals1Module implements Module {
   f64 $4294967249() => _func0();
 
   f64 _func0() {
-    final frame = Frame(this);
-    frame.f64_const(4294967249.0);
-    return frame.pop();
+    return 4294967249.0;
   }
 }
 

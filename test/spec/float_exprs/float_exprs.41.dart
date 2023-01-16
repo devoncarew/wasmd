@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs41Module implements Module {
-  FloatExprs41Module();
+  FloatExprs41Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -23,44 +28,31 @@ class FloatExprs41Module implements Module {
   f64 check(i32 arg0) => _func2(arg0);
 
   void _func0(i32 i, f64 x) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.push(x);
-    frame.f64_store(3, 0);
+    var t0 = vm.f64_store(3, 0, i, x);
   }
 
   void _func1(i32 n, f64 z) {
     i32 i = 0;
 
-    final frame = Frame(this);
     block_label_0:
     {
       loop_label_1:
       for (;;) {
-        frame.push(i);
-        frame.push(i);
-        frame.f64_load(3, 0);
-        frame.push(z);
-        frame.f64_div();
-        frame.f64_store(3, 0);
-        frame.push(i);
-        frame.i32_const(8);
-        frame.i32_add();
-        i = frame.pop();
-        frame.push(i);
-        frame.push(n);
-        frame.i32_lt_u();
-        if (frame.pop() != 0) continue loop_label_1;
+        var t0 = vm.f64_load(3, 0, i);
+        var t1 = vm.f64_div(t0, z);
+        var t2 = vm.f64_store(3, 0, i, t1);
+        var t3 = vm.i32_add(i, 8);
+        i = t3;
+        var t4 = vm.i32_lt_u(i, n);
+        if (t4 != 0) continue loop_label_1;
         break;
       }
     }
   }
 
   f64 _func2(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f64_load(3, 0);
-    return frame.pop();
+    var t0 = vm.f64_load(3, 0, i);
+    return t0;
   }
 }
 

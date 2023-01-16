@@ -12,8 +12,8 @@
 | comments.wast               | +   |
 | const.wast                  | +   |
 | conversions.wast            | +   |
-| endianness.wast             | -   |
-| exports.wast                | -   |
+| endianness.wast             | +   |
+| exports.wast                | +   |
 | f32_bitwise.wast            | +   |
 | f32_cmp.wast                | +   |
 | f32.wast                    | +   |
@@ -21,10 +21,10 @@
 | f64_cmp.wast                | +   |
 | f64.wast                    | +   |
 | fac.wast                    | -   |
-| float_exprs.wast            | -   |
-| float_literals.wast         | -   |
-| float_memory.wast           | -   |
-| float_misc.wast             | -   |
+| float_exprs.wast            | +   |
+| float_literals.wast         | +   |
+| float_memory.wast           | +   |
+| float_misc.wast             | +   |
 | forward.wast                | -   |
 | func_ptrs.wast              | -   |
 | func.wast                   | -   |

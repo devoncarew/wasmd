@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs93Module implements Module {
-  FloatExprs93Module();
+  FloatExprs93Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -18,13 +23,9 @@ class FloatExprs93Module implements Module {
   i32 point_four(f64 arg0, f64 arg1) => _func0(arg0, arg1);
 
   i32 _func0(f64 four, f64 ten) {
-    final frame = Frame(this);
-    frame.push(four);
-    frame.push(ten);
-    frame.f64_div();
-    frame.f64_const(0.4);
-    frame.f64_lt();
-    return frame.pop();
+    var t0 = vm.f64_div(four, ten);
+    var t1 = vm.f64_lt(t0, 0.4);
+    return t1;
   }
 }
 

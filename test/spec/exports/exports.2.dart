@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Exports2Module implements Module {
-  Exports2Module();
+  Exports2Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -18,13 +23,9 @@ class Exports2Module implements Module {
   void a() => _func0();
   void b() => _func1();
 
-  void _func0() {
-    final frame = Frame(this);
-  }
+  void _func0() {}
 
-  void _func1() {
-    final frame = Frame(this);
-  }
+  void _func1() {}
 }
 
 typedef FunctionType0 = void Function();

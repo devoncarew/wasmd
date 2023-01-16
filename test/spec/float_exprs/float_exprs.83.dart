@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs83Module implements Module {
-  FloatExprs83Module();
+  FloatExprs83Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -25,75 +30,51 @@ class FloatExprs83Module implements Module {
   i32 f64_not_ge(f64 arg0, f64 arg1) => _func7(arg0, arg1);
 
   i32 _func0(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_lt();
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.f32_lt(x, y);
+    var t1 = vm.i32_eqz(t0);
+    return t1;
   }
 
   i32 _func1(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_le();
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.f32_le(x, y);
+    var t1 = vm.i32_eqz(t0);
+    return t1;
   }
 
   i32 _func2(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_gt();
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.f32_gt(x, y);
+    var t1 = vm.i32_eqz(t0);
+    return t1;
   }
 
   i32 _func3(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_ge();
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.f32_ge(x, y);
+    var t1 = vm.i32_eqz(t0);
+    return t1;
   }
 
   i32 _func4(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_lt();
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.f64_lt(x, y);
+    var t1 = vm.i32_eqz(t0);
+    return t1;
   }
 
   i32 _func5(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_le();
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.f64_le(x, y);
+    var t1 = vm.i32_eqz(t0);
+    return t1;
   }
 
   i32 _func6(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_gt();
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.f64_gt(x, y);
+    var t1 = vm.i32_eqz(t0);
+    return t1;
   }
 
   i32 _func7(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_ge();
-    frame.i32_eqz();
-    return frame.pop();
+    var t0 = vm.f64_ge(x, y);
+    var t1 = vm.i32_eqz(t0);
+    return t1;
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatLiterals0Module implements Module {
-  FloatLiterals0Module();
+  FloatLiterals0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -99,557 +104,393 @@ class FloatLiterals0Module implements Module {
   f64 f64_hex_sep5() => _func81();
 
   i32 _func00() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func01() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func02() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func03() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func04() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func05() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func06() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func07() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func08() {
-    final frame = Frame(this);
-    frame.f32_const(double.nan);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.nan);
+    return t0;
   }
 
   i32 _func09() {
-    final frame = Frame(this);
-    frame.f32_const(double.infinity);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.infinity);
+    return t0;
   }
 
   i32 _func10() {
-    final frame = Frame(this);
-    frame.f32_const(double.infinity);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.infinity);
+    return t0;
   }
 
   i32 _func11() {
-    final frame = Frame(this);
-    frame.f32_const(double.negativeInfinity);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(double.negativeInfinity);
+    return t0;
   }
 
   i32 _func12() {
-    final frame = Frame(this);
-    frame.f32_const(0.0);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(0.0);
+    return t0;
   }
 
   i32 _func13() {
-    final frame = Frame(this);
-    frame.f32_const(0.0);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(0.0);
+    return t0;
   }
 
   i32 _func14() {
-    final frame = Frame(this);
-    frame.f32_const(-0.0);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(-0.0);
+    return t0;
   }
 
   i32 _func15() {
-    final frame = Frame(this);
-    frame.f32_const(6.2831854820251465);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(6.2831854820251465);
+    return t0;
   }
 
   i32 _func16() {
-    final frame = Frame(this);
-    frame.f32_const(1.401298464324817e-45);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(1.401298464324817e-45);
+    return t0;
   }
 
   i32 _func17() {
-    final frame = Frame(this);
-    frame.f32_const(1.1754943508222875e-38);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(1.1754943508222875e-38);
+    return t0;
   }
 
   i32 _func18() {
-    final frame = Frame(this);
-    frame.f32_const(3.4028234663852886e+38);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(3.4028234663852886e+38);
+    return t0;
   }
 
   i32 _func19() {
-    final frame = Frame(this);
-    frame.f32_const(1.1754942106924411e-38);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(1.1754942106924411e-38);
+    return t0;
   }
 
   i32 _func20() {
-    final frame = Frame(this);
-    frame.f32_const(1024.0);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(1024.0);
+    return t0;
   }
 
   i32 _func21() {
-    final frame = Frame(this);
-    frame.f32_const(0.0);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(0.0);
+    return t0;
   }
 
   i32 _func22() {
-    final frame = Frame(this);
-    frame.f32_const(0.0);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(0.0);
+    return t0;
   }
 
   i32 _func23() {
-    final frame = Frame(this);
-    frame.f32_const(-0.0);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(-0.0);
+    return t0;
   }
 
   i32 _func24() {
-    final frame = Frame(this);
-    frame.f32_const(6.2831854820251465);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(6.2831854820251465);
+    return t0;
   }
 
   i32 _func25() {
-    final frame = Frame(this);
-    frame.f32_const(1.401298464324817e-45);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(1.401298464324817e-45);
+    return t0;
   }
 
   i32 _func26() {
-    final frame = Frame(this);
-    frame.f32_const(1.1754943508222875e-38);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(1.1754943508222875e-38);
+    return t0;
   }
 
   i32 _func27() {
-    final frame = Frame(this);
-    frame.f32_const(1.1754942106924411e-38);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(1.1754942106924411e-38);
+    return t0;
   }
 
   i32 _func28() {
-    final frame = Frame(this);
-    frame.f32_const(3.4028234663852886e+38);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(3.4028234663852886e+38);
+    return t0;
   }
 
   i32 _func29() {
-    final frame = Frame(this);
-    frame.f32_const(10000000000.0);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(10000000000.0);
+    return t0;
   }
 
   i32 _func30() {
-    final frame = Frame(this);
-    frame.f32_const(1.0000001192092896);
-    frame.i32_reinterpret_f32();
-    return frame.pop();
+    var t0 = vm.i32_reinterpret_f32(1.0000001192092896);
+    return t0;
   }
 
   i64 _func31() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func32() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func33() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func34() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func35() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func36() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func37() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func38() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func39() {
-    final frame = Frame(this);
-    frame.f64_const(double.nan);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.nan);
+    return t0;
   }
 
   i64 _func40() {
-    final frame = Frame(this);
-    frame.f64_const(double.infinity);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.infinity);
+    return t0;
   }
 
   i64 _func41() {
-    final frame = Frame(this);
-    frame.f64_const(double.infinity);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.infinity);
+    return t0;
   }
 
   i64 _func42() {
-    final frame = Frame(this);
-    frame.f64_const(double.negativeInfinity);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(double.negativeInfinity);
+    return t0;
   }
 
   i64 _func43() {
-    final frame = Frame(this);
-    frame.f64_const(0.0);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(0.0);
+    return t0;
   }
 
   i64 _func44() {
-    final frame = Frame(this);
-    frame.f64_const(0.0);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(0.0);
+    return t0;
   }
 
   i64 _func45() {
-    final frame = Frame(this);
-    frame.f64_const(-0.0);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(-0.0);
+    return t0;
   }
 
   i64 _func46() {
-    final frame = Frame(this);
-    frame.f64_const(6.283185307179586);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(6.283185307179586);
+    return t0;
   }
 
   i64 _func47() {
-    final frame = Frame(this);
-    frame.f64_const(5e-324);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(5e-324);
+    return t0;
   }
 
   i64 _func48() {
-    final frame = Frame(this);
-    frame.f64_const(2.2250738585072014e-308);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(2.2250738585072014e-308);
+    return t0;
   }
 
   i64 _func49() {
-    final frame = Frame(this);
-    frame.f64_const(2.225073858507201e-308);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(2.225073858507201e-308);
+    return t0;
   }
 
   i64 _func50() {
-    final frame = Frame(this);
-    frame.f64_const(1.7976931348623157e+308);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(1.7976931348623157e+308);
+    return t0;
   }
 
   i64 _func51() {
-    final frame = Frame(this);
-    frame.f64_const(1.2676506002282294e+30);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(1.2676506002282294e+30);
+    return t0;
   }
 
   i64 _func52() {
-    final frame = Frame(this);
-    frame.f64_const(0.0);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(0.0);
+    return t0;
   }
 
   i64 _func53() {
-    final frame = Frame(this);
-    frame.f64_const(0.0);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(0.0);
+    return t0;
   }
 
   i64 _func54() {
-    final frame = Frame(this);
-    frame.f64_const(-0.0);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(-0.0);
+    return t0;
   }
 
   i64 _func55() {
-    final frame = Frame(this);
-    frame.f64_const(6.283185307179586);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(6.283185307179586);
+    return t0;
   }
 
   i64 _func56() {
-    final frame = Frame(this);
-    frame.f64_const(5e-324);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(5e-324);
+    return t0;
   }
 
   i64 _func57() {
-    final frame = Frame(this);
-    frame.f64_const(2.2250738585072014e-308);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(2.2250738585072014e-308);
+    return t0;
   }
 
   i64 _func58() {
-    final frame = Frame(this);
-    frame.f64_const(2.225073858507201e-308);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(2.225073858507201e-308);
+    return t0;
   }
 
   i64 _func59() {
-    final frame = Frame(this);
-    frame.f64_const(1.7976931348623157e+308);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(1.7976931348623157e+308);
+    return t0;
   }
 
   i64 _func60() {
-    final frame = Frame(this);
-    frame.f64_const(1e+100);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(1e+100);
+    return t0;
   }
 
   i64 _func61() {
-    final frame = Frame(this);
-    frame.f64_const(1.000000119);
-    frame.i64_reinterpret_f64();
-    return frame.pop();
+    var t0 = vm.i64_reinterpret_f64(1.000000119);
+    return t0;
   }
 
   f32 _func62() {
-    final frame = Frame(this);
-    frame.f32_const(1000000.0);
-    return frame.pop();
+    return 1000000.0;
   }
 
   f32 _func63() {
-    final frame = Frame(this);
-    frame.f32_const(1000.0);
-    return frame.pop();
+    return 1000.0;
   }
 
   f32 _func64() {
-    final frame = Frame(this);
-    frame.f32_const(1003.1416015625);
-    return frame.pop();
+    return 1003.1416015625;
   }
 
   f32 _func65() {
-    final frame = Frame(this);
-    frame.f32_const(990000028057600.0);
-    return frame.pop();
+    return 990000028057600.0;
   }
 
   f32 _func66() {
-    final frame = Frame(this);
-    frame.f32_const(1.2200011857269034e+28);
-    return frame.pop();
+    return 1.2200011857269034e+28;
   }
 
   f32 _func67() {
-    final frame = Frame(this);
-    frame.f32_const(168755360.0);
-    return frame.pop();
+    return 168755360.0;
   }
 
   f32 _func68() {
-    final frame = Frame(this);
-    frame.f32_const(109071.0);
-    return frame.pop();
+    return 109071.0;
   }
 
   f32 _func69() {
-    final frame = Frame(this);
-    frame.f32_const(41215.94140625);
-    return frame.pop();
+    return 41215.94140625;
   }
 
   f32 _func70() {
-    final frame = Frame(this);
-    frame.f32_const(1966080.0);
-    return frame.pop();
+    return 1966080.0;
   }
 
   f32 _func71() {
-    final frame = Frame(this);
-    frame.f32_const(23605224144896.0);
-    return frame.pop();
+    return 23605224144896.0;
   }
 
   f64 _func72() {
-    final frame = Frame(this);
-    frame.f64_const(1000000.0);
-    return frame.pop();
+    return 1000000.0;
   }
 
   f64 _func73() {
-    final frame = Frame(this);
-    frame.f64_const(1000.0);
-    return frame.pop();
+    return 1000.0;
   }
 
   f64 _func74() {
-    final frame = Frame(this);
-    frame.f64_const(1003.141592);
-    return frame.pop();
+    return 1003.141592;
   }
 
   f64 _func75() {
-    final frame = Frame(this);
-    frame.f64_const(9.9e-122);
-    return frame.pop();
+    return 9.9e-122;
   }
 
   f64 _func76() {
-    final frame = Frame(this);
-    frame.f64_const(1.2200011354e+28);
-    return frame.pop();
+    return 1.2200011354e+28;
   }
 
   f64 _func77() {
-    final frame = Frame(this);
-    frame.f64_const(3078696982321561.0);
-    return frame.pop();
+    return 3078696982321561.0;
   }
 
   f64 _func78() {
-    final frame = Frame(this);
-    frame.f64_const(109071.0);
-    return frame.pop();
+    return 109071.0;
   }
 
   f64 _func79() {
-    final frame = Frame(this);
-    frame.f64_const(41215.94240794191);
-    return frame.pop();
+    return 41215.94240794191;
   }
 
   f64 _func80() {
-    final frame = Frame(this);
-    frame.f64_const(1966080.0);
-    return frame.pop();
+    return 1966080.0;
   }
 
   f64 _func81() {
-    final frame = Frame(this);
-    frame.f64_const(23605225168752.0);
-    return frame.pop();
+    return 23605225168752.0;
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs85Module implements Module {
-  FloatExprs85Module();
+  FloatExprs85Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -22,52 +27,38 @@ class FloatExprs85Module implements Module {
     f32 x = 0;
     f32 result = 0;
 
-    final frame = Frame(this);
-    frame.f32_const(1.0);
-    x = frame.pop();
+    x = 1.0;
 
     loop_label_0:
     for (;;) {
-      frame.push(x);
-      result = frame.peek();
-      frame.f32_const(0.5);
-      frame.f32_mul();
-      x = frame.peek();
-      frame.f32_const(1.0);
-      frame.f32_add();
-      frame.f32_const(1.0);
-      frame.f32_gt();
-      if (frame.pop() != 0) continue loop_label_0;
+      result = x;
+      var t0 = vm.f32_mul(x, 0.5);
+      x = t0;
+      var t1 = vm.f32_add(t0, 1.0);
+      var t2 = vm.f32_gt(t1, 1.0);
+      if (t2 != 0) continue loop_label_0;
       break;
     }
-    frame.push(result);
-    return frame.pop();
+    return result;
   }
 
   f64 _func1() {
     f64 x = 0;
     f64 result = 0;
 
-    final frame = Frame(this);
-    frame.f64_const(1.0);
-    x = frame.pop();
+    x = 1.0;
 
     loop_label_0:
     for (;;) {
-      frame.push(x);
-      result = frame.peek();
-      frame.f64_const(0.5);
-      frame.f64_mul();
-      x = frame.peek();
-      frame.f64_const(1.0);
-      frame.f64_add();
-      frame.f64_const(1.0);
-      frame.f64_gt();
-      if (frame.pop() != 0) continue loop_label_0;
+      result = x;
+      var t0 = vm.f64_mul(x, 0.5);
+      x = t0;
+      var t1 = vm.f64_add(t0, 1.0);
+      var t2 = vm.f64_gt(t1, 1.0);
+      if (t2 != 0) continue loop_label_0;
       break;
     }
-    frame.push(result);
-    return frame.pop();
+    return result;
   }
 }
 

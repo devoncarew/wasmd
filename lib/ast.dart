@@ -134,7 +134,9 @@ class FunctionBuilder {
     }
 
     if (blocktype.isPrimitive) {
-      addStatement(Code('\nvar $blockReturnName = 0;$description'));
+      // TODO: instead ,have a default init value
+      var val = blocktype.isInt ? '0' : '0.0';
+      addStatement(Code('\nvar $blockReturnName = $val;$description'));
     } else if (blocktype.returnItems > 1) {
       throw 'todo:';
     } else {

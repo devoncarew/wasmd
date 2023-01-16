@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs79Module implements Module {
-  FloatExprs79Module();
+  FloatExprs79Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -27,121 +32,73 @@ class FloatExprs79Module implements Module {
   f64 f64_xkcd_better_sqrt_5(f64 arg0, f64 arg1, f64 arg2, f64 arg3) => _func09(arg0, arg1, arg2, arg3);
 
   f32 _func00(f32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.f32_sqrt();
-    return frame.pop();
+    var t0 = vm.f32_sqrt(arg0);
+    return t0;
   }
 
   f32 _func01(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.f32_div();
-    frame.push(arg2);
-    frame.push(arg3);
-    frame.push(arg2);
-    frame.f32_sub();
-    frame.f32_div();
-    frame.f32_add();
-    return frame.pop();
+    var t0 = vm.f32_div(arg0, arg1);
+    var t1 = vm.f32_sub(arg3, arg2);
+    var t2 = vm.f32_div(arg2, t1);
+    var t3 = vm.f32_add(t0, t2);
+    return t3;
   }
 
   f32 _func02(f32 arg0, f32 arg1, f32 arg2) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.f32_mul();
-    frame.push(arg2);
-    frame.f32_div();
-    return frame.pop();
+    var t0 = vm.f32_mul(arg0, arg1);
+    var t1 = vm.f32_div(t0, arg2);
+    return t1;
   }
 
   f32 _func03(f32 arg0, f32 arg1, f32 arg2) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.f32_div();
-    frame.push(arg2);
-    frame.push(arg0);
-    frame.f32_div();
-    frame.f32_add();
-    return frame.pop();
+    var t0 = vm.f32_div(arg0, arg1);
+    var t1 = vm.f32_div(arg2, arg0);
+    var t2 = vm.f32_add(t0, t1);
+    return t2;
   }
 
   f32 _func04(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.f32_mul();
-    frame.f32_add();
-    frame.push(arg3);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.f32_mul();
-    frame.f32_sub();
-    frame.f32_div();
-    return frame.pop();
+    var t0 = vm.f32_mul(arg1, arg2);
+    var t1 = vm.f32_add(arg0, t0);
+    var t2 = vm.f32_mul(arg1, arg2);
+    var t3 = vm.f32_sub(arg3, t2);
+    var t4 = vm.f32_div(t1, t3);
+    return t4;
   }
 
   f64 _func05(f64 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.f64_sqrt();
-    return frame.pop();
+    var t0 = vm.f64_sqrt(arg0);
+    return t0;
   }
 
   f64 _func06(f64 arg0, f64 arg1, f64 arg2, f64 arg3) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.f64_div();
-    frame.push(arg2);
-    frame.push(arg3);
-    frame.push(arg2);
-    frame.f64_sub();
-    frame.f64_div();
-    frame.f64_add();
-    return frame.pop();
+    var t0 = vm.f64_div(arg0, arg1);
+    var t1 = vm.f64_sub(arg3, arg2);
+    var t2 = vm.f64_div(arg2, t1);
+    var t3 = vm.f64_add(t0, t2);
+    return t3;
   }
 
   f64 _func07(f64 arg0, f64 arg1, f64 arg2) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.f64_mul();
-    frame.push(arg2);
-    frame.f64_div();
-    return frame.pop();
+    var t0 = vm.f64_mul(arg0, arg1);
+    var t1 = vm.f64_div(t0, arg2);
+    return t1;
   }
 
   f64 _func08(f64 arg0, f64 arg1, f64 arg2) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.f64_div();
-    frame.push(arg2);
-    frame.push(arg0);
-    frame.f64_div();
-    frame.f64_add();
-    return frame.pop();
+    var t0 = vm.f64_div(arg0, arg1);
+    var t1 = vm.f64_div(arg2, arg0);
+    var t2 = vm.f64_add(t0, t1);
+    return t2;
   }
 
   f64 _func09(f64 arg0, f64 arg1, f64 arg2, f64 arg3) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.f64_mul();
-    frame.f64_add();
-    frame.push(arg3);
-    frame.push(arg1);
-    frame.push(arg2);
-    frame.f64_mul();
-    frame.f64_sub();
-    frame.f64_div();
-    return frame.pop();
+    var t0 = vm.f64_mul(arg1, arg2);
+    var t1 = vm.f64_add(arg0, t0);
+    var t2 = vm.f64_mul(arg1, arg2);
+    var t3 = vm.f64_sub(arg3, t2);
+    var t4 = vm.f64_div(t1, t3);
+    return t4;
   }
 }
 

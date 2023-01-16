@@ -1404,6 +1404,8 @@ enum ValueType {
     }
   }
 
+  bool get intType => this == i32 || this == i64;
+
   bool get refType => this == funcref || this == externref;
 
   @override

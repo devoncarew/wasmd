@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs67Module implements Module {
-  FloatExprs67Module();
+  FloatExprs67Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -19,35 +24,21 @@ class FloatExprs67Module implements Module {
   f64 f64_no_fold_6x_via_add(f64 arg0) => _func1(arg0);
 
   f32 _func0(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f32_add();
-    frame.push(x);
-    frame.f32_add();
-    frame.push(x);
-    frame.f32_add();
-    frame.push(x);
-    frame.f32_add();
-    frame.push(x);
-    frame.f32_add();
-    return frame.pop();
+    var t0 = vm.f32_add(x, x);
+    var t1 = vm.f32_add(t0, x);
+    var t2 = vm.f32_add(t1, x);
+    var t3 = vm.f32_add(t2, x);
+    var t4 = vm.f32_add(t3, x);
+    return t4;
   }
 
   f64 _func1(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(x);
-    frame.f64_add();
-    frame.push(x);
-    frame.f64_add();
-    frame.push(x);
-    frame.f64_add();
-    frame.push(x);
-    frame.f64_add();
-    frame.push(x);
-    frame.f64_add();
-    return frame.pop();
+    var t0 = vm.f64_add(x, x);
+    var t1 = vm.f64_add(t0, x);
+    var t2 = vm.f64_add(t1, x);
+    var t3 = vm.f64_add(t2, x);
+    var t4 = vm.f64_add(t3, x);
+    return t4;
   }
 }
 

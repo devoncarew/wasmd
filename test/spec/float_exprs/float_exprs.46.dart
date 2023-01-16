@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs46Module implements Module {
-  FloatExprs46Module();
+  FloatExprs46Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -25,123 +30,115 @@ class FloatExprs46Module implements Module {
   f64 f64_no_fold_ge_if_to_abs(f64 arg0) => _func7(arg0);
 
   f32 _func0(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_const(0.0);
-    frame.f32_lt();
-    if_label_0: // => f32
-    if (frame.pop() != 0) {
-      frame.push(x);
-      frame.f32_neg();
+    var t0 = vm.f32_lt(x, 0.0);
+
+    var block0 = 0.0; // => f32
+    if_label_0:
+    if (t0 != 0) {
+      var t1 = vm.f32_neg(x);
+      block0 = t1;
     } else {
-      frame.push(x);
+      block0 = x;
     }
-    return frame.pop();
+    return block0;
   }
 
   f32 _func1(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_le();
-    if_label_0: // => f32
-    if (frame.pop() != 0) {
-      frame.push(x);
-      frame.f32_neg();
+    var t0 = vm.f32_le(x, -0.0);
+
+    var block0 = 0.0; // => f32
+    if_label_0:
+    if (t0 != 0) {
+      var t1 = vm.f32_neg(x);
+      block0 = t1;
     } else {
-      frame.push(x);
+      block0 = x;
     }
-    return frame.pop();
+    return block0;
   }
 
   f32 _func2(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_const(-0.0);
-    frame.f32_gt();
-    if_label_0: // => f32
-    if (frame.pop() != 0) {
-      frame.push(x);
+    var t0 = vm.f32_gt(x, -0.0);
+
+    var block0 = 0.0; // => f32
+    if_label_0:
+    if (t0 != 0) {
+      block0 = x;
     } else {
-      frame.push(x);
-      frame.f32_neg();
+      var t1 = vm.f32_neg(x);
+      block0 = t1;
     }
-    return frame.pop();
+    return block0;
   }
 
   f32 _func3(f32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_const(0.0);
-    frame.f32_ge();
-    if_label_0: // => f32
-    if (frame.pop() != 0) {
-      frame.push(x);
+    var t0 = vm.f32_ge(x, 0.0);
+
+    var block0 = 0.0; // => f32
+    if_label_0:
+    if (t0 != 0) {
+      block0 = x;
     } else {
-      frame.push(x);
-      frame.f32_neg();
+      var t1 = vm.f32_neg(x);
+      block0 = t1;
     }
-    return frame.pop();
+    return block0;
   }
 
   f64 _func4(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_const(0.0);
-    frame.f64_lt();
-    if_label_0: // => f64
-    if (frame.pop() != 0) {
-      frame.push(x);
-      frame.f64_neg();
+    var t0 = vm.f64_lt(x, 0.0);
+
+    var block0 = 0.0; // => f64
+    if_label_0:
+    if (t0 != 0) {
+      var t1 = vm.f64_neg(x);
+      block0 = t1;
     } else {
-      frame.push(x);
+      block0 = x;
     }
-    return frame.pop();
+    return block0;
   }
 
   f64 _func5(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_const(-0.0);
-    frame.f64_le();
-    if_label_0: // => f64
-    if (frame.pop() != 0) {
-      frame.push(x);
-      frame.f64_neg();
+    var t0 = vm.f64_le(x, -0.0);
+
+    var block0 = 0.0; // => f64
+    if_label_0:
+    if (t0 != 0) {
+      var t1 = vm.f64_neg(x);
+      block0 = t1;
     } else {
-      frame.push(x);
+      block0 = x;
     }
-    return frame.pop();
+    return block0;
   }
 
   f64 _func6(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_const(-0.0);
-    frame.f64_gt();
-    if_label_0: // => f64
-    if (frame.pop() != 0) {
-      frame.push(x);
+    var t0 = vm.f64_gt(x, -0.0);
+
+    var block0 = 0.0; // => f64
+    if_label_0:
+    if (t0 != 0) {
+      block0 = x;
     } else {
-      frame.push(x);
-      frame.f64_neg();
+      var t1 = vm.f64_neg(x);
+      block0 = t1;
     }
-    return frame.pop();
+    return block0;
   }
 
   f64 _func7(f64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f64_const(0.0);
-    frame.f64_ge();
-    if_label_0: // => f64
-    if (frame.pop() != 0) {
-      frame.push(x);
+    var t0 = vm.f64_ge(x, 0.0);
+
+    var block0 = 0.0; // => f64
+    if_label_0:
+    if (t0 != 0) {
+      block0 = x;
     } else {
-      frame.push(x);
-      frame.f64_neg();
+      var t1 = vm.f64_neg(x);
+      block0 = t1;
     }
-    return frame.pop();
+    return block0;
   }
 }
 

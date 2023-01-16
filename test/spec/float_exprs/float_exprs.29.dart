@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs29Module implements Module {
-  FloatExprs29Module();
+  FloatExprs29Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -21,35 +26,27 @@ class FloatExprs29Module implements Module {
   i64 i64_no_fold_f64_u(i64 arg0) => _func3(arg0);
 
   i32 _func0(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.f32_convert_i32_s();
-    frame.i32_trunc_f32_s();
-    return frame.pop();
+    var t0 = vm.f32_convert_i32_s(arg0);
+    var t1 = vm.i32_trunc_f32_s(t0);
+    return t1;
   }
 
   i32 _func1(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.f32_convert_i32_u();
-    frame.i32_trunc_f32_u();
-    return frame.pop();
+    var t0 = vm.f32_convert_i32_u(arg0);
+    var t1 = vm.i32_trunc_f32_u(t0);
+    return t1;
   }
 
   i64 _func2(i64 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.f64_convert_i64_s();
-    frame.i64_trunc_f64_s();
-    return frame.pop();
+    var t0 = vm.f64_convert_i64_s(arg0);
+    var t1 = vm.i64_trunc_f64_s(t0);
+    return t1;
   }
 
   i64 _func3(i64 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.f64_convert_i64_u();
-    frame.i64_trunc_f64_u();
-    return frame.pop();
+    var t0 = vm.f64_convert_i64_u(arg0);
+    var t1 = vm.i64_trunc_f64_u(t0);
+    return t1;
   }
 }
 

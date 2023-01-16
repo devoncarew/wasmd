@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs94Module implements Module {
-  FloatExprs94Module();
+  FloatExprs94Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -23,71 +28,43 @@ class FloatExprs94Module implements Module {
     f64 local2 = 0;
     f64 local3 = 0;
 
-    final frame = Frame(this);
-    frame.f64_const(0.0);
-    local0 = frame.pop();
+    local0 = 0.0;
     block_label_0:
     {
-      frame.push(arg0);
-      frame.i32_const(1);
-      frame.i32_lt_s();
-      if (frame.pop() != 0) break block_label_0;
-      frame.f64_const(1.0);
-      local1 = frame.pop();
-      frame.f64_const(0.0);
-      local2 = frame.pop();
+      var t0 = vm.i32_lt_s(arg0, 1);
+      if (t0 != 0) break block_label_0;
+      local1 = 1.0;
+      local2 = 0.0;
 
       loop_label_1:
       for (;;) {
-        frame.push(local0);
-        frame.push(local1);
-        frame.f64_const(8.0);
-        frame.push(local2);
-        frame.f64_const(8.0);
-        frame.f64_mul();
-        local3 = frame.peek();
-        frame.f64_const(1.0);
-        frame.f64_add();
-        frame.f64_div();
-        frame.f64_const(4.0);
-        frame.push(local3);
-        frame.f64_const(4.0);
-        frame.f64_add();
-        frame.f64_div();
-        frame.f64_sub();
-        frame.f64_const(2.0);
-        frame.push(local3);
-        frame.f64_const(5.0);
-        frame.f64_add();
-        frame.f64_div();
-        frame.f64_sub();
-        frame.f64_const(2.0);
-        frame.push(local3);
-        frame.f64_const(6.0);
-        frame.f64_add();
-        frame.f64_div();
-        frame.f64_sub();
-        frame.f64_mul();
-        frame.f64_add();
-        local0 = frame.pop();
-        frame.push(local2);
-        frame.f64_const(1.0);
-        frame.f64_add();
-        local2 = frame.pop();
-        frame.push(local1);
-        frame.f64_const(0.0625);
-        frame.f64_mul();
-        local1 = frame.pop();
-        frame.push(arg0);
-        frame.i32_const(-1);
-        frame.i32_add();
-        arg0 = frame.peek();
-        if (frame.pop() != 0) continue loop_label_1;
+        var t1 = vm.f64_mul(local2, 8.0);
+        local3 = t1;
+        var t2 = vm.f64_add(t1, 1.0);
+        var t3 = vm.f64_div(8.0, t2);
+        var t4 = vm.f64_add(local3, 4.0);
+        var t5 = vm.f64_div(4.0, t4);
+        var t6 = vm.f64_sub(t3, t5);
+        var t7 = vm.f64_add(local3, 5.0);
+        var t8 = vm.f64_div(2.0, t7);
+        var t9 = vm.f64_sub(t6, t8);
+        var t10 = vm.f64_add(local3, 6.0);
+        var t11 = vm.f64_div(2.0, t10);
+        var t12 = vm.f64_sub(t9, t11);
+        var t13 = vm.f64_mul(local1, t12);
+        var t14 = vm.f64_add(local0, t13);
+        local0 = t14;
+        var t15 = vm.f64_add(local2, 1.0);
+        local2 = t15;
+        var t16 = vm.f64_mul(local1, 0.0625);
+        local1 = t16;
+        var t17 = vm.i32_add(arg0, -1);
+        arg0 = t17;
+        if (t17 != 0) continue loop_label_1;
         break;
       }
     }
-    frame.push(local0);
-    return frame.pop();
+    return local0;
   }
 }
 

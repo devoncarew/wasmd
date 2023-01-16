@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FuncModule implements Module {
-  FuncModule();
+  FuncModule() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -18,12 +23,8 @@ class FuncModule implements Module {
   i32 e(i32 arg0) => _f(arg0);
 
   i32 _f(i32 n) {
-    final frame = Frame(this);
-    frame.push(n);
-    frame.i32_const(1);
-    frame.i32_add();
-    return frame.pop();
-    return frame.pop();
+    var t0 = vm.i32_add(n, 1);
+    return t0;
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs49Module implements Module {
-  FloatExprs49Module();
+  FloatExprs49Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -24,45 +29,28 @@ class FloatExprs49Module implements Module {
     f64 z0 = 0;
     f64 z1 = 0;
 
-    final frame = Frame(this);
-    frame.f64_const(156.25);
-    x = frame.pop();
-    frame.f64_const(208.333333334);
-    r = frame.pop();
-    frame.f64_const(1.77951304201);
-    q = frame.pop();
-    frame.push(r);
-    frame.f64_neg();
-    frame.push(x);
-    frame.f64_mul();
-    frame.push(x);
-    frame.push(q);
-    frame.f64_mul();
-    frame.push(r);
-    frame.f64_sub();
-    frame.f64_div();
-    z0 = frame.pop();
-    frame.push(r);
-    frame.f64_neg();
-    frame.push(x);
-    frame.f64_mul();
-    frame.push(x);
-    frame.push(q);
-    frame.f64_mul();
-    frame.push(r);
-    frame.f64_sub();
-    frame.f64_div();
-    z1 = frame.pop();
+    x = 156.25;
+    r = 208.333333334;
+    q = 1.77951304201;
+    var t0 = vm.f64_neg(r);
+    var t1 = vm.f64_mul(t0, x);
+    var t2 = vm.f64_mul(x, q);
+    var t3 = vm.f64_sub(t2, r);
+    var t4 = vm.f64_div(t1, t3);
+    z0 = t4;
+    var t5 = vm.f64_neg(r);
+    var t6 = vm.f64_mul(t5, x);
+    var t7 = vm.f64_mul(x, q);
+    var t8 = vm.f64_sub(t7, r);
+    var t9 = vm.f64_div(t6, t8);
+    z1 = t9;
     block_label_0:
     {
-      frame.push(z0);
-      frame.push(z1);
-      frame.f64_eq();
-      if (frame.pop() != 0) break block_label_0;
-      throw Trap('unreachable');
+      var t10 = vm.f64_eq(z0, z1);
+      if (t10 != 0) break block_label_0;
+      var t11 = vm.unreachable();
     }
-    frame.push(z1);
-    return frame.pop();
+    return z1;
   }
 }
 

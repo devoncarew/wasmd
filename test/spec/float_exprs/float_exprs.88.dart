@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs88Module implements Module {
-  FloatExprs88Module();
+  FloatExprs88Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -22,43 +27,25 @@ class FloatExprs88Module implements Module {
       _func1(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 
   f64 _func0(f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
-    final frame = Frame(this);
-    frame.push(x0);
-    frame.push(y0);
-    frame.f64_mul();
-    frame.push(x1);
-    frame.push(y1);
-    frame.f64_mul();
-    frame.f64_add();
-    frame.push(x2);
-    frame.push(y2);
-    frame.f64_mul();
-    frame.f64_add();
-    frame.push(x3);
-    frame.push(y3);
-    frame.f64_mul();
-    frame.f64_add();
-    return frame.pop();
+    var t0 = vm.f64_mul(x0, y0);
+    var t1 = vm.f64_mul(x1, y1);
+    var t2 = vm.f64_add(t0, t1);
+    var t3 = vm.f64_mul(x2, y2);
+    var t4 = vm.f64_add(t2, t3);
+    var t5 = vm.f64_mul(x3, y3);
+    var t6 = vm.f64_add(t4, t5);
+    return t6;
   }
 
   f64 _func1(f64 x0, f64 x1, f64 x2, f64 x3, f64 y0, f64 y1, f64 y2, f64 y3) {
-    final frame = Frame(this);
-    frame.push(x0);
-    frame.push(y0);
-    frame.f64_mul();
-    frame.push(x1);
-    frame.push(y1);
-    frame.f64_mul();
-    frame.f64_add();
-    frame.push(x2);
-    frame.push(y2);
-    frame.f64_mul();
-    frame.push(x3);
-    frame.push(y3);
-    frame.f64_mul();
-    frame.f64_add();
-    frame.f64_add();
-    return frame.pop();
+    var t0 = vm.f64_mul(x0, y0);
+    var t1 = vm.f64_mul(x1, y1);
+    var t2 = vm.f64_add(t0, t1);
+    var t3 = vm.f64_mul(x2, y2);
+    var t4 = vm.f64_mul(x3, y3);
+    var t5 = vm.f64_add(t3, t4);
+    var t6 = vm.f64_add(t2, t5);
+    return t6;
   }
 }
 

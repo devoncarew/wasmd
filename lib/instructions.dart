@@ -473,11 +473,11 @@ class BlockFunctionType {
   }
 
   bool get isPrimitive {
-    if (returnItems == 1) {
-      return !firstReturnType!.refType;
-    } else {
-      return false;
-    }
+    return returnItems == 1 ? !firstReturnType!.refType : false;
+  }
+
+  bool get isInt {
+    return returnItems == 1 ? firstReturnType!.intType : false;
   }
 
   String get describe {

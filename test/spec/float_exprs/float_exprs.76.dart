@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FloatExprs76Module implements Module {
-  FloatExprs76Module();
+  FloatExprs76Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -24,72 +29,45 @@ class FloatExprs76Module implements Module {
   f32 recoding_demote(f64 arg0, f32 arg1) => _func6(arg0, arg1);
 
   i32 _func0(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_mul();
-    frame.push(x);
-    frame.f32_eq();
-    return frame.pop();
+    var t0 = vm.f32_mul(x, y);
+    var t1 = vm.f32_eq(t0, x);
+    return t1;
   }
 
   i32 _func1(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_mul();
-    frame.push(x);
-    frame.f32_le();
-    return frame.pop();
+    var t0 = vm.f32_mul(x, y);
+    var t1 = vm.f32_le(t0, x);
+    return t1;
   }
 
   i32 _func2(f32 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f32_mul();
-    frame.push(x);
-    frame.f32_lt();
-    return frame.pop();
+    var t0 = vm.f32_mul(x, y);
+    var t1 = vm.f32_lt(t0, x);
+    return t1;
   }
 
   i32 _func3(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_mul();
-    frame.push(x);
-    frame.f64_eq();
-    return frame.pop();
+    var t0 = vm.f64_mul(x, y);
+    var t1 = vm.f64_eq(t0, x);
+    return t1;
   }
 
   i32 _func4(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_mul();
-    frame.push(x);
-    frame.f64_le();
-    return frame.pop();
+    var t0 = vm.f64_mul(x, y);
+    var t1 = vm.f64_le(t0, x);
+    return t1;
   }
 
   i32 _func5(f64 x, f64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.push(y);
-    frame.f64_mul();
-    frame.push(x);
-    frame.f64_lt();
-    return frame.pop();
+    var t0 = vm.f64_mul(x, y);
+    var t1 = vm.f64_lt(t0, x);
+    return t1;
   }
 
   f32 _func6(f64 x, f32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.f32_demote_f64();
-    frame.push(y);
-    frame.f32_mul();
-    return frame.pop();
+    var t0 = vm.f32_demote_f64(x);
+    var t1 = vm.f32_mul(t0, y);
+    return t1;
   }
 }
 
