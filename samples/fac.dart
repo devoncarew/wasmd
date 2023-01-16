@@ -24,17 +24,18 @@ class FacModule implements Module {
 
   i32 _func0(i32 arg0) {
     var t0 = vm.i32_eq(arg0, 0);
-    int label_0_result = 0;
-    if_label_0: // => i32
+
+    var block0 = 0; // => i32
+    if_label_0:
     if (t0 != 0) {
-      label_0_result = 1;
+      block0 = 1;
     } else {
       var t1 = vm.i32_sub(arg0, 1);
       var t2 = _func0(t1);
       var t3 = vm.i32_mul(arg0, t2);
-      label_0_result = t3;
+      block0 = t3;
     }
-    return label_0_result;
+    return block0;
   }
 }
 

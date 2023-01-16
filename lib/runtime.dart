@@ -18,6 +18,7 @@ typedef f64 = double;
 
 typedef FuncRef = Function;
 typedef ExternRef = Function;
+typedef RefType = Function;
 
 // runtime support
 

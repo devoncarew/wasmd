@@ -120,6 +120,51 @@ class FunctionBuilder {
     _names[baseName] = val + 1;
     return name;
   }
+
+  void generateBlockReturnVar(
+    BlockFunctionType blocktype, {
+    String? description,
+  }) {
+    var blockReturnName = generateName('block');
+    scope.blockReturnName = blockReturnName;
+
+    description ??= '';
+    if (description.isNotEmpty) {
+      description = ' // $description';
+    }
+
+    if (blocktype.isPrimitive) {
+      addStatement(Code('\nvar $blockReturnName = 0;$description'));
+    } else if (blocktype.returnItems > 1) {
+      throw 'todo:';
+    } else {
+      var type = blocktype.firstReturnType!;
+      addStatement(Code('\n${type.typeName} $blockReturnName;$description'));
+    }
+  }
+
+  void blockReturn({bool endStatement = false}) {
+    // We're at the end of a block - either an `else` instruction or an `end`.
+    var retCount = scope.blockReturnCount;
+
+    if (retCount == 0) {
+      return;
+    } else if (retCount == 1) {
+      // todo: does poping here mess up the stack?
+      var ref = popRef();
+      addStatement(Code('${scope.blockReturnName} = $ref;'));
+
+      if (endStatement) {
+        pushRef(Ref(scope.blockReturnName!));
+      }
+    } else {
+      throw 'todo:';
+    }
+  }
+
+  /// Remove all but the oldest [depth] stack entries, but keep the top
+  /// [paramCount] stack items.
+  void unwindTo(int depth, int paramCount) => stack.unwindTo(depth, paramCount);
 }
 
 class RefStack {
@@ -134,6 +179,17 @@ class RefStack {
   Ref pop() => stack.removeLast();
 
   Ref peek() => stack.last;
+
+  /// Remove all but the oldest [depth] stack entries, but keep the top
+  /// [paramCount] stack items.
+  void unwindTo(int depth, int paramCount) {
+    if (stack.length == depth + paramCount) {
+      return;
+    }
+
+    // Keep [0, start), [length-paramCount, length)
+    stack.removeRange(depth, stack.length - paramCount);
+  }
 }
 
 class VmCall {

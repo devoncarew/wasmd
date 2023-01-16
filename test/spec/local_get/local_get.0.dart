@@ -5,14 +5,9 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
-import 'package:wasmd/runtime_vm.dart';
 
 class LocalGet0Module implements Module {
-  LocalGet0Module() {
-    vm = VM(this);
-  }
-
-  late final VM vm;
+  LocalGet0Module();
 
   @override
   final Memory memory = Memory(0);
@@ -43,41 +38,57 @@ class LocalGet0Module implements Module {
   i32 _func00() {
     i32 local0 = 0;
 
-    return local0;
+    final frame = Frame(this);
+    frame.push(local0);
+    return frame.pop();
   }
 
   i64 _func01() {
     i64 local0 = 0;
 
-    return local0;
+    final frame = Frame(this);
+    frame.push(local0);
+    return frame.pop();
   }
 
   f32 _func02() {
     f32 local0 = 0;
 
-    return local0;
+    final frame = Frame(this);
+    frame.push(local0);
+    return frame.pop();
   }
 
   f64 _func03() {
     f64 local0 = 0;
 
-    return local0;
+    final frame = Frame(this);
+    frame.push(local0);
+    return frame.pop();
   }
 
   i32 _func04(i32 arg0) {
-    return arg0;
+    final frame = Frame(this);
+    frame.push(arg0);
+    return frame.pop();
   }
 
   i64 _func05(i64 arg0) {
-    return arg0;
+    final frame = Frame(this);
+    frame.push(arg0);
+    return frame.pop();
   }
 
   f32 _func06(f32 arg0) {
-    return arg0;
+    final frame = Frame(this);
+    frame.push(arg0);
+    return frame.pop();
   }
 
   f64 _func07(f64 arg0) {
-    return arg0;
+    final frame = Frame(this);
+    frame.push(arg0);
+    return frame.pop();
   }
 
   void _func08(i64 arg0, f32 arg1, f64 arg2, i32 arg3, i32 arg4) {
@@ -86,15 +97,34 @@ class LocalGet0Module implements Module {
     i64 local2 = 0;
     f64 local3 = 0;
 
-    var t0 = vm.i64_eqz(arg0);
-    var t1 = vm.f32_neg(arg1);
-    var t2 = vm.f64_neg(arg2);
-    var t3 = vm.i32_eqz(arg3);
-    var t4 = vm.i32_eqz(arg4);
-    var t5 = vm.f32_neg(local0);
-    var t6 = vm.i64_eqz(local1);
-    var t7 = vm.i64_eqz(local2);
-    var t8 = vm.f64_neg(local3);
+    final frame = Frame(this);
+    frame.push(arg0);
+    frame.i64_eqz();
+    frame.drop();
+    frame.push(arg1);
+    frame.f32_neg();
+    frame.drop();
+    frame.push(arg2);
+    frame.f64_neg();
+    frame.drop();
+    frame.push(arg3);
+    frame.i32_eqz();
+    frame.drop();
+    frame.push(arg4);
+    frame.i32_eqz();
+    frame.drop();
+    frame.push(local0);
+    frame.f32_neg();
+    frame.drop();
+    frame.push(local1);
+    frame.i64_eqz();
+    frame.drop();
+    frame.push(local2);
+    frame.i64_eqz();
+    frame.drop();
+    frame.push(local3);
+    frame.f64_neg();
+    frame.drop();
   }
 
   f64 _func09(i64 arg0, f32 arg1, f64 arg2, i32 arg3, i32 arg4) {
@@ -103,85 +133,103 @@ class LocalGet0Module implements Module {
     i64 local2 = 0;
     f64 local3 = 0;
 
-    local0 = 5.5;
-    local1 = 6;
-    local3 = 8.0;
-    var t0 = vm.f64_convert_i64_u(arg0);
-    var t1 = vm.f64_promote_f32(arg1);
-    var t2 = vm.f64_convert_i32_u(arg3);
-    var t3 = vm.f64_convert_i32_s(arg4);
-    var t4 = vm.f64_promote_f32(local0);
-    var t5 = vm.f64_convert_i64_u(local1);
-    var t6 = vm.f64_convert_i64_u(local2);
-    var t7 = vm.f64_add(t6, local3);
-    var t8 = vm.f64_add(t5, t7);
-    var t9 = vm.f64_add(t4, t8);
-    var t10 = vm.f64_add(t3, t9);
-    var t11 = vm.f64_add(t2, t10);
-    var t12 = vm.f64_add(arg2, t11);
-    var t13 = vm.f64_add(t1, t12);
-    var t14 = vm.f64_add(t0, t13);
-    return t14;
+    final frame = Frame(this);
+    frame.f32_const(5.5);
+    local0 = frame.pop();
+    frame.i64_const(6);
+    local1 = frame.pop();
+    frame.f64_const(8.0);
+    local3 = frame.pop();
+    frame.push(arg0);
+    frame.f64_convert_i64_u();
+    frame.push(arg1);
+    frame.f64_promote_f32();
+    frame.push(arg2);
+    frame.push(arg3);
+    frame.f64_convert_i32_u();
+    frame.push(arg4);
+    frame.f64_convert_i32_s();
+    frame.push(local0);
+    frame.f64_promote_f32();
+    frame.push(local1);
+    frame.f64_convert_i64_u();
+    frame.push(local2);
+    frame.f64_convert_i64_u();
+    frame.push(local3);
+    frame.f64_add();
+    frame.f64_add();
+    frame.f64_add();
+    frame.f64_add();
+    frame.f64_add();
+    frame.f64_add();
+    frame.f64_add();
+    frame.f64_add();
+    return frame.pop();
   }
 
   i32 _func10(i32 arg0) {
-    var block0 = 0; // => i32
-    block_label_0:
+    final frame = Frame(this);
+    block_label_0: // => i32
     {
-      block0 = arg0;
+      frame.push(arg0);
     }
-    return block0;
+    return frame.pop();
   }
 
   i32 _func11(i32 arg0) {
-    var block0 = 0; // => i32
+    final frame = Frame(this);
 
-    loop_label_0:
+    loop_label_0: // => i32
     for (;;) {
-      block0 = arg0;
+      frame.push(arg0);
       break;
     }
-    return block0;
+    return frame.pop();
   }
 
   i32 _func12(i32 arg0) {
-    var block0 = 0; // => i32
-    block_label_0:
+    final frame = Frame(this);
+    block_label_0: // => i32
     {
+      frame.push(arg0);
       break block_label_0;
-      block0 = arg0;
     }
-    return block0;
+    return frame.pop();
   }
 
   i32 _func13(i32 arg0) {
-    var block0 = 0; // => i32
-    block_label_0:
+    final frame = Frame(this);
+    block_label_0: // => i32
     {
-      if (1 != 0) break block_label_0;
-      block0 = arg0;
+      frame.push(arg0);
+      frame.i32_const(1);
+      if (frame.pop() != 0) break block_label_0;
     }
-    return block0;
+    return frame.pop();
   }
 
   i32 _func14(i32 arg0) {
-    var block0 = 0; // => i32
-    block_label_0:
+    final frame = Frame(this);
+    block_label_0: // => i32
     {
-      if (arg0 != 0) break block_label_0;
-      block0 = arg0;
+      frame.push(arg0);
+      frame.push(arg0);
+      if (frame.pop() != 0) break block_label_0;
     }
-    return block0;
+    return frame.pop();
   }
 
   i32 _func15(i32 arg0) {
+    final frame = Frame(this);
     block_label_0:
     {
       block_label_1:
       {
         block_label_2:
         {
-          switch (arg0) {
+          frame.push(arg0);
+          var t0 = frame.pop();
+          switch (t0) {
             case 0:
               break block_label_2;
             case 1:
@@ -190,39 +238,48 @@ class LocalGet0Module implements Module {
               break block_label_0;
           }
 
-          return 0;
+          frame.i32_const(0);
+          return frame.pop();
         }
-        return 1;
+        frame.i32_const(1);
+        return frame.pop();
       }
-      return 2;
+      frame.i32_const(2);
+      return frame.pop();
     }
-    return 3;
+    frame.i32_const(3);
+    return frame.pop();
   }
 
   i32 _func16(i32 arg0) {
-    return arg0;
+    final frame = Frame(this);
+    frame.push(arg0);
+    return frame.pop();
+    return frame.pop();
   }
 
   i32 _func17(i32 arg0) {
-    var block0 = 0; // => i32
-    if_label_0:
-    if (arg0 != 0) {
-      block0 = arg0;
+    final frame = Frame(this);
+    frame.push(arg0);
+    if_label_0: // => i32
+    if (frame.pop() != 0) {
+      frame.push(arg0);
     } else {
-      block0 = 0;
+      frame.i32_const(0);
     }
-    return block0;
+    return frame.pop();
   }
 
   i32 _func18(i32 arg0) {
-    var block0 = 0; // => i32
-    if_label_0:
-    if (arg0 != 0) {
-      block0 = 1;
+    final frame = Frame(this);
+    frame.push(arg0);
+    if_label_0: // => i32
+    if (frame.pop() != 0) {
+      frame.i32_const(1);
     } else {
-      block0 = arg0;
+      frame.push(arg0);
     }
-    return block0;
+    return frame.pop();
   }
 }
 

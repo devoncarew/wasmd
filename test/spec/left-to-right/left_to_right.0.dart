@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class LeftToRight0Module implements Module {
   LeftToRight0Module() {
     segments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(1);
@@ -123,1401 +127,1072 @@ class LeftToRight0Module implements Module {
   i32 br_table() => _func129();
 
   i32 _i32_t0(i32 arg0, i32 arg1) {
-    final frame = Frame(this);
-    frame.i32_const(-1);
-    return frame.pop();
+    return -1;
   }
 
   i32 _i32_t1(i32 arg0, i32 arg1) {
-    final frame = Frame(this);
-    frame.i32_const(-2);
-    return frame.pop();
+    return -2;
   }
 
   i32 _i64_t0(i64 arg0, i64 arg1) {
-    final frame = Frame(this);
-    frame.i32_const(-1);
-    return frame.pop();
+    return -1;
   }
 
   i32 _i64_t1(i64 arg0, i64 arg1) {
-    final frame = Frame(this);
-    frame.i32_const(-2);
-    return frame.pop();
+    return -2;
   }
 
   i32 _f32_t0(f32 arg0, f32 arg1) {
-    final frame = Frame(this);
-    frame.i32_const(-1);
-    return frame.pop();
+    return -1;
   }
 
   i32 _f32_t1(f32 arg0, f32 arg1) {
-    final frame = Frame(this);
-    frame.i32_const(-2);
-    return frame.pop();
+    return -2;
   }
 
   i32 _f64_t0(f64 arg0, f64 arg1) {
-    final frame = Frame(this);
-    frame.i32_const(-1);
-    return frame.pop();
+    return -1;
   }
 
   i32 _f64_t1(f64 arg0, f64 arg1) {
-    final frame = Frame(this);
-    frame.i32_const(-2);
-    return frame.pop();
+    return -2;
   }
 
   void _reset() {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.i32_const(0);
-    frame.i32_store(2, 0);
+    var t0 = vm.i32_store(2, 0, 8, 0);
   }
 
   void _bump() {
-    final frame = Frame(this);
-    frame.i32_const(11);
-    frame.i32_const(10);
-    frame.i32_load8_u(0, 0);
-    frame.i32_store8(0, 0);
-    frame.i32_const(10);
-    frame.i32_const(9);
-    frame.i32_load8_u(0, 0);
-    frame.i32_store8(0, 0);
-    frame.i32_const(9);
-    frame.i32_const(8);
-    frame.i32_load8_u(0, 0);
-    frame.i32_store8(0, 0);
-    frame.i32_const(8);
-    frame.i32_const(-3);
-    frame.i32_store8(0, 0);
+    var t0 = vm.i32_load8_u(0, 0, 10);
+    var t1 = vm.i32_store8(0, 0, 11, t0);
+    var t2 = vm.i32_load8_u(0, 0, 9);
+    var t3 = vm.i32_store8(0, 0, 10, t2);
+    var t4 = vm.i32_load8_u(0, 0, 8);
+    var t5 = vm.i32_store8(0, 0, 9, t4);
+    var t6 = vm.i32_store8(0, 0, 8, -3);
   }
 
   i32 _get() {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.i32_load(2, 0);
-    return frame.pop();
+    var t0 = vm.i32_load(2, 0, 8);
+    return t0;
   }
 
   i32 _i32_left() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(1);
-    frame.i32_store8(0, 0);
-    frame.i32_const(0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 1);
+    return 0;
   }
 
   i32 _i32_right() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(2);
-    frame.i32_store8(0, 0);
-    frame.i32_const(1);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 2);
+    return 1;
   }
 
   i32 _i32_another() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(3);
-    frame.i32_store8(0, 0);
-    frame.i32_const(1);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 3);
+    return 1;
   }
 
   i32 _i32_callee() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(4);
-    frame.i32_store8(0, 0);
-    frame.i32_const(0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 4);
+    return 0;
   }
 
   i32 _i32_bool() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(5);
-    frame.i32_store8(0, 0);
-    frame.i32_const(0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 5);
+    return 0;
   }
 
   i64 _i64_left() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(1);
-    frame.i32_store8(0, 0);
-    frame.i64_const(0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 1);
+    return 0;
   }
 
   i64 _i64_right() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(2);
-    frame.i32_store8(0, 0);
-    frame.i64_const(1);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 2);
+    return 1;
   }
 
   i64 _i64_another() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(3);
-    frame.i32_store8(0, 0);
-    frame.i64_const(1);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 3);
+    return 1;
   }
 
   i32 _i64_callee() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(4);
-    frame.i32_store8(0, 0);
-    frame.i32_const(2);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 4);
+    return 2;
   }
 
   i32 _i64_bool() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(5);
-    frame.i32_store8(0, 0);
-    frame.i32_const(0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 5);
+    return 0;
   }
 
   f32 _f32_left() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(1);
-    frame.i32_store8(0, 0);
-    frame.f32_const(0.0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 1);
+    return 0.0;
   }
 
   f32 _f32_right() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(2);
-    frame.i32_store8(0, 0);
-    frame.f32_const(1.0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 2);
+    return 1.0;
   }
 
   f32 _f32_another() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(3);
-    frame.i32_store8(0, 0);
-    frame.f32_const(1.0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 3);
+    return 1.0;
   }
 
   i32 _f32_callee() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(4);
-    frame.i32_store8(0, 0);
-    frame.i32_const(4);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 4);
+    return 4;
   }
 
   i32 _f32_bool() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(5);
-    frame.i32_store8(0, 0);
-    frame.i32_const(0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 5);
+    return 0;
   }
 
   f64 _f64_left() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(1);
-    frame.i32_store8(0, 0);
-    frame.f64_const(0.0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 1);
+    return 0.0;
   }
 
   f64 _f64_right() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(2);
-    frame.i32_store8(0, 0);
-    frame.f64_const(1.0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 2);
+    return 1.0;
   }
 
   f64 _f64_another() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(3);
-    frame.i32_store8(0, 0);
-    frame.f64_const(1.0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 3);
+    return 1.0;
   }
 
   i32 _f64_callee() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(4);
-    frame.i32_store8(0, 0);
-    frame.i32_const(6);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 4);
+    return 6;
   }
 
   i32 _f64_bool() {
-    final frame = Frame(this);
     _bump();
-    frame.i32_const(8);
-    frame.i32_const(5);
-    frame.i32_store8(0, 0);
-    frame.i32_const(0);
-    return frame.pop();
+    var t0 = vm.i32_store8(0, 0, 8, 5);
+    return 0;
   }
 
-  void _i32_dummy(i32 arg0, i32 arg1) {
-    final frame = Frame(this);
-  }
+  void _i32_dummy(i32 arg0, i32 arg1) {}
 
-  void _i64_dummy(i64 arg0, i64 arg1) {
-    final frame = Frame(this);
-  }
+  void _i64_dummy(i64 arg0, i64 arg1) {}
 
-  void _f32_dummy(f32 arg0, f32 arg1) {
-    final frame = Frame(this);
-  }
+  void _f32_dummy(f32 arg0, f32 arg1) {}
 
-  void _f64_dummy(f64 arg0, f64 arg1) {
-    final frame = Frame(this);
-  }
+  void _f64_dummy(f64 arg0, f64 arg1) {}
 
   i32 _func035() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_add();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_add(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func036() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_sub();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_sub(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func037() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_mul();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_mul(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func038() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_div_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_div_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func039() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_div_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_div_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func040() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_rem_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_rem_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func041() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_rem_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_rem_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func042() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_and();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_and(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func043() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_or();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_or(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func044() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_xor();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_xor(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func045() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_shl();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_shl(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func046() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_shr_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_shr_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func047() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_shr_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_shr_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func048() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_eq();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_eq(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func049() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_ne();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_ne(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func050() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_lt_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_lt_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func051() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_le_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_le_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func052() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_lt_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_lt_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func053() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_le_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_le_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func054() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_gt_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_gt_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func055() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_ge_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_ge_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func056() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_gt_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_gt_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func057() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_ge_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_ge_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func058() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_store(2, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_store(2, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func059() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_store8(0, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_store8(0, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func060() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.i32_store16(1, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = vm.i32_store16(1, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func061() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      _i32_dummy(t0, t1);
-    }
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    _i32_dummy(t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func062() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.push(_i32_callee());
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      frame.push(func(t0, t1));
-    }
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = _i32_callee();
+    var func0 = assertCallable<FunctionType0>(table0[t2]);
+    var t3 = func0(t0, t1);
+    var t4 = _get();
+    return t4;
   }
 
   i32 _func063() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i32_right());
-    frame.push(_i32_bool());
-    frame.select();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i32_right();
+    var t2 = _i32_bool();
+    var t3 = vm.select(t0, t1, t2);
+    var t4 = _get();
+    return t4;
   }
 
   i32 _func064() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_add();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_add(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func065() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_sub();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_sub(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func066() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_mul();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_mul(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func067() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_div_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_div_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func068() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_div_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_div_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func069() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_rem_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_rem_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func070() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_rem_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_rem_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func071() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_and();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_and(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func072() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_or();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_or(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func073() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_xor();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_xor(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func074() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_shl();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_shl(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func075() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_shr_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_shr_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func076() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_shr_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_shr_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func077() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_eq();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_eq(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func078() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_ne();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_ne(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func079() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_lt_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_lt_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func080() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_le_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_le_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func081() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_lt_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_lt_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func082() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_le_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_le_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func083() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_gt_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_gt_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func084() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_ge_s();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_ge_s(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func085() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_gt_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_gt_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func086() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.i64_ge_u();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_ge_u(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func087() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i64_right());
-    frame.i64_store(3, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_store(3, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func088() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i64_right());
-    frame.i64_store8(0, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_store8(0, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func089() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i64_right());
-    frame.i64_store16(1, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_store16(1, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func090() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_i64_right());
-    frame.i64_store32(2, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _i64_right();
+    var t2 = vm.i64_store32(2, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func091() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      _i64_dummy(t0, t1);
-    }
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    _i64_dummy(t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func092() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.push(_i64_callee());
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType1) throw Trap('indirect call type mismatch');
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      frame.push(func(t0, t1));
-    }
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = _i64_callee();
+    var func0 = assertCallable<FunctionType1>(table0[t2]);
+    var t3 = func0(t0, t1);
+    var t4 = _get();
+    return t4;
   }
 
   i32 _func093() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i64_left());
-    frame.push(_i64_right());
-    frame.push(_i64_bool());
-    frame.select();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i64_left();
+    var t1 = _i64_right();
+    var t2 = _i64_bool();
+    var t3 = vm.select(t0, t1, t2);
+    var t4 = _get();
+    return t4;
   }
 
   i32 _func094() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_add();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_add(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func095() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_sub();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_sub(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func096() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_mul();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_mul(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func097() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_div();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_div(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func098() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_copysign();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_copysign(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func099() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_eq();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_eq(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func100() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_ne();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_ne(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func101() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_lt();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_lt(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func102() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_le();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_le(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func103() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_gt();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_gt(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func104() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_ge();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_ge(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func105() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_min();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_min(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func106() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.f32_max();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_max(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func107() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_f32_right());
-    frame.f32_store(2, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _f32_right();
+    var t2 = vm.f32_store(2, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func108() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      _f32_dummy(t0, t1);
-    }
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    _f32_dummy(t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func109() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.push(_f32_callee());
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType2) throw Trap('indirect call type mismatch');
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      frame.push(func(t0, t1));
-    }
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = _f32_callee();
+    var func0 = assertCallable<FunctionType2>(table0[t2]);
+    var t3 = func0(t0, t1);
+    var t4 = _get();
+    return t4;
   }
 
   i32 _func110() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f32_left());
-    frame.push(_f32_right());
-    frame.push(_f32_bool());
-    frame.select();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f32_left();
+    var t1 = _f32_right();
+    var t2 = _f32_bool();
+    var t3 = vm.select(t0, t1, t2);
+    var t4 = _get();
+    return t4;
   }
 
   i32 _func111() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_add();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_add(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func112() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_sub();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_sub(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func113() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_mul();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_mul(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func114() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_div();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_div(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func115() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_copysign();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_copysign(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func116() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_eq();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_eq(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func117() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_ne();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_ne(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func118() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_lt();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_lt(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func119() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_le();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_le(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func120() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_gt();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_gt(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func121() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_ge();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_ge(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func122() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_min();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_min(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func123() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.f64_max();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_max(t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func124() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_i32_left());
-    frame.push(_f64_right());
-    frame.f64_store(3, 0);
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _i32_left();
+    var t1 = _f64_right();
+    var t2 = vm.f64_store(3, 0, t0, t1);
+    var t3 = _get();
+    return t3;
   }
 
   i32 _func125() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    {
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      _f64_dummy(t0, t1);
-    }
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    _f64_dummy(t0, t1);
+    var t2 = _get();
+    return t2;
   }
 
   i32 _func126() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.push(_f64_callee());
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType3) throw Trap('indirect call type mismatch');
-      var t1 = frame.pop();
-      var t0 = frame.pop();
-      frame.push(func(t0, t1));
-    }
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = _f64_callee();
+    var func0 = assertCallable<FunctionType3>(table0[t2]);
+    var t3 = func0(t0, t1);
+    var t4 = _get();
+    return t4;
   }
 
   i32 _func127() {
-    final frame = Frame(this);
     _reset();
-    frame.push(_f64_left());
-    frame.push(_f64_right());
-    frame.push(_f64_bool());
-    frame.select();
-    frame.drop();
-    frame.push(_get());
-    return frame.pop();
+    var t0 = _f64_left();
+    var t1 = _f64_right();
+    var t2 = _f64_bool();
+    var t3 = vm.select(t0, t1, t2);
+    var t4 = _get();
+    return t4;
   }
 
   i32 _func128() {
-    final frame = Frame(this);
-    block_label_0: // => i32
+    var block0 = 0; // => i32
+    block_label_0:
     {
       _reset();
-      frame.push(_i32_left());
-      frame.push(_i32_right());
-      frame.i32_const(0);
-      frame.i32_and();
-      if (frame.pop() != 0) break block_label_0;
-      frame.drop();
-      frame.push(_get());
+      var t0 = _i32_left();
+      var t1 = _i32_right();
+      var t2 = vm.i32_and(t1, 0);
+      if (t2 != 0) break block_label_0;
+      var t3 = _get();
+      block0 = t3;
     }
-    return frame.pop();
+    return block0;
   }
 
   i32 _func129() {
-    final frame = Frame(this);
-    block_label_0: // => i32
+    var block0 = 0; // => i32
+    block_label_0:
     {
       _reset();
-      block_label_1: // => i32
+
+      var block1 = 0; // => i32
+      block_label_1:
       {
-        frame.push(_i32_left());
-        frame.push(_i32_right());
-        var t0 = frame.pop();
-        switch (t0) {
+        var t0 = _i32_left();
+        var t1 = _i32_right();
+        switch (t1) {
           case 0:
             break block_label_0;
           default:
             break block_label_1;
         }
+
+        block1 = t0;
       }
-      frame.drop();
-      frame.push(_get());
+      var t2 = _get();
+      block0 = t2;
     }
-    return frame.pop();
+    return block0;
   }
 
   List<Function> _initFunctionTable() {

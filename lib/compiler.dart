@@ -1327,13 +1327,15 @@ enum BlockType {
       if (breakType) {
         // adjust stack
         if (targetScope.stackNeedsAdjust(currentScope)) {
+          // todo: this needs fixing
+
           var unwindTo = targetScope.entryDepth - targetScope.blockParamCount;
           var retainTop = targetScope.blockReturnCount;
 
-          // todo:
-          statements.add('frame.unwindTo($unwindTo, $retainTop);');
+          functionBuilder.unwindTo(unwindTo, retainTop);
         }
       }
+      // todo: do we need to return the block value here?
       statements.add('$jumpKind $label;');
 
       if (popCondition) {
@@ -1795,6 +1797,8 @@ class Scope {
 
   // ignore: unused_field
   bool _unreachable = false;
+
+  String? blockReturnName;
 
   Scope({this.parent, this.blockType}) {
     // TODO: improve the temp allocation logic

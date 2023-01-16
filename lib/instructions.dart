@@ -81,11 +81,13 @@ class Instruction_Block extends Instruction {
 
     functionBuilder.enterBlock(compiler.BlockType.$block, blocktype);
 
-    var description = blocktype.describe;
-    if (description.isNotEmpty) description = '// $description\n';
+    if (blocktype.returnItems != 0) {
+      functionBuilder.generateBlockReturnVar(blocktype,
+          description: blocktype.describe);
+    }
 
     var label = functionBuilder.currentBlockLabel;
-    functionBuilder.addStatement(Code('$label: $description{'));
+    functionBuilder.addStatement(Code('$label: {'));
   }
 }
 
@@ -114,11 +116,13 @@ class Instruction_Loop extends Instruction {
 
     functionBuilder.enterBlock(compiler.BlockType.$loop, blocktype);
 
-    var description = blocktype.describe;
-    if (description.isNotEmpty) description = '// $description\n';
+    if (blocktype.returnItems != 0) {
+      functionBuilder.generateBlockReturnVar(blocktype,
+          description: blocktype.describe);
+    }
 
     var label = functionBuilder.currentBlockLabel;
-    functionBuilder.addStatement(Code('\n$label: ${description}for (;;) {'));
+    functionBuilder.addStatement(Code('\n$label: for (;;) {'));
   }
 }
 
@@ -153,13 +157,14 @@ class Instruction_If extends Instruction {
 
     functionBuilder.enterBlock(compiler.BlockType.$if, blocktype);
 
-    var description = blocktype.describe;
-    if (description.isNotEmpty) description = '// $description\n';
+    if (blocktype.returnItems != 0) {
+      functionBuilder.generateBlockReturnVar(blocktype,
+          description: blocktype.describe);
+    }
 
     var label = functionBuilder.currentBlockLabel;
     var ref = functionBuilder.popRef();
-    functionBuilder
-        .addStatement(Code('$label: ${description}if (${ref.expr} != 0) {'));
+    functionBuilder.addStatement(Code('$label: if (${ref.expr} != 0) {'));
   }
 }
 
@@ -173,6 +178,7 @@ class Instruction_Else extends Instruction {
 
   @override
   void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.blockReturn();
     functionBuilder.addStatement(Code('} else {\n'));
   }
 }
@@ -211,6 +217,8 @@ class Instruction_End extends Instruction {
 
   @override
   void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.blockReturn(endStatement: true);
+
     var oldScope = functionBuilder.scope;
     var oldNesting = functionBuilder.exitBlock();
 
@@ -451,6 +459,25 @@ class BlockFunctionType {
     if (valueType != null) return 1;
     if (functionType != null) return functionType!.resultType.length;
     return 0;
+  }
+
+  compiler.ValueType? get firstReturnType {
+    if (valueType != null) {
+      return valueType;
+    } else if (functionType != null) {
+      var types = functionType!.resultType;
+      return types.firstOrNull;
+    } else {
+      return null;
+    }
+  }
+
+  bool get isPrimitive {
+    if (returnItems == 1) {
+      return !firstReturnType!.refType;
+    } else {
+      return false;
+    }
   }
 
   String get describe {
