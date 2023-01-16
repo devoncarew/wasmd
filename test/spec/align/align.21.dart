@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Align21Module implements Module {
-  Align21Module();
+  Align21Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -16,10 +21,7 @@ class Align21Module implements Module {
   late final List<Table> tables = [];
 
   void _func0() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.f32_const(1.0);
-    frame.f32_store(2, 0);
+    var t0 = vm.f32_store(2, 0, 0, 1.0);
   }
 }
 

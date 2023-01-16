@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class MemorySize1Module implements Module {
-  MemorySize1Module();
+  MemorySize1Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(1);
@@ -19,16 +24,12 @@ class MemorySize1Module implements Module {
   void grow(i32 arg0) => _func1(arg0);
 
   i32 _func0() {
-    final frame = Frame(this);
-    frame.memory_size(0);
-    return frame.pop();
+    var t0 = vm.memory_size(0);
+    return t0;
   }
 
   void _func1(i32 sz) {
-    final frame = Frame(this);
-    frame.push(sz);
-    frame.memory_grow(0);
-    frame.drop();
+    var t0 = vm.memory_grow(0, sz);
   }
 }
 

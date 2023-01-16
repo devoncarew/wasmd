@@ -7,11 +7,15 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class MemoryCopy4Module implements Module {
   MemoryCopy4Module() {
     _data.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -28,18 +32,12 @@ class MemoryCopy4Module implements Module {
   i32 load8_u(i32 arg0) => _func1(arg0);
 
   void _func0() {
-    final frame = Frame(this);
-    frame.i32_const(20);
-    frame.i32_const(22);
-    frame.i32_const(4);
-    frame.memory_copy(0, 0);
+    var t0 = vm.memory_copy(0, 0, 20, 22, 4);
   }
 
   i32 _func1(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load8_u(0, 0, arg0);
+    return t0;
   }
 }
 

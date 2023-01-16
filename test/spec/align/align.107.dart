@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Align107Module implements Module {
-  Align107Module();
+  Align107Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(1);
@@ -19,17 +24,12 @@ class Align107Module implements Module {
   i32 load(i32 arg0) => _func1(arg0);
 
   void _func0(i32 arg0, i64 arg1) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.push(arg1);
-    frame.i64_store(2, 0);
+    var t0 = vm.i64_store(2, 0, arg0, arg1);
   }
 
   i32 _func1(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_load(2, 0);
-    return frame.pop();
+    var t0 = vm.i32_load(2, 0, arg0);
+    return t0;
   }
 }
 

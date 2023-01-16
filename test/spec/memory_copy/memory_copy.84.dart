@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class MemoryCopy84Module implements Module {
-  MemoryCopy84Module();
+  MemoryCopy84Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -22,47 +27,29 @@ class MemoryCopy84Module implements Module {
   i32 checkRange(i32 arg0, i32 arg1, i32 arg2) => _func1(arg0, arg1, arg2);
 
   void _func0() {
-    final frame = Frame(this);
-    frame.i32_const(10);
-    frame.i32_const(85);
-    frame.i32_const(10);
-    frame.memory_fill(0);
-    frame.i32_const(16);
-    frame.i32_const(15);
-    frame.i32_const(5);
-    frame.memory_copy(0, 0);
+    var t0 = vm.memory_fill(0, 10, 85, 10);
+    var t1 = vm.memory_copy(0, 0, 16, 15, 5);
   }
 
   i32 _func1(i32 from, i32 to, i32 expected) {
-    final frame = Frame(this);
-
     loop_label_0:
     for (;;) {
-      frame.push(from);
-      frame.push(to);
-      frame.i32_eq();
+      var t0 = vm.i32_eq(from, to);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(-1);
-        return frame.pop();
+      if (t0 != 0) {
+        return -1;
       }
-      frame.push(from);
-      frame.i32_load8_u(0, 0);
-      frame.push(expected);
-      frame.i32_eq();
+      var t1 = vm.i32_load8_u(0, 0, from);
+      var t2 = vm.i32_eq(t1, expected);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.push(from);
-        frame.i32_const(1);
-        frame.i32_add();
-        from = frame.pop();
+      if (t2 != 0) {
+        var t3 = vm.i32_add(from, 1);
+        from = t3;
         continue loop_label_0;
       }
       break;
     }
-    frame.push(from);
-    return frame.pop();
-    return frame.pop();
+    return from;
   }
 }
 

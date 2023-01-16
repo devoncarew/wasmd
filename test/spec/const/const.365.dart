@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Const365Module implements Module {
-  Const365Module();
+  Const365Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -18,9 +23,7 @@ class Const365Module implements Module {
   f64 f() => _func0();
 
   f64 _func0() {
-    final frame = Frame(this);
-    frame.f64_const(-2.409919865102885e-181);
-    return frame.pop();
+    return -2.409919865102885e-181;
   }
 }
 

@@ -7,11 +7,15 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Address0Module implements Module {
   Address0Module() {
     _data.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(1);
@@ -53,213 +57,148 @@ class Address0Module implements Module {
   void $32_bad(i32 arg0) => _func29(arg0);
 
   i32 _func00(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load8_u(0, 0, i);
+    return t0;
   }
 
   i32 _func01(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_u(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load8_u(0, 0, i);
+    return t0;
   }
 
   i32 _func02(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_u(0, 1);
-    return frame.pop();
+    var t0 = vm.i32_load8_u(0, 1, i);
+    return t0;
   }
 
   i32 _func03(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_u(0, 2);
-    return frame.pop();
+    var t0 = vm.i32_load8_u(0, 2, i);
+    return t0;
   }
 
   i32 _func04(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_u(0, 25);
-    return frame.pop();
+    var t0 = vm.i32_load8_u(0, 25, i);
+    return t0;
   }
 
   i32 _func05(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_s(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load8_s(0, 0, i);
+    return t0;
   }
 
   i32 _func06(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_s(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load8_s(0, 0, i);
+    return t0;
   }
 
   i32 _func07(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_s(0, 1);
-    return frame.pop();
+    var t0 = vm.i32_load8_s(0, 1, i);
+    return t0;
   }
 
   i32 _func08(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_s(0, 2);
-    return frame.pop();
+    var t0 = vm.i32_load8_s(0, 2, i);
+    return t0;
   }
 
   i32 _func09(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_s(0, 25);
-    return frame.pop();
+    var t0 = vm.i32_load8_s(0, 25, i);
+    return t0;
   }
 
   i32 _func10(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_u(1, 0);
-    return frame.pop();
+    var t0 = vm.i32_load16_u(1, 0, i);
+    return t0;
   }
 
   i32 _func11(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_u(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load16_u(0, 0, i);
+    return t0;
   }
 
   i32 _func12(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_u(0, 1);
-    return frame.pop();
+    var t0 = vm.i32_load16_u(0, 1, i);
+    return t0;
   }
 
   i32 _func13(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_u(1, 2);
-    return frame.pop();
+    var t0 = vm.i32_load16_u(1, 2, i);
+    return t0;
   }
 
   i32 _func14(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_u(1, 25);
-    return frame.pop();
+    var t0 = vm.i32_load16_u(1, 25, i);
+    return t0;
   }
 
   i32 _func15(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_s(1, 0);
-    return frame.pop();
+    var t0 = vm.i32_load16_s(1, 0, i);
+    return t0;
   }
 
   i32 _func16(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_s(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load16_s(0, 0, i);
+    return t0;
   }
 
   i32 _func17(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_s(0, 1);
-    return frame.pop();
+    var t0 = vm.i32_load16_s(0, 1, i);
+    return t0;
   }
 
   i32 _func18(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_s(1, 2);
-    return frame.pop();
+    var t0 = vm.i32_load16_s(1, 2, i);
+    return t0;
   }
 
   i32 _func19(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_s(1, 25);
-    return frame.pop();
+    var t0 = vm.i32_load16_s(1, 25, i);
+    return t0;
   }
 
   i32 _func20(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load(2, 0);
-    return frame.pop();
+    var t0 = vm.i32_load(2, 0, i);
+    return t0;
   }
 
   i32 _func21(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load(0, 0);
-    return frame.pop();
+    var t0 = vm.i32_load(0, 0, i);
+    return t0;
   }
 
   i32 _func22(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load(0, 1);
-    return frame.pop();
+    var t0 = vm.i32_load(0, 1, i);
+    return t0;
   }
 
   i32 _func23(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load(1, 2);
-    return frame.pop();
+    var t0 = vm.i32_load(1, 2, i);
+    return t0;
   }
 
   i32 _func24(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load(2, 25);
-    return frame.pop();
+    var t0 = vm.i32_load(2, 25, i);
+    return t0;
   }
 
   void _func25(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_u(0, 0xffffffff);
-    frame.drop();
+    var t0 = vm.i32_load8_u(0, 0xffffffff, i);
   }
 
   void _func26(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load8_s(0, 0xffffffff);
-    frame.drop();
+    var t0 = vm.i32_load8_s(0, 0xffffffff, i);
   }
 
   void _func27(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_u(1, 0xffffffff);
-    frame.drop();
+    var t0 = vm.i32_load16_u(1, 0xffffffff, i);
   }
 
   void _func28(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load16_s(1, 0xffffffff);
-    frame.drop();
+    var t0 = vm.i32_load16_s(1, 0xffffffff, i);
   }
 
   void _func29(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.i32_load(2, 0xffffffff);
-    frame.drop();
+    var t0 = vm.i32_load(2, 0xffffffff, i);
   }
 }
 

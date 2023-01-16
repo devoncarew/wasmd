@@ -15,6 +15,8 @@ import 'package:wasmd/src/utils.dart';
 // TODO:? --disable-saturating-float-to-int --disable-sign-extension
 // --disable-multi-value --disable-simd
 
+// | address.wast                | -   |
+
 void main(List<String> args) {
   if (args.isEmpty) {
     print('usage: dart tools/spec_2.dart <wast file>');
@@ -23,11 +25,7 @@ void main(List<String> args) {
 
   args = args.toList();
 
-  var vmBackend = false;
-  if (args.contains('--vm')) {
-    args.remove('--vm');
-    vmBackend = true;
-  }
+  var vmBackend = _parseConfig();
 
   if (args.contains('--all')) {
     var specDir = Directory(p.join('test', 'spec'));
@@ -64,7 +62,8 @@ void main(List<String> args) {
       if (!wasmFile.existsSync()) continue;
 
       var dartFile = File('${p.withoutExtension(wasmFile.path)}.dart');
-      compileWasmToDart(compiler, wasmFile, dartFile, vmBackend: vmBackend);
+      var useVmBackend = vmBackend[p.basename(wastFile.path)] ?? false;
+      compileWasmToDart(compiler, wasmFile, dartFile, vmBackend: useVmBackend);
     }
   }
 }
@@ -559,4 +558,25 @@ class ModuleRef {
 
   @override
   String toString() => refName;
+}
+
+Map<String, bool> _parseConfig() {
+  var file = File('tool/tests.md');
+
+  var results = <String, bool>{};
+
+  for (var line in file.readAsLinesSync()) {
+    line = line.trim();
+    if (line.isEmpty) continue;
+
+    var items = line.split('|');
+    if (items.length != 4) continue;
+
+    var name = items[1].trim();
+    var vmBackend = items[2].trim().startsWith('+');
+
+    results[name] = vmBackend;
+  }
+
+  return results;
 }

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Align106Module implements Module {
-  Align106Module();
+  Align106Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(1);
@@ -24,9 +29,7 @@ class Align106Module implements Module {
     f32 local0 = 0;
     f32 local1 = 0;
 
-    final frame = Frame(this);
-    frame.f32_const(10.0);
-    local0 = frame.pop();
+    local0 = 10.0;
     block_label_0:
     {
       block_label_1:
@@ -37,9 +40,7 @@ class Align106Module implements Module {
           {
             block_label_4:
             {
-              frame.push(arg0);
-              var t0 = frame.pop();
-              switch (t0) {
+              switch (arg0) {
                 case 0:
                   break block_label_4;
                 case 1:
@@ -52,48 +53,33 @@ class Align106Module implements Module {
                   break block_label_0;
               }
             }
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.f32_store(2, 0);
-            frame.i32_const(0);
-            frame.f32_load(2, 0);
-            local1 = frame.pop();
+            var t0 = vm.f32_store(2, 0, 0, local0);
+            var t1 = vm.f32_load(2, 0, 0);
+            local1 = t1;
             break block_label_0;
           }
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.f32_store(0, 0);
-          frame.i32_const(0);
-          frame.f32_load(0, 0);
-          local1 = frame.pop();
+          var t2 = vm.f32_store(0, 0, 0, local0);
+          var t3 = vm.f32_load(0, 0, 0);
+          local1 = t3;
           break block_label_0;
         }
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.f32_store(1, 0);
-        frame.i32_const(0);
-        frame.f32_load(1, 0);
-        local1 = frame.pop();
+        var t4 = vm.f32_store(1, 0, 0, local0);
+        var t5 = vm.f32_load(1, 0, 0);
+        local1 = t5;
         break block_label_0;
       }
-      frame.i32_const(0);
-      frame.push(local0);
-      frame.f32_store(2, 0);
-      frame.i32_const(0);
-      frame.f32_load(2, 0);
-      local1 = frame.pop();
+      var t6 = vm.f32_store(2, 0, 0, local0);
+      var t7 = vm.f32_load(2, 0, 0);
+      local1 = t7;
     }
-    frame.push(local1);
-    return frame.pop();
+    return local1;
   }
 
   f64 _func1(i32 arg0) {
     f64 local0 = 0;
     f64 local1 = 0;
 
-    final frame = Frame(this);
-    frame.f64_const(10.0);
-    local0 = frame.pop();
+    local0 = 10.0;
     block_label_0:
     {
       block_label_1:
@@ -106,9 +92,7 @@ class Align106Module implements Module {
             {
               block_label_5:
               {
-                frame.push(arg0);
-                var t0 = frame.pop();
-                switch (t0) {
+                switch (arg0) {
                   case 0:
                     break block_label_5;
                   case 1:
@@ -123,56 +107,38 @@ class Align106Module implements Module {
                     break block_label_0;
                 }
               }
-              frame.i32_const(0);
-              frame.push(local0);
-              frame.f64_store(3, 0);
-              frame.i32_const(0);
-              frame.f64_load(3, 0);
-              local1 = frame.pop();
+              var t0 = vm.f64_store(3, 0, 0, local0);
+              var t1 = vm.f64_load(3, 0, 0);
+              local1 = t1;
               break block_label_0;
             }
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.f64_store(0, 0);
-            frame.i32_const(0);
-            frame.f64_load(0, 0);
-            local1 = frame.pop();
+            var t2 = vm.f64_store(0, 0, 0, local0);
+            var t3 = vm.f64_load(0, 0, 0);
+            local1 = t3;
             break block_label_0;
           }
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.f64_store(1, 0);
-          frame.i32_const(0);
-          frame.f64_load(1, 0);
-          local1 = frame.pop();
+          var t4 = vm.f64_store(1, 0, 0, local0);
+          var t5 = vm.f64_load(1, 0, 0);
+          local1 = t5;
           break block_label_0;
         }
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.f64_store(2, 0);
-        frame.i32_const(0);
-        frame.f64_load(2, 0);
-        local1 = frame.pop();
+        var t6 = vm.f64_store(2, 0, 0, local0);
+        var t7 = vm.f64_load(2, 0, 0);
+        local1 = t7;
         break block_label_0;
       }
-      frame.i32_const(0);
-      frame.push(local0);
-      frame.f64_store(3, 0);
-      frame.i32_const(0);
-      frame.f64_load(3, 0);
-      local1 = frame.pop();
+      var t8 = vm.f64_store(3, 0, 0, local0);
+      var t9 = vm.f64_load(3, 0, 0);
+      local1 = t9;
     }
-    frame.push(local1);
-    return frame.pop();
+    return local1;
   }
 
   i32 _func2(i32 arg0, i32 arg1) {
     i32 local0 = 0;
     i32 local1 = 0;
 
-    final frame = Frame(this);
-    frame.i32_const(10);
-    local0 = frame.pop();
+    local0 = 10;
     block_label_0:
     {
       block_label_1:
@@ -185,9 +151,7 @@ class Align106Module implements Module {
             {
               block_label_5:
               {
-                frame.push(arg0);
-                var t0 = frame.pop();
-                switch (t0) {
+                switch (arg0) {
                   case 0:
                     break block_label_5;
                   case 1:
@@ -202,194 +166,121 @@ class Align106Module implements Module {
                     break block_label_0;
                 }
               }
-              frame.push(arg1);
-              frame.i32_const(0);
-              frame.i32_eq();
+              var t0 = vm.i32_eq(arg1, 0);
               if_label_5:
-              if (frame.pop() != 0) {
-                frame.i32_const(0);
-                frame.push(local0);
-                frame.i32_store8(0, 0);
-                frame.i32_const(0);
-                frame.i32_load8_s(0, 0);
-                local1 = frame.pop();
+              if (t0 != 0) {
+                var t1 = vm.i32_store8(0, 0, 0, local0);
+                var t2 = vm.i32_load8_s(0, 0, 0);
+                local1 = t2;
               }
-              frame.push(arg1);
-              frame.i32_const(1);
-              frame.i32_eq();
+              var t3 = vm.i32_eq(arg1, 1);
               if_label_5:
-              if (frame.pop() != 0) {
-                frame.i32_const(0);
-                frame.push(local0);
-                frame.i32_store8(0, 0);
-                frame.i32_const(0);
-                frame.i32_load8_s(0, 0);
-                local1 = frame.pop();
+              if (t3 != 0) {
+                var t4 = vm.i32_store8(0, 0, 0, local0);
+                var t5 = vm.i32_load8_s(0, 0, 0);
+                local1 = t5;
               }
               break block_label_0;
             }
-            frame.push(arg1);
-            frame.i32_const(0);
-            frame.i32_eq();
+            var t6 = vm.i32_eq(arg1, 0);
             if_label_4:
-            if (frame.pop() != 0) {
-              frame.i32_const(0);
-              frame.push(local0);
-              frame.i32_store8(0, 0);
-              frame.i32_const(0);
-              frame.i32_load8_u(0, 0);
-              local1 = frame.pop();
+            if (t6 != 0) {
+              var t7 = vm.i32_store8(0, 0, 0, local0);
+              var t8 = vm.i32_load8_u(0, 0, 0);
+              local1 = t8;
             }
-            frame.push(arg1);
-            frame.i32_const(1);
-            frame.i32_eq();
+            var t9 = vm.i32_eq(arg1, 1);
             if_label_4:
-            if (frame.pop() != 0) {
-              frame.i32_const(0);
-              frame.push(local0);
-              frame.i32_store8(0, 0);
-              frame.i32_const(0);
-              frame.i32_load8_u(0, 0);
-              local1 = frame.pop();
+            if (t9 != 0) {
+              var t10 = vm.i32_store8(0, 0, 0, local0);
+              var t11 = vm.i32_load8_u(0, 0, 0);
+              local1 = t11;
             }
             break block_label_0;
           }
-          frame.push(arg1);
-          frame.i32_const(0);
-          frame.i32_eq();
+          var t12 = vm.i32_eq(arg1, 0);
           if_label_3:
-          if (frame.pop() != 0) {
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.i32_store16(1, 0);
-            frame.i32_const(0);
-            frame.i32_load16_s(1, 0);
-            local1 = frame.pop();
+          if (t12 != 0) {
+            var t13 = vm.i32_store16(1, 0, 0, local0);
+            var t14 = vm.i32_load16_s(1, 0, 0);
+            local1 = t14;
           }
-          frame.push(arg1);
-          frame.i32_const(1);
-          frame.i32_eq();
+          var t15 = vm.i32_eq(arg1, 1);
           if_label_3:
-          if (frame.pop() != 0) {
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.i32_store16(0, 0);
-            frame.i32_const(0);
-            frame.i32_load16_s(0, 0);
-            local1 = frame.pop();
+          if (t15 != 0) {
+            var t16 = vm.i32_store16(0, 0, 0, local0);
+            var t17 = vm.i32_load16_s(0, 0, 0);
+            local1 = t17;
           }
-          frame.push(arg1);
-          frame.i32_const(2);
-          frame.i32_eq();
+          var t18 = vm.i32_eq(arg1, 2);
           if_label_3:
-          if (frame.pop() != 0) {
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.i32_store16(1, 0);
-            frame.i32_const(0);
-            frame.i32_load16_s(1, 0);
-            local1 = frame.pop();
+          if (t18 != 0) {
+            var t19 = vm.i32_store16(1, 0, 0, local0);
+            var t20 = vm.i32_load16_s(1, 0, 0);
+            local1 = t20;
           }
           break block_label_0;
         }
-        frame.push(arg1);
-        frame.i32_const(0);
-        frame.i32_eq();
+        var t21 = vm.i32_eq(arg1, 0);
         if_label_2:
-        if (frame.pop() != 0) {
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.i32_store16(1, 0);
-          frame.i32_const(0);
-          frame.i32_load16_u(1, 0);
-          local1 = frame.pop();
+        if (t21 != 0) {
+          var t22 = vm.i32_store16(1, 0, 0, local0);
+          var t23 = vm.i32_load16_u(1, 0, 0);
+          local1 = t23;
         }
-        frame.push(arg1);
-        frame.i32_const(1);
-        frame.i32_eq();
+        var t24 = vm.i32_eq(arg1, 1);
         if_label_2:
-        if (frame.pop() != 0) {
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.i32_store16(0, 0);
-          frame.i32_const(0);
-          frame.i32_load16_u(0, 0);
-          local1 = frame.pop();
+        if (t24 != 0) {
+          var t25 = vm.i32_store16(0, 0, 0, local0);
+          var t26 = vm.i32_load16_u(0, 0, 0);
+          local1 = t26;
         }
-        frame.push(arg1);
-        frame.i32_const(2);
-        frame.i32_eq();
+        var t27 = vm.i32_eq(arg1, 2);
         if_label_2:
-        if (frame.pop() != 0) {
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.i32_store16(1, 0);
-          frame.i32_const(0);
-          frame.i32_load16_u(1, 0);
-          local1 = frame.pop();
+        if (t27 != 0) {
+          var t28 = vm.i32_store16(1, 0, 0, local0);
+          var t29 = vm.i32_load16_u(1, 0, 0);
+          local1 = t29;
         }
         break block_label_0;
       }
-      frame.push(arg1);
-      frame.i32_const(0);
-      frame.i32_eq();
+      var t30 = vm.i32_eq(arg1, 0);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i32_store(2, 0);
-        frame.i32_const(0);
-        frame.i32_load(2, 0);
-        local1 = frame.pop();
+      if (t30 != 0) {
+        var t31 = vm.i32_store(2, 0, 0, local0);
+        var t32 = vm.i32_load(2, 0, 0);
+        local1 = t32;
       }
-      frame.push(arg1);
-      frame.i32_const(1);
-      frame.i32_eq();
+      var t33 = vm.i32_eq(arg1, 1);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i32_store(0, 0);
-        frame.i32_const(0);
-        frame.i32_load(0, 0);
-        local1 = frame.pop();
+      if (t33 != 0) {
+        var t34 = vm.i32_store(0, 0, 0, local0);
+        var t35 = vm.i32_load(0, 0, 0);
+        local1 = t35;
       }
-      frame.push(arg1);
-      frame.i32_const(2);
-      frame.i32_eq();
+      var t36 = vm.i32_eq(arg1, 2);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i32_store(1, 0);
-        frame.i32_const(0);
-        frame.i32_load(1, 0);
-        local1 = frame.pop();
+      if (t36 != 0) {
+        var t37 = vm.i32_store(1, 0, 0, local0);
+        var t38 = vm.i32_load(1, 0, 0);
+        local1 = t38;
       }
-      frame.push(arg1);
-      frame.i32_const(4);
-      frame.i32_eq();
+      var t39 = vm.i32_eq(arg1, 4);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i32_store(2, 0);
-        frame.i32_const(0);
-        frame.i32_load(2, 0);
-        local1 = frame.pop();
+      if (t39 != 0) {
+        var t40 = vm.i32_store(2, 0, 0, local0);
+        var t41 = vm.i32_load(2, 0, 0);
+        local1 = t41;
       }
     }
-    frame.push(local1);
-    return frame.pop();
+    return local1;
   }
 
   i64 _func3(i32 arg0, i32 arg1) {
     i64 local0 = 0;
     i64 local1 = 0;
 
-    final frame = Frame(this);
-    frame.i64_const(10);
-    local0 = frame.pop();
+    local0 = 10;
     block_label_0:
     {
       block_label_1:
@@ -406,9 +297,7 @@ class Align106Module implements Module {
                 {
                   block_label_7:
                   {
-                    frame.push(arg0);
-                    var t0 = frame.pop();
-                    switch (t0) {
+                    switch (arg0) {
                       case 0:
                         break block_label_7;
                       case 1:
@@ -427,297 +316,181 @@ class Align106Module implements Module {
                         break block_label_0;
                     }
                   }
-                  frame.push(arg1);
-                  frame.i32_const(0);
-                  frame.i32_eq();
+                  var t0 = vm.i32_eq(arg1, 0);
                   if_label_7:
-                  if (frame.pop() != 0) {
-                    frame.i32_const(0);
-                    frame.push(local0);
-                    frame.i64_store8(0, 0);
-                    frame.i32_const(0);
-                    frame.i64_load8_s(0, 0);
-                    local1 = frame.pop();
+                  if (t0 != 0) {
+                    var t1 = vm.i64_store8(0, 0, 0, local0);
+                    var t2 = vm.i64_load8_s(0, 0, 0);
+                    local1 = t2;
                   }
-                  frame.push(arg1);
-                  frame.i32_const(1);
-                  frame.i32_eq();
+                  var t3 = vm.i32_eq(arg1, 1);
                   if_label_7:
-                  if (frame.pop() != 0) {
-                    frame.i32_const(0);
-                    frame.push(local0);
-                    frame.i64_store8(0, 0);
-                    frame.i32_const(0);
-                    frame.i64_load8_s(0, 0);
-                    local1 = frame.pop();
+                  if (t3 != 0) {
+                    var t4 = vm.i64_store8(0, 0, 0, local0);
+                    var t5 = vm.i64_load8_s(0, 0, 0);
+                    local1 = t5;
                   }
                   break block_label_0;
                 }
-                frame.push(arg1);
-                frame.i32_const(0);
-                frame.i32_eq();
+                var t6 = vm.i32_eq(arg1, 0);
                 if_label_6:
-                if (frame.pop() != 0) {
-                  frame.i32_const(0);
-                  frame.push(local0);
-                  frame.i64_store8(0, 0);
-                  frame.i32_const(0);
-                  frame.i64_load8_u(0, 0);
-                  local1 = frame.pop();
+                if (t6 != 0) {
+                  var t7 = vm.i64_store8(0, 0, 0, local0);
+                  var t8 = vm.i64_load8_u(0, 0, 0);
+                  local1 = t8;
                 }
-                frame.push(arg1);
-                frame.i32_const(1);
-                frame.i32_eq();
+                var t9 = vm.i32_eq(arg1, 1);
                 if_label_6:
-                if (frame.pop() != 0) {
-                  frame.i32_const(0);
-                  frame.push(local0);
-                  frame.i64_store8(0, 0);
-                  frame.i32_const(0);
-                  frame.i64_load8_u(0, 0);
-                  local1 = frame.pop();
+                if (t9 != 0) {
+                  var t10 = vm.i64_store8(0, 0, 0, local0);
+                  var t11 = vm.i64_load8_u(0, 0, 0);
+                  local1 = t11;
                 }
                 break block_label_0;
               }
-              frame.push(arg1);
-              frame.i32_const(0);
-              frame.i32_eq();
+              var t12 = vm.i32_eq(arg1, 0);
               if_label_5:
-              if (frame.pop() != 0) {
-                frame.i32_const(0);
-                frame.push(local0);
-                frame.i64_store16(1, 0);
-                frame.i32_const(0);
-                frame.i64_load16_s(1, 0);
-                local1 = frame.pop();
+              if (t12 != 0) {
+                var t13 = vm.i64_store16(1, 0, 0, local0);
+                var t14 = vm.i64_load16_s(1, 0, 0);
+                local1 = t14;
               }
-              frame.push(arg1);
-              frame.i32_const(1);
-              frame.i32_eq();
+              var t15 = vm.i32_eq(arg1, 1);
               if_label_5:
-              if (frame.pop() != 0) {
-                frame.i32_const(0);
-                frame.push(local0);
-                frame.i64_store16(0, 0);
-                frame.i32_const(0);
-                frame.i64_load16_s(0, 0);
-                local1 = frame.pop();
+              if (t15 != 0) {
+                var t16 = vm.i64_store16(0, 0, 0, local0);
+                var t17 = vm.i64_load16_s(0, 0, 0);
+                local1 = t17;
               }
-              frame.push(arg1);
-              frame.i32_const(2);
-              frame.i32_eq();
+              var t18 = vm.i32_eq(arg1, 2);
               if_label_5:
-              if (frame.pop() != 0) {
-                frame.i32_const(0);
-                frame.push(local0);
-                frame.i64_store16(1, 0);
-                frame.i32_const(0);
-                frame.i64_load16_s(1, 0);
-                local1 = frame.pop();
+              if (t18 != 0) {
+                var t19 = vm.i64_store16(1, 0, 0, local0);
+                var t20 = vm.i64_load16_s(1, 0, 0);
+                local1 = t20;
               }
               break block_label_0;
             }
-            frame.push(arg1);
-            frame.i32_const(0);
-            frame.i32_eq();
+            var t21 = vm.i32_eq(arg1, 0);
             if_label_4:
-            if (frame.pop() != 0) {
-              frame.i32_const(0);
-              frame.push(local0);
-              frame.i64_store16(1, 0);
-              frame.i32_const(0);
-              frame.i64_load16_u(1, 0);
-              local1 = frame.pop();
+            if (t21 != 0) {
+              var t22 = vm.i64_store16(1, 0, 0, local0);
+              var t23 = vm.i64_load16_u(1, 0, 0);
+              local1 = t23;
             }
-            frame.push(arg1);
-            frame.i32_const(1);
-            frame.i32_eq();
+            var t24 = vm.i32_eq(arg1, 1);
             if_label_4:
-            if (frame.pop() != 0) {
-              frame.i32_const(0);
-              frame.push(local0);
-              frame.i64_store16(0, 0);
-              frame.i32_const(0);
-              frame.i64_load16_u(0, 0);
-              local1 = frame.pop();
+            if (t24 != 0) {
+              var t25 = vm.i64_store16(0, 0, 0, local0);
+              var t26 = vm.i64_load16_u(0, 0, 0);
+              local1 = t26;
             }
-            frame.push(arg1);
-            frame.i32_const(2);
-            frame.i32_eq();
+            var t27 = vm.i32_eq(arg1, 2);
             if_label_4:
-            if (frame.pop() != 0) {
-              frame.i32_const(0);
-              frame.push(local0);
-              frame.i64_store16(1, 0);
-              frame.i32_const(0);
-              frame.i64_load16_u(1, 0);
-              local1 = frame.pop();
+            if (t27 != 0) {
+              var t28 = vm.i64_store16(1, 0, 0, local0);
+              var t29 = vm.i64_load16_u(1, 0, 0);
+              local1 = t29;
             }
             break block_label_0;
           }
-          frame.push(arg1);
-          frame.i32_const(0);
-          frame.i32_eq();
+          var t30 = vm.i32_eq(arg1, 0);
           if_label_3:
-          if (frame.pop() != 0) {
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.i64_store32(2, 0);
-            frame.i32_const(0);
-            frame.i64_load32_s(2, 0);
-            local1 = frame.pop();
+          if (t30 != 0) {
+            var t31 = vm.i64_store32(2, 0, 0, local0);
+            var t32 = vm.i64_load32_s(2, 0, 0);
+            local1 = t32;
           }
-          frame.push(arg1);
-          frame.i32_const(1);
-          frame.i32_eq();
+          var t33 = vm.i32_eq(arg1, 1);
           if_label_3:
-          if (frame.pop() != 0) {
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.i64_store32(0, 0);
-            frame.i32_const(0);
-            frame.i64_load32_s(0, 0);
-            local1 = frame.pop();
+          if (t33 != 0) {
+            var t34 = vm.i64_store32(0, 0, 0, local0);
+            var t35 = vm.i64_load32_s(0, 0, 0);
+            local1 = t35;
           }
-          frame.push(arg1);
-          frame.i32_const(2);
-          frame.i32_eq();
+          var t36 = vm.i32_eq(arg1, 2);
           if_label_3:
-          if (frame.pop() != 0) {
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.i64_store32(1, 0);
-            frame.i32_const(0);
-            frame.i64_load32_s(1, 0);
-            local1 = frame.pop();
+          if (t36 != 0) {
+            var t37 = vm.i64_store32(1, 0, 0, local0);
+            var t38 = vm.i64_load32_s(1, 0, 0);
+            local1 = t38;
           }
-          frame.push(arg1);
-          frame.i32_const(4);
-          frame.i32_eq();
+          var t39 = vm.i32_eq(arg1, 4);
           if_label_3:
-          if (frame.pop() != 0) {
-            frame.i32_const(0);
-            frame.push(local0);
-            frame.i64_store32(2, 0);
-            frame.i32_const(0);
-            frame.i64_load32_s(2, 0);
-            local1 = frame.pop();
+          if (t39 != 0) {
+            var t40 = vm.i64_store32(2, 0, 0, local0);
+            var t41 = vm.i64_load32_s(2, 0, 0);
+            local1 = t41;
           }
           break block_label_0;
         }
-        frame.push(arg1);
-        frame.i32_const(0);
-        frame.i32_eq();
+        var t42 = vm.i32_eq(arg1, 0);
         if_label_2:
-        if (frame.pop() != 0) {
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.i64_store32(2, 0);
-          frame.i32_const(0);
-          frame.i64_load32_u(2, 0);
-          local1 = frame.pop();
+        if (t42 != 0) {
+          var t43 = vm.i64_store32(2, 0, 0, local0);
+          var t44 = vm.i64_load32_u(2, 0, 0);
+          local1 = t44;
         }
-        frame.push(arg1);
-        frame.i32_const(1);
-        frame.i32_eq();
+        var t45 = vm.i32_eq(arg1, 1);
         if_label_2:
-        if (frame.pop() != 0) {
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.i64_store32(0, 0);
-          frame.i32_const(0);
-          frame.i64_load32_u(0, 0);
-          local1 = frame.pop();
+        if (t45 != 0) {
+          var t46 = vm.i64_store32(0, 0, 0, local0);
+          var t47 = vm.i64_load32_u(0, 0, 0);
+          local1 = t47;
         }
-        frame.push(arg1);
-        frame.i32_const(2);
-        frame.i32_eq();
+        var t48 = vm.i32_eq(arg1, 2);
         if_label_2:
-        if (frame.pop() != 0) {
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.i64_store32(1, 0);
-          frame.i32_const(0);
-          frame.i64_load32_u(1, 0);
-          local1 = frame.pop();
+        if (t48 != 0) {
+          var t49 = vm.i64_store32(1, 0, 0, local0);
+          var t50 = vm.i64_load32_u(1, 0, 0);
+          local1 = t50;
         }
-        frame.push(arg1);
-        frame.i32_const(4);
-        frame.i32_eq();
+        var t51 = vm.i32_eq(arg1, 4);
         if_label_2:
-        if (frame.pop() != 0) {
-          frame.i32_const(0);
-          frame.push(local0);
-          frame.i64_store32(2, 0);
-          frame.i32_const(0);
-          frame.i64_load32_u(2, 0);
-          local1 = frame.pop();
+        if (t51 != 0) {
+          var t52 = vm.i64_store32(2, 0, 0, local0);
+          var t53 = vm.i64_load32_u(2, 0, 0);
+          local1 = t53;
         }
         break block_label_0;
       }
-      frame.push(arg1);
-      frame.i32_const(0);
-      frame.i32_eq();
+      var t54 = vm.i32_eq(arg1, 0);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i64_store(3, 0);
-        frame.i32_const(0);
-        frame.i64_load(3, 0);
-        local1 = frame.pop();
+      if (t54 != 0) {
+        var t55 = vm.i64_store(3, 0, 0, local0);
+        var t56 = vm.i64_load(3, 0, 0);
+        local1 = t56;
       }
-      frame.push(arg1);
-      frame.i32_const(1);
-      frame.i32_eq();
+      var t57 = vm.i32_eq(arg1, 1);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i64_store(0, 0);
-        frame.i32_const(0);
-        frame.i64_load(0, 0);
-        local1 = frame.pop();
+      if (t57 != 0) {
+        var t58 = vm.i64_store(0, 0, 0, local0);
+        var t59 = vm.i64_load(0, 0, 0);
+        local1 = t59;
       }
-      frame.push(arg1);
-      frame.i32_const(2);
-      frame.i32_eq();
+      var t60 = vm.i32_eq(arg1, 2);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i64_store(1, 0);
-        frame.i32_const(0);
-        frame.i64_load(1, 0);
-        local1 = frame.pop();
+      if (t60 != 0) {
+        var t61 = vm.i64_store(1, 0, 0, local0);
+        var t62 = vm.i64_load(1, 0, 0);
+        local1 = t62;
       }
-      frame.push(arg1);
-      frame.i32_const(4);
-      frame.i32_eq();
+      var t63 = vm.i32_eq(arg1, 4);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i64_store(2, 0);
-        frame.i32_const(0);
-        frame.i64_load(2, 0);
-        local1 = frame.pop();
+      if (t63 != 0) {
+        var t64 = vm.i64_store(2, 0, 0, local0);
+        var t65 = vm.i64_load(2, 0, 0);
+        local1 = t65;
       }
-      frame.push(arg1);
-      frame.i32_const(8);
-      frame.i32_eq();
+      var t66 = vm.i32_eq(arg1, 8);
       if_label_1:
-      if (frame.pop() != 0) {
-        frame.i32_const(0);
-        frame.push(local0);
-        frame.i64_store(3, 0);
-        frame.i32_const(0);
-        frame.i64_load(3, 0);
-        local1 = frame.pop();
+      if (t66 != 0) {
+        var t67 = vm.i64_store(3, 0, 0, local0);
+        var t68 = vm.i64_load(3, 0, 0);
+        local1 = t68;
       }
     }
-    frame.push(local1);
-    return frame.pop();
+    return local1;
   }
 }
 

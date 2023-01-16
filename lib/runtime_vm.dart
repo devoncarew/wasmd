@@ -67,7 +67,15 @@ class VM {
     }
   }
 
-  // f32 f32_load(u32 align, u32 offset, i32 index) { }
+  f32 f32_load(u32 align, u32 offset, i32 index) {
+    if (index < 0) throw Trap('out of bounds memory access');
+    try {
+      return memory.data.getFloat32(index + offset, Endian.little);
+    } on RangeError {
+      throw Trap('out of bounds memory access');
+    }
+  }
+
   f64 f64_load(u32 align, u32 offset, i32 index) {
     if (index < 0) throw Trap('out of bounds memory access');
     try {
@@ -822,9 +830,21 @@ class VM {
     return arg0.toInt();
   }
 
-  // void memory_init(u32 immediate0, u32 immediate1, i32 arg0, i32 arg1, i32 arg2) { }
+  // void memory_init(
+  //     u32 dataSegment, u32 memIndex, i32 dstOffset, i32 srcOffset, i32 count) {
+  //   // var module = function.module;
+  //   // var segmentName = module.dataSegments.segments[dataSegment].name;
+
+  //   memory.copyFrom(segment, srcOffset, dstOffset, count);
+  //   // memory.copyFrom(_data.$segmentName, srcOffset, dstOffset, count);
+  // }
+
   // void data_drop(u32 immediate0) { }
-  // void memory_copy(u32 immediate0, u32 immediate1, i32 arg0, i32 arg1, i32 arg2) { }
+
+  void memory_copy(u32 destMemoryIndex, u32 srcMemoryIndex, i32 destOffset,
+      i32 sourceOffset, i32 count) {
+    memory.copy(count, sourceOffset, destOffset);
+  }
 
   void memory_fill(u32 immediate0, i32 offset, i32 value, i32 count) {
     memory.fill(value, offset, count);

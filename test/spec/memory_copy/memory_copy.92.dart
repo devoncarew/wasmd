@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class MemoryCopy92Module implements Module {
-  MemoryCopy92Module();
+  MemoryCopy92Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -21,11 +26,7 @@ class MemoryCopy92Module implements Module {
   void test() => _func0();
 
   void _func0() {
-    final frame = Frame(this);
-    frame.i32_const(0x9000);
-    frame.i32_const(0x10000);
-    frame.i32_const(0);
-    frame.memory_copy(0, 0);
+    var t0 = vm.memory_copy(0, 0, 0x9000, 0x10000, 0);
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Const19Module implements Module {
-  Const19Module();
+  Const19Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -15,11 +20,7 @@ class Const19Module implements Module {
   @override
   late final List<Table> tables = [];
 
-  void _func0() {
-    final frame = Frame(this);
-    frame.f32_const(1.2345679166470003e-11);
-    frame.drop();
-  }
+  void _func0() {}
 }
 
 typedef FunctionType0 = void Function();

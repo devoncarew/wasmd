@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class MemoryRedundancy0Module implements Module {
-  MemoryRedundancy0Module();
+  MemoryRedundancy0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(
@@ -26,103 +31,58 @@ class MemoryRedundancy0Module implements Module {
   i32 malloc_aliasing() => _func5();
 
   void _func0() {
-    final frame = Frame(this);
-    frame.i32_const(0);
-    frame.i32_const(0);
-    frame.i32_store(2, 0);
-    frame.i32_const(4);
-    frame.i32_const(0);
-    frame.i32_store(2, 0);
-    frame.i32_const(8);
-    frame.i32_const(0);
-    frame.i32_store(2, 0);
-    frame.i32_const(12);
-    frame.i32_const(0);
-    frame.i32_store(2, 0);
+    var t0 = vm.i32_store(2, 0, 0, 0);
+    var t1 = vm.i32_store(2, 0, 4, 0);
+    var t2 = vm.i32_store(2, 0, 8, 0);
+    var t3 = vm.i32_store(2, 0, 12, 0);
   }
 
   i32 _func1() {
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.i32_const(0);
-    frame.i32_store(2, 0);
-    frame.i32_const(5);
-    frame.f32_const(-0.0);
-    frame.f32_store(2, 0);
-    frame.i32_const(8);
-    frame.i32_load(2, 0);
-    return frame.pop();
+    var t0 = vm.i32_store(2, 0, 8, 0);
+    var t1 = vm.f32_store(2, 0, 5, -0.0);
+    var t2 = vm.i32_load(2, 0, 8);
+    return t2;
   }
 
   i32 _func2() {
     i32 t = 0;
     i32 s = 0;
 
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.i32_load(2, 0);
-    t = frame.pop();
-    frame.i32_const(5);
-    frame.i32_const(-0x80000000);
-    frame.i32_store(2, 0);
-    frame.i32_const(8);
-    frame.i32_load(2, 0);
-    s = frame.pop();
-    frame.push(t);
-    frame.push(s);
-    frame.i32_add();
-    return frame.pop();
+    var t0 = vm.i32_load(2, 0, 8);
+    t = t0;
+    var t1 = vm.i32_store(2, 0, 5, -0x80000000);
+    var t2 = vm.i32_load(2, 0, 8);
+    s = t2;
+    var t3 = vm.i32_add(t, s);
+    return t3;
   }
 
   f32 _func3() {
     f32 t = 0;
 
-    final frame = Frame(this);
-    frame.i32_const(8);
-    frame.i32_const(0x23232323);
-    frame.i32_store(2, 0);
-    frame.i32_const(11);
-    frame.f32_load(2, 0);
-    t = frame.pop();
-    frame.i32_const(8);
-    frame.i32_const(0);
-    frame.i32_store(2, 0);
-    frame.push(t);
-    return frame.pop();
+    var t0 = vm.i32_store(2, 0, 8, 0x23232323);
+    var t1 = vm.f32_load(2, 0, 11);
+    t = t1;
+    var t2 = vm.i32_store(2, 0, 8, 0);
+    return t;
   }
 
   i32 _malloc(i32 size) {
-    final frame = Frame(this);
-    frame.i32_const(16);
-    return frame.pop();
+    return 16;
   }
 
   i32 _func5() {
     i32 x = 0;
     i32 y = 0;
 
-    final frame = Frame(this);
-    frame.i32_const(4);
-    {
-      var t0 = frame.pop();
-      frame.push(_malloc(t0));
-    }
-    x = frame.pop();
-    frame.i32_const(4);
-    {
-      var t0 = frame.pop();
-      frame.push(_malloc(t0));
-    }
-    y = frame.pop();
-    frame.push(x);
-    frame.i32_const(42);
-    frame.i32_store(2, 0);
-    frame.push(y);
-    frame.i32_const(43);
-    frame.i32_store(2, 0);
-    frame.push(x);
-    frame.i32_load(2, 0);
-    return frame.pop();
+    var t0 = _malloc(4);
+    x = t0;
+    var t1 = _malloc(4);
+    y = t1;
+    var t2 = vm.i32_store(2, 0, x, 42);
+    var t3 = vm.i32_store(2, 0, y, 43);
+    var t4 = vm.i32_load(2, 0, x);
+    return t4;
   }
 }
 

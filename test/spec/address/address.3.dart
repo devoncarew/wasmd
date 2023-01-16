@@ -7,11 +7,15 @@
 import 'dart:typed_data';
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Address3Module implements Module {
   Address3Module() {
     _data.init(memory);
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(1);
@@ -29,45 +33,32 @@ class Address3Module implements Module {
   void $32_bad(i32 arg0) => _func5(arg0);
 
   f32 _func0(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f32_load(2, 0);
-    return frame.pop();
+    var t0 = vm.f32_load(2, 0, i);
+    return t0;
   }
 
   f32 _func1(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f32_load(0, 0);
-    return frame.pop();
+    var t0 = vm.f32_load(0, 0, i);
+    return t0;
   }
 
   f32 _func2(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f32_load(0, 1);
-    return frame.pop();
+    var t0 = vm.f32_load(0, 1, i);
+    return t0;
   }
 
   f32 _func3(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f32_load(1, 2);
-    return frame.pop();
+    var t0 = vm.f32_load(1, 2, i);
+    return t0;
   }
 
   f32 _func4(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f32_load(2, 8);
-    return frame.pop();
+    var t0 = vm.f32_load(2, 8, i);
+    return t0;
   }
 
   void _func5(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    frame.f32_load(2, 0xffffffff);
-    frame.drop();
+    var t0 = vm.f32_load(2, 0xffffffff, i);
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class Const212Module implements Module {
-  Const212Module();
+  Const212Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -18,9 +23,7 @@ class Const212Module implements Module {
   f32 f() => _func0();
 
   f32 _func0() {
-    final frame = Frame(this);
-    frame.f32_const(8.881785255792436e-16);
-    return frame.pop();
+    return 8.881785255792436e-16;
   }
 }
 
