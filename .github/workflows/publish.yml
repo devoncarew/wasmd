@@ -1,0 +1,35 @@
+# A CI configuration to auto-publish pub packages.
+
+name: Publish
+
+on:
+  # Run on PRs for general validation (changelog, pubspec version, ...).
+  pull_request:
+    branches: [ main ]
+  # Run on git tags to perform the publish.
+  push:
+    tags: [ 'v[0-9]+.[0-9]+.[0-9]+*' ]
+
+jobs:
+  auto-publish:
+    if: github.repository_owner == 'devoncarew'
+
+    # This is required for authentication using OIDC.
+    permissions:
+      id-token: write 
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
+      - uses: dart-lang/setup-dart@a57a6c04cf7d4840e88432aad6281d1e125f0d46
+
+      - name: Install firehose
+        run: dart pub global activate firehose
+
+      - name: Validate packages
+        if: ${{ github.event_name == 'pull_request' }}
+        run: dart pub global run firehose --verify
+
+      - name: Publish packages
+        if: ${{ github.event_name == 'push' }}
+        run: dart pub global run firehose --publish
