@@ -1406,7 +1406,11 @@ enum ValueType {
     }
   }
 
-  bool get intType => this == i32 || this == i64;
+  String? get initValue {
+    if (this == i32 || this == i64) return '0';
+    if (this == f32 || this == f64) return '0.0';
+    return null;
+  }
 
   bool get refType => this == funcref || this == externref;
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class IntExprs3Module extends Module {
-  IntExprs3Module();
+  IntExprs3Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -21,43 +26,27 @@ class IntExprs3Module extends Module {
   i64 i64_no_fold_shl_shr_u(i64 arg0) => _func3(arg0);
 
   i32 _func0(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_const(1);
-    frame.i32_shl();
-    frame.i32_const(1);
-    frame.i32_shr_s();
-    return frame.pop();
+    var t0 = vm.i32_shl(x, 1);
+    var t1 = vm.i32_shr_s(t0, 1);
+    return t1;
   }
 
   i32 _func1(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_const(1);
-    frame.i32_shl();
-    frame.i32_const(1);
-    frame.i32_shr_u();
-    return frame.pop();
+    var t0 = vm.i32_shl(x, 1);
+    var t1 = vm.i32_shr_u(t0, 1);
+    return t1;
   }
 
   i64 _func2(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_const(1);
-    frame.i64_shl();
-    frame.i64_const(1);
-    frame.i64_shr_s();
-    return frame.pop();
+    var t0 = vm.i64_shl(x, 1);
+    var t1 = vm.i64_shr_s(t0, 1);
+    return t1;
   }
 
   i64 _func3(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_const(1);
-    frame.i64_shl();
-    frame.i64_const(1);
-    frame.i64_shr_u();
-    return frame.pop();
+    var t0 = vm.i64_shl(x, 1);
+    var t1 = vm.i64_shr_u(t0, 1);
+    return t1;
   }
 }
 

@@ -1,6 +1,6 @@
 import 'package:code_builder/code_builder.dart' hide FunctionType;
 import 'package:wasmd/compiler.dart';
-import 'package:wasmd/instructions.dart';
+import 'package:wasmd/instructions.dart' hide ValueType;
 import 'package:wasmd/src/utils.dart';
 
 class Ref {
@@ -78,6 +78,14 @@ class FunctionBuilder {
 
   Ref popRef() => stack.pop();
 
+  List<Ref> popN(int count) {
+    var result = <Ref>[];
+    for (int i = 0; i < count; i++) {
+      result.add(popRef());
+    }
+    return result;
+  }
+
   Ref peekRef() => stack.peek();
 
   void pushRef(Ref ref) {
@@ -107,6 +115,19 @@ class FunctionBuilder {
     stack.push(Ref(temp));
   }
 
+  void pushAssignTuple(VmCall call) {
+    // create temp
+    var temp = generateName('tuple');
+
+    // assign to temp
+    statements.add(declareVar(temp).assign(call.toExpression()).statement);
+
+    // push tuple fields
+    for (int i = 0; i < call.returns.length; i++) {
+      stack.push(Ref('$temp.t$i'));
+    }
+  }
+
   ModuleFunction? functionByIndex(int index) {
     return definedFunction.module.functionByIndex(index);
   }
@@ -134,11 +155,11 @@ class FunctionBuilder {
     }
 
     if (blocktype.isPrimitive) {
-      // TODO: instead ,have a default init value
-      var val = blocktype.isInt ? '0' : '0.0';
+      var val = blocktype.defaultInitValue;
       addStatement(Code('\nvar $blockReturnName = $val;$description'));
     } else if (blocktype.returnItems > 1) {
-      throw 'todo:';
+      addStatement(Code(
+          '\nlate ${blocktype.tupleTypeName} $blockReturnName;$description'));
     } else {
       var type = blocktype.firstReturnType!;
       addStatement(Code('\n${type.typeName} $blockReturnName;$description'));
@@ -160,7 +181,9 @@ class FunctionBuilder {
         pushRef(Ref(scope.blockReturnName!));
       }
     } else {
-      throw 'todo:';
+      var refs = popN(retCount);
+      addStatement(Code('return Tuple$retCount('
+          '${refs.reversed.map((ref) => ref.toString()).join(', ')});'));
     }
   }
 
@@ -198,10 +221,9 @@ class VmCall {
   final String name;
   final List<num> immediates;
   final List<Ref> args;
+  final List<ValueType> returns;
 
-  // todo: return types
-
-  VmCall(this.name, this.immediates, this.args);
+  VmCall(this.name, this.immediates, this.args, this.returns);
 
   Expression toExpression() {
     var params = [

@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FuncPtrs9Module extends Module {
   FuncPtrs9Module() {
     elementSegments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -30,27 +34,17 @@ class FuncPtrs9Module extends Module {
   i32 callt(i32 arg0) => _func2(arg0);
 
   i32 _t1() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    return frame.pop();
+    return 1;
   }
 
   i32 _t2() {
-    final frame = Frame(this);
-    frame.i32_const(2);
-    return frame.pop();
+    return 2;
   }
 
   i32 _func2(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
-      frame.push(func());
-    }
-    return frame.pop();
+    var func0 = assertCallable<FunctionType0>(table0[i]);
+    var t0 = func0();
+    return t0;
   }
 
   List<Function> _initFunctionTable() {
