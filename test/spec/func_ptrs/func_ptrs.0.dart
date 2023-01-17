@@ -5,6 +5,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 /// A class representing the symbols imported from the 'spectest' module.
 abstract class SpectestImports {
@@ -12,9 +13,13 @@ abstract class SpectestImports {
 }
 
 class FuncPtrs0Module extends Module {
-  FuncPtrs0Module({required this.spectestImports});
+  FuncPtrs0Module({required this.spectestImports}) {
+    vm = VM(this);
+  }
 
   final SpectestImports spectestImports;
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -27,43 +32,26 @@ class FuncPtrs0Module extends Module {
   i32 three(i32 arg0) => _func4(arg0);
   void four(i32 arg0) => _func5(arg0);
 
-  void _func0() {
-    final frame = Frame(this);
-  }
+  void _func0() {}
 
-  void _func1() {
-    final frame = Frame(this);
-  }
+  void _func1() {}
 
   i32 _func2() {
-    final frame = Frame(this);
-    frame.i32_const(13);
-    return frame.pop();
+    return 13;
   }
 
   i32 _func3(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    frame.i32_const(1);
-    frame.i32_add();
-    return frame.pop();
+    var t0 = vm.i32_add(arg0, 1);
+    return t0;
   }
 
   i32 _func4(i32 a) {
-    final frame = Frame(this);
-    frame.push(a);
-    frame.i32_const(2);
-    frame.i32_sub();
-    return frame.pop();
+    var t0 = vm.i32_sub(a, 2);
+    return t0;
   }
 
   void _func5(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
-    {
-      var t0 = frame.pop();
-      spectestImports.print_i32(t0);
-    }
+    spectestImports.print_i32(arg0);
   }
 }
 

@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class IntExprs10Module extends Module {
-  IntExprs10Module();
+  IntExprs10Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -19,19 +24,13 @@ class IntExprs10Module extends Module {
   i64 i64_no_fold_rem_s_2(i64 arg0) => _func1(arg0);
 
   i32 _func0(i32 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_const(2);
-    frame.i32_rem_s();
-    return frame.pop();
+    var t0 = vm.i32_rem_s(x, 2);
+    return t0;
   }
 
   i64 _func1(i64 x) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_const(2);
-    frame.i64_rem_s();
-    return frame.pop();
+    var t0 = vm.i64_rem_s(x, 2);
+    return t0;
   }
 }
 

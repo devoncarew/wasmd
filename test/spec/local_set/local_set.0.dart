@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class LocalSet0Module extends Module {
-  LocalSet0Module();
+  LocalSet0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -38,57 +43,41 @@ class LocalSet0Module extends Module {
   void _func00() {
     i32 local0 = 0;
 
-    final frame = Frame(this);
-    frame.i32_const(0);
-    local0 = frame.pop();
+    local0 = 0;
   }
 
   void _func01() {
     i64 local0 = 0;
 
-    final frame = Frame(this);
-    frame.i64_const(0);
-    local0 = frame.pop();
+    local0 = 0;
   }
 
   void _func02() {
     f32 local0 = 0;
 
-    final frame = Frame(this);
-    frame.f32_const(0.0);
-    local0 = frame.pop();
+    local0 = 0.0;
   }
 
   void _func03() {
     f64 local0 = 0;
 
-    final frame = Frame(this);
-    frame.f64_const(0.0);
-    local0 = frame.pop();
+    local0 = 0.0;
   }
 
   void _func04(i32 arg0) {
-    final frame = Frame(this);
-    frame.i32_const(10);
-    arg0 = frame.pop();
+    arg0 = 10;
   }
 
   void _func05(i64 arg0) {
-    final frame = Frame(this);
-    frame.i64_const(11);
-    arg0 = frame.pop();
+    arg0 = 11;
   }
 
   void _func06(f32 arg0) {
-    final frame = Frame(this);
-    frame.f32_const(11.100000381469727);
-    arg0 = frame.pop();
+    arg0 = 11.100000381469727;
   }
 
   void _func07(f64 arg0) {
-    final frame = Frame(this);
-    frame.f64_const(12.2);
-    arg0 = frame.pop();
+    arg0 = 12.2;
   }
 
   void _func08(i64 arg0, f32 arg1, f64 arg2, i32 arg3, i32 arg4) {
@@ -97,25 +86,15 @@ class LocalSet0Module extends Module {
     i64 local2 = 0;
     f64 local3 = 0;
 
-    final frame = Frame(this);
-    frame.i64_const(0);
-    arg0 = frame.pop();
-    frame.f32_const(0.0);
-    arg1 = frame.pop();
-    frame.f64_const(0.0);
-    arg2 = frame.pop();
-    frame.i32_const(0);
-    arg3 = frame.pop();
-    frame.i32_const(0);
-    arg4 = frame.pop();
-    frame.f32_const(0.0);
-    local0 = frame.pop();
-    frame.i64_const(0);
-    local1 = frame.pop();
-    frame.i64_const(0);
-    local2 = frame.pop();
-    frame.f64_const(0.0);
-    local3 = frame.pop();
+    arg0 = 0;
+    arg1 = 0.0;
+    arg2 = 0.0;
+    arg3 = 0;
+    arg4 = 0;
+    local0 = 0.0;
+    local1 = 0;
+    local2 = 0;
+    local3 = 0.0;
   }
 
   i64 _func09(i64 arg0, f32 arg1, f64 arg2, i32 arg3, i32 arg4) {
@@ -124,108 +103,75 @@ class LocalSet0Module extends Module {
     i64 local2 = 0;
     f64 local3 = 0;
 
-    final frame = Frame(this);
-    frame.f32_const(-0.30000001192092896);
-    arg1 = frame.pop();
-    frame.i32_const(40);
-    arg3 = frame.pop();
-    frame.i32_const(-7);
-    arg4 = frame.pop();
-    frame.f32_const(5.5);
-    local0 = frame.pop();
-    frame.i64_const(6);
-    local1 = frame.pop();
-    frame.f64_const(8.0);
-    local3 = frame.pop();
-    frame.push(arg0);
-    frame.f64_convert_i64_u();
-    frame.push(arg1);
-    frame.f64_promote_f32();
-    frame.push(arg2);
-    frame.push(arg3);
-    frame.f64_convert_i32_u();
-    frame.push(arg4);
-    frame.f64_convert_i32_s();
-    frame.push(local0);
-    frame.f64_promote_f32();
-    frame.push(local1);
-    frame.f64_convert_i64_u();
-    frame.push(local2);
-    frame.f64_convert_i64_u();
-    frame.push(local3);
-    frame.f64_add();
-    frame.f64_add();
-    frame.f64_add();
-    frame.f64_add();
-    frame.f64_add();
-    frame.f64_add();
-    frame.f64_add();
-    frame.f64_add();
-    frame.i64_trunc_f64_s();
-    return frame.pop();
+    arg1 = -0.30000001192092896;
+    arg3 = 40;
+    arg4 = -7;
+    local0 = 5.5;
+    local1 = 6;
+    local3 = 8.0;
+    var t0 = vm.f64_convert_i64_u(arg0);
+    var t1 = vm.f64_promote_f32(arg1);
+    var t2 = vm.f64_convert_i32_u(arg3);
+    var t3 = vm.f64_convert_i32_s(arg4);
+    var t4 = vm.f64_promote_f32(local0);
+    var t5 = vm.f64_convert_i64_u(local1);
+    var t6 = vm.f64_convert_i64_u(local2);
+    var t7 = vm.f64_add(t6, local3);
+    var t8 = vm.f64_add(t5, t7);
+    var t9 = vm.f64_add(t4, t8);
+    var t10 = vm.f64_add(t3, t9);
+    var t11 = vm.f64_add(t2, t10);
+    var t12 = vm.f64_add(arg2, t11);
+    var t13 = vm.f64_add(t1, t12);
+    var t14 = vm.f64_add(t0, t13);
+    var t15 = vm.i64_trunc_f64_s(t14);
+    return t15;
   }
 
   void _func10(i32 arg0) {
-    final frame = Frame(this);
     block_label_0:
     {
-      frame.i32_const(1);
-      arg0 = frame.pop();
+      arg0 = 1;
     }
   }
 
   void _func11(i32 arg0) {
-    final frame = Frame(this);
-
     loop_label_0:
     for (;;) {
-      frame.i32_const(3);
-      arg0 = frame.pop();
+      arg0 = 3;
       break;
     }
   }
 
   void _func12(i32 arg0) {
-    final frame = Frame(this);
     block_label_0:
     {
-      frame.i32_const(9);
-      arg0 = frame.pop();
+      arg0 = 9;
       break block_label_0;
     }
   }
 
   void _func13(i32 arg0) {
-    final frame = Frame(this);
     block_label_0:
     {
-      frame.i32_const(8);
-      arg0 = frame.pop();
-      frame.i32_const(1);
-      if (frame.pop() != 0) break block_label_0;
+      arg0 = 8;
+      if (1 != 0) break block_label_0;
     }
   }
 
   void _func14(i32 arg0) {
-    final frame = Frame(this);
     block_label_0:
     {
-      frame.i32_const(6);
-      frame.i32_const(9);
-      arg0 = frame.pop();
-      if (frame.pop() != 0) break block_label_0;
+      arg0 = 9;
+      if (6 != 0) break block_label_0;
     }
   }
 
   void _func15(i32 arg0) {
-    final frame = Frame(this);
     block_label_0:
     {
-      frame.i32_const(10);
-      arg0 = frame.pop();
-      frame.i32_const(1);
-      var t0 = frame.pop();
-      switch (t0) {
+      arg0 = 10;
+      switch (1) {
         default:
           break block_label_0;
       }
@@ -233,30 +179,22 @@ class LocalSet0Module extends Module {
   }
 
   void _func16(i32 arg0) {
-    final frame = Frame(this);
-    frame.i32_const(7);
-    arg0 = frame.pop();
+    arg0 = 7;
     return;
   }
 
   void _func17(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
     if_label_0:
-    if (frame.pop() != 0) {
-      frame.i32_const(3);
-      arg0 = frame.pop();
+    if (arg0 != 0) {
+      arg0 = 3;
     }
   }
 
   void _func18(i32 arg0) {
-    final frame = Frame(this);
-    frame.push(arg0);
     if_label_0:
-    if (frame.pop() != 0) {
+    if (arg0 != 0) {
     } else {
-      frame.i32_const(1);
-      arg0 = frame.pop();
+      arg0 = 1;
     }
   }
 }

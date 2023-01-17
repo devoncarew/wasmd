@@ -5,11 +5,15 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class FuncPtrs8Module extends Module {
   FuncPtrs8Module() {
     elementSegments.init();
+    vm = VM(this);
   }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -31,57 +35,35 @@ class FuncPtrs8Module extends Module {
   i32 callu(i32 arg0) => _func6(arg0);
 
   i32 _t1() {
-    final frame = Frame(this);
-    frame.i32_const(1);
-    return frame.pop();
+    return 1;
   }
 
   i32 _t2() {
-    final frame = Frame(this);
-    frame.i32_const(2);
-    return frame.pop();
+    return 2;
   }
 
   i32 _t3() {
-    final frame = Frame(this);
-    frame.i32_const(3);
-    return frame.pop();
+    return 3;
   }
 
   i32 _u1() {
-    final frame = Frame(this);
-    frame.i32_const(4);
-    return frame.pop();
+    return 4;
   }
 
   i32 _u2() {
-    final frame = Frame(this);
-    frame.i32_const(5);
-    return frame.pop();
+    return 5;
   }
 
   i32 _func5(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType0) throw Trap('indirect call type mismatch');
-      frame.push(func());
-    }
-    return frame.pop();
+    var func0 = assertCallable<FunctionType0>(table0[i]);
+    var t0 = func0();
+    return t0;
   }
 
   i32 _func6(i32 i) {
-    final frame = Frame(this);
-    frame.push(i);
-    {
-      var func = table0[frame.pop()];
-      if (func == null) throw Trap('uninitialized element');
-      if (func is! FunctionType1) throw Trap('indirect call type mismatch');
-      frame.push(func());
-    }
-    return frame.pop();
+    var func0 = assertCallable<FunctionType1>(table0[i]);
+    var t0 = func0();
+    return t0;
   }
 
   List<Function> _initFunctionTable() {

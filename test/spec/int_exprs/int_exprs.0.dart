@@ -5,9 +5,14 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:wasmd/runtime.dart';
+import 'package:wasmd/runtime_vm.dart';
 
 class IntExprs0Module extends Module {
-  IntExprs0Module();
+  IntExprs0Module() {
+    vm = VM(this);
+  }
+
+  late final VM vm;
 
   @override
   final Memory memory = Memory(0);
@@ -21,51 +26,31 @@ class IntExprs0Module extends Module {
   i32 i64_no_fold_cmp_u_offset(i64 arg0, i64 arg1) => _func3(arg0, arg1);
 
   i32 _func0(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_const(1);
-    frame.i32_add();
-    frame.push(y);
-    frame.i32_const(1);
-    frame.i32_add();
-    frame.i32_lt_s();
-    return frame.pop();
+    var t0 = vm.i32_add(x, 1);
+    var t1 = vm.i32_add(y, 1);
+    var t2 = vm.i32_lt_s(t0, t1);
+    return t2;
   }
 
   i32 _func1(i32 x, i32 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i32_const(1);
-    frame.i32_add();
-    frame.push(y);
-    frame.i32_const(1);
-    frame.i32_add();
-    frame.i32_lt_u();
-    return frame.pop();
+    var t0 = vm.i32_add(x, 1);
+    var t1 = vm.i32_add(y, 1);
+    var t2 = vm.i32_lt_u(t0, t1);
+    return t2;
   }
 
   i32 _func2(i64 x, i64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_const(1);
-    frame.i64_add();
-    frame.push(y);
-    frame.i64_const(1);
-    frame.i64_add();
-    frame.i64_lt_s();
-    return frame.pop();
+    var t0 = vm.i64_add(x, 1);
+    var t1 = vm.i64_add(y, 1);
+    var t2 = vm.i64_lt_s(t0, t1);
+    return t2;
   }
 
   i32 _func3(i64 x, i64 y) {
-    final frame = Frame(this);
-    frame.push(x);
-    frame.i64_const(1);
-    frame.i64_add();
-    frame.push(y);
-    frame.i64_const(1);
-    frame.i64_add();
-    frame.i64_lt_u();
-    return frame.pop();
+    var t0 = vm.i64_add(x, 1);
+    var t1 = vm.i64_add(y, 1);
+    var t2 = vm.i64_lt_u(t0, t1);
+    return t2;
   }
 }
 

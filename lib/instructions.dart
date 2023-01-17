@@ -233,16 +233,17 @@ class Instruction_End extends Instruction {
     } else if (oldNesting != null) {
       functionBuilder.addStatement(Code('}'));
     } else {
+      var functype = functionBuilder.definedFunction.functionType;
+
       // TODO: functionBuilder.stack.isEmpty likely cooresponds to the function
       // already having returned in this block, but we should better encode this
       if (function.returnsVoid || functionBuilder.stack.isEmpty) {
         return functionBuilder.addStatement(Code(''));
       } else if (function.returnsTuple) {
-        // todo:
-        throw 'todo:';
-        // var arity = function.functionType.resultType.length;
-        // return functionBuilder
-        //     .addStatement(Code('return Tuple$arity.from(frame.stack);'));
+        var arity = functype.resultType.length;
+        var refs = functionBuilder.popN(arity);
+        functionBuilder.addStatement(Code('return Tuple$arity('
+            '${refs.reversed.map((ref) => ref.toString()).join(', ')});'));
       } else {
         return functionBuilder.addStatement(
             refer(functionBuilder.popRef().expr).returned.statement);
@@ -425,9 +426,10 @@ class Instruction_Return extends Instruction {
     if (functype.returnsVoid) {
       functionBuilder.addStatement(Code('return;'));
     } else if (functype.returnsTuple) {
-      // var arity = functype.resultType.length;
-      throw 'todo:';
-      // return Code('return Tuple$arity.from(frame.stack);');
+      var arity = functype.resultType.length;
+      var refs = functionBuilder.popN(arity);
+      functionBuilder.addStatement(Code('return Tuple$arity('
+          '${refs.reversed.map((ref) => ref.toString()).join(', ')});'));
     } else {
       var ref = functionBuilder.popRef();
       functionBuilder.addStatement(refer(ref.expr).returned.statement);
@@ -461,6 +463,11 @@ class BlockFunctionType {
     return 0;
   }
 
+  String get tupleTypeName {
+    var retItems = functionType!.resultType;
+    return 'Tuple${retItems.length}<${retItems.map((t) => t.typeName).join(', ')}>';
+  }
+
   compiler.ValueType? get firstReturnType {
     if (valueType != null) {
       return valueType;
@@ -476,8 +483,8 @@ class BlockFunctionType {
     return returnItems == 1 ? !firstReturnType!.refType : false;
   }
 
-  bool get isInt {
-    return returnItems == 1 ? firstReturnType!.intType : false;
+  String? get defaultInitValue {
+    return firstReturnType?.initValue;
   }
 
   String get describe {
@@ -766,15 +773,14 @@ class Instruction_Call extends Instruction {
       args.add(functionBuilder.popRef());
     }
 
-    var call = VmCall(target.name, [], args.reversed.toList());
+    var call = VmCall(target.name, [], args.reversed.toList(),
+        target.functionType.resultType);
 
     if (target.returnsVoid) {
       functionBuilder.performCall(call);
     } else if (target.returnsTuple) {
-      // todo:
-      throw 'todo:';
       // push the return tuples item's to the stack
-      // call = call.property('pushTo').call([refer('frame.stack')]);
+      functionBuilder.pushAssignTuple(call);
     } else {
       functionBuilder.pushAssignTemp(call);
     }
@@ -859,15 +865,12 @@ class Instruction_CallIndirect extends Instruction {
       args.add(functionBuilder.popRef());
     }
 
-    var call = VmCall(name, [], args.reversed.toList());
+    var call = VmCall(name, [], args.reversed.toList(), funcType.resultType);
 
     if (funcType.returnsVoid) {
       functionBuilder.performCall(call);
     } else if (funcType.returnsTuple) {
-      // todo:
-      throw 'todo:';
-      // push the return tuples item's to the stack
-      // call = call.property('pushTo').call([refer('frame.stack')]);
+      functionBuilder.pushAssignTuple(call);
     } else {
       functionBuilder.pushAssignTemp(call);
     }
@@ -984,14 +987,18 @@ class Instruction_RefFunc extends Instruction {
 /// numtype := i32, i64, f32, f64
 /// reftype := functype | externref
 enum ValueType {
-  i32,
-  i64,
-  f32,
-  f64,
-  funcref,
-  u32,
-  reftype,
-  any;
+  i32(0x7F),
+  i64(0x7E),
+  f32(0x7D),
+  f64(0x7C),
+  funcref(0x70),
+  u32(0x7F),
+  reftype(0x70),
+  any(0x7F);
+
+  final int code;
+
+  const ValueType(this.code);
 
   static ValueType fromString(String str) {
     var ret = values.firstWhereOrNull((e) => e.name == str);
@@ -1156,12 +1163,14 @@ class Instruction {
         'vm.${instruction.methodName}',
         instr.args.cast<num>(),
         args.reversed.toList(),
+        [],
       ));
     } else {
       functionBuilder.pushAssignTemp(VmCall(
         'vm.${instruction.methodName}',
         instr.args.cast<num>(),
         args.reversed.toList(),
+        [compiler.ValueType.fromCode(returns.first.code)],
       ));
     }
   }
