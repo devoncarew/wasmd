@@ -49,3 +49,20 @@ We have some initial benchmarks in the benchmark/ directory. Run either:
 or:
 
 - `git submodule update --remote`
+
+## Contributions, PRs, and publishing
+
+When contributing to this repo:
+
+- if the version in the changelog is a stable semver version (`x.y.z`), the
+  latest changes there have been published to pub. Please add a new changelog
+  section for your change, rev the service portion of the version and append
+  `-dev`, and update pubspec.yaml to agree with the new version
+- if the changelog version ends in `-dev`, the latest changes are unpublished;
+  please add a new changelog entry for your change in the most recent section
+- for PRs, the `Publish` bot will perform basic validation of the info in the
+  pubspec.yaml and CHANGELOG.md files
+- when the PR is merged into the main branch, if the change is for an
+  unpublished stable version, a repo maintainer will tag that commit with the
+  pubspec version (e.g., `v1.2.3`); that tag event will trigger the `Publish`
+  bot to publish a new version of the package to pub.dev
