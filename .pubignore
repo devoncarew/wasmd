@@ -1,1 +1,4 @@
+benchmark/
+samples/
 test/
+tool/

@@ -1,6 +1,7 @@
 name: wasmd
 description: An exploration of compiling Wasm to Dart. 
 version: 0.1.0
+repository: https://github.com/devoncarew/wasmd
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
