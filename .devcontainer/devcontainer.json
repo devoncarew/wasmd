@@ -1,28 +1,30 @@
 {
     // Use the latest stable Dart docker container.
     "image": "dart",
-    // Install the Dart-Code extension.
+
     "customizations": {
         "vscode": {
+            // Install the Dart-Code extension.
             "extensions": [
                 "dart-code.dart-code"
-            ]
-        }
-    },
-    // Initial VS Code settings.
-    "settings": {
-        "[dart]": {
-            "editor.formatOnSave": true,
-            "editor.formatOnType": true,
-            "editor.rulers": [
-                80
             ],
-            "editor.selectionHighlight": false,
-            "editor.suggest.snippetsPreventQuickSuggestions": false,
-            "editor.suggestSelection": "first",
-            "editor.tabCompletion": "onlySnippets",
-            "editor.wordBasedSuggestions": false
-        },
-        "dart.showTodos": false
+
+            // Initial VS Code settings.
+            "settings": {
+                "[dart]": {
+                    "editor.formatOnSave": true,
+                    "editor.formatOnType": true,
+                    "editor.rulers": [
+                        80
+                    ],
+                    "editor.selectionHighlight": false,
+                    "editor.suggest.snippetsPreventQuickSuggestions": false,
+                    "editor.suggestSelection": "first",
+                    "editor.tabCompletion": "onlySnippets",
+                    "editor.wordBasedSuggestions": false
+                },
+                "dart.showTodos": false
+            }
+        }
     }
 }
