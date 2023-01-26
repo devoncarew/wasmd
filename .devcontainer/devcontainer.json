@@ -1,14 +1,12 @@
 {
     // Use the latest stable Dart docker container.
     "image": "dart",
-
     "customizations": {
         "vscode": {
             // Install the Dart-Code extension.
             "extensions": [
                 "dart-code.dart-code"
             ],
-
             // Initial VS Code settings.
             "settings": {
                 "[dart]": {
