@@ -21,7 +21,8 @@
                     "editor.tabCompletion": "onlySnippets",
                     "editor.wordBasedSuggestions": false
                 },
-                "dart.showTodos": false
+                "dart.showTodos": false,
+                "git.confirmSync": false
             }
         }
     }
