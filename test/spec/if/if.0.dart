@@ -964,7 +964,6 @@ class If0Module extends Module {
       frame.i32_const(19);
     } else {
       frame.i32_const(21);
-      frame.unwindTo(0, 1);
       break if_label_0;
       frame.i32_const(20);
     }
@@ -987,7 +986,6 @@ class If0Module extends Module {
       frame.i32_const(-18);
       frame.i32_const(18);
       frame.i64_const(-18);
-      frame.unwindTo(0, 3);
       break if_label_0;
       frame.i32_const(-19);
       frame.i32_const(19);
@@ -1064,7 +1062,6 @@ class If0Module extends Module {
       break if_label_0;
     } else {
       frame.i32_sub();
-      frame.unwindTo(0, 1);
       break if_label_0;
     }
     return frame.pop();

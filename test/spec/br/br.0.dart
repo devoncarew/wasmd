@@ -513,7 +513,6 @@ class Br0Module extends Module {
         frame.push(arg1);
       } else {
         frame.i32_const(4);
-        frame.unwindTo(0, 1);
         break block_label_0;
       }
     }

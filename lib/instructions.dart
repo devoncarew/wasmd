@@ -17,6 +17,15 @@ class Instr {
     this.args = const [],
   ]);
 
+  bool get isBlockStart =>
+      instruction is Instruction_Block ||
+      instruction is Instruction_If ||
+      instruction is Instruction_Loop;
+
+  bool get isElse => instruction is Instruction_Else;
+
+  bool get isBlockEnd => instruction is Instruction_End;
+
   Code generateToStatement(DefinedFunction function) {
     return instruction.generateToStatement(this, function);
   }
@@ -32,7 +41,7 @@ class Instruction_Unreachable extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
-    function.scope.unreachable();
+    function.scope.unreachable = true;
 
     if (instr.args.isNotEmpty) {
       var error = instr.args[0] as String;
@@ -43,6 +52,13 @@ class Instruction_Unreachable extends Instruction {
           .thrown
           .statement;
     }
+  }
+
+  @override
+  void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.scope.unreachable = true;
+
+    super.generateToVm(instr, functionBuilder);
   }
 }
 
@@ -173,12 +189,28 @@ class Instruction_Else extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
+    // todo: end scope / start a new scope
+
+    var oldScope = function.scope;
+    var blockType = function.exitBlock();
+    function.enterBlock(blockType!, oldScope.blockType!);
+    function.scope.blockReturnName = oldScope.blockReturnName;
+
     return Code('} else {\n');
   }
 
   @override
   void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
-    functionBuilder.blockReturn();
+    var blockEndCode = functionBuilder.blockReturn(shouldPopRef: true);
+    if (blockEndCode != null) {
+      functionBuilder.addStatement(blockEndCode);
+    }
+
+    var oldScope = functionBuilder.scope;
+    var blockType = functionBuilder.exitBlock();
+    functionBuilder.enterBlock(blockType!, oldScope.blockType!);
+    functionBuilder.scope.blockReturnName = oldScope.blockReturnName;
+
     functionBuilder.addStatement(Code('} else {\n'));
   }
 }
@@ -217,7 +249,12 @@ class Instruction_End extends Instruction {
 
   @override
   void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
-    functionBuilder.blockReturn(endStatement: true);
+    // todo: this should be true...
+    var blockEndCode = functionBuilder.blockReturn(shouldPopRef: false);
+    if (blockEndCode != null) {
+      functionBuilder.addStatement(blockEndCode);
+      functionBuilder.pushRef(Ref(functionBuilder.scope.blockReturnName!));
+    }
 
     var oldScope = functionBuilder.scope;
     var oldNesting = functionBuilder.exitBlock();
@@ -235,9 +272,7 @@ class Instruction_End extends Instruction {
     } else {
       var functype = functionBuilder.definedFunction.functionType;
 
-      // TODO: functionBuilder.stack.isEmpty likely cooresponds to the function
-      // already having returned in this block, but we should better encode this
-      if (function.returnsVoid || functionBuilder.stack.isEmpty) {
+      if (function.returnsVoid || oldScope.unreachable) {
         return functionBuilder.addStatement(Code(''));
       } else if (function.returnsTuple) {
         var arity = functype.resultType.length;
@@ -257,6 +292,8 @@ class Instruction_Br extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
+    function.scope.unreachable = true;
+
     var immediate = instr.args[0] as int;
     var label = function.labelNameFromIndex(immediate);
     var scope = function.scopeForIndex(immediate);
@@ -268,6 +305,8 @@ class Instruction_Br extends Instruction {
 
   @override
   void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.scope.unreachable = true;
+
     var function = functionBuilder.definedFunction;
     var immediate = instr.args[0] as int;
     var label = functionBuilder.labelNameFromIndex(immediate);
@@ -327,6 +366,8 @@ class Instruction_BrTable extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
+    function.scope.unreachable = true;
+
     var labelIndexes = instr.args[0] as List<int>;
     var defaultIndex = instr.args[1] as int;
 
@@ -366,6 +407,8 @@ class Instruction_BrTable extends Instruction {
 
   @override
   void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.scope.unreachable = true;
+
     var labelIndexes = instr.args[0] as List<int>;
     var defaultIndex = instr.args[1] as int;
 
@@ -407,6 +450,8 @@ class Instruction_Return extends Instruction {
 
   @override
   Code generateToStatement(Instr instr, DefinedFunction function) {
+    function.scope.unreachable = true;
+
     var frame = refer('frame');
 
     if (function.returnsVoid) {
@@ -421,6 +466,8 @@ class Instruction_Return extends Instruction {
 
   @override
   void generateToVm(Instr instr, FunctionBuilder functionBuilder) {
+    functionBuilder.scope.unreachable = true;
+
     var functype = functionBuilder.definedFunction.functionType;
 
     if (functype.returnsVoid) {

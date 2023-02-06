@@ -67,8 +67,20 @@ class FunctionBuilder {
   }
 
   void build(List<Instr> instrs) {
+    int depth = 0;
+
     for (var instr in instrs) {
-      instr.instruction.generateToVm(instr, this);
+      if (scope.unreachable) {
+        if (depth == 0 && (instr.isElse || instr.isBlockEnd)) {
+          instr.instruction.generateToVm(instr, this);
+        } else if (instr.isBlockStart) {
+          depth++;
+        } else if (instr.isBlockEnd) {
+          depth--;
+        }
+      } else {
+        instr.instruction.generateToVm(instr, this);
+      }
     }
   }
 
@@ -86,7 +98,15 @@ class FunctionBuilder {
     return result;
   }
 
-  Ref peekRef() => stack.peek();
+  List<Ref> peekN(int count) {
+    var result = <Ref>[];
+    for (int i = 0; i < count; i++) {
+      result.add(peekRef(0));
+    }
+    return result;
+  }
+
+  Ref peekRef([int depth = 0]) => stack.peek(depth);
 
   void pushRef(Ref ref) {
     stack.push(ref);
@@ -166,24 +186,19 @@ class FunctionBuilder {
     }
   }
 
-  void blockReturn({bool endStatement = false}) {
+  Code? blockReturn({required bool shouldPopRef}) {
     // We're at the end of a block - either an `else` instruction or an `end`.
     var retCount = scope.blockReturnCount;
 
     if (retCount == 0) {
-      return;
+      return null;
     } else if (retCount == 1) {
-      // todo: does poping here mess up the stack?
-      var ref = popRef();
-      addStatement(Code('${scope.blockReturnName} = $ref;'));
-
-      if (endStatement) {
-        pushRef(Ref(scope.blockReturnName!));
-      }
+      var ref = shouldPopRef ? popRef() : peekRef();
+      return Code('${scope.blockReturnName} = $ref;');
     } else {
-      var refs = popN(retCount);
-      addStatement(Code('return Tuple$retCount('
-          '${refs.reversed.map((ref) => ref.toString()).join(', ')});'));
+      var refs = shouldPopRef ? popN(retCount) : peekN(retCount);
+      return Code('${scope.blockReturnName} = Tuple$retCount('
+          '${refs.reversed.map((ref) => ref.toString()).join(', ')});');
     }
   }
 
@@ -203,7 +218,7 @@ class RefStack {
 
   Ref pop() => stack.removeLast();
 
-  Ref peek() => stack.last;
+  Ref peek([int depth = 0]) => stack[stack.length - 1 - depth];
 
   /// Remove all but the oldest [depth] stack entries, but keep the top
   /// [paramCount] stack items.

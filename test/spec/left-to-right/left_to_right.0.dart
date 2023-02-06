@@ -1163,7 +1163,10 @@ class LeftToRight0Module extends Module {
       var t0 = _i32_left();
       var t1 = _i32_right();
       var t2 = vm.i32_and(t1, 0);
-      if (t2 != 0) break block_label_0;
+      if (t2 != 0) {
+        block0 = t0;
+        break block_label_0;
+      }
       var t3 = _get();
       block0 = t3;
     }
@@ -1183,8 +1186,10 @@ class LeftToRight0Module extends Module {
         var t1 = _i32_right();
         switch (t1) {
           case 0:
+            block1 = t0;
             break block_label_0;
           default:
+            block1 = t0;
             break block_label_1;
         }
 

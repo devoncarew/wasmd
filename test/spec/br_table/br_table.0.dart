@@ -50087,10 +50087,8 @@ class BrTable0Module extends Module {
         var t0 = frame.pop();
         switch (t0) {
           case 0:
-            frame.unwindTo(0, 1);
             break block_label_0;
           default:
-            frame.unwindTo(0, 1);
             break if_label_1;
         }
       }

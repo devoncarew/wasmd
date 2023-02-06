@@ -1338,6 +1338,12 @@ enum BlockType {
         }
       }
       // todo: do we need to return the block value here?
+
+      var blockAssignCode = functionBuilder.blockReturn(shouldPopRef: false);
+      if (blockAssignCode != null) {
+        statements.add(blockAssignCode.toString());
+      }
+
       statements.add('$jumpKind $label;');
 
       if (popCondition) {
@@ -1803,8 +1809,9 @@ class Scope {
 
   int nextTempId = 0;
 
-  // ignore: unused_field
-  bool _unreachable = false;
+  /// Set to indicate that the remaining instructions in this block are not
+  /// reachable.
+  bool unreachable = false;
 
   String? blockReturnName;
 
@@ -1816,11 +1823,6 @@ class Scope {
   }
 
   String get nextTempName => 't${nextTempId++}';
-
-  /// Call to indicate that validating the rest of the stack is not necessary.
-  void unreachable() {
-    _unreachable = true;
-  }
 
   void updateStackDepth(int adjust, String desc) {
     _stackDepth += adjust;
